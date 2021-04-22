@@ -1,0 +1,32 @@
+@import '../../assets/css/colors';
+
+.Sidebar {
+  background-color: $bg-gray;
+  position: fixed;
+  min-height: 100vh;
+  height: 100%;
+  transform: translateX(-100%);
+  width: 14rem;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  grid-area: sidebar;
+  z-index: 999;
+  transition: 400ms ease-out;
+
+  @media screen and (min-width: 768px) {
+    width: 16rem;
+    transform: translateX(0);
+    z-index: 0;
+  }
+
+  @media screen and (min-width: 996px) {
+    width: 19rem;
+  }
+}
+
+.Open {
+  transform: translateX(0);
+}

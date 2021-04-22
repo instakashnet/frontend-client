@@ -1,0 +1,204 @@
+@import '../../core/assets/css/colors';
+
+.Exchange {
+  text-align: center;
+  margin: 40px 0;
+
+  h1 {
+    font-size: 1.4rem;
+    color: $base-green;
+    font-weight: bold;
+  }
+}
+
+.ExchangeForm {
+  max-width: 27rem;
+  margin: 50px auto 20px;
+
+  p {
+    color: $base-green;
+    font-size: 0.9rem;
+  }
+
+  label {
+    text-align: left;
+  }
+
+  @media screen and (min-width: 768px) {
+    p {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.Information {
+  position: relative;
+  width: 100%;
+  margin-top: 40px;
+
+  h3 {
+    color: $base-green;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+  }
+}
+
+.InfoImg {
+  position: relative;
+  left: 0;
+  display: none;
+
+  @media screen and (min-width: 1280px) {
+    display: block;
+    left: 10px;
+  }
+}
+
+.InfoCard {
+  width: 100%;
+  min-height: 5rem;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+
+  &:first-of-type {
+    border-radius: 10px 0 0 10px;
+  }
+
+  &:last-of-type {
+    border-radius: 0 10px 10px 0;
+  }
+
+  p {
+    font-size: 0.85rem;
+    color: $base-green;
+    margin-top: 10px;
+  }
+
+  @media screen and (min-width: 1140px) {
+    max-width: 12rem;
+    margin: 0;
+    min-height: 8rem;
+  }
+
+  @media screen and (min-width: 1366) {
+    max-width: 14rem;
+  }
+
+  @media screen and (min-width: 1440px) {
+    max-width: 16rem;
+  }
+}
+
+.AddAccount {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 0 0 10px 10px;
+  background-color: #e1f2ec;
+  color: #20a2a5;
+  font-size: 0.9rem;
+  width: 100%;
+  position: relative;
+  top: -18px;
+  transition: 200ms ease-out;
+
+  &:hover,
+  &:focus {
+    background-color: darken($color: #e1f2ec, $amount: 5);
+  }
+}
+
+.Amount {
+  color: $base-green;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 10px 0 20px;
+}
+
+.TransferCode {
+  max-width: 26rem;
+  margin: 0 auto;
+
+  h4 {
+    text-align: left;
+    margin-bottom: 10px;
+  }
+}
+
+.Timer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    font-size: 0.9rem;
+  }
+}
+
+.TransferAccount {
+  background-color: $bg-gray;
+  border-radius: 10px;
+  padding: 10px 20px;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
+  color: $base-green;
+
+  p {
+    font-weight: bold;
+  }
+}
+
+.Coupon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  border: 1px dashed #c3e5d9;
+  background-color: $bg-gray;
+  color: $base-green;
+  border-radius: 5px;
+  margin-top: 15px;
+
+  p {
+    font-size: 0.9rem;
+  }
+}
+
+.ExchangeKash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: $base-green;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 16px;
+
+  button {
+    background-color: $button-yellow;
+    color: $base-text;
+    padding: 2px 20px;
+    border-radius: 20px;
+    margin: 0 10px;
+    border: 2px solid $button-yellow;
+    transition: 200ms ease-out;
+
+    &:last-of-type {
+      background-color: transparent;
+      color: #fff;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: darken($color: $button-yellow, $amount: 15);
+      border-color: darken($color: $button-yellow, $amount: 15);
+      color: $base-text;
+    }
+  }
+}

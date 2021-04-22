@@ -1,0 +1,45 @@
+.Alert {
+  position: fixed;
+  bottom: -100%;
+  width: 100vw;
+  max-width: 400px;
+  right: 1px;
+  animation: enter-leave 5s ease-in-out;
+  z-index: 10000;
+
+  @media screen and (min-width: 768px) {
+    right: 25px;
+  }
+}
+
+@keyframes enter-leave {
+  0% {
+    bottom: -100%;
+  }
+  10% {
+    bottom: 1px;
+  }
+  90% {
+    bottom: 1px;
+  }
+  100% {
+    bottom: -100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  @keyframes enter-leave {
+    0% {
+      bottom: -100%;
+    }
+    10% {
+      bottom: 25px;
+    }
+    90% {
+      bottom: 25px;
+    }
+    100% {
+      bottom: -100%;
+    }
+  }
+}

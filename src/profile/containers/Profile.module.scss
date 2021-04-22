@@ -1,0 +1,156 @@
+@import '../../core/assets/css/colors';
+
+.ProfileWrapper {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: $base-green;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+}
+
+.ProfileInfoWrapper {
+  padding-bottom: 60px;
+
+  h1 {
+    font-size: 1.5rem;
+    color: $base-green;
+  }
+
+  h3 {
+    color: $base-green;
+    font-size: 1.25rem;
+    padding: 10px 0 5px;
+  }
+
+  hr {
+    border-bottom: 1px solid #e1f2ec;
+  }
+
+  h4 {
+    font-size: 1.05rem;
+    font-weight: bold;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  button {
+    color: $base-green;
+    font-size: 0.9rem;
+  }
+
+  form {
+    max-width: 52rem;
+    margin: 0 auto;
+
+    button,
+    button[type='submit'] {
+      background-color: $button-yellow;
+      color: #222;
+      max-width: 20rem;
+      margin: 0 25px;
+    }
+  }
+
+  @media screen and (min-width: 996px) {
+    padding-bottom: 0;
+  }
+}
+
+.Percentage {
+  color: $base-green;
+  font-size: 0.9rem;
+}
+
+.AffiliateCard {
+  min-width: 20rem;
+  width: 100%;
+  background-color: $light-yellow;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 20px;
+  text-align: center;
+  transform: translateY(86%);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  transition: 450ms ease-in-out;
+
+  h2,
+  h3 {
+    color: $base-green;
+    margin: 10px 0 15px;
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin: 10px 0;
+    span {
+      font-size: 1.2rem;
+    }
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  button {
+    color: $base-green;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+
+  @media screen and (min-width: 996px) {
+    position: static;
+    border-radius: 10px;
+    transform: translateY(0);
+    padding: 50px 20px;
+  }
+}
+
+.Show {
+  transform: translateY(0);
+}
+
+.ShowMoreButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 15px;
+
+  &:focus {
+    outline: 0;
+  }
+
+  @media screen and (min-width: 996px) {
+    display: none;
+  }
+}
+
+.Code {
+  background-color: #46e6ad;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+  font-size: 1.3rem;
+}

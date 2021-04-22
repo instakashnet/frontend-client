@@ -1,0 +1,48 @@
+@import '../../core/assets/css/colors';
+
+.Box {
+  width: 140px;
+  height: 140px;
+  border-radius: 15px;
+  background-color: $bg-gray;
+  transition: 250ms ease-in-out;
+  margin: 20px 20px 5px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & + p {
+    font-size: 0.9rem;
+  }
+
+  &:hover,
+  &focus {
+    box-shadow: 3px 5px 12px rgba(10, 67, 68, 0.1);
+  }
+
+  img {
+    width: 100%;
+    max-width: 10rem;
+    object-fit: contain;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 120px;
+    height: 120px;
+    margin: 10px 20px;
+  }
+
+  @media screen and (min-width: 996px) {
+    width: 160px;
+    height: 160px;
+    margin: 10px 25px;
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+.Add {
+  max-width: 4rem !important;
+}

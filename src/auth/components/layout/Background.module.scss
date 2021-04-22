@@ -1,0 +1,11 @@
+.Background {
+  background: url("../../assets/images/bg/login.svg"), url("../../assets/images/bg/shape.svg");
+  background-size: 100%;
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: block;
+  }
+}

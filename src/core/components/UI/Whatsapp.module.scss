@@ -1,0 +1,12 @@
+@import '../../../core/assets/css/colors';
+
+.Whatsapp {
+  display: flex;
+  align-items: center;
+
+  @media screen and (min-width: 768px) {
+    padding: 10px 13px;
+    border-radius: 10px;
+    background-color: #e1f2ec;
+  }
+}

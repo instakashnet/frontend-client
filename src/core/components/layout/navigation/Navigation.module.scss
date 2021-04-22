@@ -1,0 +1,86 @@
+@import '../../../assets/css/colors';
+
+.NavItem {
+  padding: 16px 0 16px 30px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  transition: 250ms ease-in-out;
+
+  @media screen and (min-width: 768px) {
+    padding-left: 45px;
+    font-size: 1.1rem;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: #c3e5d9;
+  }
+}
+
+.Active {
+  background-color: #c3e5d9;
+  border-right: 4px solid $base-green;
+}
+
+.ProfileNavigation {
+  padding: 40px 0 20px;
+  width: 100%;
+
+  button {
+    padding: 16px 0 16px 30px;
+    width: 100%;
+    transition: 250ms ease-in-out;
+
+    &:hover,
+    &:focus {
+      background-color: #c3e5d9;
+    }
+
+    @media screen and (min-width: 768px) {
+      padding-left: 45px;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.ProfileProgress {
+  padding: 0 40px;
+  margin-top: 30px;
+
+  h3,
+  p {
+    color: $base-green;
+    font-weight: 400;
+    font-size: 1rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}
+
+.ProfileImg {
+  border-radius: 10px;
+  background-color: #f0f8f5;
+  width: 6rem;
+  margin-right: 20px;
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.ProfileInfo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: bold;
+  padding: 0 40px;
+
+  h3 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: $base-green;
+  }
+}

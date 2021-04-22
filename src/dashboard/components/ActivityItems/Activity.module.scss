@@ -1,0 +1,57 @@
+@import '../../../core/assets/css/colors';
+
+.AcitivityItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 10px 15px;
+  border-bottom: 2px solid #fff;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+.Color {
+  width: 17px;
+  height: 17px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.Info {
+  font-size: 0.85rem;
+
+  span {
+    color: #959595;
+    font-size: 0.8rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 0.9rem;
+  }
+}
+
+.Price {
+  color: $base-green;
+  font-weight: bold;
+}
+
+.ViewButton {
+  width: auto !important;
+  font-size: 0.8rem;
+  margin-left: auto;
+  background-color: $button-yellow;
+  padding: 5px 15px !important;
+  transition: 200ms ease-out;
+
+  &:hover,
+  &:focus {
+    background-color: darken($color: $button-yellow, $amount: 15);
+  }
+}

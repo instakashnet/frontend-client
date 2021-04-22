@@ -1,0 +1,25 @@
+@import '../../../core/assets/css/colors';
+
+.NoDetails {
+  color: #959595;
+  margin-top: 15px;
+}
+
+.DocumentFile {
+  padding: 15px;
+  background: $bg-input;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 18rem;
+  margin: 0 10px;
+
+  svg {
+    color: $base-green;
+  }
+}

@@ -1,0 +1,23 @@
+@import '../../core/assets/css/colors';
+
+.ContainerTable {
+  color: inherit;
+
+  > div {
+    border: none;
+    border-radius: 10px 10px 0 0;
+    box-shadow: none;
+  }
+}
+
+.FooterTable {
+  border-radius: 0 0 10px 10px !important;
+  background-color: $bg-gray !important;
+}
+
+.ThTable,
+.TdTable {
+  border: none !important;
+  border-bottom: 1px solid #c3e5d9 !important;
+  background-color: $bg-gray !important;
+}

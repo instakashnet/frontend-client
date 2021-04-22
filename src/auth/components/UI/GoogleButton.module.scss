@@ -1,0 +1,17 @@
+@import "../../../core/assets/css/colors";
+
+.GoogleButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $border-color;
+
+  img {
+    margin-right: 15px;
+  }
+
+  &:hover,
+  &:focus {
+    box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.07);
+  }
+}

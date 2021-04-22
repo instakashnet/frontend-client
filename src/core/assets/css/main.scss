@@ -1,0 +1,186 @@
+@import './fonts';
+@import './colors';
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  color: #676767;
+}
+
+.main-app {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 5rem 1fr;
+  grid-template-areas:
+    'header'
+    'section';
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 16rem 1fr;
+    grid-template-rows: 5rem 1fr;
+    grid-template-areas:
+      'sidebar header'
+      'sidebar section';
+  }
+
+  @media screen and (min-width: 996px) {
+    grid-template-columns: 19rem 1fr;
+  }
+}
+
+.main-section {
+  grid-area: section;
+  height: 100%;
+  min-height: 90vh;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  display: grid;
+  position: relative;
+}
+
+.max-screen {
+  max-width: 1440px;
+}
+
+.action-button {
+  background-color: $button-yellow;
+  transition: 200ms ease-out;
+
+  &:hover,
+  &:focus {
+    background-color: $base-yellow;
+  }
+}
+
+/* FORM GLOBALS */
+
+input::placeholder {
+  font-size: 0.9rem;
+}
+
+.error-msg {
+  color: #ff4b55 !important;
+  font-size: 0.9rem !important;
+  margin-top: 7px;
+  margin-left: 10px;
+  display: block;
+}
+
+/* REACT MODAL */
+
+.ReactModal__Html--open,
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.15) !important;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  transition: 300ms ease-in-out;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.slider-modal {
+  max-height: 100vh;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  max-width: 25rem;
+  background-color: #fff;
+  border-radius: 40px 40px 0 0;
+  outline: none;
+  overflow-y: auto;
+
+  @media screen and (min-width: 768px) {
+    border-radius: 40px 0 0 0;
+    height: 100vh;
+  }
+}
+
+.ReactModal__Content.slider-modal {
+  transform: translateY(100%);
+  transition: 600ms ease-in-out;
+
+  @media screen and (min-width: 768px) {
+    transform: translateX(100%);
+  }
+}
+
+.ReactModal__Content--after-open.slider-modal {
+  transform: translateY(0);
+
+  @media screen and (min-width: 768px) {
+    transform: translateX(0);
+  }
+}
+
+.ReactModal__Content--before-close.slider-modal {
+  transform: translateY(100%);
+
+  @media screen and (min-width: 768px) {
+    transform: translateX(100%);
+  }
+}
+
+/* SWIPER */
+
+.swiper-pagination-bullet {
+  background-color: #c3e5d9;
+  opacity: 1;
+  width: 12px;
+  height: 12px;
+  margin: 0 7px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #87cbb3;
+}
+
+/* CUSTOM MATERIAL-UI */
+.MuiFormControl-root {
+  width: 100%;
+}
+
+.MuiInputBase-root {
+  color: inherit !important;
+}
+
+.MuiInput-underline:before,
+.MuiInput-underline:after {
+  display: none;
+}
+
+/* SWEETALERT */
+
+.swal2-title {
+  color: $base-green;
+  font-size: 1.5rem;
+}
+
+.swal2-content {
+  font-size: 1.1rem;
+  color: #676767;
+}
+
+.swal2-styled.swal2-confirm {
+  color: #676767;
+  background-color: $button-yellow;
+}

@@ -1,0 +1,17 @@
+@import '../../assets/css/colors';
+
+.Button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.Button[type='submit'] {
+  background-color: $button-yellow;
+  width: 100%;
+  max-width: 100%;
+
+  &:hover,
+  &:focus {
+    background-color: $base-yellow;
+  }
+}

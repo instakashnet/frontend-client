@@ -1,0 +1,86 @@
+@import "../../../core/assets/css/colors";
+
+.FormGroup {
+  width: 100%;
+  margin: 20px 0;
+
+  @media screen and (min-width: 768px) {
+    margin: 30px 0;
+  }
+}
+
+.Select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 10px 0 6px;
+  width: 100%;
+  border-bottom: 1px solid $secondary-green;
+  background-image: url(../../../core/assets/images/icons/arrow.svg);
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: 12px;
+}
+
+.InputGroup {
+  position: relative;
+
+  input {
+    width: 100%;
+    border-bottom-color: $secondary-green;
+    transition: 300ms ease-in-out;
+
+    &::placeholder {
+      color: $placeholder;
+    }
+
+    &:focus {
+      outline: none;
+      border-bottom-color: darken($color: $secondary-green, $amount: 20);
+    }
+  }
+
+  svg {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: $placeholder;
+    transition: 250ms ease-in-out;
+  }
+
+  input:focus + svg {
+    color: darken($color: $placeholder, $amount: 20);
+  }
+
+  input.Error + svg {
+    color: $error !important;
+  }
+}
+
+.Error {
+  border-bottom-color: $error !important;
+}
+
+.PhoneWrapper {
+  font-size: 1rem !important;
+  font-family: inherit !important;
+}
+
+.PhoneInput {
+  width: 100% !important;
+  border: none !important;
+  border-bottom: 1px solid $secondary-green !important;
+  border-radius: 0 !important;
+  font-size: 1rem !important;
+}
+
+.PhoneError {
+  border-bottom-color: $error !important;
+}
+
+.ButtonFlag {
+  border: none !important;
+  border-bottom: 1px solid $secondary-green !important;
+  background-color: transparent !important;
+  border-radius: 0 !important;
+}
