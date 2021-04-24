@@ -7,7 +7,7 @@ import Layout from '../../core/components/layout/Layout';
 import AddAccount from '../../accounts/containers/AddAccount';
 import Calculator from './Calculator';
 import Accounts from './Accounts';
-import Information from './Information';
+import Information from '../components/Information';
 import Complete from './Complete';
 import Button from '../../core/components/UI/Button';
 

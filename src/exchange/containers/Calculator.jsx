@@ -153,11 +153,14 @@ const Calculator = ({ profile, setStep, setModal }) => {
             </>
           )}
           {minimum && (
-            <p className='text-center error-msg mt-3'>
+            <p className='text-center error-msg mt-1 md:mt-3'>
               Solo aplicable para montos mayores a $ {formatAmount(coupon.minimumBuy)} o S/. {formatAmount(coupon.minimumSell)}
             </p>
           )}
-          <Button type='submit' disabled={values.amount_received <= 0 || minimum || disabled} className={`action-button mt-5 ld-ext-right ${isProcessing ? 'running' : ''}`}>
+          <Button
+            type='submit'
+            disabled={values.amount_received <= 0 || minimum || disabled}
+            className={`action-button mt-2 md:mt-5 ld-ext-right ${isProcessing ? 'running' : ''}`}>
             <span className='ld ld-ring ld-spin' />
             Comenzar cambio
           </Button>

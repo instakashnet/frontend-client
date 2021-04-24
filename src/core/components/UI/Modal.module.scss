@@ -39,7 +39,11 @@
 }
 
 .ProfileModalContent {
-  padding: 70px 0 40px;
+  padding: 40px 0;
+
+  @media screen and (min-width: 768px) {
+    padding: 70px 0 40px;
+  }
 }
 
 .Close {
