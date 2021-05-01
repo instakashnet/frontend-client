@@ -1,28 +1,38 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import Skeleton from 'react-loading-skeleton';
+import { Link } from 'react-router-dom';
 import { RefreshCcw, ArrowUp } from 'react-feather';
-import { getTotalAmountInit } from '../../store/actions';
 import { formatAmount } from '../../shared/functions';
 
 import Card from '../../core/components/UI/Card';
+import Button from '../../core/components/UI/Button';
 
+import KashIcon from '../../core/assets/images/kash.svg';
 import classes from './Dashboard.module.scss';
 
-const TotalTransfered = ({ totalAmount, isLoading, className, type }) => {
-  const dispatch = useDispatch();
+const TotalTransfered = ({ totalAmount, kashAccount, isLoading, className, type }) => {
   let savings = 0;
-
-  useEffect(() => {
-    dispatch(getTotalAmountInit());
-  }, [dispatch]);
-
-  if (totalAmount >= 0) {
-    savings = totalAmount * 0.1;
-  }
+  if (totalAmount >= 0) savings = totalAmount * 0.1;
 
   return (
     <div className={`flex flex-wrap md:flex-nowrap ${className || ''}`}>
+      <div className={`${classes.KashCard} w-full`}>
+        <img src={KashIcon} alt='kash' />
+        <h3>
+          {kashAccount && kashAccount.balance > 0 ? (
+            <span>
+              ¡Tienes <b>{kashAccount.balance}</b> KASH!
+            </span>
+          ) : (
+            'Todavia no posees KASH'
+          )}
+        </h3>
+        <p>¿Quieres cambiar o retirar?</p>
+        <div className='flex items-center justify-between mt-3'>
+          <Link to='/currency-exchange'>Cambiar</Link>
+          <Button type='button'>Retirar</Button>
+        </div>
+      </div>
       <div className={`${classes.DashboardCard} w-full ${type === 'account' && 'mx-0 md:mx-3'}`}>
         <h2>
           <RefreshCcw className='mr-2' size={20} /> Soles cambiados

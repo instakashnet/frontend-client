@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, lazy } from 'react';
 import { Switch, Router } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUserInit, getProfilesInit } from './store/actions';
@@ -6,13 +6,13 @@ import history from './shared/history';
 
 import Alert from './core/components/UI/Alert';
 import ScrollToTop from './hoc/ScrollToTop';
+import asyncComponent from './hoc/AsyncComponent';
 
 // ROUTING
 import PublicRoute from './routing/PublicRoute';
 import PrivateRoute from './routing/PrivateRoute';
 
 // PUBLIC
-import Signin from './auth/containers/Signin';
 import Signup from './auth/containers/Signup';
 import RecoverPassword from './auth/containers/RecoverPassword';
 import ChangePassword from './auth/containers/ChangePassword';
@@ -25,6 +25,8 @@ import Dashboard from './dashboard/containers/Dashboard';
 import MyProfile from './profile/containers/Profile';
 import Accounts from './accounts/containers/Accounts';
 import Exchange from './exchange/containers/Exchange';
+
+const Signin = lazy(() => import('./auth/containers/Signin'));
 
 function App() {
   const dispatch = useDispatch();
@@ -42,7 +44,7 @@ function App() {
     <Router history={history}>
       <ScrollToTop>
         <Switch>
-          <PublicRoute exact path='/signin' component={Signin} />
+          <PublicRoute exact path='/signin' component={asyncComponent(Signin)} />
           <PublicRoute exact path='/signup' component={Signup} />
           <PublicRoute exact path='/recover-password' component={RecoverPassword} />
           <PublicRoute exact path='/change-password' component={ChangePassword} />

@@ -41,6 +41,17 @@
   }
 }
 
+.CheckGroup {
+  margin: 10px 0 5px;
+  width: 100%;
+  cursor: pointer;
+
+  label {
+    font-size: 0.9rem;
+    color: $base-green;
+  }
+}
+
 .InputGroup {
   position: relative;
 

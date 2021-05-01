@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Repeat } from 'react-feather';
 import _ from 'lodash';
 import Skeleton from 'react-loading-skeleton';
-import { getOrdersInit, getWithdrawalsInit } from '../../../store/actions';
 
 import Card from '../../../core/components/UI/Card';
 import OrderItem from '../../components/ActivityItems/OrderItem';
@@ -13,18 +11,11 @@ import WithdrawalItem from '../../components/ActivityItems/WithdrawalItem';
 import classes from '../Dashboard.module.scss';
 
 const RecentActivity = ({ orders, withdrawals, openModal, isLoading }) => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getOrdersInit());
-    dispatch(getWithdrawalsInit());
-  }, [dispatch]);
-
   return (
     <div>
       <div className={classes.DashboardCard}>
         <div className='flex items-center justify-between'>
-          <h2 className='flex items-center mb-3'>
+          <h2 className='flex items-center mb-2'>
             <Repeat className='mr-2' size={20} /> Últimos cambios de divisa
           </h2>
           {orders.length > 4 && <Link to='/dashboard/all'>Ver todos</Link>}

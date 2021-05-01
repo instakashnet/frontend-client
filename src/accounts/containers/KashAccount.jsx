@@ -9,7 +9,7 @@ const KashAccount = ({ account, openModal }) => {
     <div className={classes.KashAccount}>
       <img src={KashIcon} alt='kash-icon' />
       <div className='md:ml-6 ml-3 text-right md:text-left'>
-        <h2>{!account.balance ? 'No has ganado ningún KASH' : `¡Tienes ${account.balance} KASH!`}</h2>
+        <h2>{!account.balance ? 'Todavia no posees ningún KASH' : `¡Tienes ${account.balance} KASH!`}</h2>
         <p className='block md:hidden'>
           <b>retiralos</b> o usalos en tus próximas <b>operaciones</b>.
         </p>
@@ -19,9 +19,14 @@ const KashAccount = ({ account, openModal }) => {
         <p className='text-sm font-bold mt-3'>1 KASH = 1$ USD</p>
         <Link to='/my-profile'>¿Cómo ganar kash?</Link>
         {account.balance > 0 && (
-          <button className='action-button' onClick={() => openModal('withdrawal')}>
-            Retirar mis kash
-          </button>
+          <div className={classes.actionButtons}>
+            <button className='action-button' onClick={() => openModal('withdrawal')}>
+              Retirar mis kash
+            </button>
+            <Link className='action-button' to='/currency-exchange'>
+              Usar mis kash
+            </Link>
+          </div>
         )}
       </div>
     </div>

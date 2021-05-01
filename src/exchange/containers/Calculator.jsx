@@ -21,23 +21,24 @@ import classes from './Exchange.module.scss';
 const Calculator = ({ profile, setStep, setModal }) => {
   const [actualRates, setActualRates] = useState({ buy: 0, sell: 0 });
   const [couponName, setCouponName] = useState('');
+  const { rates, isLoading, coupon, isProcessing } = useSelector((state) => state.Exchange);
+
+  const { type: profiletype } = profile;
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getRatesInit());
-    dispatch(validateCouponInit('NEW_USER'));
-  }, [dispatch]);
+    dispatch(validateCouponInit('NEW_USER', profiletype));
+  }, [dispatch, profiletype]);
 
   const onCouponChange = (e) => setCouponName(e.target.value);
   const sendCoupon = () => {
     const bodyCoupon = couponName.trim();
     const regex = /^((?=.*\d)?)(?=.*[a-zA-Z]).{6,}$/;
     if (bodyCoupon && regex.test(bodyCoupon)) {
-      dispatch(validateCouponInit(bodyCoupon.toUpperCase()));
+      dispatch(validateCouponInit(bodyCoupon.toUpperCase(), profile.type));
     } else return;
   };
-
-  const { rates, isLoading, coupon, isProcessing } = useSelector((state) => state.Exchange);
 
   const formik = useFormik({
     initialValues: {
@@ -70,8 +71,8 @@ const Calculator = ({ profile, setStep, setModal }) => {
 
   useEffect(() => {
     if (actualRates.buy > 0 && actualRates.sell > 0) {
-      setFieldValue('amount_sent', 1000);
-      setFieldValue('amount_received', 1000 / actualRates.sell);
+      setFieldValue('amount_sent', Math.round(1000 * actualRates.sell));
+      setFieldValue('amount_received', 1000);
     }
   }, [actualRates, setFieldValue]);
 

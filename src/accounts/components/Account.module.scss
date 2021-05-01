@@ -2,7 +2,7 @@
 
 .AccountCard {
   margin: 10px;
-  width: 20rem;
+  width: 17rem;
   min-height: 7.5rem;
   display: grid;
   align-content: center;
@@ -11,6 +11,11 @@
   button {
     color: $base-green;
     text-decoration: underline;
+  }
+
+  @media (min-width: 1366px) {
+    width: 19rem;
+    min-height: 8rem;
   }
 }
 

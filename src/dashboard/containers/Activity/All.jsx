@@ -1,7 +1,8 @@
 import React from 'react';
 import { _ } from 'gridjs-react';
 import moment from 'moment';
-import { Repeat } from 'react-feather';
+import { Link } from 'react-router-dom';
+import { Repeat, ArrowLeftCircle } from 'react-feather';
 import { formatAmount } from '../../../shared/functions';
 
 import Button from '../../../core/components/UI/Button';
@@ -53,6 +54,9 @@ const AllActivity = ({ orders, openModal }) => {
 
   return (
     <div className={classes.DashboardCard}>
+      <Link to='/activity' className='flex items-center mb-6 text-base'>
+        <ArrowLeftCircle className='mr-2' size={40} />
+      </Link>
       <h2 className='flex items-center mb-3'>
         <Repeat className='mr-2' size={20} /> Cambios de divisa realizados
       </h2>

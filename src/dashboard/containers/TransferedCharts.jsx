@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { DollarSign } from 'react-feather';
 import Skeleton from 'react-loading-skeleton';
-import { getOrderAmountsInit } from '../../store/actions';
 
 import Card from '../../core/components/UI/Card';
 import PieChart from '../components/Charts/PieChart';
@@ -10,14 +8,8 @@ import PieChart from '../components/Charts/PieChart';
 import classes from './Dashboard.module.scss';
 
 const TransferedCharts = ({ isLoading, orderAmounts }) => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getOrderAmountsInit());
-  }, [dispatch]);
-
   return (
-    <div className={`${classes.DashboardCard} w-full`}>
+    <div className={`${classes.DashboardCard} w-full hidden md:block`}>
       <h2 className='flex items-center mb-2'>
         <DollarSign className='mr-2' size={20} /> Total cambiado
       </h2>

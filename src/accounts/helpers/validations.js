@@ -8,6 +8,7 @@ export const addAccountValidation = Yup.object().shape({
   currencyId: Yup.string().required('Debes seleccionar una moneda.'),
   alias: Yup.string().required('Debes ingresar un alias.').max(40, 'No deben ser más de 40 caracteres.'),
   acc_type: Yup.string().required('Debes seleccionar un tipo de cuenta.'),
+  accept: Yup.boolean().oneOf([true], 'Debes declarar que es tu cuenta personal.'),
 });
 
 export const editAccountValidation = Yup.object().shape({

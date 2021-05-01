@@ -65,7 +65,7 @@ const Accounts = ({ order, setStep, setModal }) => {
 
   if (formik.values.account_to_id) {
     const chosenAccount = filteredAccounts.find((account) => account.id === formik.values.account_to_id);
-    if (chosenAccount.bank.id === 2) interplaza = validateInterplaza(chosenAccount.account_number);
+    if (chosenAccount && chosenAccount.bank.id === 2) interplaza = validateInterplaza(chosenAccount.account_number);
   } else interplaza = false;
 
   return (

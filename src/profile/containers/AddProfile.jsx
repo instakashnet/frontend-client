@@ -5,13 +5,14 @@ import { addProfileInit } from '../../store/actions';
 import { addProfileValidation } from '../helpers/validations';
 
 import Input from '../../core/components/UI/form/Input';
+import Checkbox from '../../core/components/UI/form/Checkbox';
 import Button from '../../core/components/UI/Button';
 
 const AddProfile = () => {
   const dispatch = useDispatch();
   const isProcessing = useSelector((state) => state.Profile.isProcessing);
   const formik = useFormik({
-    initialValues: { type: 'juridica', razon_social: '', ruc: '', address: '' },
+    initialValues: { type: 'juridica', razon_social: '', ruc: '', address: '', accept: false },
     validationSchema: addProfileValidation,
     onSubmit: (values) => dispatch(addProfileInit(values)),
   });
@@ -52,6 +53,9 @@ const AddProfile = () => {
         error={formik.errors.address}
         touched={formik.touched.address}
       />
+      <Checkbox name='accept' value={formik.values.accept} onChange={formik.handleChange} error={formik.errors.accept}>
+        Declaro que soy el representante legal de la empresa.
+      </Checkbox>
       <Button type='submit' className={`ld-ext-right ${isProcessing ? 'running' : ''}`} disabled={!formik.isValid || isProcessing}>
         <span className='ld ld-ring ld-spin' />
         Agregar empresa

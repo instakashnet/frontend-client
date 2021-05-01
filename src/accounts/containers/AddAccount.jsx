@@ -7,12 +7,13 @@ import { addAccountValidation } from '../helpers/validations';
 import CustomSelect from '../../core/components/UI/form/CustomSelect';
 import Input from '../../core/components/UI/form/Input';
 import Select from '../../core/components/UI/form/Select';
+import Checkbox from '../../core/components/UI/form/Checkbox';
 import Button from '../../core/components/UI/Button';
 
 const AddAccount = ({ order, accType }) => {
   const dispatch = useDispatch();
   const formik = useFormik({
-    initialValues: { account_number: '', cci: '', bankId: '', currencyId: '', alias: '', acc_type: '' },
+    initialValues: { account_number: '', cci: '', bankId: '', currencyId: '', alias: '', acc_type: '', accept: false },
     validationSchema: addAccountValidation,
     onSubmit: (values) => dispatch(addAccountInit(values, accType)),
   });
@@ -82,6 +83,9 @@ const AddAccount = ({ order, accType }) => {
           error={formik.errors.alias}
           touched={formik.touched.alias}
         />
+        <Checkbox name='accept' value={formik.values.accept} onChange={formik.handleChange} error={formik.errors.accept}>
+          Declaro que esta es mi cuenta personal o de mi empresa.
+        </Checkbox>
         <Button type='submit' disabled={!formik.isValid || isProcessing} className={`action-button ld-ext-right ${isProcessing ? 'running' : ''}`}>
           <span className='ld ld-ring ld-spin' />
           Agregar cuenta

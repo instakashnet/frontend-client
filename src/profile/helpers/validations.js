@@ -6,6 +6,7 @@ export const addProfileValidation = Yup.object().shape({
     .required('Debes ingresa el RUC de tu empresa.')
     .matches(/^[0-9]{10,13}$/, 'Ingresa un RUC válido.'),
   address: Yup.string().required('Debes colocar la dirección fiscal.').min(12, 'Dirección fiscal muy corta.'),
+  accept: Yup.boolean().oneOf([true], 'Debes aceptar que eres el representante legal.'),
 });
 
 export const editProfileValidation = (type) =>

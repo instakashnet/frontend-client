@@ -21,6 +21,78 @@
     text-decoration: underline;
     color: $base-green;
   }
+
+  > a {
+    transition: 200ms ease-out;
+
+    &:hover {
+      color: darken($color: $base-green, $amount: 15);
+    }
+  }
+}
+
+.KashCard {
+  background-color: $light-yellow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 25px 10px;
+  border-radius: 15px;
+  margin: 10px 0;
+
+  h3 {
+    color: $base-green;
+    margin-top: 5px;
+    font-size: 1.1rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  a,
+  button {
+    background-color: $button-yellow;
+    border-radius: 15px;
+    margin: 0 10px;
+    padding: 5px 20px;
+    transition: 200ms ease-out;
+
+    &:hover,
+    &:focus {
+      background-color: darken($color: $button-yellow, $amount: 15);
+    }
+  }
+}
+
+.NoActivity {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  img {
+    position: relative;
+    left: 20px;
+  }
+
+  h1 {
+    color: $base-green;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  a {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 17rem;
+  }
 }
 
 .ActivityMobile {

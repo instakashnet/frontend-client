@@ -9,9 +9,10 @@ export const getRatesSuccess = (rates) => ({
   rates,
 });
 
-export const validateCouponInit = (couponName) => ({
+export const validateCouponInit = (couponName, profileType) => ({
   type: types.VALIDATE_COUPON_INIT,
   couponName,
+  profileType,
 });
 
 export const validateCouponSuccess = (coupon) => ({

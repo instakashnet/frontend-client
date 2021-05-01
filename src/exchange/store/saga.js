@@ -15,13 +15,13 @@ function* getRates() {
   }
 }
 
-function* validateCoupon({ couponName }) {
+function* validateCoupon({ couponName, profileType }) {
   try {
-    const res = yield axios.get(`/coupons/client/${couponName}`);
-    console.log(res);
+    const res = yield axios.get(`/coupons/client/${couponName}/${profileType}`);
     if (res.status === 200)
       yield put(actions.validateCouponSuccess({ name: couponName, discount: res.data.discount, minimumBuy: res.data.minAmountBuy, minimumSell: res.data.minAmountSell }));
   } catch (error) {
+    console.log(error);
     if (!couponName.includes('NEW_USER')) yield put(setAlertInit(error.message, 'error'));
     yield put(actions.exchangeError());
   }
@@ -66,13 +66,13 @@ function* cancelExchange({ orderId }) {
       text: 'Deberás crear una nueva operación para recibir tu cambio.',
       showCancelButton: true,
       confirmButtonColor: '#f56565',
-      confirmButtonText: 'Si, cancelar',
+      confirmButtonText: 'Si, continuar',
       cancelButtonText: 'No, regresar',
     });
 
     if (result.isConfirmed) {
       yield axios.delete(`/order/client/cancel/${orderId}`);
-      yield call([history, 'push'], '/');
+      yield call([history, 'push'], '/dashboard');
       yield put(actions.cancelExchangeSuccess());
       yield Swal.fire('Exitoso', 'Su solicitud de cambio fue cancelada.', 'success');
     }

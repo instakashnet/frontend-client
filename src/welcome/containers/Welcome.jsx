@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
+import { getScheduleInit } from '../../store/actions';
 
 import Card from '../../core/components/UI/Card';
 import Layout from '../../core/components/layout/Layout';
+import OutOfTime from '../../core/containers/OutOfTime';
 
 import ExchangeImg from '../images/exchange.svg';
 import AffiliateImg from '../images/affiliate.svg';
@@ -10,7 +14,36 @@ import AffiliateImg from '../images/affiliate.svg';
 import classes from './Welcome.module.scss';
 
 const Welcome = () => {
-  return (
+  const dispatch = useDispatch();
+  const [outOfTime, setOutOfTime] = useState(false);
+  const schedule = useSelector((state) => state.Data.schedule);
+
+  useEffect(() => {
+    dispatch(getScheduleInit());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (schedule && schedule.length > 0) {
+      schedule.forEach((day) => {
+        const actualDay = new Date().getDay();
+        if (day.idDayOfWeek === actualDay) {
+          if (!day.isWorkingDay) return setTimeout(() => setOutOfTime(true), 500);
+
+          const actualTime = moment(new Date(), 'HH:mm');
+          const startTime = moment(day.startTime, 'HH:mm');
+          const endTime = moment(day.endTime, 'HH:mm');
+
+          if (!actualTime.isAfter(startTime) || !actualTime.isBefore(endTime)) return setTimeout(() => setOutOfTime(true), 500);
+        }
+      });
+    }
+  }, [schedule]);
+
+  const closeOutOfTime = () => setOutOfTime(false);
+
+  return outOfTime ? (
+    <OutOfTime onClose={closeOutOfTime} />
+  ) : (
     <Layout className='content-start'>
       <div className={classes.Welcome}>
         <div className='w-9/12 lg:w-2/6'>
