@@ -12,7 +12,7 @@ const Modal = ({ children, closeModal }) => {
     <ReactModal closeTimeoutMS={300} onRequestClose={closeModal} isOpen={isOpen} className={classes.Modal} ariaHideApp={false} preventScroll>
       <div className={classes.ModalContent}>
         <button onClick={closeModal} className={classes.Close}>
-          <X />
+          <X size={30} />
         </button>
         {children}
       </div>

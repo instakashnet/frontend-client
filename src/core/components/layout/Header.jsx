@@ -23,10 +23,10 @@ const Header = () => {
       </button>
       <div className={classes.Hours}>
         <p>Lunes a Viernes: 9am a 7pm</p>
-        <p>Sábados y feriados: 9am a 3pm</p>
+        <p>Sábados y feriados: 9am a 2:30pm</p>
       </div>
       <div className='flex items-center ml-auto'>
-        <a href='https://wa.me/51929324006?text=Hola%20Instakash,%20deseo%20informacion' target='_blank' rel='noopener noreferrer'>
+        <a href='https://wa.link/05keps' target='_blank' rel='noopener noreferrer'>
           <Whatsapp />
         </a>
         <ProfileInfo main={profiles.find((profile) => profile.type === 'natural')} openNav={openNav} selected={profileSelected} />

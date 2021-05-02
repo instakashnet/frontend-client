@@ -2,6 +2,7 @@
 
 .Exchange {
   text-align: center;
+  margin-bottom: 20px;
 
   h1 {
     font-size: 1.4rem;
@@ -39,7 +40,7 @@
 .Information {
   position: relative;
   width: 100%;
-  margin-top: 40px;
+  margin-top: 20px;
 
   h3 {
     color: $base-green;
@@ -47,6 +48,10 @@
     text-align: left;
     margin-bottom: 10px;
     font-size: 1.3rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    margin-top: 40px;
   }
 }
 
@@ -64,25 +69,36 @@
 .InfoCard {
   width: 100%;
   min-height: 5rem;
-  margin: 10px 0;
+  margin: 5px 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  border-radius: 0;
-
-  &:first-of-type {
-    border-radius: 10px 0 0 10px;
-  }
-
-  &:last-of-type {
-    border-radius: 0 10px 10px 0;
-  }
+  justify-content: flex-start;
+  border-radius: 10px;
 
   p {
     font-size: 0.85rem;
     color: $base-green;
-    margin-top: 10px;
+    margin-left: 20px;
+  }
+
+  @media screen and (min-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 0;
+    margin: 10px 0;
+
+    &:first-of-type {
+      border-radius: 10px 0 0 10px;
+    }
+
+    &:last-of-type {
+      border-radius: 0 10px 10px 0;
+    }
+
+    p {
+      margin-top: 10px;
+      margin-left: 0;
+    }
   }
 
   @media screen and (min-width: 1140px) {
@@ -98,6 +114,16 @@
   @media screen and (min-width: 1440px) {
     max-width: 16rem;
   }
+}
+
+.InfoButton {
+  position: fixed;
+  cursor: pointer;
+  right: 20px;
+  bottom: 20px;
+  color: #fff;
+  border-radius: 50%;
+  background-color: $base-green;
 }
 
 .AddAccount {
@@ -124,6 +150,9 @@
   font-size: 1.4rem;
   font-weight: bold;
   margin: 10px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .TransferCode {
@@ -207,3 +236,34 @@
     }
   }
 }
+
+.CompleteProfile {
+  li {
+    background-image: url(../../core/assets/images/icons/check.svg);
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: left center;
+    padding-left: 25px;
+  }
+
+  b {
+    color: $base-green;
+  }
+}
+
+// @keyframes pulse {
+//   0% {
+//     transform: scale(0.95);
+//     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+//   }
+
+//   70% {
+//     transform: scale(1);
+//     box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+//   }
+
+//   100% {
+//     transform: scale(0.95);
+//     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+//   }
+// }

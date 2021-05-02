@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { isMobile } from 'react-device-detect';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { Info } from 'react-feather';
 import { getBanksInit, getCurenciesInit, getAccountsInit, getKashAccountInit, openModal, closeModal } from '../../store/actions';
 
 import Layout from '../../core/components/layout/Layout';
@@ -77,12 +79,14 @@ const Exchange = () => {
 
   if (modalType === 'account') ModalComponent = () => <AddAccount order={order} accType='orders' />;
   if (modalType === 'complete') ModalComponent = () => <CompleteProfile dispatch={dispatch} history={history} />;
+  if (modalType === 'info') ModalComponent = () => <Information onClose={() => dispatch(closeModal())} />;
 
   return (
     <Layout ModalComponent={ModalComponent}>
       <div className={classes.Exchange}>
         {pages[step]}
-        <Information />
+        {!isMobile && <Information />}
+        {isMobile && <Info className={classes.InfoButton} size={30} onClick={() => openModalHandler('info')} />}
       </div>
     </Layout>
   );
@@ -90,12 +94,21 @@ const Exchange = () => {
 
 const CompleteProfile = ({ history, dispatch }) => {
   return (
-    <>
-      <h2>Completa tu perfil</h2>
-      <p className='mb-3 text-center'>
-        Estimado usuario, para poder hacer operaciones con montos mayores de <b>$ 5,000</b> o <b>S/. 15,000</b> debes <b>completar el 100%</b> de tu información de perfil. Si aún
-        no lo has hecho por favor haz click en continuar y ten a la mano tu documento de identidad.
+    <div className={classes.CompleteProfile}>
+      <h2 className='text-center'>Completa tu perfil</h2>
+      <p>
+        Para realizar operaciones mayores a <b>$ 5,000</b> o <b>S/. 15,000</b> deberás:
       </p>
+      <ul className='my-3'>
+        <li>
+          Completar tu <b>información de perfil</b> al 100%.
+        </li>
+        <li>
+          Cargar una foto de tu <b>documento de identidad</b>.
+        </li>
+      </ul>
+      <p className='text-center'>Haz click en continuar para agregar tus datos.</p>
+
       <Button
         type='button'
         className='action-button'
@@ -105,7 +118,7 @@ const CompleteProfile = ({ history, dispatch }) => {
         }}>
         Completar mi perfil
       </Button>
-    </>
+    </div>
   );
 };
 

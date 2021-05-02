@@ -14,7 +14,8 @@ export default function activityReducer(state = initialState, action) {
       const filteredOrders = action.orders.reverse();
       return { ...state, orders: filteredOrders, isLoading: false };
     case types.GET_WITHDRAWALS_SUCCESS:
-      return { ...state, withdrawals: action.withdrawals, isLoading: false };
+      const filteredWithdrawals = action.withdrawals.reverse();
+      return { ...state, withdrawals: filteredWithdrawals, isLoading: false };
     case types.GET_ORDER_AMOUNTS_SUCCESS:
       return { ...state, orderAmounts: action.orderAmounts, isLoading: false };
     case types.GET_TOTAL_AMOUNT_SUCCESS:

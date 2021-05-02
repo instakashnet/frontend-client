@@ -1,8 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { closeModal } from '../../store/actions';
 
 import Button from '../../core/components/UI/Button';
+
+import classes from '../containers/Profile.module.scss';
 
 const KashInfo = () => {
   const dispatch = useDispatch();
@@ -10,15 +13,24 @@ const KashInfo = () => {
   const closeModalHandler = () => dispatch(closeModal());
 
   return (
-    <div className='text-center'>
-      <h2>Beneficios de promocionar tu código</h2>
+    <div className={classes.KashInfo}>
+      <h2 className='text-center'>¡GANA 1 KASH por cada referído!</h2>
       <ul>
-        <li>Ganarás dinero por cada usuario que se registre y haga un cambio.</li>
-        <li>El nuevo usuario también gana un descuento en su primer cambio.</li>
+        <li>Comparte tu código con tus amigos y conocidos.</li>
+        <li>Cada amigo registrado con tu código obtendrá una tasa preferencial en su primer cambio.</li>
+        <li>
+          Una vez tu amigo complete su primer cambio tu ganarás <b>1 KASH</b> reflejado en tu cuenta <Link to='/my-accounts'>que puedes ver aquí</Link>.
+        </li>
+        <li>
+          No hay límites, mientras más compartas tu código podrás acumular más <b>KASH</b>.
+        </li>
       </ul>
+      <p className={classes.KashPrice}>1 KASH equivale a $ 1 USD</p>
       <p>
-        Si se registran 100 personas con tu código y generan un cambio de divisas con Instakash, ¡estarías ganando 100$ que puedes retirar en cualquiera de nuestros bancos
-        afiliados!
+        Podrás usar tus <b>KASH</b> como parte de tus ventas de dólares o retiralos a una de tus cuentas en dólares.
+      </p>
+      <p className='mt-4'>
+        Para mayor información te invitamos a leer nuestros <a href='https://instakash.net/terminos-y-condiciones'>términos y condiciones</a> en la sección <b>KASH</b>.
       </p>
       <Button onClick={closeModalHandler} className='action-button mt-3'>
         ¡Lo entiendo!

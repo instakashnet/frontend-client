@@ -34,10 +34,10 @@ const styles = {
     ...provided,
     height: '100%',
     minHeight: '50px',
-    border: 'none',
     backgroundColor: '#F6FBF9',
     borderRadius: '10px',
     boxShadow: '0px 4px 5px rgba(0, 0, 0, 0.05)',
+    border: '1px solid #e4e4e4',
   }),
   menu: (provided) => ({
     ...provided,

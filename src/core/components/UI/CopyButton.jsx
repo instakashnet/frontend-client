@@ -5,7 +5,7 @@ import { Copy } from 'react-feather';
 const CopyButton = ({ textToCopy }) => {
   return (
     <CopyToClipboard text={textToCopy}>
-      <Copy className='ml-3 cursor-pointer' size={20} />
+      <Copy className='ml-2 cursor-pointer' size={20} />
     </CopyToClipboard>
   );
 };

@@ -154,3 +154,33 @@
   margin: 10px 0;
   font-size: 1.3rem;
 }
+
+.KashInfo {
+  font-size: 0.95rem;
+  text-align: center;
+
+  .KashPrice {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: $base-green;
+    margin: 20px 0;
+  }
+
+  ul {
+    text-align: left;
+  }
+
+  a {
+    color: $base-green;
+    text-decoration: underline;
+  }
+
+  li {
+    margin: 10px 0;
+    background-image: url(../../core/assets/images/icons/check.svg);
+    background-size: 15px;
+    padding-left: 25px;
+    background-repeat: no-repeat;
+    background-position: left 35%;
+  }
+}

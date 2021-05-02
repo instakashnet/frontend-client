@@ -5,14 +5,13 @@ import { RefreshCcw, ArrowUp } from 'react-feather';
 import { formatAmount } from '../../shared/functions';
 
 import Card from '../../core/components/UI/Card';
-import Button from '../../core/components/UI/Button';
 
 import KashIcon from '../../core/assets/images/kash.svg';
 import classes from './Dashboard.module.scss';
 
 const TotalTransfered = ({ totalAmount, kashAccount, isLoading, className, type }) => {
   let savings = 0;
-  if (totalAmount >= 0) savings = totalAmount * 0.1;
+  if (totalAmount >= 0) savings = totalAmount * 0.03;
 
   return (
     <div className={`flex flex-wrap md:flex-nowrap ${className || ''}`}>
@@ -24,13 +23,13 @@ const TotalTransfered = ({ totalAmount, kashAccount, isLoading, className, type 
               ¡Tienes <b>{kashAccount.balance}</b> KASH!
             </span>
           ) : (
-            'Todavia no posees KASH'
+            'No posees ningún KASH'
           )}
         </h3>
         <p>¿Quieres cambiar o retirar?</p>
         <div className='flex items-center justify-between mt-3'>
           <Link to='/currency-exchange'>Cambiar</Link>
-          <Button type='button'>Retirar</Button>
+          <Link to='/my-accounts'>Retirar</Link>
         </div>
       </div>
       <div className={`${classes.DashboardCard} w-full ${type === 'account' && 'mx-0 md:mx-3'}`}>

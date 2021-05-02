@@ -31,7 +31,7 @@ const PersonalDetails = ({ profile, user, onEdit }) => (
     <div className='flex items-center justify-between mt-8'>
       <h3>Datos adicionales</h3>
       <button className='flex items-center' type='button' onClick={() => onEdit('personal')}>
-        {!profile.address || !profile.date_birth ? 'Completar datos de perfil' : 'Editar datos'} <Edit className='ml-2' size={20} />
+        {!profile.address || !profile.date_birth ? 'Completar perfil' : 'Editar datos'} <Edit className='ml-2' size={20} />
       </button>
     </div>
     <hr />

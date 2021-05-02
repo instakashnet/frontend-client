@@ -84,7 +84,7 @@ const AddAccount = ({ order, accType }) => {
           touched={formik.touched.alias}
         />
         <Checkbox name='accept' value={formik.values.accept} onChange={formik.handleChange} error={formik.errors.accept}>
-          Declaro que esta es mi cuenta personal o de mi empresa.
+          Declaro que es mi cuenta personal o de mi empresa.
         </Checkbox>
         <Button type='submit' disabled={!formik.isValid || isProcessing} className={`action-button ld-ext-right ${isProcessing ? 'running' : ''}`}>
           <span className='ld ld-ring ld-spin' />

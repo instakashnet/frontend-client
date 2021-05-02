@@ -4,6 +4,7 @@ import * as actions from './actions';
 import { closeModal, setAlertInit } from '../../store/actions';
 import axios from '../helpers/axios';
 import exchangeAxios from '../../exchange/helpers/axios';
+import history from '../../shared/history';
 import Swal from 'sweetalert2';
 
 function* getAccounts({ accType }) {
@@ -79,6 +80,7 @@ function* withdrawKash({ values }) {
       yield put(actions.withdrawKashSuccess());
       yield call(getKashAccount);
       yield put(closeModal());
+      yield call([history, 'push'], '/dashboard');
     }
   } catch (error) {
     yield put(setAlertInit(error.message, 'error'));

@@ -79,12 +79,14 @@
     width: 8rem;
   }
 
-  a {
+  a,
+  button {
     margin-top: 10px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     display: inline-block;
     padding: 10px 25px;
     border-radius: 15px;
+    width: auto;
   }
 
   @media (min-width: 768px) {
@@ -99,8 +101,9 @@
       width: 14rem;
     }
 
-    a {
-      font-size: 0.9rem;
+    a,
+    button {
+      font-size: 1rem;
     }
 
     p {

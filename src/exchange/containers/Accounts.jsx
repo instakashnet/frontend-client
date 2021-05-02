@@ -59,7 +59,13 @@ const Accounts = ({ order, setStep, setModal }) => {
     icon: `${process.env.PUBLIC_URL}/images/banks/${account.bank.name.toLowerCase()}-logo.svg`,
   }));
   const onBankChange = (option) => formik.setFieldValue('bank_id', option.value);
-  const onAccountChange = (option) => formik.setFieldValue('account_to_id', option.value);
+  const onAccountChange = (option) => {
+    if (!option.value) return;
+
+    const chosenAccount = filteredAccounts.find((account) => account.id === option.value);
+    formik.setFieldValue('account_to_id', option.value);
+    formik.setFieldValue('bank_to_name', chosenAccount.bank.name);
+  };
 
   let interplaza;
 

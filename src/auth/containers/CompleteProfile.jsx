@@ -127,13 +127,12 @@ const CompleteProfile = () => {
         </div>
       </div>
       <Modal closeModal={closeModalHandler}>
-        <h2>¡Lo hacemos todo por su seguridad!</h2>
+        <h2>¡Queremos proteger tu identidad!</h2>
         <p className='px-4 mb-6 text-center'>
-          Al realizar una operación, la creación del perfil nos ayuda a mejorar la seguridad y validación de nuestros usuarios. Así como saber si requieres una boleta (persona
-          natural) o una factura (persona jurídica).
+          Al realizar una operación queremos estar seguro que eres tu quien lo realiza. Además, nos ayuda a saber según tu perfil registrado si debemos entregarte boleta o factura.
         </p>
         <Button className={classes.SubmitButton} onClick={closeModalHandler}>
-          Lo entiendo
+          De acuerdo
         </Button>
       </Modal>
     </main>

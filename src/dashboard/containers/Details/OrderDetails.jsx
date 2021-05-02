@@ -7,6 +7,7 @@ import { formatAmount } from '../../../shared/functions';
 import { closeSliderModal } from '../../../store/actions';
 
 import Button from '../../../core/components/UI/Button';
+import CopyButton from '../../../core/components/UI/CopyButton';
 import Input from '../../../core/components/UI/form/FlexInput';
 
 import classes from '../Dashboard.module.scss';
@@ -16,7 +17,6 @@ const OrderDetails = () => {
   const formik = useFormik({ initialValues: { transaction_code: '' }, validationSchema: transactionCodeValidation, onSubmit: (values) => console.log(values) });
 
   const details = useSelector((state) => state.Dashboard.details);
-
   const closeModalHandler = () => dispatch(closeSliderModal());
 
   return details.estateName ? (
@@ -40,6 +40,12 @@ const OrderDetails = () => {
         <h4>Solicitado:</h4>
         <span className={classes.Price}>{`${details.currencyReceived === 'USD' ? '$' : 'S/.'} ${formatAmount(details.amountReceived)}`}</span>
       </div>
+      {details.kashApplied && (
+        <div className='flex items-center justify-between pr-2 my-3'>
+          <h4>KASH utilizados:</h4>
+          <span className={classes.Price}>{details.kashUsed} KASH</span>
+        </div>
+      )}
       <div className='flex items-center justify-between pr-2 my-3'>
         <h4>Tasa de cambio:</h4>
         <span>{details.rate}</span>
@@ -56,8 +62,12 @@ const OrderDetails = () => {
           <h3>Cuenta a transferir:</h3>
           <div className='flex items-center justify-between pr-2 my-2'>
             <img src={`${process.env.PUBLIC_URL}/images/banks/${details.bankSent.toLowerCase()}-logo.svg`} width={80} alt={details.bankSent} />
-            <span>{details.accountFromRaw}</span>
+            <div className='flex items-center'>
+              <span>{details.accountFromRaw}</span>
+              <CopyButton textToCopy={details.accountFromRaw} />
+            </div>
           </div>
+          <p>Instakash SAC - RUC 20605285105</p>
           <form onSubmit={formik.handleSubmit} className='mt-8'>
             <Input
               name='transaction_code'

@@ -25,7 +25,7 @@ const Selection = () => {
       {!isLoading && (
         <div className={classes.ProfileWrapper}>
           <h1>¡Nos alegra que estés aqui!</h1>
-          <h3>¿Que perfil vas a usar hoy?</h3>
+          <h3>Elije el perfil que usarás hoy</h3>
           <div className='flex items-center flex-wrap justify-center mt-10'>
             {profiles.map((profile) => (
               <ProfileBox

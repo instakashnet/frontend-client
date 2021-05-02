@@ -54,6 +54,7 @@ const KashWithdraw = ({ kashAccount, accounts }) => {
           error={formik.errors.accountId}
           touched={formik.touched.accountId}
         />
+        <p className='text-sm'>* Solo se permiten cuenta en dólares.</p>
         <Button type='submit' className={`action-button ld-ext-right ${isProcessing ? 'running' : ''}`} disabled={!formik.isValid || isProcessing}>
           <span className='ld ld-ring ld-spin' />
           Solicitar retiro

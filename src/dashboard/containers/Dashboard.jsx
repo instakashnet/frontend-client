@@ -14,12 +14,13 @@ import ActivityMobile from './Activity/Mobile';
 import OrderDetails from './Details/OrderDetails';
 import WithdrawalDetails from './Details/WithdrawalDetails';
 import NoActivity from '../components/NoActivity';
+import KashWithdrawal from '../../accounts/containers/KashWithdraw';
 
 const Dashboard = ({ match }) => {
   const [detailsType, setDetailsType] = useState(null);
   const dispatch = useDispatch();
   const { orders, withdrawals, orderAmounts, totalAmount, isLoading } = useSelector((state) => state.Dashboard);
-  const kashAccount = useSelector((state) => state.Accounts.kashAccount);
+  const { kashAccount, accounts } = useSelector((state) => state.Accounts);
 
   const openDetails = (id, type = null) => {
     dispatch(getOrderDetailsInit(id, type));
@@ -44,7 +45,10 @@ const Dashboard = ({ match }) => {
   if (detailsType === 'withdrawal') ModalComponent = () => <WithdrawalDetails />;
 
   return (
-    <Layout SliderModalComponent={ModalComponent} className={`${orders.length <= 0 && withdrawals.length <= 0 ? 'content-center' : 'content-start'} max-screen`}>
+    <Layout
+      SliderModalComponent={ModalComponent}
+      ModalComponent={() => <KashWithdrawal kashAccount={kashAccount} accounts={accounts} />}
+      className={`${orders.length <= 0 && withdrawals.length <= 0 ? 'content-center' : 'content-start'} max-screen`}>
       {isLoading && <Spinner />}
       {!isLoading &&
         (orders.length <= 0 && withdrawals.length <= 0 ? (

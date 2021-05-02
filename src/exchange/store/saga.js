@@ -53,7 +53,15 @@ function* completeExchange({ values, orderId, setStep }) {
       yield call(setStep, 2);
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, 'error'));
+    if (error.data && error.data.code === 4006) {
+      yield call(
+        [Swal, 'fire'],
+        'Ha ocurrido un error',
+        `En estos momentos presentamos problemas con ${values.bank_to_name}. Te pedimos hablar con uno de nuestos asesores a través de nuestro whatsapp y solucionaremos el problema.`,
+        'error'
+      );
+    } else yield put(setAlertInit(error.message, 'error'));
+
     yield put(actions.exchangeError());
   }
 }

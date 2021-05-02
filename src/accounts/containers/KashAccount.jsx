@@ -9,7 +9,7 @@ const KashAccount = ({ account, openModal }) => {
     <div className={classes.KashAccount}>
       <img src={KashIcon} alt='kash-icon' />
       <div className='md:ml-6 ml-3 text-right md:text-left'>
-        <h2>{!account.balance ? 'Todavia no posees ningún KASH' : `¡Tienes ${account.balance} KASH!`}</h2>
+        <h2>{!account.balance ? 'No posees ningún KASH' : `¡Tienes ${account.balance} KASH!`}</h2>
         <p className='block md:hidden'>
           <b>retiralos</b> o usalos en tus próximas <b>operaciones</b>.
         </p>

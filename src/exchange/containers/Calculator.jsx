@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
-import { Info, X } from 'react-feather';
+import { Info, X, Clock } from 'react-feather';
 import { getRatesInit, validateCouponInit, createExchangeInit, deleteCoupon } from '../../store/actions';
 import { formatAmount } from '../../shared/functions';
 
@@ -107,7 +107,9 @@ const Calculator = ({ profile, setStep, setModal }) => {
         {!isLoading && (
           <div className={classes.Timer}>
             <p>Se actualizará el tipo de cambio en:</p>
-            <Timer onFinish={() => dispatch(getRatesInit())} />
+            <div className='flex items-center'>
+              <Clock className='mr-2' size={15} /> <Timer onFinish={() => dispatch(getRatesInit())} />
+            </div>
           </div>
         )}
         <div className='relative'>
@@ -122,8 +124,8 @@ const Calculator = ({ profile, setStep, setModal }) => {
             onChange={currencyChangeHandler}
           />
           <p className='flex items-center justify-center w-full'>
-            ¿Montos mayores a $ 5,000 o S/. 15,000?
-            <Tooltip title='Escribenos a nuestro whatsapp o nuestro correo para recibir una tasa preferencial.' placement='top-start' enterTouchDelay={300} leaveTouchDelay={800}>
+            ¿Montos mayores a $ 5,000?
+            <Tooltip title='Escribenos a nuestro canal de whatsapp para recibir una tasa preferencial.' placement='top-start' enterTouchDelay={300} leaveTouchDelay={800}>
               <Info className='ml-3' />
             </Tooltip>
           </p>

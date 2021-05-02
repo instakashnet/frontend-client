@@ -1,6 +1,8 @@
 import React from 'react';
+import { isMobile } from 'react-device-detect';
 
 import Card from '../../core/components/UI/Card';
+import Button from '../../core/components/UI/Button';
 
 import InfoImg from '../images/exchange-user.svg';
 import Clock from '../images/icons/clock.svg';
@@ -10,7 +12,7 @@ import Dollar from '../images/icons/dollar.svg';
 
 import classes from '../containers/Exchange.module.scss';
 
-const Information = () => {
+const Information = ({ onClose }) => {
   return (
     <div className={classes.Information}>
       <div className='flex items-end justify-center'>
@@ -19,19 +21,19 @@ const Information = () => {
           <div className='w-full'>
             <h3>¡Importante!</h3>
             <Card className={classes.InfoCard}>
-              <img src={Clock} alt='clock' />
-              <p>Las transacciones se procesan entre 10 a 25 minutos.</p>
+              <img src={Arrows} alt='arrows' />
+              <p>
+                Recibimos solo transferencias. <br /> No aceptamos depósitos.
+              </p>
             </Card>
           </div>
           <Card className={classes.InfoCard}>
-            <img src={Arrows} alt='arrows' />
-            <p>
-              Recibimos solo transferencias. <br /> No aceptamos depósitos.
-            </p>
-          </Card>
-          <Card className={classes.InfoCard}>
             <img src={User} alt='clock' />
             <p>Ambas cuentas deben ser del titular.</p>
+          </Card>
+          <Card className={classes.InfoCard}>
+            <img src={Clock} alt='clock' />
+            <p>Las transacciones se procesan entre 10 a 25 minutos.</p>
           </Card>
           <Card className={classes.InfoCard}>
             <img src={Dollar} alt='clock' />
@@ -39,6 +41,11 @@ const Information = () => {
           </Card>
         </div>
       </div>
+      {isMobile && (
+        <Button type='button' className='action-button' onClick={onClose}>
+          Aceptar
+        </Button>
+      )}
     </div>
   );
 };

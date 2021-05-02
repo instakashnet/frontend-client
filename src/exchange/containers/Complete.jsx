@@ -29,7 +29,9 @@ const TransferCode = ({ order }) => {
       <h1>¡Último paso!</h1>
       <img src={TransferImg} alt='transfer-money' className='mx-auto inline-block my-4' />
       <p>Transfiere desde tu banca por internet el monto de:</p>
-      <p className={classes.Amount}>{`${order.currencySent === 'PEN' ? 'S/.' : '$'} ${formatAmount(order.amountSent)}`}</p>
+      <p className={classes.Amount}>
+        {`${order.currencySent === 'PEN' ? 'S/.' : '$'} ${formatAmount(order.amountSent)}`} <CopyButton textToCopy={order.amountSent} />
+      </p>
 
       {order.kashApplied && (
         <>
@@ -43,12 +45,17 @@ const TransferCode = ({ order }) => {
         <div className='flex items-center justify-between'>
           <img src={`${process.env.PUBLIC_URL}/images/banks/${order.bankFromName.toLowerCase()}-logo.svg`} width={100} alt={order.bankFromName} />
           <div className='text-right'>
-            <small>Nro. de cuenta:</small>
+            <small>Cuenta en {order.currencySent === 'PEN' ? 'Soles' : 'Dólares'}:</small>
             <p className='flex items-center mt-1'>
               {order.accountToRaw} <CopyButton textToCopy={order.accountToRaw} />
             </p>
           </div>
         </div>
+      </div>
+
+      <div className={`${classes.TransferAccount} mt-8 flex items-center justify-between`}>
+        <p className='text-left'>Instakash SAC - RUC 20605285105</p>
+        <CopyButton textToCopy='20605285105' />
       </div>
 
       <p className='mb-6 mt-8 text-left'>
@@ -67,7 +74,7 @@ const TransferCode = ({ order }) => {
       <form onSubmit={formik.handleSubmit}>
         <Input
           name='transaction_code'
-          placeholder='Número de operación'
+          placeholder='Ingresa el nro. de operación'
           value={formik.values.transaction_code}
           error={formik.errors.transaction_code}
           touched={formik.touched.transaction_code}

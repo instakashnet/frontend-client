@@ -97,6 +97,7 @@ function* completeProfile({ values }) {
     const res = yield axios.post('/users/profiles', profileValues);
     if (res.status === 200) yield call(loadUser);
   } catch (error) {
+    console.log(error);
     yield put(setAlertInit(error.message, 'error'));
     yield put(actions.authError());
   }

@@ -12,17 +12,18 @@ import Switch from '../../core/components/UI/form/Switch';
 import classes from './Profile.module.scss';
 
 const EditPersonalProfile = ({ profile, onCancelEdit }) => {
+  console.log(profile);
   const dispatch = useDispatch();
   const isProcessing = useSelector((state) => state.Profile.isProcessing);
   const formik = useFormik({
     initialValues: {
       profileId: profile.id,
       type: profile.type,
-      job: profile.job,
-      profession: profile.profession,
-      pep: !!+profile.pep,
+      job: profile.job || '',
+      profession: profile.profession || '',
+      pep: !!+profile.pep || false,
       date_birth: profile.date_birth,
-      address: profile.address,
+      address: profile.address || '',
     },
     validationSchema: editProfileValidation('personal'),
     onSubmit: (values) => dispatch(editProfileInit(values, onCancelEdit)),
