@@ -47,7 +47,7 @@ const TransferCode = ({ order }) => {
           <div className='text-right'>
             <small>Cuenta en {order.currencySent === 'PEN' ? 'Soles' : 'Dólares'}:</small>
             <p className='flex items-center mt-1'>
-              {order.accountToRaw} <CopyButton textToCopy={order.accountToRaw} />
+              {order.accountFromRaw} <CopyButton textToCopy={order.accountFromRaw} />
             </p>
           </div>
         </div>
