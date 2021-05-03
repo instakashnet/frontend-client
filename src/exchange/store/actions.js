@@ -57,10 +57,11 @@ export const cancelExchangeSuccess = () => ({
   type: types.CANCEL_EXCHANGE_SUCCESS,
 });
 
-export const processCodeInit = (values, orderId) => ({
+export const processCodeInit = (values, orderId, processType = null) => ({
   type: types.PROCESS_CODE_INIT,
   values,
   orderId,
+  processType,
 });
 
 export const processCodeSuccess = () => ({

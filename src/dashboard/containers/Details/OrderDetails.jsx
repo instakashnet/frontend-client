@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import { transactionCodeValidation } from '../../helpers/validations';
 import { formatAmount } from '../../../shared/functions';
-import { closeSliderModal } from '../../../store/actions';
+import { closeSliderModal, processCodeInit } from '../../../store/actions';
 
 import Button from '../../../core/components/UI/Button';
 import CopyButton from '../../../core/components/UI/CopyButton';
@@ -13,10 +13,14 @@ import Input from '../../../core/components/UI/form/FlexInput';
 import classes from '../Dashboard.module.scss';
 
 const OrderDetails = () => {
-  const dispatch = useDispatch();
-  const formik = useFormik({ initialValues: { transaction_code: '' }, validationSchema: transactionCodeValidation, onSubmit: (values) => console.log(values) });
-
   const details = useSelector((state) => state.Dashboard.details);
+  const dispatch = useDispatch();
+  const formik = useFormik({
+    initialValues: { transaction_code: '' },
+    validationSchema: transactionCodeValidation,
+    onSubmit: (values) => dispatch(processCodeInit(values, details.id, 'details')),
+  });
+
   const closeModalHandler = () => dispatch(closeSliderModal());
 
   return details.estateName ? (

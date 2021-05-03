@@ -2,7 +2,7 @@ import { put, takeEvery, takeLatest, all, fork, call } from 'redux-saga/effects'
 import * as types from './types';
 import * as actions from './actions';
 import axios from '../helpers/axios';
-import { setAlertInit } from '../../store/actions';
+import { setAlertInit, getOrdersInit } from '../../store/actions';
 import Swal from 'sweetalert2';
 import history from '../../shared/history';
 
@@ -90,10 +90,11 @@ function* cancelExchange({ orderId }) {
   }
 }
 
-function* processCode({ values, orderId }) {
+function* processCode({ values, orderId, processType }) {
   try {
     const res = yield axios.put(`/order/client/step-4/${orderId}`, values);
     if (res.status === 200) {
+      if (processType === 'details') yield put(getOrdersInit());
       yield call([history, 'push'], '/dashboard');
       yield Swal.fire({
         title: 'Solicitud completada',
