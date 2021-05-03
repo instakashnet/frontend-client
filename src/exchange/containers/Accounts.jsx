@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { Plus } from 'react-feather';
@@ -15,7 +15,6 @@ import Button from '../../core/components/UI/Button';
 import classes from './Exchange.module.scss';
 
 const Accounts = ({ order, setStep, setModal }) => {
-  const [useKash, setUseKash] = useState(false);
   if (!order) setStep(0);
 
   let funds_origin;
@@ -28,13 +27,13 @@ const Accounts = ({ order, setStep, setModal }) => {
   const { accounts, kashAccount } = useSelector((state) => state.Accounts);
 
   const formik = useFormik({
-    initialValues: { account_to_id: '', bank_id: '', funds_origin: '', couponName: coupon ? coupon.name : null, useKash, kashUsed: 0 },
-    validationSchema: completeExchangeValidation(funds_origin, kashAccount ? kashAccount.balance : 0),
+    initialValues: { account_to_id: '', bank_id: '', funds_origin: '', couponName: coupon ? coupon.name : null, useKash: false, kashUsed: '' },
+    enableReinitialize: true,
+    validationSchema: completeExchangeValidation(funds_origin, kashAccount.balance || 0),
     onSubmit: (values) => dispatch(completeExchangeInit(values, order.id, setStep)),
   });
 
   const filteredAccounts = accounts.filter((account) => account.currency.id === order.currencyReceivedId);
-
   const fundsOptions = [
     { label: 'Ahorros', value: 'ahorros' },
     { label: 'Alquiler de bienes inmuebles', value: 'alquiler de bienes inmuebles' },
@@ -73,11 +72,11 @@ const Accounts = ({ order, setStep, setModal }) => {
 
   return (
     <>
-      {order.currencyReceivedId === 2 && kashAccount && kashAccount.balance > 0 && (
+      {order.currencyReceivedId === 2 && kashAccount.balance > 0 && (
         <div className={classes.ExchangeKash}>
           <p className='mr-4'>Tienes {kashAccount.balance} kash disponibles. ¿Deseas usarlos como parte de tu cambio?</p>
-          <button onClick={() => setUseKash(true)}>Si</button>
-          <button onClick={() => setUseKash(false)}>No</button>
+          <button onClick={() => formik.setFieldValue('useKash', true)}>Si</button>
+          <button onClick={() => formik.setFieldValue('useKash', false)}>No</button>
         </div>
       )}
       <h1 className='mt-6'>Selecciona tus bancos y cuentas</h1>
@@ -127,7 +126,7 @@ const Accounts = ({ order, setStep, setModal }) => {
             onBlur={formik.handleBlur}
           />
         )}
-        {useKash && (
+        {formik.values.useKash && (
           <Input
             type='number'
             label='¿Cuantos kash deseas usar?'
