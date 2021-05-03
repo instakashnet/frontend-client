@@ -46,6 +46,7 @@ const Accounts = ({ order, setStep, setModal }) => {
     { label: 'Préstamos', value: 'préstamos' },
     { label: 'Otros', value: 'otros' },
   ];
+
   const bankOptions = banks.map((bank) => ({ label: bank.name, value: bank.id, icon: `${process.env.PUBLIC_URL}/images/banks/${bank.name.toLowerCase()}-logo.svg` }));
   const accountOptions = filteredAccounts.map((account) => ({
     account: `*****${account.account_number.substring(account.account_number.length - 4, account.account_number.length)}`,
