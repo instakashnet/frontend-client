@@ -15,7 +15,12 @@ const Upload1 = () => {
   const formik = useFormik({ initialValues: { identity_photo: '' }, onSubmit: (values) => dispatch(uploadDocumentInit(values, 'frontal')) });
   const isProcessing = useSelector((state) => state.Profile.isProcessing);
 
-  const onFileChange = (e) => formik.setFieldValue('identity_photo', e.currentTarget.files[0]);
+  const onFileChange = (e) => {
+    if (!e.currentTarget.files[0]) return;
+    const fileSize = e.currentTarget.files[0].size / 1024 / 1024;
+    if (fileSize > 5) return formik.setFieldError('identity_photo', 'El archivo es muy grande, el tamaño máximo debe ser de 5MB');
+    formik.setFieldValue('identity_photo', e.currentTarget.files[0]);
+  };
 
   return (
     <div className={classes.UploadDocument}>
@@ -28,12 +33,12 @@ const Upload1 = () => {
           <ul>
             <li>Sube una imagen a color de la parte frontal.</li>
             <li>Solo se aceptan los formatos JPG/PNG.</li>
-            <li>La imágen debe ser de un peso máximo de 2MB.</li>
+            <li>La imágen debe ser de un peso máximo de 5MB.</li>
           </ul>
         </div>
       </div>
       <form onSubmit={formik.handleSubmit}>
-        <UploadInput name='identity_photo' value={formik.values.identity_photo} onChange={onFileChange} />
+        <UploadInput name='identity_photo' value={formik.values.identity_photo} onChange={onFileChange} error={formik.errors.identity_photo} />
         <div className='flex flex-col items-center'>
           <Button type='submit' disabled={!formik.values.identity_photo || isProcessing} className={`ld-ext-right ${isProcessing ? 'runnning' : ''}`}>
             <span className='ld ld-ring ld-spin' />
