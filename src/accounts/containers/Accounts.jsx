@@ -14,6 +14,7 @@ import AddAccount from './AddAccount';
 import AccountDetails from './AccountDetails';
 import KashAccount from './KashAccount';
 import KashWithdrawal from './KashWithdraw';
+import KashInfo from '../../profile/components/KashInfo';
 
 import classes from './Accounts.module.scss';
 
@@ -42,6 +43,7 @@ const Accounts = () => {
   if (modalType === 'add') ModalComponent = () => <AddAccount accType='users' />;
   if (modalType === 'details') ModalComponent = () => <AccountDetails />;
   if (modalType === 'withdrawal') ModalComponent = () => <KashWithdrawal accounts={accounts} kashAccount={kashAccount} />;
+  if (modalType === 'kashInfo') ModalComponent = () => <KashInfo />;
 
   const groupedAccounts = _.map(_.groupBy(accounts, (account) => account.currency.id));
 

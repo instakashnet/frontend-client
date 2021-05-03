@@ -52,7 +52,8 @@ const ProfileNavigation = () => {
 
     if (!profile.address && !profile.identity_photo) width = 33;
     if ((!profile.address && profile.identity_photo) || (profile.address && !profile.identity_photo)) width = 66;
-    if (profile.address && profile.identity_photo) width = 100;
+    if (profile.address && profile.identity_photo && !profile.identity_photo_two) width = 88;
+    if (profile.address && profile.identity_photo && profile.identity_photo_two) width = 100;
   }
 
   return (

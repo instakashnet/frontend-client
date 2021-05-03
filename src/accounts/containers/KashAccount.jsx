@@ -17,7 +17,7 @@ const KashAccount = ({ account, openModal }) => {
           Puedes <b>retirar</b> tus <b>KASH</b> o usarlos en tus próximas <b>operaciones</b> de cambios de divisas.
         </p>
         <p className='text-sm font-bold mt-3'>1 KASH = 1$ USD</p>
-        <Link to='/my-profile'>¿Cómo ganar kash?</Link>
+        <button onClick={() => openModal('kashInfo')}>¿Cómo ganar kash?</button>
         {account.balance > 0 && (
           <div className={classes.actionButtons}>
             <button className='action-button' onClick={() => openModal('withdrawal')}>

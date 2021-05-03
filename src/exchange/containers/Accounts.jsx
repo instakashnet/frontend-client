@@ -30,11 +30,13 @@ const Accounts = ({ order, setStep, setModal }) => {
   const { accounts, kashAccount } = useSelector((state) => state.Accounts);
 
   const formik = useFormik({
-    initialValues: { account_to_id: '', bank_id: '', funds_origin: '', couponName: coupon ? coupon.name : null, kashApplied: useKash, kashUsed: 0 },
+    initialValues: { account_to_id: '', bank_id: '', funds_origin: '', couponName: coupon ? coupon.name : null, useKash, kashUsed: 0 },
     enableReinitialize: true,
-    validationSchema: completeExchangeValidation(funds_origin, useKash, kashAccount ? kashAccount.balance : 0),
+    validationSchema: completeExchangeValidation(funds_origin, kashAccount ? kashAccount.balance : 0),
     onSubmit: (values) => dispatch(completeExchangeInit(values, order.id, setStep)),
   });
+
+  console.log(formik.values, formik.errors);
 
   const filteredAccounts = accounts.filter((account) => account.currency.id === order.currencyReceivedId);
 
