@@ -77,7 +77,7 @@ function* uploadDocument({ values, uploadType }) {
   if (uploadType === 'trasera') URL = '/users/upload-identity-photo-two';
 
   try {
-    const res = yield axios.post(URL, formData);
+    const res = yield axios.post(URL, formData, { timeout: 25000 });
     if (res.status === 200) {
       yield put(setAlertInit('La foto se ha cargado correctamente.', 'success'));
       yield put(actions.editProfileSuccess());
