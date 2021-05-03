@@ -24,6 +24,8 @@
 
   > a {
     transition: 200ms ease-out;
+    width: auto;
+    display: inline-block;
 
     &:hover {
       color: darken($color: $base-green, $amount: 15);

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { toggleNav } from '../../../store/actions';
 
@@ -25,9 +25,7 @@ const Sidebar = () => {
   return (
     <>
       <div className={`${classes.Sidebar} ${opened ? classes.Open : ''}`}>
-        <Link to='/'>
-          <Logo className='lg:w-52 md:w-44 w-40 mt-5' />
-        </Link>
+        <Logo className='lg:w-52 md:w-44 w-40 mt-5' />
         <Navigation />
         <Affiliate usercode={usercode} />
       </div>

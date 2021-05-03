@@ -83,7 +83,7 @@ function* cancelExchange({ orderId }) {
       yield call([history, 'push'], '/dashboard');
       yield put(actions.cancelExchangeSuccess());
       yield Swal.fire('Exitoso', 'Su solicitud de cambio fue cancelada.', 'success');
-    }
+    } else yield put(actions.exchangeError());
   } catch (error) {
     yield put(setAlertInit(error.message, 'error'));
     yield put(actions.exchangeError());

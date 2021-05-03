@@ -58,15 +58,13 @@ const Accounts = () => {
                 <CreditCard className='mr-3' />
                 <span>Mis cuentas</span>
               </h1>
-              <p className='ml-2'>Estás son sus cuentas para recibir.</p>
               <div className='flex items-center flex-wrap lg:flex-nowrap justify-center md:justify-between my-5'>
                 <Button type='button' onClick={addAccountHandler} className='action-button md:max-w-sm lg:max-w-xs lg:my-0'>
                   Agregar cuenta
                 </Button>
               </div>
               <p className='mt-3 text-sm'>
-                Te recordamos que las cuentas que agregues deberán ser solo tuyas o de tu empresa, de lo contrario no podremos realizar tu cambio. Puedes tener hasta 20 cuentas
-                agregadas, 10 cuentas en soles y 10 en dólares.
+                Las cuentas que agregues deberán ser <b>tuyas o de tu empresa</b>. Puedes tener hasta <b>20 cuentas agregadas</b>, 10 cuentas en soles y 10 en dólares.
               </p>
             </section>
             <section className='lg:col-span-3 md:ml-3'>
