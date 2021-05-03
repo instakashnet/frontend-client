@@ -72,6 +72,15 @@ const OrderDetails = () => {
             </div>
           </div>
           <p>Instakash SAC - RUC 20605285105</p>
+          <div className='flex items-center justify-between mt-3'>
+            <p>Monto a enviar:</p>
+            <div className='flex items-center'>
+              <p className={classes.Price}>
+                {details.currencyReceived === 'USD' ? '$' : 'S/.'} {formatAmount(details.amountSent)}
+              </p>
+              <CopyButton textToCopy={details.amountSent} />
+            </div>
+          </div>
           <form onSubmit={formik.handleSubmit} className='mt-8'>
             <Input
               name='transaction_code'
