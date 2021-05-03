@@ -45,7 +45,7 @@ const TransferCode = ({ order }) => {
         <div className='flex items-center justify-between'>
           <img src={`${process.env.PUBLIC_URL}/images/banks/${order.bankFromName.toLowerCase()}-logo.svg`} width={100} alt={order.bankFromName} />
           <div className='text-right'>
-            <small>Cuenta en {order.currencySent === 'PEN' ? 'Soles' : 'Dólares'}:</small>
+            <small>Cuenta corriente en {order.currencySent === 'PEN' ? 'Soles' : 'Dólares'}:</small>
             <p className='flex items-center mt-1'>
               {order.accountFromRaw} <CopyButton textToCopy={order.accountFromRaw} />
             </p>
