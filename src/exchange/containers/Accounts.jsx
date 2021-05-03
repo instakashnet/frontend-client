@@ -50,6 +50,7 @@ const Accounts = ({ order, setStep, setModal }) => {
   const accountOptions = filteredAccounts.map((account) => ({
     account: `*****${account.account_number.substring(account.account_number.length - 4, account.account_number.length)}`,
     currency: account.currency.ISO === 'PEN' ? 'S/.' : '$',
+    bankName: account.bank.name,
     alias: account.alias,
     value: account.id,
     icon: `${process.env.PUBLIC_URL}/images/banks/${account.bank.name.toLowerCase()}-logo.svg`,

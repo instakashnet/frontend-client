@@ -81,7 +81,7 @@ const IconOption = (props) => (
     <div className='flex items-center'>
       <p className='font-bold mr-2'>{props.data.currency}</p>
       <span className='ml-2 text-sm'>
-        <span style={{ color: '#959595' }}>{props.data.account}</span> - {props.data.alias.substring(0, 15)}...
+        <span style={{ color: '#959595' }}>{props.data.account}</span> - {props.data.alias ? props.data.alias.substring(0, 15) : `${props.data.bankName} ${props.data.currency}`}...
       </span>
     </div>
     <img src={props.data.icon} alt={props.data.label} width={70} style={{ marginRight: '10px', display: 'inline-block' }} />
