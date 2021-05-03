@@ -22,7 +22,7 @@ function* validateCoupon({ couponName, profileType }) {
       yield put(actions.validateCouponSuccess({ name: couponName, discount: res.data.discount, minimumBuy: res.data.minAmountBuy, minimumSell: res.data.minAmountSell }));
   } catch (error) {
     console.log(error);
-    if (!couponName.includes('NEW_USER')) yield put(setAlertInit(error.message, 'error'));
+    if (!couponName.includes('NUEVOREFERIDO')) yield put(setAlertInit(error.message, 'error'));
     yield put(actions.exchangeError());
   }
 }

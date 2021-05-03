@@ -28,7 +28,7 @@ const Calculator = ({ profile, setStep, setModal }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getRatesInit());
-    dispatch(validateCouponInit('NEW_USER', profiletype));
+    dispatch(validateCouponInit('NUEVOREFERIDO1', profiletype));
   }, [dispatch, profiletype]);
 
   const onCouponChange = (e) => setCouponName(e.target.value);
