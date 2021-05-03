@@ -27,8 +27,6 @@ const Signin = () => {
     dispatch(signinGoogle(res.tokenId));
   };
 
-  // const userSession = JSON.parse(localStorage.getItem('userSession'));
-
   return (
     <main className='grid grid-cols-1 md:grid-cols-2 h-full md:h-screen'>
       <Background />

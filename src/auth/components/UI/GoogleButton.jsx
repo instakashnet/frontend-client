@@ -1,10 +1,10 @@
-import React from "react";
-import GoogleLogin from "react-google-login";
+import React from 'react';
+import GoogleLogin from 'react-google-login';
 
-import Button from "../../../core/components/UI/Button";
+import Button from '../../../core/components/UI/Button';
 
-import classes from "./GoogleButton.module.scss";
-import GoogleIcon from "../../assets/images/icons/google.svg";
+import classes from './GoogleButton.module.scss';
+import GoogleIcon from '../../assets/images/icons/google.svg';
 
 const GoogleButton = ({ onSuccess, onFailure }) => {
   return (
@@ -13,7 +13,7 @@ const GoogleButton = ({ onSuccess, onFailure }) => {
       onSuccess={onSuccess}
       onFailure={onFailure}
       buttonText='Login'
-      cookiePolicy={"single_host_origin"}
+      cookiePolicy={'single_host_origin'}
       render={(props) => (
         <Button onClick={props.onClick} disabled={props.disabled} className={classes.GoogleButton}>
           <img src={GoogleIcon} width={20} alt='google' /> Acceder con google

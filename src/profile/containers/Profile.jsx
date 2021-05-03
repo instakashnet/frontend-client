@@ -19,9 +19,9 @@ import KashInfo from '../components/KashInfo';
 import EditUserCode from './EditUserCode';
 
 import KashIcon from '../../core/assets/images/kash.svg';
-import Facebook from '../images/facebook.svg';
-import Instagram from '../images/instagram.svg';
-import Whatsapp from '../images/whatsapp.svg';
+// import Facebook from '../images/facebook.svg';
+// import Instagram from '../images/instagram.svg';
+// import Whatsapp from '../images/whatsapp.svg';
 
 import classes from './Profile.module.scss';
 
@@ -118,11 +118,11 @@ const Profile = () => {
             <button onClick={() => openModalHandler('editCode')} className='mb-3 text-sm'>
               Editar mi código
             </button>
-            <div className='flex items-center mt-3 mb-12 justify-between'>
+            {/* <div className='flex items-center mt-3 mb-12 justify-between'>
               <img src={Whatsapp} alt='whatsapp' className='ml-3' />
               <img src={Facebook} alt='facebook' className='ml-3' />
               <img src={Instagram} alt='instagram' className='ml-3' />
-            </div>
+            </div> */}
             <p>
               Por cada amigo que haga su primer cambio de divisas recibirás 1 <b>KASH</b>. Al usar nuestros <b>KASH</b> accederás a beneficios dentro de nuestra plataforma.
             </p>

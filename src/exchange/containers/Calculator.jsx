@@ -152,6 +152,7 @@ const Calculator = ({ profile, setStep, setModal }) => {
                 <button type='button' onClick={() => dispatch(deleteCoupon())}>
                   <X />
                 </button>
+                {coupon.name === 'NUEVOREFERIDO1' && <p>Aprovecha este cupón en tu primera operación.</p>}
               </div>
             </>
           )}
