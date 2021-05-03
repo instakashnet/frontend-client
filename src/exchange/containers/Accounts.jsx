@@ -16,11 +16,9 @@ import classes from './Exchange.module.scss';
 
 const Accounts = ({ order, setStep, setModal }) => {
   const [useKash, setUseKash] = useState(false);
-
   if (!order) setStep(0);
 
   let funds_origin;
-
   if (order.currencyReceivedId === 1 && order.amountSent >= 15000) funds_origin = true;
   if (order.currencyReceivedId === 2 && order.amountSent >= 5000) funds_origin = true;
 
@@ -31,12 +29,9 @@ const Accounts = ({ order, setStep, setModal }) => {
 
   const formik = useFormik({
     initialValues: { account_to_id: '', bank_id: '', funds_origin: '', couponName: coupon ? coupon.name : null, useKash, kashUsed: 0 },
-    enableReinitialize: true,
     validationSchema: completeExchangeValidation(funds_origin, kashAccount ? kashAccount.balance : 0),
     onSubmit: (values) => dispatch(completeExchangeInit(values, order.id, setStep)),
   });
-
-  console.log(formik.values, formik.errors);
 
   const filteredAccounts = accounts.filter((account) => account.currency.id === order.currencyReceivedId);
 
@@ -154,4 +149,4 @@ const Accounts = ({ order, setStep, setModal }) => {
   );
 };
 
-export default Accounts;
+export default React.memo(Accounts);

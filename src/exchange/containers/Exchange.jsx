@@ -104,7 +104,7 @@ const CompleteProfile = ({ history, dispatch }) => {
           Completar tu <b>información de perfil</b> al 100%.
         </li>
         <li>
-          Cargar una foto de tu <b>documento de identidad</b>.
+          Cargar ambas fotos de tu <b>documento de identidad</b>.
         </li>
       </ul>
       <p className='text-center'>Haz click en continuar para agregar tus datos.</p>
