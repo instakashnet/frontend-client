@@ -142,9 +142,7 @@ const Calculator = ({ profile, setStep, setModal }) => {
             />
           ) : (
             <>
-              <p className='mt-5' style={{ fontSize: '.95rem' }}>
-                ¡Genial!, haz activado el cupón:
-              </p>
+              <p className='mt-5'>¡Genial!, haz activado el cupón:</p>
               <div className={classes.Coupon}>
                 <p className='flex items-center'>
                   <img src={CouponImg} alt='cupón' className='mr-2' /> {coupon.name}
@@ -152,8 +150,8 @@ const Calculator = ({ profile, setStep, setModal }) => {
                 <button type='button' onClick={() => dispatch(deleteCoupon())}>
                   <X />
                 </button>
-                {coupon.name === 'NUEVOREFERIDO1' && <p>Aprovecha este cupón en tu primera operación.</p>}
               </div>
+              {coupon.name === 'NUEVOREFERIDO1' && <p>Aprovecha este cupón en tu primera operación.</p>}
             </>
           )}
           {minimum && (
