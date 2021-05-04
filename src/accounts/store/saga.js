@@ -61,9 +61,9 @@ function* editAccount({ id, values, setEdit }) {
     const res = yield axios.put(`/accounts/${id}`, values);
     if (res.status === 200) {
       yield put(actions.editAccountSuccess());
-      yield call(getAccounts);
+      yield call(getAccounts, { accType: 'users' });
       yield call(setAccountDetails, { accId: id });
-      yield put(setAlertInit('Cuenta agregada correctamente.', 'success'));
+      yield put(setAlertInit('Cuenta editada correctamente.', 'success'));
       yield call(setEdit, false);
     }
   } catch (error) {
@@ -103,7 +103,7 @@ function* deleteAccount({ account }) {
 
     if (result.isConfirmed) {
       yield axios.delete(`/accounts/${account.id}`);
-      yield call(getAccounts);
+      yield call(getAccounts, { accType: 'users' });
       yield put(setAlertInit('Cuenta eliminada correctamente.', 'success'));
       yield put(actions.deleteAccountSuccess());
       yield put(closeModal());
