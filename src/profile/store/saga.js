@@ -4,6 +4,7 @@ import * as actions from './actions';
 import axios from '../helpers/axios';
 import { setAlertInit, closeModal } from '../../store/actions';
 import history from '../../shared/history';
+import Swal from 'sweetalert2';
 
 function* getProfiles() {
   try {
@@ -108,6 +109,34 @@ function* editUserCode({ values }) {
   }
 }
 
+function* disableProfile({ id }) {
+  try {
+    const result = yield call([Swal, 'fire'], {
+      icon: 'warning',
+      title: '¿Deseas eliminar este perfil?',
+      text: 'Los datos serán eliminados y deberás agregarlo de nuevo para poder utilizarlo en otras operaciones.',
+      confirmButtonText: 'Si, eliminar',
+      showCancelButton: true,
+      cancelButtonText: 'No, cancelar',
+      cancelButtonColor: '#ff4b55',
+    });
+
+    if (result.isConfirmed) {
+      const res = yield axios.delete(`/users/active/${id}`, { data: { active: false } });
+      if (res.status === 200) {
+        yield call(getProfiles);
+        yield history.push('/profile-selection');
+        yield call([sessionStorage, 'removeItem'], 'profileSelected');
+        yield put(actions.disableProfileSuccess());
+        yield Swal.fire('Perfil eliminado', 'El perfil ha sido eliminado correctamente. Deberá seleccionar un nuevo perfil.', 'success');
+      }
+    } else yield put(actions.profilesError());
+  } catch (error) {
+    yield put(setAlertInit(error.message, 'error'));
+    yield put(actions.profilesError());
+  }
+}
+
 export function* watchGetProfiles() {
   yield takeEvery(types.GET_PROFILES_INIT, getProfiles);
 }
@@ -132,6 +161,18 @@ export function* watchEditUserCode() {
   yield takeLatest(types.EDIT_USER_CODE_INIT, editUserCode);
 }
 
+export function* watchDisableProfile() {
+  yield takeLatest(types.DISABLE_PROFILE_INIT, disableProfile);
+}
+
 export default function* profilesSaga() {
-  yield all([fork(watchGetProfiles), fork(watchSelectProfile), fork(watchAddProfile), fork(watchEditProfile), fork(watchUploadDocument), fork(watchEditUserCode)]);
+  yield all([
+    fork(watchGetProfiles),
+    fork(watchSelectProfile),
+    fork(watchAddProfile),
+    fork(watchEditProfile),
+    fork(watchUploadDocument),
+    fork(watchEditUserCode),
+    fork(watchDisableProfile),
+  ]);
 }

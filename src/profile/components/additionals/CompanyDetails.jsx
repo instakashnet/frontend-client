@@ -1,13 +1,20 @@
 import React from 'react';
-import { Edit } from 'react-feather';
+import { Edit, Delete } from 'react-feather';
 
-const CompanyDetails = ({ profile, onEdit }) => (
+import classes from './Details.module.scss';
+
+const CompanyDetails = ({ profile, onEdit, onDisable }) => (
   <>
     <div className='flex items-center justify-between mt-10'>
       <h3>Datos básicos</h3>
-      <button className='flex items-center' type='button' onClick={() => onEdit('company')}>
-        Editar datos <Edit className='ml-2' size={20} />
-      </button>
+      <div className={classes.ActionButtons}>
+        <button className='flex items-center flex-wrap mr-4' type='button' onClick={() => onEdit('company')}>
+          Editar <Edit className='ml-1' size={20} />
+        </button>
+        <button className='flex items-center' type='button' onClick={onDisable}>
+          Eliminar <Delete className='ml-1' size={20} />
+        </button>
+      </div>
     </div>
     <hr />
     <div className='flex items-center justify-between mt-4'>

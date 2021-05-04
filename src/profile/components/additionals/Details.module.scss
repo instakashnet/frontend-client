@@ -23,3 +23,12 @@
     color: $base-green;
   }
 }
+
+.ActionButtons {
+  display: flex;
+  align-items: center;
+
+  button:last-of-type {
+    color: $error;
+  }
+}

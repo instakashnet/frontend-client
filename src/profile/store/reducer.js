@@ -15,11 +15,13 @@ const profileReducer = (state = initialState, action) => {
     case types.EDIT_PROFILE_INIT:
     case types.UPLOAD_DOCUMENT_INIT:
     case types.EDIT_USER_CODE_INIT:
+    case types.DISABLE_PROFILE_INIT:
       return { ...state, isProcessing: true };
     case types.ADD_PROFILE_SUCCESS:
     case types.EDIT_PROFILE_SUCCESS:
     case types.UPLOAD_DOCUMENT_SUCCESS:
     case types.EDIT_USER_CODE_SUCCESS:
+    case types.DISABLE_PROFILE_SUCCESS:
       return { ...state, isProcessing: false };
 
     case types.GET_PROFILES_INIT:

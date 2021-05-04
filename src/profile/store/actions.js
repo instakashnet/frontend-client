@@ -60,6 +60,15 @@ export const editUserCodeSuccess = (userCode) => ({
   userCode,
 });
 
+export const disableProfileInit = (id) => ({
+  type: types.DISABLE_PROFILE_INIT,
+  id,
+});
+
+export const disableProfileSuccess = () => ({
+  type: types.DISABLE_PROFILE_SUCCESS,
+});
+
 export const profilesError = () => ({
   type: types.PROFILES_ERROR,
 });

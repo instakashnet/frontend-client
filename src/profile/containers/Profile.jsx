@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { openModal, getAccountsInit } from '../../store/actions';
+import { openModal, getAccountsInit, disableProfileInit } from '../../store/actions';
 import { ArrowUp, ArrowDown } from 'react-feather';
 
 import PersonalDetails from '../components/additionals/PersonalDetails';
@@ -95,7 +95,11 @@ const Profile = () => {
               <p className={classes.Percentage}>{width}% completado</p>
             </div>
             <ProgressBar width={width} />
-            {profileSelected.type === 'natural' ? <PersonalDetails profile={profile} user={user} onEdit={setEdit} /> : <CompanyDetails profile={profile} onEdit={setEdit} />}
+            {profileSelected.type === 'natural' ? (
+              <PersonalDetails profile={profile} user={user} onEdit={setEdit} />
+            ) : (
+              <CompanyDetails profile={profile} onEdit={setEdit} onDisable={() => dispatch(disableProfileInit(profileSelected.id))} />
+            )}
             <DocumentDetails uploadFile={openModalHandler} profile={profile} />
           </div>
           <div className={`${classes.AffiliateCard} ${showSlide ? classes.Show : ''}`}>
