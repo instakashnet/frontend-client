@@ -27,7 +27,7 @@ const Accounts = ({ order, setStep, setModal }) => {
   const { accounts, kashAccount } = useSelector((state) => state.Accounts);
 
   const formik = useFormik({
-    initialValues: { account_to_id: '', bank_id: '', funds_origin: '', couponName: coupon ? coupon.name : null, useKash: false, kashUsed: '' },
+    initialValues: { account_to_id: '', bank_id: '', funds_origin: '', couponName: coupon ? coupon.name : null, kashApplied: false, kashUsed: '' },
     enableReinitialize: true,
     validationSchema: completeExchangeValidation(funds_origin, kashAccount.balance || 0),
     onSubmit: (values) => dispatch(completeExchangeInit(values, order.id, setStep)),
@@ -74,11 +74,11 @@ const Accounts = ({ order, setStep, setModal }) => {
 
   return (
     <>
-      {order.currencyReceivedId === 2 && kashAccount.balance > 0 && (
+      {kashAccount.balance > 0 && (
         <div className={classes.ExchangeKash}>
           <p className='mr-4'>Tienes {kashAccount.balance} kash disponibles. ¿Deseas usarlos como parte de tu cambio?</p>
-          <button onClick={() => formik.setFieldValue('useKash', true)}>Si</button>
-          <button onClick={() => formik.setFieldValue('useKash', false)}>No</button>
+          <button onClick={() => formik.setFieldValue('kashApplied', true)}>Si</button>
+          <button onClick={() => formik.setFieldValue('kashApplied', false)}>No</button>
         </div>
       )}
       <h1 className='mt-6'>Selecciona tus bancos y cuentas</h1>
@@ -128,7 +128,7 @@ const Accounts = ({ order, setStep, setModal }) => {
             onBlur={formik.handleBlur}
           />
         )}
-        {formik.values.useKash && (
+        {formik.values.kashApplied && (
           <Input
             type='number'
             label='¿Cuantos kash deseas usar?'
