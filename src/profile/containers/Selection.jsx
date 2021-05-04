@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectProfileInit, openModal } from '../../store/actions';
+import { AlertTriangle } from 'react-feather';
 
 import Layout from '../../core/components/layout/Layout';
 import ProfileBox from '../components/SelectionBox';
@@ -10,13 +11,30 @@ import AddProfile from './AddProfile';
 import classes from './Profile.module.scss';
 
 const Selection = () => {
+  const [modalType, setModalType] = useState(null);
   const dispatch = useDispatch();
   const { isLoading, profiles } = useSelector((state) => state.Profile);
 
-  const addProfileHandler = () => dispatch(openModal());
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setModalType('info');
+      dispatch(openModal());
+    }, 600);
+    return () => clearTimeout(timeout);
+  }, [dispatch]);
+
+  const addProfileHandler = () => {
+    setModalType('profile');
+    dispatch(openModal());
+  };
+
+  let ModalComponent;
+
+  if (modalType === 'profile') ModalComponent = () => <AddProfile />;
+  if (modalType === 'info') ModalComponent = () => <InfoModal />;
 
   return (
-    <Layout ModalComponent={() => <AddProfile />}>
+    <Layout ModalComponent={ModalComponent}>
       {isLoading && (
         <div className='flex items-center justify-center'>
           <Spinner />
@@ -43,5 +61,16 @@ const Selection = () => {
     </Layout>
   );
 };
+
+export const InfoModal = () => (
+  <div className='flex flex-col items-center justify-center text-center'>
+    <AlertTriangle size={70} className='error-msg mb-4' />
+    <h2>Estimado usuario</h2>
+    <p>
+      Le informamos que en estos momentos la plataforma para empresas de <b>Interbank</b> está caida en su totalidad y no se pueden realizar transferencias. Hemos hablado con el
+      banco y están trabajando para solucionarlo. <br /> Agradecemos su comprensión.
+    </p>
+  </div>
+);
 
 export default Selection;
