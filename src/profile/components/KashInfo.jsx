@@ -27,7 +27,7 @@ const KashInfo = () => {
       </ul>
       <p className={classes.KashPrice}>1 KASH equivale a $ 1 USD</p>
       <p>
-        Podrás usar tus <b>KASH</b> como parte de tus ventas de dólares o retiralos a una de tus cuentas en dólares.
+        Puedes retirar tus <b>KASH</b> en tus cambios de divisas adicionandolos a tu monto a recibir, o retiralos direactamente a una de tus cuentas en dólares.
       </p>
       <p className='mt-4'>
         Para mayor información te invitamos a leer nuestros <a href='https://instakash.net/terminos-y-condiciones'>términos y condiciones</a> en la sección <b>KASH</b>.

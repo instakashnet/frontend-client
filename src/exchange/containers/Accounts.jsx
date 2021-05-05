@@ -76,7 +76,7 @@ const Accounts = ({ order, setStep, setModal }) => {
     <>
       {kashAccount.balance > 0 && (
         <div className={classes.ExchangeKash}>
-          <p className='mr-4'>Tienes {kashAccount.balance} kash disponibles. ¿Deseas usarlos como parte de tu cambio?</p>
+          <p className='mr-4'>Tienes {kashAccount.balance} kash disponibles. ¿Deseas retirarlos junto con tu cambio?</p>
           <button onClick={() => formik.setFieldValue('kashApplied', true)}>Si</button>
           <button onClick={() => formik.setFieldValue('kashApplied', false)}>No</button>
         </div>
@@ -131,7 +131,7 @@ const Accounts = ({ order, setStep, setModal }) => {
         {formik.values.kashApplied && (
           <Input
             type='number'
-            label='¿Cuantos kash deseas usar?'
+            label='¿Cuantos kash deseas retirar?'
             placeholder='Ingresar la cantidad de kash'
             name='kashUsed'
             value={formik.values.kashUsed}

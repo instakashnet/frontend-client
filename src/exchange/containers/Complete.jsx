@@ -24,20 +24,25 @@ const TransferCode = ({ order }) => {
   });
   const isProcessing = useSelector((state) => state.Exchange.isProcessing);
 
+  console.log(order);
+
   return (
     <div className={classes.TransferCode}>
       <h1>¡Último paso!</h1>
       <img src={TransferImg} alt='transfer-money' className='mx-auto inline-block my-4' />
-      <p>Transfiere desde tu banca por internet el monto de:</p>
+      <p>Transfiere desde tu banco por internet el monto de:</p>
       <p className={classes.Amount}>
         {`${order.currencySent === 'PEN' ? 'S/.' : '$'} ${formatAmount(order.amountSent)}`} <CopyButton textToCopy={order.amountSent} />
       </p>
 
-      {order.kashApplied && (
-        <>
-          <p>Kash a utilizar en tu operación:</p>
-          <p className={classes.Amount}>{order.kashUsed} kash</p>
-        </>
+      <p>Recibirás el monto de:</p>
+      {order.kashApplied ? (
+        <p className={classes.Amount}>
+          {`${order.currencyReceived === 'PEN' ? 'S/.' : '$'} ${formatAmount(order.amountReceived - order.kashUsed)}`} + {order.kashUsed} KASH ={' '}
+          {order.currencyReceived === 'PEN' ? 'S/.' : '$'} {formatAmount(order.amountReceived)}
+        </p>
+      ) : (
+        <p className={classes.Amount}>{`${order.currencyReceived === 'PEN' ? 'S/.' : '$'} ${formatAmount(order.amountReceived)}`}</p>
       )}
 
       <h4>Banco a transferir:</h4>

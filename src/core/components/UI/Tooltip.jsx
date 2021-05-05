@@ -9,6 +9,8 @@ const HtmlTooltip = withStyles((theme) => ({
     fontSize: theme.typography.pxToRem(14),
     padding: 10,
     borderRadius: '10px',
+    boxShadow: '3px 3px 10px rgba(0, 0, 0, 0.15)',
+    cursor: 'pointer',
   },
 }))(Tooltip);
 

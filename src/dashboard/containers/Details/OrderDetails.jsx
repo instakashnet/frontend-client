@@ -76,7 +76,7 @@ const OrderDetails = () => {
             <p>Monto a enviar:</p>
             <div className='flex items-center'>
               <p className={classes.Price}>
-                {details.currencyReceived === 'USD' ? '$' : 'S/.'} {formatAmount(details.amountSent)}
+                {details.currencySent === 'USD' ? '$' : 'S/.'} {formatAmount(details.amountSent)}
               </p>
               <CopyButton textToCopy={details.amountSent} />
             </div>

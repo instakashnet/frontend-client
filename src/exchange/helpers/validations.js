@@ -7,7 +7,7 @@ export const completeExchangeValidation = (funds, amount) =>
     funds_origin: funds ? Yup.string().required('Deles seleccionar una opción.') : Yup.string().notRequired(),
     kashUsed: Yup.number().when('useKash', {
       is: true,
-      then: Yup.number().required('Debes ingresar los kash a usar.').max(amount, `No puedes usar más de la cantidad que posees. (${amount} kash).`),
+      then: Yup.number().required('Debes ingresar los kash a retirar.').max(amount, `No puedes retirar más de la cantidad que posees. (${amount} kash).`),
       otherwise: Yup.number().notRequired(),
     }),
   });
