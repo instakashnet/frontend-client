@@ -56,7 +56,7 @@ const OrderDetails = () => {
       </div>
       <h3 className='mt-4'>Cuenta que recibe:</h3>
       <div className='flex items-center justify-between pr-2 my-2'>
-        <img src={`${process.env.PUBLIC_URL}/images/banks/${details.bankReceive.toLowerCase()}-logo.svg`} width={80} alt={details.bankReceive} />
+        <img src={`${process.env.PUBLIC_URL}/images/banks/${details.bankSent.toLowerCase()}-logo.svg`} width={80} alt={details.bankSent} />
         <span>{`*********${details.accountToRaw.substring(details.accountToRaw.length - 4, details.accountToRaw.length)}`}</span>
       </div>
 
@@ -65,7 +65,7 @@ const OrderDetails = () => {
           <h2 className='mt-5'>Completa tu operación</h2>
           <h3>Cuenta a transferir:</h3>
           <div className='flex items-center justify-between pr-2 my-2'>
-            <img src={`${process.env.PUBLIC_URL}/images/banks/${details.bankSent.toLowerCase()}-logo.svg`} width={80} alt={details.bankSent} />
+            <img src={`${process.env.PUBLIC_URL}/images/banks/${details.bankReceive.toLowerCase()}-logo.svg`} width={80} alt={details.bankReceive} />
             <div className='flex items-center'>
               <span>{details.accountFromRaw}</span>
               <CopyButton textToCopy={details.accountFromRaw} />
