@@ -68,7 +68,7 @@ export const InfoModal = () => (
     <h2>Estimado usuario</h2>
     <p>
       Le informamos que en estos momentos la plataforma para empresas de <b>BCP</b> se encuentra con retrasos de conexión. Por tal motivo, las operaciónes a <b>BCP</b> podrán
-      demorar hasta 1 hora. Hemos notificado al banco y están trabajando para solucionarlo. <br /> Agradecemos su comprensión.
+      demorar hasta 1 hora. Hemos notificado al banco y están trabajando para solucionarlo. <br /> <span className='mt-4 inline-block font-bold'>Agradecemos su comprensión.</span>
     </p>
   </div>
 );
