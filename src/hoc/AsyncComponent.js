@@ -5,7 +5,7 @@ import Spinner from '../core/components/UI/Spinner';
 const asyncComponent = (Component) => {
   return (props) => {
     return (
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<Spinner screen />}>
         <Component {...props} />
       </Suspense>
     );

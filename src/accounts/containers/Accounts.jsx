@@ -49,8 +49,8 @@ const Accounts = () => {
 
   return (
     <Layout className={`${isMobile ? 'content-center' : 'content-start'}`} ModalComponent={ModalComponent}>
+      {accountsLoading && <Spinner screen />}
       <div className={classes.Accounts}>
-        {accountsLoading && <Spinner />}
         {!accountsLoading && <KashAccount account={kashAccount} openModal={openModalHandler} />}
         {!accountsLoading && accounts.length <= 0 && <NoAccount onAddAccount={addAccountHandler} />}
         {!accountsLoading && accounts.length > 0 && (

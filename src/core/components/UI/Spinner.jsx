@@ -1,10 +1,10 @@
 import React from 'react';
 import { ClockLoader } from 'react-spinners';
 
-const Spinner = () => {
+const Spinner = ({ full, screen }) => {
   return (
-    <div className='flex items-center justify-center h-48'>
-      <ClockLoader size={80} color='#0d8284' />
+    <div className={`flex items-center justify-center ${screen ? 'h-screen' : ''} ${full ? 'max-h-full' : ''}`}>
+      <ClockLoader size={85} color='#0d8284' />
     </div>
   );
 };

@@ -16,15 +16,7 @@ const CopyButton = ({ textToCopy }) => {
   const handleClose = () => setOpen(false);
 
   return (
-    <Tooltip
-      className='ml-2 cursor-pointer'
-      open={open}
-      onClose={handleClose}
-      disableFocusListener
-      disableHoverListener
-      disableTouchListener
-      placement='top-right'
-      title='¡Copiado!'>
+    <Tooltip className='ml-2 cursor-pointer' open={open} onClose={handleClose} disableFocusListener disableHoverListener disableTouchListener placement='top-end' title='¡Copiado!'>
       <CopyToClipboard text={textToCopy}>
         <Copy className='cursor-pointer' size={20} onClick={handleOpen} />
       </CopyToClipboard>

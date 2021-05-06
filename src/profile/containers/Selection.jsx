@@ -35,11 +35,7 @@ const Selection = () => {
 
   return (
     <Layout ModalComponent={ModalComponent}>
-      {isLoading && (
-        <div className='flex items-center justify-center'>
-          <Spinner />
-        </div>
-      )}
+      {isLoading && <Spinner screen />}
       {!isLoading && (
         <div className={classes.ProfileWrapper}>
           <h1>¡Nos alegra que estés aqui!</h1>

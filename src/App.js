@@ -13,20 +13,19 @@ import PublicRoute from './routing/PublicRoute';
 import PrivateRoute from './routing/PrivateRoute';
 
 // PUBLIC
+import Signin from './auth/containers/Signin';
 import Signup from './auth/containers/Signup';
 import RecoverPassword from './auth/containers/RecoverPassword';
 import ChangePassword from './auth/containers/ChangePassword';
 import CompleteProfile from './auth/containers/CompleteProfile';
 
 // PRIVATE
-import ProfileSelection from './profile/containers/Selection';
-import Welcome from './welcome/containers/Welcome';
-import Dashboard from './dashboard/containers/Dashboard';
-import MyProfile from './profile/containers/Profile';
-import Accounts from './accounts/containers/Accounts';
-import Exchange from './exchange/containers/Exchange';
-
-const Signin = lazy(() => import('./auth/containers/Signin'));
+const ProfileSelection = lazy(() => import('./profile/containers/Selection'));
+const Welcome = lazy(() => import('./welcome/containers/Welcome'));
+const Dashboard = lazy(() => import('./dashboard/containers/Dashboard'));
+const MyProfile = lazy(() => import('./profile/containers/Profile'));
+const Accounts = lazy(() => import('./accounts/containers/Accounts'));
+const Exchange = lazy(() => import('./exchange/containers/Exchange'));
 
 function App() {
   const dispatch = useDispatch();
@@ -44,17 +43,17 @@ function App() {
     <Router history={history}>
       <ScrollToTop>
         <Switch>
-          <PublicRoute exact path='/signin' component={asyncComponent(Signin)} />
+          <PublicRoute exact path='/signin' component={Signin} />
           <PublicRoute exact path='/signup' component={Signup} />
           <PublicRoute exact path='/recover-password' component={RecoverPassword} />
           <PublicRoute exact path='/change-password' component={ChangePassword} />
           <PublicRoute exact path='/complete-profile' component={CompleteProfile} />
-          <PrivateRoute exact path='/' component={Welcome} />
-          <PrivateRoute exact path='/profile-selection' component={ProfileSelection} />
-          <PrivateRoute exact path='/my-profile' component={MyProfile} />
-          <PrivateRoute exact path='/my-accounts' component={Accounts} />
-          <PrivateRoute exact path='/currency-exchange' component={Exchange} />
-          <PrivateRoute path='/dashboard' component={Dashboard} />
+          <PrivateRoute exact path='/' component={asyncComponent(Welcome)} />
+          <PrivateRoute exact path='/profile-selection' component={asyncComponent(ProfileSelection)} />
+          <PrivateRoute exact path='/my-profile' component={asyncComponent(MyProfile)} />
+          <PrivateRoute exact path='/my-accounts' component={asyncComponent(Accounts)} />
+          <PrivateRoute exact path='/currency-exchange' component={asyncComponent(Exchange)} />
+          <PrivateRoute path='/dashboard' component={asyncComponent(Dashboard)} />
         </Switch>
       </ScrollToTop>
       <Alert />

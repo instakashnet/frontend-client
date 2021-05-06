@@ -49,7 +49,7 @@ const Dashboard = ({ match }) => {
       SliderModalComponent={ModalComponent}
       ModalComponent={() => <KashWithdrawal kashAccount={kashAccount} accounts={accounts} />}
       className={`${orders.length <= 0 && withdrawals.length <= 0 ? 'content-center' : 'content-start'} max-screen`}>
-      {isLoading && <Spinner />}
+      {isLoading && <Spinner screen />}
       {!isLoading &&
         (orders.length <= 0 && withdrawals.length <= 0 ? (
           <NoActivity />

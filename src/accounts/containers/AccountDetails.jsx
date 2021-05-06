@@ -18,11 +18,7 @@ const AccountDetails = () => {
   return (
     <div className={classes.AccountDetails}>
       <h2 className='text-center'>Detalles de la cuenta</h2>
-      {!edit && isProcessing && (
-        <div className='h-48 w-full flex items-center justify-center'>
-          <Spinner />
-        </div>
-      )}
+      {!edit && isProcessing && <Spinner screen />}
       {!isProcessing && (
         <>
           <div className='grid grid-cols-2 md:grid-cols-3 mb-6'>
