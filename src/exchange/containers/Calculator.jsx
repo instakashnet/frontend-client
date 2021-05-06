@@ -124,7 +124,7 @@ const Calculator = ({ profile, setStep, setModal }) => {
             onChange={currencyChangeHandler}
           />
           <p className='flex items-center justify-center w-full'>
-            ¿Montos mayores a $ 5,000?
+            ¿Montos mayores a $ 5,000.00?
             <Tooltip title='Escribenos a nuestro canal de whatsapp para recibir una tasa preferencial.' placement='top-start' enterTouchDelay={300} leaveTouchDelay={800}>
               <Info className='ml-3' />
             </Tooltip>
@@ -159,10 +159,8 @@ const Calculator = ({ profile, setStep, setModal }) => {
               Solo aplicable para montos mayores a $ {formatAmount(coupon.minimumBuy)} o S/. {formatAmount(coupon.minimumSell)}
             </p>
           )}
-          <Button
-            type='submit'
-            disabled={values.amount_received <= 0 || minimum || disabled}
-            className={`action-button mt-2 md:mt-5 ld-ext-right ${isProcessing ? 'running' : ''}`}>
+          {values.amount_received < 1 && <p className='error-msg'>El monto mínimo a recibir es de $ 1.00 o S/. 3.00</p>}
+          <Button type='submit' disabled={values.amount_received < 1 || minimum || disabled} className={`action-button mt-2 md:mt-5 ld-ext-right ${isProcessing ? 'running' : ''}`}>
             <span className='ld ld-ring ld-spin' />
             Comenzar cambio
           </Button>
