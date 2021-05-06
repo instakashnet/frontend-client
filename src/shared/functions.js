@@ -4,6 +4,6 @@ export const validateInterplaza = (accountNumber) => {
   const firstAccNumber = accountNumber.substring(0, 1);
 
   let interplaza = false;
-  if (firstAccNumber >= 3 && firstAccNumber <= 8) interplaza = true;
+  if (firstAccNumber >= 3 && firstAccNumber <= 7) interplaza = true;
   return interplaza;
 };

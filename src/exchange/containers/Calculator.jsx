@@ -159,7 +159,7 @@ const Calculator = ({ profile, setStep, setModal }) => {
               Solo aplicable para montos mayores a $ {formatAmount(coupon.minimumBuy)} o S/. {formatAmount(coupon.minimumSell)}
             </p>
           )}
-          {values.amount_received < 1 && <p className='error-msg'>El monto mínimo a recibir es de $ 1.00 o S/. 3.00</p>}
+          {values.amount_received < 1 && <p className='error-msg'>El monto mínimo a recibir es de $ 1.00</p>}
           <Button type='submit' disabled={values.amount_received < 1 || minimum || disabled} className={`action-button mt-2 md:mt-5 ld-ext-right ${isProcessing ? 'running' : ''}`}>
             <span className='ld ld-ring ld-spin' />
             Comenzar cambio
