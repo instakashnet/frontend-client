@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Mail } from 'react-feather';
 import { emailValidation } from '../helpers/formValidations';
 import { recoverPasswordInit } from '../../store/actions';
@@ -52,6 +53,12 @@ const RecoverPassword = () => {
             {sent ? 'Reenviar correo' : 'Reiniciar contraseña'}
           </Button>
         </form>
+        <p>
+          ¿Ya la recordaste?{' '}
+          <Link to='/signin' className={classes.InfoButton}>
+            Inicia sesión
+          </Link>
+        </p>
       </div>
     </main>
   );
