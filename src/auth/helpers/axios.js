@@ -38,6 +38,7 @@ authInstance.interceptors.response.use(
       if (code === 2004) message = 'Usuario y/o contraseña inválida, por favor verifique sus datos.';
       if (code === 2005) message = 'El documento que intentas agregar ya  exíste. Por favor verifique sus datos.';
       if (code === 2009) message = 'El nombre de usuario que intentas agregar ya exíste. Por favor verifique sus datos.';
+      if (code === 2010) message = 'No existe ningún usuario con el código de afiliado que intentas ingresar.';
 
       error.response.message = message;
       return Promise.reject(error.response);
