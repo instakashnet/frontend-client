@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectProfileInit, openModal } from '../../store/actions';
 import { AlertTriangle } from 'react-feather';
@@ -15,13 +15,13 @@ const Selection = () => {
   const dispatch = useDispatch();
   const { isLoading, profiles } = useSelector((state) => state.Profile);
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     setModalType('info');
-  //     dispatch(openModal());
-  //   }, 600);
-  //   return () => clearTimeout(timeout);
-  // }, [dispatch]);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setModalType('info');
+      dispatch(openModal());
+    }, 600);
+    return () => clearTimeout(timeout);
+  }, [dispatch]);
 
   const addProfileHandler = () => {
     setModalType('profile');
@@ -64,7 +64,7 @@ export const InfoModal = () => (
     <h2>Estimado usuario</h2>
     <p>
       Le informamos que en estos momentos la plataforma para empresas de <b>Interbank</b> y <b>BCP</b> se encuentra con retrasos de conexión. Por tal motivo, las operaciónes a
-      dichos bancos podrán demorar más de lo usual. Le Hemos notificado y están trabajando para solucionarlo. <br />
+      dichos bancos podrán demorar más de lo usual. Lo Hemos notificado y están trabajando para solucionarlo. <br />
       <span className='mt-4 inline-block font-bold'>Agradecemos su comprensión.</span>
     </p>
   </div>
