@@ -24,8 +24,6 @@ const TransferCode = ({ order }) => {
   });
   const isProcessing = useSelector((state) => state.Exchange.isProcessing);
 
-  console.log(order);
-
   return (
     <div className={classes.TransferCode}>
       <h1>¡Último paso!</h1>

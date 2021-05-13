@@ -134,7 +134,7 @@ const Calculator = ({ profile, setStep, setModal }) => {
               name='couponName'
               value={couponName}
               onClick={sendCoupon}
-              disabled={isProcessing || isLoading}
+              disabled={values.amount_received < 1 || isProcessing || isLoading}
               onChange={onCouponChange}
               placeholder='Cupón de descuento'
               buttonLabel='Agregar'
