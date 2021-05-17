@@ -15,13 +15,13 @@ const Selection = () => {
   const dispatch = useDispatch();
   const { isLoading, profiles } = useSelector((state) => state.Profile);
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     setModalType('info');
-  //     dispatch(openModal());
-  //   }, 600);
-  //   return () => clearTimeout(timeout);
-  // }, [dispatch]);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setModalType('info');
+      dispatch(openModal());
+    }, 600);
+    return () => clearTimeout(timeout);
+  }, [dispatch]);
 
   const addProfileHandler = () => {
     setModalType('profile');
@@ -63,8 +63,8 @@ export const InfoModal = () => (
     <AlertTriangle size={70} className='error-msg mb-4' />
     <h2>Estimado usuario</h2>
     <p>
-      Le informamos que en estos momentos la plataforma para empresas de <b>BCP</b> e <b>Interbank</b> se encuentran con retrasos de conexión. Por tal motivo, sus operaciones
-      podrán demorar más de lo usual. <br />
+      Le informamos que en estos momentos la plataforma para empresas de <b>BCP</b> se encuentra con retrasos de conexión. Por tal motivo, sus operaciones podrán demorar más de lo
+      usual. <br />
       <span className='mt-4 inline-block font-bold'>Agradecemos su comprensión.</span>
     </p>
   </div>
