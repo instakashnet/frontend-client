@@ -1,10 +1,7 @@
 @import './fonts';
 @import './colors';
 
-html,
-body {
-  position: fixed;
-  overflow: hidden;
+html {
   height: 100%;
   width: 100%;
 }
@@ -13,19 +10,15 @@ body {
   font-family: 'Lato', sans-serif;
   font-size: 16px;
   color: #676767;
+  overflow: auto;
+  height: 100%;
+  position: relative;
 }
 
 @media screen and (min-width: 996px) {
   body {
     font-size: 14px;
   }
-}
-
-#root {
-  width: 100vw;
-  height: 100vh;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
 }
 
 .main-app {
