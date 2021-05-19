@@ -11,7 +11,7 @@
   overflow: auto;
   position: relative;
   padding: 30px 30px 50px;
-  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .ModalContent {
