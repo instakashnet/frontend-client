@@ -49,11 +49,11 @@ const AccountDetails = () => {
                 </div>
               </div>
               <div className='grid grid-cols-1 md:grid-cols-2 md:gap-6 mt-6'>
-                <Button className={classes.DeleteButton} type='button' onClick={() => dispatch(deleteAccountInit(accountDetails))}>
-                  Eliminar cuenta <Trash className='ml-2' />
-                </Button>
                 <Button className='action-button' type='button' onClick={() => setEdit(true)}>
                   Editar cuenta <Edit2 className='ml-2' />
+                </Button>
+                <Button className={classes.DeleteButton} type='button' onClick={() => dispatch(deleteAccountInit(accountDetails))}>
+                  Eliminar cuenta <Trash className='ml-2' />
                 </Button>
               </div>
             </>
