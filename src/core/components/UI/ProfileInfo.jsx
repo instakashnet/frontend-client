@@ -1,4 +1,5 @@
 import React from 'react';
+import { isMobile } from 'react-device-detect';
 
 import Male from '../../assets/images/profiles/male.svg';
 import Female from '../../assets/images/profiles/female.svg';
@@ -27,11 +28,12 @@ const ProfileInfo = ({ main, selected, openNav }) => {
 
   return (
     <div className='flex items-center ml-4 md:ml-6'>
-      <div className={classes.ProfilePhoto}>{Avatar && <img src={Avatar} alt='profile' />}</div>
-      <div className={classes.ProfileInfo}>
-        <p className='font-bold'>Hola</p>
-        <p>{profileName}</p>
-      </div>
+      <div className={`${classes.ProfilePhoto} md:mr-3`}>{Avatar && <img src={Avatar} alt='profile' />}</div>
+      {!isMobile && (
+        <p className={classes.ProfileInfo}>
+          <span className='font-bold'>Hola</span>, <br /> {profileName}
+        </p>
+      )}
       <button onClick={openNav} className='p-2 ml-2 md:ml-4 outline-none'>
         <img src={Arrow} alt='arrow-down' className='w-4' />
       </button>

@@ -26,11 +26,15 @@ const TotalTransfered = ({ totalAmount, kashAccount, isLoading, className, type 
             'No posees ningún KASH'
           )}
         </h3>
-        <p>¿Quieres cambiar o retirar?</p>
-        <div className='flex items-center justify-between mt-3'>
-          <Link to='/currency-exchange'>Cambiar</Link>
-          <Link to='/my-accounts'>Retirar</Link>
-        </div>
+        {kashAccount.balance > 0 && (
+          <>
+            <p>¿Quieres cambiar o retirar?</p>
+            <div className='flex items-center justify-between mt-3'>
+              <Link to='/currency-exchange'>Cambiar</Link>
+              <Link to='/my-accounts'>Retirar</Link>
+            </div>
+          </>
+        )}
       </div>
       <div className={`${classes.DashboardCard} w-full ${type === 'account' && 'mx-0 md:mx-3'}`}>
         <h2>

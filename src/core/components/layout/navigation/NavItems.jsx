@@ -8,7 +8,7 @@ import AccountsIcon from '../../../assets/images/icons/accounts.svg';
 
 const NavItems = () => {
   return (
-    <nav className='w-full mt-16'>
+    <nav className='w-full mt-10 mb-12'>
       <ul>
         <NavItem link='/dashboard' icon={DashboardIcon} label='Mi actividad' />
         <NavItem exact link='/currency-exchange' icon={ExchangeIcon} label='Cambio de divisas' />

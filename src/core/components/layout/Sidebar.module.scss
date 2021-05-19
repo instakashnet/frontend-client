@@ -3,7 +3,7 @@
 .Sidebar {
   background-color: $bg-gray;
   position: fixed;
-  min-height: 100vh;
+  max-height: 100vh;
   height: 100%;
   transform: translateX(-100%);
   width: 72%;
@@ -16,6 +16,7 @@
   grid-area: sidebar;
   z-index: 999;
   transition: 400ms ease-out;
+  overflow-y: auto;
 
   @media screen and (min-width: 768px) {
     transform: translateX(0);

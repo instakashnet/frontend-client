@@ -17,7 +17,7 @@ const Layout = ({ className, children, ModalComponent, SliderModalComponent }) =
     <main className='main-app'>
       <Sidebar />
       <Header />
-      <section className={`main-section p-4 lg:p-10 ${className || ''}`}>{children}</section>
+      <section className={`main-section px-4 lg:px-10 ${className || ''}`}>{children}</section>
       <Modal closeModal={closeModalHandler}>{ModalComponent && ModalComponent()}</Modal>
       <SliderModal closeModal={closeSliderModalHandler}>{SliderModalComponent && <SliderModalComponent />}</SliderModal>
     </main>

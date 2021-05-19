@@ -15,6 +15,7 @@
     "formik": "^2.2.6",
     "gridjs": "^3.4.0",
     "gridjs-react": "^3.4.0",
+    "inobounce": "^0.2.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "node-sass": "^5.0.0",

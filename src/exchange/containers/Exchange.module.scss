@@ -2,7 +2,7 @@
 
 .Exchange {
   text-align: center;
-  margin-bottom: 20px;
+  margin: 20px 0;
 
   h1 {
     font-size: 1.4rem;
@@ -212,16 +212,17 @@
   color: #fff;
   display: flex;
   align-items: center;
-  padding: 16px;
+  padding: 8px;
 
   button {
     background-color: $button-yellow;
     color: $base-text;
     padding: 2px 20px;
     border-radius: 20px;
-    margin: 0 10px;
+    margin: 0 5px;
     border: 2px solid $button-yellow;
     transition: 200ms ease-out;
+    font-size: 0.9rem;
 
     &:last-of-type {
       background-color: transparent;
@@ -233,6 +234,16 @@
       background-color: darken($color: $button-yellow, $amount: 15);
       border-color: darken($color: $button-yellow, $amount: 15);
       color: $base-text;
+    }
+  }
+
+  @media screen and (min-width: 992px) {
+    font-size: 1.05rem;
+
+    padding: 16px;
+
+    button {
+      font-size: 1.05rem;
     }
   }
 }

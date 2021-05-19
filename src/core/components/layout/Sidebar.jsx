@@ -22,6 +22,11 @@ const Sidebar = () => {
     // eslint-disable-next-line
   }, [location, dispatch]);
 
+  useEffect(() => {
+    if (opened) document.body.style.overflow = 'hidden';
+    return () => (document.body.style.overflow = 'unset');
+  }, [opened]);
+
   return (
     <>
       <div className={`${classes.Sidebar} ${opened ? classes.Open : ''}`}>

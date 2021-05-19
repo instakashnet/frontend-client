@@ -82,7 +82,7 @@ const Exchange = () => {
   if (modalType === 'info') ModalComponent = () => <Information onClose={() => dispatch(closeModal())} />;
 
   return (
-    <Layout ModalComponent={ModalComponent}>
+    <Layout ModalComponent={ModalComponent} className='content-center'>
       <div className={classes.Exchange}>
         {pages[step]}
         {!isMobile && <Information />}

@@ -6,6 +6,7 @@ import store from './store';
 
 import './core/assets/css/app.css';
 import './core/assets/css/main.scss';
+import 'inobounce/inobounce';
 
 ReactDOM.render(
   <Provider store={store}>

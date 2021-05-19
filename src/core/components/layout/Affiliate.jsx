@@ -19,7 +19,7 @@ const Affiliate = ({ usercode }) => {
         Copiar código <CopyButton textToCopy={usercode} />
       </p>
       <p>
-        ¡Comparte el código para ganar benefícios!. <Link to='/my-profile'>Conoce más</Link>
+        ¡Comparte el código con tus amigos!. <Link to='/my-profile'>Conoce más</Link>
       </p>
     </Card>
   );

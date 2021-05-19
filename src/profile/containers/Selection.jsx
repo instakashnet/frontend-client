@@ -38,7 +38,7 @@ const Selection = () => {
       {isLoading && <Spinner screen />}
       {!isLoading && (
         <div className={classes.ProfileWrapper}>
-          <h1>¡Nos alegra que estés aqui!</h1>
+          <h1 className='mb-1'>¡Nos alegra que estés aqui!</h1>
           <h3>Selecciona el perfil que usarás hoy</h3>
           <div className='flex items-center flex-wrap justify-center mt-10'>
             {profiles.map((profile) => (
@@ -50,7 +50,7 @@ const Selection = () => {
                 name={profile.type === 'natural' ? `${profile.first_name} ${profile.last_name}` : profile.razon_social}
               />
             ))}
-            {profiles.length < 4 && <ProfileBox onClick={addProfileHandler} type='add' name='Agregar perfil' />}
+            {profiles.length < 4 && <ProfileBox onClick={addProfileHandler} type='add' name='Agregar empresa' />}
           </div>
         </div>
       )}

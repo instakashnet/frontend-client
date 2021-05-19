@@ -40,7 +40,7 @@ const AccountDetails = () => {
             <>
               <div className='grid grid-cols-1 md:grid-cols-2'>
                 <div>
-                  <h4 className='mt-4'>Número de cuenta</h4>
+                  <h4 className='md:mt-4'>Número de cuenta</h4>
                   <p>{accountDetails.account_number || accountDetails.cci}</p>
                 </div>
                 <div className='md:text-right'>
@@ -48,7 +48,7 @@ const AccountDetails = () => {
                   <p>{accountDetails.alias}</p>
                 </div>
               </div>
-              <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-6'>
+              <div className='grid grid-cols-1 md:grid-cols-2 md:gap-6 mt-6'>
                 <Button className={classes.DeleteButton} type='button' onClick={() => dispatch(deleteAccountInit(accountDetails))}>
                   Eliminar cuenta <Trash className='ml-2' />
                 </Button>

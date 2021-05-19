@@ -21,6 +21,7 @@ import classes from './Exchange.module.scss';
 const Calculator = ({ profile, setStep, setModal }) => {
   const [actualRates, setActualRates] = useState({ buy: 0, sell: 0 });
   const [couponName, setCouponName] = useState('');
+  const [showInfo, setShowInfo] = useState(false);
   const { rates, isLoading, coupon, isProcessing } = useSelector((state) => state.Exchange);
 
   const { type: profiletype } = profile;
@@ -125,7 +126,14 @@ const Calculator = ({ profile, setStep, setModal }) => {
           />
           <p className='flex items-center justify-center w-full'>
             ¿Montos mayores a $ 5,000.00?
-            <Tooltip title='Escribenos a nuestro canal de whatsapp para recibir una tasa preferencial.' placement='top-start' enterTouchDelay={300} leaveTouchDelay={800}>
+            <Tooltip
+              title='Escribenos a nuestro canal de whatsapp para recibir una tasa preferencial.'
+              placement='top-start'
+              disableHoverListener
+              onMouseEnter={() => setShowInfo(true)}
+              onClick={() => setShowInfo(true)}
+              onMouseLeave={() => setShowInfo(false)}
+              open={showInfo}>
               <Info className='ml-3' />
             </Tooltip>
           </p>

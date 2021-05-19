@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { Info } from 'react-feather';
@@ -16,6 +16,7 @@ import TransferImg from '../images/transfer.svg';
 import classes from './Exchange.module.scss';
 
 const TransferCode = ({ order }) => {
+  const [showInfo, setShowInfo] = useState(false);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: { transaction_code: '' },
@@ -64,16 +65,19 @@ const TransferCode = ({ order }) => {
       <p className='mb-6 mt-8 text-left'>
         Una vez realizado coloque el número de operación <b>emitido por su banco</b> dentro del casillero mostrado debajo darle a enviar.
       </p>
-
-      <Tooltip
-        title={<img src={`${process.env.PUBLIC_URL}/images/samples/transfer-${order.bankFromName.toLowerCase()}.png`} alt='ejemplo de transferencia' />}
-        placement='top-start'
-        enterTouchDelay={200}
-        leaveTouchDelay={500}>
-        <p className='flex items-center justify-end text-sm mb-5 font-bold cursor-pointer underline'>
-          ¿Donde lo encuentro? <Info className='ml-2' />
-        </p>
-      </Tooltip>
+      <div className='flex items-center justify-end mb-3'>
+        <span className='text-sm font-bold cursor-pointer underline'>¿Donde lo encuentro?</span>
+        <Tooltip
+          title={<img src={`${process.env.PUBLIC_URL}/images/samples/transfer-${order.bankFromName.toLowerCase()}.png`} alt='ejemplo de transferencia' />}
+          placement='top-start'
+          disableHoverListener
+          onMouseEnter={() => setShowInfo(true)}
+          onClick={() => setShowInfo(true)}
+          onMouseLeave={() => setShowInfo(false)}
+          open={showInfo}>
+          <Info className='ml-2' />
+        </Tooltip>
+      </div>
       <form onSubmit={formik.handleSubmit}>
         <Input
           name='transaction_code'

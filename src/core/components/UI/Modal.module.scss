@@ -5,12 +5,13 @@
   background-color: #fff;
   width: 100%;
   max-width: 34rem;
-  max-height: calc(100vh - 0.5rem);
+  max-height: 100vh;
   margin: 0 auto;
   outline: 0;
-  overflow-y: auto;
+  overflow: auto;
   position: relative;
-  padding: 30px;
+  padding: 30px 30px 50px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .ModalContent {
@@ -22,12 +23,12 @@
   align-items: center;
 
   button {
-    margin-top: 20px;
+    margin-top: 15px;
   }
 
   h2 {
     color: $secondary-green;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     font-size: 1.3rem;
     font-weight: 600;
   }

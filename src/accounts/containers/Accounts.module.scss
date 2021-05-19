@@ -59,7 +59,7 @@
   width: 100%;
 
   hr {
-    margin: 30px 0;
+    margin: 15px 0;
   }
 
   h4 {
@@ -87,6 +87,12 @@
     &:focus {
       color: #fff;
       background-color: $error;
+    }
+  }
+
+  @media screen and (min-width: 992px) {
+    hr {
+      margin: 30px 0;
     }
   }
 }

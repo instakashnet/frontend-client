@@ -76,12 +76,14 @@ const Accounts = ({ order, setStep, setModal }) => {
     <>
       {kashAccount.balance > 0 && (
         <div className={classes.ExchangeKash}>
-          <p className='mr-4'>Tienes {kashAccount.balance} kash disponibles. ¿Deseas retirarlos junto con tu cambio?</p>
-          <button onClick={() => formik.setFieldValue('kashApplied', true)}>Si</button>
+          <p className='mr-4'>{kashAccount.balance} kash disponibles. ¿Deseas retirar?</p>
+          <button className='ml-3' onClick={() => formik.setFieldValue('kashApplied', true)}>
+            Si
+          </button>
           <button onClick={() => formik.setFieldValue('kashApplied', false)}>No</button>
         </div>
       )}
-      <h1 className='mt-6'>Selecciona tus bancos y cuentas</h1>
+      <h1 className='mt-12 md:mt-0'>Selecciona tus bancos y cuentas</h1>
       <p>Debes seleccionar tu banco de envío y la cuenta donde recibes.</p>
       <form onSubmit={formik.handleSubmit} className={classes.ExchangeForm}>
         <CustomSelect

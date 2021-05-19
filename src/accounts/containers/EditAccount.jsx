@@ -39,13 +39,13 @@ const EditAccount = ({ account, cancelEdit, setEdit }) => {
           onBlur={formik.handleBlur}
           placeholder='Ingresa un alias'
         />
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-          <Button className='action-button' type='button' onClick={cancelEdit}>
-            Cancelar
-          </Button>
+        <div className='grid grid-cols-1 md:grid-cols-2 md:gap-5'>
           <Button type='submit' disabled={!formik.isValid || isProcessing} className={`action-button ld-ext-right ${isProcessing ? 'running' : ''}`}>
             <span className='ld ld-ring ld-spin' />
             Editar cuenta
+          </Button>
+          <Button className='secondary-button' type='button' onClick={cancelEdit}>
+            Cancelar
           </Button>
         </div>
       </form>

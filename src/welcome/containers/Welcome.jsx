@@ -46,7 +46,7 @@ const Welcome = () => {
   return outOfTime ? (
     <OutOfTime onClose={closeOutOfTime} />
   ) : (
-    <Layout className='content-start' ModalComponent={() => <KashInfo />}>
+    <Layout className='content-start mt-8' ModalComponent={() => <KashInfo />}>
       <div className={classes.Welcome}>
         <div className='w-9/12 lg:w-2/6'>
           <h1>¡Bienvenido a Instakash!</h1>
