@@ -6897,11 +6897,6 @@ init-package-json@^2.0.2:
     validate-npm-package-license "^3.0.4"
     validate-npm-package-name "^3.0.0"
 
-inobounce@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/inobounce/-/inobounce-0.2.0.tgz#adfb6cfa505758f51f8a9f0859768c0a043dd9c3"
-  integrity sha512-eJt1MQEqLKanAFEE5DkSF36d9uyg8kLb/R6ysEF7udJOM5JZXidkhhGv6WoWbEcVdyRqZfYMjv6XbSIz7tD4CQ==
-
 internal-ip@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/internal-ip/-/internal-ip-4.3.0.tgz"
