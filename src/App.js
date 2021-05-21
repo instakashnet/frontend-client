@@ -2,6 +2,7 @@ import { useEffect, lazy } from 'react';
 import { Switch, Router } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUserInit, getProfilesInit } from './store/actions';
+import ReactPixel from 'react-facebook-pixel';
 import history from './shared/history';
 
 import Alert from './core/components/UI/Alert';
@@ -27,6 +28,8 @@ const MyProfile = lazy(() => import('./profile/containers/Profile'));
 const Accounts = lazy(() => import('./accounts/containers/Accounts'));
 const Exchange = lazy(() => import('./exchange/containers/Exchange'));
 
+ReactPixel.init(process.env.REACT_APP_FB_PIXEL_ID, {}, { autoConfig: true, debug: false });
+
 function App() {
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.Auth.isAuth);
@@ -38,6 +41,10 @@ function App() {
   useEffect(() => {
     if (isAuth) dispatch(getProfilesInit());
   }, [dispatch, isAuth]);
+
+  useEffect(() => {
+    ReactPixel.pageView();
+  }, []);
 
   return (
     <Router history={history}>
