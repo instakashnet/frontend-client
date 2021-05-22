@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutInit } from '../../../../store/actions';
+import { useProfileInfo } from '../../../../shared/hooks/useProfileInfo';
 
 import NavItem from './NavItem';
 import ProgressBar from '../../UI/ProgressBar';
@@ -18,42 +19,16 @@ const ProfileNavigation = () => {
   const dispatch = useDispatch();
   const { profiles } = useSelector((state) => state.Profile);
   const profileSelected = JSON.parse(sessionStorage.getItem('profileSelected'));
-  const userProfile = profiles.find((profile) => profile.type === 'natural');
-  const profile = {
-    ...profileSelected,
-    first_name: userProfile.first_name,
-    last_name: userProfile.last_name,
-    document_type: userProfile.document_type,
-    document_identification: userProfile.document_identification,
-    identity_photo: userProfile.identity_photo,
-    identity_photo_two: userProfile.identity_photo_two,
-  };
+  const { profileInfo, profileCompleted } = useProfileInfo(profiles, profileSelected);
 
-  let Avatar;
-  let profileName;
-  let profileType;
-  let width = 0;
+  let Avatar = profileInfo.identity_sex === 'male' ? Male : Female;
+  let profileName = `${profileInfo.first_name} ${profileInfo.last_name}`;
+  let profileType = 'Usuario';
 
-  if (!profileSelected && userProfile) {
-    Avatar = userProfile.identity_sex === 'male' ? Male : Female;
-    profileName = `${userProfile.first_name} ${userProfile.last_name}`;
-    profileType = 'Usuario';
-  }
-  if (profileSelected) {
-    if (profileSelected.type === 'juridica') {
-      Avatar = Company;
-      profileName = profileSelected.razon_social;
-      profileType = 'Empresa';
-    } else {
-      Avatar = profileSelected.identity_sex === 'male' ? Male : Female;
-      profileName = `${profileSelected.first_name} ${profileSelected.last_name}`;
-      profileType = 'Usuario';
-    }
-
-    if (!profile.address && !profile.identity_photo) width = 33;
-    if ((!profile.address && profile.identity_photo) || (profile.address && !profile.identity_photo)) width = 66;
-    if (profile.address && profile.identity_photo && !profile.identity_photo_two) width = 88;
-    if (profile.address && profile.identity_photo && profile.identity_photo_two) width = 100;
+  if (profileInfo.type === 'juridica') {
+    Avatar = Company;
+    profileName = profileInfo.razon_social;
+    profileType = 'Empresa';
   }
 
   return (
@@ -67,16 +42,16 @@ const ProfileNavigation = () => {
           <p>{profileType}</p>
         </div>
       </div>
-      {profileSelected && (
+      {profileInfo.selected && (
         <div className={classes.ProfileProgress}>
           <h3>Progreso de tu perfil</h3>
-          <ProgressBar width={width} />
-          <p>{width}% completado</p>
+          <ProgressBar width={profileCompleted} />
+          <p>{profileCompleted}% completado</p>
         </div>
       )}
       <nav className='w-full mt-8'>
         <ul>
-          {profileSelected && <NavItem label='Ver perfil' icon={Profile} link='/my-profile' />}
+          {profileInfo.selected && <NavItem label='Ver perfil' icon={Profile} link='/my-profile' />}
           <NavItem label='Cambiar perfil' icon={ChangeProfile} link='/profile-selection' />
           <li>
             <button className='flex items-center' onClick={() => dispatch(logoutInit())}>
@@ -90,4 +65,4 @@ const ProfileNavigation = () => {
   );
 };
 
-export default ProfileNavigation;
+export default React.memo(ProfileNavigation);

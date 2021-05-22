@@ -22,7 +22,7 @@ const EditUserCode = () => {
     <div className='text-center'>
       <h2>Editar código de afiliado</h2>
       <p>Puede editar su código de afiliado para que sea más facil de compartir y recordar.</p>
-      <form onSubmit={formik.handleSubmit} className='mt-6 text-left'>
+      <form onSubmit={formik.handleSubmit} className='mt-6 text-left flex flex-col items-center'>
         <Input
           name='username'
           placeholder='Código de afiliado'
@@ -33,7 +33,7 @@ const EditUserCode = () => {
           touched={formik.touched.username}
         />
 
-        <Button type='submit' className={`action-button ld-ext-right ${isProcessing ? 'running' : ''}`} disabled={!formik.isValid || isProcessing}>
+        <Button type='submit' className={`action-button ld-ext-right max-w-xs ${isProcessing ? 'running' : ''}`} disabled={!formik.isValid || isProcessing}>
           <span className='ld ld-ring ld-spin' />
           Editar código
         </Button>

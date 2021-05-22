@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { openModal, getAccountsInit, disableProfileInit } from '../../store/actions';
 import { ArrowUp, ArrowDown } from 'react-feather';
+import { useProfileInfo } from '../../shared/hooks/useProfileInfo';
 
 import PersonalDetails from '../components/additionals/PersonalDetails';
 import CompanyDetails from '../components/additionals/CompanyDetails';
@@ -15,7 +16,7 @@ import CopyButton from '../../core/components/UI/CopyButton';
 // MODAL
 import Upload1 from './upload/Upload1';
 import Upload2 from './upload/Upload2';
-import KashInfo from '../components/KashInfo';
+import KashInfo from '../../core/containers/KashInfo';
 import EditUserCode from './EditUserCode';
 
 import KashIcon from '../../core/assets/images/kash.svg';
@@ -29,29 +30,13 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
   const [showSlide, setShowSlide] = useState(false);
-  const [modalType, setModalType] = useState(null);
   const [editType, setEditType] = useState('');
-
   const { profiles, user } = useSelector((state) => state.Profile);
+  const profileSelected = JSON.parse(sessionStorage.getItem('profileSelected'));
+  const { profileInfo, profileCompleted } = useProfileInfo(profiles, profileSelected);
+
   const { kashAccount, isLoading } = useSelector((state) => state.Accounts);
   const usercode = useSelector((state) => state.Auth.userCode);
-  const profileSelected = JSON.parse(sessionStorage.getItem('profileSelected'));
-  const naturalProfile = profiles.find((profile) => profile.type === 'natural');
-  const profile = {
-    ...profileSelected,
-    first_name: naturalProfile.first_name,
-    last_name: naturalProfile.last_name,
-    document_type: naturalProfile.document_type,
-    document_identification: naturalProfile.document_identification,
-    identity_photo: naturalProfile.identity_photo,
-    identity_photo_two: naturalProfile.identity_photo_two,
-  };
-
-  let width = 0;
-  if (!profile.address && !profile.identity_photo) width = 33;
-  if ((!profile.address && profile.identity_photo) || (profile.address && !profile.identity_photo)) width = 66;
-  if (profile.address && profile.identity_photo && !profile.identity_photo_two) width = 88;
-  if (profile.address && profile.identity_photo && profile.identity_photo_two) width = 100;
 
   useEffect(() => {
     dispatch(getAccountsInit('kash'));
@@ -68,39 +53,38 @@ const Profile = () => {
   };
 
   const openModalHandler = (type) => {
-    setModalType(type);
-    dispatch(openModal());
+    let ModalComponent;
+
+    if (type === 'frontal') ModalComponent = () => <Upload1 />;
+    if (type === 'trasera') ModalComponent = () => <Upload2 />;
+    if (type === 'kash') ModalComponent = () => <KashInfo />;
+    if (type === 'editCode') ModalComponent = () => <EditUserCode />;
+
+    dispatch(openModal(ModalComponent));
   };
 
-  let UploadComponent;
-
-  if (modalType === 'frontal') UploadComponent = () => <Upload1 />;
-  if (modalType === 'trasera') UploadComponent = () => <Upload2 />;
-  if (modalType === 'kash') UploadComponent = () => <KashInfo />;
-  if (modalType === 'editCode') UploadComponent = () => <EditUserCode />;
-
   return (
-    <Layout ModalComponent={UploadComponent} className='content-start'>
+    <Layout className='content-start'>
       {isEdit ? (
         editType === 'personal' ? (
-          <EditPersonalProfile onCancelEdit={cancelEdit} profile={profile} />
+          <EditPersonalProfile onCancelEdit={cancelEdit} profile={profileInfo} />
         ) : (
-          <EditCompanyProfile onCancelEdit={cancelEdit} profile={profile} />
+          <EditCompanyProfile onCancelEdit={cancelEdit} profile={profileInfo} />
         )
       ) : (
         <div className='grid grid-cols-1 md:grid-cols-4 gap-4 overscroll-x-auto'>
           <div className={`${classes.ProfileInfoWrapper} col-span-3 md:mr-12`}>
             <div className='flex items-center justify-between'>
               <h1>Mi perfil</h1>
-              <p className={classes.Percentage}>{width}% completado</p>
+              <p className={classes.Percentage}>{profileCompleted}% completado</p>
             </div>
-            <ProgressBar width={width} />
-            {profileSelected.type === 'natural' ? (
-              <PersonalDetails profile={profile} user={user} onEdit={setEdit} />
+            <ProgressBar width={profileCompleted} />
+            {profileInfo.type === 'natural' ? (
+              <PersonalDetails profile={profileInfo} user={user} onEdit={setEdit} />
             ) : (
-              <CompanyDetails profile={profile} onEdit={setEdit} onDisable={() => dispatch(disableProfileInit(profileSelected.id))} />
+              <CompanyDetails profile={profileInfo} onEdit={setEdit} onDisable={() => dispatch(disableProfileInit(profileInfo.id))} />
             )}
-            <DocumentDetails uploadFile={openModalHandler} profile={profile} />
+            <DocumentDetails uploadFile={openModalHandler} profile={profileInfo} />
           </div>
           <div className={`${classes.AffiliateCard} ${showSlide ? classes.Show : ''}`}>
             <button onClick={() => setShowSlide((prev) => !prev)} className={classes.ShowMoreButton}>

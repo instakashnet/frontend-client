@@ -18,7 +18,7 @@ const AccountDetails = () => {
   return (
     <div className={classes.AccountDetails}>
       <h2 className='text-center'>Detalles de la cuenta</h2>
-      {!edit && isProcessing && <Spinner screen />}
+      {!edit && isProcessing && <Spinner full />}
       {!isProcessing && (
         <>
           <div className='grid grid-cols-2 md:grid-cols-3 mb-6'>

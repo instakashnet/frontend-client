@@ -249,6 +249,11 @@
 }
 
 .CompleteProfile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+
   li {
     background-image: url(../../core/assets/images/icons/check.svg);
     background-repeat: no-repeat;
@@ -260,21 +265,9 @@
   b {
     color: $base-green;
   }
+
+  button {
+    margin-top: 20px;
+    font-size: 1rem;
+  }
 }
-
-// @keyframes pulse {
-//   0% {
-//     transform: scale(0.95);
-//     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
-//   }
-
-//   70% {
-//     transform: scale(1);
-//     box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
-//   }
-
-//   100% {
-//     transform: scale(0.95);
-//     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-//   }
-// }

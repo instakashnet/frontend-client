@@ -1,13 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { openModal } from '../../../store/actions';
 
 import Card from '../UI/Card';
 import CopyButton from '../UI/CopyButton';
+import KashInfo from '../../containers/KashInfo';
 
 import AffiliateImg from '../../assets/images/affiliate.svg';
 import classes from './Affiliate.module.scss';
 
 const Affiliate = ({ usercode }) => {
+  const dispatch = useDispatch();
+
   return (
     <Card className={classes.AffiliateCard}>
       <img src={AffiliateImg} alt='affiliate' />
@@ -19,10 +23,13 @@ const Affiliate = ({ usercode }) => {
         Copiar código <CopyButton textToCopy={usercode} />
       </p>
       <p>
-        ¡Comparte el código con tus amigos!. <Link to='/my-profile'>Conoce más</Link>
+        ¡Comparte el código con tus amigos! <br />{' '}
+        <button className='mt-1' onClick={() => dispatch(openModal(KashInfo))}>
+          Conoce más
+        </button>
       </p>
     </Card>
   );
 };
 
-export default Affiliate;
+export default React.memo(Affiliate);

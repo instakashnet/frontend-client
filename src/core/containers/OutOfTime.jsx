@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../components/UI/Button';
 
-import classes from './OutOfTime.module.scss';
+import classes from './CoreContainers.module.scss';
 
 const OutOfTime = ({ onClose }) => {
   return (

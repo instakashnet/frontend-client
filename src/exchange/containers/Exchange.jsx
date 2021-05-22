@@ -10,8 +10,8 @@ import AddAccount from '../../accounts/containers/AddAccount';
 import Calculator from './Calculator';
 import Accounts from './Accounts';
 import Information from '../components/Information';
+import CompleteProfile from '../components/CompleteProfile';
 import Complete from './Complete';
-import Button from '../../core/components/UI/Button';
 
 import classes from './Exchange.module.scss';
 
@@ -19,7 +19,6 @@ const Exchange = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [step, setStep] = useState(0);
-  const [modalType, setModalType] = useState(null);
   const profileSelected = JSON.parse(sessionStorage.getItem('profileSelected'));
   const order = useSelector((state) => state.Exchange.order);
   const profiles = useSelector((state) => state.Profile.profiles);
@@ -64,9 +63,19 @@ const Exchange = () => {
     return () => clearTimeout(timer);
   }, [step, order, dispatch]);
 
+  const onCloseHandler = () => {
+    history.push('/my-profile');
+    dispatch(closeModal());
+  };
+
   const openModalHandler = (type = null) => {
-    setModalType(type);
-    dispatch(openModal());
+    let ModalComponent;
+
+    if (type === 'account') ModalComponent = () => <AddAccount order={order} accType='orders' />;
+    if (type === 'complete') ModalComponent = () => <CompleteProfile onClose={onCloseHandler} />;
+    if (type === 'info') ModalComponent = () => <Information onClose={() => dispatch(closeModal())} />;
+
+    dispatch(openModal(ModalComponent));
   };
 
   const pages = [
@@ -75,50 +84,14 @@ const Exchange = () => {
     <Complete order={order} />,
   ];
 
-  let ModalComponent;
-
-  if (modalType === 'account') ModalComponent = () => <AddAccount order={order} accType='orders' />;
-  if (modalType === 'complete') ModalComponent = () => <CompleteProfile dispatch={dispatch} history={history} />;
-  if (modalType === 'info') ModalComponent = () => <Information onClose={() => dispatch(closeModal())} />;
-
   return (
-    <Layout ModalComponent={ModalComponent} className='content-center'>
+    <Layout className='content-center'>
       <div className={classes.Exchange}>
         {pages[step]}
         {!isMobile && <Information />}
         {isMobile && <Info className={classes.InfoButton} size={30} onClick={() => openModalHandler('info')} />}
       </div>
     </Layout>
-  );
-};
-
-const CompleteProfile = ({ history, dispatch }) => {
-  return (
-    <div className={classes.CompleteProfile}>
-      <h2 className='text-center'>Completa tu perfil</h2>
-      <p>
-        Para realizar operaciones mayores a <b>$ 5,000</b> o <b>S/. 15,000</b> deberás:
-      </p>
-      <ul className='my-3'>
-        <li>
-          Completar tu <b>información de perfil</b> al 100%.
-        </li>
-        <li>
-          Cargar ambas fotos de tu <b>documento de identidad</b>.
-        </li>
-      </ul>
-      <p className='text-center'>Haz click en continuar para agregar tus datos.</p>
-
-      <Button
-        type='button'
-        className='action-button'
-        onClick={() => {
-          history.push('/my-profile');
-          dispatch(closeModal());
-        }}>
-        Completar mi perfil
-      </Button>
-    </div>
   );
 };
 

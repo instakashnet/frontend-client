@@ -34,7 +34,7 @@ const AddAccount = ({ order, accType }) => {
   return (
     <>
       <h2>Agregar cuenta bancaria</h2>
-      <form onSubmit={formik.handleSubmit} className='w-full'>
+      <form onSubmit={formik.handleSubmit} className='w-full flex flex-col items-center'>
         <CustomSelect
           name='bankId'
           label='Banco'

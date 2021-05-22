@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectProfileInit, openModal } from '../../store/actions';
 import { AlertTriangle } from 'react-feather';
@@ -11,30 +11,20 @@ import AddProfile from './AddProfile';
 import classes from './Profile.module.scss';
 
 const Selection = () => {
-  const [modalType, setModalType] = useState(null);
   const dispatch = useDispatch();
   const { isLoading, profiles } = useSelector((state) => state.Profile);
 
   // useEffect(() => {
   //   const timeout = setTimeout(() => {
-  //     setModalType('info');
-  //     dispatch(openModal());
+  //     dispatch(openModal(InfoModal));
   //   }, 600);
   //   return () => clearTimeout(timeout);
   // }, [dispatch]);
 
-  const addProfileHandler = () => {
-    setModalType('profile');
-    dispatch(openModal());
-  };
-
-  let ModalComponent;
-
-  if (modalType === 'profile') ModalComponent = () => <AddProfile />;
-  if (modalType === 'info') ModalComponent = () => <InfoModal />;
+  const addProfileHandler = () => dispatch(openModal(AddProfile));
 
   return (
-    <Layout ModalComponent={ModalComponent}>
+    <Layout>
       {isLoading && <Spinner screen />}
       {!isLoading && (
         <div className={classes.ProfileWrapper}>

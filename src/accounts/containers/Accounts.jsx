@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import _ from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { isMobile } from 'react-device-detect';
@@ -14,12 +14,11 @@ import AddAccount from './AddAccount';
 import AccountDetails from './AccountDetails';
 import KashAccount from './KashAccount';
 import KashWithdrawal from './KashWithdraw';
-import KashInfo from '../../profile/components/KashInfo';
+import KashInfo from '../../core/containers/KashInfo';
 
 import classes from './Accounts.module.scss';
 
 const Accounts = () => {
-  const [modalType, setModalType] = useState(null);
   const dispatch = useDispatch();
   const { accounts, kashAccount, isLoading: accountsLoading } = useSelector((state) => state.Accounts);
 
@@ -32,23 +31,22 @@ const Accounts = () => {
 
   const addAccountHandler = () => openModalHandler('add');
 
-  let ModalComponent;
-
   const openModalHandler = (type, accId = null) => {
-    setModalType(type);
-    if (accId) dispatch(setAccountDetailsInit(accId));
-    dispatch(openModal());
-  };
+    let ModalComponent;
 
-  if (modalType === 'add') ModalComponent = () => <AddAccount accType='users' />;
-  if (modalType === 'details') ModalComponent = () => <AccountDetails />;
-  if (modalType === 'withdrawal') ModalComponent = () => <KashWithdrawal accounts={accounts} kashAccount={kashAccount} />;
-  if (modalType === 'kashInfo') ModalComponent = () => <KashInfo />;
+    if (type === 'add') ModalComponent = () => <AddAccount accType='users' />;
+    if (type === 'details') ModalComponent = () => <AccountDetails />;
+    if (type === 'withdrawal') ModalComponent = () => <KashWithdrawal accounts={accounts} kashAccount={kashAccount} />;
+    if (type === 'kashInfo') ModalComponent = () => <KashInfo />;
+    if (accId) dispatch(setAccountDetailsInit(accId));
+
+    dispatch(openModal(ModalComponent));
+  };
 
   const groupedAccounts = _.map(_.groupBy(accounts, (account) => account.currency.id));
 
   return (
-    <Layout className={`${isMobile ? 'content-center' : 'content-start'}`} ModalComponent={ModalComponent}>
+    <Layout className={`${isMobile ? 'content-center' : 'content-start'}`}>
       {accountsLoading && <Spinner screen />}
       <div className={classes.Accounts}>
         {!accountsLoading && <KashAccount account={kashAccount} openModal={openModalHandler} />}
