@@ -34,14 +34,14 @@ const TransferCode = ({ order }) => {
         {`${order.currencySent === 'PEN' ? 'S/.' : '$'} ${formatAmount(order.amountSent)}`} <CopyButton textToCopy={order.amountSent} />
       </p>
 
-      <p>Recibirás el monto de:</p>
-      {order.kashApplied ? (
-        <p className={classes.Amount}>
-          {`${order.currencyReceived === 'PEN' ? 'S/.' : '$'} ${formatAmount(order.amountReceived - order.kashUsed)}`} + {order.kashUsed} KASH ={' '}
-          {order.currencyReceived === 'PEN' ? 'S/.' : '$'} {formatAmount(order.amountReceived)}
-        </p>
-      ) : (
-        <p className={classes.Amount}>{`${order.currencyReceived === 'PEN' ? 'S/.' : '$'} ${formatAmount(order.amountReceived)}`}</p>
+      {order.kashApplied && (
+        <>
+          <p>Recibirás el monto de:</p>
+          <p className={classes.Amount}>
+            {`${order.currencyReceived === 'PEN' ? 'S/.' : '$'} ${formatAmount(order.amountReceived - order.kashUsed)}`} + {order.kashUsed} KASH ={' '}
+            {order.currencyReceived === 'PEN' ? 'S/.' : '$'} {formatAmount(order.amountReceived)}
+          </p>
+        </>
       )}
 
       <h4>Banco a transferir:</h4>

@@ -84,7 +84,7 @@ const Calculator = ({ profile, setStep, setModal }) => {
       setFieldValue('amount_received', values.type === 'buy' ? values.amount_sent * rates.buy : values.amount_sent / rates.sell);
     }
     // eslint-disable-next-line
-  }, [coupon]);
+  }, [coupon, setFieldValue]);
 
   const swipeCurrencyHandler = () => {
     setFieldValue('type', values.type === 'buy' ? 'sell' : 'buy');
