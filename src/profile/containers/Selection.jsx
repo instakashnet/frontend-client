@@ -53,8 +53,8 @@ export const InfoModal = () => (
     <AlertTriangle size={70} className='error-msg mb-4' />
     <h2>Estimado usuario</h2>
     <p>
-      Le informamos que en estos momentos la plataforma para empresas de <b>BCP</b> se encuentra inhabilitada. Por tal motivo, no podremos realizar operaciones desde y hacia ese
-      banco. <br />
+      Le informamos que en estos momentos las plataformas para empresas de <b>BCP</b> y <b>Interbank</b> se encuentra inhabilitadas por actualizaciones en sus plataforma. Por tal
+      motivo, toda operación ingresada a partir de este momento será atendida el dia Lunes. <br />
       <span className='mt-4 inline-block font-bold'>Agradecemos su comprensión.</span>
     </p>
   </div>
