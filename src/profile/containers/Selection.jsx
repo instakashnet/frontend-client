@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectProfileInit, openModal } from '../../store/actions';
 import { AlertTriangle } from 'react-feather';
@@ -14,12 +14,12 @@ const Selection = () => {
   const dispatch = useDispatch();
   const { isLoading, profiles } = useSelector((state) => state.Profile);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      dispatch(openModal(InfoModal));
-    }, 600);
-    return () => clearTimeout(timeout);
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     dispatch(openModal(InfoModal));
+  //   }, 600);
+  //   return () => clearTimeout(timeout);
+  // }, [dispatch]);
 
   const addProfileHandler = () => dispatch(openModal(AddProfile));
 
