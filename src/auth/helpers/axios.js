@@ -37,6 +37,7 @@ authInstance.interceptors.response.use(
       if (code === 2003) message = 'El teléfono que ha colocado ya se encuentra registrado, por favor intente con otro.';
       if (code === 2004) message = 'Usuario y/o contraseña inválida, por favor verifique sus datos.';
       if (code === 2005) message = 'El documento que intentas agregar ya  exíste. Por favor verifique sus datos.';
+      if (code === 2007) message = 'El nro. de su DNI debe ser de 8 caracteres. Por favor, verifique los datos.';
       if (code === 2009) message = 'El nombre de usuario que intentas agregar ya exíste. Por favor verifique sus datos.';
       if (code === 2010) message = 'No existe ningún usuario con el código de afiliado que intentas ingresar.';
 
