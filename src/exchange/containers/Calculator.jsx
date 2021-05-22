@@ -32,15 +32,6 @@ const Calculator = ({ profile, setStep, setModal }) => {
     dispatch(validateCouponInit('NUEVOREFERIDO1', profiletype));
   }, [dispatch, profiletype]);
 
-  const onCouponChange = (e) => setCouponName(e.target.value);
-  const sendCoupon = () => {
-    const bodyCoupon = couponName.trim();
-    const regex = /^((?=.*\d)?)(?=.*[a-zA-Z]).{6,}$/;
-    if (bodyCoupon && regex.test(bodyCoupon)) {
-      dispatch(validateCouponInit(bodyCoupon.toUpperCase(), profile.type));
-    } else return;
-  };
-
   const formik = useFormik({
     initialValues: {
       currency_sent_id: 2,
@@ -60,8 +51,21 @@ const Calculator = ({ profile, setStep, setModal }) => {
       return dispatch(createExchangeInit(values, profile, setStep));
     },
   });
-
   const { values, setFieldValue } = formik;
+
+  const onCouponChange = (e) => setCouponName(e.target.value);
+  const sendCouponHandler = () => {
+    const bodyCoupon = couponName.trim();
+    const regex = /^((?=.*\d)?)(?=.*[a-zA-Z]).{6,}$/;
+    if (bodyCoupon && regex.test(bodyCoupon)) {
+      dispatch(validateCouponInit(bodyCoupon.toUpperCase(), profile.type));
+    } else return;
+  };
+  const deleteCouponHandler = () => {
+    dispatch(deleteCoupon());
+    setActualRates({ buy: rates.buy, sell: rates.sell });
+    setFieldValue('amount_received', values.type === 'buy' ? values.amount_sent * rates.buy : values.amount_sent / rates.sell);
+  };
 
   useEffect(() => {
     if (rates.buy && rates.sell) {
@@ -79,9 +83,6 @@ const Calculator = ({ profile, setStep, setModal }) => {
     if (coupon) {
       setActualRates({ buy: rates.buy + coupon.discount, sell: rates.sell - coupon.discount });
       setFieldValue('amount_received', values.type === 'buy' ? values.amount_sent * (rates.buy + coupon.discount) : values.amount_sent / (rates.sell - coupon.discount));
-    } else {
-      setActualRates({ buy: rates.buy, sell: rates.sell });
-      setFieldValue('amount_received', values.type === 'buy' ? values.amount_sent * rates.buy : values.amount_sent / rates.sell);
     }
     // eslint-disable-next-line
   }, [coupon, setFieldValue]);
@@ -150,7 +151,7 @@ const Calculator = ({ profile, setStep, setModal }) => {
             <FlexInput
               name='couponName'
               value={couponName}
-              onClick={sendCoupon}
+              onClick={sendCouponHandler}
               disabled={values.amount_received < 1 || isProcessing || isLoading}
               onChange={onCouponChange}
               placeholder='Cupón de descuento'
@@ -164,7 +165,7 @@ const Calculator = ({ profile, setStep, setModal }) => {
                 <p className='flex items-center'>
                   <img src={CouponImg} alt='cupón' className='mr-2' /> {coupon.name}
                 </p>
-                <button type='button' onClick={() => dispatch(deleteCoupon())}>
+                <button type='button' onClick={deleteCouponHandler}>
                   <X />
                 </button>
               </div>
