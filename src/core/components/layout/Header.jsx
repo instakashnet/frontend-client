@@ -4,6 +4,7 @@ import { toggleNav, openSliderModal } from '../../../store/actions';
 
 import Whatsapp from '../UI/Whatsapp';
 import ProfileInfo from '../UI/ProfileInfo';
+import ProfileNavigation from './navigation/ProfileNavigation';
 
 import classes from './Header.module.scss';
 
@@ -12,7 +13,7 @@ const Header = () => {
   const { profiles } = useSelector((state) => state.Profile);
   const profileSelected = JSON.parse(sessionStorage.getItem('profileSelected'));
 
-  const openNav = () => dispatch(openSliderModal('profile'));
+  const openNav = () => dispatch(openSliderModal(ProfileNavigation));
 
   return (
     <div className={classes.Header}>

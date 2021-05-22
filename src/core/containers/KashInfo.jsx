@@ -1,13 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { closeModal } from '../../store/actions';
 
-import Button from '../../core/components/UI/Button';
+import Button from '../components/UI/Button';
 
-import classes from '../containers/Profile.module.scss';
+import classes from './CoreContainers.module.scss';
 
 const KashInfo = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const closeModalHandler = () => dispatch(closeModal());
@@ -19,7 +20,14 @@ const KashInfo = () => {
         <li>Comparte tu código con tus amigos y conocidos.</li>
         <li>Cada amigo registrado con tu código obtendrá una tasa preferencial en su primer cambio.</li>
         <li>
-          Una vez tu amigo complete su primer cambio tu ganarás <b>1 KASH</b> reflejado en tu cuenta <Link to='/my-accounts'>que puedes ver aquí</Link>.
+          Una vez tu amigo complete su primer cambio tu ganarás <b>1 KASH</b> reflejado en tu cuenta{' '}
+          <button
+            onClick={() => {
+              closeModalHandler();
+              history.push('/my-accounts');
+            }}>
+            que puedes ver aquí.
+          </button>
         </li>
         <li>
           No hay límites, mientras más compartas tu código podrás acumular más <b>KASH</b>.

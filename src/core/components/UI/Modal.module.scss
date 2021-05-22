@@ -19,11 +19,12 @@
   width: 100%;
   display: flex;
   flex-flow: column;
-  justify-content: center;
+  padding: 40px 0 20px;
   align-items: center;
 
   button {
     margin-top: 15px;
+    max-width: 20rem;
   }
 
   h2 {
@@ -31,18 +32,6 @@
     margin-bottom: 10px;
     font-size: 1.3rem;
     font-weight: 600;
-  }
-
-  @media screen and (min-width: 768px) {
-    padding: 30px 40px;
-  }
-}
-
-.ProfileModalContent {
-  padding: 40px 0;
-
-  @media screen and (min-width: 768px) {
-    padding: 70px 0 40px;
   }
 }
 

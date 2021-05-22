@@ -72,12 +72,12 @@ const EditPersonalProfile = ({ profile, onCancelEdit }) => {
         </div>
         <Switch label='PEP' name='pep' placeholder='¿Eres una persona políticamente expuesta?' value={formik.values.pep} onChange={onPepChange} />
         <div className='flex items-center justify-center mt-12'>
-          <Button type='button' onClick={onCancelEdit}>
-            Regresar
-          </Button>
-          <Button type='submit' disabled={!formik.isValid || isProcessing} className={`ld-ext-right ${isProcessing ? 'running' : ''}`}>
+          <Button type='submit' disabled={!formik.isValid || isProcessing} className={`action-button ld-ext-right ${isProcessing ? 'running' : ''}`}>
             <span className='ld ld-ring ld-spin' />
             Actualizar datos
+          </Button>
+          <Button type='button' className='secondary-button' onClick={onCancelEdit}>
+            Regresar
           </Button>
         </div>
       </form>

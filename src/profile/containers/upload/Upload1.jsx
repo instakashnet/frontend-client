@@ -40,11 +40,11 @@ const Upload1 = () => {
       <form onSubmit={formik.handleSubmit}>
         <UploadInput name='identity_photo' value={formik.values.identity_photo} onChange={onFileChange} error={formik.errors.identity_photo} />
         <div className='flex flex-col items-center'>
-          <Button type='submit' disabled={!formik.values.identity_photo || isProcessing} className={`ld-ext-right ${isProcessing ? 'runnning' : ''}`}>
+          <Button type='submit' disabled={!formik.values.identity_photo || isProcessing} className={`action-button ld-ext-right ${isProcessing ? 'runnning' : ''}`}>
             <span className='ld ld-ring ld-spin' />
             Guardar foto
           </Button>
-          <Button type='button' onClick={() => dispatch(closeModal())}>
+          <Button type='button' className='secondary-button' onClick={() => dispatch(closeModal())}>
             Cancelar
           </Button>
         </div>

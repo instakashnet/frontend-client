@@ -8,7 +8,7 @@ import Card from '../../core/components/UI/Card';
 import Layout from '../../core/components/layout/Layout';
 import OutOfTime from '../../core/containers/OutOfTime';
 import Button from '../../core/components/UI/Button';
-import KashInfo from '../../profile/components/KashInfo';
+import KashInfo from '../../core/containers/KashInfo';
 
 import ExchangeImg from '../images/exchange.svg';
 import AffiliateImg from '../images/affiliate.svg';
@@ -46,7 +46,7 @@ const Welcome = () => {
   return outOfTime ? (
     <OutOfTime onClose={closeOutOfTime} />
   ) : (
-    <Layout className='content-start mt-8' ModalComponent={() => <KashInfo />}>
+    <Layout className='content-start mt-8'>
       <div className={classes.Welcome}>
         <div className='w-9/12 lg:w-2/6'>
           <h1>¡Bienvenido a Instakash!</h1>
@@ -68,7 +68,7 @@ const Welcome = () => {
           <div className='lg:w-2/3 md:mt-6 md:pl-6'>
             <h4>¡Gana KASH recomendando!</h4>
             <p>Comparte tu código de afiliado y gana KASH y más beneficios.</p>
-            <Button className='action-button' onClick={() => dispatch(openModal())}>
+            <Button className='action-button' onClick={() => dispatch(openModal(KashInfo))}>
               Quiero saber más
             </Button>
           </div>

@@ -28,8 +28,9 @@
   width: 100%;
 
   button {
-    padding: 16px 0 16px 30px;
+    padding: 16px 0 16px 30px !important;
     width: 100%;
+    max-width: 100% !important;
     transition: 250ms ease-in-out;
 
     &:hover,
@@ -38,8 +39,7 @@
     }
 
     @media screen and (min-width: 768px) {
-      padding: 20px 0;
-      padding-left: 45px;
+      padding-left: 45px !important;
       font-size: 1.1rem;
     }
   }
