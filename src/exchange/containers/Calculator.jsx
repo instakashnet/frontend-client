@@ -60,22 +60,31 @@ const Calculator = ({ profile, setStep, setModal }) => {
       return dispatch(createExchangeInit(values, profile, setStep));
     },
   });
+
   const { values, setFieldValue } = formik;
 
   useEffect(() => {
     if (rates.buy && rates.sell) {
-      if (coupon) {
-        setActualRates({ buy: rates.buy + coupon.discount, sell: rates.sell - coupon.discount });
-      } else setActualRates({ buy: rates.buy, sell: rates.sell });
+      setActualRates({ buy: rates.buy, sell: rates.sell });
+      dispatch(deleteCoupon());
+
+      if (rates.buy > 0 && rates.sell > 0) {
+        setFieldValue('amount_sent', Math.round(1000 * rates.sell));
+        setFieldValue('amount_received', 1000);
+      }
     }
-  }, [rates, setFieldValue, coupon]);
+  }, [rates, dispatch, setFieldValue]);
 
   useEffect(() => {
-    if (actualRates.buy > 0 && actualRates.sell > 0) {
-      setFieldValue('amount_sent', Math.round(1000 * actualRates.sell));
-      setFieldValue('amount_received', 1000);
+    if (coupon) {
+      setActualRates({ buy: rates.buy + coupon.discount, sell: rates.sell - coupon.discount });
+      setFieldValue('amount_received', values.type === 'buy' ? values.amount_sent * (rates.buy + coupon.discount) : values.amount_sent / (rates.sell - coupon.discount));
+    } else {
+      setActualRates({ buy: rates.buy, sell: rates.sell });
+      setFieldValue('amount_received', values.type === 'buy' ? values.amount_sent * rates.buy : values.amount_sent / rates.sell);
     }
-  }, [actualRates, setFieldValue]);
+    // eslint-disable-next-line
+  }, [coupon]);
 
   const swipeCurrencyHandler = () => {
     setFieldValue('type', values.type === 'buy' ? 'sell' : 'buy');
