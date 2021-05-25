@@ -55,6 +55,7 @@ const AddAccount = ({ order, accType }) => {
           error={formik.errors.account_number}
           touched={formik.touched.account_number}
         />
+        <p className='self-start mb-3 relative -top-1 ml-2'>* Entre 13 y 14 caracteres.</p>
         <Select
           name='acc_type'
           label='Tipo de cuenta'

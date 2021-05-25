@@ -18,8 +18,7 @@ function* getRates() {
 function* validateCoupon({ couponName, profileType }) {
   try {
     const res = yield axios.get(`/coupons/client/${couponName}/${profileType}`);
-    if (res.status === 200)
-      yield put(actions.validateCouponSuccess({ name: couponName, discount: res.data.discount, minimumBuy: res.data.minAmountBuy, minimumSell: res.data.minAmountSell }));
+    if (res.status === 200) yield put(actions.validateCouponSuccess({ name: couponName, discount: res.data.discount, minimumAmount: res.data.minAmountBuy }));
   } catch (error) {
     if (!couponName.includes('NUEVOREFERIDO')) yield put(setAlertInit(error.message, 'error'));
     yield put(actions.exchangeError());

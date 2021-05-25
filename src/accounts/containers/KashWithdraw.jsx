@@ -32,7 +32,7 @@ const KashWithdraw = ({ kashAccount, accounts }) => {
   return (
     <>
       <h2>Retira tus kash</h2>
-      <form onSubmit={formik.handleSubmit} className='w-full'>
+      <form onSubmit={formik.handleSubmit} className='w-full flex flex-col items-center'>
         <Input
           name='kashQty'
           type='number'

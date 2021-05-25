@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
-import { Info, X, Clock } from 'react-feather';
+import { Info, Clock } from 'react-feather';
 import { getRatesInit, validateCouponInit, createExchangeInit, deleteCoupon } from '../../store/actions';
-import { formatAmount } from '../../shared/functions';
 
 import Rates from '../components/calculator/Rates';
 import Input from '../components/calculator/Input';
-import FlexInput from '../../core/components/UI/form/FlexInput';
+import CouponInput from '../components/calculator/Coupon';
+
 import Swipe from '../components/calculator/Swipe';
 import Spinner from '../../core/components/UI/Spinner';
 import Button from '../../core/components/UI/Button';
 import Tooltip from '../../core/components/UI/Tooltip';
 import Timer from '../components/calculator/Timer';
 
-import CouponImg from '../images/icons/coupon.svg';
-
 import classes from './Exchange.module.scss';
 
 const Calculator = ({ profile, setStep, setModal }) => {
   const [actualRates, setActualRates] = useState({ buy: 0, sell: 0 });
-  const [couponName, setCouponName] = useState('');
   const [showInfo, setShowInfo] = useState(false);
   const { rates, isLoading, coupon, isProcessing } = useSelector((state) => state.Exchange);
 
@@ -53,8 +50,7 @@ const Calculator = ({ profile, setStep, setModal }) => {
   });
   const { values, setFieldValue } = formik;
 
-  const onCouponChange = (e) => setCouponName(e.target.value);
-  const sendCouponHandler = () => {
+  const sendCouponHandler = (couponName) => {
     const bodyCoupon = couponName.trim();
     const regex = /^((?=.*\d)?)(?=.*[a-zA-Z]).{6,}$/;
     if (bodyCoupon && regex.test(bodyCoupon)) {
@@ -103,8 +99,8 @@ const Calculator = ({ profile, setStep, setModal }) => {
   };
 
   let minimum;
-  if (coupon && coupon.minimumBuy) {
-    minimum = (values.type === 'sell' && values.amount_sent < coupon.minimumSell) || (values.type === 'buy' && values.amount_sent < coupon.minimumBuy);
+  if (coupon && coupon.minimumAmount) {
+    minimum = (values.type === 'sell' && values.amount_received < coupon.minimumAmount) || (values.type === 'buy' && values.amount_sent < coupon.minimumAmount);
   }
 
   const disabled = (actualRates.buy <= 0 && actualRates.sell <= 0) || isLoading || isProcessing;
@@ -147,38 +143,17 @@ const Calculator = ({ profile, setStep, setModal }) => {
               <Info className='ml-3' />
             </Tooltip>
           </p>
-          {!coupon ? (
-            <FlexInput
-              name='couponName'
-              value={couponName}
-              onClick={sendCouponHandler}
-              disabled={values.amount_received < 1 || isProcessing || isLoading}
-              onChange={onCouponChange}
-              placeholder='Cupón de descuento'
-              buttonLabel='Agregar'
-              className='mt-4'
-            />
-          ) : (
-            <>
-              <p className='mt-5'>¡Genial!, haz activado el cupón:</p>
-              <div className={classes.Coupon}>
-                <p className='flex items-center'>
-                  <img src={CouponImg} alt='cupón' className='mr-2' /> {coupon.name}
-                </p>
-                <button type='button' onClick={deleteCouponHandler}>
-                  <X />
-                </button>
-              </div>
-              {coupon.name === 'NUEVOREFERIDO1' && <p>Aprovecha este cupón en tu primera operación.</p>}
-            </>
-          )}
-          {minimum && (
-            <p className='text-center error-msg mt-1 md:mt-3'>
-              Solo aplicable para montos mayores a $ {formatAmount(coupon.minimumBuy)} o S/. {formatAmount(coupon.minimumSell)}
-            </p>
-          )}
+          <CouponInput
+            coupon={coupon}
+            minimum={minimum}
+            amountReceived={values.amount_received}
+            isProcessing={isProcessing}
+            isLoading={isLoading}
+            onSendCoupon={sendCouponHandler}
+            onDeleteCoupon={deleteCouponHandler}
+          />
           {values.amount_received < 1 && <p className='error-msg'>El monto mínimo a recibir es de $ 1.00</p>}
-          <Button type='submit' disabled={values.amount_received < 1 || minimum || disabled} className={`action-button mt-2 md:mt-5 ld-ext-right ${isProcessing ? 'running' : ''}`}>
+          <Button type='submit' disabled={values.amount_received < 1 || disabled} className={`action-button mt-2 md:mt-5 ld-ext-right ${isProcessing ? 'running' : ''}`}>
             <span className='ld ld-ring ld-spin' />
             Comenzar cambio
           </Button>
