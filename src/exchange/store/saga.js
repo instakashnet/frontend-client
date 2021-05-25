@@ -55,7 +55,7 @@ function* completeExchange({ values, orderId, setStep }) {
       yield call(
         [Swal, 'fire'],
         'Ha ocurrido un error',
-        `En estos momentos presentamos problemas con ${values.bank_to_name}. Te pedimos hablar con uno de nuestos asesores a través de nuestro whatsapp y solucionaremos el problema.`,
+        `En este momento no podemos crear su pedido hacía el banco que está solicitando. Por favor intente nuevamente con un monto menor. Si el problema persiste contactese con atención al cliente.`,
         'error'
       );
     } else yield put(setAlertInit(error.message, 'error'));
