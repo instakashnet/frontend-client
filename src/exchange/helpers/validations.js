@@ -15,5 +15,5 @@ export const completeExchangeValidation = (funds, amount) =>
 export const transferCodeValidation = Yup.object().shape({
   transaction_code: Yup.string()
     .required('Debes ingresar el nro. de tu transferencia')
-    .matches(/^[0-9]{5,11}$/, 'El nro. que intentas ingresar es inválido.'),
+    .matches(/^[0-9]{5,8}$/, 'El nro. que intentas ingresar es inválido.'),
 });
