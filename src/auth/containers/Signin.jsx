@@ -61,7 +61,7 @@ const Signin = () => {
           <div className='flex justify-end'>
             <Link to='/recover-password'>¿Olvidaste tu contraseña?</Link>
           </div>
-          <Button type='submit' className={`${classes.SubmitButton} mb-5 ld-ext-right ${isProcessing ? 'running' : ''}`} disabled={!formik.isValid || isProcessing}>
+          <Button type='submit' className={`action-button my-5 ld-ext-right ${isProcessing ? 'running' : ''}`} disabled={!formik.isValid || isProcessing}>
             <span className='ld ld-ring ld-spin' />
             Ingresar
           </Button>

@@ -2,8 +2,6 @@ import React from 'react';
 import GoogleLogin from 'react-google-login';
 
 import Button from '../../../core/components/UI/Button';
-
-import classes from './GoogleButton.module.scss';
 import GoogleIcon from '../../assets/images/icons/google.svg';
 
 const GoogleButton = ({ onSuccess, onFailure }) => {
@@ -15,7 +13,7 @@ const GoogleButton = ({ onSuccess, onFailure }) => {
       buttonText='Login'
       cookiePolicy={'single_host_origin'}
       render={(props) => (
-        <Button onClick={props.onClick} disabled={props.disabled} className={classes.GoogleButton}>
+        <Button onClick={props.onClick} disabled={props.disabled} className='secondary-button'>
           <img src={GoogleIcon} width={20} alt='google' /> Acceder con google
         </Button>
       )}

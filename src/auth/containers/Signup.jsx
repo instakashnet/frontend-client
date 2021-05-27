@@ -66,7 +66,7 @@ const Signup = () => {
             Al crear tu cuenta estás aceptando nuestros <a href='https://instakash.net/politicas-de-privacidad'>Términos y condiciones</a> y{' '}
             <a href='https://instakash.net/terminos-y-condiciones'>Políticas de privacidad</a>.
           </p>
-          <Button type='submit' className={`${classes.SubmitButton} mb-2 ld-ext-right ${isProcessing ? 'running' : ''}`} disabled={!formik.isValid || isProcessing}>
+          <Button type='submit' className={`action-button mt-5 ld-ext-right ${isProcessing ? 'running' : ''}`} disabled={!formik.isValid || isProcessing}>
             <span className='ld ld-ring ld-spin' />
             Crear cuenta
           </Button>

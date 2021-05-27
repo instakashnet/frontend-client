@@ -24,6 +24,7 @@ import CompleteProfile from './auth/containers/CompleteProfile';
 const ProfileSelection = lazy(() => import('./profile/containers/Selection'));
 const Welcome = lazy(() => import('./welcome/containers/Welcome'));
 const Dashboard = lazy(() => import('./dashboard/containers/Dashboard'));
+const AffiliateProgram = lazy(() => import('./affiliate/containers/Instructions'));
 const MyProfile = lazy(() => import('./profile/containers/Profile'));
 const Accounts = lazy(() => import('./accounts/containers/Accounts'));
 const Exchange = lazy(() => import('./exchange/containers/Exchange'));
@@ -58,6 +59,7 @@ function App() {
           <PrivateRoute exact path='/' component={asyncComponent(Welcome)} />
           <PrivateRoute exact path='/profile-selection' component={asyncComponent(ProfileSelection)} />
           <PrivateRoute exact path='/my-profile' component={asyncComponent(MyProfile)} />
+          <PrivateRoute exact path='/affiliate-program' component={asyncComponent(AffiliateProgram)} />
           <PrivateRoute exact path='/my-accounts' component={asyncComponent(Accounts)} />
           <PrivateRoute exact path='/currency-exchange' component={asyncComponent(Exchange)} />
           <PrivateRoute path='/dashboard' component={asyncComponent(Dashboard)} />
