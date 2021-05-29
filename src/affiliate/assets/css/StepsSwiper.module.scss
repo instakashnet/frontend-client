@@ -1,0 +1,60 @@
+@import '../../../core/assets/css/colors';
+
+.SwiperContainer {
+  width: 100%;
+  max-width: 325px;
+  margin-top: 25px;
+}
+
+.SwiperSlide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  padding: 0 30px;
+
+  h4 {
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  p {
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+
+  b,
+  a {
+    color: $base-green;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    max-width: 160px;
+  }
+}
+
+.SwiperPrev,
+.SwiperNext {
+  display: inline-block;
+  color: $base-green;
+  position: absolute;
+  top: 25%;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.SwiperPrev {
+  left: 0;
+}
+
+.SwiperNext {
+  right: 0;
+}

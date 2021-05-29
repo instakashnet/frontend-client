@@ -24,12 +24,12 @@ const Accounts = ({ order, setStep, setModal }) => {
   const dispatch = useDispatch();
   const { banks } = useSelector((state) => state.Data);
   const { isProcessing, coupon } = useSelector((state) => state.Exchange);
-  const { accounts, kashAccount } = useSelector((state) => state.Accounts);
+  const { accounts } = useSelector((state) => state.Accounts);
 
   const formik = useFormik({
     initialValues: { account_to_id: '', bank_id: '', funds_origin: '', couponName: coupon ? coupon.name : null, kashApplied: false, kashUsed: '' },
     enableReinitialize: true,
-    validationSchema: completeExchangeValidation(funds_origin, kashAccount.balance || 0),
+    validationSchema: completeExchangeValidation(funds_origin, 0),
     onSubmit: (values) => dispatch(completeExchangeInit(values, order.id, setStep)),
   });
 
@@ -74,7 +74,7 @@ const Accounts = ({ order, setStep, setModal }) => {
 
   return (
     <>
-      {kashAccount.balance > 0 && (
+      {/* {kashAccount.balance > 0 && (
         <div className={classes.ExchangeKash}>
           <p className='mr-4'>{kashAccount.balance} kash disponibles. ¿Deseas retirar?</p>
           <button className='ml-3' onClick={() => formik.setFieldValue('kashApplied', true)}>
@@ -82,7 +82,7 @@ const Accounts = ({ order, setStep, setModal }) => {
           </button>
           <button onClick={() => formik.setFieldValue('kashApplied', false)}>No</button>
         </div>
-      )}
+      )} */}
       <h1 className='mt-12 md:mt-0'>Selecciona tus bancos y cuentas</h1>
       <p>Debes seleccionar tu banco de envío y la cuenta donde recibes.</p>
       <form onSubmit={formik.handleSubmit} className={classes.ExchangeForm}>

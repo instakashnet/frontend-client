@@ -30,7 +30,7 @@ const TotalTransfered = ({ totalAmount, kashAccount, isLoading, className, type 
           <>
             <p>¿Quieres cambiar o retirar?</p>
             <div className='flex items-center justify-between mt-3'>
-              <Link to='/currency-exchange'>Cambiar</Link>
+              {/* <Link to='/currency-exchange'>Cambiar</Link> */}
               <Link to='/my-accounts'>Retirar</Link>
             </div>
           </>

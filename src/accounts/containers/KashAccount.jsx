@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 import KashIcon from '../../core/assets/images/kash.svg';
 import classes from './Accounts.module.scss';
@@ -23,9 +23,9 @@ const KashAccount = ({ account, openModal }) => {
             <button className='action-button' onClick={() => openModal('withdrawal')}>
               Retirar mis kash
             </button>
-            <Link className='action-button' to='/currency-exchange'>
+            {/* <Link className='action-button' to='/currency-exchange'>
               Usar mis kash
-            </Link>
+            </Link> */}
           </div>
         )}
       </div>
