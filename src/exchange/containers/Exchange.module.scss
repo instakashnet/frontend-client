@@ -1,4 +1,4 @@
-@import '../../core/assets/css/colors';
+@import "../../core/assets/css/colors";
 
 .Exchange {
   text-align: center;
@@ -252,6 +252,29 @@
 
   button {
     margin-top: 20px;
+    font-size: 1rem;
+  }
+}
+
+.KashInfoWrapper {
+  margin: 10px 0 20px;
+
+  b {
+    color: $base-green;
+  }
+
+  p {
+    font-size: 1rem;
+    color: $base-text;
+  }
+
+  .KashTotalCard {
+    margin-top: 1rem;
+
+    p {
+      font-size: 1.1rem;
+    }
+
     font-size: 1rem;
   }
 }

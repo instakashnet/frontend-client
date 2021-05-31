@@ -1,32 +1,19 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { openModal } from '../../../store/actions';
 
 import Card from '../UI/Card';
-import CopyButton from '../UI/CopyButton';
-import KashInfo from '../../containers/KashInfo';
+import UserCode from '../../../affiliate/components/UserCode';
 
-import AffiliateImg from '../../assets/images/affiliate.svg';
+import KashImg from '../../../core/assets/images/kash.svg';
 import classes from './Affiliate.module.scss';
 
 const Affiliate = ({ usercode }) => {
-  const dispatch = useDispatch();
-
   return (
     <Card className={classes.AffiliateCard}>
-      <img src={AffiliateImg} alt='affiliate' />
+      <img src={KashImg} alt='affiliate' />
       <h3>¡Comparte y gana!</h3>
-      <div className={classes.Code}>
-        <span>{usercode}</span>
-      </div>
-      <p className={classes.Copy}>
-        Copiar código <CopyButton textToCopy={usercode} />
-      </p>
+      <UserCode userCode={usercode} />
       <p>
-        ¡Comparte el código con tus amigos! <br />{' '}
-        <button className='mt-1' onClick={() => dispatch(openModal(KashInfo))}>
-          Conoce más
-        </button>
+        <b>¡Comparte el código con tus amigos!</b>
       </p>
     </Card>
   );

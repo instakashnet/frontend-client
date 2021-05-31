@@ -103,6 +103,10 @@ input::placeholder {
   display: block;
 }
 
+.input-error {
+  border-color: #ff4b55 !important;
+}
+
 /* REACT MODAL */
 
 .ReactModal__Html--open,
@@ -215,12 +219,6 @@ input::placeholder {
   color: #676767;
 }
 
-.swal2-styled.swal2-confirm {
-  color: #676767;
-  background-color: $button-yellow !important;
-}
-
 .swal2-styled.swal2-cancel {
-  color: #fff;
-  background-color: $error !important;
+  color: #676767;
 }

@@ -48,9 +48,11 @@ export const completeExchangeSuccess = (order) => ({
   order,
 });
 
-export const cancelExchangeInit = (orderId) => ({
+export const cancelExchangeInit = (orderId, status = null, setStep = null) => ({
   type: types.CANCEL_EXCHANGE_INIT,
   orderId,
+  status,
+  setStep,
 });
 
 export const cancelExchangeSuccess = () => ({

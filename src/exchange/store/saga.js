@@ -1,14 +1,14 @@
-import { put, takeEvery, takeLatest, all, fork, call } from 'redux-saga/effects';
-import * as types from './types';
-import * as actions from './actions';
-import axios from '../helpers/axios';
-import { setAlertInit, getOrdersInit } from '../../store/actions';
-import Swal from 'sweetalert2';
-import history from '../../shared/history';
+import { put, takeEvery, takeLatest, all, fork, call } from "redux-saga/effects";
+import * as types from "./types";
+import * as actions from "./actions";
+import axios from "../helpers/axios";
+import { setAlertInit, getOrdersInit } from "../../store/actions";
+import Swal from "sweetalert2";
+import history from "../../shared/history";
 
 function* getRates() {
   try {
-    const res = yield axios.get('/rates');
+    const res = yield axios.get("/rates");
     if (res.status === 200) yield put(actions.getRatesSuccess(res.data[0]));
   } catch (error) {
     yield put(actions.exchangeError());
@@ -20,7 +20,7 @@ function* validateCoupon({ couponName, profileType }) {
     const res = yield axios.get(`/coupons/client/${couponName}/${profileType}`);
     if (res.status === 200) yield put(actions.validateCouponSuccess({ name: couponName, discount: res.data.discount, minimumAmount: res.data.minAmountBuy }));
   } catch (error) {
-    if (!couponName.includes('NUEVOREFERIDO')) yield put(setAlertInit(error.message, 'error'));
+    if (!couponName.includes("NUEVOREFERIDO")) yield put(setAlertInit(error.message, "error"));
     yield put(actions.exchangeError());
   }
 }
@@ -32,20 +32,27 @@ function* createExchange({ values, profile, setStep }) {
   };
 
   try {
-    const res = yield axios.post('/order/client/step-2', exchangeValues);
+    const res = yield axios.post("/order/client/step-2", exchangeValues);
     if (res.status === 201) {
       yield put(actions.createExchangeSuccess(res.data));
       yield call(setStep, 1);
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, 'error'));
+    yield put(setAlertInit(error.message, "error"));
     yield put(actions.exchangeError());
   }
 }
 
 function* completeExchange({ values, orderId, setStep }) {
+  const exchangeValues = {
+    ...values,
+    kashApplied: values.kashApplied === "yes",
+  };
+
   try {
-    const res = yield axios.put(`/order/client/step-3/${orderId}`, values);
+    const res = yield axios.put(`/order/client/step-3/${orderId}`, exchangeValues);
+
+    console.log(res);
     if (res.status === 200) {
       yield put(actions.completeExchangeSuccess(res.data));
       yield call(setStep, 2);
@@ -53,37 +60,43 @@ function* completeExchange({ values, orderId, setStep }) {
   } catch (error) {
     if (error.data && error.data.code === 4006) {
       yield call(
-        [Swal, 'fire'],
-        'Ha ocurrido un error',
+        [Swal, "fire"],
+        "Ha ocurrido un error",
         `En este momento no podemos crear su pedido hacía el banco que está solicitando. Por favor intente nuevamente con un monto menor. Si el problema persiste contactese con atención al cliente.`,
-        'error'
+        "error"
       );
-    } else yield put(setAlertInit(error.message, 'error'));
+    } else yield put(setAlertInit(error.message, "error"));
 
     yield put(actions.exchangeError());
   }
 }
 
-function* cancelExchange({ orderId }) {
+function* cancelExchange({ orderId, status, setStep }) {
   try {
     const result = yield Swal.fire({
-      icon: 'warning',
-      title: '¿Estás seguro?',
-      text: 'Deberás crear una nueva operación para recibir tu cambio.',
+      icon: "warning",
+      title: "¿Estás seguro?",
+      text: "Deberás crear una nueva operación para recibir tu cambio.",
       showCancelButton: true,
-      confirmButtonColor: '#f56565',
-      confirmButtonText: 'Si, continuar',
-      cancelButtonText: 'No, regresar',
+      cancelButtonColor: "#ffeb4d",
+      confirmButtonColor: "#ff4b55",
+      confirmButtonText: "Continuar",
+      cancelButtonText: "Regresar",
     });
 
+    let URL = `/order/client/cancel/${orderId}`;
+    if (status === "draft") URL = `/order/client/draft/${orderId}`;
+
     if (result.isConfirmed) {
-      yield axios.delete(`/order/client/cancel/${orderId}`);
-      yield call([history, 'push'], '/dashboard');
+      yield axios.delete(URL);
+      if (status === "draft") {
+        yield call(setStep, 0);
+      } else yield call([history, "push"], "/dashboard");
       yield put(actions.cancelExchangeSuccess());
-      yield Swal.fire('Exitoso', 'Su solicitud de cambio fue cancelada.', 'success');
+      yield Swal.fire("Exitoso", "Su solicitud de cambio fue cancelada.", "success");
     } else yield put(actions.exchangeError());
   } catch (error) {
-    yield put(setAlertInit(error.message, 'error'));
+    yield put(setAlertInit(error.message, "error"));
     yield put(actions.exchangeError());
   }
 }
@@ -92,20 +105,20 @@ function* processCode({ values, orderId, processType }) {
   try {
     const res = yield axios.put(`/order/client/step-4/${orderId}`, values);
     if (res.status === 200) {
-      if (processType === 'details') yield put(getOrdersInit());
-      yield call([history, 'push'], '/dashboard');
+      if (processType === "details") yield put(getOrdersInit());
+      yield call([history, "push"], "/dashboard");
       yield Swal.fire({
-        title: 'Solicitud completada',
-        text: 'Tu solicitud de cambio fue recibida y será procesada en breve. Puedes ver el detalle en tu tabla de actividades.',
+        title: "Solicitud completada",
+        text: "Tu solicitud de cambio fue recibida y será procesada en breve. Puedes ver el detalle en tu tabla de actividades.",
         imageUrl: `${process.env.PUBLIC_URL}/images/success.svg`,
-        imageAlt: 'success',
+        imageAlt: "success",
         showConfirmButton: false,
         showCloseButton: true,
       });
       yield put(actions.processCodeSuccess());
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, 'error'));
+    yield put(setAlertInit(error.message, "error"));
     yield put(actions.exchangeError());
   }
 }

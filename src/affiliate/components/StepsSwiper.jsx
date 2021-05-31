@@ -33,26 +33,26 @@ const StepsSwiper = () => {
         swiper.params.navigation.prevEl = navigationPrevRef.current;
         swiper.params.navigation.nextEl = navigationNextRef.current;
       }}>
-      <SwiperSlide className={classes.SwiperSlide}>
+      <SwiperSlide>
         <Step img={Step1Img} title='1. Comparte tu código con amigos'>
           <p>Cada amigo registrado con tu código obtendrá una tasa preferencial en su primer cambio.</p>
         </Step>
       </SwiperSlide>
-      <SwiperSlide className={classes.SwiperSlide}>
+      <SwiperSlide>
         <Step img={Step2Img} title='2. Disfruta tus recompensas'>
           <p>
             Una vez tu amigo complete su primer cambio tu ganarás <b>1 KASH</b> reflejado en tu cuenta que puedes <Link to='/my-accounts'>ver aquí</Link>
           </p>
         </Step>
       </SwiperSlide>
-      <SwiperSlide className={classes.SwiperSlide}>
+      <SwiperSlide>
         <Step img={Step3Img} title='3. Acumula sin límites'>
           <p>No hay límites, mientras más compartas tu código podrás acumular más Kash.</p>
         </Step>
       </SwiperSlide>
-      <SwiperSlide className={classes.SwiperSlide}>
+      <SwiperSlide>
         <Step img={Step4Img}>
-          <p>
+          <p className='text-center'>
             Puedes retirar tus KASH en tus cambios de divisas adicionándolos a tu monto a recibir, o retirarlos directamente a una de tus cuentas en dólares. <br /> Para mayor
             información te invitamos a leer nuestros <a href='https://instakash.net/terminos-y-condiciones'>términos y condiciones</a> en la sección KASH.
           </p>
