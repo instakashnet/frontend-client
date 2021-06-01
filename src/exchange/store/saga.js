@@ -47,15 +47,28 @@ function* completeExchange({ values, orderId, setStep }) {
   const exchangeValues = {
     ...values,
     kashApplied: values.kashApplied === "yes",
+    bank_id: values.bank_id || 1,
   };
 
   try {
     const res = yield axios.put(`/order/client/step-3/${orderId}`, exchangeValues);
 
-    console.log(res);
     if (res.status === 200) {
+      if (res.data.noBank) {
+        yield call([history, "push"], "/dashboard");
+        yield Swal.fire({
+          title: "Solicitud completada",
+          text: "Tu solicitud de cambio fue recibida y será procesada en breve. Puedes ver el detalle en tu tabla de actividades.",
+          imageUrl: `${process.env.PUBLIC_URL}/images/success.svg`,
+          imageAlt: "success",
+          showConfirmButton: false,
+          showCloseButton: true,
+        });
+        return yield put(actions.processCodeSuccess());
+      }
+
       yield put(actions.completeExchangeSuccess(res.data));
-      yield call(setStep, 2);
+      return yield call(setStep, 2);
     }
   } catch (error) {
     if (error.data && error.data.code === 4006) {
