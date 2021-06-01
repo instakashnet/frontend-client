@@ -1,4 +1,5 @@
 @import "../../core/assets/css/colors";
+@import "../../core/assets/css/breakpoints";
 
 .Exchange {
   text-align: center;
@@ -35,95 +36,6 @@
       font-size: 1.1rem;
     }
   }
-}
-
-.Information {
-  position: relative;
-  width: 100%;
-  margin-top: 20px;
-
-  h3 {
-    color: $base-green;
-    font-weight: bold;
-    text-align: left;
-    margin-bottom: 10px;
-    font-size: 1.3rem;
-  }
-
-  @media screen and (min-width: 768px) {
-    margin-top: 0;
-  }
-}
-
-.InfoImg {
-  position: relative;
-  left: 0;
-  display: none;
-
-  @media screen and (min-width: 1280px) {
-    display: block;
-    left: 10px;
-  }
-}
-
-.InfoCard {
-  width: 100%;
-  min-height: 5rem;
-  margin: 5px 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  border-radius: 10px;
-
-  p {
-    font-size: 0.85rem;
-    color: $base-green;
-    margin-left: 20px;
-  }
-
-  @media screen and (min-width: 768px) {
-    flex-direction: column;
-    justify-content: center;
-    border-radius: 0;
-    margin: 10px 0;
-
-    &:first-of-type {
-      border-radius: 10px 0 0 10px;
-    }
-
-    &:last-of-type {
-      border-radius: 0 10px 10px 0;
-    }
-
-    p {
-      margin-top: 10px;
-      margin-left: 0;
-    }
-  }
-
-  @media screen and (min-width: 1140px) {
-    max-width: 12rem;
-    margin: 0;
-    min-height: 8rem;
-  }
-
-  @media screen and (min-width: 1366) {
-    max-width: 14rem;
-  }
-
-  @media screen and (min-width: 1440px) {
-    max-width: 16rem;
-  }
-}
-
-.InfoButton {
-  position: fixed;
-  cursor: pointer;
-  right: 20px;
-  bottom: 20px;
-  color: #fff;
-  border-radius: 50%;
-  background-color: $base-green;
 }
 
 .AddAccount {
