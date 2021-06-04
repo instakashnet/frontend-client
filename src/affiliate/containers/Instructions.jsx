@@ -1,11 +1,14 @@
 import React from "react";
 import { isMobile } from "react-device-detect";
+import { useDispatch, useSelector } from "react-redux";
+import { openModal } from "../../store/actions";
 
 import Layout from "../../core/components/layout/Layout";
 import StepsSwiper from "../components/StepsSwiper";
 import Step from "../components/Step";
 import Card from "../../core/components/UI/Card";
 import UserCode from "../components/UserCode";
+import EditCode from "./EditCode";
 
 import Step1Img from "../assets/images/step1.svg";
 import Step2Img from "../assets/images/step2.svg";
@@ -16,8 +19,13 @@ import Arrow2 from "../assets/images/arrow2.svg";
 import classes from "../assets/css/Instructions.module.scss";
 
 const Instructions = () => {
+  const dispatch = useDispatch();
+  const usercode = useSelector((state) => state.Auth.userCode);
+
+  const editCodeHandler = () => dispatch(openModal(EditCode));
+
   return (
-    <Layout className="content-start mt-12">
+    <Layout className="content-start mt-6 md:mt-12">
       <article className={classes.Instructions}>
         <h1>¡Recomienda y gana!</h1>
         <h3>Comparte el código con tus amigos</h3>
@@ -43,13 +51,16 @@ const Instructions = () => {
             </Step>
           </div>
         )}
-        <Card className={classes.CodeCard}>
-          <UserCode userCode="ROGER123" />
+        <Card className={classes.CodeInfoCard}>
+          <div className={classes.CodeWrapper}>
+            <UserCode userCode={usercode} />
+            <button onClick={editCodeHandler}>Editar mi código</button>
+          </div>
           <p className="hidden md:block font-bold text-left">
             Con Instakash ganas tú y los tuyos. No hay límites, mientras más compartas tu código más oportunidades tienes de ganar KASH.
           </p>
         </Card>
-        <p className="hidden md:block text-center mt-4">
+        <p className="hidden md:block text-center mt-8">
           Para mayor información te invitamos a leer nuestros <a href="https://instakash.net/terminos-y-condiciones">términos y condiciones</a> en la sección KASH.
         </p>
       </article>

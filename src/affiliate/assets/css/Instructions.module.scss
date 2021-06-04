@@ -1,5 +1,5 @@
-@import '../../../core/assets/css/colors';
-@import '../../../core/assets/css/breakpoints';
+@import "../../../core/assets/css/colors";
+@import "../../../core/assets/css/breakpoints";
 
 .Instructions {
   max-width: 1536px;
@@ -49,11 +49,11 @@
   }
 }
 
-.CodeCard {
+.CodeInfoCard {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 5px;
   padding: 25px;
 
   > p {
@@ -63,9 +63,28 @@
 
   @include respond(desktop) {
     padding: 50px;
+    margin-top: 30px;
 
     p {
       font-size: 1rem;
     }
+  }
+}
+
+.CodeWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  button {
+    color: $base-green;
+    text-decoration: underline;
+    margin-top: 5px;
+    font-size: 0.95rem;
+  }
+
+  @include respond(desktop) {
+    align-items: flex-start;
   }
 }

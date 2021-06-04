@@ -1,11 +1,10 @@
-@import '../../../core/assets/css/colors';
-@import '../../../core/assets/css/breakpoints';
+@import "../../../core/assets/css/colors";
+@import "../../../core/assets/css/breakpoints";
 
 .UserCode {
   display: flex;
   align-items: center;
-  width: 100%;
-  max-width: 15rem;
+
   p {
     background-color: #fff7b8;
     color: $base-green;
@@ -13,8 +12,9 @@
     border-right: none;
     border-radius: 10px 0 0 10px;
     flex: 0.8;
-    padding: 10px 20px;
+    padding: 10px 13px;
     text-align: center;
+    font-size: 0.95rem;
   }
 
   span {
@@ -22,16 +22,8 @@
     color: #fff;
     border-radius: 0 10px 10px 0;
     flex: 0.2;
-    padding: 11.3px 15px;
+    padding: 12px 15px;
     cursor: pointer;
     margin-left: 0;
-  }
-
-  @include respond(tablet) {
-    font-size: 1rem;
-  }
-
-  @include respond(desktop) {
-    font-size: 1.05rem;
   }
 }

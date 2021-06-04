@@ -8,7 +8,7 @@ import Card from "../../core/components/UI/Card";
 import classes from "../containers/Exchange.module.scss";
 
 const KashUsed = ({ formik, balance, totalAmount, onKashUsed, order }) => {
-  const { currencySentISO, amountSent } = order;
+  const { currencySentSymbol, amountSent } = order;
 
   return (
     <div className={classes.KashInfoWrapper}>
@@ -35,8 +35,7 @@ const KashUsed = ({ formik, balance, totalAmount, onKashUsed, order }) => {
               <b>Total a transferir</b>
             </p>
             <span>
-              {`${currencySentISO === "PEN" ? "S/." : "$"} ${formatAmount(amountSent)} + ${formik.values.kashUsed || 0} KASH`} ={" "}
-              {`${currencySentISO === "PEN" ? "S/." : "$"} ${formatAmount(totalAmount)}`}
+              {`${currencySentSymbol} ${formatAmount(amountSent)} + ${formik.values.kashUsed || 0} KASH`} = {`${currencySentSymbol} ${formatAmount(totalAmount)}`}
             </span>
           </Card>
         </>

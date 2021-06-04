@@ -52,7 +52,7 @@ const Accounts = ({ order, setStep, setModal }) => {
   const bankOptions = banks.map((bank) => ({ label: bank.name, value: bank.id, icon: `${process.env.PUBLIC_URL}/images/banks/${bank.name.toLowerCase()}-logo.svg` }));
   const accountOptions = filteredAccounts.map((account) => ({
     account: `*****${account.account_number.substring(account.account_number.length - 4, account.account_number.length)}`,
-    currency: account.currency.ISO === "PEN" ? "S/." : "$",
+    currency: account.currency.Symbol,
     bankName: account.bank.name,
     alias: account.alias,
     value: account.id,
@@ -85,7 +85,7 @@ const Accounts = ({ order, setStep, setModal }) => {
   return (
     <>
       <h1 className="mt-12 md:mt-0">Completa los datos</h1>
-      <p>Selecciona tu banco de envío y la cuenta donde recibes.</p>
+      <h3>Selecciona tu banco de envío y la cuenta donde recibes.</h3>
       <form onSubmit={formik.handleSubmit} className={classes.ExchangeForm}>
         {kashAccount.balance > 0 && <KashUsed formik={formik} onKashUsed={kashUsedHandler} totalAmount={totalAmountSent} balance={kashAccount.balance} order={order} />}
         {formik.values.kashApplied && totalAmountSent <= 0 ? null : (

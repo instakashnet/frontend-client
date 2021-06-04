@@ -1,19 +1,34 @@
-@import '../../core/assets/css/colors';
+@import "../../core/assets/css/colors";
+@import "../../core/assets/css/breakpoints";
+@import "../../core/assets/css/font-sizes";
 
-.ProfileWrapper {
+.ProfileSelectionWrapper {
   display: grid;
-  justify-content: center;
   align-content: center;
   text-align: center;
+  margin-top: 40px;
 
   h1 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
     color: $base-green;
+    font-weight: bold;
+    font-size: $title;
   }
 
   h3 {
-    font-size: 1.1rem;
+    font-weight: bold;
+    font-size: $subtitle;
+  }
+
+  @include respond(tablet) {
+    h1 {
+      font-size: $title * 1.3;
+    }
+  }
+
+  @include respond(ldesktop) {
+    h1 {
+      font-size: $title * 1.6;
+    }
   }
 }
 
@@ -54,14 +69,14 @@
     margin: 0 auto;
 
     button,
-    button[type='submit'] {
+    button[type="submit"] {
       color: #676767;
       max-width: 20rem;
       margin: 0 25px;
     }
   }
 
-  @media screen and (min-width: 996px) {
+  @include respond(desktop) {
     padding-bottom: 0;
   }
 }
@@ -113,7 +128,7 @@
     font-weight: bold;
   }
 
-  @media screen and (min-width: 996px) {
+  @include respond(tablet) {
     position: static;
     border-radius: 10px;
     transform: translateY(0);

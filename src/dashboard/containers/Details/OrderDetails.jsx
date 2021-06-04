@@ -42,7 +42,7 @@ const OrderDetails = () => {
       </div>
       <div className="flex items-center justify-between pr-2 my-3">
         <h4>Solicitado:</h4>
-        <span className={classes.Price}>{`${details.currencyReceived === "USD" ? "$" : "S/."} ${formatAmount(details.amountReceived)}`}</span>
+        <span className={classes.Price}>{`${details.currencyReceivedSymbol} ${formatAmount(details.amountReceived)}`}</span>
       </div>
       {details.kashApplied && (
         <div className="flex items-center justify-between pr-2 my-3">
@@ -76,7 +76,7 @@ const OrderDetails = () => {
             <p>Monto a enviar:</p>
             <div className="flex items-center">
               <p className={classes.Price}>
-                {details.currencySent === "USD" ? "$" : "S/."} {formatAmount(details.amountSent)}
+                {details.currencySentSymbol} {formatAmount(details.amountSent)}
               </p>
               <CopyButton textToCopy={details.amountSent} />
             </div>

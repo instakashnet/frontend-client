@@ -1,4 +1,4 @@
-@import '../../core/assets/css/colors';
+@import "../../core/assets/css/colors";
 
 .DashboardCard {
   margin: 10px 0;
@@ -30,6 +30,10 @@
     &:hover {
       color: darken($color: $base-green, $amount: 15);
     }
+  }
+
+  &:last-of-type {
+    margin-top: 40px;
   }
 }
 

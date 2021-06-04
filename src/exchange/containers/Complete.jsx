@@ -31,14 +31,14 @@ const TransferCode = ({ order }) => {
       <img src={TransferImg} alt="transfer-money" className="mx-auto inline-block my-4" />
       <p>Transfiere desde tu banco por internet el monto de:</p>
       <p className={classes.Amount}>
-        {`${order.currencySent === "PEN" ? "S/." : "$"} ${formatAmount(order.amountSent)}`} <CopyButton textToCopy={order.amountSent} />
+        {`${order.currencySentSymbol} ${formatAmount(order.amountSent)}`} <CopyButton textToCopy={order.amountSent} />
       </p>
 
       <h4>Banco a transferir:</h4>
       <div className={classes.TransferAccount}>
         <div className="flex items-center justify-between">
           <img src={`${process.env.PUBLIC_URL}/images/banks/${order.bankFromName.toLowerCase()}-logo.svg`} width={100} alt={order.bankFromName} />
-          <div className="text-right">
+          <div className="text-right text-base">
             <small>Cuenta corriente en {order.currencySent === "PEN" ? "Soles" : "Dólares"}:</small>
             <p className="flex items-center mt-1">
               {order.accountFromRaw} <CopyButton textToCopy={order.accountFromRaw} />
