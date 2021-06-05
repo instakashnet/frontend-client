@@ -15,7 +15,7 @@ const TotalTransfered = ({ totalAmount, kashAccount, isLoading, className, type 
 
   return (
     <div className={`flex flex-wrap md:flex-nowrap ${className || ""}`}>
-      <div className={`${classes.KashCard} w-full`}>
+      <Card className={classes.KashCard}>
         <img src={KashIcon} alt="kash" />
         <h3>
           {kashAccount && kashAccount.balance > 0 ? (
@@ -35,7 +35,7 @@ const TotalTransfered = ({ totalAmount, kashAccount, isLoading, className, type 
             </div>
           </>
         )}
-      </div>
+      </Card>
       <div className={`${classes.DashboardCard} w-full ${type === "account" && "mx-0 md:mx-3"}`}>
         <h2>
           <RefreshCcw className="mr-2" size={20} /> Soles cambiados
