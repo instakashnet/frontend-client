@@ -9,6 +9,7 @@ import Step from "../components/Step";
 import Card from "../../core/components/UI/Card";
 import UserCode from "../components/UserCode";
 import EditCode from "./EditCode";
+import ShareIcons from "../components/ShareIcons";
 
 import Step1Img from "../assets/images/step1.svg";
 import Step2Img from "../assets/images/step2.svg";
@@ -51,7 +52,7 @@ const Instructions = () => {
             </Step>
           </div>
         )}
-        <Card className={classes.CodeInfoCard}>
+        <div className={classes.CodeInfoCard}>
           <div className={classes.CodeWrapper}>
             <UserCode userCode={usercode} />
             <button onClick={editCodeHandler}>Editar mi código</button>
@@ -59,10 +60,16 @@ const Instructions = () => {
           <p className="hidden md:block font-bold text-left">
             Con Instakash ganas tú y los tuyos. No hay límites, mientras más compartas tu código más oportunidades tienes de ganar KASH.
           </p>
-        </Card>
+        </div>
         <p className="hidden md:block text-center mt-8">
           Para mayor información te invitamos a leer nuestros <a href="https://instakash.net/terminos-y-condiciones">términos y condiciones</a> en la sección KASH.
         </p>
+        <div className="flex items-center justify-center flex-col mt-4 lg:flex-row text-center">
+          <p className="md:mr-4 lg:mr-8">
+            ¡Invita a tus amigos y gana <b>KASH</b> ahora!
+          </p>
+          <ShareIcons userCode={usercode} className="mt-3 md:mt-0" />
+        </div>
       </article>
     </Layout>
   );
