@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProfileInit, openModal } from "../../store/actions";
 import { AlertTriangle } from "react-feather";
@@ -14,12 +14,12 @@ const Selection = () => {
   const dispatch = useDispatch();
   const { isLoading, profiles } = useSelector((state) => state.Profile);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      dispatch(openModal(InfoModal));
-    }, 600);
-    return () => clearTimeout(timeout);
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     dispatch(openModal(InfoModal));
+  //   }, 600);
+  //   return () => clearTimeout(timeout);
+  // }, [dispatch]);
 
   const addProfileHandler = () => dispatch(openModal(AddProfile));
 
@@ -53,8 +53,8 @@ export const InfoModal = () => (
     <AlertTriangle size={70} className="error-msg mb-4" />
     <h2>Estimado usuario</h2>
     <p>
-      Le informamos que en estos momentos la plataforma para empresas de <b>BCP</b> se encuentra con retrasos de conexión. Por tal motivo, las operaciónes a <b>BCP</b> podrán
-      demorar más de lo usual. Hemos notificado al banco y están trabajando para solucionarlo. <br />
+      Le informamos que en estos momentos la plataforma para empresas de <b>Intebank</b> se encuentra con retrasos de conexión. Por tal motivo, las operaciónes a <b>Interbank</b>{" "}
+      podrán demorar más de lo usual. Hemos notificado al banco y están trabajando para solucionarlo. <br />
       <span className="mt-4 inline-block font-bold">Agradecemos su comprensión.</span>
     </p>
   </div>
