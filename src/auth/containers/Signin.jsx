@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import { signinValidation } from "../helpers/formValidations";
 import { Mail } from "react-feather";
 import { useSelector, useDispatch } from "react-redux";
-import { signinInit, signinGoogle, setAlertInit, openModal, closeModal } from "../../store/actions";
+import { signinInit, signinGoogle, setAlertInit, closeModal } from "../../store/actions";
 
 import Background from "../components/layout/Background";
 import Logo from "../../core/components/UI/Logo";
@@ -28,12 +28,12 @@ const Signin = () => {
     dispatch(signinGoogle(res.tokenId));
   };
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const timeout = setTimeout(() => {
       dispatch(openModal());
     }, 600);
     return () => clearTimeout(timeout);
-  }, [dispatch]);
+  }, [dispatch]); */
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 h-full md:h-screen">
@@ -69,7 +69,7 @@ const Signin = () => {
           <div className="flex justify-end">
             <Link to="/recover-password">¿Olvidaste tu contraseña?</Link>
           </div>
-          <Button type="submit" className={`action-button my-5 ld-ext-right ${isProcessing ? "running" : ""}`} disabled={true || !formik.isValid || isProcessing}>
+          <Button type="submit" className={`action-button my-5 ld-ext-right ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
             <span className="ld ld-ring ld-spin" />
             Ingresar
           </Button>

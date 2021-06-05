@@ -11,7 +11,6 @@ const GoogleButton = ({ onSuccess, onFailure }) => {
       onSuccess={onSuccess}
       onFailure={onFailure}
       buttonText="Login"
-      disabled
       cookiePolicy={"single_host_origin"}
       render={(props) => (
         <Button onClick={props.onClick} disabled={props.disabled} className="secondary-button">
