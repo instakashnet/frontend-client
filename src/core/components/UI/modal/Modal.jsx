@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import ReactModal from 'react-modal';
-import { X } from 'react-feather';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import ReactModal from "react-modal";
+import { X } from "react-feather";
+import { closeModal } from "../../../../store/actions";
 
-import classes from './Modal.module.scss';
+import classes from "./Modal.module.scss";
 
 function scrollToPreventBounce(htmlElement) {
   const { scrollTop, offsetHeight, scrollHeight } = htmlElement;
@@ -20,22 +21,23 @@ function scrollToPreventBounce(htmlElement) {
   }
 }
 
-const Modal = ({ children, closeModal }) => {
+const Modal = ({ children }) => {
   const isOpen = useSelector((state) => state.Modal.isOpen);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      document.addEventListener('touchstart', scrollToPreventBounce);
+      document.body.style.overflow = "hidden";
+      document.addEventListener("touchstart", scrollToPreventBounce);
     }
     return () => {
-      document.body.style.overflow = 'unset';
-      document.removeEventListener('touchstart', scrollToPreventBounce);
+      document.body.style.overflow = "unset";
+      document.removeEventListener("touchstart", scrollToPreventBounce);
     };
   }, [isOpen]);
 
   return (
-    <ReactModal closeTimeoutMS={300} onRequestClose={closeModal} isOpen={isOpen} className={classes.Modal} ariaHideApp={false} preventScroll>
+    <ReactModal closeTimeoutMS={300} onRequestClose={() => dispatch(closeModal())} isOpen={isOpen} className={classes.Modal} ariaHideApp={false} preventScroll>
       <div className={classes.ModalContent}>
         <button onClick={closeModal} className={classes.Close}>
           <X size={30} />

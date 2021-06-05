@@ -1,4 +1,4 @@
-@import '../../assets/css/colors';
+@import "../../../assets/css/colors";
 
 .Modal {
   border-radius: 10px;
@@ -41,4 +41,16 @@
   top: 1.5rem;
   right: 1.5rem;
   position: absolute;
+}
+
+.InfoModal {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
 }
