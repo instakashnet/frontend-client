@@ -1,8 +1,8 @@
-@import '../../assets/css/colors';
-@import '../../assets/css/breakpoints';
+@import "../../assets/css/colors";
+@import "../../assets/css/breakpoints";
 
 .Sidebar {
-  background-color: $bg-gray;
+  background-color: $card-color;
   position: fixed;
   max-height: 100vh;
   height: 100%;

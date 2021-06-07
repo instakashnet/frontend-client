@@ -5,6 +5,10 @@
   text-align: center;
   margin: 20px 0;
 
+  p {
+    font-size: 1rem;
+  }
+
   h1 {
     font-size: 1.4rem;
     color: $base-green;
@@ -48,7 +52,7 @@
 
   p {
     color: $base-green;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   label {
@@ -85,7 +89,7 @@
 
 .Amount {
   color: $base-green;
-  font-size: 1.4rem;
+  font-size: 1.4rem !important;
   font-weight: bold;
   margin: 10px 0 20px;
   display: flex;
@@ -100,6 +104,7 @@
   h4 {
     text-align: left;
     margin-bottom: 10px;
+    font-size: 1.1rem;
   }
 }
 
@@ -120,7 +125,6 @@
 }
 
 .TransferAccount {
-  background-color: $bg-gray;
   border-radius: 10px;
   padding: 10px 20px;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);

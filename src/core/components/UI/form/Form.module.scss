@@ -5,9 +5,9 @@
   width: 100%;
 
   label {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     display: block;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   input,
@@ -15,10 +15,10 @@
   .CheckboxWrapper {
     width: 100%;
     padding: 15px;
-    background: $bg-input;
-    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
+    background: $card-color;
+    box-shadow: 0px 24px 20px rgba(0, 0, 0, 0.04);
     border-radius: 10px;
-    border: 1px solid lighten($color: $placeholder, $amount: 10);
+    border: 1px solid #cacaca;
 
     &::placeholder {
       color: $placeholder;

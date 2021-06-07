@@ -6,10 +6,10 @@ import { openModal } from "../../store/actions";
 import Layout from "../../core/components/layout/Layout";
 import StepsSwiper from "../components/StepsSwiper";
 import Step from "../components/Step";
-import Card from "../../core/components/UI/Card";
 import UserCode from "../components/UserCode";
 import EditCode from "./EditCode";
 import ShareIcons from "../components/ShareIcons";
+import Card from "../../core/components/UI/Card";
 
 import Step1Img from "../assets/images/step1.svg";
 import Step2Img from "../assets/images/step2.svg";
@@ -26,7 +26,7 @@ const Instructions = () => {
   const editCodeHandler = () => dispatch(openModal(EditCode));
 
   return (
-    <Layout className="content-start mt-6 md:mt-12">
+    <Layout className="content-start">
       <article className={classes.Instructions}>
         <h1>¡Recomienda y gana!</h1>
         <h3>Comparte el código con tus amigos</h3>
@@ -52,15 +52,15 @@ const Instructions = () => {
             </Step>
           </div>
         )}
-        <div className={classes.CodeInfoCard}>
+        <Card className={classes.CodeInfoCard}>
           <div className={classes.CodeWrapper}>
             <UserCode userCode={usercode} />
             <button onClick={editCodeHandler}>Editar mi código</button>
           </div>
-          <p className="hidden md:block font-bold text-left">
-            Con Instakash ganas tú y los tuyos. No hay límites, mientras más compartas tu código más oportunidades tienes de ganar KASH.
+          <p className="hidden md:block text-left">
+            Con Instakash ganas tú y los tuyos. No hay límites, mientras más <b>compartas tu código</b> más oportunidades tienes de ganar <b>KASH</b>.
           </p>
-        </div>
+        </Card>
         <p className="hidden md:block text-center mt-8">
           Para mayor información te invitamos a leer nuestros <a href="https://instakash.net/terminos-y-condiciones">términos y condiciones</a> en la sección KASH.
         </p>

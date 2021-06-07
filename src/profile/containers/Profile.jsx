@@ -51,7 +51,7 @@ const Profile = () => {
   };
 
   return (
-    <Layout className="content-start">
+    <Layout className={classes.ProfileInfoSection}>
       {isEdit ? (
         editType === "personal" ? (
           <EditPersonalProfile onCancelEdit={cancelEdit} profile={profileInfo} />

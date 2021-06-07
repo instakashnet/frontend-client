@@ -11,13 +11,13 @@ const ShareIcons = ({ className, userCode }) => {
   return (
     <div className={`flex items-center justify-center ${className || ""}`}>
       <FacebookShareButton quote={message} url="https://instakash.net">
-        <img src={FacebookIcon} width={30} height={30} className="mx-2" />
+        <img src={FacebookIcon} width={30} height={30} alt="facebook" className="mx-2" />
       </FacebookShareButton>
       <WhatsappShareButton title={message} url="https://instakash.net">
-        <img src={WhatsappIcon} width={35} height={35} className="mx-2" />
+        <img src={WhatsappIcon} width={35} height={35} alt="whatsapp" className="mx-2" />
       </WhatsappShareButton>
       <LinkedinShareButton summary={message} url="https://instakash.net">
-        <img src={LinkedinIcon} width={30} height={30} className="mx-2" />
+        <img src={LinkedinIcon} width={30} height={30} alt="linkedin" className="mx-2" />
       </LinkedinShareButton>
     </div>
   );

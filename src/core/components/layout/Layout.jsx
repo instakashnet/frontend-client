@@ -18,7 +18,7 @@ const Layout = ({ className, children }) => {
     <main className="main-app">
       <Sidebar />
       <Header />
-      <section className={`main-section px-4 lg:px-10 md:mt-8 ${className || ""}`}>{children}</section>
+      <section className={`main-section ${className || ""}`}>{children}</section>
       <Modal closeModal={closeModalHandler}>{Component && <Component />}</Modal>
       <SliderModal closeModal={closeSliderModalHandler}>{SliderComponent && <SliderComponent />}</SliderModal>
     </main>

@@ -57,21 +57,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 5px;
-  padding: 10px;
+  margin: 5px auto 0;
+  color: #fff;
+  max-width: 63rem;
+  background-color: transparent;
+  box-shadow: none;
+
+  b {
+    color: #f2c94c !important;
+  }
 
   > p {
     max-width: 35rem;
-    margin-left: 25px;
+    margin-left: 45px;
   }
 
   @include respond(tablet) {
     padding: 25px;
-    background-color: #e1f2ec;
+    background: #20a2a5;
   }
 
   @include respond(desktop) {
-    padding: 50px;
+    padding: 40px;
     margin-top: 30px;
 
     p {
@@ -87,10 +94,16 @@
   flex-direction: column;
 
   button {
-    color: $base-green;
     text-decoration: underline;
+    color: $base-green;
     margin-top: 5px;
     font-size: 0.95rem;
+  }
+
+  @include respond(tablet) {
+    button {
+      color: #fff;
+    }
   }
 
   @include respond(desktop) {

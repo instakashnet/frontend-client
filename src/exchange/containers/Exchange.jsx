@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { isMobile } from 'react-device-detect';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { Info } from 'react-feather';
-import { getBanksInit, getCurenciesInit, getAccountsInit, getKashAccountInit, openModal, closeModal } from '../../store/actions';
+import React, { useState, useEffect } from "react";
+import { isMobile } from "react-device-detect";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { getBanksInit, getCurenciesInit, getAccountsInit, getKashAccountInit, openModal, closeModal } from "../../store/actions";
 
-import Layout from '../../core/components/layout/Layout';
-import AddAccount from '../../accounts/containers/AddAccount';
-import Calculator from './Calculator';
-import Accounts from './Accounts';
-import Information from '../components/Information';
-import CompleteProfile from '../components/CompleteProfile';
-import Complete from './Complete';
+import Layout from "../../core/components/layout/Layout";
+import AddAccount from "../../accounts/containers/AddAccount";
+import Calculator from "./Calculator";
+import Accounts from "./Accounts";
+import Information from "../components/Information";
+import CompleteProfile from "../components/CompleteProfile";
+import Complete from "./Complete";
+import { InfoButton } from "../components/InfoButton";
 
-import classes from './Exchange.module.scss';
+import classes from "./Exchange.module.scss";
 
 const Exchange = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [step, setStep] = useState(0);
-  const profileSelected = JSON.parse(sessionStorage.getItem('profileSelected'));
+  const profileSelected = JSON.parse(sessionStorage.getItem("profileSelected"));
   const order = useSelector((state) => state.Exchange.order);
   const profiles = useSelector((state) => state.Profile.profiles);
-  const naturalProfile = profiles.find((profile) => profile.type === 'natural');
+  const naturalProfile = profiles.find((profile) => profile.type === "natural");
   const profile = {
     ...profileSelected,
     first_name: naturalProfile.first_name,
@@ -36,23 +36,23 @@ const Exchange = () => {
   useEffect(() => {
     dispatch(getBanksInit());
     dispatch(getCurenciesInit());
-    dispatch(getAccountsInit('orders'));
+    dispatch(getAccountsInit("orders"));
     dispatch(getKashAccountInit());
   }, [dispatch]);
 
   useEffect(() => {
     if (step > 0) {
-      window.addEventListener('beforeunload', preventLoad);
+      window.addEventListener("beforeunload", preventLoad);
       window.scrollTo(0, 0);
       return () => {
-        window.removeEventListener('beforeunload', preventLoad);
+        window.removeEventListener("beforeunload", preventLoad);
       };
     }
   }, [step]);
   const preventLoad = (e) => {
     e.preventDefault();
-    if (e) e.returnValue = '¿Deseas salir del proceso de cambio de divisas?';
-    return '';
+    if (e) e.returnValue = "¿Deseas salir del proceso de cambio de divisas?";
+    return "";
   };
 
   useEffect(() => {
@@ -64,16 +64,16 @@ const Exchange = () => {
   }, [step, order, dispatch]);
 
   const onCloseHandler = () => {
-    history.push('/my-profile');
+    history.push("/my-profile");
     dispatch(closeModal());
   };
 
   const openModalHandler = (type = null) => {
     let ModalComponent;
 
-    if (type === 'account') ModalComponent = () => <AddAccount order={order} accType='orders' />;
-    if (type === 'complete') ModalComponent = () => <CompleteProfile onClose={onCloseHandler} />;
-    if (type === 'info') ModalComponent = () => <Information onClose={() => dispatch(closeModal())} />;
+    if (type === "account") ModalComponent = () => <AddAccount order={order} accType="orders" />;
+    if (type === "complete") ModalComponent = () => <CompleteProfile onClose={onCloseHandler} />;
+    if (type === "info") ModalComponent = () => <Information onClose={() => dispatch(closeModal())} />;
 
     dispatch(openModal(ModalComponent));
   };
@@ -85,11 +85,11 @@ const Exchange = () => {
   ];
 
   return (
-    <Layout className='content-center'>
+    <Layout className="content-center">
       <div className={classes.Exchange}>
         {pages[step]}
         {!isMobile && <Information />}
-        {isMobile && <Info className={classes.InfoButton} size={30} onClick={() => openModalHandler('info')} />}
+        {isMobile && <InfoButton onInfoOpen={() => openModalHandler("info")} />}
       </div>
     </Layout>
   );

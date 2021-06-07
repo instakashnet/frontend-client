@@ -10,6 +10,7 @@ import Tooltip from "../../core/components/UI/Tooltip";
 import Input from "../../core/components/UI/form/Input";
 import Button from "../../core/components/UI/Button";
 import CopyButton from "../../core/components/UI/CopyButton";
+import Card from "../../core/components/UI/Card";
 
 import TransferImg from "../images/transfer.svg";
 
@@ -35,22 +36,20 @@ const TransferCode = ({ order }) => {
       </p>
 
       <h4>Banco a transferir:</h4>
-      <div className={classes.TransferAccount}>
-        <div className="flex items-center justify-between">
-          <img src={`${process.env.PUBLIC_URL}/images/banks/${order.bankFromName.toLowerCase()}-logo.svg`} width={100} alt={order.bankFromName} />
-          <div className="text-right text-base">
-            <small>Cuenta corriente en {order.currencySent === "PEN" ? "Soles" : "Dólares"}:</small>
-            <p className="flex items-center mt-1">
-              {order.accountFromRaw} <CopyButton textToCopy={order.accountFromRaw} />
-            </p>
-          </div>
+      <Card className={`${classes.TransferAccount} flex items-center justify-between`}>
+        <img src={`${process.env.PUBLIC_URL}/images/banks/${order.bankFromName.toLowerCase()}-logo.svg`} width={100} alt={order.bankFromName} />
+        <div className="text-right text-base">
+          <small>Cuenta corriente en {order.currencySent === "PEN" ? "Soles" : "Dólares"}:</small>
+          <p className="flex items-center mt-1">
+            {order.accountFromRaw} <CopyButton textToCopy={order.accountFromRaw} />
+          </p>
         </div>
-      </div>
+      </Card>
 
-      <div className={`${classes.TransferAccount} mt-8 flex items-center justify-between`}>
+      <Card className={`${classes.TransferAccount} mt-8 flex items-center justify-between`}>
         <p className="text-left">Instakash SAC - RUC 20605285105</p>
         <CopyButton textToCopy="20605285105" />
-      </div>
+      </Card>
 
       <p className="mb-6 mt-8 text-left">
         Una vez realizado coloque el número de operación <b>emitido por su banco</b> dentro del casillero mostrado debajo darle a enviar.
