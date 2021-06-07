@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import classes from '../assets/css/Step.module.scss';
+import classes from "../assets/css/Step.module.scss";
 
 const Step = ({ img, title, className, children }) => {
   return (
-    <div className={`${classes.Step} ${className || ''}`}>
-      <img src={img} alt={title || 'pasos'} />
+    <div className={`${classes.Step} ${className || ""}`}>
+      <img src={img} alt={title || "pasos"} />
       {title && <h4>{title}</h4>}
       {children}
     </div>

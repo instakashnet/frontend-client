@@ -74,7 +74,7 @@
 
   @include respond(tablet) {
     padding: 25px;
-    background: #20a2a5;
+    background-color: #20a2a5 !important;
   }
 
   @include respond(desktop) {
@@ -108,5 +108,14 @@
 
   @include respond(desktop) {
     align-items: flex-start;
+  }
+}
+
+.Step2 img {
+  width: 190px;
+  max-width: initial;
+
+  @include respond(desktop) {
+    width: 280px;
   }
 }

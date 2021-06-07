@@ -1,7 +1,6 @@
 import React from "react";
 import { isMobile } from "react-device-detect";
 
-import Card from "../../core/components/UI/Card";
 import Button from "../../core/components/UI/Button";
 
 import InfoImg from "../images/exchange-user.png";
@@ -18,29 +17,27 @@ const Information = ({ onClose }) => {
       <div className="flex items-end justify-center">
         <div className="flex items-end justify-center flex-wrap relative lg:flex-nowrap">
           <h3 className={classes.InfoTitle}>¡Importante!</h3>
-          <Card className={classes.InfoImgCard}>
+          <div className={classes.InfoImgCard}>
             <img src={InfoImg} alt="information" />
-          </Card>
-          <div className="w-full">
-            <Card className={classes.InfoCard}>
-              <img src={Arrows} alt="arrows" />
-              <p>
-                Recibimos solo transferencias. <br /> No aceptamos depósitos.
-              </p>
-            </Card>
           </div>
-          <Card className={classes.InfoCard}>
+          <div className={classes.InfoCard}>
+            <img src={Arrows} alt="arrows" />
+            <p>
+              Recibimos solo transferencias. <br /> No aceptamos depósitos.
+            </p>
+          </div>
+          <div className={classes.InfoCard}>
             <img src={User} alt="clock" />
             <p>Ambas cuentas deben ser del titular.</p>
-          </Card>
-          <Card className={classes.InfoCard}>
+          </div>
+          <div className={classes.InfoCard}>
             <img src={Clock} alt="clock" />
             <p>Las transacciones se procesan entre 10 a 25 minutos.</p>
-          </Card>
-          <Card className={classes.InfoCard}>
+          </div>
+          <div className={classes.InfoCard}>
             <img src={Dollar} alt="clock" />
             <p>Importes mayores de $10,000 pueden tardar más de lo usual.</p>
-          </Card>
+          </div>
         </div>
       </div>
       {isMobile && (
