@@ -7,8 +7,6 @@ import Button from "../../../core/components/UI/Button";
 import classes from "./Activity.module.scss";
 
 const AcitivityItem = ({ order, openModal }) => {
-  console.log(order);
-
   return (
     <div className={classes.AcitivityItem}>
       <div className={classes.Color} style={{ backgroundColor: order.stateColor }} />
