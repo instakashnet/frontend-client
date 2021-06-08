@@ -1,14 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
+import Tooltip from '../../core/components/UI/Tooltip';
 
 import classes from '../assets/css/UserCode.module.scss';
 
 const UserCode = ({ userCode }) => {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    let timeout;
+    if (open) timeout = setTimeout(() => setOpen(false), 1500);
+    return () => clearTimeout(timeout);
+  }, [open]);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <div className={classes.UserCode}>
       <p>{userCode}</p>
-      <button>Copiar</button>
+      <Tooltip
+        className='ml-2 cursor-pointer'
+        open={open}
+        onClose={handleClose}
+        disableFocusListener
+        disableHoverListener
+        disableTouchListener
+        placement='top-end'
+        title='¡Copiado!'>
+        <CopyToClipboard text={userCode} onCopy={handleOpen}>
+          <span>Copiar</span>
+        </CopyToClipboard>
+      </Tooltip>
     </div>
   );
 };
 
-export default UserCode;
+export default React.memo(UserCode);

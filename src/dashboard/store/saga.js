@@ -1,22 +1,22 @@
-import { put, takeEvery, all, fork, select, takeLatest } from 'redux-saga/effects';
-import * as types from './types';
-import * as actions from './actions';
-import { setAlertInit } from '../../store/actions';
-import axios from '../helpers/axios';
+import { put, takeEvery, all, fork, select, takeLatest } from "redux-saga/effects";
+import * as types from "./types";
+import * as actions from "./actions";
+import { setAlertInit } from "../../store/actions";
+import axios from "../helpers/axios";
 
 function* getOrders() {
   try {
-    const res = yield axios.get('/order/user');
+    const res = yield axios.get("/order/user");
     if (res.status === 200) yield put(actions.getOrdersSuccess(res.data));
   } catch (error) {
-    yield put(setAlertInit(error.message, 'error'));
+    yield put(setAlertInit(error.message, "error"));
     yield put(actions.activityError());
   }
 }
 
 function* getWithdrawals() {
   try {
-    const res = yield axios.get('/withdrawals/user');
+    const res = yield axios.get("/withdrawals/user");
     if (res.status === 200) yield put(actions.getWithdrawalsSuccess(res.data));
   } catch (error) {
     yield put(actions.activityError());
@@ -25,7 +25,7 @@ function* getWithdrawals() {
 
 function* getOrderAmounts() {
   try {
-    const res = yield axios.get('/order/data/total-processed/user');
+    const res = yield axios.get("/order/data/total-processed/user");
     if (res.status === 200) yield put(actions.getOrderAmountsSuccess(res.data));
   } catch (error) {
     yield put(actions.activityError());
@@ -34,7 +34,8 @@ function* getOrderAmounts() {
 
 function* getTotalAmount() {
   try {
-    const res = yield axios.get('/order/data/user');
+    const res = yield axios.get("/order/data/user");
+    console.log(res);
     if (res.status === 200) yield put(actions.getTotalAmountSuccess(res.data));
   } catch (error) {
     yield put(actions.activityError());
@@ -44,8 +45,8 @@ function* getTotalAmount() {
 function* getOrderDetails({ id, detailsType }) {
   let details = {};
 
-  if (detailsType === 'order') details = yield select((state) => state.Dashboard.orders.find((order) => order.id === id));
-  if (detailsType === 'withdrawal') details = yield select((state) => state.Dashboard.withdrawals.find((withdrawal) => withdrawal.id === id));
+  if (detailsType === "order") details = yield select((state) => state.Dashboard.orders.find((order) => order.id === id));
+  if (detailsType === "withdrawal") details = yield select((state) => state.Dashboard.withdrawals.find((withdrawal) => withdrawal.id === id));
   yield put(actions.getOrderDetailsSuccess(details));
 }
 

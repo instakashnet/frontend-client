@@ -29,6 +29,7 @@
     width: 100%;
     border-bottom-color: $secondary-green;
     transition: 300ms ease-in-out;
+    font-size: 1rem;
 
     &::placeholder {
       color: $placeholder;

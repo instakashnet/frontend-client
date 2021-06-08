@@ -1,0 +1,108 @@
+@import "../../core/assets/css/colors";
+@import "../../core/assets/css/breakpoints";
+
+.Information {
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+
+  @include respond(tablet) {
+    margin-top: 60px;
+  }
+}
+
+.InfoCard {
+  width: 100%;
+  min-height: 5rem;
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 10px;
+  box-shadow: none;
+  background-color: $card-color;
+  padding: 5px;
+
+  p {
+    font-size: 0.85rem;
+    color: $base-green;
+    margin-left: 20px;
+  }
+
+  @include respond(tablet) {
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 0;
+    margin: 10px 0;
+
+    &:last-of-type {
+      border-radius: 0 10px 10px 0;
+    }
+
+    p {
+      margin-top: 10px;
+      margin-left: 0;
+    }
+  }
+
+  @include respond(desktop) {
+    max-width: 12rem;
+    margin: 0;
+    min-height: 8rem;
+  }
+
+  @include respond(ldesktop) {
+    max-width: 16rem;
+  }
+}
+
+.InfoImgCard {
+  height: 8rem;
+  box-shadow: none;
+  position: relative;
+  width: 60%;
+  display: none;
+  border-radius: 10px 0 0 10px;
+  background-color: $card-color;
+
+  img {
+    position: absolute;
+    left: -30px;
+    top: -76px;
+    max-width: 15rem;
+  }
+
+  @include respond(ldesktop) {
+    display: block;
+  }
+}
+
+.InfoTitle {
+  color: $base-green;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  z-index: 1;
+
+  @include respond(tablet) {
+    margin-top: 0;
+    position: absolute;
+    top: -40px;
+    left: 0;
+  }
+
+  @include respond(ldesktop) {
+    left: 100px;
+  }
+}
+
+.InfoButton {
+  position: fixed;
+  cursor: pointer;
+  right: 20px;
+  bottom: 20px;
+  color: #fff;
+  border-radius: 50%;
+  background-color: $base-green;
+}

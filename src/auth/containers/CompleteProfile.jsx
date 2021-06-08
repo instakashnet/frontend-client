@@ -7,7 +7,6 @@ import { User, FileText } from "react-feather";
 import { logoutInit, completeProfileInit, openModal, closeModal } from "../../store/actions";
 
 import Input from "../components/UI/Input";
-import CodeInput from "../../core/components/UI/form/Input";
 import Select from "../components/UI/Select";
 import PhoneInput from "../components/UI/PhoneInput";
 import Button from "../../core/components/UI/Button";
@@ -101,17 +100,6 @@ const CompleteProfile = () => {
               Selecciona tu sexo
             </option>
           </Select>
-          <h4 className="text-center mb-2">¿Te ha referido un amigo?</h4>
-          <p className="text-sm text-center">¡Ingresa su código y recibe una tasa preferencial!</p>
-          <CodeInput
-            name="affiliate"
-            placeholder="Ingresa el código de afiliado aquí"
-            value={formik.values.affiliate}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.errors.affiliate}
-            touched={formik.touched.affiliate}
-          />
           <Button type="submit" className={`${classes.SubmitButton} ld-ext-right ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
             <span className="ld ld-ring ld-spin" />
             Completar mi perfil

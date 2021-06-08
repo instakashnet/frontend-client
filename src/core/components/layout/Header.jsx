@@ -1,17 +1,18 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleNav, openSliderModal } from '../../../store/actions';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleNav, openSliderModal } from "../../../store/actions";
 
-import Whatsapp from '../UI/Whatsapp';
-import ProfileInfo from '../UI/ProfileInfo';
-import ProfileNavigation from './navigation/ProfileNavigation';
+import Whatsapp from "../UI/Whatsapp";
+import ProfileInfo from "../UI/ProfileInfo";
+import ProfileNavigation from "./navigation/ProfileNavigation";
+import Logo from "../UI/Logo";
 
-import classes from './Header.module.scss';
+import classes from "./Header.module.scss";
 
 const Header = () => {
   const dispatch = useDispatch();
   const { profiles } = useSelector((state) => state.Profile);
-  const profileSelected = JSON.parse(sessionStorage.getItem('profileSelected'));
+  const profileSelected = JSON.parse(sessionStorage.getItem("profileSelected"));
 
   const openNav = () => dispatch(openSliderModal(ProfileNavigation));
 
@@ -22,15 +23,16 @@ const Header = () => {
         <span />
         <span />
       </button>
+      <Logo className="lg:w-52 md:w-44 w-40 mr-4 hidden md:block" />
       <div className={classes.Hours}>
         <p>Lunes a Viernes: 9am a 7pm</p>
         <p>Sábados y feriados: 9am a 2:30pm</p>
       </div>
-      <div className='flex items-center ml-auto'>
-        <a href='https://wa.link/05keps' target='_blank' rel='noopener noreferrer'>
+      <div className="flex items-center ml-auto">
+        <a href="https://wa.link/05keps" target="_blank" rel="noopener noreferrer">
           <Whatsapp />
         </a>
-        <ProfileInfo main={profiles.find((profile) => profile.type === 'natural')} openNav={openNav} selected={profileSelected} />
+        <ProfileInfo main={profiles.find((profile) => profile.type === "natural")} openNav={openNav} selected={profileSelected} />
       </div>
     </div>
   );

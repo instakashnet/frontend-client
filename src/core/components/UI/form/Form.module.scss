@@ -1,13 +1,13 @@
-@import '../../../assets/css/colors';
+@import "../../../assets/css/colors";
 
 .FormGroup {
   margin: 10px 0 20px;
   width: 100%;
 
   label {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     display: block;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   input,
@@ -15,10 +15,10 @@
   .CheckboxWrapper {
     width: 100%;
     padding: 15px;
-    background: $bg-input;
-    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
+    background: $card-color;
+    box-shadow: 0px 24px 20px rgba(0, 0, 0, 0.04);
     border-radius: 10px;
-    border: 1px solid lighten($color: $placeholder, $amount: 10);
+    border: 1px solid #cacaca;
 
     &::placeholder {
       color: $placeholder;
@@ -53,10 +53,15 @@
   }
 }
 
+.RadioGroup {
+  margin: 5px 10px;
+  cursor: pointer;
+}
+
 .InputGroup {
   position: relative;
 
-  input[type='file'] {
+  input[type="file"] {
     visibility: hidden;
   }
 
@@ -91,9 +96,9 @@
 
   button {
     flex: 0.2;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding: 14.5px 15px;
     box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
   }
 }
 

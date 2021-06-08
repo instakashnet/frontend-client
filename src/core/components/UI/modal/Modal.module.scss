@@ -1,8 +1,9 @@
 @import "../../../assets/css/colors";
+@import "../../../assets/css/breakpoints";
 
 .Modal {
   border-radius: 10px;
-  background-color: #fff;
+  background-color: $bg-color;
   width: 100%;
   max-width: 34rem;
   max-height: 100vh;
@@ -28,16 +29,22 @@
   }
 
   h2 {
-    color: $secondary-green;
+    color: $base-green;
     margin-bottom: 10px;
     font-size: 1.3rem;
     font-weight: 600;
+  }
+
+  @include respond(desktop) {
+    h2 {
+      font-size: 1.6rem;
+    }
   }
 }
 
 .Close {
   margin-top: 0 !important;
-  color: $secondary-green;
+  color: $base-green;
   top: 1.5rem;
   right: 1.5rem;
   position: absolute;

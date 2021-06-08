@@ -1,4 +1,5 @@
-@import '../../core/assets/css/colors';
+@import "../../core/assets/css/colors";
+@import "../../core/assets/css/breakpoints";
 
 .DashboardCard {
   margin: 10px 0;
@@ -30,6 +31,10 @@
     &:hover {
       color: darken($color: $base-green, $amount: 15);
     }
+  }
+
+  &:last-of-type {
+    margin-top: 40px;
   }
 }
 
@@ -75,16 +80,16 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  font-size: 1rem;
 
   img {
     position: relative;
-    left: 20px;
     width: 200px;
   }
 
   h1 {
     color: $base-green;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 15px;
   }
@@ -97,9 +102,19 @@
     max-width: 17rem;
   }
 
-  @media screen and (min-width: 768px) {
+  @include respond(tablet) {
     img {
       width: 300px;
+    }
+  }
+
+  @include respond(desktop) {
+    h1 {
+      font-size: 2.3rem;
+    }
+
+    img {
+      width: 400px;
     }
   }
 }
@@ -145,7 +160,7 @@
     font-size: 1.2rem;
     margin-bottom: 15px;
 
-    @media screen and (min-width: 768px) {
+    @include respond(tablet) {
       font-size: 1.3rem;
       padding: 40px 10px;
     }

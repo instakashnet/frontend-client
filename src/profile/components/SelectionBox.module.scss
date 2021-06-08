@@ -1,10 +1,10 @@
-@import '../../core/assets/css/colors';
+@import "../../core/assets/css/colors";
 
 .Box {
   width: 140px;
   height: 140px;
   border-radius: 15px;
-  background-color: $bg-gray;
+  background-color: $card-color;
   transition: 250ms ease-in-out;
   margin: 20px 20px 5px 20px;
   display: flex;

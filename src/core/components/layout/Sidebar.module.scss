@@ -1,7 +1,8 @@
-@import '../../assets/css/colors';
+@import "../../assets/css/colors";
+@import "../../assets/css/breakpoints";
 
 .Sidebar {
-  background-color: $bg-gray;
+  background-color: $card-color;
   position: fixed;
   max-height: 100vh;
   height: 100%;
@@ -18,12 +19,12 @@
   transition: 400ms ease-out;
   overflow-y: auto;
 
-  @media screen and (min-width: 768px) {
+  @include respond(tablet) {
     transform: translateX(0);
     z-index: 0;
   }
 
-  @media screen and (min-width: 996px) {
+  @include respond(desktop) {
     max-width: 19rem;
   }
 }

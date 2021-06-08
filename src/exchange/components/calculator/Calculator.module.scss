@@ -1,10 +1,11 @@
-@import '../../../core/assets/css/colors';
+@import "../../../core/assets/css/colors";
 
 .BuyCard,
 .SellCard {
   border-radius: 10px 0 0 10px;
   border-right: 1px solid $base-green;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
+  background-color: $card-color;
   padding: 10px 25px;
 
   h4 {
@@ -14,7 +15,7 @@
 
 .SellCard {
   border-radius: 0 10px 10px 0;
-  border: none;
+  border-right: none;
 }
 
 .Price {
@@ -46,7 +47,7 @@
 
   input {
     width: 100%;
-    background-color: $bg-gray;
+    background-color: $card-color;
     text-align: right;
     border-radius: 0 10px 10px 0;
     padding: 19px 25px 15px;
@@ -85,7 +86,7 @@
   top: 62px;
   border-radius: 50%;
   background-color: $button-yellow;
-  border: 6px solid #fff;
+  border: 6px solid $card-color;
   transition: 350ms ease-in-out;
   transform: rotate(0deg);
 
@@ -119,5 +120,26 @@
 
   p {
     font-size: 0.9rem;
+  }
+}
+
+.KashInput {
+  margin-top: 5px;
+  position: relative;
+
+  input {
+    padding: 10px 10px 10px 20px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid $border-color;
+    background-color: transparent;
+  }
+
+  span {
+    color: $base-green;
+    font-weight: bold;
+    position: absolute;
+    right: 35px;
+    top: 10px;
   }
 }

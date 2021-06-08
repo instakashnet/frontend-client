@@ -1,13 +1,14 @@
-@import '../../../core/assets/css/colors';
+@import "../../../core/assets/css/colors";
 
 .NoDetails {
   color: #959595;
   margin-top: 15px;
 }
 
-.DocumentFile {
+.DocumentFile,
+.AddFile {
   padding: 15px;
-  background: $bg-input;
+  background: $card-color;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
   text-align: center;
@@ -22,6 +23,12 @@
   svg {
     color: $base-green;
   }
+}
+
+.AddFile {
+  padding: 20px;
+  flex-direction: row;
+  text-decoration: underline;
 }
 
 .ActionButtons {

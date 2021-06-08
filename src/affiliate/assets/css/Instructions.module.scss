@@ -1,15 +1,121 @@
-@import '../../../core/assets/css/colors';
+@import "../../../core/assets/css/colors";
+@import "../../../core/assets/css/breakpoints";
 
 .Instructions {
-  text-align: center;
+  max-width: 1536px;
+  margin: auto;
 
   h1 {
     color: $base-green;
     font-weight: bold;
     font-size: 1.7rem;
+    text-align: center;
   }
 
   h3 {
     font-weight: bold;
+    text-align: center;
+  }
+
+  b {
+    color: $base-green;
+  }
+
+  a {
+    color: $base-green;
+    text-decoration: underline;
+  }
+
+  @include respond(tablet) {
+    margin-top: 25px;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+    }
+  }
+
+  @include respond(desktop) {
+    h1 {
+      font-size: 3.3rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+.CodeInfoCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px auto 0;
+  color: #fff;
+  max-width: 63rem;
+  background-color: transparent;
+  box-shadow: none;
+
+  b {
+    color: #f2c94c !important;
+  }
+
+  > p {
+    max-width: 35rem;
+    margin-left: 45px;
+  }
+
+  @include respond(tablet) {
+    padding: 25px;
+    background-color: #20a2a5 !important;
+  }
+
+  @include respond(desktop) {
+    padding: 40px;
+    margin-top: 30px;
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+.CodeWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  button {
+    text-decoration: underline;
+    color: $base-green;
+    margin-top: 5px;
+    font-size: 0.95rem;
+  }
+
+  @include respond(tablet) {
+    button {
+      color: #fff;
+    }
+  }
+
+  @include respond(desktop) {
+    align-items: flex-start;
+  }
+}
+
+.Step2 img {
+  width: 190px;
+  max-width: initial;
+
+  @include respond(desktop) {
+    width: 280px;
   }
 }
