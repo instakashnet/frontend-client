@@ -39,7 +39,7 @@ const Modal = ({ children }) => {
   return (
     <ReactModal closeTimeoutMS={300} onRequestClose={() => dispatch(closeModal())} isOpen={isOpen} className={classes.Modal} ariaHideApp={false} preventScroll>
       <div className={classes.ModalContent}>
-        <button onClick={closeModal} className={classes.Close}>
+        <button onClick={() => dispatch(closeModal())} className={classes.Close}>
           <X size={30} />
         </button>
         {children}
