@@ -1,4 +1,4 @@
-@import '../../core/assets/css/colors';
+@import "../../core/assets/css/colors";
 
 .SignupBackground {
   display: flex;
@@ -17,6 +17,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  font-size: 1rem;
 
   h1 {
     color: $secondary-green;

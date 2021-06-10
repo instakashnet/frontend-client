@@ -1,13 +1,14 @@
 import { useEffect, lazy } from "react";
 import { Switch, Router } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUserInit, getProfilesInit } from "./store/actions";
+import { loadUserInit, getProfilesInit, closeModal } from "./store/actions";
 import ReactPixel from "react-facebook-pixel";
 import history from "./shared/history";
 
 import Alert from "./core/components/UI/Alert";
 import ScrollToTop from "./hoc/ScrollToTop";
 import asyncComponent from "./hoc/AsyncComponent";
+import Modal from "./core/components/UI/modal/Modal";
 
 // ROUTING
 import PublicRoute from "./routing/PublicRoute";
@@ -35,6 +36,7 @@ ReactPixel.init(process.env.REACT_APP_FB_PIXEL_ID, {}, { autoConfig: true, debug
 function App() {
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.Auth.isAuth);
+  const ModalComponent = useSelector((state) => state.Modal.Component);
 
   useEffect(() => {
     dispatch(loadUserInit());
@@ -47,6 +49,8 @@ function App() {
   useEffect(() => {
     ReactPixel.pageView();
   }, []);
+
+  const closeModalHandler = () => dispatch(closeModal());
 
   return (
     <Router history={history}>
@@ -67,6 +71,7 @@ function App() {
         </Switch>
       </ScrollToTop>
       <Alert />
+      <Modal closeModal={closeModalHandler}>{ModalComponent && <ModalComponent />}</Modal>
     </Router>
   );
 }

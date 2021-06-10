@@ -30,7 +30,7 @@ const Signin = () => {
 
   /*   useEffect(() => {
     const timeout = setTimeout(() => {
-      dispatch(openModal());
+      dispatch(openModal(Information));
     }, 600);
     return () => clearTimeout(timeout);
   }, [dispatch]); */
@@ -82,17 +82,24 @@ const Signin = () => {
           </Link>
         </p>
       </div>
-      <InfoModal type="alert">
-        <p>
-          En este momento nos encontramos realizando unas <b>mejoras y actualizaciones</b> en nuestra plataforma, todo para poder ofrecerle el mejor servicio posible. Estaremos de
-          vuelta a la brevedad posible.
-        </p>
-        <p>Agradecemos su comprensión.</p>
-        <Button onClick={() => dispatch(closeModal())} className="action-button">
-          Lo entiendo
-        </Button>
-      </InfoModal>
     </main>
+  );
+};
+
+export const Information = () => {
+  const dispatch = useDispatch();
+
+  return (
+    <InfoModal type="alert">
+      <p>
+        En este momento nos encontramos realizando unas <b>mejoras y actualizaciones</b> en nuestra plataforma, todo para poder ofrecerle el mejor servicio posible. Estaremos de
+        vuelta a la brevedad posible.
+      </p>
+      <p>Agradecemos su comprensión.</p>
+      <Button onClick={() => dispatch(closeModal())} className="action-button">
+        Lo entiendo
+      </Button>
+    </InfoModal>
   );
 };
 

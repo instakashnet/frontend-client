@@ -5,7 +5,7 @@
   border-radius: 10px;
   background-color: $bg-color;
   width: 100%;
-  max-width: 34rem;
+  max-width: 36rem;
   max-height: 100vh;
   margin: 0 auto;
   outline: 0;
@@ -13,6 +13,7 @@
   position: relative;
   padding: 30px 30px 50px;
   overscroll-behavior: contain;
+  font-size: 1rem;
 }
 
 .ModalContent {

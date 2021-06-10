@@ -10,7 +10,6 @@ import Input from "../components/UI/Input";
 import Select from "../components/UI/Select";
 import PhoneInput from "../components/UI/PhoneInput";
 import Button from "../../core/components/UI/Button";
-import Modal from "../../core/components/UI/modal/Modal";
 
 import classes from "./Auth.module.scss";
 
@@ -41,8 +40,7 @@ const CompleteProfile = () => {
 
   const onPhoneChange = (value) => formik.setFieldValue("phone", value);
 
-  const openModalHandler = () => dispatch(openModal());
-  const closeModalHandler = () => dispatch(closeModal());
+  const openModalHandler = () => dispatch(openModal(DataInfo));
 
   return (
     <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
@@ -100,7 +98,7 @@ const CompleteProfile = () => {
               Selecciona tu sexo
             </option>
           </Select>
-          <Button type="submit" className={`${classes.SubmitButton} ld-ext-right ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
+          <Button type="submit" className={`action-button ld-ext-right ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
             <span className="ld ld-ring ld-spin" />
             Completar mi perfil
           </Button>
@@ -114,16 +112,23 @@ const CompleteProfile = () => {
           </button>
         </div>
       </div>
-      <Modal>
-        <h2>¡Queremos proteger tu identidad!</h2>
-        <p className="px-4 mb-6 text-center">
-          Al realizar una operación queremos estar seguro que eres tu quien lo realiza. Además, nos ayuda a saber según tu perfil registrado si debemos entregarte boleta o factura.
-        </p>
-        <Button className="action-button" onClick={closeModalHandler}>
-          De acuerdo
-        </Button>
-      </Modal>
     </main>
+  );
+};
+
+const DataInfo = () => {
+  const dispatch = useDispatch();
+
+  return (
+    <>
+      <h2>¡Queremos proteger tu identidad!</h2>
+      <p className="px-4 mb-6 text-center">
+        Al realizar una operación queremos estar seguro que eres tu quien lo realiza. Además, nos ayuda a saber según tu perfil registrado si debemos entregarte boleta o factura.
+      </p>
+      <Button className="action-button" onClick={() => dispatch(closeModal())}>
+        De acuerdo
+      </Button>
+    </>
   );
 };
 

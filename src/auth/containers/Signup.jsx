@@ -63,8 +63,8 @@ const Signup = () => {
             error={formik.errors.confirmPassword}
             touched={formik.touched.confirmPassword}
           />
-          <h4 className="text-center mb-2">¿Te ha referido un amigo?</h4>
-          <p className="text-sm text-center">¡Ingresa su código y recibe una tasa preferencial!</p>
+          <h4 className="text-center text-lg mb-2">¿Te ha referido un amigo?</h4>
+          <p className="text-center">¡Ingresa su código y recibe una tasa preferencial!</p>
           <CodeInput
             name="affiliate"
             placeholder="Ingresa el código de afiliado aquí"

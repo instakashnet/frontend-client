@@ -1,6 +1,5 @@
 import React from "react";
 import { AlertTriangle, Info } from "react-feather";
-import Modal from "./Modal";
 
 import classes from "./Modal.module.scss";
 
@@ -11,13 +10,11 @@ const InfoModal = ({ type, children }) => {
   if (type === "info") IconType = <Info size={60} />;
 
   return (
-    <Modal>
-      <div className={classes.InfoModal}>
-        {IconType}
-        <h2>Estimado usuario</h2>
-        {children}
-      </div>
-    </Modal>
+    <div className={classes.InfoModal}>
+      {IconType}
+      <h2>Estimado usuario</h2>
+      {children}
+    </div>
   );
 };
 
