@@ -11,7 +11,7 @@ export const signupValidation = Yup.object().shape({
   email: Yup.string().required("Debes colocar un correo electrónico.").email("Coloca un correo válido."),
   phone: Yup.string()
     .required("Debes colocar un teléfono de contacto.")
-    .matches(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s/0-9]{10,13}$/, "Debes colocar un teléfono válido."),
+    .matches(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s/0-9]{9,14}$/, "Debes colocar un teléfono válido."),
   password: Yup.string()
     .required("Debes colocar una contraseña")
     .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{6,}$/, "Debe ser de al menos 6 caracteres con 1 número."),

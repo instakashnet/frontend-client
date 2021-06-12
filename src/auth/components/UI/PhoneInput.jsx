@@ -13,12 +13,10 @@ const InputPhone = ({ onChange, value, country, error }) => {
         onChange={onChange}
         containerClass={classes.PhoneWrapper}
         inputClass={`${classes.PhoneInput} ${error ? classes.PhoneError : ""}`}
-        onlyCountries={["pe"]}
-        countryCodeEditable={false}
         buttonClass={classes.ButtonFlag}
-        placeholder='Teléfono'
+        placeholder="Teléfono"
       />
-      {value && error && <span className='error-msg'>{error}</span>}
+      {value && error && <span className="error-msg">{error}</span>}
     </div>
   );
 };
