@@ -2,7 +2,7 @@ import React from "react";
 
 import Card from "../../core/components/UI/card.component";
 
-import classes from "../css/account-components.module.scss";
+import classes from "../assets/css/account-components.module.scss";
 
 const AccountCard = ({ account, openModal }) => {
   const accountNumber = account.account_number || account.cci;

@@ -14,7 +14,7 @@ import AccountDetails from "./account-details.screen";
 import KashAccount from "../components/kash-account.component";
 import WithdrawKash from "../components/forms/withdraw-kash.component";
 
-import classes from "../css/account-containers.module.scss";
+import classes from "../assets/css/account-containers.module.scss";
 
 const Accounts = () => {
   const dispatch = useDispatch();

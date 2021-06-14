@@ -2,8 +2,8 @@ import React from "react";
 
 import Button from "../../core/components/UI/button.component";
 
-import NoAccountImg from "../images/no-accounts.svg";
-import classes from "../css/account-components.module.scss";
+import NoAccountImg from "../assets/images/no-accounts.svg";
+import classes from "../assets/css/account-components.module.scss";
 
 const NoAccounts = ({ onAddAccount }) => {
   return (

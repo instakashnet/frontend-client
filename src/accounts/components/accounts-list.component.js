@@ -4,7 +4,7 @@ import { ArrowDown } from "react-feather";
 import Accordion from "../../core/components/UI/accordion.component";
 import AccountCard from "./account-card.component";
 
-import classes from "../css/account-components.module.scss";
+import classes from "../assets/css/account-components.module.scss";
 
 const AccountsList = ({ accounts, openDetails }) => {
   let label;

@@ -7,7 +7,7 @@ import Spinner from "../../core/components/UI/spinner.component";
 import EditAccount from "../components/forms/edit-account.component";
 import Button from "../../core/components/UI/button.component";
 
-import classes from "../css/account-containers.module.scss";
+import classes from "../assets/css/account-containers.module.scss";
 
 const AccountDetails = () => {
   const dispatch = useDispatch();
