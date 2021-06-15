@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Upload, AlertTriangle } from "react-feather";
+import { Upload, FileText, AlertTriangle } from "react-feather";
 import { useDispatch } from "react-redux";
 import { editProfileInit } from "../store/actions";
 
@@ -35,7 +35,11 @@ const DocumentDetails = ({ profile, uploadFile }) => {
             <p>Formato .jpg o .png</p>
           </button>
         ) : (
-          <div className="flex flex-col items-center justify-center w-full max-w-sm">
+          <div className={classes.DocumentFile}>
+            <span>
+              <FileText size={35} />
+            </span>
+            <h4>Foto frontal</h4>
             {/*  <a href={profile.identity_photo} target="_blank" rel="noopener noreferrer" className={classes.DocumentFile}>
             <File size={40} />
             <p>Parte frontal</p>
@@ -57,7 +61,7 @@ const DocumentDetails = ({ profile, uploadFile }) => {
             <p>Formato .jpg o .png</p>
           </button>
         ) : (
-          <div className="flex flex-col items-center justify-center w-full max-w-sm">
+          <div className={classes.DocumentFile}>
             {/*  <a href={profile.identity_photo_two} target="_blank" rel="noopener noreferrer" className={classes.DocumentFile}>
             <File size={40} />
             <p>Parte trasera</p>

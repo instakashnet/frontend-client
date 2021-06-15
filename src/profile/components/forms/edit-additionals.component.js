@@ -28,7 +28,7 @@ const EditAdditionalData = ({ profile, onEdit }) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <div className="grid grid-cols-1 md:grid-cols-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
         <DatePicker label="Fecha de nacimiento" placeholder="DD/MM/YYYY" value={formik.values.date_birth} onChange={onDateChange} />
         <Input
           label="Dirección"
@@ -41,7 +41,7 @@ const EditAdditionalData = ({ profile, onEdit }) => {
           touched={formik.touched.address}
         />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
         <Input
           label="Ocupación"
           name="job"
@@ -63,7 +63,7 @@ const EditAdditionalData = ({ profile, onEdit }) => {
           touched={formik.touched.profession}
         />
       </div>
-      <div className="flex flex-wrap items-center justify-center mt-3">
+      <div className="flex flex-col items-center justify-center mt-3">
         <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button ld-ext-right ${isProcessing ? "running" : ""}`}>
           <span className="ld ld-ring ld-spin" />
           Actualizar datos

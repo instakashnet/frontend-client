@@ -48,15 +48,19 @@ const Profile = () => {
         <h1>Mi perfil</h1>
         <p className="mb-4">Completa toda tu información de perfil para poder hacer operaciones mayores a 5mil USD.</p>
         <ProgressBar width={profileCompleted} />
-        <Accordion defaultExpanded title="Datos básicos" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
-          <InfoComponent profile={profileSelected} user={user} onDisable={() => dispatch(disableProfileInit(profileSelected.id))} />
-        </Accordion>
-        <Accordion defaultExpanded title="Documento de identidad" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
-          <DocumentInfo uploadFile={openModalHandler} profile={profileSelected} />
-        </Accordion>
-        <Accordion defaultExpanded title="Datos adicionales" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
-          {edit ? <EditAdditional profile={profileSelected} onEdit={setEdit} /> : <AdditionalInfo profile={profileSelected} onEdit={setEdit} />}
-        </Accordion>
+        <div className="grid grid-cols-1 lg:grid-cols-3">
+          <div className="col-span-2 lg:mr-14 lg:mt-4">
+            <Accordion defaultExpanded title="Datos básicos" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
+              <InfoComponent profile={profileSelected} user={user} onDisable={() => dispatch(disableProfileInit(profileSelected.id))} />
+            </Accordion>
+            <Accordion defaultExpanded title="Datos adicionales" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
+              {edit ? <EditAdditional profile={profileSelected} onEdit={setEdit} /> : <AdditionalInfo profile={profileSelected} onEdit={setEdit} />}
+            </Accordion>
+          </div>
+          <Accordion defaultExpanded title="Documento de identidad" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
+            <DocumentInfo uploadFile={openModalHandler} profile={profileSelected} />
+          </Accordion>
+        </div>
       </div>
     </Layout>
   );

@@ -1,4 +1,5 @@
 @import "../../../core/assets/css/colors";
+@import "../../../core/assets/css/breakpoints";
 
 .NoDetails {
   color: #959595;
@@ -144,10 +145,15 @@
 .InfoItem {
   margin: 10px 0;
   width: 100%;
+  max-width: 22rem;
 
   h4 {
     color: $base-text;
     margin-left: 10px;
+  }
+
+  @include respond(tablet) {
+    margin: 10px 5px;
   }
 }
 
