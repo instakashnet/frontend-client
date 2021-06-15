@@ -19,7 +19,20 @@
   flex-direction: column;
   width: 100%;
   max-width: 18rem;
-  margin: 0 10px;
+  margin: 10px auto;
+
+  h4 {
+    margin-top: 5px;
+    color: $base-text;
+
+    b {
+      color: $base-green;
+    }
+  }
+
+  button svg {
+    color: $base-green;
+  }
 
   span {
     background-color: $base-green;
@@ -39,15 +52,11 @@
 .AddFile {
   padding: 20px;
   flex-direction: column;
-  margin: 10px auto;
 
-  h4 {
-    margin-top: 5px;
-    color: $base-text;
-
-    b {
-      color: $base-green;
-    }
+  button[type="submit"] {
+    margin: 3px 0 0 !important;
+    color: $base-green !important;
+    text-decoration: underline;
   }
 
   p {

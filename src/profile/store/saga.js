@@ -68,16 +68,21 @@ function* editProfile({ values, setEdit }) {
   }
 }
 
-function* uploadDocument({ values, uploadType }) {
+function* uploadDocument({ values, uploadType, setPercentage }) {
   const formData = new FormData();
   formData.append(uploadType === "frontal" ? "file-one" : "file-two", values.identity_photo || values.identity_photo_two);
-
   let URL = "/users/upload-identity-photo";
 
   if (uploadType === "trasera") URL = "/users/upload-identity-photo-two";
 
   try {
-    const res = yield axios.post(URL, formData, { timeout: 25000 });
+    const res = yield axios.post(URL, formData, {
+      timeout: 25000,
+      onUploadProgress: ({ loaded, total }) => {
+        const percentage = Math.floor((loaded * 100) / total);
+        if (percentage < 100) setPercentage(percentage);
+      },
+    });
     if (res.status === 200) {
       yield put(setAlertInit("La foto se ha cargado correctamente.", "success"));
       yield put(actions.editProfileSuccess());
@@ -88,6 +93,7 @@ function* uploadDocument({ values, uploadType }) {
       yield put(closeModal());
     }
   } catch (error) {
+    call(setPercentage, 0);
     yield put(setAlertInit(error.message, "error"));
     yield put(actions.profilesError());
   }

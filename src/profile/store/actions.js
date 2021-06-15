@@ -40,10 +40,11 @@ export const editProfileSuccess = () => ({
   type: types.EDIT_PROFILE_SUCCESS,
 });
 
-export const uploadDocumentInit = (values, uploadType) => ({
+export const uploadDocumentInit = (values, uploadType, setPercentage) => ({
   type: types.UPLOAD_DOCUMENT_INIT,
   values,
   uploadType,
+  setPercentage,
 });
 
 export const uploadDocumentSuccess = () => ({

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Upload, FileText, AlertTriangle } from "react-feather";
+import { Upload, FileText, Edit, AlertTriangle } from "react-feather";
 import { useDispatch } from "react-redux";
 import { editProfileInit } from "../store/actions";
+import UploadDocument from "./forms/upload-document.component";
 
 import Switch from "../../core/components/UI/form-items/switch.component";
 
@@ -21,39 +22,27 @@ const DocumentDetails = ({ profile, uploadFile }) => {
   };
 
   return (
-    <div className="w-full text-center">
+    <div className="w-full text-cente mt-3">
       {profile.type === "juridica" && <p>Datos del representante legal.</p>}
       <div className="flex flex-col items-center justify-center mx-auto w-full">
         {!profile.identity_photo ? (
-          <button className={classes.AddFile} type="button" onClick={() => uploadFile("frontal")}>
-            <span>
-              <Upload size={35} />
-            </span>
-            <h4>
-              Cargar <b>parte frontal</b>
-            </h4>
-            <p>Formato .jpg o .png</p>
-          </button>
+          <UploadDocument type="frontal" />
         ) : (
           <div className={classes.DocumentFile}>
             <span>
-              <FileText size={35} />
+              <FileText size={30} />
             </span>
-            <h4>Foto frontal</h4>
-            {/*  <a href={profile.identity_photo} target="_blank" rel="noopener noreferrer" className={classes.DocumentFile}>
-            <File size={40} />
-            <p>Parte frontal</p>
-          </a>
-          <button className="flex items-center mt-3 p-2" type="button" onClick={() => uploadFile("frontal")}>
-            Editar foto <Edit className="ml-2" size={20} />
-          </button> */}
+            <h4>Parte frontal</h4>
+            <button className="flex items-center mt-1" type="button" onClick={() => uploadFile("frontal")}>
+              editar foto <Edit className="ml-1" size={15} />
+            </button>
           </div>
         )}
 
         {!profile.identity_photo_two ? (
           <button className={classes.AddFile} type="button" onClick={() => uploadFile("trasera")}>
             <span>
-              <Upload size={35} />
+              <Upload size={30} />
             </span>
             <h4>
               Cargar <b>parte trasera</b>
@@ -62,13 +51,13 @@ const DocumentDetails = ({ profile, uploadFile }) => {
           </button>
         ) : (
           <div className={classes.DocumentFile}>
-            {/*  <a href={profile.identity_photo_two} target="_blank" rel="noopener noreferrer" className={classes.DocumentFile}>
-            <File size={40} />
-            <p>Parte trasera</p>
-          </a>
-          <button className="flex items-center mt-3 p-2" type="button" onClick={() => uploadFile("trasera")}>
-            Editar foto <Edit className="ml-2" size={20} />
-          </button> */}
+            <span>
+              <FileText size={30} />
+            </span>
+            <h4>Parte trasera</h4>
+            <button className="flex items-center mt-1" type="button" onClick={() => uploadFile("trasera")}>
+              editar foto <Edit className="ml-1" size={15} />
+            </button>
           </div>
         )}
       </div>
