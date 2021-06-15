@@ -1,5 +1,6 @@
 import React from "react";
 import Select, { components } from "react-select";
+import { isMobile } from "react-device-detect";
 
 import classes from "./Form.module.scss";
 
@@ -8,7 +9,7 @@ const { Option, SingleValue } = components;
 const styles = {
   valueContainer: (provided) => ({
     ...provided,
-    minHeight: "45px",
+    minHeight: isMobile ? "35px" : "45px",
   }),
   option: (provided, state) => {
     return {
@@ -27,13 +28,13 @@ const styles = {
       ...provided,
       color: "#AFAFAF",
       fontSize: "1rem",
-      top: "30px",
+      top: isMobile ? "25px" : "30px",
     };
   },
   control: (provided) => ({
     ...provided,
     height: "100%",
-    minHeight: "50px",
+    minHeight: isMobile ? "35px" : "45px",
     backgroundColor: "#fff",
     borderRadius: "10px",
     boxShadow: "0px 4px 5px rgba(0, 0, 0, 0.05)",

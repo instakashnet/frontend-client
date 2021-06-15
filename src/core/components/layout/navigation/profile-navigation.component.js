@@ -46,7 +46,6 @@ const ProfileNavigation = () => {
         <div className={classes.ProfileProgress}>
           <h3>Progreso de tu perfil</h3>
           <ProgressBar width={profileCompleted} />
-          <p>{profileCompleted}% completado</p>
         </div>
       )}
       <nav className="w-full mt-8">

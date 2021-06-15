@@ -223,6 +223,11 @@ input::placeholder {
   color: inherit !important;
 }
 
+.MuiAccordionDetails-root {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 .MuiInput-underline:before,
 .MuiInput-underline:after {
   display: none;

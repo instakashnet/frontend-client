@@ -37,8 +37,6 @@
 }
 
 .ProfileInfoWrapper {
-  padding-bottom: 60px;
-
   h1 {
     font-size: 1.5rem;
     color: $base-green;
@@ -71,14 +69,20 @@
   }
 
   form {
-    max-width: 52rem;
     margin: 0 auto;
+    width: 100%;
 
     button,
     button[type="submit"] {
       color: #676767;
       max-width: 20rem;
-      margin: 0 25px;
+      margin: 10px 0;
+    }
+  }
+
+  @include respond(tablet) {
+    form {
+      max-width: 52rem;
     }
   }
 

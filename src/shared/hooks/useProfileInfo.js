@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export const useProfileInfo = (profiles, profileSelected) => {
   const [profileInfo, setProfileInfo] = useState({});
   const [profileCompleted, setProfileCompleted] = useState(0);
-  const naturalProfile = profiles.find((profile) => profile.type === 'natural');
+  const naturalProfile = profiles.find((profile) => profile.type === "natural");
 
   useEffect(() => {
     setProfileInfo({
       ...profileSelected,
       selected: !!profileSelected,
+      pep: !!+naturalProfile.pep,
       identity_sex: naturalProfile.identity_sex,
       first_name: naturalProfile.first_name,
       last_name: naturalProfile.last_name,
