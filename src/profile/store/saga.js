@@ -68,7 +68,7 @@ function* editProfile({ values, setEdit }) {
   }
 }
 
-function* uploadDocument({ values, uploadType, setPercentage }) {
+function* uploadDocument({ values, uploadType, setFile, setPercentage }) {
   const formData = new FormData();
   formData.append(uploadType === "frontal" ? "file-one" : "file-two", values.identity_photo || values.identity_photo_two);
   let URL = "/users/upload-identity-photo";
@@ -85,8 +85,8 @@ function* uploadDocument({ values, uploadType, setPercentage }) {
     });
     if (res.status === 200) {
       call(setPercentage, 100);
+      call(setFile, null);
       yield call(getProfiles);
-
       const profileSelected = yield call([sessionStorage, "getItem"], "profileSelected");
       yield call(setSelectedProfile, JSON.parse(profileSelected).id);
       yield put(actions.editProfileSuccess());

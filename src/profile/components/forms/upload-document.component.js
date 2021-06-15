@@ -12,12 +12,12 @@ const UploadDocument = ({ type, documentUrl }) => {
   const dispatch = useDispatch();
   const isProcessing = useSelector((state) => state.Profile.isProcessing);
   const [percentage, setPercentage] = useState(0);
-
   const [file, setFile] = useState(null);
+
   const inputName = type === "frontal" ? "identity_photo" : "identity_photo_two";
   const onDrop = useCallback((acceptedFile) => setFile(acceptedFile), []);
 
-  const uploadPhotoHandler = () => dispatch(uploadDocumentInit({ [inputName]: file[0] }, type, setPercentage));
+  const uploadPhotoHandler = () => dispatch(uploadDocumentInit({ [inputName]: file[0] }, type, setFile, setPercentage));
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: "image/jpeg, image/png", maxSize: 5242880, multiple: false });
 
