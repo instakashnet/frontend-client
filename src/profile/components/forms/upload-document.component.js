@@ -37,11 +37,12 @@ const UploadDocument = ({ type }) => {
         {file ? (
           <>
             <h4>{file[0].name}</h4>
-            {percentage > 0 && isProcessing ? (
+            {percentage > 0 && isProcessing && (
               <p className="italic flex items-center">
                 <Clock size={15} className="mr-1" style={{ color: "#676767" }} /> cargando foto: {percentage}%
               </p>
-            ) : (
+            )}
+            {!isProcessing && (
               <button type="button" className="flex items-center px-2 underline" onClick={uploadPhotoHandler}>
                 cargar foto <Upload size={15} className="ml-2" />
               </button>

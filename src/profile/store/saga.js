@@ -85,11 +85,11 @@ function* uploadDocument({ values, uploadType, setPercentage }) {
     });
     if (res.status === 200) {
       call(setPercentage, 100);
-      yield put(actions.editProfileSuccess());
       yield call(getProfiles);
 
       const profileSelected = yield call([sessionStorage, "getItem"], "profileSelected");
       yield call(setSelectedProfile, JSON.parse(profileSelected).id);
+      yield put(actions.editProfileSuccess());
       yield put(setAlertInit("La foto se ha cargado correctamente.", "success"));
     }
   } catch (error) {
