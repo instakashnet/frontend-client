@@ -32,7 +32,7 @@ const Signup = () => {
         <p className="mt-6">
           Registrate y realiza tus operaciones <br /> de forma segura desde nuestra plataforma digital.
         </p>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
           <Input
             type="email"
             name="email"
@@ -63,7 +63,7 @@ const Signup = () => {
             error={formik.errors.confirmPassword}
             touched={formik.touched.confirmPassword}
           />
-          <h4 className="text-center text-lg mb-2">¿Te ha referido un amigo?</h4>
+          <h4 className="text-center text-lg mb-2 mt-3">¿Te ha referido un amigo?</h4>
           <p className="text-center">¡Ingresa su código y recibe una tasa preferencial!</p>
           <CodeInput
             name="affiliate"

@@ -1,4 +1,5 @@
 @import "../../../core/assets/css/colors";
+@import "../../../core/assets/css/breakpoints";
 
 .SignupBackground {
   display: flex;
@@ -48,7 +49,7 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @include respond(tablet) {
     padding: 100px 15px;
     min-width: 23rem;
 
