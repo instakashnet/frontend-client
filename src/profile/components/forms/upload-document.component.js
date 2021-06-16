@@ -44,9 +44,12 @@ const UploadDocument = ({ type, documentUrl }) => {
             </p>
           )}
           {!isProcessing && (
-            <button type="button" className="flex items-center px-2 underline" onClick={uploadPhotoHandler}>
-              cargar foto <Upload size={15} className="ml-2" />
-            </button>
+            <>
+              <button type="button" className="flex items-center px-2 mb-1 underline" onClick={uploadPhotoHandler}>
+                cargar foto <Upload size={15} className="ml-2" />
+              </button>
+              <p>.jpg o .png | máximo 5MB</p>
+            </>
           )}
         </>
       ) : documentUrl ? (

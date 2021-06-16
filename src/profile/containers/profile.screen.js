@@ -18,7 +18,7 @@ import classes from "../assets/css/profile-containers.module.scss";
 const Profile = () => {
   const [edit, setEdit] = useState(false);
   const dispatch = useDispatch();
-  const { profiles, user } = useSelector((state) => state.Profile);
+  const { profiles, user, isProcessing } = useSelector((state) => state.Profile);
   const profileSelected = JSON.parse(sessionStorage.getItem("profileSelected"));
   const { profileCompleted } = useProfileInfo(profiles, profileSelected);
 
@@ -45,7 +45,7 @@ const Profile = () => {
             </Accordion>
           </div>
           <Accordion defaultExpanded title="Documento de identidad" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
-            <DocumentInfo profile={profileSelected} />
+            <DocumentInfo profile={profileSelected} isProcessing={isProcessing} />
           </Accordion>
         </div>
       </div>

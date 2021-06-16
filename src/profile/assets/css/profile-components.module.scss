@@ -34,7 +34,7 @@
 
   p {
     color: $base-text;
-    font-size: 0.85rem;
+    font-size: 0.8rem !important;
   }
 
   button svg {
@@ -49,6 +49,12 @@
     display: grid;
     align-content: center;
     justify-content: center;
+    transition: 200ms ease-in-out;
+
+    &:focus,
+    &:hover {
+      background-color: $anchor-green;
+    }
   }
 
   svg {

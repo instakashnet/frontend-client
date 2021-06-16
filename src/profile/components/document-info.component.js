@@ -6,7 +6,7 @@ import UploadDocument from "./forms/upload-document.component";
 
 import Switch from "../../core/components/UI/form-items/switch.component";
 
-const DocumentDetails = ({ profile }) => {
+const DocumentDetails = ({ profile, isProcessing }) => {
   const dispatch = useDispatch();
   const [pep, setPep] = useState(profile.pep && profile.pep === "1" ? true : false);
 
@@ -31,7 +31,7 @@ const DocumentDetails = ({ profile }) => {
           <AlertTriangle className="mr-3" /> No has subido tu documento.
         </span>
       )}
-      <Switch name="pep" placeholder="¿Eres una persona políticamente expuesta?" value={pep} onChange={onPepChange} />
+      <Switch name="pep" placeholder="¿Eres una persona políticamente expuesta?" value={pep} onChange={onPepChange} isProcessing={isProcessing} />
     </div>
   );
 };
