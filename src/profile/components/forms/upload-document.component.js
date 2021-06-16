@@ -54,7 +54,7 @@ const UploadDocument = ({ type, documentUrl }) => {
         </>
       ) : documentUrl ? (
         <h4>
-          Foto <b>frontal</b> cargada
+          Foto <b>{type}</b> cargada
         </h4>
       ) : (
         <>
