@@ -47,7 +47,7 @@ const CompleteProfile = () => {
       <div className={classes.AuthWrapper}>
         <h1>¡Felicidades, Tu cuenta ha sido creada!</h1>
         <p className="mt-6">Ahora, debes completar todos tus datos</p>
-        <form onSubmit={formik.handleSubmit} className="text-center">
+        <form onSubmit={formik.handleSubmit} className="text-center flex flex-col items-center justify-center">
           <Input
             name="first_name"
             type="text"
@@ -98,7 +98,7 @@ const CompleteProfile = () => {
               Selecciona tu sexo
             </option>
           </Select>
-          <Button type="submit" className={`action-button ld-ext-right ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
+          <Button type="submit" className={`action-button ld-ext-right mt-3 ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
             <span className="ld ld-ring ld-spin" />
             Completar mi perfil
           </Button>
