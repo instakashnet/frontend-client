@@ -133,6 +133,7 @@ function* processCode({ values, orderId, processType }) {
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
     yield put(actions.exchangeError());
+    if (error.data && error.data.code === 4005 && processType !== "details") yield call([history, "push"], "/currency-exchange");
   }
 }
 

@@ -35,7 +35,7 @@ authInstance.interceptors.response.use(
       if (code === 4002) message = "Parece que este nro. de transferencia ya ha sido usado por hoy. Verificalo e intenta de nuevo.";
       if (code === 4003) message = "El cupón que intentas usar no existe o no está disponible. Verificalo e intenta de nuevo.";
       if (code === 4004) message = "Este cupón ya lo has usado con anterioridad. Por favor intenta con otro.";
-      if (code === 4005) message = "Se ha agotado el tiempo para esta solicitud de cambio de divisas. Debes crear una nueva solicitud.";
+      if (code === 4005) message = "Se ha agotado el tiempo en esta solicitud de cambio de divisas. Deberás crear una nueva solicitud de cambio.";
       if (code === 4008) message = "En estos momentos estams realizando unas actualizaciones, por ese mótivo su solicitud no puede ser generada. Agradecemos su comprensión.";
       if (code === 4012) message = "No posees los KASH suficientes en tu balance para canjear.";
       if (code === 4019) message = "No estás autorizado para utilizar este cupón.";
