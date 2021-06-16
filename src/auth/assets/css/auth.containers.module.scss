@@ -1,0 +1,69 @@
+@import "../../../core/assets/css/colors";
+@import "../../../core/assets/css/breakpoints";
+
+.SignupBackground {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url(../images/bg/coins.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.AuthWrapper {
+  padding: 70px 40px 60px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1rem;
+
+  h1 {
+    color: $secondary-green;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    line-height: 1.3;
+  }
+
+  a {
+    font-size: 0.9rem;
+    color: $anchor-green;
+    text-decoration: underline;
+    transition: 250ms ease-out;
+
+    &:hover {
+      color: darken($color: $anchor-green, $amount: 10);
+    }
+  }
+
+  form {
+    width: 100%;
+    margin: 20px 0;
+    text-align: left;
+    max-width: 23rem;
+
+    h4 {
+      color: $secondary-green;
+    }
+  }
+
+  @include respond(tablet) {
+    padding: 100px 15px;
+    min-width: 23rem;
+
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.InfoButton {
+  color: $secondary-green;
+  margin-bottom: 10px;
+
+  &:hover {
+    color: darken($color: $anchor-green, $amount: 10);
+  }
+}

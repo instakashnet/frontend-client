@@ -1,0 +1,175 @@
+@import "../../../core/assets/css/colors";
+@import "../../../core/assets/css/breakpoints";
+
+.NoDetails {
+  color: #959595;
+  margin-top: 15px;
+}
+
+.AddFile {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 19rem;
+  margin: 10px auto;
+
+  button[type="submit"] {
+    margin: 3px 0 0 !important;
+    color: $base-green !important;
+    text-decoration: underline;
+  }
+
+  h4 {
+    margin-top: 5px;
+    font-size: 1rem !important;
+    color: $base-text;
+
+    b {
+      color: #20a2a5;
+    }
+  }
+
+  p {
+    color: $base-text;
+    font-size: 0.8rem !important;
+  }
+
+  button svg {
+    color: $base-green;
+  }
+
+  span {
+    background-color: $base-green;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    transition: 200ms ease-in-out;
+
+    &:focus,
+    &:hover {
+      background-color: $anchor-green;
+    }
+  }
+
+  svg {
+    color: #fff;
+  }
+}
+
+.ActionButtons {
+  display: flex;
+  align-items: center;
+
+  button:last-of-type {
+    color: $error;
+  }
+}
+
+.SelectionCard {
+  width: 140px;
+  height: 140px;
+  border-radius: 15px;
+  background-color: $card-color;
+  transition: 250ms ease-in-out;
+  margin: 20px 20px 5px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & + p {
+    font-size: 0.9rem;
+  }
+
+  &:hover,
+  &focus {
+    box-shadow: 3px 5px 12px rgba(10, 67, 68, 0.1);
+  }
+
+  img {
+    width: 100%;
+    max-width: 10rem;
+    object-fit: contain;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 120px;
+    height: 120px;
+    margin: 10px 20px;
+  }
+
+  @media screen and (min-width: 996px) {
+    width: 160px;
+    height: 160px;
+    margin: 10px 25px;
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+.Add {
+  max-width: 4rem !important;
+}
+
+.UploadDocument {
+  text-align: center;
+
+  h2 {
+    color: $base-green;
+    margin: 0;
+  }
+
+  img {
+    max-width: 10rem;
+  }
+
+  h4 {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  ul {
+    font-size: 0.8rem;
+    list-style-image: url(../../../core/assets/images/icons/check.svg);
+  }
+
+  li {
+    margin: 5px 0;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}
+
+.InfoItem {
+  margin: 10px 0;
+  width: 100%;
+  max-width: 22rem;
+
+  h4 {
+    color: $base-text;
+    margin-left: 10px;
+  }
+
+  @include respond(tablet) {
+    margin: 10px 5px;
+  }
+}
+
+.InfoBox {
+  margin-top: 5px;
+  padding: 10px 20px;
+  background: #ffffff;
+  box-shadow: 0px 24px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  color: $base-text;
+  font-size: 0.9rem;
+}

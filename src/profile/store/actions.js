@@ -1,4 +1,4 @@
-import * as types from './types';
+import * as types from "./types";
 
 export const getProfilesInit = () => ({
   type: types.GET_PROFILES_INIT,
@@ -30,7 +30,7 @@ export const addProfileSuccess = () => ({
   type: types.ADD_PROFILE_SUCCESS,
 });
 
-export const editProfileInit = (values, setEdit) => ({
+export const editProfileInit = (values, setEdit = null) => ({
   type: types.EDIT_PROFILE_INIT,
   values,
   setEdit,
@@ -40,10 +40,12 @@ export const editProfileSuccess = () => ({
   type: types.EDIT_PROFILE_SUCCESS,
 });
 
-export const uploadDocumentInit = (values, uploadType) => ({
+export const uploadDocumentInit = (values, uploadType, setFile, setPercentage) => ({
   type: types.UPLOAD_DOCUMENT_INIT,
   values,
   uploadType,
+  setFile,
+  setPercentage,
 });
 
 export const uploadDocumentSuccess = () => ({

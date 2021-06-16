@@ -1,4 +1,4 @@
-import * as types from './types';
+import * as types from "./types";
 
 export const getRatesInit = () => ({
   type: types.GET_RATES_INIT,
@@ -24,11 +24,10 @@ export const deleteCoupon = () => ({
   type: types.DELETE_COUPON,
 });
 
-export const createExchangeInit = (values, profile, setStep) => ({
+export const createExchangeInit = (values, profile) => ({
   type: types.CREATE_EXCHANGE_INIT,
   values,
   profile,
-  setStep,
 });
 
 export const createExchangeSuccess = (order) => ({
@@ -36,11 +35,10 @@ export const createExchangeSuccess = (order) => ({
   order,
 });
 
-export const completeExchangeInit = (values, orderId, setStep) => ({
+export const completeExchangeInit = (values, orderId) => ({
   type: types.COMPLETE_EXCHANGE_INIT,
   values,
   orderId,
-  setStep,
 });
 
 export const completeExchangeSuccess = (order) => ({

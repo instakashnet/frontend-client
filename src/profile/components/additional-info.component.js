@@ -1,0 +1,35 @@
+import React from "react";
+import moment from "moment";
+import { Edit, AlertTriangle } from "react-feather";
+
+import InfoBox from "./info-box.component";
+
+const PersonalDetails = ({ profile, onEdit }) => {
+  let completed = true;
+
+  if (!profile.date_birth || !profile.address || !profile.job || !profile.profession) completed = false;
+
+  return (
+    <div className="w-full">
+      <div className="flex flex-col md:flex-row items-center justify-center md:justify-between">
+        <InfoBox label="Fecha de nacimiento">{profile.date_birth ? moment(profile.date_birth).format("DD/MM/YYYY") : "Sin fecha de nacimiento"}</InfoBox>
+        <InfoBox label="Dirección">{profile.address ? profile.address.substring(0, 20) : "Sin dirección"}</InfoBox>
+      </div>
+      <div className="flex flex-col md:flex-row items-center justify-center md:justify-between">
+        <InfoBox label="Ocupación">{profile.job || "Sin ocupación"}</InfoBox>
+        <InfoBox label="Profesión">{profile.profession || "Sin profesión"}</InfoBox>
+      </div>
+      <button type="button" onClick={() => onEdit((prev) => !prev)} className="flex mt-3 ml-auto underline font-bold items-center">
+        Editar info <Edit className="ml-2" size={18} />
+      </button>
+
+      {!completed && (
+        <span className="error-msg justify-center mb-4">
+          <AlertTriangle className="mr-3" /> No has completado los datos.
+        </span>
+      )}
+    </div>
+  );
+};
+
+export default PersonalDetails;

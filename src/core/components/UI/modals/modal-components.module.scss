@@ -1,0 +1,104 @@
+@import "../../../assets/css/colors";
+@import "../../../assets/css/breakpoints";
+
+.Modal {
+  border-radius: 10px;
+  background-color: $bg-color;
+  width: 100%;
+  max-width: 36rem;
+  max-height: 100vh;
+  margin: 0 auto;
+  outline: 0;
+  overflow: auto;
+  position: relative;
+  padding: 30px 30px 50px;
+  overscroll-behavior: contain;
+  font-size: 1rem;
+}
+
+.ModalContent {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  padding: 40px 0 20px;
+  align-items: center;
+
+  button {
+    margin-top: 15px;
+    max-width: 20rem;
+  }
+
+  h2 {
+    color: $base-green;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  @include respond(desktop) {
+    h2 {
+      font-size: 1.6rem;
+    }
+  }
+}
+
+.Close {
+  margin-top: 0 !important;
+  color: $base-green;
+  top: 1.5rem;
+  right: 1.5rem;
+  position: absolute;
+}
+
+.InfoModal {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+}
+
+.OutOfTimeBg {
+  background-image: url(../../../assets/images/outOfTime.svg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.OutOfTimeWrapper {
+  max-width: 30rem;
+  height: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  h1 {
+    color: $base-green;
+    margin-top: 20px;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  @include respond(tablet) {
+    h1 {
+      font-size: 1.8rem;
+    }
+  }
+
+  @include respond(desktop) {
+    h1 {
+      font-size: 2.3rem;
+    }
+  }
+}

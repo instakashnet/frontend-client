@@ -1,0 +1,129 @@
+@import "../../../assets/css/colors";
+@import "../../../assets/css/breakpoints";
+
+.FormGroup {
+  margin: 10px 0;
+  width: 100%;
+
+  label {
+    margin-bottom: 5px;
+    display: block;
+    font-size: 1rem;
+  }
+
+  input,
+  select,
+  .CheckboxWrapper {
+    width: 100%;
+    padding: 10px;
+    background: $card-color;
+    box-shadow: 0px 24px 20px rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
+    border: 1px solid #cacaca;
+
+    &::placeholder {
+      color: $placeholder;
+    }
+  }
+
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url(../../../../core/assets/images/icons/arrow.svg);
+    background-position: 97% center;
+    background-size: 12px;
+    background-repeat: no-repeat;
+  }
+
+  button {
+    background-color: $secondary-green !important;
+    border-radius: 0 10px 10px 0;
+    margin-top: 0 !important;
+    color: #fff;
+  }
+
+  @include respond(tablet) {
+    input,
+    select,
+    .CheckboxWrapper {
+      padding: 15px;
+    }
+  }
+}
+
+.SwitchGroup {
+  background: #f6fbf9;
+  border-radius: 10px;
+  margin: 10px auto;
+  padding: 10px 0 10px 10px;
+  box-shadow: 0px 24px 20px rgba(0, 0, 0, 0.04);
+  max-width: 25rem;
+
+  p {
+    font-size: 0.85rem !important;
+  }
+}
+
+.CheckGroup {
+  margin: 5px 0;
+  width: 100%;
+  cursor: pointer;
+
+  label {
+    font-size: 0.9rem;
+    color: $base-green;
+  }
+}
+
+.RadioGroup {
+  margin: 5px 10px;
+  cursor: pointer;
+}
+
+.InputGroup {
+  position: relative;
+
+  input[type="file"] {
+    visibility: hidden;
+  }
+
+  label {
+    position: absolute;
+    width: 100%;
+    padding: 15px;
+    background: $bg-input;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #afafaf;
+    cursor: pointer;
+    top: 0;
+  }
+
+  svg {
+    color: $base-green;
+  }
+}
+
+.FlexInput {
+  display: flex;
+  align-items: center;
+
+  input {
+    flex: 0.8;
+    border-radius: 10px 0 0 10px;
+  }
+
+  button {
+    flex: 0.2;
+    padding: 14.5px 15px;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+  }
+}
+
+.DatePicker {
+  width: 100%;
+}

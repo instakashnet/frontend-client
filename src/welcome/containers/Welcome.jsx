@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import { getScheduleInit } from "../../store/actions";
 
-import Card from "../../core/components/UI/Card";
-import Layout from "../../core/components/layout/Layout";
-import OutOfTime from "../../core/containers/OutOfTime";
+import Card from "../../core/components/UI/card.component";
+import Layout from "../../core/components/layout/layout.component";
+import ClosedModal from "../../core/components/UI/modals/closed-modal.component";
 
 import ExchangeImg from "../images/exchange.svg";
 import AffiliateImg from "../images/affiliate.svg";
@@ -42,7 +42,7 @@ const Welcome = () => {
   const closeOutOfTime = () => setOutOfTime(false);
 
   return outOfTime ? (
-    <OutOfTime onClose={closeOutOfTime} />
+    <ClosedModal onClose={closeOutOfTime} />
   ) : (
     <Layout className="content-start mt-8">
       <div className={classes.Welcome}>
