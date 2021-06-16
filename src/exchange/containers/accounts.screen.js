@@ -14,8 +14,8 @@ import Button from "../../core/components/UI/button.component";
 
 import classes from "../assets/css/exchange-screens.module.scss";
 
-const Accounts = ({ order, setStep, setModal }) => {
-  if (!order) setStep(0);
+const Accounts = ({ order, history, setModal }) => {
+  if (!order) history.goBack();
 
   const [totalAmountSent, setTotalAmountSent] = useState(order.amountSent);
 
@@ -32,7 +32,7 @@ const Accounts = ({ order, setStep, setModal }) => {
     initialValues: { account_to_id: "", bank_id: "", funds_origin: "", couponName: coupon ? coupon.name : null, kashApplied: "no", kashUsed: "" },
     enableReinitialize: true,
     validationSchema: completeExchangeValidation(funds_origin, kashAccount.balance, totalAmountSent),
-    onSubmit: (values) => dispatch(completeExchangeInit(values, order.id, setStep)),
+    onSubmit: (values) => dispatch(completeExchangeInit(values, order.id)),
   });
 
   const filteredAccounts = accounts.filter((account) => account.currency.id === order.currencyReceivedId);
@@ -134,13 +134,15 @@ const Accounts = ({ order, setStep, setModal }) => {
             onBlur={formik.handleBlur}
           />
         )}
-        <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button mt-4 ld-ext-right ${isProcessing ? "running" : ""}`}>
-          <span className="ld ld-ring ld-spin" />
-          Completar cambio
-        </Button>
-        <Button type="button" className="secondary-button mt-6" onClick={() => dispatch(cancelExchangeInit(order.id, "draft", setStep))}>
-          Cancelar
-        </Button>
+        <div className="flex flex-col items-center justify-center">
+          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button mt-4 ld-ext-right ${isProcessing ? "running" : ""}`}>
+            <span className="ld ld-ring ld-spin" />
+            Completar cambio
+          </Button>
+          <Button type="button" className="secondary-button mt-6" onClick={() => dispatch(cancelExchangeInit(order.id, "draft"))}>
+            Cancelar
+          </Button>
+        </div>
       </form>
     </>
   );

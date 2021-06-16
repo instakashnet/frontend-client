@@ -16,7 +16,7 @@ import TransferImg from "../assets/images/transfer.svg";
 
 import classes from "../assets/css/exchange-screens.module.scss";
 
-const TransferCode = ({ order }) => {
+const CompleteExchange = ({ order }) => {
   const [showInfo, setShowInfo] = useState(false);
   const dispatch = useDispatch();
   const formik = useFormik({
@@ -78,16 +78,18 @@ const TransferCode = ({ order }) => {
           onBlur={formik.handleBlur}
         />
         <p className="uppercase text-left text-sm">Solo posees 15 minutos para enviarnos el nro. de tu operación.</p>
-        <Button type="submit" className={`action-button mt-6 ld-ext-right ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
-          <span className="ld ld-ring ld-spin" />
-          Enviar
-        </Button>
-        <Button type="button" className="secondary-button mt-6" onClick={() => dispatch(cancelExchangeInit(order.id))}>
-          Cancelar
-        </Button>
+        <div className="flex flex-col justify-center items-center">
+          <Button type="submit" className={`action-button mt-6 ld-ext-right ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
+            <span className="ld ld-ring ld-spin" />
+            Enviar
+          </Button>
+          <Button type="button" className="secondary-button mt-6" onClick={() => dispatch(cancelExchangeInit(order.id))}>
+            Cancelar
+          </Button>
+        </div>
       </form>
     </div>
   );
 };
 
-export default TransferCode;
+export default CompleteExchange;

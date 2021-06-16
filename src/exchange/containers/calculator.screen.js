@@ -16,7 +16,7 @@ import Timer from "../components/calculator-items/timer.component";
 
 import classes from "../assets/css/exchange-screens.module.scss";
 
-const Calculator = ({ profile, setStep, setModal }) => {
+const Calculator = ({ profile, setModal }) => {
   const [actualRates, setActualRates] = useState({ buy: 0, sell: 0 });
   const [showInfo, setShowInfo] = useState(false);
   const { rates, isLoading, coupon, isProcessing } = useSelector((state) => state.Exchange);
@@ -45,7 +45,7 @@ const Calculator = ({ profile, setStep, setModal }) => {
           return setModal("complete");
         }
       }
-      return dispatch(createExchangeInit(values, profile, setStep));
+      return dispatch(createExchangeInit(values, profile));
     },
   });
   const { values, setFieldValue } = formik;

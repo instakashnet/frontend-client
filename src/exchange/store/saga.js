@@ -25,7 +25,7 @@ function* validateCoupon({ couponName, profileType }) {
   }
 }
 
-function* createExchange({ values, profile, setStep }) {
+function* createExchange({ values, profile }) {
   const exchangeValues = {
     ...values,
     profile_id: profile.id,
@@ -35,7 +35,7 @@ function* createExchange({ values, profile, setStep }) {
     const res = yield axios.post("/order/client/step-2", exchangeValues);
     if (res.status === 201) {
       yield put(actions.createExchangeSuccess(res.data));
-      yield call(setStep, 1);
+      yield call([history, "push"], "/currency-exchange/step-2");
     }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
@@ -43,7 +43,7 @@ function* createExchange({ values, profile, setStep }) {
   }
 }
 
-function* completeExchange({ values, orderId, setStep }) {
+function* completeExchange({ values, orderId }) {
   const exchangeValues = {
     ...values,
     kashApplied: values.kashApplied === "yes",
@@ -68,7 +68,7 @@ function* completeExchange({ values, orderId, setStep }) {
       }
 
       yield put(actions.completeExchangeSuccess(res.data));
-      return yield call(setStep, 2);
+      return yield call([history, "push"], "/currency-exchange/complete");
     }
   } catch (error) {
     if (error.data && error.data.code === 4006) {
@@ -84,7 +84,7 @@ function* completeExchange({ values, orderId, setStep }) {
   }
 }
 
-function* cancelExchange({ orderId, status, setStep }) {
+function* cancelExchange({ orderId, status }) {
   try {
     const result = yield Swal.fire({
       icon: "warning",
@@ -103,7 +103,7 @@ function* cancelExchange({ orderId, status, setStep }) {
     if (result.isConfirmed) {
       yield axios.delete(URL);
       if (status === "draft") {
-        yield call(setStep, 0);
+        yield call([history, "push"], "/currency-exchange");
       } else yield call([history, "push"], "/dashboard");
       yield put(actions.cancelExchangeSuccess());
       yield Swal.fire("Exitoso", "Su solicitud de cambio fue cancelada.", "success");

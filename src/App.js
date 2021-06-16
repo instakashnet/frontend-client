@@ -53,26 +53,28 @@ function App() {
   const closeModalHandler = () => dispatch(closeModal());
 
   return (
-    <Router history={history}>
-      <ScrollToTop>
-        <Switch>
-          <PublicRoute exact path="/signin" component={Signin} />
-          <PublicRoute exact path="/signup" component={Signup} />
-          <PublicRoute exact path="/recover-password" component={RecoverPassword} />
-          <PublicRoute exact path="/change-password" component={ChangePassword} />
-          <PublicRoute exact path="/complete-profile" component={CompleteProfile} />
-          <PrivateRoute exact path="/" component={asyncComponent(Welcome)} />
-          <PrivateRoute exact path="/profile-selection" component={asyncComponent(ProfileSelection)} />
-          <PrivateRoute exact path="/my-profile" component={asyncComponent(MyProfile)} />
-          <PrivateRoute exact path="/affiliate-program" component={asyncComponent(Affiliates)} />
-          <PrivateRoute exact path="/my-accounts" component={asyncComponent(Accounts)} />
-          <PrivateRoute exact path="/currency-exchange" component={asyncComponent(Exchange)} />
-          <PrivateRoute path="/dashboard" component={asyncComponent(Dashboard)} />
-        </Switch>
-      </ScrollToTop>
+    <>
+      <Router history={history}>
+        <ScrollToTop>
+          <Switch>
+            <PublicRoute exact path="/signin" component={Signin} />
+            <PublicRoute exact path="/signup" component={Signup} />
+            <PublicRoute exact path="/recover-password" component={RecoverPassword} />
+            <PublicRoute exact path="/change-password" component={ChangePassword} />
+            <PublicRoute exact path="/complete-profile" component={CompleteProfile} />
+            <PrivateRoute exact path="/" component={asyncComponent(Welcome)} />
+            <PrivateRoute exact path="/profile-selection" component={asyncComponent(ProfileSelection)} />
+            <PrivateRoute exact path="/my-profile" component={asyncComponent(MyProfile)} />
+            <PrivateRoute exact path="/affiliate-program" component={asyncComponent(Affiliates)} />
+            <PrivateRoute exact path="/my-accounts" component={asyncComponent(Accounts)} />
+            <PrivateRoute path="/currency-exchange" component={asyncComponent(Exchange)} />
+            <PrivateRoute path="/dashboard" component={asyncComponent(Dashboard)} />
+          </Switch>
+        </ScrollToTop>
+      </Router>
       <Alert />
       <Modal closeModal={closeModalHandler}>{ModalComponent && <ModalComponent />}</Modal>
-    </Router>
+    </>
   );
 }
 

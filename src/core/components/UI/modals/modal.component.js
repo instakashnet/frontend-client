@@ -26,15 +26,13 @@ const Modal = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-      document.addEventListener("touchstart", scrollToPreventBounce);
-    }
+    document.body.style.overflow = "hidden";
+    document.addEventListener("touchstart", scrollToPreventBounce);
     return () => {
       document.body.style.overflow = "unset";
       document.removeEventListener("touchstart", scrollToPreventBounce);
     };
-  }, [isOpen]);
+  }, []);
 
   return (
     <ReactModal closeTimeoutMS={300} onRequestClose={() => dispatch(closeModal())} isOpen={isOpen} className={classes.Modal} ariaHideApp={false} preventScroll>

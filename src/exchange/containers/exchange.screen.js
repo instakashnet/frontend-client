@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { getBanksInit, getCurenciesInit, getAccountsInit, getKashAccountInit, openModal, closeModal } from "../../store/actions";
 
 import Calculator from "./calculator.screen";
@@ -16,23 +16,11 @@ import { InfoButton } from "../components/info-button.component";
 
 import classes from "../assets/css/exchange-screens.module.scss";
 
-const Exchange = () => {
-  const history = useHistory();
+const Exchange = ({ history, match }) => {
   const dispatch = useDispatch();
   const [step, setStep] = useState(0);
   const profileSelected = JSON.parse(sessionStorage.getItem("profileSelected"));
   const order = useSelector((state) => state.Exchange.order);
-  const profiles = useSelector((state) => state.Profile.profiles);
-  const naturalProfile = profiles.find((profile) => profile.type === "natural");
-  const profile = {
-    ...profileSelected,
-    first_name: naturalProfile.first_name,
-    last_name: naturalProfile.last_name,
-    document_type: naturalProfile.document_type,
-    document_identification: naturalProfile.document_identification,
-    identity_photo: naturalProfile.identity_photo,
-    identity_photo_two: naturalProfile.identity_photo_two,
-  };
 
   useEffect(() => {
     dispatch(getBanksInit());
@@ -50,6 +38,7 @@ const Exchange = () => {
       };
     }
   }, [step]);
+
   const preventLoad = (e) => {
     e.preventDefault();
     if (e) e.returnValue = "¿Deseas salir del proceso de cambio de divisas?";
@@ -69,6 +58,8 @@ const Exchange = () => {
     dispatch(closeModal());
   };
 
+  console.log(match.url);
+
   const openModalHandler = (type = null) => {
     let ModalComponent;
 
@@ -79,16 +70,20 @@ const Exchange = () => {
     dispatch(openModal(ModalComponent));
   };
 
-  const pages = [
-    <Calculator profile={profile} setModal={openModalHandler} setStep={setStep} />,
-    <Accounts order={order} setModal={openModalHandler} setStep={setStep} />,
-    <Complete order={order} />,
-  ];
+  console.log(match.url + "/step-2");
 
   return (
     <Layout className="content-center">
       <div className={classes.Exchange}>
-        {pages[step]}
+        <Route exact path={match.url}>
+          <Calculator profile={profileSelected} setModal={openModalHandler} />
+        </Route>
+        <Route path={match.url + "/step-2"}>
+          <Accounts order={order} setModal={openModalHandler} />
+        </Route>
+        <Route path={match.url + "/complete"}>
+          <Complete order={order} />
+        </Route>
         {!isMobile && <Information />}
         {isMobile && <InfoButton onInfoOpen={() => openModalHandler("info")} />}
       </div>

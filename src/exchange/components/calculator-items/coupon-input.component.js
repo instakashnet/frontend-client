@@ -33,7 +33,7 @@ const Coupon = ({ coupon, minimum, amountReceived, onSendCoupon, onDeleteCoupon,
           <X />
         </button>
       </div>
-      {coupon.name === "NUEVOREFERIDO1" && <p>Aprovecha este cupón en tu primera operación.</p>}
+      {coupon.name === "NUEVOREFERIDO1" && <p className="my-2">Aprovecha este cupón en tu primera operación.</p>}
       {minimum && <p className="text-center error-msg mt-1 md:mt-3">Solo aplicable para montos mayores a $ {formatAmount(coupon.minimumAmount)}</p>}
     </>
   );
