@@ -20,7 +20,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const { profiles, user, isProcessing } = useSelector((state) => state.Profile);
   const profileSelected = JSON.parse(sessionStorage.getItem("profileSelected"));
-  const { profileCompleted } = useProfileInfo(profiles, profileSelected);
+  const { profileInfo, profileCompleted } = useProfileInfo(profiles, profileSelected);
 
   let InfoComponent = (props) => <PersonalInfo {...props} />;
   if (profileSelected.type === "juridica") InfoComponent = (props) => <CompanyInfo {...props} />;
@@ -38,11 +38,13 @@ const Profile = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3">
           <div className="col-span-2 lg:mr-14 lg:mt-4">
             <Accordion defaultExpanded title="Datos básicos" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
-              <InfoComponent profile={profileSelected} user={user} onDisable={() => dispatch(disableProfileInit(profileSelected.id))} />
+              <InfoComponent profile={profileSelected} personalProfile={profileInfo} user={user} onDisable={() => dispatch(disableProfileInit(profileSelected.id))} />
             </Accordion>
-            <Accordion defaultExpanded title="Datos adicionales" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
-              {edit ? <EditAdditional profile={profileSelected} onEdit={setEdit} /> : <AdditionalInfo profile={profileSelected} onEdit={setEdit} />}
-            </Accordion>
+            {profileSelected.type === "natural" && (
+              <Accordion defaultExpanded title="Datos adicionales" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
+                {edit ? <EditAdditional profile={profileSelected} onEdit={setEdit} /> : <AdditionalInfo profile={profileSelected} onEdit={setEdit} />}
+              </Accordion>
+            )}
           </div>
           <Accordion defaultExpanded title="Documento de identidad" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
             <DocumentInfo profile={profileSelected} isProcessing={isProcessing} />

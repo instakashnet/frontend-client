@@ -13,14 +13,14 @@ const PersonalDetails = ({ profile, onEdit }) => {
     <div className="w-full">
       <div className="flex flex-col md:flex-row items-center justify-center md:justify-between">
         <InfoBox label="Fecha de nacimiento">{profile.date_birth ? moment(profile.date_birth).format("DD/MM/YYYY") : "Sin fecha de nacimiento"}</InfoBox>
-        <InfoBox label="Dirección">{profile.address ? profile.address.substring(0, 20) : "Sin dirección"}</InfoBox>
+        <InfoBox label="Dirección">{profile.address ? profile.address.substring(0, 100) : "Sin dirección"}</InfoBox>
       </div>
       <div className="flex flex-col md:flex-row items-center justify-center md:justify-between">
         <InfoBox label="Ocupación">{profile.job || "Sin ocupación"}</InfoBox>
         <InfoBox label="Profesión">{profile.profession || "Sin profesión"}</InfoBox>
       </div>
       <button type="button" onClick={() => onEdit((prev) => !prev)} className="flex mt-3 ml-auto underline font-bold items-center">
-        Editar info <Edit className="ml-2" size={18} />
+        Editar datos <Edit className="ml-2" size={18} />
       </button>
 
       {!completed && (

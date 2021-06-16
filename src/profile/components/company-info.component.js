@@ -1,49 +1,38 @@
 import React from "react";
-import { Edit, Delete } from "react-feather";
+import { Delete } from "react-feather";
 
-import classes from "../assets/css/profile-components.module.scss";
+import InfoBox from "./info-box.component";
 
-const CompanyDetails = ({ profile, onEdit, onDisable }) => (
-  <>
-    <div className="flex items-center justify-between mt-10">
-      <h3>Datos básicos</h3>
-      <div className={classes.ActionButtons}>
-        <button className="flex items-center flex-wrap mr-4" type="button" onClick={() => onEdit("company")}>
-          Editar <Edit className="ml-1" size={20} />
-        </button>
-        <button className="flex items-center" type="button" onClick={onDisable}>
-          Eliminar <Delete className="ml-1" size={20} />
-        </button>
-      </div>
+const CompanyDetails = ({ profile, personalProfile, user, onEdit, onDisable }) => (
+  <div className="w-full">
+    <div className="flex flex-col md:flex-row items-center justify-center md:justify-between">
+      <InfoBox label="Razón social">{profile.razon_social}</InfoBox>
+      <InfoBox label="RUC">{profile.ruc}</InfoBox>
     </div>
-    <hr />
-    <div className="flex items-center justify-between mt-4">
-      <div>
-        <h4>Nombre de la empresa</h4>
-        <p>{profile.razon_social}</p>
-      </div>
-      <div>
-        <h4>RUC</h4>
-        <p>{profile.ruc}</p>
-      </div>
+
+    <div className="flex items-center justify-center md:justify-end">
+      <InfoBox label="Dirección fiscal">{profile.address}</InfoBox>
     </div>
-    <div className="my-4">
-      <h4>Dirección fiscal</h4>
-      <p>{profile.address}</p>
+
+    <div className="flex item-center justify-end ml-auto mt-2">
+      <button type="button" onClick={() => onDisable(null)} style={{ color: "#ff4b55" }} className="flex underline font-bold items-center mr-3">
+        Eliminar <Delete className="ml-2" size={18} />
+      </button>
+      {/* <button type="button" onClick={() => onEdit((prev) => !prev)} className="flex underline font-bold items-center">
+        Editar datos <Edit className="ml-2" size={18} />
+      </button> */}
     </div>
-    <h3 className="mt-8">Representante legal</h3>
-    <hr />
-    <div className="flex items-center justify-between mt-4">
-      <div>
-        <h4>Nombre completo</h4>
-        <p>{`${profile.first_name} ${profile.last_name}`}</p>
-      </div>
-      <div>
-        <h4>Documento de identidad</h4>
-        <p>{`${profile.document_type} ${profile.document_identification}`}</p>
-      </div>
+
+    <h3>Representante Legal</h3>
+    <div className="flex flex-col md:flex-row items-center justify-center md:justify-between">
+      <InfoBox label="Nombre completo">{`${personalProfile.first_name} ${personalProfile.last_name}`}</InfoBox>
+      <InfoBox label="Documento de identidad">{`${personalProfile.document_type} ${personalProfile.document_identification}`}</InfoBox>
     </div>
-  </>
+    <div className="flex flex-col md:flex-row items-center justify-center md:justify-between">
+      <InfoBox label="Teléfono">{user.phone || "No posees un teléfono"}</InfoBox>
+      <InfoBox label="Correo electrónico">{user.email}</InfoBox>
+    </div>
+  </div>
 );
 
 export default CompanyDetails;
