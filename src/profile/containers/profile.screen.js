@@ -18,8 +18,8 @@ import classes from "../assets/css/profile-containers.module.scss";
 const Profile = () => {
   const [edit, setEdit] = useState(false);
   const dispatch = useDispatch();
-  const { profiles, user, isProcessing } = useSelector((state) => state.Profile);
-  const { profileInfo, profileCompleted } = useProfileInfo(profiles);
+  const { user, isProcessing } = useSelector((state) => state.Profile);
+  const { profileInfo, profileCompleted } = useProfileInfo();
 
   let InfoComponent = (props) => <PersonalInfo {...props} />;
   if (profileInfo.type === "juridica") InfoComponent = (props) => <CompanyInfo {...props} />;

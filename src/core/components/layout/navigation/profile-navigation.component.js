@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logoutInit } from "../../../../store/actions";
 import { useProfileInfo } from "../../../../shared/hooks/useProfileInfo";
 
@@ -17,8 +17,7 @@ import classes from "./navigation-components.module.scss";
 
 const ProfileNavigation = () => {
   const dispatch = useDispatch();
-  const { profiles } = useSelector((state) => state.Profile);
-  const { profileInfo, profileCompleted } = useProfileInfo(profiles);
+  const { profileInfo, profileCompleted } = useProfileInfo();
 
   let Avatar = profileInfo.identity_sex === "male" ? Male : Female;
   let profileName = `${profileInfo.first_name} ${profileInfo.last_name}`;

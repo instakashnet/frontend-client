@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-export const useProfileInfo = (profiles) => {
+export const useProfileInfo = () => {
   const profileSelected = JSON.parse(sessionStorage.getItem("profileSelected"));
+  const profiles = useSelector((state) => state.Profile.profiles);
   const naturalProfile = profiles.find((profile) => profile.type === "natural");
   const [profileInfo, setProfileInfo] = useState({
     ...profileSelected,

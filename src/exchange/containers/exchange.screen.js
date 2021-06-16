@@ -3,6 +3,7 @@ import { isMobile } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 import { getBanksInit, getCurenciesInit, getAccountsInit, getKashAccountInit, openModal, closeModal } from "../../store/actions";
+import { useProfileInfo } from "../../shared/hooks/useProfileInfo";
 
 import Calculator from "./calculator.screen";
 import Accounts from "./accounts.screen";
@@ -19,8 +20,8 @@ import classes from "../assets/css/exchange-screens.module.scss";
 const Exchange = ({ history, match }) => {
   const dispatch = useDispatch();
   const [step, setStep] = useState(0);
-  const profileSelected = JSON.parse(sessionStorage.getItem("profileSelected"));
   const order = useSelector((state) => state.Exchange.order);
+  const { profileInfo } = useProfileInfo();
 
   useEffect(() => {
     dispatch(getBanksInit());
@@ -58,8 +59,6 @@ const Exchange = ({ history, match }) => {
     dispatch(closeModal());
   };
 
-  console.log(match.url);
-
   const openModalHandler = (type = null) => {
     let ModalComponent;
 
@@ -70,13 +69,11 @@ const Exchange = ({ history, match }) => {
     dispatch(openModal(ModalComponent));
   };
 
-  console.log(match.url + "/step-2");
-
   return (
     <Layout className="content-center">
       <div className={classes.Exchange}>
         <Route exact path={match.url}>
-          <Calculator profile={profileSelected} setModal={openModalHandler} />
+          <Calculator profile={profileInfo} setModal={openModalHandler} />
         </Route>
         <Route path={match.url + "/step-2"}>
           <Accounts order={order} setModal={openModalHandler} />
