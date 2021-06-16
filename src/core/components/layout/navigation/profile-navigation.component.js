@@ -18,8 +18,7 @@ import classes from "./navigation-components.module.scss";
 const ProfileNavigation = () => {
   const dispatch = useDispatch();
   const { profiles } = useSelector((state) => state.Profile);
-  const profileSelected = JSON.parse(sessionStorage.getItem("profileSelected"));
-  const { profileInfo, profileCompleted } = useProfileInfo(profiles, profileSelected);
+  const { profileInfo, profileCompleted } = useProfileInfo(profiles);
 
   let Avatar = profileInfo.identity_sex === "male" ? Male : Female;
   let profileName = `${profileInfo.first_name} ${profileInfo.last_name}`;

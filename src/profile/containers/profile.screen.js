@@ -19,11 +19,10 @@ const Profile = () => {
   const [edit, setEdit] = useState(false);
   const dispatch = useDispatch();
   const { profiles, user, isProcessing } = useSelector((state) => state.Profile);
-  const profileSelected = JSON.parse(sessionStorage.getItem("profileSelected"));
-  const { profileInfo, profileCompleted } = useProfileInfo(profiles, profileSelected);
+  const { profileInfo, profileCompleted } = useProfileInfo(profiles);
 
   let InfoComponent = (props) => <PersonalInfo {...props} />;
-  if (profileSelected.type === "juridica") InfoComponent = (props) => <CompanyInfo {...props} />;
+  if (profileInfo.type === "juridica") InfoComponent = (props) => <CompanyInfo {...props} />;
 
   useEffect(() => {
     dispatch(getAccountsInit("kash"));
@@ -38,16 +37,16 @@ const Profile = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3">
           <div className="col-span-2 lg:mr-14 lg:mt-4">
             <Accordion defaultExpanded title="Datos básicos" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
-              <InfoComponent profile={profileSelected} personalProfile={profileInfo} user={user} onDisable={() => dispatch(disableProfileInit(profileSelected.id))} />
+              <InfoComponent profile={profileInfo} personalProfile={profileInfo} user={user} onDisable={() => dispatch(disableProfileInit(profileInfo.id))} />
             </Accordion>
-            {profileSelected.type === "natural" && (
+            {profileInfo.type === "natural" && (
               <Accordion defaultExpanded title="Datos adicionales" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
-                {edit ? <EditAdditional profile={profileSelected} onEdit={setEdit} /> : <AdditionalInfo profile={profileSelected} onEdit={setEdit} />}
+                {edit ? <EditAdditional profile={profileInfo} onEdit={setEdit} /> : <AdditionalInfo profile={profileInfo} onEdit={setEdit} />}
               </Accordion>
             )}
           </div>
           <Accordion defaultExpanded title="Documento de identidad" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
-            <DocumentInfo profile={profileSelected} isProcessing={isProcessing} />
+            <DocumentInfo profile={profileInfo} isProcessing={isProcessing} />
           </Accordion>
         </div>
       </div>
