@@ -19,14 +19,14 @@ export const useProfileInfo = (profiles, profileSelected) => {
       identity_photo_two: naturalProfile.identity_photo_two,
     });
     // eslint-disable-next-line
-  }, [naturalProfile]);
+  }, []);
 
   useEffect(() => {
-    if (!profileInfo.address && !profileInfo.identity_photo) setProfileCompleted(33);
-    if ((!profileInfo.address && profileInfo.identity_photo) || (profileInfo.address && !profileInfo.identity_photo)) setProfileCompleted(66);
-    if (profileInfo.address && profileInfo.identity_photo && !profileInfo.identity_photo_two) setProfileCompleted(88);
-    if (profileInfo.address && profileInfo.identity_photo && profileInfo.identity_photo_two) setProfileCompleted(100);
-  }, [profileInfo]);
+    if (!profileSelected.address && !profileSelected.identity_photo) setProfileCompleted(33);
+    if ((!profileSelected.address && profileSelected.identity_photo) || (profileSelected.address && !profileSelected.identity_photo)) setProfileCompleted(66);
+    if (profileSelected.address && profileSelected.identity_photo && !profileSelected.identity_photo_two) setProfileCompleted(88);
+    if (profileSelected.address && profileSelected.identity_photo && profileSelected.identity_photo_two) setProfileCompleted(100);
+  }, [profileSelected]);
 
   return { profileInfo, profileCompleted };
 };
