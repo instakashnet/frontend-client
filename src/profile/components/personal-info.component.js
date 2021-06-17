@@ -12,6 +12,7 @@ const PersonalDetails = ({ profile, user }) => (
       <InfoBox label="Teléfono">{user.phone || "No posees un teléfono"}</InfoBox>
       <InfoBox label="Correo electrónico">{user.email}</InfoBox>
     </div>
+    <p className="ml-3 mt-2 font-bold">* Si desea editar alguno de sus datos básicos, por favor contacte a soporte.</p>
   </div>
 );
 
