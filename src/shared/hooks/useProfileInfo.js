@@ -15,6 +15,7 @@ export const useProfileInfo = () => {
     identity_photo: naturalProfile.identity_photo,
     identity_photo_two: naturalProfile.identity_photo_two,
   });
+
   const [profileCompleted, setProfileCompleted] = useState(0);
 
   useEffect(() => {
@@ -35,9 +36,14 @@ export const useProfileInfo = () => {
   }, [profileSelected]);
 
   useEffect(() => {
-    if (!profileInfo.address && !profileInfo.identity_photo) setProfileCompleted(33);
-    if ((!profileInfo.address && profileInfo.identity_photo) || (profileInfo.address && !profileInfo.identity_photo)) setProfileCompleted(66);
-    if (profileInfo.address && profileInfo.identity_photo && profileInfo.identity_photo_two) setProfileCompleted(100);
+    const isAddress = !!profileInfo.address;
+    const isFrontPhoto = !!profileInfo.identity_photo;
+    const isRearPhoto = !!profileInfo.identity_photo_two;
+
+    if (!isAddress && !isFrontPhoto && !isRearPhoto) setProfileCompleted(33);
+    if ((isAddress && !isFrontPhoto && !isRearPhoto) || (!isAddress && isFrontPhoto && !isRearPhoto) || (!isAddress && !isFrontPhoto && isRearPhoto)) setProfileCompleted(66);
+    if ((isAddress && isFrontPhoto && !isRearPhoto) || (!isAddress && !isFrontPhoto && isRearPhoto)) setProfileCompleted(88);
+    if (isAddress && isFrontPhoto && isRearPhoto) setProfileCompleted(100);
   }, [profileInfo]);
 
   return { profileInfo, profileCompleted };
