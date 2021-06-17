@@ -6,7 +6,7 @@ import UploadDocument from "./forms/upload-document.component";
 
 import Switch from "../../core/components/UI/form-items/switch.component";
 
-const DocumentDetails = ({ profile, isProcessing }) => {
+const DocumentDetails = ({ profile, isCompleted, isProcessing }) => {
   const dispatch = useDispatch();
   const [pep, setPep] = useState(profile.pep && profile.pep === "1" ? true : false);
 
@@ -19,6 +19,11 @@ const DocumentDetails = ({ profile, isProcessing }) => {
     dispatch(editProfileInit(newProfileInfo));
   };
 
+  let incompletedMessage;
+  if (!isCompleted.isRearPhoto && !isCompleted.isFrontPhoto) incompletedMessage = "No has subido tu documento.";
+  if (!isCompleted.isRearPhoto && isCompleted.isFrontPhoto) incompletedMessage = "No has subido la foto trasera.";
+  if (isCompleted.isRearPhoto && !isCompleted.isFrontPhoto) incompletedMessage = "No has subido la foto frontal.";
+
   return (
     <div className="w-full text-center mt-3">
       {profile.type === "juridica" && <p>Documento del representante legal.</p>}
@@ -26,9 +31,9 @@ const DocumentDetails = ({ profile, isProcessing }) => {
         <UploadDocument type="frontal" documentUrl={profile.identity_photo} />
         <UploadDocument type="trasera" documentUrl={profile.identity_photo_two} />
       </div>
-      {(!profile.identity_photo || !profile.identity_photo_two) && (
+      {incompletedMessage && (
         <span className="error-msg justify-center mb-4">
-          <AlertTriangle className="mr-3" /> No has subido el documento.
+          <AlertTriangle className="mr-3" /> {incompletedMessage}
         </span>
       )}
       {profile.type === "natural" && <Switch name="pep" placeholder="¿Eres una persona políticamente expuesta?" value={pep} onChange={onPepChange} isProcessing={isProcessing} />}

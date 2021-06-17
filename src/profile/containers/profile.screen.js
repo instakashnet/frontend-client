@@ -19,7 +19,7 @@ const Profile = () => {
   const [edit, setEdit] = useState(false);
   const dispatch = useDispatch();
   const { user, isProcessing } = useSelector((state) => state.Profile);
-  const { profileInfo, profileCompleted } = useProfileInfo();
+  const { profileInfo, profileCompleted, isCompleted } = useProfileInfo();
 
   let InfoComponent = (props) => <PersonalInfo {...props} />;
   if (profileInfo.type === "juridica") InfoComponent = (props) => <CompanyInfo {...props} />;
@@ -46,7 +46,7 @@ const Profile = () => {
             )}
           </div>
           <Accordion defaultExpanded title="Documento de identidad" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
-            <DocumentInfo profile={profileInfo} isProcessing={isProcessing} />
+            <DocumentInfo isCompleted={isCompleted} profile={profileInfo} isProcessing={isProcessing} />
           </Accordion>
         </div>
       </div>
