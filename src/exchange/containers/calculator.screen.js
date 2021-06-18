@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { Info, Clock } from "react-feather";
@@ -18,6 +18,7 @@ import classes from "../assets/css/exchange-screens.module.scss";
 
 const Calculator = ({ profile, setModal }) => {
   const [actualRates, setActualRates] = useState({ buy: 0, sell: 0 });
+  const [couponRates, setCouponRates] = useState({ buy: 0, sell: 0 });
   const [showInfo, setShowInfo] = useState(false);
   const { rates, isLoading, coupon, isProcessing } = useSelector((state) => state.Exchange);
 
@@ -49,6 +50,7 @@ const Calculator = ({ profile, setModal }) => {
     },
   });
   const { values, setFieldValue } = formik;
+  const { type, amount_sent } = values;
 
   const sendCouponHandler = (couponName) => {
     const bodyCoupon = couponName.trim();
@@ -66,23 +68,22 @@ const Calculator = ({ profile, setModal }) => {
   useEffect(() => {
     if (rates.buy && rates.sell) {
       setActualRates({ buy: rates.buy, sell: rates.sell });
-      dispatch(deleteCoupon());
+      if (coupon) dispatch(deleteCoupon());
 
       if (rates.buy > 0 && rates.sell > 0) {
         setFieldValue("amount_sent", Math.round(1000 * rates.sell));
         setFieldValue("amount_received", 1000);
       }
     }
+    // eslint-disable-next-line
   }, [rates, dispatch, setFieldValue]);
 
-  const setCouponValues = useCallback(() => {
-    setActualRates({ buy: rates.buy + coupon.discount, sell: rates.sell - coupon.discount });
-    setFieldValue("amount_received", values.type === "buy" ? values.amount_sent * (rates.buy + coupon.discount) : values.amount_sent / (rates.sell - coupon.discount));
-  }, [rates, values, coupon, setFieldValue]);
-
   useEffect(() => {
-    if (coupon && rates.buy > 0 && rates.sell > 0) setCouponValues();
-  }, [coupon, rates, setCouponValues]);
+    if (coupon && actualRates.buy > 0 && actualRates.sell > 0) {
+      setCouponRates({ buy: actualRates.buy + coupon.discount, sell: actualRates.sell - coupon.discount });
+      setFieldValue("amount_received", type === "buy" ? amount_sent * (actualRates.buy + coupon.discount) : amount_sent / (actualRates.sell - coupon.discount));
+    }
+  }, [coupon, type, amount_sent, actualRates, setFieldValue]);
 
   const swipeCurrencyHandler = () => {
     setFieldValue("type", values.type === "buy" ? "sell" : "buy");
@@ -110,7 +111,7 @@ const Calculator = ({ profile, setModal }) => {
     <>
       <h1>¡Gana cambiando con Instakash!</h1>
       <h3>Mejores tasas, mayor ahorro.</h3>
-      {isLoading ? <Spinner /> : <Rates actualRates={actualRates} rates={rates} />}
+      {isLoading ? <Spinner /> : <Rates actualRates={actualRates} coupon={coupon} couponRates={couponRates} />}
       <form onSubmit={formik.handleSubmit} className={classes.ExchangeForm}>
         {!isLoading && (
           <div className={classes.Timer}>
