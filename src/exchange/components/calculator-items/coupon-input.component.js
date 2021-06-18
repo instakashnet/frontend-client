@@ -6,9 +6,8 @@ import InlineInput from "../../../core/components/UI/form-items/inline-input.com
 import CouponImg from "../../assets/images/icons/coupon.svg";
 import classes from "../../assets/css/exchange-components.module.scss";
 
-const Coupon = ({ coupon, minimum, amountReceived, onSendCoupon, onDeleteCoupon, isProcessing, isLoading }) => {
+const Coupon = ({ coupon, minimum, onSendCoupon, onDeleteCoupon, isProcessing, isLoading }) => {
   const [couponName, setCouponName] = useState("");
-
   const onCouponChange = (e) => setCouponName(e.target.value);
 
   return !coupon ? (
@@ -16,7 +15,7 @@ const Coupon = ({ coupon, minimum, amountReceived, onSendCoupon, onDeleteCoupon,
       name="couponName"
       value={couponName}
       onClick={() => onSendCoupon(couponName)}
-      disabled={amountReceived < 1 || isProcessing || isLoading}
+      disabled={isProcessing || isLoading}
       onChange={onCouponChange}
       placeholder="Cupón de descuento"
       buttonLabel="Agregar"
@@ -39,4 +38,4 @@ const Coupon = ({ coupon, minimum, amountReceived, onSendCoupon, onDeleteCoupon,
   );
 };
 
-export default Coupon;
+export default React.memo(Coupon);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { Info, Clock } from "react-feather";
@@ -75,13 +75,14 @@ const Calculator = ({ profile, setModal }) => {
     }
   }, [rates, dispatch, setFieldValue]);
 
+  const setCouponValues = useCallback(() => {
+    setActualRates({ buy: rates.buy + coupon.discount, sell: rates.sell - coupon.discount });
+    setFieldValue("amount_received", values.type === "buy" ? values.amount_sent * (rates.buy + coupon.discount) : values.amount_sent / (rates.sell - coupon.discount));
+  }, [rates, values, coupon, setFieldValue]);
+
   useEffect(() => {
-    if (coupon) {
-      setActualRates({ buy: rates.buy + coupon.discount, sell: rates.sell - coupon.discount });
-      setFieldValue("amount_received", values.type === "buy" ? values.amount_sent * (rates.buy + coupon.discount) : values.amount_sent / (rates.sell - coupon.discount));
-    }
-    // eslint-disable-next-line
-  }, [coupon, setFieldValue]);
+    if (coupon && rates.buy > 0 && rates.sell > 0) setCouponValues();
+  }, [coupon, rates, setCouponValues]);
 
   const swipeCurrencyHandler = () => {
     setFieldValue("type", values.type === "buy" ? "sell" : "buy");
