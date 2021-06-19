@@ -17,7 +17,7 @@ const Coupon = ({ coupon, minimum, onSendCoupon, onDeleteCoupon, isProcessing, i
       onClick={() => onSendCoupon(couponName)}
       disabled={isProcessing || isLoading}
       onChange={onCouponChange}
-      placeholder="Cupón de descuento"
+      placeholder="Ingrese su cupón aquí"
       buttonLabel="Agregar"
       className="mt-4"
     />
