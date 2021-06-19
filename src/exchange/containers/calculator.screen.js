@@ -19,6 +19,7 @@ import classes from "../assets/css/exchange-screens.module.scss";
 const Calculator = ({ profile, setModal }) => {
   const [actualRates, setActualRates] = useState({ buy: 0, sell: 0 });
   const [couponRates, setCouponRates] = useState({ buy: 0, sell: 0 });
+  const [isCouponMin, setIsCouponMin] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const { rates, isLoading, coupon, isProcessing } = useSelector((state) => state.Exchange);
 
@@ -27,8 +28,7 @@ const Calculator = ({ profile, setModal }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getRatesInit());
-    dispatch(validateCouponInit("NUEVOREFERIDO1", profiletype));
-  }, [dispatch, profiletype]);
+  }, [dispatch]);
 
   const formik = useFormik({
     initialValues: {
@@ -42,28 +42,13 @@ const Calculator = ({ profile, setModal }) => {
     enableReinitialize: true,
     onSubmit: (values) => {
       if ((values.currency_received_id === 1 && values.amount_sent >= 15000) || (values.currency_received_id === 2 && values.amount_sent >= 5000)) {
-        if (!profile.address || !profile.identity_photo || !profile.identity_photo_two) {
-          return setModal("complete");
-        }
+        if (!profile.address || !profile.identity_photo || !profile.identity_photo_two) return setModal("complete");
       }
       return dispatch(createExchangeInit(values, profile));
     },
   });
   const { values, setFieldValue } = formik;
-  const { type, amount_sent } = values;
-
-  const sendCouponHandler = (couponName) => {
-    const bodyCoupon = couponName.trim();
-    const regex = /^((?=.*\d)?)(?=.*[a-zA-Z]).{6,}$/;
-    if (bodyCoupon && regex.test(bodyCoupon)) {
-      dispatch(validateCouponInit(bodyCoupon.toUpperCase(), profile.type));
-    } else return;
-  };
-  const deleteCouponHandler = () => {
-    dispatch(deleteCoupon());
-    setActualRates({ buy: rates.buy, sell: rates.sell });
-    setFieldValue("amount_received", values.type === "buy" ? values.amount_sent * rates.buy : values.amount_sent / rates.sell);
-  };
+  const { type, amount_sent, amount_received } = values;
 
   useEffect(() => {
     if (rates.buy && rates.sell) {
@@ -77,6 +62,10 @@ const Calculator = ({ profile, setModal }) => {
     }
     // eslint-disable-next-line
   }, [rates, dispatch, setFieldValue]);
+
+  useEffect(() => {
+    if (actualRates.buy > 0 && actualRates.sell > 0) dispatch(validateCouponInit("NUEVOREFERIDO1", profiletype));
+  }, [actualRates, dispatch, profiletype]);
 
   useEffect(() => {
     if (coupon && actualRates.buy > 0 && actualRates.sell > 0) {
@@ -100,10 +89,23 @@ const Calculator = ({ profile, setModal }) => {
     if (values.type === "sell") setFieldValue(inputName, inputName === "amount_received" ? +rawValue / actualRates.sell : +rawValue * actualRates.sell);
   };
 
-  let minimum;
-  if (coupon && coupon.minimumAmount) {
-    minimum = (values.type === "sell" && values.amount_received < coupon.minimumAmount) || (values.type === "buy" && values.amount_sent < coupon.minimumAmount);
-  }
+  const sendCouponHandler = (couponName) => {
+    const bodyCoupon = couponName.trim();
+    const regex = /^((?=.*\d)?)(?=.*[a-zA-Z]).{6,}$/;
+    if (bodyCoupon && regex.test(bodyCoupon)) {
+      dispatch(validateCouponInit(bodyCoupon.toUpperCase(), profile.type));
+    } else return;
+  };
+
+  const deleteCouponHandler = () => {
+    dispatch(deleteCoupon());
+    setActualRates({ buy: rates.buy, sell: rates.sell });
+    setFieldValue("amount_received", values.type === "buy" ? values.amount_sent * rates.buy : values.amount_sent / rates.sell);
+  };
+
+  useEffect(() => {
+    if (coupon && coupon.minimumAmount > 0) setIsCouponMin((type === "sell" && amount_received < coupon.minimumAmount) || (type === "buy" && amount_sent < coupon.minimumAmount));
+  }, [coupon, amount_received, amount_sent, type]);
 
   const disabled = (actualRates.buy <= 0 && actualRates.sell <= 0) || isLoading || isProcessing;
 
@@ -122,7 +124,7 @@ const Calculator = ({ profile, setModal }) => {
           </div>
         )}
         <div className="relative">
-          <Input name="amount_sent" value={values.amount_sent} currency={values.currency_sent_id} label="Envias" disabled={disabled} onChange={currencyChangeHandler} />
+          <Input name="amount_sent" value={amount_sent} currency={values.currency_sent_id} label="Envias" disabled={disabled} onChange={currencyChangeHandler} />
           <Swipe onSwipeCurrency={swipeCurrencyHandler} type={values.type} disabled={disabled} />
           <Input
             name="amount_received"
@@ -147,9 +149,10 @@ const Calculator = ({ profile, setModal }) => {
           </p>
           <CouponInput
             coupon={coupon}
-            minimum={minimum}
+            minimum={isCouponMin}
             amountReceived={values.amount_received}
             isProcessing={isProcessing}
+            disabled={disabled}
             isLoading={isLoading}
             onSendCoupon={sendCouponHandler}
             onDeleteCoupon={deleteCouponHandler}
