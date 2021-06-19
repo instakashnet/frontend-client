@@ -24,7 +24,7 @@ const PersonalDetails = ({ profile, onEdit }) => {
       </button>
 
       {!completed && (
-        <span className="error-msg justify-center mb-4">
+        <span className="error-msg flex items-center justify-center mb-4">
           <AlertTriangle className="mr-3" /> No has completado los datos.
         </span>
       )}

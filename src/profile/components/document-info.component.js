@@ -32,7 +32,7 @@ const DocumentDetails = ({ profile, isCompleted, isProcessing }) => {
         <UploadDocument type="trasera" documentUrl={profile.identity_photo_two} />
       </div>
       {incompletedMessage && (
-        <span className="error-msg justify-center mb-4">
+        <span className="error-msg flex items-center justify-center mb-4">
           <AlertTriangle className="mr-3" /> {incompletedMessage}
         </span>
       )}

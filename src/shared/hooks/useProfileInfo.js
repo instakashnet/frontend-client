@@ -42,7 +42,7 @@ export const useProfileInfo = () => {
   useEffect(() => {
     if (!isAddress && !isFrontPhoto && !isRearPhoto) setProfileCompleted(33);
     if ((isAddress && !isFrontPhoto && !isRearPhoto) || (!isAddress && isFrontPhoto && !isRearPhoto) || (!isAddress && !isFrontPhoto && isRearPhoto)) setProfileCompleted(66);
-    if ((isAddress && isFrontPhoto && !isRearPhoto) || (!isAddress && !isFrontPhoto && isRearPhoto)) setProfileCompleted(88);
+    if ((isAddress && isFrontPhoto && !isRearPhoto) || (isAddress && !isFrontPhoto && isRearPhoto) || (!isAddress && isFrontPhoto && isRearPhoto)) setProfileCompleted(88);
     if (isAddress && isFrontPhoto && isRearPhoto) setProfileCompleted(100);
   }, [profileInfo, isAddress, isFrontPhoto, isRearPhoto]);
 

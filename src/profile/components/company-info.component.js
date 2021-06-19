@@ -3,7 +3,7 @@ import { Delete } from "react-feather";
 
 import InfoBox from "./info-box.component";
 
-const CompanyDetails = ({ profile, personalProfile, user, onEdit, onDisable }) => (
+const CompanyDetails = ({ profile, personalProfile, user, onDisable }) => (
   <div className="w-full">
     <div className="flex flex-col md:flex-row items-center justify-center md:justify-between">
       <InfoBox label="Razón social">{profile.razon_social}</InfoBox>
