@@ -7,6 +7,7 @@ import { toggleNav } from "../../../store/actions";
 import Navigation from "./navigation/nav-items.component";
 import Backdrop from "../UI/backdrop.component";
 import Affiliate from "./affiliate-card.component";
+import Logo from "../UI/logo.component";
 
 import classes from "./layout-components.module.scss";
 
@@ -29,6 +30,7 @@ const Sidebar = () => {
   return (
     <>
       <div className={`${classes.Sidebar} ${opened ? classes.Open : ""}`}>
+        <Logo className={classes.Logo} />
         <Navigation />
         <Affiliate usercode={usercode} />
       </div>
