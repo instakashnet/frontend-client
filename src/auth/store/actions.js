@@ -1,4 +1,4 @@
-import * as types from './types';
+import * as types from "./types";
 
 export const loadUserInit = () => ({
   type: types.LOADUSER_INIT,
@@ -56,6 +56,14 @@ export const logoutInit = () => ({
 
 export const logoutSuccess = () => ({
   type: types.LOGOUT_SUCCESS,
+});
+
+export const refreshTokenInit = () => ({
+  type: types.REFRESH_TOKEN_INIT,
+});
+
+export const refreshTokenSuccess = () => ({
+  type: types.REFRESH_TOKEN_SUCCESS,
 });
 
 export const authError = () => ({

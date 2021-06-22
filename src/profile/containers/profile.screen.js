@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAccountsInit, disableProfileInit } from "../../store/actions";
+import { disableProfileInit } from "../../store/actions";
 import { useProfileInfo } from "../../shared/hooks/useProfileInfo";
 import { ArrowDownCircle } from "react-feather";
 
@@ -23,10 +23,6 @@ const Profile = () => {
 
   let InfoComponent = (props) => <PersonalInfo {...props} />;
   if (profileInfo.type === "juridica") InfoComponent = (props) => <CompanyInfo {...props} />;
-
-  useEffect(() => {
-    dispatch(getAccountsInit("kash"));
-  }, [dispatch]);
 
   return (
     <Layout className={classes.ProfileInfoSection}>
