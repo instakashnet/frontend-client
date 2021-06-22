@@ -58,10 +58,12 @@ const ActivityMobile = ({ orders, withdrawals, openModal, isLoading }) => {
                         </section>
                       </article>
                       <article className={classes.ActivityMobile}>
-                        <section>
-                          <h4>Fecha</h4>
-                          <p>{moment(order.created).format("DD/MM HH:mm")}</p>
-                        </section>
+                        {order.completedAt && (
+                          <section>
+                            <h4>Fecha</h4>
+                            <p>{moment(order.completedAt).format("DD/MM HH:mm")}</p>
+                          </section>
+                        )}
                         <section className="mr-4">
                           <h4>Solicitado</h4>
                           <p className={classes.Price}>{`${order.currencyReceived === "USD" ? "$" : "S/."} ${formatAmount(order.amountReceived)}`}</p>

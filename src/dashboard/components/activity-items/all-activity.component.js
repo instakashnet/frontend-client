@@ -46,7 +46,7 @@ const AllActivity = ({ orders, openModal }) => {
     data = orders.map((order) => ({
       status: { color: order.stateColor, name: order.estateName.toLowerCase() },
       pedidoId: order.uuid,
-      date: moment(order.created).format("DD/MM/YY HH:mm a"),
+      date: order.completedAt ? moment(order.completedAt).format("DD/MM/YY HH:mm a") : "Incompleta",
       amount: `${order.currencyReceivedSymbol} ${formatAmount(order.amountReceived)}`,
       orderId: order.id,
     }));

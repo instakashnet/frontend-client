@@ -35,7 +35,6 @@ function* getOrderAmounts() {
 function* getTotalAmount() {
   try {
     const res = yield axios.get("/order/data/user");
-    console.log(res);
     if (res.status === 200) yield put(actions.getTotalAmountSuccess(res.data));
   } catch (error) {
     yield put(actions.activityError());
