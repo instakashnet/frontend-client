@@ -12,7 +12,7 @@ const AcitivityItem = ({ order, openModal }) => {
       <div className={classes.Color} style={{ backgroundColor: order.stateColor }} />
       <div className={classes.Info}>
         <p>{order.uuid}</p>
-        <span>{moment(order.created).format("DD/MM/YY HH:mm a")}</span>
+        {order.completedAt && <span>{moment(order.completedAt).format("DD/MM/YY HH:mm a")}</span>}
         <p className={classes.Price}>{`${order.currencyReceivedSymbol} ${formatAmount(order.amountReceived)}`}</p>
       </div>
       <Button className={classes.ViewButton} onClick={() => openModal(order.id, "order")}>
