@@ -11,6 +11,7 @@ function* getRates() {
     const res = yield axios.get("/rates");
     if (res.status === 200) {
       const rates = { id: res.data[0].id, buy: +res.data[0].buy, sell: +res.data[0].sell };
+
       yield put(actions.getRatesSuccess(rates));
     }
   } catch (error) {
