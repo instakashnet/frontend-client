@@ -44,7 +44,6 @@ function* loadUser() {
 
 function* setAuthTimeout(timeout, isLoadUser = false) {
   yield delay(timeout - 5000);
-  console.log("refreshing");
   if (isLoadUser) {
     yield call(logout);
   } else yield put(actions.refreshTokenInit());
@@ -154,7 +153,7 @@ function* logout() {
   try {
     yield axios.post("/auth/logout");
   } catch (error) {
-    console.log(error);
+    yield put(actions.authError());
   }
 
   yield call(clearUser);

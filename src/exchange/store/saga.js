@@ -9,7 +9,14 @@ import history from "../../shared/history";
 function* getRates() {
   try {
     const res = yield axios.get("/rates");
-    if (res.status === 200) yield put(actions.getRatesSuccess(res.data[0]));
+    if (res.status === 200) {
+      const rates = {
+        id: res.data[0].id,
+        buy: +res.data[0].buy,
+        sell: +res.data[0].sell,
+      };
+      yield put(actions.getRatesSuccess(rates));
+    }
   } catch (error) {
     yield put(actions.exchangeError());
   }
