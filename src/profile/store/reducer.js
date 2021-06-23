@@ -1,4 +1,5 @@
 import * as types from "./types";
+import { LOGOUT_SUCCESS } from "../../auth/store/types";
 
 const initialState = {
   profiles: [],
@@ -6,7 +7,6 @@ const initialState = {
   profileSelected: null,
   isLoading: true,
   isProcessing: false,
-  profileCompleted: 0,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -30,7 +30,10 @@ const profileReducer = (state = initialState, action) => {
       return { ...state, isLoading: false, profiles: action.profiles, user: action.user };
 
     case types.SELECT_PROFILE_SUCCESS:
-      return { ...state, profileSelected: action.profile, profileCompleted: action.completed };
+      return { ...state, profileSelected: action.profile };
+
+    case LOGOUT_SUCCESS:
+      return { ...state, profileSelected: null };
 
     case types.PROFILES_ERROR:
       return { ...state, isLoading: false, isProcessing: false };

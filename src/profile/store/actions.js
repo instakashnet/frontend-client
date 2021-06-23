@@ -10,15 +10,15 @@ export const getProfilesSuccess = (profiles, user) => ({
   user,
 });
 
-export const selectProfileInit = (profileId) => ({
+export const selectProfileInit = (profileId, profile = null) => ({
   type: types.SELECT_PROFILE_INIT,
   profileId,
+  profile,
 });
 
-export const selectProfileSuccess = (profile, completed) => ({
+export const selectProfileSuccess = (profile) => ({
   type: types.SELECT_PROFILE_SUCCESS,
   profile,
-  completed,
 });
 
 export const addProfileInit = (values) => ({

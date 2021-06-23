@@ -1,7 +1,7 @@
 import { useEffect, lazy } from "react";
 import { Switch, Router } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUserInit, getProfilesInit, closeModal } from "./store/actions";
+import { loadUserInit, getProfilesInit, selectProfileInit, closeModal } from "./store/actions";
 import ReactPixel from "react-facebook-pixel";
 import history from "./shared/history";
 
@@ -37,14 +37,18 @@ function App() {
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.Auth.isAuth);
   const ModalComponent = useSelector((state) => state.Modal.Component);
+  const profileSelected = JSON.parse(sessionStorage.getItem("profileSelected"));
 
   useEffect(() => {
     dispatch(loadUserInit());
   }, [dispatch]);
 
   useEffect(() => {
-    if (isAuth) dispatch(getProfilesInit());
-  }, [dispatch, isAuth]);
+    if (isAuth) {
+      dispatch(getProfilesInit());
+      if (profileSelected) dispatch(selectProfileInit(null, profileSelected));
+    }
+  }, [dispatch, isAuth, profileSelected]);
 
   useEffect(() => {
     ReactPixel.pageView();

@@ -31,21 +31,20 @@ function* addProfile({ values }) {
   }
 }
 
-function* setSelectedProfile(profileId) {
-  const profile = yield select((state) => state.Profile.profiles.find((profile) => profile.id === profileId));
-  let completed = 0;
-  yield call([sessionStorage, "setItem"], "profileSelected", JSON.stringify(profile));
+function* setSelectedProfile(profileId, profile) {
+  let profileSelected = profile;
 
-  if (!profile.address && !profile.identity_photo) completed = 33;
-  if ((!profile.address && profile.identity_photo) || (profile.address && !profile.identity_photo)) completed = 66;
-  if (profile.address && profile.identity_photo) completed = 100;
+  if (profileId) {
+    profileSelected = yield select((state) => state.Profile.profiles.find((p) => p.id === profileId));
+    yield call([sessionStorage, "setItem"], "profileSelected", JSON.stringify(profileSelected));
+  }
 
-  yield put(actions.selectProfileSuccess(profile, completed));
+  yield put(actions.selectProfileSuccess(profileSelected));
 }
 
-function* selectProfile({ profileId }) {
-  yield call(setSelectedProfile, profileId);
-  yield call([history, "push"], "/");
+function* selectProfile({ profileId, profile }) {
+  yield call(setSelectedProfile, profileId, profile);
+  if (profileId) yield call([history, "push"], "/");
 }
 
 function* editProfile({ values, setEdit }) {
