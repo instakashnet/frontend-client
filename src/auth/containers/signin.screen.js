@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { signinValidation } from "../helpers/formValidations";
 import { Mail } from "react-feather";
 import { useSelector, useDispatch } from "react-redux";
-import { signinInit, signinGoogle, setAlertInit, closeModal } from "../../store/actions";
+import { signinInit, signinGoogle, closeModal } from "../../store/actions";
 
 import Background from "../components/layout/background.component";
 import Logo from "../../core/components/UI/logo.component";
