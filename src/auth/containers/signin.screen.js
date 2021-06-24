@@ -24,7 +24,6 @@ const Signin = () => {
     console.log(res);
     if (res.error) {
       if (res.error.includes("popup_closed")) return;
-      return dispatch(setAlertInit("Parece que hay problemas conectando con google. Por favor intente más tarde.", "error"));
     }
     dispatch(signinGoogle(res.tokenId));
   };

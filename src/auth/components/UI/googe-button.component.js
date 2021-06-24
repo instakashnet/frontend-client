@@ -7,7 +7,7 @@ import GoogleIcon from "../../assets/images/icons/google.svg";
 const GoogleButton = ({ onSuccess, onFailure }) => {
   return (
     <GoogleLogin
-      clientId="202060127908-3bn0eg60kljv6a03nhttcddlmkmqd5is.apps.googleusercontent.com"
+      clientId="202060127908-2f1qk4eq495ccdm3r6ah185vca55eflm.apps.googleusercontent.com"
       onSuccess={onSuccess}
       onFailure={onFailure}
       buttonText="Login"
