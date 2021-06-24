@@ -11,7 +11,7 @@ import Logo from "../../core/components/UI/logo.component";
 import Input from "../components/UI/input.component";
 import Password from "../components/UI/password-input.component";
 import Button from "../../core/components/UI/button.component";
-import GoogleButton from "../components/UI/googe-button.component";
+import GoogleButton from "../components/UI/google-button.component";
 import InfoModal from "../../core/components/UI/modals/info-modal.component";
 
 import classes from "../assets/css/auth.containers.module.scss";

@@ -7,10 +7,11 @@ import GoogleIcon from "../../assets/images/icons/google.svg";
 const GoogleButton = ({ onSuccess, onFailure }) => {
   return (
     <GoogleLogin
-      clientId="202060127908-2f1qk4eq495ccdm3r6ah185vca55eflm.apps.googleusercontent.com"
+      clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
       onSuccess={onSuccess}
       onFailure={onFailure}
       buttonText="Login"
+      cookiePolicy={"single_host_origin"}
       render={(props) => (
         <Button onClick={props.onClick} disabled={props.disabled} className="secondary-button">
           <img src={GoogleIcon} width={20} alt="google" /> Acceder con google
