@@ -1,0 +1,19 @@
+name: Instakash-client CI
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [15.x]
+
+    steps:
+      - uses: actions/checkout@main
+      - run: npm install
+      - run: npm run build
