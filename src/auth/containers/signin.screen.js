@@ -21,10 +21,7 @@ const Signin = () => {
   const { isProcessing } = useSelector((state) => state.Auth);
   const formik = useFormik({ initialValues: { email: "", password: "" }, validationSchema: signinValidation, onSubmit: (values) => dispatch(signinInit(values)) });
   const signInGoogle = (res) => {
-    console.log(res);
-    if (res.error) {
-      if (res.error.includes("popup_closed")) return;
-    }
+    if (res.error) if (res.error.includes("popup_closed")) return;
     dispatch(signinGoogle(res.tokenId));
   };
 
