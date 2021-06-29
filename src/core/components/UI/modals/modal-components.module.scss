@@ -7,7 +7,7 @@
   width: 100%;
   max-width: 36rem;
   max-height: 100vh;
-  margin: 0 auto;
+  margin: auto;
   outline: 0;
   overflow: auto;
   position: relative;
@@ -23,6 +23,10 @@
   flex-flow: column;
   padding: 40px 0 20px;
   align-items: center;
+
+  b {
+    color: $base-green;
+  }
 
   button {
     margin-top: 15px;

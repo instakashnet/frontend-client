@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProfileInit, openModal, closeModal } from "../../store/actions";
-import { AlertTriangle } from "react-feather";
+import { Info } from "react-feather";
 
 import Layout from "../../core/components/layout/layout.component";
 import SelectionCard from "../components/selection-card.component";
@@ -54,13 +54,13 @@ export const InfoModal = () => {
 
   return (
     <div className="flex flex-col items-center justify-center text-center">
-      <AlertTriangle size={70} className="error-msg mb-4" />
+      <Info size={70} className="info-icon mb-4" />
       <h2>Estimado usuario</h2>
       <p>
-        Le informamos que en estos momentos las plataforma para empresas de <b>BCP</b> presenta problemas en su plataforma. Por tal motivo no podremos realizar transferencias a
-        este banco. Ya el banco ha sido notificado y estarán solucionando.
+        Queremos comunicarle que <b>el dia 29 de Junio no realizaremos operaciones.</b> Podrá realizar sus cambios de divisas con normalidad{" "}
+        <b>a partir del dia Miércoles 30 de Junio.</b> <br /> Horario de apertura regular <b>9AM a 7PM</b>
         <br />
-        <span className="mt-4 inline-block font-bold">Agradecemos su comprensión.</span>
+        <span className="mt-4 inline-block font-bold">Esperamos que tengan un buen día.</span>
         <Button onClick={() => dispatch(closeModal())} className="action-button">
           Lo entiendo
         </Button>
