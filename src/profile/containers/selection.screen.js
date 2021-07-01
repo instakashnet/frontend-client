@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProfileInit, openModal, closeModal } from "../../store/actions";
 import { Info } from "react-feather";
@@ -17,13 +17,13 @@ const Selection = () => {
 
   const addProfileHandler = () => dispatch(openModal(AddProfile));
 
-  /*   useEffect(() => {
+  useEffect(() => {
     const timeout = setTimeout(() => {
       dispatch(openModal(InfoModal));
     }, 600);
     return () => clearTimeout(timeout);
   }, [dispatch]);
- */
+
   return (
     <Layout>
       {isLoading && <Spinner screen />}
@@ -57,10 +57,10 @@ export const InfoModal = () => {
       <Info size={70} className="info-icon mb-4" />
       <h2>Estimado usuario</h2>
       <p>
-        Queremos comunicarle que <b>el dia 29 de Junio no realizaremos operaciones.</b> Podrá realizar sus cambios de divisas con normalidad{" "}
-        <b>a partir del dia Miércoles 30 de Junio.</b> <br /> Horario de apertura regular <b>9AM a 7PM</b>
+        Queremos comunicarle que la plataforma para empresas de <b>BCP</b> se encuentra con problemas de conexión. Por tal motivo las operaciones realizadas a ese banco podrán
+        demorar más de lo usual. Ya el banco ha sido notificado y se encuentran solucionando.
         <br />
-        <span className="mt-4 inline-block font-bold">Esperamos que tengan un buen día.</span>
+        <span className="mt-4 inline-block font-bold">Agradecemos su comprensión.</span>
         <Button onClick={() => dispatch(closeModal())} className="action-button">
           Lo entiendo
         </Button>
