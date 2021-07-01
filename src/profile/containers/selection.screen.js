@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProfileInit, openModal, closeModal } from "../../store/actions";
-import { Info } from "react-feather";
+import { AlertTriangle } from "react-feather";
 
 import Layout from "../../core/components/layout/layout.component";
 import SelectionCard from "../components/selection-card.component";
@@ -54,7 +54,7 @@ export const InfoModal = () => {
 
   return (
     <div className="flex flex-col items-center justify-center text-center">
-      <Info size={70} className="info-icon mb-4" />
+      <AlertTriangle size={70} className="error-msg mb-4" />
       <h2>Estimado usuario</h2>
       <p>
         Queremos comunicarle que la plataforma para empresas de <b>BCP</b> se encuentra con problemas de conexión. Por tal motivo las operaciones realizadas a ese banco podrán
