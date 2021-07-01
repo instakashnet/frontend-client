@@ -2,6 +2,8 @@ name: developCI
 
 on:
   push:
+    paths-ignore:
+      - ".github/**"
     branches:
       - "develop"
 
@@ -14,8 +16,6 @@ jobs:
       REACT_APP_AUTH_API: ${{ secrets.TEST_AUTH_API }}
       REACT_APP_ACCOUNTS_API: ${{ secrets.TEST_ACCOUNTS_API }}
       REACT_APP_EXCHANGE_API: ${{ secrets.TEST_EXCHANGE_API }}
-      AWS_CF_DISTRIBUTION_ID: EU6IRE21LXH82
-      AWS_REGION: us-east-2
     strategy:
       matrix:
         node-version: [15.x]
@@ -29,3 +29,8 @@ jobs:
         run: yarn install
       - name: Build de application
         run: yarn build
+      - name: Build admin om netlify
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: npx netlify-cli deploy --dir=build --prod
