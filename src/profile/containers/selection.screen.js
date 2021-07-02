@@ -18,10 +18,15 @@ const Selection = () => {
   const addProfileHandler = () => dispatch(openModal(AddProfile));
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      dispatch(openModal(InfoModal));
-    }, 600);
-    return () => clearTimeout(timeout);
+    let timeout;
+    const isRead = sessionStorage.getItem("isRead");
+
+    if (!isRead) {
+      timeout = setTimeout(() => {
+        dispatch(openModal(InfoModal));
+      }, 600);
+    }
+    return () => timeout && clearTimeout(timeout);
   }, [dispatch]);
 
   return (
@@ -52,6 +57,11 @@ const Selection = () => {
 export const InfoModal = () => {
   const dispatch = useDispatch();
 
+  const closeModalHandler = () => {
+    sessionStorage.setItem("isRead", true);
+    dispatch(closeModal());
+  };
+
   return (
     <div className="flex flex-col items-center justify-center text-center">
       <AlertTriangle size={70} className="error-msg mb-4" />
@@ -61,7 +71,7 @@ export const InfoModal = () => {
         demorar más de lo usual. Ya el banco ha sido notificado y se encuentran solucionando.
         <br />
         <span className="mt-4 inline-block font-bold">Agradecemos su comprensión.</span>
-        <Button onClick={() => dispatch(closeModal())} className="action-button">
+        <Button onClick={closeModalHandler} className="action-button">
           Lo entiendo
         </Button>
       </p>
