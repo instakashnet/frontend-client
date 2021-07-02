@@ -85,7 +85,7 @@ const CustomSelect = ({ name, label, error, touched, onChange, value, placeholde
         components={{ Option: IconOption, SingleValue: CustomValueContainer }}
         isSearchable={false}
       />
-      {error && touched && <span className="error-msg">{error}</span>}
+      {error && touched && <p className="error-msg">{error}</p>}
     </div>
   );
 };

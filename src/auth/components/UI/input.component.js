@@ -11,7 +11,7 @@ const Input = ({ placeholder, name, type, error, groupClass, touched, icon, ...r
         <input name={name} type={type} className={`border-b py-2 pl-2 pr-6 ${error && touched ? classes.Error : ""}`} placeholder={placeholder} {...rest} />
         <Icon size={20} />
       </div>
-      {error && touched && <span className="error-msg">{error}</span>}
+      {error && touched && <p className="error-msg">{error}</p>}
     </div>
   );
 };

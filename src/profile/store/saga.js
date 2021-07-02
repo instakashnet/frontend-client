@@ -57,9 +57,9 @@ function* editProfile({ values, setEdit }) {
     if (res.status === 200) {
       yield call(getProfiles);
       yield call(setSelectedProfile, values.profileId);
-      yield put(setAlertInit("Su perfil ha sido actualizado correctamente.", "success"));
       yield put(actions.editProfileSuccess());
       if (setEdit) yield call(setEdit, false);
+      yield put(setAlertInit("Su perfil ha sido actualizado correctamente.", "success"));
     }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
@@ -84,8 +84,7 @@ function* uploadDocument({ values, uploadType, setFile, setPercentage }) {
     });
     if (res.status === 200) {
       yield call(getProfiles);
-      const profileSelected = yield call([sessionStorage, "getItem"], "profileSelected");
-      yield call(setSelectedProfile, JSON.parse(profileSelected).id);
+      yield call(setSelectedProfile, values.profileId);
       yield call(setFile, null);
       yield put(actions.editProfileSuccess());
       yield put(setAlertInit("La foto se ha cargado correctamente.", "success"));

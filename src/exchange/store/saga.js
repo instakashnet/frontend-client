@@ -52,6 +52,7 @@ function* completeExchange({ values, orderId }) {
     ...values,
     kashApplied: values.kashApplied === "yes",
     bank_id: values.bank_id || 1,
+    funds_origin: values.funds_origin === "otros" ? values.funds_text : values.funds_origin,
   };
 
   try {
