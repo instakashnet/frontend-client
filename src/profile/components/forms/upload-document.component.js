@@ -37,7 +37,7 @@ const UploadDocument = ({ type, documentUrl }) => {
       </div>
       {file ? (
         <>
-          <h4>{file[0].name}</h4>
+          <h4>{`${file[0].name.substring(0, 14)}${file[0].name.length > 15 ? "...." : ""}`}</h4>
           {percentage > 0 && isProcessing && (
             <p className="italic flex items-center">
               <Clock size={15} className="mr-1" style={{ color: "#676767" }} /> cargando foto: {percentage}%

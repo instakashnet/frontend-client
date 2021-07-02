@@ -21,7 +21,7 @@ function* getRates() {
 
 function* validateCoupon({ couponName, profileType }) {
   try {
-    const res = yield axios.get(`/coupons/client/${couponName}/${profileType}`);
+    const res = yield axios.get(`/coupons/${couponName}/${profileType}`);
     if (res.status === 200) yield put(actions.validateCouponSuccess({ name: couponName, discount: res.data.discount, minimumAmount: res.data.minAmountBuy }));
   } catch (error) {
     if (!couponName.includes("NUEVOREFERIDO")) yield put(setAlertInit(error.message, "error"));
@@ -36,7 +36,7 @@ function* createExchange({ values, profile }) {
   };
 
   try {
-    const res = yield axios.post("/order/client/step-2", exchangeValues);
+    const res = yield axios.post("/order/step-2", exchangeValues);
     if (res.status === 201) {
       yield put(actions.createExchangeSuccess(res.data));
       yield call([history, "push"], "/currency-exchange/step-2");
@@ -55,7 +55,7 @@ function* completeExchange({ values, orderId }) {
   };
 
   try {
-    const res = yield axios.put(`/order/client/step-3/${orderId}`, exchangeValues);
+    const res = yield axios.put(`/order/step-3/${orderId}`, exchangeValues);
 
     if (res.status === 200) {
       if (res.data.noBank) {
@@ -101,8 +101,8 @@ function* cancelExchange({ orderId, status }) {
       cancelButtonText: "Regresar",
     });
 
-    let URL = `/order/client/cancel/${orderId}`;
-    if (status === "draft") URL = `/order/client/draft/${orderId}`;
+    let URL = `/order/cancel/${orderId}`;
+    if (status === "draft") URL = `/order/draft/${orderId}`;
 
     if (result.isConfirmed) {
       yield axios.delete(URL);
@@ -120,7 +120,7 @@ function* cancelExchange({ orderId, status }) {
 
 function* processCode({ values, orderId, processType }) {
   try {
-    const res = yield axios.put(`/order/client/step-4/${orderId}`, values);
+    const res = yield axios.put(`/order/step-4/${orderId}`, values);
     if (res.status === 200) {
       if (processType === "details") yield put(getOrdersInit());
       yield call([history, "push"], "/dashboard");
