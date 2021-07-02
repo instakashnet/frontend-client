@@ -17,12 +17,12 @@ const Selection = () => {
 
   const addProfileHandler = () => dispatch(openModal(AddProfile));
 
-  /*   useEffect(() => {
+  useEffect(() => {
     const timeout = setTimeout(() => {
       dispatch(openModal(InfoModal));
     }, 600);
     return () => clearTimeout(timeout);
-  }, [dispatch]); */
+  }, [dispatch]);
 
   return (
     <Layout>
