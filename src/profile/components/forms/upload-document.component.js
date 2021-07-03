@@ -25,7 +25,7 @@ const UploadDocument = ({ type, documentUrl, profileId }) => {
 
   const FileIcon = file || documentUrl ? <FileText size={30} /> : <Upload size={30} />;
 
-  const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: "image/jpeg, image/png", maxSize: 5242880, multiple: false });
+  const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: "image/jpeg, image/png, application/pdf", maxSize: 5242880, multiple: false });
 
   return (
     <Card className={classes.AddFile}>
@@ -36,7 +36,6 @@ const UploadDocument = ({ type, documentUrl, profileId }) => {
       {file ? (
         <>
           <h4>{`${file.name.substring(0, 14)}${file.name.length > 15 ? "...." : ""}`}</h4>
-          <p>.jpg o .png | máximo 5MB</p>
           {isProcessing && (
             <p className="italic mt-2 flex font-bold items-center">
               <Clock size={15} className="mr-1" style={{ color: "#676767" }} /> cargando foto: {percentage}%
@@ -52,6 +51,7 @@ const UploadDocument = ({ type, documentUrl, profileId }) => {
           Cargar <b>foto {type}</b>
         </h4>
       )}
+      <p>.jpg, .png o .pdf | máximo 5MB</p>
     </Card>
   );
 };

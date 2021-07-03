@@ -24,7 +24,7 @@ const AccountDetails = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 mb-6">
             <div>
               <h4>Banco</h4>
-              <img src={`${process.env.PUBLIC_URL}/images/banks/${accountDetails.bank.name}-logo.svg`} width={80} alt={accountDetails.bank.name} />
+              <img src={`${process.env.PUBLIC_URL}/images/banks/${accountDetails.bank.name.toLowerCase()}-logo.svg`} width={80} alt={accountDetails.bank.name} />
             </div>
             <div>
               <h4>Tipo de cuenta</h4>
