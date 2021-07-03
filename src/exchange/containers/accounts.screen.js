@@ -11,6 +11,7 @@ import AccountSelect from "../../core/components/UI/form-items/account-select.co
 import Select from "../../core/components/UI/form-items/select.component";
 import KashUsed from "../components/kash-used.component";
 import Button from "../../core/components/UI/button.component";
+import Input from "../../core/components/UI/form-items/input.component";
 
 import classes from "../assets/css/exchange-screens.module.scss";
 
@@ -18,6 +19,7 @@ const Accounts = ({ order, history, setModal }) => {
   if (!order) history.goBack();
 
   const [totalAmountSent, setTotalAmountSent] = useState(order.amountSent);
+  const [fundsInput, setFundsInput] = useState(false);
 
   let funds_origin;
   if (order.currencyReceivedId === 1 && order.amountSent >= 15000) funds_origin = true;
@@ -29,13 +31,14 @@ const Accounts = ({ order, history, setModal }) => {
   const { accounts, kashAccount } = useSelector((state) => state.Accounts);
 
   const formik = useFormik({
-    initialValues: { account_to_id: "", bank_id: "", funds_origin: "", couponName: coupon ? coupon.name : null, kashApplied: "no", kashUsed: "" },
+    initialValues: { account_to_id: "", bank_id: "", funds_origin: "", funds_text: "", couponName: coupon ? coupon.name : null, kashApplied: "no", kashUsed: "" },
     enableReinitialize: true,
     validationSchema: completeExchangeValidation(funds_origin, kashAccount.balance, totalAmountSent),
     onSubmit: (values) => dispatch(completeExchangeInit(values, order.id)),
   });
 
   const filteredAccounts = accounts.filter((account) => account.currency.id === order.currencyReceivedId);
+
   const fundsOptions = [
     { label: "Ahorros", value: "ahorros" },
     { label: "Alquiler de bienes inmuebles", value: "alquiler de bienes inmuebles" },
@@ -48,6 +51,10 @@ const Accounts = ({ order, history, setModal }) => {
     { label: "Préstamos", value: "préstamos" },
     { label: "Otros", value: "otros" },
   ];
+  const onFundsOriginChange = (e) => {
+    setFundsInput(e.target.value === "otros");
+    formik.setFieldValue("funds_origin", e.target.value);
+  };
 
   const bankOptions = banks.map((bank) => ({ label: bank.name, value: bank.id, icon: `${process.env.PUBLIC_URL}/images/banks/${bank.name.toLowerCase()}-logo.svg` }));
   const accountOptions = filteredAccounts.map((account) => ({
@@ -130,8 +137,19 @@ const Accounts = ({ order, history, setModal }) => {
             value={formik.values.funds_origin}
             error={formik.errors.funds_origin}
             touched={formik.touched.funds_origin}
+            onChange={onFundsOriginChange}
+          />
+        )}
+        {fundsInput && (
+          <Input
+            type="text"
+            name="funds_text"
+            placeholder="Escribe el origen de tus fondos"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            value={formik.values.funds_text}
+            error={formik.errors.funds_text}
+            touched={formik.touched.funds_text}
           />
         )}
         <div className="flex flex-col items-center justify-center">

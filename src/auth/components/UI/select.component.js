@@ -13,7 +13,7 @@ const Select = ({ options, name, error, touched, children, ...rest }) => {
           </option>
         ))}
       </select>
-      {error && touched && <span className="error-msg">{error}</span>}
+      {error && touched && <p className="error-msg">{error}</p>}
     </div>
   );
 };

@@ -16,7 +16,7 @@ const Password = ({ name, placeholder, error, touched, ...rest }) => {
         <input type={type} name={name} autoComplete="password" placeholder={placeholder} className={`border-b py-2 pl-2 pr-6 ${error && touched ? classes.Error : ""}`} {...rest} />
         <Icon size={20} onClick={() => setType((prevType) => (prevType === "password" ? "text" : "password"))} />
       </div>
-      {error && touched && <span className="error-msg">{error}</span>}
+      {error && touched && <p className="error-msg">{error}</p>}
     </div>
   );
 };

@@ -19,7 +19,7 @@ const FlexInput = ({ type, name, value, placeholder, disabled, error, touched, b
         )}
       </div>
 
-      {error && touched && <span className="error-msg">{error}</span>}
+      {error && touched && <p className="error-msg">{error}</p>}
     </div>
   );
 };

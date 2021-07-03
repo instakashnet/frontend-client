@@ -8,16 +8,22 @@ import Card from "../../../core/components/UI/card.component";
 
 import classes from "../../assets/css/profile-components.module.scss";
 
-const UploadDocument = ({ type, documentUrl }) => {
+const UploadDocument = ({ type, documentUrl, profileId }) => {
   const dispatch = useDispatch();
   const isProcessing = useSelector((state) => state.Profile.isProcessing);
   const [percentage, setPercentage] = useState(0);
   const [file, setFile] = useState(null);
 
   const inputName = type === "frontal" ? "identity_photo" : "identity_photo_two";
-  const onDrop = useCallback((acceptedFile) => setFile(acceptedFile), []);
+  const onDrop = useCallback(
+    (acceptedFile) => {
+      setFile(acceptedFile[0]);
+      dispatch(uploadDocumentInit({ [inputName]: acceptedFile[0], profileId }, type, setFile, setPercentage));
+    },
+    [dispatch, inputName, type, profileId]
+  );
 
-  const uploadPhotoHandler = () => dispatch(uploadDocumentInit({ [inputName]: file[0] }, type, setFile, setPercentage));
+  const FileIcon = file || documentUrl ? <FileText size={30} /> : <Upload size={30} />;
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: "image/jpeg, image/png", maxSize: 5242880, multiple: false });
 
@@ -25,31 +31,16 @@ const UploadDocument = ({ type, documentUrl }) => {
     <Card className={classes.AddFile}>
       <div className="flex justify-center px-6 cursor-pointer" {...getRootProps()}>
         <input {...getInputProps()} />
-        {file || documentUrl ? (
-          <span className="text-center">
-            <FileText size={30} />
-          </span>
-        ) : (
-          <span className="text-center">
-            <Upload size={30} />
-          </span>
-        )}
+        <span className="text-center">{FileIcon}</span>
       </div>
       {file ? (
         <>
-          <h4>{file[0].name}</h4>
-          {percentage > 0 && isProcessing && (
-            <p className="italic flex items-center">
+          <h4>{`${file.name.substring(0, 14)}${file.name.length > 15 ? "...." : ""}`}</h4>
+          <p>.jpg o .png | máximo 5MB</p>
+          {isProcessing && (
+            <p className="italic mt-2 flex font-bold items-center">
               <Clock size={15} className="mr-1" style={{ color: "#676767" }} /> cargando foto: {percentage}%
             </p>
-          )}
-          {!isProcessing && (
-            <>
-              <button type="button" className="flex items-center px-2 mb-1 underline" onClick={uploadPhotoHandler}>
-                cargar foto <Upload size={15} className="ml-2" />
-              </button>
-              <p>.jpg o .png | máximo 5MB</p>
-            </>
           )}
         </>
       ) : documentUrl ? (
@@ -57,12 +48,9 @@ const UploadDocument = ({ type, documentUrl }) => {
           Foto <b>{type}</b> cargada
         </h4>
       ) : (
-        <>
-          <h4>
-            Cargar <b>foto {type}</b>
-          </h4>
-          <p>.jpg o .png | máximo 5MB</p>
-        </>
+        <h4>
+          Cargar <b>foto {type}</b>
+        </h4>
       )}
     </Card>
   );

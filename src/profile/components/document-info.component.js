@@ -28,13 +28,13 @@ const DocumentDetails = ({ profile, isCompleted, isProcessing }) => {
     <div className="w-full text-center mt-3">
       {profile.type === "juridica" && <p>Documento del representante legal.</p>}
       <div className="flex flex-col items-center justify-center mx-auto w-full">
-        <UploadDocument type="frontal" documentUrl={profile.identity_photo} />
-        <UploadDocument type="trasera" documentUrl={profile.identity_photo_two} />
+        <UploadDocument type="frontal" profileId={profile.id} documentUrl={profile.identity_photo} />
+        <UploadDocument type="trasera" profileId={profile.id} documentUrl={profile.identity_photo_two} />
       </div>
       {incompletedMessage && (
-        <span className="error-msg flex items-center justify-center mb-4">
+        <p className="error-msg flex items-center justify-center mb-4">
           <AlertTriangle className="mr-3" /> {incompletedMessage}
-        </span>
+        </p>
       )}
       {profile.type === "natural" && <Switch name="pep" placeholder="¿Eres una persona políticamente expuesta?" value={pep} onChange={onPepChange} isProcessing={isProcessing} />}
     </div>
