@@ -23,6 +23,7 @@ const StepsSwiper = () => {
   return (
     <Swiper
       cssMode
+      loop
       className={classes.SwiperContainer}
       nnavigation={{
         prevEl: navigationPrevRef.current,
