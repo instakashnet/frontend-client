@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const authInstance = axios.create({
-  baseURL: process.env.NODE_ENV !== "production" ? process.env.REACT_APP_TEST_EXCHANGE_API : process.env.REACT_APP_EXCHANGE_API,
+  baseURL: `${process.env.NODE_ENV !== "production" ? process.env.REACT_APP_TEST_EXCHANGE_API : process.env.REACT_APP_EXCHANGE_API}/client`,
   timeout: 8000,
 });
 
