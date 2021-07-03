@@ -10,7 +10,7 @@ const AccountCard = ({ account, openModal }) => {
   return (
     <Card className={classes.AccountCard}>
       <div className="flex items-center justify-between">
-        <img src={`${process.env.PUBLIC_URL}/images/banks/${account.bank.name}-logo.svg`} width={80} alt={account.bank.name} />
+        <img src={`${process.env.PUBLIC_URL}/images/banks/${account.bank.name.toLowerCase()}-logo.svg`} width={80} alt={account.bank.name} />
         <button onClick={openModal}>ver más</button>
       </div>
       <div className="flex items-center justify-between mt-6">
