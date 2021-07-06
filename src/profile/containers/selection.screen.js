@@ -67,8 +67,8 @@ export const InfoModal = () => {
       <AlertTriangle size={70} className="error-msg mb-4" />
       <h2>Estimado usuario</h2>
       <p>
-        Queremos comunicarle que las plataformas para empresas de <b>Interbank</b> y <b>BCP</b> se encuentran con problemas de conexión. Por tal motivo las operaciones demorarán un
-        poco más de lo usual.
+        Queremos comunicarle que la plataforma para empresas de <b>Interbank</b> se encuentra con problemas en sus transferencias. Por tal motivo las operaciones hacia ese banco no
+        se harán por los momentos.
         <br />
         <span className="mt-4 inline-block font-bold">Agradecemos su comprensión.</span>
         <Button onClick={closeModalHandler} className="action-button">
