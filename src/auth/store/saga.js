@@ -76,13 +76,8 @@ function* signinGoogle({ token }) {
 }
 
 function* signup({ values }) {
-  const signupValues = {
-    ...values,
-    phone: "+" + values.phone,
-  };
-
   try {
-    const res = yield axios.post("/auth/signup", signupValues);
+    const res = yield axios.post("/auth/signup", values);
     if (res.status === 201) yield put(actions.signinInit({ email: values.email, password: values.password }));
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
