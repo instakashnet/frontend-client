@@ -6,7 +6,6 @@ import GoogleIcon from "../../assets/images/icons/google.svg";
 
 const GoogleButton = ({ onSuccess, onFailure }) => {
   const clientId = process.env.NODE_ENV !== "production" ? process.env.REACT_APP_TEST_GOOGLE_ID : process.env.REACT_APP_GOOGLE_ID;
-  console.log(clientId);
 
   return (
     <GoogleLogin
