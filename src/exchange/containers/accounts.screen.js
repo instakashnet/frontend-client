@@ -155,7 +155,7 @@ const Accounts = ({ order, history, setModal }) => {
         <div className="flex flex-col items-center justify-center">
           <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button mt-4 ld-ext-right ${isProcessing ? "running" : ""}`}>
             <span className="ld ld-ring ld-spin" />
-            Completar cambio
+            Continuar
           </Button>
           <Button type="button" className="secondary-button mt-6" onClick={() => dispatch(cancelExchangeInit(order.id, "draft"))}>
             Cancelar
