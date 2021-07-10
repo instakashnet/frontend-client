@@ -20,7 +20,7 @@ const ProfileNavigation = () => {
   const { profileInfo, profileCompleted } = useProfileInfo();
 
   let Avatar = profileInfo.identity_sex === "male" ? Male : Female;
-  let profileName = `${profileInfo.first_name} ${profileInfo.last_name}`;
+  let profileName = `${profileInfo.first_name.split(" ")[0]} ${profileInfo.last_name.split(" ")[0]}`;
   let profileType = "Usuario";
 
   if (profileInfo.type === "juridica") {

@@ -36,6 +36,7 @@ const CompleteProfile = () => {
   const sexOptions = [
     { value: "male", label: "Masculino" },
     { value: "female", label: "Femeníno" },
+    { value: "other", label: "Otro" },
   ];
 
   const onPhoneChange = (value) => formik.setFieldValue("phone", value);

@@ -33,7 +33,7 @@ const UploadDocument = ({ type, documentUrl, profileId }) => {
         <input {...getInputProps()} />
         <span className="text-center">{FileIcon}</span>
       </div>
-      {file ? (
+      {file && (
         <>
           <h4>{`${file.name.substring(0, 14)}${file.name.length > 15 ? "...." : ""}`}</h4>
           {isProcessing && (
@@ -42,15 +42,17 @@ const UploadDocument = ({ type, documentUrl, profileId }) => {
             </p>
           )}
         </>
-      ) : documentUrl ? (
-        <h4>
-          Foto <b>{type}</b> cargada
-        </h4>
-      ) : (
-        <h4>
-          Cargar <b>foto {type}</b>
-        </h4>
       )}
+      {!file &&
+        (documentUrl ? (
+          <h4>
+            Foto <b>{type}</b> cargada
+          </h4>
+        ) : (
+          <h4>
+            Cargar <b>foto {type}</b>
+          </h4>
+        ))}
       <p>.jpg, .png o .pdf | máximo 5MB</p>
     </Card>
   );

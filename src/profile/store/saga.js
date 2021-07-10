@@ -1,7 +1,7 @@
 import { put, all, fork, call, select, takeEvery, takeLatest } from "redux-saga/effects";
 import * as types from "./types";
 import * as actions from "./actions";
-import axios from "../helpers/axios";
+import axios from "../../auth/helpers/axios";
 import { setAlertInit, closeModal } from "../../store/actions";
 import history from "../../shared/history";
 import Swal from "sweetalert2";

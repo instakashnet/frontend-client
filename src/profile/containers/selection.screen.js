@@ -36,7 +36,7 @@ const Selection = () => {
         <div className={classes.ProfileSelectionWrapper}>
           <h1 className="mb-1">¡Nos alegra que estés aqui!</h1>
           <h3>Selecciona el perfil que usarás hoy</h3>
-          <div className="flex items-center flex-wrap justify-center mt-10">
+          <div className="flex items-start flex-wrap justify-center mt-10">
             {profiles.map((profile) => (
               <SelectionCard
                 onClick={() => dispatch(selectProfileInit(profile.id))}

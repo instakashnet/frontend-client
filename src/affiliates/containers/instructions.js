@@ -3,7 +3,6 @@ import { isMobile } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../store/actions";
 
-import Layout from "../../core/components/layout/layout.component";
 import StepsSwiper from "../components/steps-swiper.component";
 import Step from "../components/step.component";
 import UserCode from "../components/user-code.component";
@@ -19,15 +18,15 @@ import Arrow2 from "../assets/images/arrow2.svg";
 
 import classes from "../assets/css/affiliates-containers.module.scss";
 
-const Instructions = () => {
+export const Instructions = ({ ...rest }) => {
   const dispatch = useDispatch();
   const usercode = useSelector((state) => state.Auth.userCode);
 
   const editCodeHandler = () => dispatch(openModal(EditCode));
 
   return (
-    <Layout className="content-start">
-      <article className={classes.Instructions}>
+    <div {...rest}>
+      <article className={classes.AffiliatesSection}>
         <h1>¡Recomienda y gana!</h1>
         <h3>Comparte el código con tus amigos</h3>
         {isMobile && <StepsSwiper />}
@@ -71,8 +70,6 @@ const Instructions = () => {
           <ShareIcons userCode={usercode} className="mt-3 md:mt-0" />
         </div>
       </article>
-    </Layout>
+    </div>
   );
 };
-
-export default Instructions;
