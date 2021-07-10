@@ -14,7 +14,7 @@ const ProfileInfo = ({ main, selected, openNav }) => {
 
   if (!selected && main) {
     Avatar = main.identity_sex === "male" ? Male : Female;
-    profileName = `${main.first_name} ${main.last_name}`;
+    profileName = `${main.first_name.split(" ")[0]} ${main.last_name.split(" ")[0]}`;
   }
   if (selected) {
     if (selected.type === "juridica") {
@@ -22,7 +22,7 @@ const ProfileInfo = ({ main, selected, openNav }) => {
       profileName = selected.razon_social;
     } else {
       Avatar = selected.identity_sex === "male" ? Male : Female;
-      profileName = `${selected.first_name} ${selected.last_name}`;
+      profileName = `${selected.first_name.split(" ")[0]} ${selected.last_name.split(" ")[0]}`;
     }
   }
 

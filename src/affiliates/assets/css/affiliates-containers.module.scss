@@ -17,6 +17,7 @@ button.AffiliatesTab {
   font-size: 1rem;
   text-transform: capitalize;
   font-family: inherit;
+  max-width: 12rem;
 
   &[aria-selected="true"] {
     background-color: $base-green;
@@ -30,6 +31,16 @@ button.AffiliatesTab {
   }
 }
 
+.TableCard {
+  max-width: 1280px;
+  margin: 15px auto;
+  padding: 10px 5px;
+
+  @include respond(desktop) {
+    padding: 30px 55px;
+  }
+}
+
 .AffiliatesSection {
   max-width: 1536px;
   margin: auto;
@@ -39,6 +50,11 @@ button.AffiliatesTab {
     font-weight: bold;
     font-size: 1.7rem;
     text-align: center;
+  }
+
+  h2 {
+    font-weight: bold;
+    font-size: 1.5rem;
   }
 
   h3 {
@@ -85,6 +101,16 @@ button.AffiliatesTab {
 .AffiliatesWrapper {
   background-color: #fff;
   border-radius: 10px;
+}
+
+p.Completed {
+  color: $base-green !important;
+  font-weight: bold;
+}
+
+img.NoReward {
+  filter: grayscale(1);
+  opacity: 0.7;
 }
 
 .CodeInfoCard {
@@ -151,5 +177,35 @@ button.AffiliatesTab {
 
   @include respond(desktop) {
     width: 280px;
+  }
+}
+
+.AffiliatesTotalCard {
+  width: 8.5rem;
+  height: 6.5rem;
+  margin: 12px;
+  padding-left: 7px;
+  padding-right: 7px;
+  font-weight: bold;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+
+  h4 {
+    font-size: 2rem;
+  }
+
+  p {
+    position: relative;
+    top: -5px;
+  }
+
+  &:nth-of-type(3) {
+    color: $base-green;
+  }
+
+  &:last-of-type {
+    color: #eab726;
   }
 }

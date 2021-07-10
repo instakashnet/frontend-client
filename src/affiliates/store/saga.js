@@ -1,13 +1,17 @@
 import { put, takeEvery, all, fork } from "redux-saga/effects";
+import camelize from "camelize";
 import * as types from "./types";
 import { setAlertInit } from "../../store/actions";
 import * as actions from "./actions";
-import axios from "../helpers/axios";
+import axios from "../../auth/helpers/axios";
 
 function* getAffiliates() {
   try {
     const res = yield axios.get("/users/affiliates");
-    console.log(res);
+    if (res.status === 200) {
+      const affiliatesData = camelize(res.data.affiliates);
+      yield put(actions.getAffiliatesSuccess(affiliatesData));
+    }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
     yield put(actions.affiliatesError());

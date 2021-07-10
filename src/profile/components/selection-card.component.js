@@ -18,7 +18,7 @@ const SelectionBox = ({ type, sex, name, onClick }) => {
       <button onClick={onClick} className={classes.SelectionCard}>
         <img src={Avatar} alt="profile" className={type === "add" ? classes.Add : ""} />
       </button>
-      <p className="mt-3">{name}</p>
+      <p className="mt-3 w-36">{name}</p>
     </div>
   );
 };
