@@ -36,13 +36,22 @@ const accountCodes = [
 ];
 
 export const getCodeMessage = (code, type) => {
+  let selectedCode;
+  let codeMessage;
+
   switch (type) {
     case "auth":
-      return authCodes.find((c) => c.code === code).message;
+      selectedCode = authCodes.find((c) => c.code === code);
+      codeMessage = selectedCode ? selectedCode.message : "Ha ocurrido un error inesperado, por favor intente de nuevo. Si el problema persiste contacte a soporte.";
+      return codeMessage;
     case "exchange":
-      return exchangeCodes.find((c) => c.code === code).message;
+      selectedCode = exchangeCodes.find((c) => c.code === code);
+      codeMessage = selectedCode ? selectedCode.message : "Ha ocurrido un error inesperado, por favor intente de nuevo. Si el problema persiste contacte a soporte.";
+      return codeMessage;
     case "account":
-      return accountCodes.find((c) => c.code === code).message;
+      selectedCode = accountCodes.find((c) => c.code === code);
+      codeMessage = selectedCode ? selectedCode.message : "Ha ocurrido un error inesperado, por favor intente de nuevo. Si el problema persiste contacte a soporte.";
+      return codeMessage;
     default:
       return "";
   }
