@@ -4,24 +4,26 @@ import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import { transactionCodeValidation } from "../../helpers/validations";
 import { formatAmount } from "../../../shared/functions";
-import { closeSliderModal, processCodeInit } from "../../../store/actions";
+import { closeSliderModal, processCodeInit, cancelExchangeInit } from "../../../store/actions";
 
 import Button from "../../../core/components/UI/button.component";
 import CopyButton from "../../../core/components/UI/copy-button.component";
-import InlineInput from "../../../core/components/UI/form-items/inline-input.component";
+import Input from "../../../core/components/UI/form-items/input.component";
 
 import classes from "../../assets/css/activity-components.module.scss";
 
 const OrderDetails = () => {
   const details = useSelector((state) => state.Dashboard.details);
+  const isProcessing = useSelector((state) => state.Exchange.isProcessing);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: { transaction_code: "" },
     validationSchema: transactionCodeValidation,
-    onSubmit: (values) => dispatch(processCodeInit(values, details.id, "details")),
+    onSubmit: (values) => dispatch(processCodeInit(values, details.id, "details", closeModalHandler)),
   });
 
   const closeModalHandler = () => dispatch(closeSliderModal());
+  const cancelExchangeHandler = () => dispatch(cancelExchangeInit(details.id, "details", closeModalHandler));
 
   return details.estateName ? (
     <div className={classes.Details}>
@@ -84,7 +86,7 @@ const OrderDetails = () => {
             </div>
           </div>
           <form onSubmit={formik.handleSubmit} className="mt-8">
-            <InlineInput
+            <Input
               name="transaction_code"
               placeholder="Número de transferencia"
               value={formik.values.transaction_code}
@@ -92,18 +94,20 @@ const OrderDetails = () => {
               touched={formik.touched.transaction_code}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              buttonType="submit"
-              buttonLabel="Agregar"
             />
+            <div className="grid grid-cols-1 gap-2 md:gap-4 md:grid-cols-2">
+              <Button type="submit" className={`action-button ld-ext-right ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
+                <span className="ld ld-ring ld-spin" />
+                Enviar
+              </Button>
+              <Button type="button" className={`secondary-button ld-ext-right ${isProcessing ? "running" : ""}`} disabled={isProcessing} onClick={cancelExchangeHandler}>
+                <span className="ld ld-ring ld-spin" />
+                Cancelar
+              </Button>
+            </div>
           </form>
         </>
       )}
-
-      <div className="flex justify-center mt-4">
-        <Button type="button" className={classes.CloseButton} onClick={closeModalHandler}>
-          Aceptar
-        </Button>
-      </div>
     </div>
   ) : null;
 };

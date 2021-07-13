@@ -240,7 +240,7 @@
 
     @include respond(tablet) {
       font-size: 1.3rem;
-      padding: 40px 10px;
+      padding: 20px 10px;
     }
   }
 
@@ -281,6 +281,11 @@
 
 .ActionButton {
   max-width: 10rem;
+}
+
+.CancelButton {
+  background-color: $base-green;
+  color: #fff;
 }
 
 .CloseButton {

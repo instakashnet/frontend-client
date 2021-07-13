@@ -46,22 +46,23 @@ export const completeExchangeSuccess = (order) => ({
   order,
 });
 
-export const cancelExchangeInit = (orderId, status = null, setStep = null) => ({
+export const cancelExchangeInit = (orderId, status = null, closeModal) => ({
   type: types.CANCEL_EXCHANGE_INIT,
   orderId,
   status,
-  setStep,
+  closeModal,
 });
 
 export const cancelExchangeSuccess = () => ({
   type: types.CANCEL_EXCHANGE_SUCCESS,
 });
 
-export const processCodeInit = (values, orderId, processType = null) => ({
+export const processCodeInit = (values, orderId, processType = null, closeModal) => ({
   type: types.PROCESS_CODE_INIT,
   values,
   orderId,
   processType,
+  closeModal,
 });
 
 export const processCodeSuccess = () => ({

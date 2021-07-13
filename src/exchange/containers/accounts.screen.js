@@ -157,7 +157,12 @@ const Accounts = ({ order, history, setModal }) => {
             <span className="ld ld-ring ld-spin" />
             Continuar
           </Button>
-          <Button type="button" className="secondary-button mt-6" onClick={() => dispatch(cancelExchangeInit(order.id, "draft"))}>
+          <Button
+            type="button"
+            className={`secondary-button mt-4 ld-ext-right ${isProcessing ? "running" : ""}`}
+            disabled={isProcessing}
+            onClick={() => dispatch(cancelExchangeInit(order.id, "draft"))}>
+            <span className="ld ld-ring ld-spin" />
             Cancelar
           </Button>
         </div>

@@ -89,7 +89,7 @@ function* completeExchange({ values, orderId }) {
   }
 }
 
-function* cancelExchange({ orderId, status }) {
+function* cancelExchange({ orderId, status, closeModal }) {
   try {
     const result = yield Swal.fire({
       icon: "warning",
@@ -106,12 +106,16 @@ function* cancelExchange({ orderId, status }) {
     if (status === "draft") URL = `/order/draft/${orderId}`;
 
     if (result.isConfirmed) {
-      yield axios.delete(URL);
-      if (status === "draft") {
-        yield call([history, "push"], "/currency-exchange");
-      } else yield call([history, "push"], "/dashboard");
-      yield put(actions.cancelExchangeSuccess());
-      yield Swal.fire("Exitoso", "Su solicitud de cambio fue cancelada.", "success");
+      const res = yield axios.delete(URL);
+
+      if (res.status === 202) {
+        if (status === "details") {
+          yield put(getOrdersInit());
+          yield call(closeModal);
+        } else yield call([history, "push"], "/currency-exchange");
+        yield Swal.fire("Exitoso", "Su solicitud de cambio fue cancelada.", "success");
+        yield put(actions.cancelExchangeSuccess());
+      }
     } else yield put(actions.exchangeError());
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
@@ -119,12 +123,15 @@ function* cancelExchange({ orderId, status }) {
   }
 }
 
-function* processCode({ values, orderId, processType }) {
+function* processCode({ values, orderId, processType, closeModal }) {
   try {
     const res = yield axios.put(`/order/step-4/${orderId}`, values);
     if (res.status === 200) {
-      if (processType === "details") yield put(getOrdersInit());
-      yield call([history, "push"], "/dashboard");
+      if (processType === "details") {
+        yield put(getOrdersInit());
+        yield call(closeModal);
+      } else yield call([history, "push"], "/dashboard");
+
       yield Swal.fire({
         title: "Solicitud completada",
         text: "Tu solicitud de cambio fue recibida y será procesada en breve. Puedes ver el detalle en tu tabla de actividades.",

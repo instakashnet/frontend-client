@@ -12,7 +12,7 @@ const SliderModal = ({ children, closeModal }) => {
     <ReactModal closeTimeoutMS={600} onRequestClose={closeModal} isOpen={isOpen} ariaHideApp={false} className="slider-modal" preventScroll>
       <div className={classes.ModalContent}>
         <button onClick={closeModal} className={classes.Close}>
-          <X />
+          <X size={27} />
         </button>
         {children}
       </div>
