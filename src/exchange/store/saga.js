@@ -1,9 +1,10 @@
 import { put, takeEvery, takeLatest, all, fork, call } from "redux-saga/effects";
+import Swal from "sweetalert2";
+import camelize from "camelize";
 import * as types from "./types";
 import * as actions from "./actions";
 import axios from "../helpers/axios";
 import { setAlertInit, getOrdersInit } from "../../store/actions";
-import Swal from "sweetalert2";
 import history from "../../shared/history";
 
 function* getRates() {
@@ -22,9 +23,9 @@ function* getRates() {
 function* getLastOrder() {
   try {
     const res = yield axios.get("/order/last-order");
-    if (res.data) {
-      yield call([sessionStorage, "setItem"], "order", JSON.stringify(res.data));
-    } else yield call([sessionStorage, "removeItem"], "order");
+    const data = camelize(res.data);
+
+    if (data.lastOrder) yield call([sessionStorage, "setItem"], "order", JSON.stringify(data.lastOrder));
     yield put(actions.getLastOrderSuccess());
   } catch (error) {
     yield put(actions.exchangeError());

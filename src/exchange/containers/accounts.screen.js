@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { Plus } from "react-feather";
@@ -15,7 +16,9 @@ import Input from "../../core/components/UI/form-items/input.component";
 
 import classes from "../assets/css/exchange-screens.module.scss";
 
-const Accounts = ({ order, history, setModal }) => {
+const Accounts = ({ setModal, order }) => {
+  const history = useHistory();
+
   if (!order) history.goBack();
 
   const [totalAmountSent, setTotalAmountSent] = useState(order.amountSent);

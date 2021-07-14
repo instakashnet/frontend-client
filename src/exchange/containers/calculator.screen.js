@@ -23,12 +23,7 @@ const Calculator = ({ profile, setModal }) => {
   const [showInfo, setShowInfo] = useState(false);
   const { rates, isLoading, coupon, isProcessing } = useSelector((state) => state.Exchange);
 
-  const { type: profiletype } = profile;
-
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getRatesInit());
-  }, [dispatch]);
 
   const formik = useFormik({
     initialValues: {
@@ -62,10 +57,6 @@ const Calculator = ({ profile, setModal }) => {
     }
     // eslint-disable-next-line
   }, [rates, dispatch, setFieldValue]);
-
-  useEffect(() => {
-    if (actualRates.buy > 0 && actualRates.sell > 0) dispatch(validateCouponInit("NUEVOREFERIDO1", profiletype));
-  }, [actualRates, dispatch, profiletype]);
 
   useEffect(() => {
     if (coupon && actualRates.buy > 0 && actualRates.sell > 0) {

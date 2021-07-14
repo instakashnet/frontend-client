@@ -2,7 +2,17 @@ import React, { useEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
 import { Route } from "react-router-dom";
-import { getBanksInit, getLastOrderInit, getCurenciesInit, getAccountsInit, getKashAccountInit, openModal, closeModal } from "../../store/actions";
+import {
+  getBanksInit,
+  getRatesInit,
+  validateCouponInit,
+  getLastOrderInit,
+  getCurenciesInit,
+  getAccountsInit,
+  getKashAccountInit,
+  openModal,
+  closeModal,
+} from "../../store/actions";
 import { useProfileInfo } from "../../shared/hooks/useProfileInfo";
 
 import Calculator from "./calculator.screen";
@@ -24,8 +34,6 @@ const Exchange = ({ history, location, match }) => {
   const { profileInfo } = useProfileInfo();
   const isLoading = useSelector((state) => state.Exchange.isLoading);
 
-  console.log(isLoading);
-
   useEffect(() => {
     dispatch(getBanksInit());
     dispatch(getCurenciesInit());
@@ -33,6 +41,13 @@ const Exchange = ({ history, location, match }) => {
     dispatch(getKashAccountInit());
     dispatch(getLastOrderInit());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (location.pathname === "/currency-exchange") {
+      dispatch(getRatesInit());
+      dispatch(validateCouponInit("NUEVOREFERIDO1"));
+    }
+  }, [location, dispatch]);
 
   const preventLoad = (e) => {
     e.preventDefault();
