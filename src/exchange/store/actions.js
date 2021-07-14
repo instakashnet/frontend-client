@@ -9,6 +9,14 @@ export const getRatesSuccess = (rates) => ({
   rates,
 });
 
+export const getLastOrderInit = () => ({
+  type: types.GET_LAST_ORDER_INIT,
+});
+
+export const getLastOrderSuccess = () => ({
+  type: types.GET_LAST_ORDER_SUCCESS,
+});
+
 export const validateCouponInit = (couponName, profileType) => ({
   type: types.VALIDATE_COUPON_INIT,
   couponName,

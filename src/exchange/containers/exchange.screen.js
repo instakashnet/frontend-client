@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
 import { Route } from "react-router-dom";
-import { getBanksInit, getCurenciesInit, getAccountsInit, getKashAccountInit, openModal, closeModal } from "../../store/actions";
+import { getBanksInit, getLastOrderInit, getCurenciesInit, getAccountsInit, getKashAccountInit, openModal, closeModal } from "../../store/actions";
 import { useProfileInfo } from "../../shared/hooks/useProfileInfo";
 
 import Calculator from "./calculator.screen";
@@ -14,31 +14,25 @@ import AddAccount from "../../accounts/components/forms/add-account.component";
 import Information from "../components/information.component";
 import CompleteProfile from "../components/profile-modal.component";
 import { InfoButton } from "../components/info-button.component";
+import Spinner from "../../core/components/UI/spinner.component";
 
 import classes from "../assets/css/exchange-screens.module.scss";
 
-const Exchange = ({ history, match }) => {
+const Exchange = ({ history, location, match }) => {
   const dispatch = useDispatch();
-  const [step, setStep] = useState(0);
-  const order = useSelector((state) => state.Exchange.order);
+  const order = JSON.parse(sessionStorage.getItem("order"));
   const { profileInfo } = useProfileInfo();
+  const isLoading = useSelector((state) => state.Exchange.isLoading);
+
+  console.log(isLoading);
 
   useEffect(() => {
     dispatch(getBanksInit());
     dispatch(getCurenciesInit());
     dispatch(getAccountsInit("orders"));
     dispatch(getKashAccountInit());
+    dispatch(getLastOrderInit());
   }, [dispatch]);
-
-  useEffect(() => {
-    if (step > 0) {
-      window.addEventListener("beforeunload", preventLoad);
-      window.scrollTo(0, 0);
-      return () => {
-        window.removeEventListener("beforeunload", preventLoad);
-      };
-    }
-  }, [step]);
 
   const preventLoad = (e) => {
     e.preventDefault();
@@ -47,12 +41,27 @@ const Exchange = ({ history, match }) => {
   };
 
   useEffect(() => {
+    if (order && order.status === 2 && location.pathname !== "/currency-exchange/complete") history.push("/currency-exchange/complete");
+  }, [history, order, location]);
+
+  useEffect(() => {
+    if (location.pathname !== "/currency-exchange") {
+      window.addEventListener("beforeunload", preventLoad);
+      window.scrollTo(0, 0);
+      return () => {
+        window.removeEventListener("beforeunload", preventLoad);
+      };
+    }
+  }, [location]);
+
+  useEffect(() => {
     let timer;
 
-    if (step === 1) timer = setTimeout(() => setStep(0), 300000);
-
-    return () => clearTimeout(timer);
-  }, [step, order, dispatch]);
+    if (location.pathname === "/currency-exchange/step-2") {
+      timer = setTimeout(() => history.push("/currency-exchange"), 300000);
+    } else timer && clearTimeout(timer);
+    return () => timer && clearTimeout(timer);
+  }, [location, history]);
 
   const onCloseHandler = () => {
     history.push("/my-profile");
@@ -71,19 +80,23 @@ const Exchange = ({ history, match }) => {
 
   return (
     <Layout className="content-center">
-      <div className={classes.Exchange}>
-        <Route exact path={match.url}>
-          <Calculator profile={profileInfo} setModal={openModalHandler} />
-        </Route>
-        <Route path={match.url + "/step-2"}>
-          <Accounts order={order} setModal={openModalHandler} />
-        </Route>
-        <Route path={match.url + "/complete"}>
-          <Complete order={order} />
-        </Route>
-        {!isMobile && <Information />}
-        {isMobile && <InfoButton onInfoOpen={() => openModalHandler("info")} />}
-      </div>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <div className={classes.Exchange}>
+          <Route exact path={match.url}>
+            <Calculator profile={profileInfo} setModal={openModalHandler} />
+          </Route>
+          <Route path={match.url + "/step-2"}>
+            <Accounts order={order} setModal={openModalHandler} />
+          </Route>
+          <Route path={match.url + "/complete"}>
+            <Complete order={order} />
+          </Route>
+          {!isMobile && <Information />}
+          {isMobile && <InfoButton onInfoOpen={() => openModalHandler("info")} />}
+        </div>
+      )}
     </Layout>
   );
 };

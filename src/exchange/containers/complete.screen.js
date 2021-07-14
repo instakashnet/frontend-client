@@ -83,7 +83,7 @@ const CompleteExchange = ({ order }) => {
             <span className="ld ld-ring ld-spin" />
             Enviar
           </Button>
-          <Button type="button" className="secondary-button mt-6" onClick={() => dispatch(cancelExchangeInit(order.id))}>
+          <Button type="button" className="secondary-button mt-6" onClick={() => dispatch(cancelExchangeInit(order.id, "complete"))}>
             Cancelar
           </Button>
         </div>

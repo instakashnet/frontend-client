@@ -19,6 +19,18 @@ function* getRates() {
   }
 }
 
+function* getLastOrder() {
+  try {
+    const res = yield axios.get("/order/last-order");
+    if (res.data) {
+      yield call([sessionStorage, "setItem"], "order", JSON.stringify(res.data));
+    } else yield call([sessionStorage, "removeItem"], "order");
+    yield put(actions.getLastOrderSuccess());
+  } catch (error) {
+    yield put(actions.exchangeError());
+  }
+}
+
 function* validateCoupon({ couponName, profileType }) {
   try {
     const res = yield axios.get(`/coupons/${couponName}/${profileType}`);
@@ -38,6 +50,7 @@ function* createExchange({ values, profile }) {
   try {
     const res = yield axios.post("/order/step-2", exchangeValues);
     if (res.status === 201) {
+      yield call([sessionStorage, "setItem"], "order", JSON.stringify(res.data));
       yield put(actions.createExchangeSuccess(res.data));
       yield call([history, "push"], "/currency-exchange/step-2");
     }
@@ -69,11 +82,13 @@ function* completeExchange({ values, orderId }) {
           showConfirmButton: false,
           showCloseButton: true,
         });
+        yield call([sessionStorage, "removeItem"], "order");
         return yield put(actions.processCodeSuccess());
       }
 
+      yield call([sessionStorage, "setItem"], "order", JSON.stringify(res.data));
       yield put(actions.completeExchangeSuccess(res.data));
-      return yield call([history, "push"], "/currency-exchange/complete");
+      yield call([history, "push"], "/currency-exchange/complete");
     }
   } catch (error) {
     if (error.data && error.data.code === 4006) {
@@ -113,6 +128,9 @@ function* cancelExchange({ orderId, status, closeModal }) {
           yield put(getOrdersInit());
           yield call(closeModal);
         } else yield call([history, "push"], "/currency-exchange");
+
+        yield call([sessionStorage, "removeItem"], "order");
+
         yield Swal.fire("Exitoso", "Su solicitud de cambio fue cancelada.", "success");
         yield put(actions.cancelExchangeSuccess());
       }
@@ -131,6 +149,8 @@ function* processCode({ values, orderId, processType, closeModal }) {
         yield put(getOrdersInit());
         yield call(closeModal);
       } else yield call([history, "push"], "/dashboard");
+
+      yield call([sessionStorage, "removeItem"], "order");
 
       yield Swal.fire({
         title: "Solicitud completada",
@@ -151,6 +171,10 @@ function* processCode({ values, orderId, processType, closeModal }) {
 
 export function* watchGetRates() {
   yield takeEvery(types.GET_RATES_INIT, getRates);
+}
+
+export function* watchGetLastOrder() {
+  yield takeEvery(types.GET_LAST_ORDER_INIT, getLastOrder);
 }
 
 export function* watchCompleteExchnge() {
@@ -174,5 +198,13 @@ export function* watchProcessCode() {
 }
 
 export default function* exchangeSaga() {
-  yield all([fork(watchGetRates), fork(watchValidateCoupon), fork(watchCreateExchange), fork(watchCompleteExchnge), fork(watchProcessCode), fork(watchCancelExchange)]);
+  yield all([
+    fork(watchGetRates),
+    fork(watchGetLastOrder),
+    fork(watchValidateCoupon),
+    fork(watchCreateExchange),
+    fork(watchCompleteExchnge),
+    fork(watchProcessCode),
+    fork(watchCancelExchange),
+  ]);
 }
