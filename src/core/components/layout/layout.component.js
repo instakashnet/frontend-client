@@ -5,10 +5,11 @@ import { closeSliderModal } from "../../../store/actions";
 import Sidebar from "./sidebar.component";
 import Header from "./header.component";
 import SliderModal from "../UI/modals/slider-modal.component";
+import Modal from "../UI/modals/modal.component";
 
 const Layout = ({ className, children }) => {
   const dispatch = useDispatch();
-  const SliderComponent = useSelector((state) => state.Modal.SliderComponent);
+  const { SliderComponent, Component: ModalComponent } = useSelector((state) => state.Modal);
 
   const closeSliderModalHandler = () => dispatch(closeSliderModal());
 
@@ -17,7 +18,17 @@ const Layout = ({ className, children }) => {
       <Sidebar />
       <Header />
       <section className={`main-section ${className || ""}`}>{children}</section>
-      <SliderModal closeModal={closeSliderModalHandler}>{SliderComponent && <SliderComponent />}</SliderModal>
+      {ModalComponent && (
+        <Modal>
+          <ModalComponent />
+        </Modal>
+      )}
+
+      {SliderComponent && (
+        <SliderModal closeModal={closeSliderModalHandler}>
+          <SliderComponent />
+        </SliderModal>
+      )}
     </main>
   );
 };

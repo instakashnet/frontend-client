@@ -6,6 +6,7 @@ import { completeProfileValidation } from "../helpers/formValidations";
 import { User, FileText } from "react-feather";
 import { logoutInit, completeProfileInit, openModal, closeModal } from "../../store/actions";
 
+import Modal from "../../core/components/UI/modals/modal.component";
 import Input from "../components/UI/input.component";
 import Select from "../components/UI/select.component";
 import PhoneInput from "../components/UI/phone-input.component";
@@ -16,6 +17,7 @@ import classes from "../assets/css/auth.containers.module.scss";
 const CompleteProfile = () => {
   const dispatch = useDispatch();
   const { isProcessing } = useSelector((state) => state.Auth);
+  const ModalComponent = useSelector((state) => state.Modal.Component);
   const userSession = JSON.parse(localStorage.getItem("userSession"));
 
   const formik = useFormik({
@@ -23,8 +25,6 @@ const CompleteProfile = () => {
     validationSchema: completeProfileValidation(userSession ? userSession.is_google : false),
     onSubmit: (values) => dispatch(completeProfileInit(values)),
   });
-
-  if (!userSession) return <Redirect to="/signin" />;
 
   const documentOptions = [
     { value: "DNI", label: "DNI" },
@@ -40,8 +40,9 @@ const CompleteProfile = () => {
   ];
 
   const onPhoneChange = (value) => formik.setFieldValue("phone", value);
-
   const openModalHandler = () => dispatch(openModal(DataInfo));
+
+  if (!userSession) return <Redirect to="/signin" />;
 
   return (
     <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
@@ -113,6 +114,11 @@ const CompleteProfile = () => {
           </button>
         </div>
       </div>
+      {ModalComponent && (
+        <Modal>
+          <ModalComponent />
+        </Modal>
+      )}
     </main>
   );
 };
