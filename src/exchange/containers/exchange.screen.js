@@ -33,6 +33,7 @@ const Exchange = ({ history, location, match }) => {
   const order = JSON.parse(sessionStorage.getItem("order"));
   const { profileInfo } = useProfileInfo();
   const isLoading = useSelector((state) => state.Exchange.isLoading);
+  const { type: profileType } = profileInfo;
 
   useEffect(() => {
     dispatch(getBanksInit());
@@ -43,11 +44,11 @@ const Exchange = ({ history, location, match }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (location.pathname === "/currency-exchange") {
+    if (location.pathname === "/currency-exchange" && !order) {
       dispatch(getRatesInit());
-      dispatch(validateCouponInit("NUEVOREFERIDO1"));
+      dispatch(validateCouponInit("NUEVOREFERIDO1", profileType));
     }
-  }, [location, dispatch]);
+  }, [location, dispatch, order, profileType]);
 
   const preventLoad = (e) => {
     e.preventDefault();

@@ -18,8 +18,7 @@ import classes from "../assets/css/exchange-screens.module.scss";
 
 const Accounts = ({ setModal, order }) => {
   const history = useHistory();
-
-  if (!order) history.goBack();
+  if (!order) history.push("/currency-exchange");
 
   const [totalAmountSent, setTotalAmountSent] = useState(order.amountSent);
   const [fundsInput, setFundsInput] = useState(false);

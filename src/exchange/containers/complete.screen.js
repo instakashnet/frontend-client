@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { Info } from "react-feather";
@@ -26,6 +27,8 @@ const CompleteExchange = ({ order }) => {
   });
   const isProcessing = useSelector((state) => state.Exchange.isProcessing);
 
+  if (!order) return <Redirect to="/currency-exchange" />;
+
   return (
     <div className={classes.TransferCode}>
       <h1>¡Último paso!</h1>
@@ -52,7 +55,7 @@ const CompleteExchange = ({ order }) => {
       </Card>
 
       <p className="mb-6 mt-8 text-left">
-        Una vez realizado coloque el número de operación <b>emitido por su banco</b> dentro del casillero mostrado debajo darle a enviar.
+        Una vez realizado coloque el número de operación <b>emitido por su banco</b> dentro del casillero mostrado debajo y debe darle al botón de <i>"enviar"</i>.
       </p>
       <div className="flex items-center justify-end mb-3">
         <span className="text-sm font-bold cursor-pointer underline">¿Donde lo encuentro?</span>

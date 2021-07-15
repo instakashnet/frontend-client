@@ -25,7 +25,9 @@ function* getLastOrder() {
     const res = yield axios.get("/order/last-order");
     const data = camelize(res.data);
 
-    if (data.lastOrder) yield call([sessionStorage, "setItem"], "order", JSON.stringify(data.lastOrder));
+    if (data.lastOrder) {
+      yield call([sessionStorage, "setItem"], "order", JSON.stringify(data.lastOrder));
+    } else yield call([sessionStorage, "removeItem"], "order");
     yield put(actions.getLastOrderSuccess());
   } catch (error) {
     yield put(actions.exchangeError());
@@ -128,9 +130,10 @@ function* cancelExchange({ orderId, status, closeModal }) {
         if (status === "details") {
           yield put(getOrdersInit());
           yield call(closeModal);
-        } else yield call([history, "push"], "/currency-exchange");
+        }
 
         yield call([sessionStorage, "removeItem"], "order");
+        if (status === "complete") yield call([history, "push"], "/currency-exchange");
 
         yield Swal.fire("Exitoso", "Su solicitud de cambio fue cancelada.", "success");
         yield put(actions.cancelExchangeSuccess());
