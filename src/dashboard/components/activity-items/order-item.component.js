@@ -1,23 +1,22 @@
 import React from "react";
-import moment from "moment";
-import { formatAmount } from "../../../shared/functions";
-
-import Button from "../../../core/components/UI/button.component";
+import { ArrowRight } from "react-feather";
+import { formatAmount, convertHexToRGBA } from "../../../shared/functions";
 
 import classes from "../../assets/css/activity-components.module.scss";
 
 const AcitivityItem = ({ order, openModal }) => {
   return (
-    <div className={classes.AcitivityItem}>
-      <div className={classes.Color} style={{ backgroundColor: order.stateColor }} />
+    <div className={classes.ActivityItem} onClick={() => openModal(order.id, "order")} role="button">
       <div className={classes.Info}>
         <p>{order.uuid}</p>
-        {order.completedAt && <span>{moment(order.completedAt).format("DD/MM/YY HH:mm a")}</span>}
         <p className={classes.Price}>{`${order.currencyReceivedSymbol} ${formatAmount(order.amountReceived)}`}</p>
       </div>
-      <Button className={classes.ViewButton} onClick={() => openModal(order.id, "order")}>
-        Ver más
-      </Button>
+      <div className={classes.StatusBadge} style={{ borderColor: order.stateColor, backgroundColor: convertHexToRGBA(order.stateColor, 10) }}>
+        {order.estateName.toLowerCase()}
+      </div>
+      <span className={classes.View}>
+        Ver más <ArrowRight size={20} className="ml-2" />
+      </span>
     </div>
   );
 };

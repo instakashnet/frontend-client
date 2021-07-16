@@ -1,20 +1,40 @@
 @import "../../../core/assets/css/colors";
 @import "../../../core/assets/css/breakpoints";
 
-.AcitivityItem {
+.ActivityItem {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: 0;
-  padding: 7px 15px;
-  border-bottom: 2px solid #fff;
+  padding: 12px 20px;
+  transition: 200ms ease-out;
+  flex-wrap: wrap;
 
   &:last-of-type {
     margin-bottom: 0;
+    padding-bottom: 15px;
   }
 
   &:first-of-type {
     margin-top: 0;
+  }
+
+  .StatusBadge {
+    text-transform: capitalize;
+    font-size: 0.85rem;
+    color: $base-text;
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    padding: 3px 7px;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: 30px;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: darken(#fff, 2);
   }
 }
 
@@ -43,17 +63,13 @@
   font-weight: bold;
 }
 
-.ViewButton {
-  width: auto !important;
-  font-size: 0.8rem;
-  margin-left: auto;
-  background-color: $button-yellow;
-  padding: 5px 15px !important;
-  transition: 200ms ease-out;
+.View {
+  display: flex;
+  align-items: center;
+  text-decoration: underline;
 
-  &:hover,
-  &:focus {
-    background-color: darken($color: $button-yellow, $amount: 15);
+  svg {
+    color: $base-green;
   }
 }
 
