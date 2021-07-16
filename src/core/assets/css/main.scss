@@ -173,7 +173,7 @@ input::placeholder {
   outline: none;
   overflow-y: auto;
 
-  @media screen and (min-width: 768px) {
+  @include respond(tablet) {
     border-radius: 40px 0 0 0;
     height: 100vh;
   }
@@ -206,16 +206,26 @@ input::placeholder {
 
 /* SWIPER */
 
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-container-horizontal > .swiper-pagination-bullets {
+  bottom: -5px !important;
+
+  @media screen and (min-width: 768px) {
+    bottom: 0 !important;
+  }
+}
+
 .swiper-pagination-bullet {
   background-color: #c3e5d9;
   opacity: 1;
-  width: 12px;
-  height: 12px;
+  width: 14px !important;
+  height: 14px !important;
   margin: 0 7px !important;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #87cbb3;
+  background-color: #20a2a5 !important;
 }
 
 /* CUSTOM MATERIAL-UI */

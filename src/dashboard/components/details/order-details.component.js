@@ -6,6 +6,7 @@ import { transactionCodeValidation } from "../../helpers/validations";
 import { formatAmount } from "../../../shared/functions";
 import { closeSliderModal, processCodeInit, cancelExchangeInit } from "../../../store/actions";
 
+import { StatusBadge } from "../../../core/components/UI/status-badge.component";
 import Button from "../../../core/components/UI/button.component";
 import CopyButton from "../../../core/components/UI/copy-button.component";
 import Input from "../../../core/components/UI/form-items/input.component";
@@ -30,9 +31,7 @@ const OrderDetails = () => {
       <h2>Detalles de la operación</h2>
       <div className="flex items-center justify-between">
         <h4>Estado:</h4>
-        <span className="rounded-lg py-2 px-3" style={{ backgroundColor: details.stateColor, fontSize: ".8rem" }}>
-          {details.estateName.toLowerCase()}
-        </span>
+        <StatusBadge color={details.stateColor} name={details.estateName.toLowerCase()} />
       </div>
       <div className="flex items-center justify-between pr-2 my-3">
         <h4>Pedido:</h4>
@@ -64,7 +63,7 @@ const OrderDetails = () => {
         <span>{`*********${details.accountToRaw.substring(details.accountToRaw.length - 4, details.accountToRaw.length)}`}</span>
       </div>
 
-      {details.estateId === 2 && (
+      {details.estateId === 2 ? (
         <>
           <h2 className="mt-5">Completa tu operación</h2>
           <h3>Cuenta a transferir:</h3>
@@ -107,6 +106,12 @@ const OrderDetails = () => {
             </div>
           </form>
         </>
+      ) : (
+        <div className="flex justify-center mt-4">
+          <Button type="button" className={classes.CloseButton} onClick={closeModalHandler}>
+            Aceptar
+          </Button>
+        </div>
       )}
     </div>
   ) : null;
