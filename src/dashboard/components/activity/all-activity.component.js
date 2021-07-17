@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Repeat, ArrowLeftCircle } from "react-feather";
 import { formatAmount } from "../../../shared/functions";
 
+import { StatusBadge } from "../../../core/components/UI/status-badge.component";
 import Button from "../../../core/components/UI/button.component";
 import ActivityTable from "../activity-table.component";
 
@@ -16,13 +17,7 @@ const AllActivity = ({ orders, openModal }) => {
       id: "status",
       name: "Estado",
       width: "120px",
-      formatter: (cell) =>
-        _(
-          <div className="flex items-center">
-            <span style={{ width: 10, height: 10, backgroundColor: cell.color, borderRadius: "50%", margin: "3px 10px 0 0" }} />
-            <p>{cell.name}</p>
-          </div>
-        ),
+      formatter: (cell) => _(<StatusBadge name={cell.name} color={cell.color} />),
     },
     { id: "pedidoId", name: "Pedido" },
     { id: "date", name: "Fecha" },
