@@ -4,6 +4,7 @@ import moment from "moment";
 import { formatAmount } from "../../../shared/functions";
 import { closeSliderModal } from "../../../store/actions";
 
+import { StatusBadge } from "../../../core/components/UI/status-badge.component";
 import Button from "../../../core/components/UI/button.component";
 
 import classes from "../../assets/css/activity-components.module.scss";
@@ -19,9 +20,7 @@ const WithdrawalDetails = () => {
       <h2>Detalles de la operación</h2>
       <div className="flex items-center justify-between">
         <h4>Estado:</h4>
-        <span className="rounded-lg py-2 px-3" style={{ backgroundColor: details.statusColor, fontSize: ".8rem" }}>
-          {details.statusName.toLowerCase()}
-        </span>
+        <StatusBadge color={details.statusColor} name={details.statusName.toLowerCase()} />
       </div>
       <div className="flex items-center justify-between pr-2 my-3">
         <h4>Pedido:</h4>

@@ -1,76 +1,60 @@
 @import "../../../core/assets/css/colors";
 @import "../../../core/assets/css/breakpoints";
 
-.ActivityItem {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin: 0;
-  padding: 12px 20px;
-  transition: 200ms ease-out;
-  flex-wrap: wrap;
+.OrderItem {
+  padding: 3px 0;
+  font-size: 0.9rem;
+  transition: 250ms ease-out;
 
-  &:last-of-type {
-    margin-bottom: 0;
-    padding-bottom: 15px;
+  .OrderTitle {
+    display: flex;
+    align-items: center;
+
+    h4 {
+      margin-bottom: 3px;
+      font-weight: normal;
+
+      &:first-of-type {
+        margin-right: 20px;
+      }
+    }
   }
 
-  &:first-of-type {
-    margin-top: 0;
+  .OrderView {
+    text-decoration: underline;
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-left: 5px;
+      color: $base-green;
+    }
   }
 
-  .StatusBadge {
-    text-transform: capitalize;
-    font-size: 0.85rem;
-    color: $base-text;
-    border-radius: 5px;
-    border-width: 1px;
-    border-style: solid;
-    padding: 3px 7px;
-    font-weight: bold;
-    margin-left: auto;
-    margin-right: 30px;
-  }
-
-  &:hover,
-  &:focus {
-    background-color: darken(#fff, 2);
-  }
-}
-
-.Color {
-  width: 17px;
-  height: 17px;
-  margin-right: 10px;
-  border-radius: 50%;
-}
-
-.Info {
-  font-size: 0.85rem;
-
-  span {
-    color: #959595;
-    font-size: 0.8rem;
+  .OrderInfo span {
+    color: $base-green;
   }
 
   @include respond(tablet) {
-    font-size: 0.9rem;
+    padding: 15px 20px;
+
+    &:first-of-type {
+      padding-bottom: 0;
+    }
+
+    &:nth-of-type(2) {
+      padding-bottom: 0;
+    }
+
+    &:last-of-type {
+      padding-top: 0;
+    }
   }
 }
 
 .Price {
   color: $base-green;
   font-weight: bold;
-}
-
-.View {
-  display: flex;
-  align-items: center;
-  text-decoration: underline;
-
-  svg {
-    color: $base-green;
-  }
 }
 
 .ContainerTable {
@@ -103,6 +87,7 @@
     display: flex;
     align-items: center;
     font-size: 1.1rem;
+    font-weight: bold;
   }
 
   h4 {
@@ -270,7 +255,7 @@
 }
 
 .SwiperContainer {
-  min-height: 570px;
+  min-height: 595px;
   z-index: 0 !important;
 }
 
