@@ -2,7 +2,7 @@
 @import "../../../core/assets/css/breakpoints";
 
 .OrderItem {
-  padding: 3px 0;
+  padding: 5px 0;
   font-size: 0.9rem;
   transition: 250ms ease-out;
 
@@ -36,18 +36,10 @@
   }
 
   @include respond(tablet) {
-    padding: 15px 20px;
+    padding: 10px 20px;
 
     &:first-of-type {
-      padding-bottom: 0;
-    }
-
-    &:nth-of-type(2) {
-      padding-bottom: 0;
-    }
-
-    &:last-of-type {
-      padding-top: 0;
+      padding-top: 10px;
     }
   }
 }

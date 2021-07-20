@@ -22,7 +22,7 @@ const RecentActivity = ({ orders, withdrawals, openModal, isLoading }) => {
         {isLoading && <Skeleton count={5} height={20} />}
         {!isLoading &&
           (orders.length > 0 ? (
-            <Card className="p-0">
+            <Card className="py-2">
               {_.slice(orders, 0, 4).map((order) => (
                 <OrderItem key={order.id} order={order} type="order" openModal={openModal} />
               ))}
@@ -39,7 +39,7 @@ const RecentActivity = ({ orders, withdrawals, openModal, isLoading }) => {
         {isLoading && <Skeleton count={5} height={20} />}
         {!isLoading &&
           (withdrawals.length > 0 ? (
-            <Card className="p-0">
+            <Card className="py-2">
               {_.slice(withdrawals, 0, 4).map((withdrawal) => (
                 <OrderItem key={withdrawal.id} order={withdrawal} type="withdrawal" openModal={openModal} />
               ))}
