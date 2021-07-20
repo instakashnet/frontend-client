@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import { transactionCodeValidation } from "../../helpers/validations";
-import { formatAmount } from "../../../shared/functions";
+import { formatAmount, convertRate } from "../../../shared/functions";
 import { closeSliderModal, processCodeInit, cancelExchangeInit } from "../../../store/actions";
 
 import { StatusBadge } from "../../../core/components/UI/status-badge.component";
@@ -55,7 +55,7 @@ const OrderDetails = () => {
       )}
       <div className="flex items-center justify-between pr-2 my-3">
         <h4>Tasa de cambio:</h4>
-        <span>{details.rate}</span>
+        <span>{convertRate(details.rate)}</span>
       </div>
       <h3 className="mt-4">Cuenta que recibe:</h3>
       <div className="flex items-center justify-between pr-2 my-2">
