@@ -74,7 +74,8 @@ const Signup = () => {
             error={formik.errors.affiliate}
             touched={formik.touched.affiliate}
           />
-          <p>
+          <p className="text-sm text-center my-2">Al crear tu cuenta estás autorizando a Instakash poder enviarte comunicaciones promocionales.</p>
+          <p className="text-sm text-center my-2">
             Al crear tu cuenta estás aceptando nuestros <a href="https://instakash.net/politicas-de-privacidad">Términos y condiciones</a> y{" "}
             <a href="https://instakash.net/terminos-y-condiciones">Políticas de privacidad</a>.
           </p>

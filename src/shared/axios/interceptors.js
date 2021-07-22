@@ -27,7 +27,6 @@ export const resInterceptor = (instance, type) =>
 
       if (error.response) {
         const code = error.response.data.code;
-
         if (code && code !== 4006) message = getCodeMessage(code, type);
 
         error.response.message = message;
