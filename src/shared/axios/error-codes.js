@@ -15,7 +15,7 @@ const authCodes = [
 ];
 
 const exchangeCodes = [
-  { code: 4001, message: "Debes esperar al menos 1 minuto para crear otro pedido." },
+  { code: 4001, message: "No puedes crear otro pedido si ya tienes un pedido en curso. Completa o cancela el pedido anterior." },
   { code: 4002, message: "En estos momentos no estamos aceptando nuevos pedidos." },
   { code: 4003, message: "Este cupón no está permitido usar para este pedido." },
   { code: 4004, message: "Esta pedido ya ha expirado, deberás crear un nuevo pedido." },
