@@ -76,7 +76,7 @@ function* uploadDocument({ values, uploadType, setFile, setPercentage }) {
 
   try {
     const res = yield axios.post(URL, formData, {
-      timeout: 25000,
+      timeout: 45000,
       onUploadProgress: ({ loaded, total }) => {
         const percentage = Math.floor((loaded * 100) / total);
         if (percentage < 100) setPercentage(percentage);
