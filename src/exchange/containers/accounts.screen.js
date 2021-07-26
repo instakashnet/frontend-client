@@ -84,7 +84,7 @@ const Accounts = ({ setModal, order }) => {
   } else interplaza = false;
 
   const kashUsedHandler = (e) => {
-    const totalAmount = order.currencySentId === 2 ? order.amountSent - +e.target.value * 2 * order.rate : order.amountSent - +e.target.value * 2;
+    const totalAmount = order.currencySentId === 2 ? order.amountSent - +e.target.value * order.rate : order.amountSent - +e.target.value;
     if (totalAmount < 0 || +e.target.value > kashAccount.balance) return;
     formik.setFieldValue("kashUsed", +e.target.value);
 
