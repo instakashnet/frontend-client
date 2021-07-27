@@ -86,7 +86,7 @@ const AddAccount = ({ order, accType }) => {
           <p>No realizamos transferencias a terceros. Todas las cuentas agregadas deben ser propias o de empresas donde seas el representante legal.</p>
         </MuiAlert>
         <Checkbox name="accept" value={formik.values.accept} onChange={formik.handleChange} error={formik.errors.accept}>
-          Declaro que es mi cuenta propia o de mi empresa.
+          Declaro que esta cuenta es propia o de mi empresa.
         </Checkbox>
         <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button ld-ext-right ${isProcessing ? "running" : ""}`}>
           <span className="ld ld-ring ld-spin" />
