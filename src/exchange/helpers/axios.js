@@ -3,7 +3,7 @@ import { reqInterceptor, resInterceptor } from "../../shared/axios/interceptors"
 
 const exchangeInstance = axios.create({
   baseURL: `${process.env.NODE_ENV !== "production" ? process.env.REACT_APP_TEST_EXCHANGE_API : process.env.REACT_APP_EXCHANGE_API}/client`,
-  timeout: 8000,
+  timeout: 15000,
 });
 
 reqInterceptor(exchangeInstance);
