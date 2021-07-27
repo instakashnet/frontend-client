@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addAccountInit } from "../../../store/actions";
 import { addAccountValidation } from "../../helpers/validations";
 
+import { MuiAlert } from "../../../core/components/UI/mui-alert.component";
 import CustomSelect from "../../../core/components/UI/form-items/custom-select.component";
 import Input from "../../../core/components/UI/form-items/input.component";
 import Select from "../../../core/components/UI/form-items/select.component";
@@ -46,14 +47,13 @@ const AddAccount = ({ order, accType }) => {
         <Input
           name="account_number"
           label="Número de cuenta"
-          placeholder="Ingresa tu nro. de cuenta"
+          placeholder="Nro. de cuenta entre 13 y 14 caracteres"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.account_number}
           error={formik.errors.account_number}
           touched={formik.touched.account_number}
         />
-        <p className="self-start mb-3 relative -top-1 ml-2">* Entre 13 y 14 caracteres.</p>
         <Select
           name="acc_type"
           label="Tipo de cuenta"
@@ -82,8 +82,11 @@ const AddAccount = ({ order, accType }) => {
           error={formik.errors.alias}
           touched={formik.touched.alias}
         />
+        <MuiAlert type="info" opened>
+          <p>No realizamos transferencias a terceros. Todas las cuentas agregadas deben ser propias o de empresas donde seas el representante legal.</p>
+        </MuiAlert>
         <Checkbox name="accept" value={formik.values.accept} onChange={formik.handleChange} error={formik.errors.accept}>
-          Declaro que es mi cuenta personal o de mi empresa.
+          Declaro que esta cuenta es propia o de mi empresa.
         </Checkbox>
         <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button ld-ext-right ${isProcessing ? "running" : ""}`}>
           <span className="ld ld-ring ld-spin" />
