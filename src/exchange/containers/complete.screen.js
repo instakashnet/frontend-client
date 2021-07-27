@@ -7,6 +7,7 @@ import { formatAmount } from "../../shared/functions";
 import { processCodeInit, cancelExchangeInit } from "../../store/actions";
 import { transferCodeValidation } from "../helpers/validations";
 
+import { MuiAlert } from "../../core/components/UI/mui-alert.component";
 import Tooltip from "../../core/components/UI/tooltip.component";
 import Input from "../../core/components/UI/form-items/input.component";
 import Button from "../../core/components/UI/button.component";
@@ -32,8 +33,8 @@ const CompleteExchange = ({ order }) => {
   return (
     <div className={classes.TransferCode}>
       <h1>¡Último paso!</h1>
-      <img src={TransferImg} alt="transfer-money" className="mx-auto inline-block my-4" />
-      <p>Transfiere desde tu banco por internet el monto de:</p>
+      <img src={TransferImg} alt="transfer-money" className="mx-auto inline-block mb-2" />
+      <p className="font-bold">Transfiere desde la app de tu banco el monto de:</p>
       <p className={classes.Amount}>
         {`${order.currencySentSymbol} ${formatAmount(order.amountSent)}`} <CopyButton textToCopy={order.amountSent} />
       </p>
@@ -49,12 +50,12 @@ const CompleteExchange = ({ order }) => {
         </div>
       </Card>
 
-      <Card className={`${classes.TransferAccount} mt-8 flex items-center justify-between`}>
+      <Card className={`${classes.TransferAccount} mt-3 flex items-center justify-between`}>
         <p className="text-left">Instakash SAC - RUC 20605285105</p>
         <CopyButton textToCopy="20605285105" />
       </Card>
 
-      <p className="mb-6 mt-8 text-left">
+      <p className="mt-4 text-left">
         Una vez realizado coloque el número de operación <b>emitido por su banco</b> dentro del casillero mostrado debajo y debe darle al botón de <i>"enviar"</i>.
       </p>
       <div className="flex items-center justify-end mb-3">
@@ -80,7 +81,9 @@ const CompleteExchange = ({ order }) => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-        <p className="uppercase text-left text-sm">Solo posees 15 minutos para enviarnos el nro. de tu operación.</p>
+        <MuiAlert type="info" opened>
+          <span className="block  font-bold text-left">Solo posees 15 minutos para enviarnos el nro. de tu operación.</span>
+        </MuiAlert>
         <div className="flex flex-col justify-center items-center">
           <Button type="submit" className={`action-button mt-6 ld-ext-right ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
             <span className="ld ld-ring ld-spin" />

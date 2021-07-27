@@ -7,6 +7,7 @@ import { completeExchangeInit, cancelExchangeInit } from "../../store/actions";
 import { completeExchangeValidation } from "../helpers/validations";
 import { validateInterplaza } from "../../shared/functions";
 
+import { MuiAlert } from "../../core/components/UI/mui-alert.component";
 import CustomSelect from "../../core/components/UI/form-items/custom-select.component";
 import AccountSelect from "../../core/components/UI/form-items/account-select.component";
 import Select from "../../core/components/UI/form-items/select.component";
@@ -123,12 +124,14 @@ const Accounts = ({ setModal, order }) => {
           </button>
         )}
         {interplaza && (
-          <p className="error-msg">
-            Las cuentas interplaza de Interbank acarrean comisión. Conozca más en nuestros{" "}
-            <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
-              términos y condiciones.
-            </a>
-          </p>
+          <MuiAlert type="warning" opened>
+            <span className="block text-left">
+              <b>Cuentas interplaza de Interbank acarrean una comisión.</b> Puede verlo en nuestros{" "}
+              <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
+                términos y condiciones.
+              </a>
+            </span>
+          </MuiAlert>
         )}
         {funds_origin && (
           <Select
