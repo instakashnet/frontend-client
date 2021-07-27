@@ -133,7 +133,7 @@ function* cancelExchange({ orderId, status, closeModal }) {
         }
 
         yield call([sessionStorage, "removeItem"], "order");
-        if (status === "complete") yield call([history, "push"], "/currency-exchange");
+        if (status === "complete" || status === "draft") yield call([history, "push"], "/currency-exchange");
 
         yield Swal.fire("Exitoso", "Su solicitud de cambio fue cancelada.", "success");
         yield put(actions.cancelExchangeSuccess());
