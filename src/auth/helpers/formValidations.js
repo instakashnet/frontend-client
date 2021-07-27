@@ -44,6 +44,6 @@ export const emailValidation = Yup.object().shape({
 export const changePasswordValidation = Yup.object().shape({
   password: Yup.string()
     .required("Debes colocar una contraseña")
-    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{6,}$/, "Debe ser de al menos 6 caracteres con 1 número."),
+    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{6,}$/, "Debe ser de al menos 6 caracteres, con 1 mayúscula y un 1 número."),
   confirmPassword: Yup.string().oneOf([Yup.ref("password"), null], "Las contraseñas deben coincidir."),
 });
