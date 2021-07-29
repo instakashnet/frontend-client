@@ -1,10 +1,10 @@
 import * as Yup from "yup";
 
 export const addProfileValidation = Yup.object().shape({
-  razon_social: Yup.string().required("Debes ingresa el nombre de tu empresa."),
+  razon_social: Yup.string().required("Debes validar el RUC para agregar el nombre de tu empresa."),
   ruc: Yup.string()
-    .required("Debes ingresa el RUC de tu empresa.")
-    .matches(/^[0-9]{10,13}$/, "Ingresa un RUC válido."),
+    .required("Debes ingresar el RUC de tu empresa.")
+    .matches(/^[0-9]{11}$/, "Debes ingresar un RUC válido."),
   address: Yup.string().required("Debes colocar la dirección fiscal.").min(12, "Dirección fiscal muy corta."),
   accept: Yup.boolean().oneOf([true], "Debes aceptar que eres el representante legal."),
 });

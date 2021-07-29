@@ -104,6 +104,13 @@ body {
   }
 }
 
+.input-spinner {
+  position: absolute;
+  right: 7px;
+  top: 0;
+  z-index: 10;
+}
+
 /* ACCORDION ACCOUNTS */
 
 .MuiAccordionDetails-root {

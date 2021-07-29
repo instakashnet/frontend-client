@@ -4,6 +4,7 @@
 .FormGroup {
   margin: 8px 0;
   width: 100%;
+  position: relative;
 
   label {
     margin-bottom: 5px;
@@ -67,11 +68,11 @@
 .CheckGroup {
   margin: 5px 0;
   width: 100%;
-  cursor: pointer;
 
   label {
     font-size: 0.9rem;
     color: $base-green;
+    cursor: pointer;
   }
 }
 

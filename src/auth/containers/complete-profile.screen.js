@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { completeProfileValidation } from "../helpers/formValidations";
+import { AllowOnlyNumbers } from "../../shared/functions";
 import { User, FileText } from "react-feather";
 import { logoutInit, completeProfileInit, openModal, closeModal } from "../../store/actions";
 
@@ -12,14 +13,13 @@ import Input from "../components/UI/input.component";
 import Select from "../components/UI/select.component";
 import PhoneInput from "../components/UI/phone-input.component";
 import Button from "../../core/components/UI/button.component";
-import Spinner from "../../core/components/UI/spinner.component";
 
 import classes from "../assets/css/auth.containers.module.scss";
 
 const CompleteProfile = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
-  const [invalidDNI, setInvalidDNI] = useState(false);
+  const [invalidDNI, setInvalidDNI] = useState(null);
   const { isProcessing } = useSelector((state) => state.Auth);
   const ModalComponent = useSelector((state) => state.Modal.Component);
   const userSession = JSON.parse(localStorage.getItem("userSession"));
@@ -65,10 +65,10 @@ const CompleteProfile = () => {
 
             setFieldValue("first_name", firstName);
             setFieldValue("last_name", lastName);
+            setInvalidDNI(null);
           }
-          setInvalidDNI(false);
         } catch (error) {
-          setInvalidDNI("El DNI ingresado no puede ser verificado. Por favor verifique sus datos.");
+          setInvalidDNI("El DNI ingresado no se ha podido verificar. Por favor revise sus datos.");
         } finally {
           setIsLoading(false);
         }
@@ -83,24 +83,18 @@ const CompleteProfile = () => {
 
   const onDocumentTypeHandler = (e) => {
     const { value } = e.target;
-    formik.setFieldValue("document_type", value);
-    formik.setFieldValue("document_identification", "");
-    formik.setFieldValue("first_name", "");
-    formik.setFieldValue("last_name", "");
+    setFieldValue("document_type", value);
+    setFieldValue("document_identification", "");
+    setFieldValue("first_name", "");
+    setFieldValue("last_name", "");
   };
 
-  const onDocumentIdentificationHandler = (e) => {
-    const re = /^[0-9\b]+$/;
-    if (e.target.value === "" || re.test(e.target.value)) {
-      formik.setFieldValue("document_identification", e.target.value);
-    }
-  };
+  const onDocumentChangeHandler = (e) => (AllowOnlyNumbers(e.target.value) ? setFieldValue("document_identification", e.target.value) : null);
 
   if (!userSession) return <Redirect to="/signin" />;
 
   return (
     <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
-      {isLoading && <Spinner />}
       <div className={classes.AuthWrapper}>
         <h1>¡Felicidades, Tu cuenta ha sido creada!</h1>
         <p className="mt-6">Ahora, debes completar todos tus datos</p>
@@ -112,7 +106,7 @@ const CompleteProfile = () => {
               type="text"
               placeholder="Nro. de documento"
               value={formik.values.document_identification}
-              onChange={onDocumentIdentificationHandler}
+              onChange={onDocumentChangeHandler}
               onBlur={formik.handleBlur}
               error={formik.errors.document_identification}
               touched={formik.touched.document_identification}
@@ -131,6 +125,9 @@ const CompleteProfile = () => {
             error={formik.errors.first_name}
             touched={formik.touched.first_name}
             icon={User}
+            isLoading={isLoading}
+            disabled={isLoading}
+            loadingPos={{ top: 9 }}
           />
           <Input
             name="last_name"
@@ -142,6 +139,9 @@ const CompleteProfile = () => {
             error={formik.errors.last_name}
             touched={formik.touched.last_name}
             icon={User}
+            isLoading={isLoading}
+            disabled={isLoading}
+            loadingPos={{ top: 9 }}
           />
           {userSession.is_google && <PhoneInput value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} country="pe" />}
           <Select

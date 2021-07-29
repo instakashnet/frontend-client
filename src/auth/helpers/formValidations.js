@@ -14,7 +14,7 @@ export const signupValidation = Yup.object().shape({
     .matches(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s/0-9]{9,14}$/, "Debes colocar un teléfono válido."),
   password: Yup.string()
     .required("Debes colocar una contraseña")
-    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{6,}$/, "Debe ser de al menos 6 caracteres con 1 número."),
+    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{6,}$/, "Debe ser de al menos 6 caracteres, con 1 mayúscula y 1 número."),
   confirmPassword: Yup.string().oneOf([Yup.ref("password"), null], "Las contraseñas deben coincidir."),
   affiliate: Yup.string()
     .notRequired()
