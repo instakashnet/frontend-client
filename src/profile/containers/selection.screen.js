@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProfileInit, openModal, closeModal } from "../../store/actions";
 import { AlertTriangle } from "react-feather";
@@ -17,17 +17,17 @@ const Selection = () => {
 
   const addProfileHandler = () => dispatch(openModal(AddProfile));
 
-  // useEffect(() => {
-  //   let timeout;
-  //   const isRead = sessionStorage.getItem("isRead");
+  useEffect(() => {
+    let timeout;
+    const isRead = sessionStorage.getItem("isRead");
 
-  //   if (!isRead) {
-  //     timeout = setTimeout(() => {
-  //       dispatch(openModal(InfoModal));
-  //     }, 600);
-  //   }
-  //   return () => timeout && clearTimeout(timeout);
-  // }, [dispatch]);
+    if (!isRead) {
+      timeout = setTimeout(() => {
+        dispatch(openModal(InfoModal));
+      }, 600);
+    }
+    return () => timeout && clearTimeout(timeout);
+  }, [dispatch]);
 
   return (
     <Layout>
