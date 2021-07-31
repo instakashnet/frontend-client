@@ -21,3 +21,8 @@ export function convertHexToRGB(hex, alpha) {
     return "rgb(" + r + ", " + g + ", " + b + ")";
   }
 }
+
+export const AllowOnlyNumbers = (value) => {
+  const re = /^[0-9\b]+$/;
+  return value === "" || re.test(value);
+};

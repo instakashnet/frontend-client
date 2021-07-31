@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useFormik } from "formik";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { completeProfileValidation } from "../helpers/formValidations";
+import { AllowOnlyNumbers } from "../../shared/functions";
 import { User, FileText } from "react-feather";
 import { logoutInit, completeProfileInit, openModal, closeModal } from "../../store/actions";
 
@@ -16,6 +18,8 @@ import classes from "../assets/css/auth.containers.module.scss";
 
 const CompleteProfile = () => {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+  const [invalidDNI, setInvalidDNI] = useState(null);
   const { isProcessing } = useSelector((state) => state.Auth);
   const ModalComponent = useSelector((state) => state.Modal.Component);
   const userSession = JSON.parse(localStorage.getItem("userSession"));
@@ -25,6 +29,9 @@ const CompleteProfile = () => {
     validationSchema: completeProfileValidation(userSession ? userSession.is_google : false),
     onSubmit: (values) => dispatch(completeProfileInit(values)),
   });
+
+  const { setFieldValue } = formik;
+  const { document_identification, document_type } = formik.values;
 
   const documentOptions = [
     { value: "DNI", label: "DNI" },
@@ -39,8 +46,50 @@ const CompleteProfile = () => {
     { value: "other", label: "Otro" },
   ];
 
+  useEffect(() => {
+    if (document_type === "DNI" && document_identification.length === 8) {
+      const validateDocument = async () => {
+        setIsLoading(true);
+
+        try {
+          const res = await axios.post("https://api.migo.pe/api/v1/dni", { token: process.env.REACT_APP_MIGO_API, dni: document_identification });
+          if (res.status === 200) {
+            const names = res.data.nombre.split(" ");
+            let firstName = names[1];
+            let lastName = names[0];
+
+            if (names.length > 2) {
+              firstName = `${names[2]} ${names[3]}`;
+              lastName = `${names[0]} ${names[1] || ""}`;
+            }
+
+            setFieldValue("first_name", firstName);
+            setFieldValue("last_name", lastName);
+            setInvalidDNI(null);
+          }
+        } catch (error) {
+          setInvalidDNI("El DNI ingresado no se ha podido verificar. Por favor revise sus datos.");
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      validateDocument();
+    } else setInvalidDNI(false);
+  }, [document_type, document_identification, setFieldValue]);
+
   const onPhoneChange = (value) => formik.setFieldValue("phone", value);
   const openModalHandler = () => dispatch(openModal(DataInfo));
+
+  const onDocumentTypeHandler = (e) => {
+    const { value } = e.target;
+    setFieldValue("document_type", value);
+    setFieldValue("document_identification", "");
+    setFieldValue("first_name", "");
+    setFieldValue("last_name", "");
+  };
+
+  const onDocumentChangeHandler = (e) => (AllowOnlyNumbers(e.target.value) ? setFieldValue("document_identification", e.target.value) : null);
 
   if (!userSession) return <Redirect to="/signin" />;
 
@@ -50,6 +99,22 @@ const CompleteProfile = () => {
         <h1>¡Felicidades, Tu cuenta ha sido creada!</h1>
         <p className="mt-6">Ahora, debes completar todos tus datos</p>
         <form onSubmit={formik.handleSubmit} className="text-center flex flex-col items-center justify-center">
+          <div className="grid grid-cols-3 w-full gap-4">
+            <Select name="document_type" options={documentOptions} value={formik.values.document_type} onChange={onDocumentTypeHandler} onBlur={onDocumentTypeHandler} />
+            <Input
+              name="document_identification"
+              type="text"
+              placeholder="Nro. de documento"
+              value={formik.values.document_identification}
+              onChange={onDocumentChangeHandler}
+              onBlur={formik.handleBlur}
+              error={formik.errors.document_identification}
+              touched={formik.touched.document_identification}
+              icon={FileText}
+              groupClass="col-span-2"
+            />
+          </div>
+          {invalidDNI && <p className="error-msg">{invalidDNI}</p>}
           <Input
             name="first_name"
             type="text"
@@ -60,6 +125,9 @@ const CompleteProfile = () => {
             error={formik.errors.first_name}
             touched={formik.touched.first_name}
             icon={User}
+            isLoading={isLoading}
+            disabled={isLoading}
+            loadingPos={{ top: 9 }}
           />
           <Input
             name="last_name"
@@ -71,23 +139,11 @@ const CompleteProfile = () => {
             error={formik.errors.last_name}
             touched={formik.touched.last_name}
             icon={User}
+            isLoading={isLoading}
+            disabled={isLoading}
+            loadingPos={{ top: 9 }}
           />
           {userSession.is_google && <PhoneInput value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} country="pe" />}
-          <div className="grid grid-cols-3 gap-4">
-            <Select name="document_type" options={documentOptions} value={formik.values.document_type} onChange={formik.handleChange} onBlur={formik.handleBlur} />
-            <Input
-              name="document_identification"
-              type="text"
-              placeholder="Nro. de documento"
-              value={formik.values.document_identification}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.errors.document_identification}
-              touched={formik.touched.document_identification}
-              icon={FileText}
-              groupClass="col-span-2"
-            />
-          </div>
           <Select
             name="identity_sex"
             value={formik.values.identity_sex}
@@ -100,7 +156,10 @@ const CompleteProfile = () => {
               Selecciona tu sexo
             </option>
           </Select>
-          <Button type="submit" className={`action-button ld-ext-right mt-3 ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
+          <Button
+            type="submit"
+            className={`action-button ld-ext-right mt-3 ${isProcessing ? "running" : ""}`}
+            disabled={!formik.isValid || (document_type === "DNI" && invalidDNI) || isProcessing}>
             <span className="ld ld-ring ld-spin" />
             Completar mi perfil
           </Button>

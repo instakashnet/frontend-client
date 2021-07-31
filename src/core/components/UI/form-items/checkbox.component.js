@@ -5,7 +5,7 @@ import classes from "./Form.module.scss";
 const Checkbox = ({ name, value, children, error, touched, ...rest }) => {
   return (
     <div className={classes.CheckGroup}>
-      <label className="flex items-center">
+      <label>
         <input type="checkbox" name={name} checked={value} {...rest} />
         <span className={`ml-2 ${!value && error ? classes.Error : ""}`}>{children}</span>
       </label>
