@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProfileInit, openModal, closeModal } from "../../store/actions";
 import { AlertTriangle } from "react-feather";
@@ -17,17 +17,17 @@ const Selection = () => {
 
   const addProfileHandler = () => dispatch(openModal(AddProfile));
 
-  // useEffect(() => {
-  //   let timeout;
-  //   const isRead = sessionStorage.getItem("isRead");
+  useEffect(() => {
+    let timeout;
+    const isRead = sessionStorage.getItem("isRead");
 
-  //   if (!isRead) {
-  //     timeout = setTimeout(() => {
-  //       dispatch(openModal(InfoModal));
-  //     }, 600);
-  //   }
-  //   return () => timeout && clearTimeout(timeout);
-  // }, [dispatch]);
+    if (!isRead) {
+      timeout = setTimeout(() => {
+        dispatch(openModal(InfoModal));
+      }, 600);
+    }
+    return () => timeout && clearTimeout(timeout);
+  }, [dispatch]);
 
   return (
     <Layout>
@@ -67,8 +67,8 @@ export const InfoModal = () => {
       <AlertTriangle size={70} className="error-msg mb-4" />
       <h2>Estimado usuario</h2>
       <p>
-        Gracias por la confianza, queremos informarle que en estos momentos la plataforma para empresas de <b>BCP</b> presenta problemas en su plataforma. Por tal motivo no
-        realizaremos operaciones a este banco por los momentos. Lamentamos los inconvenientes que esto pueda causarle y esperamos se solucione a la brevedad posible.
+        Gracias por la confianza, queremos informarle que en estos momentos la plataforma para empresas de <b>Interbank</b> presenta problemas de conexión. Por tal movito las
+        operaciones hacia este banco pueden demorar más de lo usual. Lamentamos los inconvenientes que esto pueda causarle y esperamos se solucione a la brevedad posible.
         <br />
         <span className="mt-4 inline-block font-bold">Agradecemos su comprensión.</span>
         <Button onClick={closeModalHandler} className="action-button">
