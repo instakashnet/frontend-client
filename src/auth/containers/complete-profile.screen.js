@@ -55,11 +55,14 @@ const CompleteProfile = () => {
           const res = await axios.post("https://api.migo.pe/api/v1/dni", { token: process.env.REACT_APP_MIGO_API, dni: document_identification });
           if (res.status === 200) {
             const names = res.data.nombre.split(" ");
-            let firstName = names[1];
-            let lastName = names[0];
+            let firstName = names[1] || "";
+            let lastName = names[0] || "";
 
-            if (names.length > 2) {
-              firstName = `${names[2]} ${names[3]}`;
+            if (names.length === 3) {
+              firstName = names[2] || "";
+              lastName = `${names[0] || ""} ${names[1] || ""}`;
+            } else if (names.length > 3) {
+              firstName = `${names[2] || ""} ${names[3] || ""}`;
               lastName = `${names[0]} ${names[1] || ""}`;
             }
 
