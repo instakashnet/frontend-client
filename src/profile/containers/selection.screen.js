@@ -17,17 +17,17 @@ const Selection = () => {
 
   const addProfileHandler = () => dispatch(openModal(AddProfile));
 
-  // useEffect(() => {
-  //   let timeout;
-  //   const isRead = sessionStorage.getItem("isRead");
+  useEffect(() => {
+    let timeout;
+    const isRead = sessionStorage.getItem("isRead");
 
-  //   if (!isRead) {
-  //     timeout = setTimeout(() => {
-  //       dispatch(openModal(InfoModal));
-  //     }, 600);
-  //   }
-  //   return () => timeout && clearTimeout(timeout);
-  // }, [dispatch]);
+    if (!isRead) {
+      timeout = setTimeout(() => {
+        dispatch(openModal(InfoModal));
+      }, 600);
+    }
+    return () => timeout && clearTimeout(timeout);
+  }, [dispatch]);
 
   return (
     <Layout>
@@ -67,8 +67,8 @@ export const InfoModal = () => {
       <AlertTriangle size={70} className="error-msg mb-4" />
       <h2>Estimado usuario</h2>
       <p>
-        Gracias por la confianza, queremos informarle que en estos momentos la plataforma para empresas de <b>BCP</b> presenta problemas en plataforma. Por tal movito no
-        realizaremos operaciones hacia este banco ppor el momento. Lamentamos los inconvenientes que esto pueda causarle y esperamos se solucione a la brevedad posible.
+        Gracias por la confianza, queremos informarle que en estos momentos la plataforma para empresas de <b>BCP</b> presenta problemas en plataforma. Por tal las operaciones a
+        este banco demorarán más de lo usual. Lamentamos los inconvenientes que esto pueda causarle y esperamos se solucione a la brevedad posible.
         <br />
         <span className="mt-4 inline-block font-bold">Agradecemos su comprensión.</span>
         <Button onClick={closeModalHandler} className="action-button">
