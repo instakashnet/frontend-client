@@ -57,6 +57,12 @@ const OrderDetails = () => {
         <h4>Tasa de cambio:</h4>
         <span>{convertRate(details.rate)}</span>
       </div>
+      {details.couponName && (
+        <div className="flex items-center justify-between pr-2 my-3">
+          <h4>Cupón aplicado:</h4>
+          <span>{details.couponName}</span>
+        </div>
+      )}
       <h3 className="mt-4">Cuenta que recibe:</h3>
       <div className="flex items-center justify-between pr-2 my-2">
         <img src={`${process.env.PUBLIC_URL}/images/banks/${details.bankSent.toLowerCase()}-logo.svg`} width={80} alt={details.bankSent} />
