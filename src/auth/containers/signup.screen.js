@@ -11,6 +11,7 @@ import CodeInput from "../../core/components/UI/form-items/input.component";
 import PhoneInput from "../components/UI/phone-input.component";
 import PasswordInput from "../components/UI/password-input.component";
 import Button from "../../core/components/UI/button.component";
+import { CheckboxComponent } from "../../core/components/UI/form-items/checkbox.component";
 
 import classes from "../assets/css/auth.containers.module.scss";
 
@@ -18,7 +19,7 @@ const Signup = () => {
   const dispatch = useDispatch();
   const { isProcessing } = useSelector((state) => state.Auth);
   const formik = useFormik({
-    initialValues: { email: "", phone: "", password: "", confirmPassword: "", affiliate: "" },
+    initialValues: { email: "", phone: "", password: "", confirmPassword: "", affiliate: "", allowPromotionalEmail: false, acceptTerms: false },
     validationSchema: signupValidation,
     onSubmit: (values) => dispatch(signupInit(values)),
   });
@@ -74,11 +75,18 @@ const Signup = () => {
             error={formik.errors.affiliate}
             touched={formik.touched.affiliate}
           />
-          <p className="text-sm text-center my-2">Al crear tu cuenta estás autorizando a Instakash poder enviarte comunicaciones promocionales.</p>
-          <p className="text-sm text-center my-2">
-            Al crear tu cuenta estás aceptando nuestros <a href="https://instakash.net/politicas-de-privacidad">Términos y condiciones</a> y{" "}
+          <CheckboxComponent
+            name="allowPromotionalEmail"
+            className={classes.Checkbox}
+            value={formik.values.allowPromotionalEmail}
+            error={formik.errors.allowPromotionalEmail}
+            onChange={formik.handleChange}>
+            Autorizo recibir notícias y promociones de parte de Instakash
+          </CheckboxComponent>
+          <CheckboxComponent name="acceptTerms" className={classes.Checkbox} value={formik.values.acceptTerms} error={formik.errors.acceptTerms} onChange={formik.handleChange}>
+            Declaro que he leído y acepto sus <a href="https://instakash.net/politicas-de-privacidad">Términos y condiciones</a> y las{" "}
             <a href="https://instakash.net/terminos-y-condiciones">Políticas de privacidad</a>.
-          </p>
+          </CheckboxComponent>
           <Button type="submit" className={`action-button mt-5 ld-ext-right ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
             <span className="ld ld-ring ld-spin" />
             Crear cuenta
