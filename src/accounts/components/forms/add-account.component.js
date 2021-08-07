@@ -8,7 +8,7 @@ import { MuiAlert } from "../../../core/components/UI/mui-alert.component";
 import CustomSelect from "../../../core/components/UI/form-items/custom-select.component";
 import Input from "../../../core/components/UI/form-items/input.component";
 import Select from "../../../core/components/UI/form-items/select.component";
-import Checkbox from "../../../core/components/UI/form-items/checkbox.component";
+import { CheckboxComponent } from "../../../core/components/UI/form-items/checkbox.component";
 import Button from "../../../core/components/UI/button.component";
 
 const AddAccount = ({ order, accType }) => {
@@ -85,9 +85,9 @@ const AddAccount = ({ order, accType }) => {
         <MuiAlert type="info" opened>
           <p>No realizamos transferencias a terceros. Todas las cuentas agregadas deben ser propias o de empresas donde seas el representante legal.</p>
         </MuiAlert>
-        <Checkbox name="accept" value={formik.values.accept} onChange={formik.handleChange} error={formik.errors.accept}>
+        <CheckboxComponent name="accept" value={formik.values.accept} onChange={formik.handleChange} error={formik.errors.accept}>
           Declaro que esta cuenta es propia o de mi empresa.
-        </Checkbox>
+        </CheckboxComponent>
         <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button ld-ext-right ${isProcessing ? "running" : ""}`}>
           <span className="ld ld-ring ld-spin" />
           Agregar cuenta

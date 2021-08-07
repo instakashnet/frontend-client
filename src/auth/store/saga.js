@@ -21,7 +21,7 @@ function* loadUser() {
   const { token, expDate } = JSON.parse(authData);
   if (!token) return yield call(clearUser);
 
-  if (new Date(expDate) <= new Date()) return yield put(actions.logoutInit());
+  if (new Date(expDate) <= new Date()) return yield call(logout);
 
   try {
     const res = yield axios.get("/users/session");
@@ -37,13 +37,13 @@ function* loadUser() {
     }
     yield call(setAuthTimeout, new Date(expDate).getTime() - new Date().getTime());
   } catch (error) {
-    yield put(actions.logoutInit());
+    yield call(logout);
     yield put(actions.authError());
   }
 }
 
 function* setAuthTimeout(timeout, isLoadUser = false) {
-  yield delay(timeout - 6000);
+  yield delay(timeout - 45000);
   if (isLoadUser) {
     yield call(logout);
   } else yield put(actions.refreshToken());
@@ -98,7 +98,9 @@ function* completeProfile({ values }) {
 function* refreshToken() {
   try {
     const res = yield axios.post("/auth/refresh");
-    if (res.status === 200) yield call(setAuthToken, res.data, true);
+    if (res.status === 200) {
+      yield call(setAuthToken, res.data, true);
+    } else yield call(logout);
   } catch (error) {
     yield call(logout);
   }
@@ -140,14 +142,21 @@ function* clearUser() {
 }
 
 function* logout() {
-  try {
-    yield axios.post("/auth/logout");
-  } catch (error) {
-    yield put(actions.authError());
+  const authData = yield call([localStorage, "getItem"], "authData");
+  if (!authData) return yield put(actions.logoutSuccess());
+
+  const { expDate } = JSON.parse(authData);
+  if (new Date(expDate) > new Date()) {
+    try {
+      yield axios.post("/auth/logout");
+    } catch (error) {
+      yield put(actions.authError());
+    }
   }
 
   yield call(clearUser);
   yield call([history, "push"], "/signin");
+  yield put(actions.logoutSuccess());
 }
 
 export function* watchLoadUser() {

@@ -19,6 +19,7 @@ export const signupValidation = Yup.object().shape({
   affiliate: Yup.string()
     .notRequired()
     .matches(/^[a-zA-Z0-9]+$/i, "Código de afiliado inválido."),
+  acceptTerms: Yup.boolean().oneOf([true], "Debes aceptar nuestros términos y condiciones."),
 });
 
 export const completeProfileValidation = (isGoogle) =>

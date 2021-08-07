@@ -7,7 +7,7 @@ import { AllowOnlyNumbers } from "../../../shared/functions";
 import { addProfileValidation } from "../../helpers/validations";
 
 import Input from "../../../core/components/UI/form-items/input.component";
-import Checkbox from "../../../core/components/UI/form-items/checkbox.component";
+import { CheckboxComponent } from "../../../core/components/UI/form-items/checkbox.component";
 import Button from "../../../core/components/UI/button.component";
 
 const AddProfile = () => {
@@ -90,9 +90,9 @@ const AddProfile = () => {
         error={formik.errors.address}
         touched={formik.touched.address}
       />
-      <Checkbox name="accept" value={formik.values.accept} onChange={formik.handleChange} error={formik.errors.accept}>
+      <CheckboxComponent name="accept" value={formik.values.accept} onChange={formik.handleChange} error={formik.errors.accept}>
         Declaro que soy el representante legal de la empresa.
-      </Checkbox>
+      </CheckboxComponent>
       <Button type="submit" className={`ld-ext-right self-center action-button ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || invalidRuc || isProcessing}>
         <span className="ld ld-ring ld-spin" />
         Agregar empresa
