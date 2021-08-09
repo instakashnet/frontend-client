@@ -1,0 +1,70 @@
+@import "../../../assets/css/colors";
+@import "../../../assets/css/breakpoints";
+.FormGroup {
+  position: relative;
+  margin-bottom: 15px;
+
+  input {
+    padding: 14px;
+    background-color: #fff;
+  }
+
+  svg {
+    color: $placeholder;
+  }
+}
+
+.PasswordIcon {
+  color: $placeholder;
+}
+
+.CheckGroup {
+  width: 100%;
+  margin: 5px 0;
+
+  label {
+    font-size: 0.8rem;
+    cursor: pointer;
+
+    a,
+    span {
+      font-size: 0.8rem;
+    }
+  }
+
+  @include respond(tablet) {
+    label {
+      font-size: 0.9rem;
+
+      a,
+      span {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+.PhoneWrapper {
+  font-size: 1rem !important;
+  font-family: inherit !important;
+}
+
+.PhoneInput {
+  width: 100% !important;
+  padding-top: 21px !important;
+  padding-bottom: 21px !important;
+  padding-left: 41px !important;
+}
+
+.PhoneError {
+  border-color: $error !important;
+
+  + .ButtonFlag {
+    border-color: $error !important;
+  }
+}
+
+.ButtonFlag {
+  border-right: none !important;
+  background-color: transparent !important;
+}

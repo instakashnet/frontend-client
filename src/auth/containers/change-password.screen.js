@@ -5,8 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { changePasswordValidation } from "../helpers/formValidations";
 import { resetPasswordInit } from "../store/actions";
 
-import Password from "../components/UI/password-input.component";
-import Button from "../../core/components/UI/button.component";
+// import Password from "../components/UI/password-input.component";
+import { Button } from "../../components/UI/button.component";
 
 import classes from "../assets/css/auth.containers.module.scss";
 
@@ -32,24 +32,6 @@ const ChangePassword = (props) => {
           Coloque su nueva contraseña para poder acceder nuevamente. <br /> Te aconsejamos crear una que te sea facil de recordar.
         </p>
         <form onSubmit={formik.handleSubmit}>
-          <Password
-            name="password"
-            placeholder="Nueva contraseña"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.errors.password}
-            touched={formik.touched.password}
-          />
-          <Password
-            name="confirmPassword"
-            placeholder="Confirmar contraseña"
-            value={formik.values.confirmPassword}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.errors.confirmPassword}
-            touched={formik.touched.confirmPassword}
-          />
           <Button type="submit" disabled={!formik.isValid || isProcessing} className={`${classes.SubmitButton} ld-ext-right ${isProcessing ? "running" : ""}`}>
             <span className="ld ld-ring ld-spin" />
             Reestablecer contraseña

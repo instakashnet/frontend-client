@@ -6,8 +6,8 @@ import { Mail } from "react-feather";
 import { emailValidation } from "../helpers/formValidations";
 import { recoverPasswordInit } from "../../store/actions";
 
-import Input from "../components/UI/input.component";
-import Button from "../../core/components/UI/button.component";
+import { Input } from "../../components/UI/form-items/input.component";
+import { Button } from "../../components/UI/button.component";
 
 import classes from "../assets/css/auth.containers.module.scss";
 

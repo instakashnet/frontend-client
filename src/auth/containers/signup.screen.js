@@ -1,17 +1,16 @@
 import React from "react";
 import { useFormik } from "formik";
-import { Mail } from "react-feather";
 import { Link } from "react-router-dom";
+import { Mail } from "@material-ui/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { signupValidation } from "../helpers/formValidations";
 import { signupInit } from "../store/actions";
 
-import Input from "../components/UI/input.component";
-import CodeInput from "../../core/components/UI/form-items/input.component";
-import PhoneInput from "../components/UI/phone-input.component";
-import PasswordInput from "../components/UI/password-input.component";
-import Button from "../../core/components/UI/button.component";
-import { CheckboxComponent } from "../../core/components/UI/form-items/checkbox.component";
+import { Input } from "../../components/UI/form-items/input.component";
+import { InputPhone } from "../../components/UI/form-items/phone-input.component";
+
+import { Button } from "../../components/UI/button.component";
+import { CheckboxComponent } from "../../components/UI/form-items/checkbox.component";
 
 import classes from "../assets/css/auth.containers.module.scss";
 
@@ -29,49 +28,51 @@ const Signup = () => {
   return (
     <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
       <div className={classes.AuthWrapper}>
-        <h1>¡Bienvenido a Instakash!</h1>
-        <p className="mt-6">
-          Registrate y realiza tus operaciones <br /> de forma segura desde nuestra plataforma digital.
-        </p>
-        <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
+        <h2>¡Bienvenido a Instakash!</h2>
+        <p className="mt-2 mb-4">Registrate y realiza tus operaciones de forma segura desde nuestra plataforma digital.</p>
+        <form onSubmit={formik.handleSubmit}>
           <Input
-            type="email"
             name="email"
+            type="email"
+            label="Correo eletrónico"
             value={formik.values.email}
-            placeholder="Correo electrónico"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            icon={Mail}
             error={formik.errors.email}
             touched={formik.touched.email}
+            iconEnd={Mail}
           />
-          <PhoneInput value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} country="pe" />
-          <PasswordInput
+          <InputPhone country="pe" value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} />
+          <Input
+            type="password"
             name="password"
-            placeholder="Contraseña"
+            autoComplete="new-password"
             value={formik.values.password}
+            label="Contraseña"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             error={formik.errors.password}
             touched={formik.touched.password}
           />
-          <PasswordInput
+          <Input
+            type="password"
             name="confirmPassword"
-            placeholder="Confirmar contraseña"
+            autoComplete="new-password"
             value={formik.values.confirmPassword}
+            label="Confirmar contraseña"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             error={formik.errors.confirmPassword}
             touched={formik.touched.confirmPassword}
           />
-          <h4 className="text-center text-lg mb-2 mt-3">¿Te ha referido un amigo?</h4>
-          <p className="text-center">¡Ingresa su código y recibe una tasa preferencial!</p>
-          <CodeInput
+          <h2 className="text-center mb-2">¿Te ha referido un amigo?</h2>
+          <Input
+            type="text"
+            label="Ingresa el código de afiliado"
             name="affiliate"
-            placeholder="Ingresa el código de afiliado aquí"
-            value={formik.values.affiliate}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            value={formik.values.affiliate}
             error={formik.errors.affiliate}
             touched={formik.touched.affiliate}
           />
@@ -87,7 +88,7 @@ const Signup = () => {
             Declaro que he leído y acepto sus <a href="https://instakash.net/politicas-de-privacidad">Términos y condiciones</a> y las{" "}
             <a href="https://instakash.net/terminos-y-condiciones">Políticas de privacidad</a>.
           </CheckboxComponent>
-          <Button type="submit" className={`action-button mt-5 ld-ext-right ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
+          <Button type="submit" className={`action-button my-3 ld-over ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
             <span className="ld ld-ring ld-spin" />
             Crear cuenta
           </Button>

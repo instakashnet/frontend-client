@@ -9,10 +9,10 @@ import { User, FileText } from "react-feather";
 import { logoutInit, completeProfileInit, openModal, closeModal } from "../../store/actions";
 
 import Modal from "../../core/components/UI/modals/modal.component";
-import Input from "../components/UI/input.component";
-import Select from "../components/UI/select.component";
-import PhoneInput from "../components/UI/phone-input.component";
-import Button from "../../core/components/UI/button.component";
+import { Input } from "../../components/UI/form-items/input.component";
+// import Select from "../components/UI/select.component";
+import { InputPhone } from "../../components/UI/form-items/phone-input.component";
+import { Button } from "../../components/UI/button.component";
 
 import classes from "../assets/css/auth.containers.module.scss";
 
@@ -103,7 +103,6 @@ const CompleteProfile = () => {
         <p className="mt-6">Ahora, debes completar todos tus datos</p>
         <form onSubmit={formik.handleSubmit} className="text-center flex flex-col items-center justify-center">
           <div className="grid grid-cols-3 w-full gap-4">
-            <Select name="document_type" options={documentOptions} value={formik.values.document_type} onChange={onDocumentTypeHandler} onBlur={onDocumentTypeHandler} />
             <Input
               name="document_identification"
               type="text"
@@ -146,19 +145,8 @@ const CompleteProfile = () => {
             disabled={isLoading}
             loadingPos={{ top: 9 }}
           />
-          {userSession.is_google && <PhoneInput value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} country="pe" />}
-          <Select
-            name="identity_sex"
-            value={formik.values.identity_sex}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.errors.identity_sex}
-            touched={formik.touched.identity_sex}
-            options={sexOptions}>
-            <option value="" defaultValue>
-              Selecciona tu sexo
-            </option>
-          </Select>
+          {userSession.is_google && <InputPhone value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} country="pe" />}
+
           <Button
             type="submit"
             className={`action-button ld-ext-right mt-3 ${isProcessing ? "running" : ""}`}

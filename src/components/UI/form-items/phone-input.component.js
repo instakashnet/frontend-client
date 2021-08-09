@@ -2,9 +2,9 @@ import React from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
-import classes from "../../assets/css/auth-components.module.scss";
+import classes from "./form-items.module.scss";
 
-const InputPhone = ({ onChange, value, country, error }) => {
+export const InputPhone = ({ onChange, value, country, error }) => {
   return (
     <div className={classes.FormGroup}>
       <PhoneInput
@@ -14,11 +14,9 @@ const InputPhone = ({ onChange, value, country, error }) => {
         containerClass={classes.PhoneWrapper}
         inputClass={`${classes.PhoneInput} ${error ? classes.PhoneError : ""}`}
         buttonClass={classes.ButtonFlag}
-        placeholder="Teléfono"
+        placeholder="Número de teléfono"
       />
       {value && error && <p className="error-msg">{error}</p>}
     </div>
   );
 };
-
-export default InputPhone;
