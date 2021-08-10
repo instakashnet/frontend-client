@@ -1,28 +1,30 @@
 import React from "react";
-import { TextField, InputAdornment } from "@material-ui/core";
+import { TextField, InputAdornment, CircularProgress } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { useState } from "react";
 
 import classes from "./form-items.module.scss";
 
-export const Input = ({ name, onChange, onBlur, value, label, type, error, touched, iconEnd, ...rest }) => {
+export const Input = ({ name, onChange, onBlur, value, label, type, error, touched, iconEnd, groupClass, isLoading, ...rest }) => {
   const [passwordType, setPasswordType] = useState("password");
   const onShowPassword = () => setPasswordType((prev) => (prev === "password" ? "text" : "password"));
 
   let inputProps = {};
   let Icon;
 
-  if (iconEnd) {
-    Icon = iconEnd;
+  if (iconEnd) Icon = iconEnd;
+  if (isLoading) Icon = CircularProgress;
+
+  if (Icon) {
     inputProps.endAdornment = (
       <InputAdornment position="end">
-        <Icon />
+        <Icon size={27} thickness={5} />
       </InputAdornment>
     );
   }
 
   return (
-    <div className={classes.FormGroup}>
+    <div className={`${classes.FormGroup} ${groupClass || ""}`}>
       <TextField
         type={type === "password" ? passwordType : type}
         name={name}

@@ -35,6 +35,7 @@ const Signup = () => {
             name="email"
             type="email"
             label="Correo eletrónico"
+            autoComplete="off"
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -75,6 +76,7 @@ const Signup = () => {
             value={formik.values.affiliate}
             error={formik.errors.affiliate}
             touched={formik.touched.affiliate}
+            autoComplete="off"
           />
           <CheckboxComponent
             name="allowPromotionalEmail"

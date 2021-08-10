@@ -20,3 +20,29 @@
     background-size: 800px;
   }
 }
+
+.OtpInput {
+  padding: 10px;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  background-color: $base-green;
+  text-align: center;
+  margin: 0 5px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.5rem;
+  outline: none;
+
+  &:placeholder-shown {
+    background-color: #c4c4c4;
+  }
+}
+
+.GoogleButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $base-text !important;
+  text-decoration: none !important;
+}

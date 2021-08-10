@@ -1,16 +1,36 @@
 @import "../../../assets/css/colors";
 @import "../../../assets/css/breakpoints";
+
 .FormGroup {
   position: relative;
   margin-bottom: 15px;
 
-  input {
+  input,
+  select {
     padding: 14px;
     background-color: #fff;
+    font-size: 0.9rem;
+  }
+
+  input:disabled,
+  select:disabled {
+    background-color: transparent;
+  }
+
+  select {
+    padding: 15px 10px;
+    font-size: 0.85rem;
   }
 
   svg {
     color: $placeholder;
+  }
+
+  @include respond(tablet) {
+    select,
+    input {
+      font-size: 1rem;
+    }
   }
 }
 
@@ -23,12 +43,12 @@
   margin: 5px 0;
 
   label {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     cursor: pointer;
 
     a,
     span {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
     }
   }
 

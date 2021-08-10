@@ -28,7 +28,7 @@ export const completeProfileValidation = (isGoogle) =>
     last_name: Yup.string().required("Debes colocar un apellido."),
     document_type: Yup.string().required("Debes seleccionar un tipo de documento."),
     document_identification: Yup.string()
-      .required("Debes colocar tu nro. de documento")
+      .required("Coloca tu nro. de documento")
       .matches(/^[0-9]{8,13}$/, "Número de documento ingresado inválido."),
     phone: isGoogle
       ? Yup.string()

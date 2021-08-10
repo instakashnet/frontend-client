@@ -60,6 +60,8 @@ const Signin = () => {
         <GoogleButton onSuccess={signInGoogle} onFailure={signInGoogle} />
         <p className={classes.SignInMessage}>o ingresa tus datos</p>
         <form onSubmit={formik.handleSubmit}>
+          <input type="hidden" value="something" />
+
           <Input
             type="email"
             name="email"
@@ -85,7 +87,7 @@ const Signin = () => {
           <CheckboxComponent name="rememberMe" value={formik.values.rememberMe} onChange={formik.handleChange}>
             Recordar mis datos
           </CheckboxComponent>
-          <Button className={`action-button mt-3 mb-4 ld-over ${isProcessing ? "running" : ""}`} type="submit">
+          <Button className={`action-button mt-2 mb-4 ld-over ${isProcessing ? "running" : ""}`} type="submit">
             <span className="ld ld-ring ld-spin" />
             Ingresar
           </Button>
