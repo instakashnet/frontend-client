@@ -6,5 +6,5 @@ export const exchangeService = axios.create({
   timeout: 15000,
 });
 
-reqInterceptor(exchangeInstance);
-resInterceptor(exchangeInstance, "exchange");
+reqInterceptor(exchangeService);
+resInterceptor(exchangeService, "exchange");

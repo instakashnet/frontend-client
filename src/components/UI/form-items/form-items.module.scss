@@ -3,7 +3,7 @@
 
 .FormGroup {
   position: relative;
-  margin-bottom: 15px;
+  margin-bottom: 20px !important;
 
   input,
   select {
@@ -62,6 +62,12 @@
       }
     }
   }
+}
+
+.CustomSelect {
+  padding-top: 14px !important;
+  padding-bottom: 14px !important;
+  background-color: #fff !important;
 }
 
 .PhoneWrapper {

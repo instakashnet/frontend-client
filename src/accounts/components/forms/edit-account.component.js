@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { editAccountInit } from "../../../store/actions";
 import { editAccountValidation } from "../../helpers/validations";
 
-import Input from "../../../core/components/UI/form-items/input.component";
-import Button from "../../../core/components/UI/button.component";
+import { Input } from "../../../components/UI/form-items/input.component";
+import { Button } from "../../../components/UI/button.component";
 
 const EditAccount = ({ account, cancelEdit, setEdit }) => {
   const dispatch = useDispatch();
@@ -27,7 +27,6 @@ const EditAccount = ({ account, cancelEdit, setEdit }) => {
           touched={formik.touched.account_number}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          placeholder="Ingrese su número de cuenta"
         />
         <Input
           name="alias"
@@ -37,10 +36,9 @@ const EditAccount = ({ account, cancelEdit, setEdit }) => {
           touched={formik.touched.alias}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          placeholder="Ingresa un alias"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 md:gap-5">
-          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button ld-ext-right ${isProcessing ? "running" : ""}`}>
+          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button ld-over ${isProcessing ? "running" : ""}`}>
             <span className="ld ld-ring ld-spin" />
             Editar cuenta
           </Button>

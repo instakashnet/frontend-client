@@ -6,5 +6,5 @@ export const authService = axios.create({
   timeout: 15000,
 });
 
-reqInterceptor(authInstance);
-resInterceptor(authInstance, "auth");
+reqInterceptor(authService);
+resInterceptor(authService, "auth");

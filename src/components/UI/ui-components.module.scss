@@ -11,4 +11,9 @@
   &:active {
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.03);
   }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }

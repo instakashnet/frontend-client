@@ -6,5 +6,5 @@ export const accountsService = axios.create({
   timeout: 15000,
 });
 
-reqInterceptor(accountInstance);
-resInterceptor(accountInstance, "account");
+reqInterceptor(accountsService);
+resInterceptor(accountsService, "account");

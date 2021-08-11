@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import classes from "./form-items.module.scss";
 
-export const Input = ({ name, onChange, onBlur, value, label, type, error, touched, iconEnd, groupClass, isLoading, ...rest }) => {
+export const Input = ({ name, onChange, onBlur, value, label, type, error, touched, iconEnd, groupClass, isLoading, helperText, ...rest }) => {
   const [passwordType, setPasswordType] = useState("password");
   const onShowPassword = () => setPasswordType((prev) => (prev === "password" ? "text" : "password"));
 
@@ -34,7 +34,7 @@ export const Input = ({ name, onChange, onBlur, value, label, type, error, touch
         onChange={onChange}
         onBlur={onBlur}
         variant="outlined"
-        helperText={error && touched ? error : ""}
+        helperText={error && touched ? error : helperText ? helperText : ""}
         InputProps={inputProps}
         {...rest}
       />

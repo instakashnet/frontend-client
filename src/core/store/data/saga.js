@@ -1,12 +1,12 @@
-import { all, fork, takeEvery, put } from 'redux-saga/effects';
-import * as types from './types';
-import * as actions from './actions';
-import accountAxios from '../../../accounts/helpers/axios';
-import exchangeAxios from '../../../exchange/helpers/axios';
+import { all, fork, takeEvery, put } from "redux-saga/effects";
+import * as types from "./types";
+import * as actions from "./actions";
+import { accountsService } from "../../../services/accounts.service";
+import { exchangeService } from "../../../services/exchange.service";
 
 function* getBanks() {
   try {
-    const res = yield accountAxios.get('/banks/172');
+    const res = yield accountsService.get("/banks/172");
     if (res.status === 200) yield put(actions.getBanksSuccess(res.data.banks));
   } catch (error) {
     console.log(error);
@@ -15,7 +15,7 @@ function* getBanks() {
 
 function* getCurrencies() {
   try {
-    const res = yield accountAxios.get('/currencies/country/172');
+    const res = yield accountsService.get("/currencies/country/172");
     if (res.status === 200) yield put(actions.getCurenciesSuccess(res.data.currencies));
   } catch (error) {
     console.log(error);
@@ -24,7 +24,7 @@ function* getCurrencies() {
 
 function* getSchedule() {
   try {
-    const res = yield exchangeAxios.get('/schedules');
+    const res = yield exchangeService.get("/schedules");
     if (res.status === 200) yield put(actions.getScheduleSuccess(res.data));
   } catch (error) {
     console.log(error);
