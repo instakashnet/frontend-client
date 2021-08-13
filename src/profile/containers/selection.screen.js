@@ -68,7 +68,7 @@ export const InfoModal = () => {
       <h2>Estimado usuario</h2>
       <p>
         Gracias por la confianza, queremos informarle que en estos momentos la plataforma para empresas de <b>Interbank</b> presenta problemas en sus transferencias. Por tal
-        motivo, la venta de dólares hacia este banco estará limitada por el momento. Estamos a la espera y trabajando para solucionarlo a la brevedad posible.
+        motivo, no realizaremos operaciones hacia este banco por el momento. Estamos a la espera del banco y poder solucionarlo a la brevedad posible.
         <br />
         <span className="mt-4 inline-block font-bold">Agradecemos su comprensión.</span>
         <Button onClick={closeModalHandler} className="action-button">
