@@ -3,12 +3,14 @@ import * as actions from "./actions";
 import * as types from "./types";
 import { setAlertInit } from "../../store/actions";
 import Swal from "sweetalert2";
-import { authService } from "../../services/auth.service";
+import axios from "../helpers/axios";
 import history from "../../shared/history";
 
 function* setAuthToken(data, isRefresh = false) {
   const date = new Date();
   const expDate = new Date(date.setSeconds(date.getSeconds() + data.expiresIn));
+
+  console.log(data);
 
   yield call([localStorage, "setItem"], "authData", JSON.stringify({ token: data.accessToken, expDate, userId: data.id }));
   if (isRefresh) yield call(setAuthTimeout, expDate.getTime() - new Date().getTime());
@@ -19,12 +21,13 @@ function* loadUser() {
   if (!authData) return yield put(actions.logoutSuccess());
 
   const { token, expDate } = JSON.parse(authData);
+
   if (!token) return yield call(clearUser);
 
   if (new Date(expDate) <= new Date()) return yield call(logout);
 
   try {
-    const res = yield authService.get("/users/session");
+    const res = yield axios.get("/users/session");
     const profileCompleted = !!+res.data.completed;
     yield call([localStorage, "setItem"], "userSession", JSON.stringify({ ...res.data.activityUser, profileCompleted, is_google: !!+res.data.activityUser.is_google }));
 
@@ -32,7 +35,7 @@ function* loadUser() {
       yield call([history, "push"], "/complete-profile");
       yield put(actions.authError());
     } else {
-      const userResponse = yield authService.get("/users/username");
+      const userResponse = yield axios.get("/users/username");
       yield put(actions.loadUserSuccess(token, userResponse.data.username));
     }
     yield call(setAuthTimeout, new Date(expDate).getTime() - new Date().getTime());
@@ -51,7 +54,7 @@ function* setAuthTimeout(timeout, isLoadUser = false) {
 
 function* signin({ values }) {
   try {
-    const res = yield authService.post("/auth/signin", values);
+    const res = yield axios.post("/auth/signin", values);
     if (res.status === 200) {
       yield call(setAuthToken, res.data);
       yield call(loadUser);
@@ -64,7 +67,7 @@ function* signin({ values }) {
 
 function* signinGoogle({ token }) {
   try {
-    const res = yield authService.post("/auth/google", { token });
+    const res = yield axios.post("/auth/google", { token });
     if (res.status === 201 || res.status === 200) {
       yield call(setAuthToken, res.data);
       yield call(loadUser);
@@ -77,7 +80,7 @@ function* signinGoogle({ token }) {
 
 function* signup({ values }) {
   try {
-    const res = yield authService.post("/auth/signup", values);
+    const res = yield axios.post("/auth/signup", values);
     if (res.status === 201) yield put(actions.signinInit({ email: values.email, password: values.password }));
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
@@ -87,7 +90,7 @@ function* signup({ values }) {
 
 function* completeProfile({ values }) {
   try {
-    const res = yield authService.post("/users/profiles", values);
+    const res = yield axios.post("/users/profiles", values);
     if (res.status === 200) yield call(loadUser);
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
@@ -97,7 +100,7 @@ function* completeProfile({ values }) {
 
 function* refreshToken() {
   try {
-    const res = yield authService.post("/auth/refresh");
+    const res = yield axios.post("/auth/refresh");
     if (res.status === 200) {
       yield call(setAuthToken, res.data, true);
     } else yield call(logout);
@@ -108,7 +111,7 @@ function* refreshToken() {
 
 function* recoverPassword({ values, setSent }) {
   try {
-    const res = yield authService.post("/users/recover-password", values);
+    const res = yield axios.post("/users/recover-password", values);
     if (res.status === 201) {
       yield put(actions.recoverPasswordSuccess());
       yield call(setSent, true);
@@ -122,7 +125,7 @@ function* recoverPassword({ values, setSent }) {
 
 function* resetPassword({ values, token }) {
   try {
-    const res = yield authService.post("/users/reset-password", values, { headers: { "x-access-token": token } });
+    const res = yield axios.post("/users/reset-password", values, { headers: { "x-access-token": token } });
     if (res.status === 201) {
       yield put(actions.resetPasswordSuccess());
       yield call([Swal, "fire"], "Contraseña cambiada", "Ya puedes ingresar con tu nueva contraseña.", "success");
@@ -148,7 +151,7 @@ function* logout() {
   const { expDate } = JSON.parse(authData);
   if (new Date(expDate) > new Date()) {
     try {
-      yield authService.post("/auth/logout");
+      yield axios.post("/auth/logout");
     } catch (error) {
       yield put(actions.authError());
     }
