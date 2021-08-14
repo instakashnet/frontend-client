@@ -42,6 +42,13 @@ export const emailValidation = Yup.object().shape({
   email: Yup.string().required("Debes colocar un correo electrónico.").email("Coloca un correo válido."),
 });
 
+export const emailValidationSchema = Yup.object().shape({
+  otp_1: Yup.string().required("Debes completar el código de validación.").matches(/[0-9]/, "Código de validación inválido."),
+  otp_2: Yup.string().required("Debes completar el código de validación.").matches(/[0-9]/, "Código de validación inválido."),
+  otp_3: Yup.string().required("Debes completar el código de validación.").matches(/[0-9]/, "Código de validación inválido."),
+  otp_4: Yup.string().required("Debes completar el código de validación.").matches(/[0-9]/, "Código de validación inválido."),
+});
+
 export const changePasswordValidation = Yup.object().shape({
   password: Yup.string()
     .required("Debes colocar una contraseña")

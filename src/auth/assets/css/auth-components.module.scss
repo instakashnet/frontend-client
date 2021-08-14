@@ -39,6 +39,10 @@
   }
 }
 
+.OtpError {
+  background-color: $error !important;
+}
+
 .GoogleButton {
   display: flex;
   align-items: center;

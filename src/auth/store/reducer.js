@@ -1,5 +1,5 @@
-import * as types from './types';
-import { EDIT_USER_CODE_SUCCESS } from '../../profile/store/types';
+import * as types from "./types";
+import { EDIT_USER_CODE_SUCCESS } from "../../profile/store/types";
 const initialState = {
   isProcessing: false,
   token: null,
@@ -20,6 +20,7 @@ const authReducer = (state = initialState, action) => {
     case types.RESET_PASSWORD_INIT:
       return { ...state, isProcessing: true };
 
+    case types.SIGNGUP_SUCCESS:
     case types.RECOVER_PASSWORD_SUCCESS:
     case types.RESET_PASSWORD_SUCCESS:
       return { ...state, isProcessing: false };

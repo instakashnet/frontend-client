@@ -1,18 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
+import { useSelector, useDispatch } from "react-redux";
+import { validateEmailInit } from "../../store/actions";
+import { emailValidationSchema } from "../helpers/formValidations";
 
 import { OtpInput } from "../components/UI/otp-input.component";
 import { Button } from "../../components/UI/button.component";
+import { MuiAlert } from "../../core/components/UI/mui-alert.component";
 
 import classes from "../assets/css/auth.containers.module.scss";
 import VerificationIcon from "../assets/images/icons/verification.svg";
 
 export const EmailValidationScreen = ({ history }) => {
-  const formik = useFormik({ initialValues: { otp_1: "", otp_2: "", otp_3: "", otp_4: "" } });
+  const dispatch = useDispatch();
+  const formik = useFormik({
+    initialValues: { otp_1: "", otp_2: "", otp_3: "", otp_4: "" },
+    validationSchema: emailValidationSchema,
+    onSubmit: (values) => dispatch(validateEmailInit(values)),
+  });
+  const { isProcessing } = useSelector((state) => state.Auth);
 
-  const onOtpChange = ({ target: { maxLength, value, name } }) => {
+  const onOtpChange = (e) => {
+    const {
+      target: { maxLength, value, name },
+    } = e;
+
     if (isNaN(value)) return false;
-    formik.setFieldValue([name], value);
+    formik.handleChange(e);
 
     const field = name.split("_");
 
@@ -24,20 +38,31 @@ export const EmailValidationScreen = ({ history }) => {
     }
   };
 
+  // useEffect(() => {
+  //   const authData = localStorage.getItem("authData");
+  //   if (!authData) return history.push("/signin");
+  // }, [history]);
+
   return (
     <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
       <div className={classes.AuthWrapper}>
         <img src={VerificationIcon} alt="Verificación" />
         <h2 className="mt-5 mb-3">Ingresa el código enviado a tu correo</h2>
         <p>Hemos enviado un código de 4 dígitos a tu correo. Por favor, ingresalo para poder validar tu cuenta.</p>
-        <form>
+        <form onSubmit={formik.handleSubmit}>
           <div className="flex items-center justify-center my-4">
-            <OtpInput name="otp_1" value={formik.values.otp_1} onChange={onOtpChange} />
-            <OtpInput name="otp_2" value={formik.values.otp_2} onChange={onOtpChange} />
-            <OtpInput name="otp_3" value={formik.values.otp_3} onChange={onOtpChange} />
-            <OtpInput name="otp_4" value={formik.values.otp_4} onChange={onOtpChange} />
+            <OtpInput touched={formik.touched.otp_1} name="otp_1" value={formik.values.otp_1} onChange={onOtpChange} onBlur={formik.handleBlur} />
+            <OtpInput touched={formik.touched.otp_2} name="otp_2" value={formik.values.otp_2} onChange={onOtpChange} onBlur={formik.handleBlur} />
+            <OtpInput touched={formik.touched.otp_3} name="otp_3" value={formik.values.otp_3} onChange={onOtpChange} onBlur={formik.handleBlur} />
+            <OtpInput touched={formik.touched.otp_4} name="otp_4" value={formik.values.otp_4} onChange={onOtpChange} onBlur={formik.handleBlur} />
           </div>
-          <Button type="submit" disabled={!formik.isValid} className={`action-button my-4`}>
+          {!formik.isValid && Object.keys(formik.touched).length > 3 && (
+            <MuiAlert type="error" opened>
+              <p>Código de verificación inválido. Verifica que los números ingresados sean correctos.</p>
+            </MuiAlert>
+          )}
+          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button my-4 ld-over ${isProcessing ? "running" : ""}`}>
+            <span className="ld ld-ring ld-spin" />
             Validar
           </Button>
           <Button onClick={() => history.goBack()} type="button" className="secondary-button">

@@ -1,14 +1,14 @@
 import { put, all, fork, call, select, takeEvery, takeLatest } from "redux-saga/effects";
 import * as types from "./types";
 import * as actions from "./actions";
-import axios from "../../auth/helpers/axios";
+import { authService } from "../../services/auth.service";
 import { setAlertInit, closeModal } from "../../store/actions";
 import history from "../../shared/history";
 import Swal from "sweetalert2";
 
 function* getProfiles() {
   try {
-    const res = yield axios.get("/users/profiles");
+    const res = yield authService.get("/users/profiles");
     if (res.status === 200) yield put(actions.getProfilesSuccess(res.data.profiles, res.data.user));
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
@@ -18,7 +18,7 @@ function* getProfiles() {
 
 function* addProfile({ values }) {
   try {
-    const res = yield axios.post("/users/profiles", values);
+    const res = yield authService.post("/users/profiles", values);
     if (res.status === 200) {
       yield put(setAlertInit("El perfil ha sido agregado correctamente.", "success"));
       yield put(actions.addProfileSuccess());
@@ -53,7 +53,7 @@ function* editProfile({ values, setEdit }) {
   if (typeof values.pep === "boolean") profileValues.pep = values.pep ? "1" : "0";
 
   try {
-    const res = yield axios.put("/users/profiles", profileValues);
+    const res = yield authService.put("/users/profiles", profileValues);
     if (res.status === 200) {
       yield call(getProfiles);
       yield call(setSelectedProfile, values.profileId);
@@ -75,7 +75,7 @@ function* uploadDocument({ values, uploadType, setFile, setPercentage }) {
   if (uploadType === "trasera") URL = "/users/upload-identity-photo-two";
 
   try {
-    const res = yield axios.post(URL, formData, {
+    const res = yield authService.post(URL, formData, {
       timeout: 99999,
       onUploadProgress: ({ loaded, total }) => {
         const percentage = Math.floor((loaded * 100) / total);
@@ -99,9 +99,9 @@ function* uploadDocument({ values, uploadType, setFile, setPercentage }) {
 
 function* editUserCode({ values }) {
   try {
-    const res = yield axios.put("/users/username", values);
+    const res = yield authService.put("/users/username", values);
     if (res.status === 200) {
-      const userResponse = yield axios.get("/users/username");
+      const userResponse = yield authService.get("/users/username");
       yield put(actions.editUserCodeSuccess(userResponse.data.username));
       yield put(setAlertInit("Tu código ha sido editado correctamente.", "success"));
       yield put(closeModal());
@@ -125,7 +125,7 @@ function* disableProfile({ id }) {
     });
 
     if (result.isConfirmed) {
-      const res = yield axios.delete(`/users/active/${id}`, { data: { active: false } });
+      const res = yield authService.delete(`/users/active/${id}`, { data: { active: false } });
       if (res.status === 200) {
         yield call(getProfiles);
         yield history.push("/profile-selection");
