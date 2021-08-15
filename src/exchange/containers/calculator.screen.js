@@ -63,21 +63,25 @@ const Calculator = ({ profile, setModal }) => {
       setCouponRates({ buy: actualRates.buy + coupon.discount, sell: actualRates.sell - coupon.discount });
       setFieldValue("amount_received", type === "buy" ? amount_sent * (actualRates.buy + coupon.discount) : amount_sent / (actualRates.sell - coupon.discount));
     }
-  }, [coupon, type, amount_sent, actualRates, setFieldValue]);
+
+    // eslint-disable-next-line
+  }, [coupon, setFieldValue]);
+
+  const sellRate = coupon ? couponRates.sell : actualRates.sell;
+  const buyRate = coupon ? couponRates.buy : actualRates.buy;
 
   const swipeCurrencyHandler = () => {
     setFieldValue("type", values.type === "buy" ? "sell" : "buy");
     setFieldValue("currency_sent_id", values.currency_received_id === 1 ? 1 : 2);
     setFieldValue("currency_received_id", values.currency_sent_id === 1 ? 1 : 2);
-    setFieldValue("amount_received", values.type === "buy" ? values.amount_sent / actualRates.sell : values.amount_sent * actualRates.buy);
+    setFieldValue("amount_received", values.type === "buy" ? values.amount_sent / sellRate : values.amount_sent * buyRate);
   };
 
-  const currencyChangeHandler = (e) => {
-    const { name, rawValue } = e.target;
+  const currencyChangeHandler = ({ target: { name, rawValue } }) => {
     setFieldValue(name, +rawValue);
     const inputName = name === "amount_sent" ? "amount_received" : "amount_sent";
-    if (values.type === "buy") setFieldValue(inputName, inputName === "amount_received" ? +rawValue * actualRates.buy : +rawValue / actualRates.buy);
-    if (values.type === "sell") setFieldValue(inputName, inputName === "amount_received" ? +rawValue / actualRates.sell : +rawValue * actualRates.sell);
+    if (values.type === "buy") setFieldValue(inputName, inputName === "amount_received" ? +rawValue * buyRate : +rawValue / buyRate);
+    if (values.type === "sell") setFieldValue(inputName, inputName === "amount_received" ? +rawValue / sellRate : +rawValue * buyRate);
   };
 
   const sendCouponHandler = (couponName) => {

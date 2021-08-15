@@ -7,7 +7,10 @@ import axios from "../../exchange/helpers/axios";
 function* getOrders() {
   try {
     const res = yield axios.get("/order/user");
-    if (res.status === 200) yield put(actions.getOrdersSuccess(res.data));
+    if (res.status === 200) {
+      console.log(res);
+      yield put(actions.getOrdersSuccess(res.data));
+    }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
     yield put(actions.activityError());
