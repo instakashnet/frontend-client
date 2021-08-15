@@ -21,7 +21,7 @@ import RecoverPassword from "./auth/containers/recover-password.screen";
 import ChangePassword from "./auth/containers/change-password.screen";
 import CompleteProfile from "./auth/containers/complete-profile.screen";
 
-// PRIVATE
+// PRIVAT
 
 const ProfileSelection = lazy(() => import("./profile/containers/selection.screen"));
 const Welcome = lazy(() => import("./welcome/containers/Welcome"));
