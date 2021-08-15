@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { usernameValidation } from "../../helpers/validations";
 import { editUserCodeInit } from "../../../store/actions";
 
-import Input from "../../../core/components/UI/form-items/input.component";
-import Button from "../../../core/components/UI/button.component";
+import { Input } from "../../../components/UI/form-items/input.component";
+import { Button } from "../../../components/UI/button.component";
 
 const EditUserCode = () => {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const EditUserCode = () => {
       <form onSubmit={formik.handleSubmit} className="mt-6 text-left flex flex-col items-center">
         <Input
           name="username"
-          placeholder="Código de afiliado"
+          label="Código de afiliado"
           value={formik.values.username}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -33,7 +33,7 @@ const EditUserCode = () => {
           touched={formik.touched.username}
         />
 
-        <Button type="submit" className={`action-button ld-ext-right max-w-xs ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
+        <Button type="submit" className={`action-button ld-over max-w-xs ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
           <span className="ld ld-ring ld-spin" />
           Editar código
         </Button>

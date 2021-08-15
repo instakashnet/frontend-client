@@ -1,9 +1,9 @@
 import React from "react";
 import { FacebookShareButton, WhatsappShareButton, LinkedinShareButton } from "react-share";
 
-import FacebookIcon from "../../core/assets/images/social/facebook.svg";
-import WhatsappIcon from "../../core/assets/images/social/whatsapp.svg";
-import LinkedinIcon from "../../core/assets/images/social/linkedin.svg";
+import FacebookIcon from "../../assets/images/social/facebook.svg";
+import WhatsappIcon from "../../assets/images/social/whatsapp.svg";
+import LinkedinIcon from "../../assets/images/social/linkedin.svg";
 
 const ShareIcons = ({ className, userCode }) => {
   const message = `¡Registrate con mi código ${userCode} para que obtengas una tasa preferencial!`;

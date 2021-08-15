@@ -63,6 +63,14 @@ export const validateEmailSuccess = () => ({
   type: types.VALIDATE_EMAIL_SUCCESS,
 });
 
+export const refreshCodeInit = () => ({
+  type: types.REFRESH_CODE_INIT,
+});
+
+export const refreshCodeSuccess = () => ({
+  type: types.REFRESH_CODE_SUCCESS,
+});
+
 export const logoutInit = () => ({
   type: types.LOGOUT_INIT,
 });

@@ -1,9 +1,9 @@
 import React from "react";
 
 import Card from "../UI/card.component";
-import UserCode from "../../../affiliates/components/user-code.component";
+import UserCode from "../../affiliates/components/user-code.component";
 
-import KashImg from "../../../core/assets/images/kash.svg";
+import KashImg from "../../assets/images/kash.svg";
 import classes from "./layout-components.module.scss";
 
 const Affiliate = ({ usercode }) => {

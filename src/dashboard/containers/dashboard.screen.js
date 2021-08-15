@@ -4,9 +4,9 @@ import { Route } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { openSliderModal, getOrderDetailsInit, getTotalAmountInit, getAccountsInit, getOrderAmountsInit, getOrdersInit, getWithdrawalsInit } from "../../store/actions";
 
-import Layout from "../../core/components/layout/layout.component";
+import Layout from "../../components/layout/layout.component";
 import TotalTransfered from "../components/total-transfered.component";
-import Spinner from "../../core/components/UI/spinner.component";
+import Spinner from "../../components/UI/spinner.component";
 import TransferedCharts from "../components/charts/transfered-charts.component";
 import AllActivity from "../components/activity/all-activity.component";
 import RecentActivity from "../components/activity/recent-activity.component";

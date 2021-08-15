@@ -10,9 +10,9 @@ import { CheckboxComponent } from "../../components/UI/form-items/checkbox.compo
 import { Button } from "../../components/UI/button.component";
 import { GoogleButton } from "../components/UI/google-button.component";
 import Background from "../components/layout/background.component";
-import Logo from "../../core/components/UI/logo.component";
+import Logo from "../../components/UI/logo.component";
 
-import InfoModal from "../../core/components/UI/modals/info-modal.component";
+import InfoModal from "../../components/UI/modals/info-modal.component";
 
 import classes from "../assets/css/auth.containers.module.scss";
 

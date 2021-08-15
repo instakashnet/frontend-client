@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowRight } from "react-feather";
+import { ArrowRight } from "@material-ui/icons";
 import { formatAmount, convertHexToRGBA } from "../../../shared/functions";
 
 import classes from "../../assets/css/activity-components.module.scss";

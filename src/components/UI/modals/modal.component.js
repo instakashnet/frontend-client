@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ReactModal from "react-modal";
-import { X } from "react-feather";
-import { closeModal } from "../../../../store/actions";
+import { Close } from "@material-ui/icons";
+import { closeModal } from "../../../store/actions";
 
 import classes from "./modal-components.module.scss";
 
@@ -14,7 +14,7 @@ const Modal = ({ children }) => {
     <ReactModal closeTimeoutMS={300} onRequestClose={() => dispatch(closeModal())} isOpen={isOpen} className={classes.Modal} ariaHideApp={false} preventScroll>
       <div className={classes.ModalContent}>
         <button onClick={() => dispatch(closeModal())} className={classes.Close}>
-          <X size={30} />
+          <Close fontSize="large" />
         </button>
         {children}
       </div>

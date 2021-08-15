@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { Copy } from "react-feather";
+import { FileCopy } from "@material-ui/icons";
 import Tooltip from "./tooltip.component";
 
 const CopyButton = ({ textToCopy }) => {
@@ -18,7 +18,9 @@ const CopyButton = ({ textToCopy }) => {
   return (
     <Tooltip className="ml-2 cursor-pointer" open={open} onClose={handleClose} disableFocusListener disableHoverListener disableTouchListener placement="top-end" title="¡Copiado!">
       <CopyToClipboard text={textToCopy}>
-        <Copy className="cursor-pointer" size={20} onClick={handleOpen} />
+        <button type="button" onClick={handleOpen}>
+          <FileCopy className="cursor-pointer" fontSize="small" />
+        </button>
       </CopyToClipboard>
     </Tooltip>
   );

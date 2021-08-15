@@ -2,7 +2,7 @@ import React from "react";
 import { PuffLoader } from "react-spinners";
 import Switch from "@material-ui/core/Switch";
 
-import classes from "./Form.module.scss";
+import classes from "./form-items.module.scss";
 
 const SwitchCheckbox = ({ value, name, onChange, isProcessing, placeholder }) => {
   return (

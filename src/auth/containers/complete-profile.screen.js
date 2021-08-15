@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +6,7 @@ import { completeProfileValidation } from "../helpers/formValidations";
 import { AllowOnlyNumbers } from "../../shared/functions";
 import { logoutInit, completeProfileInit, openModal, closeModal } from "../../store/actions";
 
-import Modal from "../../core/components/UI/modals/modal.component";
+import Modal from "../../components/UI/modals/modal.component";
 import { Input } from "../../components/UI/form-items/input.component";
 import { SelectComponent } from "../../components/UI/form-items/select.component";
 import { InputPhone } from "../../components/UI/form-items/phone-input.component";
@@ -15,17 +14,27 @@ import { Button } from "../../components/UI/button.component";
 
 import classes from "../assets/css/auth.containers.module.scss";
 
-const CompleteProfile = () => {
+const CompleteProfile = ({ history }) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogle, setIsGoogle] = useState(false);
   const [invalidDNI, setInvalidDNI] = useState(null);
   const { isProcessing } = useSelector((state) => state.Auth);
   const ModalComponent = useSelector((state) => state.Modal.Component);
-  const userSession = JSON.parse(localStorage.getItem("userSession"));
+
+  useEffect(() => {
+    const userVerification = sessionStorage.getItem("userVerification");
+    if (!JSON.parse(userVerification)) return history.push("/signin");
+
+    const user = JSON.parse(userVerification);
+
+    setIsGoogle(user.isGoogle);
+  }, [history]);
 
   const formik = useFormik({
     initialValues: { type: "natural", first_name: "", last_name: "", identity_sex: "", phone: "", document_type: "DNI", document_identification: "", affiliate: "" },
-    validationSchema: completeProfileValidation(userSession ? userSession.is_google : false),
+    enableReinitialize: true,
+    validationSchema: completeProfileValidation(isGoogle),
     onSubmit: (values) => dispatch(completeProfileInit(values)),
   });
 
@@ -93,8 +102,6 @@ const CompleteProfile = () => {
 
   const onDocumentChangeHandler = (e) => (AllowOnlyNumbers(e.target.value) ? setFieldValue("document_identification", e.target.value) : null);
 
-  if (!userSession) return <Redirect to="/signin" />;
-
   return (
     <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
       <div className={classes.AuthWrapper}>
@@ -110,12 +117,11 @@ const CompleteProfile = () => {
               value={formik.values.document_identification}
               onChange={onDocumentChangeHandler}
               onBlur={formik.handleBlur}
-              error={formik.errors.document_identification}
+              error={invalidDNI ? invalidDNI : formik.errors.document_identification}
               touched={formik.touched.document_identification}
               groupClass="col-span-2"
             />
           </div>
-          {invalidDNI && <p className="error-msg">{invalidDNI}</p>}
           <Input
             name="first_name"
             type="text"
@@ -140,7 +146,7 @@ const CompleteProfile = () => {
             isLoading={isLoading}
             disabled={isLoading}
           />
-          {userSession.is_google && <InputPhone value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} country="pe" />}
+          {isGoogle && <InputPhone value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} country="pe" />}
           <SelectComponent name="identity_sex" label="Sexo" value={formik.values.identity_sex} onChange={formik.handleChange} options={sexOptions} />
           <div className="flex justify-center mt-6 mb-3">
             <button type="button" className={classes.InfoButton} onClick={openModalHandler}>

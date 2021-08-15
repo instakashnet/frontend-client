@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../button.component";
+import { Button } from "../button.component";
 
 import classes from "./modal-components.module.scss";
 

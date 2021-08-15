@@ -1,9 +1,9 @@
 import React from "react";
 
-import Male from "../../core/assets/images/profiles/male.svg";
-import Female from "../../core/assets/images/profiles/female.svg";
-import Company from "../../core/assets/images/profiles/company.svg";
-import Add from "../../core/assets/images/profiles/add.svg";
+import Male from "../../assets/images/profiles/male.svg";
+import Female from "../../assets/images/profiles/female.svg";
+import Company from "../../assets/images/profiles/company.svg";
+import Add from "../../assets/images/profiles/add.svg";
 
 import classes from "../assets/css/profile-components.module.scss";
 

@@ -5,7 +5,7 @@ import { loadUserInit, getProfilesInit, selectProfileInit } from "./store/action
 import ReactPixel from "react-facebook-pixel";
 import history from "./shared/history";
 
-import Alert from "./core/components/UI/alert.component";
+import Alert from "./components/UI/alert.component";
 import ScrollToTop from "./hoc/scroll-top.component";
 import asyncComponent from "./hoc/async.component";
 

@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import _ from "lodash";
-import { Repeat } from "react-feather";
+import { Repeat } from "@material-ui/icons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination } from "swiper";
 import Skeleton from "react-loading-skeleton";
 import { getOrdersInit, getWithdrawalsInit } from "../../../store/actions";
 
-import Card from "../../../core/components/UI/card.component";
+import Card from "../../../components/UI/card.component";
 
 import { OrderItem } from "../orders/order-item.component";
 

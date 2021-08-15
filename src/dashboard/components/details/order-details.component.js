@@ -6,10 +6,10 @@ import { transactionCodeValidation } from "../../helpers/validations";
 import { formatAmount, convertRate } from "../../../shared/functions";
 import { closeSliderModal, processCodeInit, cancelExchangeInit } from "../../../store/actions";
 
-import { StatusBadge } from "../../../core/components/UI/status-badge.component";
-import Button from "../../../core/components/UI/button.component";
-import CopyButton from "../../../core/components/UI/copy-button.component";
-import Input from "../../../core/components/UI/form-items/input.component";
+import { StatusBadge } from "../../../components/UI/status-badge.component";
+import { Button } from "../../../components/UI/button.component";
+import { Input } from "../../../components/UI/form-items/input.component";
+import CopyButton from "../../../components/UI/copy-button.component";
 
 import classes from "../../assets/css/activity-components.module.scss";
 
@@ -101,11 +101,11 @@ const OrderDetails = () => {
               onBlur={formik.handleBlur}
             />
             <div className="grid grid-cols-1 gap-2 md:gap-4 md:grid-cols-2">
-              <Button type="submit" className={`action-button ld-ext-right ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
+              <Button type="submit" className={`action-button ld-over ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
                 <span className="ld ld-ring ld-spin" />
                 Enviar
               </Button>
-              <Button type="button" className={`secondary-button ld-ext-right ${isProcessing ? "running" : ""}`} disabled={isProcessing} onClick={cancelExchangeHandler}>
+              <Button type="button" className={`secondary-button ld-over ${isProcessing ? "running" : ""}`} disabled={isProcessing} onClick={cancelExchangeHandler}>
                 <span className="ld ld-ring ld-spin" />
                 Cancelar
               </Button>
@@ -114,7 +114,7 @@ const OrderDetails = () => {
         </>
       ) : (
         <div className="flex justify-center mt-4">
-          <Button type="button" className={classes.CloseButton} onClick={closeModalHandler}>
+          <Button type="button" className="action-button" onClick={closeModalHandler}>
             Aceptar
           </Button>
         </div>

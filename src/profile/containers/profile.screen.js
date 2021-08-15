@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { disableProfileInit } from "../../store/actions";
 import { useProfileInfo } from "../../shared/hooks/useProfileInfo";
-import { ArrowDownCircle } from "react-feather";
+import { ArrowDropDownCircle } from "@material-ui/icons";
 
-import Accordion from "../../core/components/UI/accordion.component";
+import Accordion from "../../components/UI/accordion.component";
 import PersonalInfo from "../components/personal-info.component";
 import CompanyInfo from "../components/company-info.component";
 import DocumentInfo from "../components/document-info.component";
 import EditAdditional from "../components/forms/edit-additionals.component";
 import AdditionalInfo from "../components/additional-info.component";
-import Layout from "../../core/components/layout/layout.component";
-import ProgressBar from "../../core/components/UI/progress-bar.component";
+import Layout from "../../components/layout/layout.component";
+import ProgressBar from "../../components/UI/progress-bar.component";
 
 import classes from "../assets/css/profile-containers.module.scss";
 
@@ -32,16 +32,16 @@ const Profile = () => {
         <ProgressBar width={profileCompleted} />
         <div className="grid grid-cols-1 lg:grid-cols-3">
           <div className="col-span-2 lg:mr-14 lg:mt-4">
-            <Accordion defaultExpanded title="Datos básicos" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
+            <Accordion defaultExpanded title="Datos básicos" className={classes.AccordionTitle} Icon={ArrowDropDownCircle}>
               <InfoComponent profile={profileInfo} personalProfile={profileInfo} user={user} onDisable={() => dispatch(disableProfileInit(profileInfo.id))} />
             </Accordion>
             {profileInfo.type === "natural" && (
-              <Accordion defaultExpanded title="Datos adicionales" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
+              <Accordion defaultExpanded title="Datos adicionales" className={classes.AccordionTitle} Icon={ArrowDropDownCircle}>
                 {edit ? <EditAdditional profile={profileInfo} onEdit={setEdit} /> : <AdditionalInfo profile={profileInfo} onEdit={setEdit} />}
               </Accordion>
             )}
           </div>
-          <Accordion defaultExpanded title="Documento de identidad" className={classes.AccordionTitle} Icon={ArrowDownCircle}>
+          <Accordion defaultExpanded title="Documento de identidad" className={classes.AccordionTitle} Icon={ArrowDropDownCircle}>
             <DocumentInfo isCompleted={isCompleted} profile={profileInfo} isProcessing={isProcessing} />
           </Accordion>
         </div>

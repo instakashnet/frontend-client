@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
-import { toggleNav } from "../../../store/actions";
+import { toggleNav } from "../../store/actions";
 
 import Navigation from "./navigation/nav-items.component";
 import Backdrop from "../UI/backdrop.component";

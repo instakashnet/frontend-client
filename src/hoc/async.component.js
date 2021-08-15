@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 
-import Spinner from "../core/components/UI/spinner.component";
+import Spinner from "../components/UI/spinner.component";
 
 const asyncComponent = (Component) => {
   return (props) => {

@@ -1,6 +1,6 @@
 import React from "react";
 
-import Card from "../../core/components/UI/card.component";
+import Card from "../../components/UI/card.component";
 
 import classes from "../assets/css/account-components.module.scss";
 

@@ -18,11 +18,15 @@ const authReducer = (state = initialState, action) => {
     case types.COMPLETE_PROFILE_INIT:
     case types.RECOVER_PASSWORD_INIT:
     case types.RESET_PASSWORD_INIT:
+    case types.VALIDATE_EMAIL_INIT:
+    case types.REFRESH_CODE_INIT:
       return { ...state, isProcessing: true };
 
     case types.SIGNGUP_SUCCESS:
     case types.RECOVER_PASSWORD_SUCCESS:
     case types.RESET_PASSWORD_SUCCESS:
+    case types.VALIDATE_EMAIL_SUCCESS:
+    case types.REFRESH_CODE_SUCCESS:
       return { ...state, isProcessing: false };
 
     case EDIT_USER_CODE_SUCCESS:

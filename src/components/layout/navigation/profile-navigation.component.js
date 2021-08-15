@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { logoutInit } from "../../../../store/actions";
-import { useProfileInfo } from "../../../../shared/hooks/useProfileInfo";
+import { logoutInit } from "../../../store/actions";
+import { useProfileInfo } from "../../../shared/hooks/useProfileInfo";
 
 import NavItem from "./nav-item.component";
 import ProgressBar from "../../UI/progress-bar.component";

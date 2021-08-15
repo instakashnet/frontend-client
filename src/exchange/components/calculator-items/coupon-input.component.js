@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { X } from "react-feather";
+import { Close } from "@material-ui/icons";
 import { formatAmount } from "../../../shared/functions";
 
-import InlineInput from "../../../core/components/UI/form-items/inline-input.component";
+import { InlineInput } from "../../../components/UI/form-items/inline-input.component";
 import CouponImg from "../../assets/images/icons/coupon.svg";
 import classes from "../../assets/css/exchange-components.module.scss";
 
@@ -17,7 +17,7 @@ const Coupon = ({ coupon, minimum, onSendCoupon, onDeleteCoupon, isProcessing, i
       onClick={() => onSendCoupon(couponName)}
       disabled={isProcessing || isLoading}
       onChange={onCouponChange}
-      placeholder="Ingrese su cupón aquí"
+      label="Ingrese su cupón aquí"
       buttonLabel="Agregar"
       className="mt-4"
     />
@@ -29,7 +29,7 @@ const Coupon = ({ coupon, minimum, onSendCoupon, onDeleteCoupon, isProcessing, i
           <img src={CouponImg} alt="cupón" className="mr-2" /> {coupon.name}
         </p>
         <button type="button" onClick={onDeleteCoupon}>
-          <X />
+          <Close />
         </button>
       </div>
       {coupon.name === "NUEVOREFERIDO1" && <p className="my-2">Aprovecha este cupón en tu primera operación.</p>}

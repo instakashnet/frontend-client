@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleNav, openSliderModal } from "../../../store/actions";
+import { toggleNav, openSliderModal } from "../../store/actions";
 
 import Whatsapp from "../UI/whatsapp.component";
 import ProfileInfo from "../UI/profile-info.component";

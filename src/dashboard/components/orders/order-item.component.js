@@ -1,8 +1,8 @@
 import React from "react";
-import { ArrowRight } from "react-feather";
+import { ArrowRight } from "@material-ui/icons";
 import { formatAmount } from "../../../shared/functions";
 
-import { StatusBadge } from "../../../core/components/UI/status-badge.component";
+import { StatusBadge } from "../../../components/UI/status-badge.component";
 
 import classes from "../../assets/css/activity-components.module.scss";
 

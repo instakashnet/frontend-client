@@ -3,12 +3,12 @@ import { FormControl, InputLabel, Select, MenuItem, FormHelperText } from "@mate
 
 import classes from "./form-items.module.scss";
 
-export const SelectComponent = ({ name, value, options, label, empty, error, touched, helperText, onChange }) => {
+export const SelectComponent = ({ name, value, options, label, empty, emptyLabel, error, touched, helperText, onChange }) => {
   return (
     <FormControl variant="outlined" className={classes.FormGroup}>
       <InputLabel htmlFor={name}>{label}</InputLabel>
       <Select error={!!error && !!touched} value={value} onChange={onChange} label={label} classes={{ select: classes.CustomSelect }} inputProps={{ name, id: name }}>
-        {empty && <MenuItem value="" />}
+        {empty && <MenuItem value="">{emptyLabel}</MenuItem>}
         {options.map((option) => (
           <MenuItem key={option.value} value={option.value}>
             {!option.icon ? (

@@ -1,7 +1,7 @@
 import React from "react";
 import { PlusCircle } from "react-feather";
 
-import classes from "./Form.module.scss";
+import classes from "./form-items.module.scss";
 
 const UploadInput = ({ value, name, error, accept, ...rest }) => {
   return (

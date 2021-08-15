@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
-import { validateEmailInit } from "../../store/actions";
+import { validateEmailInit, refreshCodeInit } from "../../store/actions";
 import { emailValidationSchema } from "../helpers/formValidations";
 
 import { OtpInput } from "../components/UI/otp-input.component";
 import { Button } from "../../components/UI/button.component";
-import { MuiAlert } from "../../core/components/UI/mui-alert.component";
+import { MuiAlert } from "../../components/UI/mui-alert.component";
 
 import classes from "../assets/css/auth.containers.module.scss";
 import VerificationIcon from "../assets/images/icons/verification.svg";
@@ -38,10 +38,10 @@ export const EmailValidationScreen = ({ history }) => {
     }
   };
 
-  // useEffect(() => {
-  //   const authData = localStorage.getItem("authData");
-  //   if (!authData) return history.push("/signin");
-  // }, [history]);
+  useEffect(() => {
+    const authData = localStorage.getItem("authData");
+    if (!authData) return history.push("/signin");
+  }, [history]);
 
   return (
     <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
@@ -70,7 +70,7 @@ export const EmailValidationScreen = ({ history }) => {
           </Button>
         </form>
         <p className="mt-8 mb-2">¿No recibiste el código?</p>
-        <button type="button" className="uppercase" onClick={() => {}}>
+        <button type="button" className="uppercase" onClick={() => dispatch(refreshCodeInit())}>
           Reenviar código
         </button>
       </div>

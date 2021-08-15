@@ -6,9 +6,9 @@ import { addProfileInit } from "../../../store/actions";
 import { AllowOnlyNumbers } from "../../../shared/functions";
 import { addProfileValidation } from "../../helpers/validations";
 
-import Input from "../../../core/components/UI/form-items/input.component";
-import { CheckboxComponent } from "../../../core/components/UI/form-items/checkbox.component";
-import Button from "../../../core/components/UI/button.component";
+import { Input } from "../../../components/UI/form-items/input.component";
+import { CheckboxComponent } from "../../../components/UI/form-items/checkbox.component";
+import { Button } from "../../../components/UI/button.component";
 
 const AddProfile = () => {
   const dispatch = useDispatch();
@@ -57,7 +57,6 @@ const AddProfile = () => {
       <Input
         type="text"
         name="ruc"
-        placeholder="RUC de la empresa"
         label="Ingresa el RUC de tu empresa"
         value={formik.values.ruc}
         onChange={onRucChangeHandler}
@@ -69,7 +68,6 @@ const AddProfile = () => {
       <Input
         type="text"
         name="razon_social"
-        placeholder="Nombre de la empresa"
         value={formik.values.razon_social}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
@@ -82,8 +80,7 @@ const AddProfile = () => {
       <Input
         type="text"
         name="address"
-        placeholder="Dirección fiscal de la empresa"
-        label="Ingresa la dirección fiscal de tu empresa"
+        label="Dirección fiscal de la empresa"
         value={formik.values.address}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}

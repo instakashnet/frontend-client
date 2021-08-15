@@ -1,5 +1,5 @@
-@import "../../../core/assets/css/colors";
-@import "../../../core/assets/css/breakpoints";
+@import "../../../assets/css/colors";
+@import "../../../assets/css/breakpoints";
 
 .NoDetails {
   color: #959595;
@@ -137,7 +137,7 @@
 
   ul {
     font-size: 0.8rem;
-    list-style-image: url(../../../core/assets/images/icons/check.svg);
+    list-style-image: url(../../../assets/images/icons/check.svg);
   }
 
   li {

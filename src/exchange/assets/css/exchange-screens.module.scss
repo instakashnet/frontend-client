@@ -1,5 +1,5 @@
-@import "../../../core/assets/css/colors";
-@import "../../../core/assets/css/breakpoints";
+@import "../../../assets/css/colors";
+@import "../../../assets/css/breakpoints";
 
 .Exchange {
   text-align: center;
@@ -73,7 +73,7 @@
   display: flex;
   align-items: center;
   padding: 15px;
-  border-radius: 0 0 10px 10px;
+  border-radius: 4px;
   background-color: #e1f2ec;
   color: #20a2a5;
   font-size: 0.9rem;

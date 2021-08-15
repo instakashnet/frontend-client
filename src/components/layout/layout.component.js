@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { closeSliderModal } from "../../../store/actions";
+import { closeSliderModal } from "../../store/actions";
 
 import Sidebar from "./sidebar.component";
 import Header from "./header.component";

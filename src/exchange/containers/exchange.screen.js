@@ -19,12 +19,12 @@ import Calculator from "./calculator.screen";
 import Accounts from "./accounts.screen";
 import Complete from "./complete.screen";
 
-import Layout from "../../core/components/layout/layout.component";
+import Layout from "../../components/layout/layout.component";
 import AddAccount from "../../accounts/components/forms/add-account.component";
 import Information from "../components/information.component";
 import CompleteProfile from "../components/profile-modal.component";
 import { InfoButton } from "../components/info-button.component";
-import Spinner from "../../core/components/UI/spinner.component";
+import Spinner from "../../components/UI/spinner.component";
 
 import classes from "../assets/css/exchange-screens.module.scss";
 

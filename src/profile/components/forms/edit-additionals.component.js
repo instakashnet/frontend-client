@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { editProfileValidation } from "../../helpers/validations";
 import { editProfileInit } from "../../store/actions";
 
-import Input from "../../../core/components/UI/form-items/input.component";
-import DatePicker from "../../../core/components/UI/form-items/datepicker.component";
-import Button from "../../../core/components/UI/button.component";
+import { Input } from "../../../components/UI/form-items/input.component";
+import DatePicker from "../../../components/UI/form-items/datepicker.component";
+import { Button } from "../../../components/UI/button.component";
 
 const EditAdditionalData = ({ profile, onEdit }) => {
   const dispatch = useDispatch();
@@ -28,12 +28,11 @@ const EditAdditionalData = ({ profile, onEdit }) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
-        <DatePicker label="Fecha de nacimiento" placeholder="DD/MM/YYYY" value={formik.values.date_birth} onChange={onDateChange} />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 mt-6">
+        <DatePicker placeholder="Fecha de nacimiento" error={formik.errors.date_birth} value={formik.values.date_birth} onChange={onDateChange} />
         <Input
-          label="Dirección"
+          label="Dirección corta"
           name="address"
-          placeholder="Ingrese su dirección"
           value={formik.values.address}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -45,7 +44,6 @@ const EditAdditionalData = ({ profile, onEdit }) => {
         <Input
           label="Ocupación"
           name="job"
-          placeholder="Ingrese su ocupación"
           value={formik.values.job}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -55,7 +53,6 @@ const EditAdditionalData = ({ profile, onEdit }) => {
         <Input
           label="Profesión"
           name="profession"
-          placeholder="Ingrese su profesión"
           value={formik.values.profession}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Info } from "react-feather";
+import { Info } from "@material-ui/icons";
 
 import classes from "../assets/css/exchange-components.module.scss";
 

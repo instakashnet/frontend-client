@@ -1,5 +1,5 @@
-@import "../../../core/assets/css/colors";
-@import "../../../core/assets/css/breakpoints";
+@import "../../../assets/css/colors";
+@import "../../../assets/css/breakpoints";
 
 .Step {
   font-size: 1rem;
@@ -144,7 +144,7 @@
     border-radius: 10px;
 
     &:placeholder-shown {
-      background: url(../../../core/assets/images/icons/search.svg);
+      background: url(../../../assets/images/icons/search.svg);
       background-size: 18px;
       background-position: 93% 50%;
       background-repeat: no-repeat;

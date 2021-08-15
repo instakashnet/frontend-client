@@ -16,7 +16,7 @@ export const InputPhone = ({ onChange, value, country, error }) => {
         buttonClass={classes.ButtonFlag}
         placeholder="Número de teléfono"
       />
-      {value && error && <p className="error-msg">{error}</p>}
+      {error && <p className="error-msg">{error}</p>}
     </div>
   );
 };

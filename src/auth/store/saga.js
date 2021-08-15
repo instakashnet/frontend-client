@@ -1,4 +1,5 @@
 import { put, all, takeLatest, call, delay, fork, takeEvery } from "redux-saga/effects";
+import camelize from "camelize";
 import * as actions from "./actions";
 import * as types from "./types";
 import { setAlertInit } from "../../store/actions";
@@ -10,7 +11,7 @@ function* setAuthToken(data, isRefresh = false) {
   const date = new Date();
   const expDate = new Date(date.setSeconds(date.getSeconds() + data.expiresIn));
 
-  yield call([localStorage, "setItem"], "authData", JSON.stringify({ token: data.accessToken, expDate, userId: data.id }));
+  yield call([localStorage, "setItem"], "authData", JSON.stringify({ token: data.accessToken, expDate }));
   if (isRefresh) yield call(setAuthTimeout, expDate.getTime() - new Date().getTime());
 }
 
@@ -25,16 +26,22 @@ function* loadUser() {
 
   try {
     const res = yield authService.get("/users/session");
-    const profileCompleted = !!+res.data.completed;
-    yield call([localStorage, "setItem"], "userSession", JSON.stringify({ ...res.data.activityUser, profileCompleted, is_google: !!+res.data.activityUser.is_google }));
+    const resData = camelize(res.data);
+    yield call([sessionStorage, "setItem"], "userVerification", JSON.stringify({ verified: resData.verified, completed: resData.completed, isGoogle: resData.isGoogle }));
 
-    if (!profileCompleted) {
-      yield call([history, "push"], "/complete-profile");
-      yield put(actions.authError());
-    } else {
-      const userResponse = yield authService.get("/users/username");
-      yield put(actions.loadUserSuccess(token, userResponse.data.username));
+    if (!resData.verified) {
+      yield call([history, "push"], "/email-verification");
+      return yield put(actions.authError());
     }
+
+    if (!resData.completed) {
+      yield call([history, "push"], "/complete-profile");
+      return yield put(actions.authError());
+    }
+
+    const userRes = yield authService.get("/users/username");
+    yield put(actions.loadUserSuccess(token, userRes.data.username));
+
     yield call(setAuthTimeout, new Date(expDate).getTime() - new Date().getTime());
   } catch (error) {
     yield call(logout);
@@ -100,7 +107,32 @@ function* completeProfile({ values }) {
 }
 
 function* validateEmail({ values }) {
-  console.log(values);
+  const verificationCode = { verificationCode: `${values.otp_1}${values.otp_2}${values.otp_3}${values.otp_4}` };
+
+  try {
+    const res = yield authService.post("/auth/verify-code", verificationCode);
+
+    if (res.status === 200) {
+      yield call(setAuthToken, res.data);
+      yield call(loadUser);
+    }
+  } catch (error) {
+    yield put(setAlertInit(error.message, "error"));
+    yield put(actions.authError());
+  }
+}
+
+function* refreshVerificationCode() {
+  try {
+    const res = yield authService.get("/auth/refresh-code");
+    if (res.status === 200) {
+      yield call([Swal, "fire"], "¡Correo enviado!", "Revisa tu correo electrónico con el nuevo código de verificación.", "success");
+      yield put(actions.refreshCodeSuccess());
+    }
+  } catch (error) {
+    yield put(setAlertInit(error.message, "error"));
+    yield put(actions.authError());
+  }
 }
 
 function* refreshToken() {
@@ -179,6 +211,10 @@ export function* watchSignin() {
   yield takeLatest(types.SIGNGIN_INIT, signin);
 }
 
+export function* watchRefreshVerificationCode() {
+  yield takeEvery(types.REFRESH_CODE_INIT, refreshVerificationCode);
+}
+
 export function* watchValidateEmail() {
   yield takeLatest(types.VALIDATE_EMAIL_INIT, validateEmail);
 }
@@ -219,5 +255,6 @@ export default function* authSaga() {
     fork(watchResetPassword),
     fork(watchRefreshToken),
     fork(watchValidateEmail),
+    fork(watchRefreshVerificationCode),
   ]);
 }

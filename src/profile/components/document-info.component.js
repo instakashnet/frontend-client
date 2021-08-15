@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { AlertTriangle } from "react-feather";
+import { Warning } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
 import { editProfileInit } from "../store/actions";
 import UploadDocument from "./forms/upload-document.component";
 
-import Switch from "../../core/components/UI/form-items/switch.component";
+import Switch from "../../components/UI/form-items/switch.component";
 
 const DocumentDetails = ({ profile, isCompleted, isProcessing }) => {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const DocumentDetails = ({ profile, isCompleted, isProcessing }) => {
       </div>
       {incompletedMessage && (
         <p className="error-msg flex items-center justify-center mb-4">
-          <AlertTriangle className="mr-3" /> {incompletedMessage}
+          <Warning className="mr-3" /> {incompletedMessage}
         </p>
       )}
       {profile.type === "natural" && <Switch name="pep" placeholder="¿Eres una persona políticamente expuesta?" value={pep} onChange={onPepChange} isProcessing={isProcessing} />}

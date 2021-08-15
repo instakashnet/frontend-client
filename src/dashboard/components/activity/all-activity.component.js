@@ -2,11 +2,11 @@ import React from "react";
 import { _ } from "gridjs-react";
 import moment from "moment";
 import { Link } from "react-router-dom";
-import { Repeat, ArrowLeftCircle } from "react-feather";
+import { ArrowLeft, Repeat } from "@material-ui/icons";
 import { formatAmount } from "../../../shared/functions";
 
-import { StatusBadge } from "../../../core/components/UI/status-badge.component";
-import Button from "../../../core/components/UI/button.component";
+import { StatusBadge } from "../../../components/UI/status-badge.component";
+import { Button } from "../../../components/UI/button.component";
 import ActivityTable from "../activity-table.component";
 
 import classes from "../../assets/css/activity-components.module.scss";
@@ -50,7 +50,7 @@ const AllActivity = ({ orders, openModal }) => {
   return (
     <div className={classes.DashboardCard}>
       <Link to="/dashboard" className="flex items-center mb-6 text-base">
-        <ArrowLeftCircle className="mr-2" size={40} />
+        <ArrowLeft fontSize="large" />
       </Link>
       <h2 className="flex items-center mb-3">
         <Repeat className="mr-2" size={20} /> Cambios de divisa realizados

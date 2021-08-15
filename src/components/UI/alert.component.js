@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeAlert } from "../../../store/actions";
+import { removeAlert } from "../../store/actions";
 
 import classes from "./ui-components.module.scss";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { convertHexToRGB } from "../../../shared/functions";
+import { convertHexToRGB } from "../../shared/functions";
 
 import classes from "./ui-components.module.scss";
 

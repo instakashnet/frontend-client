@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addAccountInit } from "../../../store/actions";
 import { addAccountValidation } from "../../helpers/validations";
 
-import { MuiAlert } from "../../../core/components/UI/mui-alert.component";
+import { MuiAlert } from "../../../components/UI/mui-alert.component";
 import { Input } from "../../../components/UI/form-items/input.component";
 import { SelectComponent } from "../../../components/UI/form-items/select.component";
 import { CheckboxComponent } from "../../../components/UI/form-items/checkbox.component";
@@ -78,7 +78,7 @@ const AddAccount = ({ order, accType }) => {
           value={formik.values.alias}
           error={formik.errors.alias}
           touched={formik.touched.alias}
-          helperText="Ej. nombre + banco + moneda"
+          helperText="Ej.: Tu nombre + banco + moneda"
         />
         <MuiAlert type="info" opened>
           <p>No realizamos transferencias a terceros. Todas las cuentas agregadas deben ser propias o de empresas donde seas el representante legal.</p>

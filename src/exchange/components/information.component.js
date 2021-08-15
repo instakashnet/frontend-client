@@ -1,7 +1,7 @@
 import React from "react";
 import { isMobile } from "react-device-detect";
 
-import Button from "../../core/components/UI/button.component";
+import { Button } from "../../components/UI/button.component";
 
 import InfoImg from "../assets/images/exchange-user.png";
 import Clock from "../assets/images/icons/clock.svg";

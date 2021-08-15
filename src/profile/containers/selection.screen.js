@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProfileInit, openModal, closeModal } from "../../store/actions";
-import { AlertTriangle } from "react-feather";
+import { Warning } from "@material-ui/icons";
 
-import Layout from "../../core/components/layout/layout.component";
+import Layout from "../../components/layout/layout.component";
 import SelectionCard from "../components/selection-card.component";
-import Spinner from "../../core/components/UI/spinner.component";
+import Spinner from "../../components/UI/spinner.component";
 import AddProfile from "../components/forms/add-profile.component";
-import Button from "../../core/components/UI/button.component";
+import { Button } from "../../components/UI/button.component";
 
 import classes from "../assets/css/profile-containers.module.scss";
 
@@ -64,7 +64,7 @@ export const InfoModal = () => {
 
   return (
     <div className="flex flex-col items-center justify-center text-center">
-      <AlertTriangle size={70} className="error-msg mb-4" />
+      <Warning fontSize="large" className="error-msg mb-4" />
       <h2>Estimado usuario</h2>
       <p>
         Gracias por la confianza, queremos informarle que en estos momentos la plataforma para empresas de <b>BCP</b> presenta problemas en plataforma. Por tal las operaciones a
