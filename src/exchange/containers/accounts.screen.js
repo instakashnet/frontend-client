@@ -58,7 +58,6 @@ const Accounts = ({ setModal, order }) => {
   };
 
   const bankOptions = banks.map((bank) => ({ label: bank.name, value: bank.id, icon: `${process.env.PUBLIC_URL}/images/banks/${bank.name.toLowerCase()}-logo.svg` }));
-  console.log(filteredAccounts);
   const accountOptions = filteredAccounts.map((account) => ({
     account: account.account_number,
     currency: account.currency.Symbol,

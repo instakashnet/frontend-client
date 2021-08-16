@@ -43,7 +43,7 @@ const Signup = () => {
             touched={formik.touched.email}
             iconEnd={Mail}
           />
-          <InputPhone country="pe" value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} />
+          <InputPhone country="pe" value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} autoComplete="username" />
           <Input
             type="password"
             name="password"
