@@ -43,7 +43,7 @@ const WithdrawalDetails = () => {
       </div>
 
       <div className="flex justify-center mt-4">
-        <Button type="button" className={classes.CloseButton} onClick={closeModalHandler}>
+        <Button type="button" className="action-button" onClick={closeModalHandler}>
           Aceptar
         </Button>
       </div>
