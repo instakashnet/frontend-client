@@ -1,32 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { completeProfileValidation } from "../helpers/formValidations";
 import { AllowOnlyNumbers } from "../../shared/functions";
-import { User, FileText } from "react-feather";
 import { logoutInit, completeProfileInit, openModal, closeModal } from "../../store/actions";
 
-import Modal from "../../core/components/UI/modals/modal.component";
-import Input from "../components/UI/input.component";
-import Select from "../components/UI/select.component";
-import PhoneInput from "../components/UI/phone-input.component";
-import Button from "../../core/components/UI/button.component";
+import Modal from "../../components/UI/modals/modal.component";
+import { Input } from "../../components/UI/form-items/input.component";
+import { SelectComponent } from "../../components/UI/form-items/select.component";
+import { InputPhone } from "../../components/UI/form-items/phone-input.component";
+import { Button } from "../../components/UI/button.component";
 
 import classes from "../assets/css/auth.containers.module.scss";
 
-const CompleteProfile = () => {
+const CompleteProfile = ({ history }) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogle, setIsGoogle] = useState(false);
   const [invalidDNI, setInvalidDNI] = useState(null);
   const { isProcessing } = useSelector((state) => state.Auth);
   const ModalComponent = useSelector((state) => state.Modal.Component);
-  const userSession = JSON.parse(localStorage.getItem("userSession"));
+
+  useEffect(() => {
+    const userVerification = sessionStorage.getItem("userVerification");
+    if (!JSON.parse(userVerification)) return history.push("/signin");
+
+    const user = JSON.parse(userVerification);
+
+    setIsGoogle(user.isGoogle);
+  }, [history]);
 
   const formik = useFormik({
     initialValues: { type: "natural", first_name: "", last_name: "", identity_sex: "", phone: "", document_type: "DNI", document_identification: "", affiliate: "" },
-    validationSchema: completeProfileValidation(userSession ? userSession.is_google : false),
+    enableReinitialize: true,
+    validationSchema: completeProfileValidation(isGoogle),
     onSubmit: (values) => dispatch(completeProfileInit(values)),
   });
 
@@ -94,87 +102,68 @@ const CompleteProfile = () => {
 
   const onDocumentChangeHandler = (e) => (AllowOnlyNumbers(e.target.value) ? setFieldValue("document_identification", e.target.value) : null);
 
-  if (!userSession) return <Redirect to="/signin" />;
-
   return (
     <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
       <div className={classes.AuthWrapper}>
-        <h1>¡Felicidades, Tu cuenta ha sido creada!</h1>
-        <p className="mt-6">Ahora, debes completar todos tus datos</p>
-        <form onSubmit={formik.handleSubmit} className="text-center flex flex-col items-center justify-center">
-          <div className="grid grid-cols-3 w-full gap-4">
-            <Select name="document_type" options={documentOptions} value={formik.values.document_type} onChange={onDocumentTypeHandler} onBlur={onDocumentTypeHandler} />
+        <h2>¡Felicidades, Tu cuenta ha sido creada!</h2>
+        <p className="mt-2 mb-8">Por favor, completa tus datos</p>
+        <form onSubmit={formik.handleSubmit}>
+          <div className="grid grid-cols-3 w-full gap-2">
+            <SelectComponent name="document_type" label="Tipo de doc." value={formik.values.document_type} onChange={onDocumentTypeHandler} options={documentOptions} />
             <Input
               name="document_identification"
               type="text"
-              placeholder="Nro. de documento"
+              label="Nro. de documento"
               value={formik.values.document_identification}
               onChange={onDocumentChangeHandler}
               onBlur={formik.handleBlur}
-              error={formik.errors.document_identification}
+              error={invalidDNI ? invalidDNI : formik.errors.document_identification}
               touched={formik.touched.document_identification}
-              icon={FileText}
               groupClass="col-span-2"
             />
           </div>
-          {invalidDNI && <p className="error-msg">{invalidDNI}</p>}
           <Input
             name="first_name"
             type="text"
-            placeholder="Nombre(s)"
+            label="Nombre(s)"
             value={formik.values.first_name}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             error={formik.errors.first_name}
             touched={formik.touched.first_name}
-            icon={User}
             isLoading={isLoading}
             disabled={isLoading}
-            loadingPos={{ top: 9 }}
           />
           <Input
             name="last_name"
             type="text"
-            placeholder="Apellido(s)"
+            label="Apellido(s)"
             value={formik.values.last_name}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             error={formik.errors.last_name}
             touched={formik.touched.last_name}
-            icon={User}
             isLoading={isLoading}
             disabled={isLoading}
-            loadingPos={{ top: 9 }}
           />
-          {userSession.is_google && <PhoneInput value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} country="pe" />}
-          <Select
-            name="identity_sex"
-            value={formik.values.identity_sex}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.errors.identity_sex}
-            touched={formik.touched.identity_sex}
-            options={sexOptions}>
-            <option value="" defaultValue>
-              Selecciona tu sexo
-            </option>
-          </Select>
+          {isGoogle && <InputPhone value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} country="pe" />}
+          <SelectComponent name="identity_sex" label="Sexo" value={formik.values.identity_sex} onChange={formik.handleChange} options={sexOptions} />
+          <div className="flex justify-center mt-6 mb-3">
+            <button type="button" className={classes.InfoButton} onClick={openModalHandler}>
+              ¿Porque me piden estos datos?
+            </button>
+          </div>
           <Button
             type="submit"
-            className={`action-button ld-ext-right mt-3 ${isProcessing ? "running" : ""}`}
+            className={`action-button ld-over mt-3 ${isProcessing ? "running" : ""}`}
             disabled={!formik.isValid || (document_type === "DNI" && invalidDNI) || isProcessing}>
             <span className="ld ld-ring ld-spin" />
-            Completar mi perfil
+            Completar
           </Button>
         </form>
-        <button className={classes.InfoButton} type="button" onClick={() => dispatch(logoutInit())}>
+        <button className="mt-4" type="button" onClick={() => dispatch(logoutInit())}>
           Acceder con otra cuenta
         </button>
-        <div className="flex justify-center">
-          <button type="button" className={classes.InfoButton} onClick={openModalHandler}>
-            ¿Porque me piden estos datos?
-          </button>
-        </div>
       </div>
       {ModalComponent && (
         <Modal>

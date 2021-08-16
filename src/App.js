@@ -5,7 +5,7 @@ import { loadUserInit, getProfilesInit, selectProfileInit } from "./store/action
 import ReactPixel from "react-facebook-pixel";
 import history from "./shared/history";
 
-import Alert from "./core/components/UI/alert.component";
+import Alert from "./components/UI/alert.component";
 import ScrollToTop from "./hoc/scroll-top.component";
 import asyncComponent from "./hoc/async.component";
 
@@ -16,11 +16,12 @@ import PrivateRoute from "./routing/PrivateRoute";
 // PUBLIC
 import Signin from "./auth/containers/signin.screen";
 import Signup from "./auth/containers/signup.screen";
+import { EmailValidationScreen } from "./auth/containers/email-validation.screen";
 import RecoverPassword from "./auth/containers/recover-password.screen";
 import ChangePassword from "./auth/containers/change-password.screen";
 import CompleteProfile from "./auth/containers/complete-profile.screen";
 
-// PRIVATE
+// PRIVAT
 
 const ProfileSelection = lazy(() => import("./profile/containers/selection.screen"));
 const Welcome = lazy(() => import("./welcome/containers/Welcome"));
@@ -59,6 +60,7 @@ function App() {
           <Switch>
             <PublicRoute exact path="/signin" component={Signin} />
             <PublicRoute exact path="/signup" component={Signup} />
+            <PublicRoute exact path="/email-verification" component={EmailValidationScreen} />
             <PublicRoute exact path="/recover-password" component={RecoverPassword} />
             <PublicRoute exact path="/change-password" component={ChangePassword} />
             <PublicRoute exact path="/complete-profile" component={CompleteProfile} />

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Edit2, Trash } from "react-feather";
+import { EditOutlined, DeleteOutlineOutlined } from "@material-ui/icons";
 import { deleteAccountInit } from "../../store/actions";
-import Spinner from "../../core/components/UI/spinner.component";
+import Spinner from "../../components/UI/spinner.component";
 
 import EditAccount from "../components/forms/edit-account.component";
-import Button from "../../core/components/UI/button.component";
+import { Button } from "../../components/UI/button.component";
 
 import classes from "../assets/css/account-containers.module.scss";
 
@@ -52,10 +52,10 @@ const AccountDetails = () => {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6 mt-6">
                 <Button className="action-button" type="button" onClick={() => setEdit(true)}>
-                  Editar cuenta <Edit2 className="ml-2" />
+                  Editar cuenta <EditOutlined className="ml-2" />
                 </Button>
                 <Button className={classes.DeleteButton} type="button" onClick={() => dispatch(deleteAccountInit(accountDetails))}>
-                  Eliminar cuenta <Trash className="ml-2" />
+                  Eliminar cuenta <DeleteOutlineOutlined className="ml-2" />
                 </Button>
               </div>
             </>

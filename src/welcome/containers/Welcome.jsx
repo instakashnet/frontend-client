@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import { getScheduleInit } from "../../store/actions";
 
-import Card from "../../core/components/UI/card.component";
-import Layout from "../../core/components/layout/layout.component";
-import ClosedModal from "../../core/components/UI/modals/closed-modal.component";
+import Card from "../../components/UI/card.component";
+import Layout from "../../components/layout/layout.component";
+import ClosedModal from "../../components/UI/modals/closed-modal.component";
 
 import ExchangeImg from "../images/exchange.svg";
 import AffiliateImg from "../images/affiliate.svg";

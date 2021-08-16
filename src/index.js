@@ -1,15 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { Provider } from 'react-redux';
-import store from './store';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { ThemeProvider } from "@material-ui/styles";
+import App from "./App";
+import store from "./store";
+import { theme } from "./components/layout/theme.component";
 
-import './core/assets/css/app.css';
-import './core/assets/css/main.scss';
+import "./assets/css/app.css";
+import "./assets/css/main.scss";
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );

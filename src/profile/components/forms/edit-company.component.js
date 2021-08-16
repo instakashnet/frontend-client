@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { editProfileValidation } from "../../helpers/validations";
 import { editProfileInit } from "../../store/actions";
 
-import Input from "../../../core/components/UI/form-items/input.component";
-import Button from "../../../core/components/UI/button.component";
+import Input from "../../../components/UI/form-items/input.component";
+import Button from "../../../components/UI/button.component";
 
 import classes from "../../assets/css/profile-components.module.scss";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import KashIcon from "../../core/assets/images/kash.svg";
+import KashIcon from "../../assets/images/kash.svg";
 import classes from "../assets/css/account-components.module.scss";
 
 const KashAccount = ({ account, openModal }) => {

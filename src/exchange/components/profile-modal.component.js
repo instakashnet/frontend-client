@@ -1,6 +1,6 @@
 import React from "react";
 
-import Button from "../../core/components/UI/button.component";
+import { Button } from "../../components/UI/button.component";
 
 import classes from "../assets/css/exchange-components.module.scss";
 

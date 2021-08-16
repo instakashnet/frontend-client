@@ -4,7 +4,7 @@ import SwipeableViews from "react-swipeable-views";
 import { Tabs, Tab } from "@material-ui/core";
 import { getAffiliatesInit } from "../store/actions";
 
-import Layout from "../core/components/layout/layout.component";
+import Layout from "../components/layout/layout.component";
 import { Instructions } from "./containers/instructions";
 import { AffiliatesList } from "./containers/affiliates-list";
 

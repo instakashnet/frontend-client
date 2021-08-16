@@ -1,5 +1,5 @@
-@import "../../../core/assets/css/colors";
-@import "../../../core/assets/css/breakpoints";
+@import "../../../assets/css/colors";
+@import "../../../assets/css/breakpoints";
 
 .OrderItem {
   padding: 5px 0;
@@ -116,7 +116,6 @@
   justify-content: center;
   flex-direction: column;
   padding: 25px 10px;
-  border-radius: 15px;
   margin: 10px 0;
 
   h3 {
@@ -256,24 +255,6 @@
   font-size: 1.25rem;
   color: $base-green;
   font-weight: bold;
-}
-
-.ActionButton,
-.CloseButton {
-  background-color: $button-yellow;
-  padding: 4px 20px !important;
-  width: auto;
-  font-size: 0.85rem;
-  border-radius: 10px;
-
-  &:hover,
-  &:focus {
-    background-color: $base-yellow;
-  }
-}
-
-.ActionButton {
-  max-width: 10rem;
 }
 
 .CancelButton {

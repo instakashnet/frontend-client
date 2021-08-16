@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Repeat } from "react-feather";
+import { Repeat } from "@material-ui/icons";
 import _ from "lodash";
 import Skeleton from "react-loading-skeleton";
 
-import Card from "../../../core/components/UI/card.component";
+import Card from "../../../components/UI/card.component";
 import { OrderItem } from "../orders/order-item.component";
 
 import classes from "../../assets/css/activity-components.module.scss";

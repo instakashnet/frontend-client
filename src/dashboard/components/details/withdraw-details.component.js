@@ -4,8 +4,8 @@ import moment from "moment";
 import { formatAmount } from "../../../shared/functions";
 import { closeSliderModal } from "../../../store/actions";
 
-import { StatusBadge } from "../../../core/components/UI/status-badge.component";
-import Button from "../../../core/components/UI/button.component";
+import { StatusBadge } from "../../../components/UI/status-badge.component";
+import { Button } from "../../../components/UI/button.component";
 
 import classes from "../../assets/css/activity-components.module.scss";
 
@@ -43,7 +43,7 @@ const WithdrawalDetails = () => {
       </div>
 
       <div className="flex justify-center mt-4">
-        <Button type="button" className={classes.CloseButton} onClick={closeModalHandler}>
+        <Button type="button" className="action-button" onClick={closeModalHandler}>
           Aceptar
         </Button>
       </div>

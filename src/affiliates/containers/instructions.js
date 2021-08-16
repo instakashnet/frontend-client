@@ -8,7 +8,7 @@ import Step from "../components/step.component";
 import UserCode from "../components/user-code.component";
 import EditCode from "../components/forms/edit-code.component";
 import ShareIcons from "../components/share-icons.component";
-import Card from "../../core/components/UI/card.component";
+import Card from "../../components/UI/card.component";
 
 import Step1Img from "../assets/images/step1.svg";
 import Step2Img from "../assets/images/step2.svg";

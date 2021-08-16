@@ -12,6 +12,7 @@ const authCodes = [
   { code: 2011, message: "El nombre de usuario debe ser entre 9 y 12 caracteres, con al menos 1 número." },
   { code: 2012, message: "Ya haz alcanzado el máximo de perfiles que puedes agregar." },
   { code: 2013, message: "Solo se permite cargar archivos en formato JPG, PNG y PDF." },
+  { code: 2016, message: "El código de verificación ha expirado o es inválido. Por favor, solicita un nuevo código de verificación." },
 ];
 
 const exchangeCodes = [

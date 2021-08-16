@@ -4,10 +4,10 @@ import { _ } from "gridjs-react";
 import moment from "moment";
 
 import { AffiliatesTable } from "../components/affiliates-table.component";
-import Card from "../../core/components/UI/card.component";
-import Spinner from "../../core/components/UI/spinner.component";
+import Card from "../../components/UI/card.component";
+import Spinner from "../../components/UI/spinner.component";
 
-import KashIcon from "../../core/assets/images/kash.svg";
+import KashIcon from "../../assets/images/kash.svg";
 
 import classes from "../assets/css/affiliates-containers.module.scss";
 

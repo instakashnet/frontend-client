@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
-import { Info } from "react-feather";
+import { Info } from "@material-ui/icons";
 import { formatAmount } from "../../shared/functions";
 import { processCodeInit, cancelExchangeInit } from "../../store/actions";
 import { transferCodeValidation } from "../helpers/validations";
 
-import { MuiAlert } from "../../core/components/UI/mui-alert.component";
-import Tooltip from "../../core/components/UI/tooltip.component";
-import Input from "../../core/components/UI/form-items/input.component";
-import Button from "../../core/components/UI/button.component";
-import CopyButton from "../../core/components/UI/copy-button.component";
-import Card from "../../core/components/UI/card.component";
+import { MuiAlert } from "../../components/UI/mui-alert.component";
+import Tooltip from "../../components/UI/tooltip.component";
+import { Input } from "../../components/UI/form-items/input.component";
+import { Button } from "../../components/UI/button.component";
+import CopyButton from "../../components/UI/copy-button.component";
+import Card from "../../components/UI/card.component";
 
 import TransferImg from "../assets/images/transfer.svg";
 
@@ -74,7 +74,7 @@ const CompleteExchange = ({ order }) => {
       <form onSubmit={formik.handleSubmit}>
         <Input
           name="transaction_code"
-          placeholder="Ingresa el nro. de operación"
+          label="Ingresa el nro. de operación"
           value={formik.values.transaction_code}
           error={formik.errors.transaction_code}
           touched={formik.touched.transaction_code}

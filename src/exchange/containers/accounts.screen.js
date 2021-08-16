@@ -2,18 +2,16 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
-import { Plus } from "react-feather";
+import { Add } from "@material-ui/icons";
 import { completeExchangeInit, cancelExchangeInit } from "../../store/actions";
 import { completeExchangeValidation } from "../helpers/validations";
 import { validateInterplaza } from "../../shared/functions";
 
-import { MuiAlert } from "../../core/components/UI/mui-alert.component";
-import CustomSelect from "../../core/components/UI/form-items/custom-select.component";
-import AccountSelect from "../../core/components/UI/form-items/account-select.component";
-import Select from "../../core/components/UI/form-items/select.component";
+import { MuiAlert } from "../../components/UI/mui-alert.component";
+import { SelectComponent } from "../../components/UI/form-items/select.component";
 import KashUsed from "../components/kash-used.component";
-import Button from "../../core/components/UI/button.component";
-import Input from "../../core/components/UI/form-items/input.component";
+import { Button } from "../../components/UI/button.component";
+import { Input } from "../../components/UI/form-items/input.component";
 
 import classes from "../assets/css/exchange-screens.module.scss";
 
@@ -61,19 +59,17 @@ const Accounts = ({ setModal, order }) => {
 
   const bankOptions = banks.map((bank) => ({ label: bank.name, value: bank.id, icon: `${process.env.PUBLIC_URL}/images/banks/${bank.name.toLowerCase()}-logo.svg` }));
   const accountOptions = filteredAccounts.map((account) => ({
-    account: `*****${account.account_number.substring(account.account_number.length - 4, account.account_number.length)}`,
+    account: account.account_number,
     currency: account.currency.Symbol,
-    bankName: account.bank.name,
-    alias: account.alias,
     value: account.id,
     icon: `${process.env.PUBLIC_URL}/images/banks/${account.bank.name.toLowerCase()}-logo.svg`,
   }));
-  const onBankChange = (option) => formik.setFieldValue("bank_id", option.value);
-  const onAccountChange = (option) => {
-    if (!option.value) return;
 
-    const chosenAccount = filteredAccounts.find((account) => account.id === option.value);
-    formik.setFieldValue("account_to_id", option.value);
+  const onAccountChange = ({ target: { value } }) => {
+    if (!value) return;
+
+    const chosenAccount = filteredAccounts.find((account) => account.id === value);
+    formik.setFieldValue("account_to_id", value);
     formik.setFieldValue("bank_to_name", chosenAccount.bank.name);
   };
 
@@ -99,28 +95,32 @@ const Accounts = ({ setModal, order }) => {
       <form onSubmit={formik.handleSubmit} className={classes.ExchangeForm}>
         {kashAccount.balance > 0 && <KashUsed formik={formik} onKashUsed={kashUsedHandler} totalAmount={totalAmountSent} balance={kashAccount.balance} order={order} />}
         {formik.values.kashApplied && totalAmountSent <= 0 ? null : (
-          <CustomSelect
+          <SelectComponent
+            name="bank_id"
             label="¿Desde que banco nos envia su dinero?"
-            placeholder="Selecciona un banco"
             options={bankOptions}
-            value={bankOptions.find((option) => option.value === formik.values.bank_id)}
-            onChange={onBankChange}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.bank_id}
             error={formik.errors.bank_id}
             touched={formik.touched.bank_id}
           />
         )}
-        <AccountSelect
+
+        <SelectComponent
+          name="account_to_id"
           label="¿En que cuenta recibirás tu dinero?"
-          placeholder="Selecciona una de tus cuentas"
           options={accountOptions}
-          value={filteredAccounts.find((option) => option.value === formik.values.account_to_id)}
+          value={formik.values.account_to_id}
           onChange={onAccountChange}
           error={formik.errors.account_to_id}
           touched={formik.touched.account_to_id}
+          empty={accountOptions.length < 1}
+          emptyLabel="No has agregado ninguna cuenta"
         />
         {filteredAccounts.length < 10 && (
           <button className={classes.AddAccount} type="button" onClick={() => setModal("account")}>
-            Agregar cuenta <Plus className="ml-2" />
+            Agregar cuenta <Add className="ml-2" />
           </button>
         )}
         {interplaza && (
@@ -134,10 +134,9 @@ const Accounts = ({ setModal, order }) => {
           </MuiAlert>
         )}
         {funds_origin && (
-          <Select
+          <SelectComponent
             name="funds_origin"
             label="Origen de los fondos"
-            placeholder="Selecciona una opción"
             options={fundsOptions}
             value={formik.values.funds_origin}
             error={formik.errors.funds_origin}

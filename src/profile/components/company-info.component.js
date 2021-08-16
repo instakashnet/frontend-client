@@ -1,5 +1,5 @@
 import React from "react";
-import { Delete } from "react-feather";
+import { Delete } from "@material-ui/icons";
 
 import InfoBox from "./info-box.component";
 

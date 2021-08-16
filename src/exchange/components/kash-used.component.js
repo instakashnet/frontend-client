@@ -1,9 +1,10 @@
 import React from "react";
+import { FormControl, FormLabel, RadioGroup } from "@material-ui/core";
 import { formatAmount } from "../../shared/functions";
 
 import KashInput from "./calculator-items/kash-input.component";
-import Radio from "../../core/components/UI/form-items/radio.component";
-import Card from "../../core/components/UI/card.component";
+import { RadioComponent } from "../../components/UI/form-items/radio.component";
+import Card from "../../components/UI/card.component";
 
 import classes from "../assets/css/exchange-components.module.scss";
 
@@ -12,12 +13,16 @@ const KashUsed = ({ formik, balance, totalAmount, onKashUsed, order }) => {
 
   return (
     <div className={classes.KashInfoWrapper}>
-      <p>
-        tienes <b>{balance} KASH</b> disponibles, ¿Deseas canjearlos?
-      </p>
       <div className="flex items-center md:ml-10">
-        <Radio label="SI" value="yes" name="kashApplied" checked={formik.values.kashApplied === "yes"} onChange={formik.handleChange} onBlur={formik.handleBlur} />
-        <Radio label="NO" value="no" name="kashApplied" checked={formik.values.kashApplied === "no"} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+        <FormControl component="fieldset">
+          <FormLabel component="legend">
+            tienes <b>{balance} KASH</b> disponibles, ¿Deseas canjearlos?
+          </FormLabel>
+          <RadioGroup row aria-label="position" name="position" defaultValue="top">
+            <RadioComponent label="SI" value="yes" name="kashApplied" checked={formik.values.kashApplied === "yes"} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+            <RadioComponent label="NO" value="no" name="kashApplied" checked={formik.values.kashApplied === "no"} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+          </RadioGroup>
+        </FormControl>
       </div>
       {formik.values.kashApplied === "yes" && (
         <>

@@ -1,5 +1,5 @@
-@import "../../../core/assets/css/breakpoints";
-@import "../../../core/assets/css/colors";
+@import "../../../assets/css/breakpoints";
+@import "../../../assets/css/colors";
 
 .Background {
   background: url("../images/bg/login.svg"), url("../images/bg/shape.svg");
@@ -21,86 +21,32 @@
   }
 }
 
-.FormGroup {
-  width: 100%;
-  margin: 10px 0;
-  position: relative;
-}
+.OtpInput {
+  padding: 10px;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  background-color: $base-green;
+  text-align: center;
+  margin: 0 5px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.5rem;
+  outline: none;
 
-.Select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  padding: 10px 0 6px;
-  width: 100%;
-  border-bottom: 1px solid $secondary-green;
-  background-image: url(../../../core/assets/images/icons/arrow.svg);
-  background-color: transparent;
-  background-repeat: no-repeat;
-  background-position: center right;
-  background-size: 12px;
-}
-
-.InputGroup {
-  position: relative;
-
-  input {
-    width: 100%;
-    border-bottom-color: $secondary-green;
-    transition: 300ms ease-in-out;
-    font-size: 1rem;
-
-    &::placeholder {
-      color: $placeholder;
-    }
-
-    &:focus {
-      outline: none;
-      border-bottom-color: darken($color: $secondary-green, $amount: 20);
-    }
-  }
-
-  svg {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: $placeholder;
-    transition: 250ms ease-in-out;
-  }
-
-  input:focus + svg {
-    color: darken($color: $placeholder, $amount: 20);
-  }
-
-  input.Error + svg {
-    color: $error !important;
+  &:placeholder-shown {
+    background-color: #c4c4c4;
   }
 }
 
-.Error {
-  border-bottom-color: $error !important;
+.OtpError {
+  background-color: $error !important;
 }
 
-.PhoneWrapper {
-  font-size: 1rem !important;
-  font-family: inherit !important;
-}
-
-.PhoneInput {
-  width: 100% !important;
-  border: none !important;
-  border-bottom: 1px solid $secondary-green !important;
-  border-radius: 0 !important;
-  font-size: 1rem !important;
-}
-
-.PhoneError {
-  border-bottom-color: $error !important;
-}
-
-.ButtonFlag {
-  border: none !important;
-  border-bottom: 1px solid $secondary-green !important;
-  background-color: transparent !important;
-  border-radius: 0 !important;
+.GoogleButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $base-text !important;
+  text-decoration: none !important;
 }

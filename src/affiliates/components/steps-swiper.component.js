@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import SwiperCore, { Navigation } from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { ArrowLeft, ArrowRight } from "react-feather";
+import { ArrowLeft, ArrowRight } from "@material-ui/icons";
 
 import Step from "./step.component";
 

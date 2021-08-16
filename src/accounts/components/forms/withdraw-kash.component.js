@@ -4,9 +4,9 @@ import { useFormik } from "formik";
 import { withdrawKashInit } from "../../../store/actions";
 import { kashWithdrawalValidation } from "../../helpers/validations";
 
-import Input from "../../../core/components/UI/form-items/input.component";
-import AccountSelect from "../../../core/components/UI/form-items/account-select.component";
-import Button from "../../../core/components/UI/button.component";
+import { Input } from "../../../components/UI/form-items/input.component";
+import { SelectComponent } from "../../../components/UI/form-items/select.component";
+import { Button } from "../../../components/UI/button.component";
 
 const KashWithdraw = ({ kashAccount, accounts }) => {
   const dispatch = useDispatch();
@@ -20,45 +20,42 @@ const KashWithdraw = ({ kashAccount, accounts }) => {
 
   const dollarAccounts = accounts.filter((account) => account.currency.id === 1);
   const accountOptions = dollarAccounts.map((account) => ({
-    account: `*****${account.account_number.substring(account.account_number.length - 4, account.account_number.length)}`,
+    account: account.account_number,
     currency: account.currency.Symbol,
-    alias: account.alias,
     value: account.id,
     icon: `${process.env.PUBLIC_URL}/images/banks/${account.bank.name.toLowerCase()}-logo.svg`,
   }));
 
-  const onAccountChange = (option) => formik.setFieldValue("accountId", option.value);
-
   return (
     <>
       <h2>Retira tus kash</h2>
-      <form onSubmit={formik.handleSubmit} className="w-full flex flex-col items-center">
+      <form onSubmit={formik.handleSubmit} className="min-w-sm mt-3">
         <Input
           name="kashQty"
           type="number"
           value={formik.values.kashQty}
           label="¿Que cantidad deseas retirar?"
-          placeholder="Ingresa la cantidad"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={formik.errors.kashQty}
           touched={formik.touched.kashQty}
         />
-        <AccountSelect
+        <SelectComponent
           name="accountId"
-          value={dollarAccounts.find((option) => option.value === formik.values.accountId)}
+          value={formik.values.accountId}
           options={accountOptions}
-          onChange={onAccountChange}
+          onChange={formik.handleChange}
           label="¿En que cuenta recibiras tus kash?"
-          placeholder="Selecciona una de tus cuentas"
           error={formik.errors.accountId}
           touched={formik.touched.accountId}
+          helperText="* Solo se permiten cuenta en dólares."
         />
-        <p className="text-sm">* Solo se permiten cuenta en dólares.</p>
-        <Button type="submit" className={`action-button ld-ext-right ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
-          <span className="ld ld-ring ld-spin" />
-          Solicitar retiro
-        </Button>
+        <div className="flex justify-center">
+          <Button type="submit" className={`action-button  ld-over ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
+            <span className="ld ld-ring ld-spin" />
+            Solicitar retiro
+          </Button>
+        </div>
       </form>
     </>
   );

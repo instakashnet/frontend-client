@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from "react";
-import { Upload, FileText, Clock } from "react-feather";
+import { Publish, InsertDriveFile, QueryBuilder } from "@material-ui/icons";
 import { useDropzone } from "react-dropzone";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadDocumentInit } from "../../store/actions";
 
-import Card from "../../../core/components/UI/card.component";
+import Card from "../../../components/UI/card.component";
 
 import classes from "../../assets/css/profile-components.module.scss";
 
@@ -23,7 +23,7 @@ const UploadDocument = ({ type, documentUrl, profileId }) => {
     [dispatch, inputName, type, profileId]
   );
 
-  const FileIcon = file || documentUrl ? <FileText size={30} /> : <Upload size={30} />;
+  const FileIcon = file || documentUrl ? <InsertDriveFile fontSize="medium" /> : <Publish fontSize="medium" />;
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: "image/jpeg, image/png, application/pdf", maxSize: 5242880, multiple: false });
 
@@ -38,7 +38,7 @@ const UploadDocument = ({ type, documentUrl, profileId }) => {
           <h4>{`${file.name.substring(0, 14)}${file.name.length > 15 ? "...." : ""}`}</h4>
           {isProcessing && (
             <p className="italic mt-2 flex font-bold items-center">
-              <Clock size={15} className="mr-1" style={{ color: "#676767" }} /> cargando foto: {percentage}%
+              <QueryBuilder className="mr-1" style={{ color: "#676767" }} /> cargando foto: {percentage}%
             </p>
           )}
         </>

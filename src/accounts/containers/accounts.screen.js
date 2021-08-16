@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import _ from "lodash";
 import { useSelector, useDispatch } from "react-redux";
-import { CreditCard } from "react-feather";
+import { CreditCard } from "@material-ui/icons";
 import { getAccountsInit, getBanksInit, getCurenciesInit, setAccountDetailsInit, openModal } from "../../store/actions";
 
-import Layout from "../../core/components/layout/layout.component";
-import Button from "../../core/components/UI/button.component";
+import Layout from "../../components/layout/layout.component";
+import { Button } from "../../components/UI/button.component";
 import AccountsList from "../components/accounts-list.component";
 import NoAccount from "../components/no-accounts.component";
-import Spinner from "../../core/components/UI/spinner.component";
+import Spinner from "../../components/UI/spinner.component";
 import AddAccount from "../components/forms/add-account.component";
 import AccountDetails from "./account-details.screen";
 import KashAccount from "../components/kash-account.component";

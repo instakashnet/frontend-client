@@ -3,11 +3,11 @@ import camelize from "camelize";
 import * as types from "./types";
 import { setAlertInit } from "../../store/actions";
 import * as actions from "./actions";
-import axios from "../../auth/helpers/axios";
+import { authService } from "../../services/auth.service";
 
 function* getAffiliates() {
   try {
-    const res = yield axios.get("/users/affiliates");
+    const res = yield authService.get("/users/affiliates");
     if (res.status === 200) {
       const affiliatesData = camelize(res.data.affiliates);
       yield put(actions.getAffiliatesSuccess(affiliatesData));

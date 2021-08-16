@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import { Edit, AlertTriangle } from "react-feather";
+import { Edit, Warning } from "@material-ui/icons";
 
 import InfoBox from "./info-box.component";
 
@@ -25,7 +25,7 @@ const PersonalDetails = ({ profile, onEdit }) => {
 
       {!completed && (
         <p className="error-msg flex items-center justify-center mb-4">
-          <AlertTriangle className="mr-3" /> No has completado los datos.
+          <Warning className="mr-3" /> No has completado los datos.
         </p>
       )}
     </div>

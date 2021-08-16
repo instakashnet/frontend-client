@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
-import { Info, Clock } from "react-feather";
+import { Info, AccessAlarm } from "@material-ui/icons";
 import { getRatesInit, validateCouponInit, createExchangeInit, deleteCoupon } from "../../store/actions";
 
 import Rates from "../components/calculator-items/rates.component";
@@ -9,9 +9,9 @@ import Input from "../components/calculator-items/currency-input.component";
 import CouponInput from "../components/calculator-items/coupon-input.component";
 
 import Swipe from "../components/calculator-items/swipe.component";
-import Spinner from "../../core/components/UI/spinner.component";
-import Button from "../../core/components/UI/button.component";
-import Tooltip from "../../core/components/UI/tooltip.component";
+import Spinner from "../../components/UI/spinner.component";
+import { Button } from "../../components/UI/button.component";
+import Tooltip from "../../components/UI/tooltip.component";
 import Timer from "../components/calculator-items/timer.component";
 
 import classes from "../assets/css/exchange-screens.module.scss";
@@ -114,7 +114,7 @@ const Calculator = ({ profile, setModal }) => {
           <div className={classes.Timer}>
             <p>Se actualizará el tipo de cambio en:</p>
             <div className="flex items-center text-base">
-              <Clock className="mr-2" size={15} /> <Timer onFinish={() => dispatch(getRatesInit())} />
+              <AccessAlarm className="mr-2" /> <Timer onFinish={() => dispatch(getRatesInit())} />
             </div>
           </div>
         )}

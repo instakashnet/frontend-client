@@ -1,0 +1,144 @@
+@import "../../../assets/css/colors";
+@import "../../../assets/css/breakpoints";
+
+.FormGroup {
+  position: relative;
+  margin-bottom: 20px !important;
+
+  input,
+  select {
+    padding: 14px;
+    background-color: #fff;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+
+  input:disabled,
+  select:disabled {
+    background-color: transparent;
+  }
+
+  select {
+    padding: 15px 10px;
+    font-size: 0.85rem;
+  }
+
+  svg {
+    color: $placeholder;
+  }
+
+  @include respond(tablet) {
+    select,
+    input {
+      font-size: 1rem;
+    }
+  }
+}
+
+.PasswordIcon {
+  color: $placeholder;
+}
+
+.DateInput input {
+  border: 1px solid #ccb;
+  border-radius: 4px;
+  color: $base-text;
+}
+
+.DateError input {
+  border-color: $error;
+}
+
+.RadioGroup {
+  margin: 5px 10px;
+  cursor: pointer;
+}
+
+.CheckGroup {
+  width: 100%;
+  margin: 5px 0;
+
+  label {
+    font-size: 0.85rem;
+    cursor: pointer;
+
+    a,
+    span {
+      font-size: 0.85rem;
+    }
+  }
+
+  @include respond(tablet) {
+    label {
+      font-size: 0.9rem;
+
+      a,
+      span {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+.FlexInput {
+  display: flex;
+  align-items: center;
+
+  .FormControl > div {
+    border-radius: 4px 0 0 4px;
+  }
+
+  input {
+    flex: 0.8;
+    border-radius: 4px 0;
+    border-right: none;
+  }
+
+  button {
+    flex: 0.2;
+    padding: 11.5px 15px;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    border-radius: 0 3px 3px 0;
+    color: #fff;
+    background-color: $secondary-green;
+  }
+}
+
+.CustomSelect {
+  padding-top: 14px !important;
+  padding-bottom: 14px !important;
+  background-color: #fff !important;
+}
+
+.PhoneWrapper {
+  font-size: 1rem !important;
+  font-family: inherit !important;
+}
+
+.PhoneInput {
+  width: 100% !important;
+  padding-top: 21px !important;
+  padding-bottom: 21px !important;
+  padding-left: 41px !important;
+}
+
+.PhoneError {
+  border-color: $error !important;
+
+  + .ButtonFlag {
+    border-color: $error !important;
+  }
+}
+
+.ButtonFlag {
+  border-right: none !important;
+  background-color: transparent !important;
+}
+
+.SwitchGroup {
+  background-color: #fff;
+  padding: 10px 0 10px 10px;
+  box-shadow: 0px 24px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+}

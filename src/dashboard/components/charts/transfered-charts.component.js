@@ -1,8 +1,8 @@
 import React from "react";
-import { DollarSign } from "react-feather";
+import { AttachMoney } from "@material-ui/icons";
 import Skeleton from "react-loading-skeleton";
 
-import Card from "../../../core/components/UI/card.component";
+import Card from "../../../components/UI/card.component";
 import PieChart from "./pie-chart.component";
 
 import classes from "../../assets/css/activity-components.module.scss";
@@ -11,7 +11,7 @@ const TransferedCharts = ({ isLoading, orderAmounts }) => {
   return (
     <div className={`${classes.DashboardCard} w-full hidden md:block`}>
       <h2 className="flex items-center mb-2">
-        <DollarSign className="mr-2" size={20} /> Total cambiado
+        <AttachMoney className="mr-2" fontSize="medium" /> Total cambiado
       </h2>
       {isLoading && <Skeleton height={300} />}
       {!isLoading && (
