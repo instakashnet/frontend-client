@@ -81,7 +81,7 @@ const Calculator = ({ profile, setModal }) => {
     setFieldValue(name, +rawValue);
     const inputName = name === "amount_sent" ? "amount_received" : "amount_sent";
     if (values.type === "buy") setFieldValue(inputName, inputName === "amount_received" ? +rawValue * buyRate : +rawValue / buyRate);
-    if (values.type === "sell") setFieldValue(inputName, inputName === "amount_received" ? +rawValue / sellRate : +rawValue * buyRate);
+    if (values.type === "sell") setFieldValue(inputName, inputName === "amount_received" ? +rawValue / sellRate : +rawValue * sellRate);
   };
 
   const sendCouponHandler = (couponName) => {
