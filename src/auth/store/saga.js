@@ -12,6 +12,7 @@ function* setAuthToken(data, isRefresh = false) {
   const expDate = new Date(date.setSeconds(date.getSeconds() + data.expiresIn));
 
   yield call([localStorage, "setItem"], "authData", JSON.stringify({ token: data.accessToken, expDate }));
+
   if (isRefresh) yield call(setAuthTimeout, expDate.getTime() - new Date().getTime());
 }
 
@@ -20,6 +21,7 @@ function* loadUser() {
   if (!authData) return yield put(actions.logoutSuccess());
 
   const { token, expDate } = JSON.parse(authData);
+
   if (!token) return yield call(clearUser);
 
   if (new Date(expDate) <= new Date()) return yield call(logout);
