@@ -20,12 +20,14 @@ export const SelectComponent = ({ name, value, options, label, empty, emptyLabel
                     <p style={{ fontSize: 15 }}>
                       {option.account} - <span style={{ color: "#20a2a5" }}>{option.currency}</span>
                     </p>
-                    <p style={{ fontSize: 12 }}>{option.alias}</p>
+                    <p style={{ fontSize: 12 }}>
+                      {option.alias} <span className="text-green ml-2">{option.isThird && "cuenta tercero"}</span>
+                    </p>
                   </div>
                 ) : (
                   <p>{option.label}</p>
                 )}
-                <img src={option.icon} alt={option.label} width={50} />
+                <img src={option.icon} alt={option.label} width={55} />
               </div>
             )}
           </MenuItem>

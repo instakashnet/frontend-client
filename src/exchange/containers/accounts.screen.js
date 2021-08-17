@@ -64,6 +64,7 @@ const Accounts = ({ setModal, order }) => {
       currency: account.currency.Symbol,
       alias: account.alias,
       value: account.id,
+      isThird: account.thirdParty,
       icon: `${process.env.PUBLIC_URL}/images/banks/${account.bank.name.toLowerCase()}-logo.svg`,
     };
   });
