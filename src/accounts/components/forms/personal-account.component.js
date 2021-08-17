@@ -9,7 +9,7 @@ import { SelectComponent } from "../../../components/UI/form-items/select.compon
 import { CheckboxComponent } from "../../../components/UI/form-items/checkbox.component";
 import { Button } from "../../../components/UI/button.component";
 
-export const PersonalAccount = ({ banks, currencies, accountTypes, isThird, addType, ...rest }) => {
+export const PersonalAccount = ({ banks, currencies, accountTypes, isThird, addType, value, index, ...rest }) => {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: { account_number: "", cci: "", bankId: "", currencyId: "", alias: "", acc_type: "", thirdParty: isThird, accept: false },
@@ -19,8 +19,8 @@ export const PersonalAccount = ({ banks, currencies, accountTypes, isThird, addT
   const isProcessing = useSelector((state) => state.Accounts.isProcessing);
 
   return (
-    <div {...rest} className="mt-4">
-      <form onSubmit={formik.handleSubmit} className="max-w-sm mx-auto">
+    <div role="tabpanel" hidden={value !== index} {...rest} className="max-w-sm mx-auto mt-8">
+      <form onSubmit={formik.handleSubmit}>
         <SelectComponent
           name="bankId"
           label="Banco"

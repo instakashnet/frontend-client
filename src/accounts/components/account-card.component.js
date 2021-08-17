@@ -14,12 +14,11 @@ const AccountCard = ({ account, openModal }) => {
         <button onClick={openModal}>ver más</button>
       </div>
       <div className="flex items-center justify-between mt-6">
-        <p className="w-1/2">{account.alias}</p>
-        <p>
-          <span>*******{accountNumber.substring(accountNumber.length - 4, accountNumber.length)}</span>
-          <br />
-          {account.cci && "Interbancaria"}
-        </p>
+        <div className="w-3/5">
+          <p>{account.alias}</p>
+          {account.thirdParty && <span className="text-sm text-green relative -top-0.5">cuenta tercero</span>}
+        </div>
+        <p>****{accountNumber.substring(accountNumber.length - 4, accountNumber.length)}</p>
       </div>
     </Card>
   );

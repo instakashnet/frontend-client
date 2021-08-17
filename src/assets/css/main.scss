@@ -207,7 +207,17 @@ input::placeholder {
   background-color: #20a2a5 !important;
 }
 
+/* CLASS COLORS */
+
+.text-green {
+  color: $base-green;
+}
+
 /* CUSTOM MATERIAL-UI */
+
+.MuiTabs-indicator {
+  background-color: $base-green !important;
+}
 
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
   border-color: $base-green !important;

@@ -6,13 +6,14 @@ import { addThirdPartyAccountSchema } from "../../helpers/validations";
 import { AllowOnlyNumbers } from "../../../shared/functions";
 import { addAccountInit } from "../../../store/actions";
 
+import { MuiAlert } from "../../../components/UI/mui-alert.component";
 import { Input } from "../../../components/UI/form-items/input.component";
 import { SelectComponent } from "../../../components/UI/form-items/select.component";
 import { CheckboxComponent } from "../../../components/UI/form-items/checkbox.component";
 import { RadioComponent } from "../../../components/UI/form-items/radio.component";
 import { Button } from "../../../components/UI/button.component";
 
-export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, ...rest }) => {
+export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, value, index, ...rest }) => {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -60,8 +61,8 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, ..
   };
 
   return (
-    <div {...rest} className="mt-4">
-      <form onSubmit={formik.handleSubmit} className="max-w-sm mx-auto">
+    <div role="tabpanel" hidden={value !== index} {...rest} className="mt-8 max-w-sm mx-auto">
+      <form onSubmit={formik.handleSubmit}>
         <FormLabel component="legend">¿A quien le pertenece esta cuenta?</FormLabel>
         <RadioGroup aria-label="tipo de cuenta a terceros" name="thirdPartyAccType" value={formik.values.thirdPartyAccType} onChange={onThirdPartyAccTypeChange}>
           <div className="flex flex-wrap items-center justify-between">
@@ -182,6 +183,9 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, ..
           touched={formik.touched.alias}
           helperText="Ej.: Tu nombre + banco + moneda"
         />
+        <MuiAlert type="info" opened>
+          Las cuentas a terceros solo pueden ser utilizadas para recibir el dinero solicitado.
+        </MuiAlert>
         <CheckboxComponent name="accept" value={formik.values.accept} onChange={formik.handleChange} error={formik.errors.accept}>
           Declaro que toda la información colocada es correcta, actual y asumo total responsabilidad de su veracidad.
         </CheckboxComponent>
@@ -192,7 +196,8 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, ..
           </CheckboxComponent>
         </div>
         <div className="flex justify-center">
-          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button`}>
+          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button ld-over ${isProcessing ? "running" : ""}`}>
+            <span className="ld ld-ring ld-spin" />
             Agregar cuenta
           </Button>
         </div>

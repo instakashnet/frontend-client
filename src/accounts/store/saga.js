@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 function* getAccounts({ accType }) {
   try {
     const res = yield accountsService.get(`/accounts?type=${accType}`);
+
     if (res.status === 200) {
       if (accType === "kash") return yield put(actions.getKashAccountSuccess(res.data.accounts));
 

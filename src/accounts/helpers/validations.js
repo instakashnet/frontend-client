@@ -24,7 +24,7 @@ export const addThirdPartyAccountSchema = Yup.object().shape({
   email: Yup.string().required("Debes colocar un correo electrónico.").email("Coloca un correo válido."),
 
   documentIdentity: Yup.string()
-    .required("Coloca tu nro. de documento")
+    .required("Debes colocar un nro. de documento.")
     .matches(/^[0-9]{8,13}$/, "Número de documento ingresado inválido."),
   documentType: Yup.string().required("Debes seleccionar un tipo de documento."),
   razonSocial: Yup.string().when("thirdPartyAccType", {

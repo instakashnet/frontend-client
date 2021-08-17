@@ -50,6 +50,24 @@ const AccountDetails = () => {
                   <p>{accountDetails.alias}</p>
                 </div>
               </div>
+              {accountDetails.thirdParty && (
+                <div className="grid grid-cols-1 md:grid-cols-3">
+                  <div>
+                    <h4 className="md:mt-4">Nombre del titular</h4>
+                    <p>{accountDetails.thirdParty.razonSocial || accountDetails.thirdParty.name}</p>
+                  </div>
+                  <div>
+                    <h4 className="md:mt-4">Correo</h4>
+                    <p>{accountDetails.thirdParty.email}</p>
+                  </div>
+                  <div className="md:text-right">
+                    <h4 className="mt-4">Documento</h4>
+                    <p>
+                      {accountDetails.thirdParty.documentType} {accountDetails.thirdParty.documentNumber}
+                    </p>
+                  </div>
+                </div>
+              )}
               <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6 mt-6">
                 <Button className="action-button" type="button" onClick={() => setEdit(true)}>
                   Editar cuenta <EditOutlined className="ml-2" />
