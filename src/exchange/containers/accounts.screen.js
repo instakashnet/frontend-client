@@ -61,6 +61,7 @@ const Accounts = ({ setModal, order }) => {
   const accountOptions = filteredAccounts.map((account) => ({
     account: account.account_number,
     currency: account.currency.Symbol,
+    alias: account.alias,
     value: account.id,
     icon: `${process.env.PUBLIC_URL}/images/banks/${account.bank.name.toLowerCase()}-logo.svg`,
   }));

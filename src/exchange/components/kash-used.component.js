@@ -18,9 +18,9 @@ const KashUsed = ({ formik, balance, totalAmount, onKashUsed, order }) => {
           <FormLabel component="legend">
             tienes <b>{balance} KASH</b> disponibles, ¿Deseas canjearlos?
           </FormLabel>
-          <RadioGroup row aria-label="position" name="position" defaultValue="top">
-            <RadioComponent label="SI" value="yes" name="kashApplied" checked={formik.values.kashApplied === "yes"} onChange={formik.handleChange} onBlur={formik.handleBlur} />
-            <RadioComponent label="NO" value="no" name="kashApplied" checked={formik.values.kashApplied === "no"} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+          <RadioGroup row aria-label="position" name="kashApplied" defaultValue="top" value={formik.values.kashApplied} onChange={formik.handleChange}>
+            <RadioComponent label="SI" value="yes" checked={formik.values.kashApplied === "yes"} />
+            <RadioComponent label="NO" value="no" checked={formik.values.kashApplied === "no"} />
           </RadioGroup>
         </FormControl>
       </div>

@@ -3,28 +3,29 @@ import { FormControl, InputLabel, Select, MenuItem, FormHelperText } from "@mate
 
 import classes from "./form-items.module.scss";
 
-export const SelectComponent = ({ name, value, options, label, empty, emptyLabel, error, touched, helperText, onChange }) => {
+export const SelectComponent = ({ name, value, options, label, empty, emptyLabel, error, touched, helperText, onChange, ...rest }) => {
   return (
     <FormControl variant="outlined" className={classes.FormGroup}>
       <InputLabel htmlFor={name}>{label}</InputLabel>
-      <Select error={!!error && !!touched} value={value} onChange={onChange} label={label} classes={{ select: classes.CustomSelect }} inputProps={{ name, id: name }}>
+      <Select error={!!error && !!touched} value={value} onChange={onChange} label={label} classes={{ select: classes.CustomSelect }} inputProps={{ name, id: name }} {...rest}>
         {empty && <MenuItem value="">{emptyLabel}</MenuItem>}
         {options.map((option) => (
           <MenuItem key={option.value} value={option.value}>
             {!option.icon ? (
               option.label
             ) : (
-              <div className="flex items-center">
-                <img src={option.icon} alt={option.label} width={50} className="mr-2" />
-                <p>
-                  {option.account ? (
-                    <>
+              <div className="flex items-center justify-between w-full">
+                {option.account ? (
+                  <div className="flex flex-col items-start justify-start">
+                    <p style={{ fontSize: 15 }}>
                       {option.account} - <span style={{ color: "#20a2a5" }}>{option.currency}</span>
-                    </>
-                  ) : (
-                    option.label
-                  )}
-                </p>
+                    </p>
+                    <p style={{ fontSize: 12 }}>{option.alias}</p>
+                  </div>
+                ) : (
+                  <p>{option.label}</p>
+                )}
+                <img src={option.icon} alt={option.label} width={50} />
               </div>
             )}
           </MenuItem>

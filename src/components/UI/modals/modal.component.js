@@ -11,7 +11,7 @@ const Modal = ({ children }) => {
   const dispatch = useDispatch();
 
   return (
-    <ReactModal closeTimeoutMS={300} onRequestClose={() => dispatch(closeModal())} isOpen={isOpen} className={classes.Modal} ariaHideApp={false} preventScroll>
+    <ReactModal closeTimeoutMS={300} onRequestClose={() => dispatch(closeModal())} isOpen={isOpen} className={`${classes.Modal} hide-scrollbar`} ariaHideApp={false} preventScroll>
       <div className={classes.ModalContent}>
         <button onClick={() => dispatch(closeModal())} className={classes.Close}>
           <Close fontSize="large" />
