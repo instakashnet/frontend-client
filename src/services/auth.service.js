@@ -7,4 +7,4 @@ export const authService = axios.create({
 });
 
 reqInterceptor(authService);
-resInterceptor(authService, "auth");
+resInterceptor(authService);

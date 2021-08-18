@@ -7,4 +7,4 @@ export const accountsService = axios.create({
 });
 
 reqInterceptor(accountsService);
-resInterceptor(accountsService, "account");
+resInterceptor(accountsService);

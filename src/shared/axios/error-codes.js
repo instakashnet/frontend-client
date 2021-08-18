@@ -1,4 +1,4 @@
-const authCodes = [
+const errorCodes = [
   { code: 2001, message: "El correo ingresado ya se encuentra registrado, por favor intenta con otro." },
   { code: 2002, message: "No se ha encontrado una cuenta con el correo ingresado, por favor verifique el correo." },
   { code: 2003, message: "El teléfono que ha colocado ya se encuentra registrado o no es válido, por favor intente con otro." },
@@ -13,9 +13,9 @@ const authCodes = [
   { code: 2012, message: "Ya haz alcanzado el máximo de perfiles que puedes agregar." },
   { code: 2013, message: "Solo se permite cargar archivos en formato JPG, PNG y PDF." },
   { code: 2016, message: "El código de verificación ha expirado o es inválido. Por favor, solicita un nuevo código de verificación." },
-];
-
-const exchangeCodes = [
+  { code: 3001, message: "Solo puedes agregar un nro. de cuenta bancario o interbancario." },
+  { code: 3002, message: "El nro. de cuenta que intentas agregar ya se encuentra registrado." },
+  { code: 3003, message: "El alias debe ser de un mínimo de 5 caracteres." },
   { code: 4001, message: "No puedes crear otro pedido si ya tienes un pedido en curso. Completa o cancela el pedido anterior." },
   { code: 4002, message: "En estos momentos no estamos aceptando nuevos pedidos." },
   { code: 4003, message: "Este cupón no está permitido usar para este pedido." },
@@ -30,30 +30,9 @@ const exchangeCodes = [
   { code: 4013, message: "No estás habilitado para usar este cupón." },
 ];
 
-const accountCodes = [
-  { code: 3001, message: "Solo puedes agregar un nro. de cuenta bancario o interbancario." },
-  { code: 3002, message: "El nro. de cuenta que intentas agregar ya se encuentra registrado." },
-  { code: 3003, message: "El alias debe ser de un mínimo de 5 caracteres." },
-];
+export const getCodeMessage = (code) => {
+  const selectedCode = errorCodes.find((c) => c.code === code);
+  const codeMessage = selectedCode ? selectedCode.message : "Ha ocurrido un error inesperado, por favor intente de nuevo. Si el problema persiste contacte a soporte.";
 
-export const getCodeMessage = (code, type) => {
-  let selectedCode;
-  let codeMessage;
-
-  switch (type) {
-    case "auth":
-      selectedCode = authCodes.find((c) => c.code === code);
-      codeMessage = selectedCode ? selectedCode.message : "Ha ocurrido un error inesperado, por favor intente de nuevo. Si el problema persiste contacte a soporte.";
-      return codeMessage;
-    case "exchange":
-      selectedCode = exchangeCodes.find((c) => c.code === code);
-      codeMessage = selectedCode ? selectedCode.message : "Ha ocurrido un error inesperado, por favor intente de nuevo. Si el problema persiste contacte a soporte.";
-      return codeMessage;
-    case "account":
-      selectedCode = accountCodes.find((c) => c.code === code);
-      codeMessage = selectedCode ? selectedCode.message : "Ha ocurrido un error inesperado, por favor intente de nuevo. Si el problema persiste contacte a soporte.";
-      return codeMessage;
-    default:
-      return "";
-  }
+  return codeMessage;
 };

@@ -7,4 +7,4 @@ export const exchangeService = axios.create({
 });
 
 reqInterceptor(exchangeService);
-resInterceptor(exchangeService, "exchange");
+resInterceptor(exchangeService);
