@@ -9,7 +9,7 @@ import { Button } from "../../components/UI/button.component";
 import AccountsList from "../components/accounts-list.component";
 import NoAccount from "../components/no-accounts.component";
 import Spinner from "../../components/UI/spinner.component";
-import AddAccount from "../components/forms/add-account.component";
+import { AddAccount } from "../components/add-account.component";
 import AccountDetails from "./account-details.screen";
 import KashAccount from "../components/kash-account.component";
 import WithdrawKash from "../components/forms/withdraw-kash.component";
@@ -32,7 +32,7 @@ const Accounts = () => {
   const openModalHandler = (type, accId = null) => {
     let ModalComponent;
 
-    if (type === "add") ModalComponent = () => <AddAccount accType="users" />;
+    if (type === "add") ModalComponent = () => <AddAccount addType="users" />;
     if (type === "details") ModalComponent = () => <AccountDetails />;
     if (type === "withdrawal") ModalComponent = () => <WithdrawKash accounts={accounts} kashAccount={kashAccount} />;
     if (accId) dispatch(setAccountDetailsInit(accId));

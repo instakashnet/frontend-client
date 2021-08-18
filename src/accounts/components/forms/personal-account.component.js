@@ -4,40 +4,28 @@ import { useSelector, useDispatch } from "react-redux";
 import { addAccountInit } from "../../../store/actions";
 import { addAccountValidation } from "../../helpers/validations";
 
-import { MuiAlert } from "../../../components/UI/mui-alert.component";
 import { Input } from "../../../components/UI/form-items/input.component";
 import { SelectComponent } from "../../../components/UI/form-items/select.component";
 import { CheckboxComponent } from "../../../components/UI/form-items/checkbox.component";
 import { Button } from "../../../components/UI/button.component";
 
-const AddAccount = ({ order, accType }) => {
+export const PersonalAccount = ({ banks, currencies, accountTypes, isThird, addType, value, index, ...rest }) => {
   const dispatch = useDispatch();
   const formik = useFormik({
-    initialValues: { account_number: "", cci: "", bankId: "", currencyId: "", alias: "", acc_type: "", accept: false },
+    initialValues: { account_number: "", cci: "", bankId: "", currencyId: "", alias: "", acc_type: "", thirdParty: isThird, accept: false },
     validationSchema: addAccountValidation,
-    onSubmit: (values) => dispatch(addAccountInit(values, accType)),
+    onSubmit: (values) => dispatch(addAccountInit(values, addType)),
   });
-  const { banks, currencies } = useSelector((state) => state.Data);
   const isProcessing = useSelector((state) => state.Accounts.isProcessing);
 
-  const bankOptions = banks.map((bank) => ({ value: bank.id, label: bank.name, icon: `${process.env.PUBLIC_URL}/images/banks/${bank.name.toLowerCase()}-logo.svg` }));
-  const accountTypeOptions = [
-    { value: "checking", label: "Corriente" },
-    { value: "savings", label: "De ahorros" },
-  ];
-  const currencyOptions = order
-    ? currencies.filter((currency) => currency.id === order.currencyReceivedId).map((currency) => ({ label: `${currency.name} (${currency.Symbol})`, value: currency.id }))
-    : currencies.map((currency) => ({ label: `${currency.name} (${currency.Symbol})`, value: currency.id }));
-
   return (
-    <>
-      <h2>Agregar cuenta bancaria</h2>
-      <form onSubmit={formik.handleSubmit} className="max-w-sm mt-3">
+    <div role="tabpanel" hidden={value !== index} {...rest} className="max-w-sm mx-auto mt-8">
+      <form onSubmit={formik.handleSubmit}>
         <SelectComponent
           name="bankId"
           label="Banco"
           value={formik.values.bankId}
-          options={bankOptions}
+          options={banks}
           onChange={formik.handleChange}
           error={formik.errors.bankId}
           touched={formik.touched.bankId}
@@ -57,7 +45,7 @@ const AddAccount = ({ order, accType }) => {
           label="Tipo de cuenta"
           onChange={formik.handleChange}
           value={formik.values.acc_type}
-          options={accountTypeOptions}
+          options={accountTypes}
           error={formik.errors.acc_type}
           touched={formik.touched.acc_type}
         />
@@ -66,7 +54,7 @@ const AddAccount = ({ order, accType }) => {
           label="Moneda"
           value={formik.values.currencyId}
           onChange={formik.handleChange}
-          options={currencyOptions}
+          options={currencies}
           error={formik.errors.currencyId}
           touched={formik.touched.currencyId}
         />
@@ -80,11 +68,8 @@ const AddAccount = ({ order, accType }) => {
           touched={formik.touched.alias}
           helperText="Ej.: Tu nombre + banco + moneda"
         />
-        <MuiAlert type="info" opened>
-          <p>No realizamos transferencias a terceros. Todas las cuentas agregadas deben ser propias o de empresas donde seas el representante legal.</p>
-        </MuiAlert>
         <CheckboxComponent name="accept" value={formik.values.accept} onChange={formik.handleChange} error={formik.errors.accept}>
-          Declaro que esta cuenta es propia o de mi empresa.
+          Declaro que toda la información colocada es correcta, actual y asumo total responsabilidad de su veracidad.
         </CheckboxComponent>
         <div className="flex justify-center">
           <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button ld-over ${isProcessing ? "running" : ""}`}>
@@ -93,8 +78,6 @@ const AddAccount = ({ order, accType }) => {
           </Button>
         </div>
       </form>
-    </>
+    </div>
   );
 };
-
-export default AddAccount;

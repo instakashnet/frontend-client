@@ -51,11 +51,9 @@ function* loadUser() {
   }
 }
 
-function* setAuthTimeout(timeout, isLoadUser = false) {
-  yield delay(timeout - 45000);
-  if (isLoadUser) {
-    yield call(logout);
-  } else yield put(actions.refreshToken());
+function* setAuthTimeout(timeout) {
+  yield delay(timeout - 20000);
+  yield call(logout);
 }
 
 function* signin({ values }) {

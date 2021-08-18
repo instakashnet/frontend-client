@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 function* getAccounts({ accType }) {
   try {
     const res = yield accountsService.get(`/accounts?type=${accType}`);
+
     if (res.status === 200) {
       if (accType === "kash") return yield put(actions.getKashAccountSuccess(res.data.accounts));
 
@@ -36,17 +37,12 @@ function* setAccountDetails({ accId }) {
   yield put(actions.setAccountDetailsSuccess(accountDetails));
 }
 
-function* addAccount({ values, accType }) {
-  const accountValues = {
-    ...values,
-    accountId: +values.accountId,
-  };
-
+function* addAccount({ values, addType }) {
   try {
-    const res = yield accountsService.post("/accounts", accountValues);
+    const res = yield accountsService.post("/accounts", values);
     if (res.status === 201) {
       yield put(actions.addAccountSuccess());
-      yield call(getAccounts, { accType });
+      yield call(getAccounts, { accType: addType });
       yield put(setAlertInit("Cuenta agregada correctamente.", "success"));
       yield put(closeModal());
     }

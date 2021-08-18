@@ -1,4 +1,4 @@
-import * as types from './types';
+import * as types from "./types";
 
 export const getAccountsInit = (accType) => ({
   type: types.GET_ACCOUNTS_INIT,
@@ -29,10 +29,10 @@ export const setAccountDetailsSuccess = (details) => ({
   details,
 });
 
-export const addAccountInit = (values, accType) => ({
+export const addAccountInit = (values, addType) => ({
   type: types.ADD_ACCOUNT_INIT,
   values,
-  accType,
+  addType,
 });
 
 export const addAccountSuccess = () => ({

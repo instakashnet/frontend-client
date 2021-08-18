@@ -46,14 +46,12 @@ const Calculator = ({ profile, setModal }) => {
   const { type, amount_sent, amount_received } = values;
 
   useEffect(() => {
-    if (rates.buy && rates.sell) {
-      setActualRates({ buy: rates.buy, sell: rates.sell });
-      if (coupon) dispatch(deleteCoupon());
+    if (coupon) dispatch(deleteCoupon());
 
-      if (rates.buy > 0 && rates.sell > 0) {
-        setFieldValue("amount_sent", Math.round(1000 * rates.sell));
-        setFieldValue("amount_received", 1000);
-      }
+    if (rates.buy > 0 && rates.sell > 0) {
+      setActualRates({ buy: rates.buy, sell: rates.sell });
+      setFieldValue("amount_sent", 1000 * rates.sell);
+      setFieldValue("amount_received", 1000);
     }
     // eslint-disable-next-line
   }, [rates, dispatch, setFieldValue]);
@@ -153,7 +151,7 @@ const Calculator = ({ profile, setModal }) => {
             onDeleteCoupon={deleteCouponHandler}
           />
           {values.amount_received < 1 && <p className="error-msg">El monto mínimo a recibir es de $ 1.00</p>}
-          <Button type="submit" disabled={values.amount_received < 1 || disabled} className={`action-button mt-2 md:mt-5 ld-ext-right ${isProcessing ? "running" : ""}`}>
+          <Button type="submit" disabled={values.amount_received < 1 || disabled} className={`action-button mt-2 ld-ext-right ${isProcessing ? "running" : ""}`}>
             <span className="ld ld-ring ld-spin" />
             Comenzar cambio
           </Button>

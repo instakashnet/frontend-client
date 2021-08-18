@@ -1,4 +1,5 @@
 @import "../../../assets/css/colors";
+@import "../../../assets/css/breakpoints";
 
 .AccountCard {
   margin: 10px;
@@ -15,7 +16,30 @@
 
   @media (min-width: 1366px) {
     width: 19rem;
-    min-height: 8rem;
+  }
+}
+
+.AddAccountsTabs {
+  width: 100%;
+}
+
+button.AddAccountTab {
+  background-color: #e1f2ec;
+  color: $base-text;
+
+  &:first-of-type {
+    border-radius: 4px 0 0 0;
+
+    &[aria-selected="true"] {
+      box-shadow: 7px 3px 7px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &:last-of-type {
+    border-radius: 0 4px 0 0;
+    &[aria-selected="true"] {
+      box-shadow: -7px 3px 10px rgba(0, 0, 0, 0.06);
+    }
   }
 }
 
@@ -98,7 +122,7 @@
       color: $base-text;
       margin-top: 20px;
       text-decoration: none;
-      font-size: 1.05rem;
+      font-size: 0.9rem;
     }
 
     button {
@@ -109,9 +133,15 @@
       color: $base-text;
       text-decoration: none;
     }
+
+    @include respond(tablet) {
+      a {
+        font-size: 1.05rem;
+      }
+    }
   }
 
-  @media screen and (min-width: 768px) {
+  @include respond(tablet) {
     padding: 50px 40px;
     background-image: url(../images/kashbg-desktop.svg);
     background-repeat: no-repeat;

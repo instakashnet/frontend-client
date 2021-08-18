@@ -6,7 +6,7 @@
   background-color: $bg-color;
   width: 100%;
   max-width: 36rem;
-  max-height: 100vh;
+  max-height: 95vh;
   margin: auto;
   outline: 0;
   overflow: auto;
@@ -42,6 +42,12 @@
 
   form {
     min-width: 19rem;
+
+    a {
+      color: $base-green;
+      text-decoration: underline;
+      font-weight: bold;
+    }
   }
 
   @include respond(desktop) {
