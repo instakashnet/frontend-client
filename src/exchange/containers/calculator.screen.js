@@ -50,7 +50,7 @@ const Calculator = ({ profile, setModal }) => {
 
     if (rates.buy > 0 && rates.sell > 0) {
       setActualRates({ buy: rates.buy, sell: rates.sell });
-      setFieldValue("amount_sent", 1000 * rates.sell);
+      setFieldValue("amount_sent", (1000 * rates.sell).toFixed(2));
       setFieldValue("amount_received", 1000);
     }
     // eslint-disable-next-line
@@ -59,7 +59,10 @@ const Calculator = ({ profile, setModal }) => {
   useEffect(() => {
     if (coupon && actualRates.buy > 0 && actualRates.sell > 0) {
       setCouponRates({ buy: actualRates.buy + coupon.discount, sell: actualRates.sell - coupon.discount });
-      setFieldValue("amount_received", type === "buy" ? amount_sent * (actualRates.buy + coupon.discount) : amount_sent / (actualRates.sell - coupon.discount));
+      setFieldValue(
+        "amount_received",
+        type === "buy" ? (amount_sent * (actualRates.buy + coupon.discount)).toFixed(2) : (amount_sent / (actualRates.sell - coupon.discount)).toFixed(2)
+      );
     }
 
     // eslint-disable-next-line
@@ -72,14 +75,14 @@ const Calculator = ({ profile, setModal }) => {
     setFieldValue("type", values.type === "buy" ? "sell" : "buy");
     setFieldValue("currency_sent_id", values.currency_received_id === 1 ? 1 : 2);
     setFieldValue("currency_received_id", values.currency_sent_id === 1 ? 1 : 2);
-    setFieldValue("amount_received", values.type === "buy" ? values.amount_sent / sellRate : values.amount_sent * buyRate);
+    setFieldValue("amount_received", values.type === "buy" ? (values.amount_sent / sellRate).toFixed(2) : (values.amount_sent * buyRate).toFixed(2));
   };
 
   const currencyChangeHandler = ({ target: { name, rawValue } }) => {
     setFieldValue(name, +rawValue);
     const inputName = name === "amount_sent" ? "amount_received" : "amount_sent";
-    if (values.type === "buy") setFieldValue(inputName, inputName === "amount_received" ? +rawValue * buyRate : +rawValue / buyRate);
-    if (values.type === "sell") setFieldValue(inputName, inputName === "amount_received" ? +rawValue / sellRate : +rawValue * sellRate);
+    if (values.type === "buy") setFieldValue(inputName, inputName === "amount_received" ? (+rawValue * buyRate).toFixed(2) : (+rawValue / buyRate).toFixed(2));
+    if (values.type === "sell") setFieldValue(inputName, inputName === "amount_received" ? (+rawValue / sellRate).toFixed(2) : (+rawValue * sellRate).toFixed(2));
   };
 
   const sendCouponHandler = (couponName) => {
