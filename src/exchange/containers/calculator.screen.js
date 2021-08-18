@@ -49,6 +49,7 @@ const Calculator = ({ profile, setModal }) => {
     if (coupon) dispatch(deleteCoupon());
 
     if (rates.buy > 0 && rates.sell > 0) {
+      setActualRates({ buy: rates.buy, sell: rates.sell });
       setFieldValue("amount_sent", 1000 * rates.sell);
       setFieldValue("amount_received", 1000);
     }
