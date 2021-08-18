@@ -16,7 +16,7 @@ export const reqInterceptor = (instance) =>
     (error) => Promise.reject(error)
   );
 
-export const resInterceptor = (instance, type) =>
+export const resInterceptor = (instance) =>
   instance.interceptors.response.use(
     (res) => res,
     (error) => {
@@ -27,7 +27,7 @@ export const resInterceptor = (instance, type) =>
 
       if (error.response) {
         const code = error.response.data.code;
-        if (code && code !== 4006) message = getCodeMessage(code, type);
+        if (code && code !== 4006) message = getCodeMessage(code);
 
         error.response.message = message;
         return Promise.reject(error.response);
