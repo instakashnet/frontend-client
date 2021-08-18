@@ -46,14 +46,11 @@ const Calculator = ({ profile, setModal }) => {
   const { type, amount_sent, amount_received } = values;
 
   useEffect(() => {
-    if (rates.buy && rates.sell) {
-      setActualRates({ buy: rates.buy, sell: rates.sell });
-      if (coupon) dispatch(deleteCoupon());
+    if (coupon) dispatch(deleteCoupon());
 
-      if (rates.buy > 0 && rates.sell > 0) {
-        setFieldValue("amount_sent", Math.round(1000 * rates.sell));
-        setFieldValue("amount_received", 1000);
-      }
+    if (rates.buy > 0 && rates.sell > 0) {
+      setFieldValue("amount_sent", 1000 * rates.sell);
+      setFieldValue("amount_received", 1000);
     }
     // eslint-disable-next-line
   }, [rates, dispatch, setFieldValue]);

@@ -69,6 +69,21 @@ const OrderDetails = () => {
         <span>{`*********${details.accountToRaw.substring(details.accountToRaw.length - 4, details.accountToRaw.length)}`}</span>
       </div>
 
+      {details.accountToThird && (
+        <>
+          <div className="flex items-center justify-between pr-2 my-3">
+            <h4>Nombre del titular:</h4>
+            <span>{details.accountToThird.name}</span>
+          </div>
+          <div className="flex items-center justify-between pr-2 my-3">
+            <h4>Documento:</h4>
+            <span>
+              {details.accountToThird.documentType} {details.accountToThird.documentNumber}
+            </span>
+          </div>
+        </>
+      )}
+
       {details.estateId === 2 ? (
         <>
           <h2 className="mt-5">Completa tu operación</h2>
