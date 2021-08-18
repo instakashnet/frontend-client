@@ -28,7 +28,7 @@ const Information = ({ onClose }) => {
           </div>
           <div className={classes.InfoCard}>
             <img src={User} alt="clock" />
-            <p>Ambas cuentas deben ser del titular.</p>
+            <p>Debe registrar primero el pedido antes de hacer una transferencia a nuestras cuentas.</p>
           </div>
           <div className={classes.InfoCard}>
             <img src={Clock} alt="clock" />
