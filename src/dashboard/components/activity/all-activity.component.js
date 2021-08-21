@@ -27,7 +27,7 @@ const AllActivity = ({ orders, openModal }) => {
       width: "90px",
       formatter: (cell) => {
         return _(
-          <Button className={classes.ActionButton} onClick={() => openModal(cell, "order")}>
+          <Button className="action-button" onClick={() => openModal(cell, "order")}>
             ver más
           </Button>
         );
