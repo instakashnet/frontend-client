@@ -17,7 +17,6 @@ const AccountDetails = () => {
 
   return (
     <div className={classes.AccountDetails}>
-      <h2 className="text-center">Detalles de la cuenta</h2>
       {!edit && isProcessing && <Spinner full />}
       {!isProcessing && (
         <>
@@ -69,7 +68,7 @@ const AccountDetails = () => {
                 </div>
               )}
               <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6 mt-6">
-                <Button className="action-button" type="button" onClick={() => setEdit(true)}>
+                <Button className="action-button mb-4 md:mb-0" type="button" onClick={() => setEdit(true)}>
                   Editar cuenta <EditOutlined className="ml-2" />
                 </Button>
                 <Button className={classes.DeleteButton} type="button" onClick={() => dispatch(deleteAccountInit(accountDetails))}>

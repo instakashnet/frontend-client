@@ -1,17 +1,24 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { closeSliderModal } from "../../store/actions";
+
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import Sidebar from "./sidebar.component";
 import Header from "./header.component";
-import SliderModal from "../UI/modals/slider-modal.component";
-import Modal from "../UI/modals/modal.component";
+import { SliderModal } from "../UI/modals/slider-modal.component";
+import { Modal } from "../UI/modals/modal.component";
 
 const Layout = ({ className, children }) => {
-  const dispatch = useDispatch();
+  const [modalProps, setModalProps] = useState({});
+  const [sliderProps, setSliderProps] = useState({});
   const { SliderComponent, Component: ModalComponent } = useSelector((state) => state.Modal);
 
-  const closeSliderModalHandler = () => dispatch(closeSliderModal());
+  useEffect(() => {
+    if (ModalComponent) setModalProps(ModalComponent().props);
+  }, [ModalComponent]);
+
+  useEffect(() => {
+    if (SliderComponent) setSliderProps(SliderComponent().props);
+  }, [SliderComponent]);
 
   return (
     <main className="main-app">
@@ -19,13 +26,13 @@ const Layout = ({ className, children }) => {
       <Header />
       <section className={`main-section ${className || ""}`}>{children}</section>
       {ModalComponent && (
-        <Modal>
+        <Modal {...modalProps}>
           <ModalComponent />
         </Modal>
       )}
 
       {SliderComponent && (
-        <SliderModal closeModal={closeSliderModalHandler}>
+        <SliderModal {...sliderProps}>
           <SliderComponent />
         </SliderModal>
       )}

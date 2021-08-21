@@ -28,7 +28,6 @@ const OrderDetails = () => {
 
   return details.estateName ? (
     <div className={classes.Details}>
-      <h2>Detalles de la operación</h2>
       <div className="flex items-center justify-between">
         <h4>Estado:</h4>
         <StatusBadge color={details.stateColor} name={details.estateName.toLowerCase()} />
@@ -128,11 +127,10 @@ const OrderDetails = () => {
           </form>
         </>
       ) : (
-        <div className="flex justify-center mt-4">
-          <Button type="button" className="action-button" onClick={closeModalHandler}>
-            Aceptar
-          </Button>
-        </div>
+
+        <Button type="button" className="action-button mt-6" onClick={closeModalHandler}>
+          Aceptar
+        </Button>
       )}
     </div>
   ) : null;

@@ -6,7 +6,7 @@ import { completeProfileValidation } from "../helpers/formValidations";
 import { AllowOnlyNumbers } from "../../shared/functions";
 import { logoutInit, completeProfileInit, openModal, closeModal } from "../../store/actions";
 
-import Modal from "../../components/UI/modals/modal.component";
+import { Modal } from "../../components/UI/modals/modal.component";
 import { Input } from "../../components/UI/form-items/input.component";
 import { SelectComponent } from "../../components/UI/form-items/select.component";
 import { InputPhone } from "../../components/UI/form-items/phone-input.component";
@@ -50,7 +50,7 @@ const CompleteProfile = ({ history }) => {
 
   const sexOptions = [
     { value: "male", label: "Masculino" },
-    { value: "female", label: "Femeníno" },
+    { value: "female", label: "Femenino" },
     { value: "other", label: "Otro" },
   ];
 
@@ -162,11 +162,11 @@ const CompleteProfile = ({ history }) => {
           </Button>
         </form>
         <button className="mt-4" type="button" onClick={() => dispatch(logoutInit())}>
-          Acceder con otra cuenta
+          Regresar a inicio de sesión
         </button>
       </div>
       {ModalComponent && (
-        <Modal>
+        <Modal title="¡Queremos proteger tu identidad!">
           <ModalComponent />
         </Modal>
       )}
@@ -179,7 +179,6 @@ const DataInfo = () => {
 
   return (
     <>
-      <h2>¡Queremos proteger tu identidad!</h2>
       <p className="px-4 mb-6 text-center">
         Al realizar una operación queremos estar seguro que eres tu quien lo realiza. Además, nos ayuda a saber según tu perfil registrado si debemos entregarte boleta o factura.
       </p>

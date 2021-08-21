@@ -17,7 +17,6 @@ const WithdrawalDetails = () => {
 
   return details.statusName ? (
     <div className={classes.Details}>
-      <h2>Detalles de la operación</h2>
       <div className="flex items-center justify-between">
         <h4>Estado:</h4>
         <StatusBadge color={details.statusColor} name={details.statusName.toLowerCase()} />
@@ -42,11 +41,10 @@ const WithdrawalDetails = () => {
         <span>{`*********${details.accountToIdRaw.substring(details.accountToIdRaw.length - 4, details.accountToIdRaw.length)}`}</span>
       </div>
 
-      <div className="flex justify-center mt-4">
-        <Button type="button" className="action-button" onClick={closeModalHandler}>
-          Aceptar
-        </Button>
-      </div>
+
+      <Button type="button" className="action-button mt-6" onClick={closeModalHandler}>
+        Aceptar
+      </Button>
     </div>
   ) : null;
 };

@@ -22,7 +22,10 @@ export const Instructions = ({ ...rest }) => {
   const dispatch = useDispatch();
   const usercode = useSelector((state) => state.Auth.userCode);
 
-  const editCodeHandler = () => dispatch(openModal(EditCode));
+  const editCodeHandler = () => {
+    const ModalComponent = () => <EditCode title="Editar código" />;
+    dispatch(openModal(ModalComponent));
+  };
 
   return (
     <div {...rest}>

@@ -20,9 +20,8 @@ const EditUserCode = () => {
 
   return (
     <div className="text-center">
-      <h2>Editar código de afiliado</h2>
       <p>Puede editar su código de afiliado para que sea más facil de compartir y recordar.</p>
-      <form onSubmit={formik.handleSubmit} className="mt-6 text-left flex flex-col items-center">
+      <form onSubmit={formik.handleSubmit} className="mt-6 text-left max-w-sm mx-auto">
         <Input
           name="username"
           label="Código de afiliado"

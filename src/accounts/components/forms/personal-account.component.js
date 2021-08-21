@@ -72,7 +72,7 @@ export const PersonalAccount = ({ banks, currencies, accountTypes, isThird, addT
           Declaro que toda la información colocada es correcta, actual y asumo total responsabilidad de su veracidad.
         </CheckboxComponent>
         <div className="flex justify-center">
-          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button ld-over ${isProcessing ? "running" : ""}`}>
+          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button mt-4 ld-over ${isProcessing ? "running" : ""}`}>
             <span className="ld ld-ring ld-spin" />
             Agregar cuenta
           </Button>

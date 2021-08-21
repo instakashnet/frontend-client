@@ -14,7 +14,9 @@ const Header = () => {
   const { profiles } = useSelector((state) => state.Profile);
   const profileSelected = JSON.parse(sessionStorage.getItem("profileSelected"));
 
-  const openNav = () => dispatch(openSliderModal(ProfileNavigation));
+  const ModalComponent = () => <ProfileNavigation />;
+
+  const openNav = () => dispatch(openSliderModal(ModalComponent));
 
   return (
     <div className={classes.Header}>

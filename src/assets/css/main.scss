@@ -215,6 +215,10 @@ input::placeholder {
 
 /* CUSTOM MATERIAL-UI */
 
+.MuiDialog-root {
+  z-index: 100 !important;
+}
+
 .MuiTabs-indicator {
   background-color: $base-green !important;
 }

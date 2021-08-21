@@ -28,8 +28,7 @@ const KashWithdraw = ({ kashAccount, accounts }) => {
 
   return (
     <>
-      <h2>Retira tus kash</h2>
-      <form onSubmit={formik.handleSubmit} className="min-w-sm mt-3">
+      <form onSubmit={formik.handleSubmit} className="max-w-sm mx-auto mt-3">
         <Input
           name="kashQty"
           type="number"

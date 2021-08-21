@@ -9,10 +9,9 @@ import { Input } from "../../components/UI/form-items/input.component";
 import { CheckboxComponent } from "../../components/UI/form-items/checkbox.component";
 import { Button } from "../../components/UI/button.component";
 import { GoogleButton } from "../components/UI/google-button.component";
+import { Modal } from "../../components/UI/modals/modal.component";
 import Background from "../components/layout/background.component";
 import Logo from "../../components/UI/logo.component";
-
-import InfoModal from "../../components/UI/modals/info-modal.component";
 
 import classes from "../assets/css/auth.containers.module.scss";
 
@@ -44,12 +43,12 @@ const Signin = () => {
     dispatch(signinGoogle(res.tokenId));
   };
 
-  /*   useEffect(() => {
-    const timeout = setTimeout(() => {
-      dispatch(openModal(Information));
-    }, 600);
-    return () => clearTimeout(timeout);
-  }, [dispatch]); */
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     dispatch(openModal());
+  //   }, 600);
+  //   return () => clearTimeout(timeout);
+  // }, [dispatch]);
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 h-full md:h-screen">
@@ -102,6 +101,9 @@ const Signin = () => {
           </Link>
         </p>
       </div>
+      <Modal title="¡IMPORTANTE!" isAlert alertType="danger">
+        <Information />
+      </Modal>
     </main>
   );
 };
@@ -110,16 +112,16 @@ export const Information = () => {
   const dispatch = useDispatch();
 
   return (
-    <InfoModal type="alert">
-      <p>
+    <>
+      <p className="mb-3 text-center">
         En este momento nos encontramos realizando unas <b>mejoras y actualizaciones</b> en nuestra plataforma, todo para poder ofrecerle el mejor servicio posible. Estaremos de
         vuelta a la brevedad posible.
       </p>
-      <p>Agradecemos su comprensión.</p>
+      <p className="text-center mb-3">Agradecemos su comprensión.</p>
       <Button onClick={() => dispatch(closeModal())} className="action-button">
         Lo entiendo
       </Button>
-    </InfoModal>
+    </>
   );
 };
 

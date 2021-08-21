@@ -87,9 +87,9 @@ const Exchange = ({ history, location, match }) => {
   const openModalHandler = (type = null) => {
     let ModalComponent;
 
-    if (type === "account") ModalComponent = () => <AddAccount order={order} accType="orders" />;
-    if (type === "complete") ModalComponent = () => <CompleteProfile onClose={onCloseHandler} />;
-    if (type === "info") ModalComponent = () => <Information onClose={() => dispatch(closeModal())} />;
+    if (type === "account") ModalComponent = () => <AddAccount title="Agregar cuenta" order={order} accType="orders" />;
+    if (type === "complete") ModalComponent = () => <CompleteProfile title="Completar perfil" onClose={onCloseHandler} />;
+    if (type === "info") ModalComponent = () => <Information title="¡IMPORTANTE!" onClose={() => dispatch(closeModal())} />;
 
     dispatch(openModal(ModalComponent));
   };

@@ -31,7 +31,6 @@ export const AddAccount = ({ order, addType }) => {
 
   return (
     <>
-      <h2>Agregar cuenta</h2>
       <Tabs value={value} onChange={handleChange} classes={{ root: classes.AddAccountsTabs }} variant="fullWidth" aria-label="Tabs de afiliados">
         <Tab label="Cuenta personal" {...a11yProps(0)} classes={{ root: classes.AddAccountTab }} />
         <Tab label="Cuenta terceros" {...a11yProps(1)} classes={{ root: classes.AddAccountTab }} />

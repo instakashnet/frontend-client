@@ -52,8 +52,8 @@ const AddProfile = () => {
   const onRucChangeHandler = (e) => (AllowOnlyNumbers(e.target.value) ? setFieldValue("ruc", e.target.value) : false);
 
   return (
-    <form onSubmit={formik.handleSubmit} className="w-full flex flex-col">
-      <h2 className="text-center mt-4">Agrega tu perfil de empresa</h2>
+    <form onSubmit={formik.handleSubmit} className="max-w-sm mx-auto">
+      <h2 className="text-center mb-4">Agrega tu perfil de empresa para tus facturas.</h2>
       <Input
         type="text"
         name="ruc"
@@ -75,7 +75,6 @@ const AddProfile = () => {
         touched={formik.touched.razon_social}
         isLoading={isLoading}
         disabled={isLoading}
-        loadingPos={{ top: 10 }}
       />
       <Input
         type="text"

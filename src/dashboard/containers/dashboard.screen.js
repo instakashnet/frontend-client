@@ -23,8 +23,8 @@ const Dashboard = ({ match }) => {
   const openDetails = (id, type = null) => {
     let SliderComponent;
 
-    if (type === "order") SliderComponent = () => <OrderDetails />;
-    if (type === "withdrawal") SliderComponent = () => <WithdrawDetails />;
+    if (type === "order") SliderComponent = () => <OrderDetails title="Datos del pedido" />;
+    if (type === "withdrawal") SliderComponent = () => <WithdrawDetails title="Datos del pedido" />;
 
     dispatch(getOrderDetailsInit(id, type));
     dispatch(openSliderModal(SliderComponent));

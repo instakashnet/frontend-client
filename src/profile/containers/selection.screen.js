@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProfileInit, openModal, closeModal } from "../../store/actions";
-import { Warning } from "@material-ui/icons";
 
 import Layout from "../../components/layout/layout.component";
 import SelectionCard from "../components/selection-card.component";
@@ -15,15 +14,21 @@ const Selection = () => {
   const dispatch = useDispatch();
   const { isLoading, profiles } = useSelector((state) => state.Profile);
 
-  const addProfileHandler = () => dispatch(openModal(AddProfile));
+  let ModalComponent = () => <ModalInformation isAlert alertType="warning" title="¡IMPORTANTE!" />;
 
+  const addProfileHandler = () => {
+    ModalComponent = () => <AddProfile title="Agregar empresa" />;
+    dispatch(openModal(ModalComponent));
+  };
   // useEffect(() => {
   //   let timeout;
   //   const isRead = sessionStorage.getItem("isRead");
 
   //   if (!isRead) {
   //     timeout = setTimeout(() => {
-  //       dispatch(openModal(InfoModal));
+
+  //       dispatch(openModal(ModalComponent));
+
   //     }, 600);
   //   }
   //   return () => timeout && clearTimeout(timeout);
@@ -54,7 +59,7 @@ const Selection = () => {
   );
 };
 
-export const InfoModal = () => {
+export const ModalInformation = () => {
   const dispatch = useDispatch();
 
   const closeModalHandler = () => {
@@ -63,18 +68,16 @@ export const InfoModal = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center text-center">
-      <Warning fontSize="large" className="error-msg mb-4" />
+    <div className="text-center">
       <h2>Estimado usuario</h2>
-      <p>
+      <p className="my-3">
         Gracias por la confianza, queremos informarle que en estos momentos la plataforma para empresas de <b>Interbank</b> presenta problemas en sus transferencias. Por tal
         motivo, no realizaremos operaciones hacia este banco por el momento. Estamos a la espera del banco y poder solucionarlo a la brevedad posible.
-        <br />
-        <span className="mt-4 inline-block font-bold">Agradecemos su comprensión.</span>
-        <Button onClick={closeModalHandler} className="action-button">
-          Lo entiendo
-        </Button>
       </p>
+      <p className="mb-4 inline-block font-bold">Agradecemos su comprensión.</p>
+      <Button onClick={closeModalHandler} className="action-button">
+        Lo entiendo
+      </Button>
     </div>
   );
 };

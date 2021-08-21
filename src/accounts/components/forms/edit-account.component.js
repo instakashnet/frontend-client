@@ -38,7 +38,7 @@ const EditAccount = ({ account, cancelEdit, setEdit }) => {
           onBlur={formik.handleBlur}
         />
         <div className="grid grid-cols-1 md:grid-cols-2 md:gap-5">
-          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button ld-over ${isProcessing ? "running" : ""}`}>
+          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button mb-4 md:mb-0 ld-over ${isProcessing ? "running" : ""}`}>
             <span className="ld ld-ring ld-spin" />
             Editar cuenta
           </Button>
