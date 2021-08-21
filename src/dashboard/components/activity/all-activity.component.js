@@ -2,7 +2,7 @@ import React from "react";
 import { _ } from "gridjs-react";
 import moment from "moment";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Repeat } from "@material-ui/icons";
+import { ArrowBack, Repeat } from "@material-ui/icons";
 import { formatAmount } from "../../../shared/functions";
 
 import { StatusBadge } from "../../../components/UI/status-badge.component";
@@ -50,7 +50,7 @@ const AllActivity = ({ orders, openModal }) => {
   return (
     <div className={classes.DashboardCard}>
       <Link to="/dashboard" className="flex items-center mb-6 text-base">
-        <ArrowLeft fontSize="large" />
+        <ArrowBack fontSize="large" className="mr-2" /> Regresar
       </Link>
       <h2 className="flex items-center mb-3">
         <Repeat className="mr-2" size={20} /> Cambios de divisa realizados
