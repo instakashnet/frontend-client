@@ -1,0 +1,211 @@
+@import "../../../assets/css/colors";
+@import "../../../assets/css/breakpoints";
+
+.AffiliatesTabs {
+  margin-bottom: 15px;
+  border-bottom: 2px solid $base-green;
+
+  > div > span {
+    display: none;
+  }
+}
+
+button.AffiliatesTab {
+  border-radius: 10px 0px 0px 0px;
+  background-color: #e1f2ec;
+  color: $base-text;
+  font-size: 1rem;
+  text-transform: capitalize;
+  font-family: inherit;
+  max-width: 12rem;
+
+  &[aria-selected="true"] {
+    background-color: $base-green;
+    color: #fff;
+    outline: 0;
+    box-shadow: -6px 1px 8px -3px rgba(0, 0, 0, 0.2);
+  }
+
+  &:last-of-type {
+    border-radius: 0px 10px 0px 0px;
+  }
+}
+
+.TableCard {
+  max-width: 1280px;
+  margin: 15px auto;
+  padding: 10px 5px;
+
+  @include respond(desktop) {
+    padding: 30px 55px;
+  }
+}
+
+.AffiliatesSection {
+  max-width: 1536px;
+  margin: auto;
+
+  h1 {
+    color: $base-green;
+    font-weight: bold;
+    font-size: 1.7rem;
+    text-align: center;
+  }
+
+  h2 {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-weight: bold;
+    text-align: center;
+  }
+
+  b {
+    color: $base-green;
+  }
+
+  a {
+    color: $base-green;
+    text-decoration: underline;
+  }
+
+  @include respond(tablet) {
+    margin-top: 25px;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+    }
+  }
+
+  @include respond(desktop) {
+    h1 {
+      font-size: 3.3rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+.AffiliatesWrapper {
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+p.Completed {
+  color: $base-green !important;
+  font-weight: bold;
+}
+
+img.NoReward {
+  filter: grayscale(1);
+  opacity: 0.7;
+}
+
+.CodeInfoCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px auto 0;
+  color: #fff;
+  max-width: 63rem;
+  background-color: transparent;
+  box-shadow: none;
+
+  b {
+    color: #f2c94c !important;
+  }
+
+  > p {
+    max-width: 35rem;
+    margin-left: 45px;
+  }
+
+  @include respond(tablet) {
+    padding: 25px;
+    background-color: #20a2a5 !important;
+  }
+
+  @include respond(desktop) {
+    padding: 40px;
+    margin-top: 30px;
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+.CodeWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  button {
+    text-decoration: underline;
+    color: $base-green;
+    margin-top: 5px;
+    font-size: 0.95rem;
+  }
+
+  @include respond(tablet) {
+    button {
+      color: #fff;
+    }
+  }
+
+  @include respond(desktop) {
+    align-items: flex-start;
+  }
+}
+
+.Step2 img {
+  width: 190px;
+  max-width: initial;
+
+  @include respond(desktop) {
+    width: 280px;
+  }
+}
+
+.AffiliatesTotalCard {
+  width: 8.5rem;
+  height: 6.5rem;
+  margin: 12px;
+  padding-left: 7px;
+  padding-right: 7px;
+  font-weight: bold;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+
+  h4 {
+    font-size: 2rem;
+  }
+
+  p {
+    position: relative;
+    top: -5px;
+  }
+
+  &:nth-of-type(3) {
+    color: $base-green;
+  }
+
+  &:last-of-type {
+    color: #eab726;
+  }
+}

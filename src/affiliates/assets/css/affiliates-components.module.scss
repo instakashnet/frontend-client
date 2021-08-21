@@ -1,0 +1,282 @@
+@import "../../../assets/css/colors";
+@import "../../../assets/css/breakpoints";
+
+.Step {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  padding: 0 30px;
+  max-width: 22rem;
+  text-align: left;
+  margin: 15px 0;
+
+  h4 {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 15px;
+    align-self: flex-start;
+  }
+
+  p {
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+
+  b,
+  a {
+    color: $base-green;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    max-width: 160px;
+  }
+
+  @include respond(tablet) {
+    img {
+      max-width: 180px;
+    }
+  }
+
+  @include respond(desktop) {
+    margin: 0;
+
+    img {
+      max-width: 200px;
+    }
+  }
+}
+
+.SwiperContainer {
+  width: 100%;
+  max-width: 325px;
+  margin-top: 25px;
+}
+
+.SwiperPrev,
+.SwiperNext {
+  display: inline-block;
+  color: #fff;
+  background-color: $base-green;
+  border-radius: 50%;
+  position: absolute;
+  top: 35%;
+  width: 30px;
+  height: 30px;
+  z-index: 10;
+  cursor: pointer;
+
+  svg {
+    position: relative;
+    top: 3.2px;
+    left: 2.5px;
+  }
+}
+
+.SwiperPrev {
+  left: 0;
+}
+
+.SwiperNext {
+  right: 0;
+}
+
+.UserCode {
+  display: flex;
+  align-items: center;
+
+  p {
+    background-color: #fff7b8;
+    color: $base-green;
+    border: 1.5px dashed $base-green;
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+    flex: 0.8;
+    padding: 10px 13px;
+    text-align: center;
+    font-size: 0.95rem;
+  }
+
+  span {
+    background-color: #4db5b7;
+    color: #fff;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 0px 24px 20px rgba(0, 0, 0, 0.04);
+    flex: 0.2;
+    padding: 12px 15px;
+    cursor: pointer;
+    margin-left: 0;
+    font-size: 1rem;
+  }
+}
+
+.ContainerTable {
+  p {
+    color: #a3a3a3;
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+
+  img {
+    max-width: 2rem;
+  }
+
+  > div {
+    border: none;
+    box-shadow: none;
+  }
+
+  .HeaderTable {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .SearchTable input {
+    width: 100%;
+    max-width: 230px;
+    border-radius: 10px;
+
+    &:placeholder-shown {
+      background: url(../../../assets/images/icons/search.svg);
+      background-size: 18px;
+      background-position: 93% 50%;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .TheadTable {
+    border-bottom: 1px solid $base-green;
+  }
+
+  .ThTable {
+    padding: 10px 5px 5px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border: none;
+    background-color: transparent;
+    color: $base-text;
+
+    > div {
+      width: auto !important;
+    }
+
+    button {
+      filter: brightness(0.5) sepia(1) hue-rotate(-70deg) saturate(5);
+      float: left;
+      position: relative;
+      bottom: 2px;
+      left: 2px;
+    }
+  }
+
+  .TrTable {
+    border-bottom: 1px solid $base-green;
+  }
+
+  .TdTable {
+    padding: 7px 5px;
+    border: none;
+    font-size: 0.9rem;
+    color: $base-text;
+    font-weight: bold;
+  }
+
+  .FooterTable {
+    padding: 5px 10px 10px;
+  }
+
+  .PaginationTable {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.85rem;
+
+    > div[role="status"] {
+      visibility: hidden;
+    }
+  }
+
+  .PaginationButtonCurrent,
+  .PaginationButtonNext,
+  .PaginationButtonPrev {
+    color: $base-green;
+    font-weight: bold;
+  }
+
+  .PaginationButtonNext:disabled,
+  .PaginationButtonPrev:disabled {
+    color: $base-text;
+    font-weight: normal;
+  }
+
+  @include respond(tablet) {
+    p {
+      font-size: 1.1rem;
+    }
+
+    .PaginationTable {
+      font-size: 1rem;
+    }
+
+    img {
+      max-width: 3rem;
+    }
+
+    .TdTable {
+      padding: 10px;
+    }
+
+    .ThTable {
+      padding: 10px;
+      font-size: 1rem;
+    }
+
+    .SearchTable input {
+      max-width: auto;
+      width: 260px;
+    }
+  }
+
+  @include respond(desktop) {
+    .PaginationTable {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 15px;
+
+      &:after {
+        display: none;
+      }
+
+      > div[role="status"] {
+        margin: 0;
+        visibility: visible;
+      }
+    }
+  }
+}
+
+.FilterButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    color: $base-green;
+    text-decoration: underline;
+    margin: 0 10px;
+  }
+
+  @include respond(tablet) {
+    button {
+      font-size: 1rem;
+    }
+  }
+}

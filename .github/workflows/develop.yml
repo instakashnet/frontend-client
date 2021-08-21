@@ -1,0 +1,37 @@
+name: developCI
+
+on:
+  push:
+    paths-ignore:
+      - ".github/**"
+    branches:
+      - "develop"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      REACT_APP_TEST_GOOGLE_ID: ${{ secrets.TEST_GOOGLE_CLIENT_ID }}
+      REACT_APP_FB_PIXEL_ID: ${{ secrets.FB_PIXEL_ID }}
+      REACT_APP_AUTH_API: ${{ secrets.TEST_AUTH_API }}
+      REACT_APP_ACCOUNTS_API: ${{ secrets.TEST_ACCOUNTS_API }}
+      REACT_APP_EXCHANGE_API: ${{ secrets.TEST_EXCHANGE_API }}
+      REACT_APP_MIGO_API: ${{ secrets.MIGO_API }}
+    strategy:
+      matrix:
+        node-version: [15.x]
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: yarn install
+      - name: Build de application
+        run: yarn build
+      - name: Build admin om netlify
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: npx netlify-cli deploy --dir=build --prod

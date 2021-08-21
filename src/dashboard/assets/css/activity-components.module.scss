@@ -1,0 +1,275 @@
+@import "../../../assets/css/colors";
+@import "../../../assets/css/breakpoints";
+
+.OrderItem {
+  padding: 5px 0;
+  font-size: 0.9rem;
+  transition: 250ms ease-out;
+
+  .OrderTitle {
+    display: flex;
+    align-items: center;
+
+    h4 {
+      margin-bottom: 3px;
+      font-weight: normal;
+
+      &:first-of-type {
+        margin-right: 20px;
+      }
+    }
+  }
+
+  .OrderView {
+    text-decoration: underline;
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-left: 5px;
+      color: $base-green;
+    }
+  }
+
+  .OrderInfo span {
+    color: $base-green;
+  }
+
+  @include respond(tablet) {
+    padding: 10px 20px;
+
+    &:first-of-type {
+      padding-top: 10px;
+    }
+  }
+}
+
+.Price {
+  color: $base-green;
+  font-weight: bold;
+}
+
+.ContainerTable {
+  color: inherit;
+
+  > div {
+    border: none;
+    border-radius: 10px 10px 0 0;
+    box-shadow: none;
+  }
+}
+
+.FooterTable {
+  border-radius: 0 0 10px 10px !important;
+  background-color: $bg-gray !important;
+}
+
+.ThTable,
+.TdTable {
+  border: none !important;
+  border-bottom: 1px solid #c3e5d9 !important;
+  background-color: #fff !important;
+}
+
+.DashboardCard {
+  margin: 10px 0;
+
+  h2 {
+    color: $base-green;
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  a {
+    font-size: 0.8rem;
+    text-decoration: underline;
+    color: $base-green;
+  }
+
+  > a {
+    transition: 200ms ease-out;
+    width: auto;
+    display: inline-block;
+
+    &:hover {
+      color: darken($color: $base-green, $amount: 15);
+    }
+  }
+
+  &:last-of-type {
+    margin-top: 40px;
+  }
+}
+
+.KashCard {
+  background-color: $light-yellow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 25px 10px;
+  margin: 10px 0;
+
+  h3 {
+    color: $base-green;
+    margin-top: 5px;
+    font-size: 1.1rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  a,
+  button {
+    background-color: $button-yellow;
+    border-radius: 15px;
+    margin: 0 10px;
+    padding: 5px 20px;
+    transition: 200ms ease-out;
+
+    &:hover,
+    &:focus {
+      background-color: darken($color: $button-yellow, $amount: 15);
+    }
+  }
+}
+
+.NoActivity {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1rem;
+
+  img {
+    position: relative;
+    width: 200px;
+  }
+
+  h1 {
+    color: $base-green;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  a {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 17rem;
+  }
+
+  @include respond(tablet) {
+    img {
+      width: 300px;
+    }
+  }
+
+  @include respond(desktop) {
+    h1 {
+      font-size: 2.3rem;
+    }
+
+    img {
+      width: 400px;
+    }
+  }
+}
+
+.ActivityMobile {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 15px 0;
+
+  h4 {
+    font-weight: 500;
+    font-size: 0.75rem;
+    margin-bottom: 5px;
+  }
+
+  p {
+    font-size: 0.85rem;
+    text-transform: capitalize;
+  }
+}
+
+.Details {
+  width: 100%;
+  font-size: 1rem;
+  height: 100%;
+  padding: 15px 25px;
+
+  .Price {
+    color: $base-green;
+    font-weight: bold;
+  }
+
+  h2,
+  h4,
+  h3 {
+    color: $base-green;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+
+    @include respond(tablet) {
+      font-size: 1.3rem;
+      padding: 20px 10px;
+    }
+  }
+
+  h3 {
+    text-align: left;
+  }
+
+  form input {
+    margin: 0;
+  }
+}
+
+.SwiperContainer {
+  min-height: 595px;
+  z-index: 0 !important;
+}
+
+.TotalAmount {
+  margin-top: 5px;
+  font-size: 1.25rem;
+  color: $base-green;
+  font-weight: bold;
+}
+
+.CancelButton {
+  background-color: $base-green;
+  color: #fff;
+}
+
+.CloseButton {
+  width: 100%;
+  padding: 15px !important;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.Price {
+  color: $base-green;
+  font-weight: bold;
+}

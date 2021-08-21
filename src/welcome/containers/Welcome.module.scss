@@ -1,0 +1,127 @@
+@import "../../assets/css/colors";
+@import "../../assets/css/breakpoints";
+
+.Welcome {
+  background-color: $light-yellow;
+  background-image: url(../images/welcome-mobile.svg);
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-size: 70%;
+  border-radius: 20px;
+  padding: 20px 30px;
+  width: 100%;
+  min-height: 15rem;
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 0.95rem;
+    margin-top: 5px;
+  }
+
+  @include respond(tablet) {
+    min-height: 23rem;
+    margin-bottom: 30px;
+    padding: 20px 50px;
+    justify-content: center;
+    background-image: url(../images/welcome.svg);
+
+    h1 {
+      margin-top: 0;
+      font-size: 1.6rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+.OptionCard {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  justify-content: center;
+  background-image: url(../images/card-bg.svg);
+  background-repeat: no-repeat;
+  background-size: 80%;
+  background-position-y: 100%;
+  padding: 20px;
+  min-height: 15rem;
+  width: 100%;
+  margin: 15px 0;
+
+  &:last-of-type {
+    background-image: url(../images/card-bg-right.svg);
+    background-position-x: right;
+    background-position-y: 100%;
+  }
+
+  h4 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: $base-green;
+  }
+
+  p {
+    font-size: 0.9rem;
+    margin: 10px 0;
+  }
+
+  img {
+    position: relative;
+    top: calc(16.5rem - 15.4rem);
+    left: 1rem;
+    width: 8rem;
+  }
+
+  a {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    display: inline-block;
+    padding: 10px 20px;
+    width: auto;
+  }
+
+  @include respond(tablet) {
+    min-height: 19rem;
+    max-width: 35rem;
+    background-position-y: 110%;
+    margin: 15px 0;
+
+    h4 {
+      font-size: 1.4rem;
+    }
+
+    img {
+      width: 14rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  @include respond(desktop) {
+    margin: 15px;
+    max-width: 38rem;
+
+    a {
+      font-size: 1rem;
+    }
+
+    img {
+      width: 18rem;
+    }
+  }
+
+  @include respond(ldesktop) {
+    margin: 0 15px;
+  }
+}
