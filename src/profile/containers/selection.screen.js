@@ -20,19 +20,17 @@ const Selection = () => {
     ModalComponent = () => <AddProfile title="Agregar empresa" />;
     dispatch(openModal(ModalComponent));
   };
-  // useEffect(() => {
-  //   let timeout;
-  //   const isRead = sessionStorage.getItem("isRead");
+  useEffect(() => {
+    let timeout;
+    const isRead = sessionStorage.getItem("isRead");
 
-  //   if (!isRead) {
-  //     timeout = setTimeout(() => {
-
-  //       dispatch(openModal(ModalComponent));
-
-  //     }, 600);
-  //   }
-  //   return () => timeout && clearTimeout(timeout);
-  // }, [dispatch]);
+    if (!isRead) {
+      timeout = setTimeout(() => {
+        dispatch(openModal(ModalComponent));
+      }, 600);
+    }
+    return () => timeout && clearTimeout(timeout);
+  }, [dispatch]);
 
   return (
     <Layout>
