@@ -35,6 +35,7 @@ const Accounts = () => {
     if (type === "add") ModalComponent = () => <AddAccount title="Agregar cuenta" addType="users" />;
     if (type === "details") ModalComponent = () => <AccountDetails title="Datos de la cuenta" />;
     if (type === "withdrawal") ModalComponent = () => <WithdrawKash title="Retirar KASH" accounts={accounts} kashAccount={kashAccount} />;
+
     if (accId) dispatch(setAccountDetailsInit(accId));
 
     dispatch(openModal(ModalComponent));

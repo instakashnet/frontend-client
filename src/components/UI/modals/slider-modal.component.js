@@ -1,4 +1,5 @@
 import React from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { isMobile } from "react-device-detect";
 import { Dialog, Slide, DialogContent } from "@material-ui/core";

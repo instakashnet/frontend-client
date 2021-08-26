@@ -1,11 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+
 import { WarningOutlined, InfoOutlined, ErrorOutline } from "@material-ui/icons";
 import { Dialog, DialogContent } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 import { closeModal } from "../../../store/actions";
 
 import classes from "./modal-components.module.scss";
+
 
 export const Modal = ({ title, isAlert, alertType, children }) => {
   const isOpen = useSelector((state) => state.Modal.isOpen);

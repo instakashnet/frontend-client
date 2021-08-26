@@ -22,14 +22,15 @@ export const addThirdPartyAccountSchema = Yup.object().shape({
   accept: Yup.boolean().oneOf([true], "Debes declarar que los datos son válidos."),
   accept2: Yup.boolean().oneOf([true], "Debes aceptar el consentimiento."),
   email: Yup.string().required("Debes colocar un correo electrónico.").email("Coloca un correo válido."),
-
   documentIdentity: Yup.string()
     .required("Debes colocar un nro. de documento.")
     .matches(/^[0-9]{8,13}$/, "Número de documento ingresado inválido."),
   documentType: Yup.string().required("Debes seleccionar un tipo de documento."),
   razonSocial: Yup.string().when("thirdPartyAccType", {
     is: "juridica",
-    then: Yup.string().required("Debes colocar la razón social de la empresa."),
+    then: Yup.string()
+      .required("Debes colocar la razón social de la empresa.")
+      .matches(/^[a-zA-Z\s]+$/i, "Solo se aceptan letras."),
     otherwise: Yup.string().notRequired(),
   }),
   name: Yup.string().when("thirdPartyAccType", {

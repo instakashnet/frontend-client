@@ -1,4 +1,5 @@
 const errorCodes = [
+  { code: 1001, message: "Su sesión ha expirado, Debes iniciar sesión nuevamente." },
   { code: 2001, message: "El correo ingresado ya se encuentra registrado, por favor intenta con otro." },
   { code: 2002, message: "No se ha encontrado una cuenta con el correo ingresado, por favor verifique el correo." },
   { code: 2003, message: "El teléfono que ha colocado ya se encuentra registrado o no es válido, por favor intente con otro." },

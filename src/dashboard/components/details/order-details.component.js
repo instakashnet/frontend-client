@@ -127,6 +127,7 @@ const OrderDetails = () => {
           </form>
         </>
       ) : (
+
         <Button type="button" className="action-button mt-6" onClick={closeModalHandler}>
           Aceptar
         </Button>
