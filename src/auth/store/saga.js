@@ -52,8 +52,8 @@ function* loadUser() {
 }
 
 function* setAuthTimeout(timeout) {
-  yield delay(timeout - 20000);
-  yield call(logout);
+  yield delay(timeout - 10000);
+  yield put(actions.logoutInit());
 }
 
 function* signin({ values }) {
@@ -135,16 +135,16 @@ function* refreshVerificationCode() {
   }
 }
 
-function* refreshToken() {
-  try {
-    const res = yield authService.post("/auth/refresh");
-    if (res.status === 200) {
-      yield call(setAuthToken, res.data, true);
-    } else yield call(logout);
-  } catch (error) {
-    yield call(logout);
-  }
-}
+// function* refreshToken() {
+//   try {
+//     const res = yield authService.post("/auth/refresh");
+//     if (res.status === 200) {
+//       yield call(setAuthToken, res.data, true);
+//     } else yield call(logout);
+//   } catch (error) {
+//     yield call(logout);
+//   }
+// }
 
 function* recoverPassword({ values, setSent }) {
   try {
@@ -239,10 +239,6 @@ export function* watchLogout() {
   yield takeLatest(types.LOGOUT_INIT, logout);
 }
 
-export function* watchRefreshToken() {
-  yield takeLatest(types.REFRESH_TOKEN, refreshToken);
-}
-
 export default function* authSaga() {
   yield all([
     fork(watchSignin),
@@ -253,7 +249,6 @@ export default function* authSaga() {
     fork(watchSigninGoogle),
     fork(watchRecoverPassword),
     fork(watchResetPassword),
-    fork(watchRefreshToken),
     fork(watchValidateEmail),
     fork(watchRefreshVerificationCode),
   ]);
