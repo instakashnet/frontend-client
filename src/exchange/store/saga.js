@@ -3,13 +3,13 @@ import Swal from "sweetalert2";
 import camelize from "camelize";
 import * as types from "./types";
 import * as actions from "./actions";
-import axios from "../helpers/axios";
+import { exchangeService } from "../../services/exchange.service";
 import { setAlertInit, getOrdersInit } from "../../store/actions";
 import history from "../../shared/history";
 
 function* getRates() {
   try {
-    const res = yield axios.get("/rates");
+    const res = yield exchangeService.get("/rates");
     if (res.status === 200) {
       const rates = { id: res.data[0].id, buy: +res.data[0].buy, sell: +res.data[0].sell };
 
@@ -22,7 +22,7 @@ function* getRates() {
 
 function* getLastOrder() {
   try {
-    const res = yield axios.get("/order/last-order");
+    const res = yield exchangeService.get("/order/last-order");
     const data = camelize(res.data);
 
     if (data.lastOrder) {
@@ -36,7 +36,7 @@ function* getLastOrder() {
 
 function* validateCoupon({ couponName, profileType }) {
   try {
-    const res = yield axios.get(`/coupons/${couponName}/${profileType}`);
+    const res = yield exchangeService.get(`/coupons/${couponName}/${profileType}`);
     if (res.status === 200) yield put(actions.validateCouponSuccess({ name: couponName, discount: res.data.discount, minimumAmount: res.data.minAmountBuy }));
   } catch (error) {
     if (!couponName.includes("NUEVOREFERIDO")) yield put(setAlertInit(error.message, "error"));
@@ -51,7 +51,7 @@ function* createExchange({ values, profile }) {
   };
 
   try {
-    const res = yield axios.post("/order/step-2", exchangeValues);
+    const res = yield exchangeService.post("/order/step-2", exchangeValues);
     if (res.status === 201) {
       yield call([sessionStorage, "setItem"], "order", JSON.stringify(res.data));
       yield put(actions.createExchangeSuccess(res.data));
@@ -72,7 +72,7 @@ function* completeExchange({ values, orderId }) {
   };
 
   try {
-    const res = yield axios.put(`/order/step-3/${orderId}`, exchangeValues);
+    const res = yield exchangeService.put(`/order/step-3/${orderId}`, exchangeValues);
 
     if (res.status === 200) {
       if (res.data.noBank) {
@@ -124,7 +124,7 @@ function* cancelExchange({ orderId, status, closeModal }) {
     if (status === "draft") URL = `/order/draft/${orderId}`;
 
     if (result.isConfirmed) {
-      const res = yield axios.delete(URL);
+      const res = yield exchangeService.delete(URL);
 
       if (res.status === 202) {
         if (status === "details") {
@@ -147,7 +147,7 @@ function* cancelExchange({ orderId, status, closeModal }) {
 
 function* processCode({ values, orderId, processType, closeModal }) {
   try {
-    const res = yield axios.put(`/order/step-4/${orderId}`, values);
+    const res = yield exchangeService.put(`/order/step-4/${orderId}`, values);
     if (res.status === 200) {
       if (processType === "details") {
         yield put(getOrdersInit());
