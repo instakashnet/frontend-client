@@ -79,10 +79,6 @@ export const logoutSuccess = () => ({
   type: types.LOGOUT_SUCCESS,
 });
 
-export const refreshToken = () => ({
-  type: types.REFRESH_TOKEN,
-});
-
 export const authError = () => ({
   type: types.AUTH_ERROR,
 });
