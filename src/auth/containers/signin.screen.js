@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import { signinValidation } from "../helpers/formValidations";
 import { useSelector, useDispatch } from "react-redux";
-import { signinInit, signinGoogle, closeModal, openModal } from "../../store/actions";
+import { signinInit, signinGoogle, closeModal } from "../../store/actions";
 
 import { Input } from "../../components/UI/form-items/input.component";
 import { CheckboxComponent } from "../../components/UI/form-items/checkbox.component";
@@ -44,12 +44,12 @@ const Signin = () => {
     dispatch(signinGoogle(res.tokenId));
   };
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      dispatch(openModal());
-    }, 600);
-    return () => clearTimeout(timeout);
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     dispatch(openModal());
+  //   }, 600);
+  //   return () => clearTimeout(timeout);
+  // }, [dispatch]);
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 h-full md:h-screen">
