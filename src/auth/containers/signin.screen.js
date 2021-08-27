@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import { signinValidation } from "../helpers/formValidations";
 import { useSelector, useDispatch } from "react-redux";
-import { signinInit, signinGoogle, closeModal } from "../../store/actions";
+import { signinInit, signinGoogle, closeModal, openModal } from "../../store/actions";
 
 import { Input } from "../../components/UI/form-items/input.component";
 import { CheckboxComponent } from "../../components/UI/form-items/checkbox.component";
