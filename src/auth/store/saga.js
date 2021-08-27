@@ -52,7 +52,7 @@ function* loadUser() {
 }
 
 function* setAuthTimeout(timeout) {
-  yield delay(timeout - 10000);
+  yield delay(timeout - 2000);
   yield put(actions.logoutInit());
 }
 
@@ -185,13 +185,10 @@ function* logout() {
   const authData = yield call([localStorage, "getItem"], "authData");
   if (!authData) return yield put(actions.logoutSuccess());
 
-  const { expDate } = JSON.parse(authData);
-  if (new Date(expDate) > new Date()) {
-    try {
-      yield authService.post("/auth/logout");
-    } catch (error) {
-      yield put(actions.authError());
-    }
+  try {
+    yield authService.post("/auth/logout");
+  } catch (error) {
+    yield put(actions.authError());
   }
 
   yield call(clearUser);
