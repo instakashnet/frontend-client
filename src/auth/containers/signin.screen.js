@@ -44,12 +44,12 @@ const Signin = () => {
     dispatch(signinGoogle(res.tokenId));
   };
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     dispatch(openModal());
-  //   }, 600);
-  //   return () => clearTimeout(timeout);
-  // }, [dispatch]);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      dispatch(openModal());
+    }, 600);
+    return () => clearTimeout(timeout);
+  }, [dispatch]);
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 h-full md:h-screen">
@@ -87,7 +87,7 @@ const Signin = () => {
           <CheckboxComponent name="rememberMe" value={formik.values.rememberMe} onChange={formik.handleChange}>
             Recordar mis datos
           </CheckboxComponent>
-          <Button className={`action-button mt-2 mb-4 ld-over ${isProcessing ? "running" : ""}`} type="submit">
+          <Button className={`action-button mt-2 mb-4 ld-over ${isProcessing ? "running" : ""}`} disabled type="submit">
             <span className="ld ld-ring ld-spin" />
             Ingresar
           </Button>
