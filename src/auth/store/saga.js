@@ -181,12 +181,12 @@ function* clearUser() {
   yield put(actions.logoutSuccess());
 }
 
-function* logout() {
+function* logout({ logType }) {
   const authData = yield call([localStorage, "getItem"], "authData");
   if (!authData) return yield put(actions.logoutSuccess());
 
   const { expDate } = JSON.parse(authData);
-  if (new Date(expDate) > new Date()) {
+  if (!logType && new Date(expDate) > new Date()) {
     try {
       yield authService.post("/auth/logout");
     } catch (error) {

@@ -28,7 +28,7 @@ const Header = () => {
       <Logo className="lg:w-52 md:w-44 w-40 mr-4 hidden md:block" />
       <div className={classes.Hours}>
         <p>Lunes a Viernes: 9am a 7pm</p>
-        <p>Sábados y feriados: 9am a 2:30pm</p>
+        <p>Sábados: 9am a 2:30pm</p>
       </div>
       <div className="flex items-center ml-auto">
         <a href="https://wa.link/05keps" target="_blank" rel="noopener noreferrer">

@@ -32,7 +32,17 @@ const Accounts = ({ setModal, order }) => {
   const { accounts, kashAccount } = useSelector((state) => state.Accounts);
 
   const formik = useFormik({
-    initialValues: { account_to_id: "", bank_id: "", funds_origin: "", funds_text: "", couponName: coupon ? coupon.name : null, kashApplied: "no", kashUsed: "" },
+    initialValues: {
+      account_to_id: "",
+      accountInterbank: false,
+      bank_id: "",
+      bankInterbank: false,
+      funds_origin: "",
+      funds_text: "",
+      couponName: coupon ? coupon.name : null,
+      kashApplied: "no",
+      kashUsed: "",
+    },
     enableReinitialize: true,
     validationSchema: completeExchangeValidation(funds_origin, kashAccount.balance, totalAmountSent),
     onSubmit: (values) => dispatch(completeExchangeInit(values, order.id)),
@@ -60,7 +70,7 @@ const Accounts = ({ setModal, order }) => {
   const bankOptions = banks.map((bank) => ({ label: bank.name, value: bank.id, icon: `${process.env.PUBLIC_URL}/images/banks/${bank.name.toLowerCase()}-logo.svg` }));
   const accountOptions = filteredAccounts.map((account) => {
     return {
-      account: account.account_number,
+      account: account.account_number || account.cci,
       currency: account.currency.Symbol,
       alias: account.alias,
       value: account.id,
@@ -69,12 +79,25 @@ const Accounts = ({ setModal, order }) => {
     };
   });
 
+  const onBankChangeHandler = (e) => {
+    const {
+      target: { value },
+    } = e;
+    formik.handleChange(e);
+
+    if (value) {
+      const bank = banks.find((b) => b.id === value);
+      formik.setFieldValue("bankInterbank", !bank.active);
+    }
+  };
+
   const onAccountChange = ({ target: { value } }) => {
     if (!value) return;
 
     const chosenAccount = filteredAccounts.find((account) => account.id === value);
     formik.setFieldValue("account_to_id", value);
     formik.setFieldValue("bank_to_name", chosenAccount.bank.name);
+    formik.setFieldValue("accountInterbank", !!chosenAccount.cci);
   };
 
   let interplaza;
@@ -103,7 +126,7 @@ const Accounts = ({ setModal, order }) => {
             name="bank_id"
             label="¿Desde que banco nos envia su dinero?"
             options={bankOptions}
-            onChange={formik.handleChange}
+            onChange={onBankChangeHandler}
             onBlur={formik.handleBlur}
             value={formik.values.bank_id}
             error={formik.errors.bank_id}
@@ -130,7 +153,17 @@ const Accounts = ({ setModal, order }) => {
         {interplaza && (
           <MuiAlert type="warning" opened>
             <span className="block text-left">
-              <b>Cuentas interplaza de Interbank acarrean una comisión.</b> Puede verlo en nuestros{" "}
+              <b>Cuentas interplaza de Interbank acarrean una comisión.</b> Conozca más en nuestros{" "}
+              <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
+                términos y condiciones.
+              </a>
+            </span>
+          </MuiAlert>
+        )}
+        {(formik.values.accountInterbank || formik.values.bankInterbank) && (
+          <MuiAlert type="warning" opened>
+            <span className="block text-left">
+              <b>Las transferencias interbancarias pueden demorar hasta 48 horas.</b> Puede ver como manejamos las transferencias interbancarias en nuestros{" "}
               <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
                 términos y condiciones.
               </a>

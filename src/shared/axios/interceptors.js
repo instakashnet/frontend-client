@@ -4,12 +4,11 @@ import store from "../../store";
 
 const requestLog = (config) => (process.env.NODE_ENV !== "production" ? console.log(`Request sent to ${config.url}`) : false);
 
-export const reqInterceptor = (instance, type = null) =>
+export const reqInterceptor = (instance) =>
   instance.interceptors.request.use(
     (config) => {
       const authUser = localStorage.getItem("authData");
       let accessToken;
-      if (!authUser && type !== "auth") return store.dispatch(logoutInit());
 
       if (authUser) accessToken = JSON.parse(authUser).token;
       if (accessToken) config.headers["x-access-token"] = accessToken;
@@ -31,7 +30,7 @@ export const resInterceptor = (instance) =>
 
       if (error.response) {
         const code = error.response.data.code;
-        if (code === 1001) store.dispatch(logoutInit());
+        if (code === 1001) store.dispatch(logoutInit("noToken"));
         if (code && code !== 4006) message = getCodeMessage(code);
 
         error.response.message = message;

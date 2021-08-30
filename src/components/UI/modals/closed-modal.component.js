@@ -12,7 +12,7 @@ const OutOfTime = ({ onClose }) => {
           Estás ingresando fuera de nuestro horario laboral. Puedes registrar tus operaciones y transferir con normalidad, pero tu cambio se efectuará dentro del siguiente horario:
         </p>
         <p className="font-bold">Lunes a Viernes: 9AM a 7PM</p>
-        <p className="font-bold">Sábados y Feriados: 9AM a 2:30PM</p>
+        <p className="font-bold">Sábados: 9AM a 2:30PM</p>
         <Button className="action-button mt-8" onClick={onClose}>
           Lo entiendo
         </Button>
