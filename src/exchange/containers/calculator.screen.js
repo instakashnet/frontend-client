@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { Info, AccessAlarm } from "@material-ui/icons";
@@ -21,6 +21,7 @@ const Calculator = ({ profile, setModal }) => {
   const [couponRates, setCouponRates] = useState({ buy: 0, sell: 0 });
   const [isCouponMin, setIsCouponMin] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
+  const temporalAmountSent = useRef(null);
   const { rates, isLoading, coupon, isProcessing } = useSelector((state) => state.Exchange);
 
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const Calculator = ({ profile, setModal }) => {
       if ((values.currency_received_id === 1 && values.amount_sent >= 15000) || (values.currency_received_id === 2 && values.amount_sent >= 5000)) {
         if (!profile.address || !profile.identity_photo || !profile.identity_photo_two) return setModal("complete");
       }
-      return dispatch(createExchangeInit(values, profile));
+      return dispatch(createExchangeInit(values, temporalAmountSent ? temporalAmountSent.current : 0, profile));
     },
   });
   const { values, setFieldValue } = formik;
@@ -50,7 +51,9 @@ const Calculator = ({ profile, setModal }) => {
 
     if (rates.buy > 0 && rates.sell > 0) {
       setActualRates({ buy: rates.buy, sell: rates.sell });
-      setFieldValue("amount_sent", (1000 * rates.sell).toFixed(2));
+      let amountSent = 1000 * rates.sell;
+      temporalAmountSent.current = amountSent;
+      setFieldValue("amount_sent", amountSent.toFixed(2));
       setFieldValue("amount_received", 1000);
     }
     // eslint-disable-next-line
@@ -81,8 +84,15 @@ const Calculator = ({ profile, setModal }) => {
   const currencyChangeHandler = ({ target: { name, rawValue } }) => {
     setFieldValue(name, +rawValue);
     const inputName = name === "amount_sent" ? "amount_received" : "amount_sent";
-    if (values.type === "buy") setFieldValue(inputName, inputName === "amount_received" ? (+rawValue * buyRate).toFixed(2) : (+rawValue / buyRate).toFixed(2));
-    if (values.type === "sell") setFieldValue(inputName, inputName === "amount_received" ? (+rawValue / sellRate).toFixed(2) : (+rawValue * sellRate).toFixed(2));
+    let totalAmount;
+
+    if (values.type === "buy") totalAmount = inputName === "amount_received" ? +rawValue * buyRate : +rawValue / buyRate;
+    if (values.type === "sell") totalAmount = inputName === "amount_received" ? +rawValue / sellRate : +rawValue * sellRate;
+
+    temporalAmountSent.current = totalAmount;
+
+    if (values.type === "buy") setFieldValue(inputName, totalAmount.toFixed(2));
+    if (values.type === "sell") setFieldValue(inputName, totalAmount.toFixed(2));
   };
 
   const sendCouponHandler = (couponName) => {
