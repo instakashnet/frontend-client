@@ -1,6 +1,6 @@
 import { getCodeMessage } from "./error-codes";
-// import { logoutInit } from "../../store/actions";
-// import store from "../../store";
+import { logoutInit } from "../../store/actions";
+import store from "../../store";
 
 const requestLog = (config) => (process.env.NODE_ENV !== "production" ? console.log(`Request sent to ${config.url}`) : false);
 
