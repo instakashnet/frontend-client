@@ -71,8 +71,9 @@ export const refreshCodeSuccess = () => ({
   type: types.REFRESH_CODE_SUCCESS,
 });
 
-export const logoutInit = () => ({
+export const logoutInit = (logType = null) => ({
   type: types.LOGOUT_INIT,
+  logType,
 });
 
 export const logoutSuccess = () => ({

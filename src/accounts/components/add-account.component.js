@@ -18,7 +18,12 @@ export const AddAccount = ({ order, addType }) => {
   const [value, setValue] = useState(0);
   const { banks, currencies } = useSelector((state) => state.Data);
 
-  const bankOptions = banks.map((bank) => ({ value: bank.id, label: bank.name, icon: `${process.env.PUBLIC_URL}/images/banks/${bank.name.toLowerCase()}-logo.svg` }));
+  const bankOptions = banks.map((bank) => ({
+    value: bank.id,
+    label: bank.name,
+    isDirect: !!bank.active,
+    icon: `${process.env.PUBLIC_URL}/images/banks/${bank.name.toLowerCase()}-logo.svg`,
+  }));
   const accountTypeOptions = [
     { value: "checking", label: "Corriente" },
     { value: "savings", label: "De ahorros" },
