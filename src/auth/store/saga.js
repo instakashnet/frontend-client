@@ -52,7 +52,7 @@ function* loadUser() {
 }
 
 function* setAuthTimeout(timeout) {
-  yield delay(timeout - 10000);
+  yield delay(timeout - 2000);
   yield put(actions.logoutInit());
 }
 

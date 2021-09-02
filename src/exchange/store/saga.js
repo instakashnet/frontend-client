@@ -44,9 +44,10 @@ function* validateCoupon({ couponName, profileType }) {
   }
 }
 
-function* createExchange({ values, profile }) {
+function* createExchange({ values, amountSent, profile }) {
   const exchangeValues = {
     ...values,
+    amount_sent: amountSent,
     profile_id: profile.id,
   };
 
