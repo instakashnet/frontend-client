@@ -24,7 +24,7 @@ function* loadUser() {
 
   if (!token) return yield call(clearUser);
 
-  if (new Date(expDate) <= new Date()) return yield call(logout);
+  if (new Date(expDate) <= new Date()) return yield call(logout, {});
 
   try {
     const res = yield authService.get("/users/session");
@@ -46,7 +46,7 @@ function* loadUser() {
 
     yield call(setAuthTimeout, new Date(expDate).getTime() - new Date().getTime());
   } catch (error) {
-    yield call(logout);
+    yield call(logout, {});
     yield put(actions.authError());
   }
 }
@@ -181,14 +181,17 @@ function* clearUser() {
   yield put(actions.logoutSuccess());
 }
 
-function* logout() {
+function* logout({ logType }) {
   const authData = yield call([localStorage, "getItem"], "authData");
   if (!authData) return yield put(actions.logoutSuccess());
 
-  try {
-    yield authService.post("/auth/logout");
-  } catch (error) {
-    yield put(actions.authError());
+  const { expDate } = JSON.parse(authData);
+  if (!logType && new Date(expDate) > new Date()) {
+    try {
+      yield authService.post("/auth/logout");
+    } catch (error) {
+      yield put(actions.authError());
+    }
   }
 
   yield call(clearUser);

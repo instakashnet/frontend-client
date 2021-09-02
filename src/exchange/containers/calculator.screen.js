@@ -89,7 +89,7 @@ const Calculator = ({ profile, setModal }) => {
     if (values.type === "buy") totalAmount = inputName === "amount_received" ? +rawValue * buyRate : +rawValue / buyRate;
     if (values.type === "sell") totalAmount = inputName === "amount_received" ? +rawValue / sellRate : +rawValue * sellRate;
 
-    temporalAmountSent.current = totalAmount;
+    temporalAmountSent.current = name === "amount_sent" ? +rawValue : totalAmount;
 
     if (values.type === "buy") setFieldValue(inputName, totalAmount.toFixed(2));
     if (values.type === "sell") setFieldValue(inputName, totalAmount.toFixed(2));

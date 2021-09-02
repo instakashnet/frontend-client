@@ -9,14 +9,14 @@ export const Input = ({ name, onChange, onBlur, value, label, type, error, touch
   const [passwordType, setPasswordType] = useState("password");
   const onShowPassword = () => setPasswordType((prev) => (prev === "password" ? "text" : "password"));
 
-  let inputProps = {};
+  let InputProps = {};
   let Icon;
 
   if (iconEnd) Icon = iconEnd;
   if (isLoading) Icon = CircularProgress;
 
   if (Icon) {
-    inputProps.endAdornment = (
+    InputProps.endAdornment = (
       <InputAdornment position="end">
         <Icon size={27} thickness={5} />
       </InputAdornment>
@@ -35,7 +35,7 @@ export const Input = ({ name, onChange, onBlur, value, label, type, error, touch
         onBlur={onBlur}
         variant="outlined"
         helperText={error && touched ? error : helperText ? helperText : ""}
-        InputProps={inputProps}
+        InputProps={InputProps}
         {...rest}
       />
       {type === "password" && (

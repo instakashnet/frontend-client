@@ -19,6 +19,7 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
     initialValues: {
       account_number: "",
       cci: "",
+      isDirect: true,
       bankId: "",
       currencyId: "",
       alias: "",
@@ -34,6 +35,7 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
       accept: false,
       accept2: false,
     },
+    enableReinitialize: true,
     validationSchema: addThirdPartyAccountSchema,
     onSubmit: (values) => dispatch(addAccountInit(values, addType)),
   });
@@ -48,6 +50,20 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
   ];
 
   const onDocumentChangeHandler = (e) => (AllowOnlyNumbers(e.target.value) ? formik.setFieldValue("documentIdentity", e.target.value) : null);
+
+  const onBankChangeHandler = (e) => {
+    const {
+      target: { value },
+    } = e;
+    formik.handleChange(e);
+    formik.setFieldValue("account_number", "");
+    formik.setFieldValue("cci", "");
+
+    if (value) {
+      const bank = banks.find((b) => b.value === value);
+      formik.setFieldValue("isDirect", bank.isDirect);
+    }
+  };
 
   const onThirdPartyAccTypeChange = (e) => {
     formik.handleChange(e);
@@ -141,20 +157,33 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
           label="Banco"
           value={formik.values.bankId}
           options={banks}
-          onChange={formik.handleChange}
+          onChange={onBankChangeHandler}
           error={formik.errors.bankId}
           touched={formik.touched.bankId}
         />
-        <Input
-          name="account_number"
-          label="Número de cuenta"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.account_number}
-          error={formik.errors.account_number}
-          touched={formik.touched.account_number}
-          helperText="Debe ser entre 13 y 14 caracteres"
-        />
+        {!formik.values.isDirect ? (
+          <Input
+            name="cci"
+            label="Número de cuenta interbancario"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.cci}
+            error={formik.errors.cci}
+            touched={formik.touched.cci}
+            helperText="Debe ser de 20 caracteres"
+          />
+        ) : (
+          <Input
+            name="account_number"
+            label="Número de cuenta"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.account_number}
+            error={formik.errors.account_number}
+            touched={formik.touched.account_number}
+            helperText="Debe ser entre 13 y 14 caracteres"
+          />
+        )}
         <SelectComponent
           name="acc_type"
           label="Tipo de cuenta"

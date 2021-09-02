@@ -1,9 +1,20 @@
 import * as Yup from "yup";
 
 export const addAccountValidation = Yup.object().shape({
-  account_number: Yup.string()
-    .required("Debes ingresar tu número de cuenta.")
-    .matches(/^[0-9]{13,14}$/, "Número de cuenta inválido. Verifica los datos."),
+  account_number: Yup.string().when("isDirect", {
+    is: true,
+    then: Yup.string()
+      .required("Debes ingresar tu número de cuenta.")
+      .matches(/^[0-9]{13,14}$/, "Número de cuenta inválido. Solo números, de 13 a 14 caracteres."),
+    otherwise: Yup.string().notRequired(),
+  }),
+  cci: Yup.string().when("isDirect", {
+    is: false,
+    then: Yup.string()
+      .required("Debes ingresar tu número de cuenta interbancario.")
+      .matches(/^[0-9]{20}$/, "Número de CCI inválido. Solo números, 20 caracteres."),
+    otherwise: Yup.string().notRequired(),
+  }),
   bankId: Yup.number().required("Debes seleccionar un banco."),
   currencyId: Yup.string().required("Debes seleccionar una moneda."),
   alias: Yup.string().required("Debes ingresar un alias.").min(5, "Debe ser mínimo de 5 caracteres.").max(40, "No deben ser más de 40 caracteres."),
@@ -12,9 +23,20 @@ export const addAccountValidation = Yup.object().shape({
 });
 
 export const addThirdPartyAccountSchema = Yup.object().shape({
-  account_number: Yup.string()
-    .required("Debes ingresar tu número de cuenta.")
-    .matches(/^[0-9]{13,14}$/, "Número de cuenta inválido. Verifica los datos."),
+  account_number: Yup.string().when("isDirect", {
+    is: true,
+    then: Yup.string()
+      .required("Debes ingresar tu número de cuenta.")
+      .matches(/^[0-9]{13,14}$/, "Número de cuenta inválido. Solo números, de 13 a 14 caracteres."),
+    otherwise: Yup.string().notRequired(),
+  }),
+  cci: Yup.string().when("isDirect", {
+    is: false,
+    then: Yup.string()
+      .required("Debes ingresar tu número de cuenta interbancario.")
+      .matches(/^[0-9]{20}$/, "Número de CCI inválido. Solo números, 20 caracteres."),
+    otherwise: Yup.string().notRequired(),
+  }),
   bankId: Yup.number().required("Debes seleccionar un banco."),
   currencyId: Yup.string().required("Debes seleccionar una moneda."),
   alias: Yup.string().required("Debes ingresar un alias.").min(5, "Debe ser mínimo de 5 caracteres.").max(40, "No deben ser más de 40 caracteres."),
@@ -46,9 +68,20 @@ export const addThirdPartyAccountSchema = Yup.object().shape({
 });
 
 export const editAccountValidation = Yup.object().shape({
-  account_number: Yup.string()
-    .required("Debes ingresar tu número de cuenta.")
-    .matches(/^[0-9]{13,14}$/, "Número de cuenta inválido. Verifica los datos."),
+  account_number: Yup.string().when("isDirect", {
+    is: true,
+    then: Yup.string()
+      .required("Debes ingresar tu número de cuenta.")
+      .matches(/^[0-9]{13,14}$/, "Número de cuenta inválido. Solo números, de 13 a 14 caracteres."),
+    otherwise: Yup.string().notRequired(),
+  }),
+  cci: Yup.string().when("isDirect", {
+    is: false,
+    then: Yup.string()
+      .required("Debes ingresar tu número de cuenta interbancario.")
+      .matches(/^[0-9]{20}$/, "Número de CCI inválido. Solo números, 20 caracteres."),
+    otherwise: Yup.string().notRequired(),
+  }),
   alias: Yup.string().required("Debes ingresar un alias.").max(40, "No deben ser más de 40 caracteres."),
 });
 
