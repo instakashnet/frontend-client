@@ -24,7 +24,7 @@ function* loadUser() {
 
   if (!token) return yield call(clearUser);
 
-  if (new Date(expDate) <= new Date()) return yield call(logout);
+  if (new Date(expDate) <= new Date()) return yield call(logout, {});
 
   try {
     const res = yield authService.get("/users/session");
@@ -46,7 +46,7 @@ function* loadUser() {
 
     yield call(setAuthTimeout, new Date(expDate).getTime() - new Date().getTime());
   } catch (error) {
-    yield call(logout);
+    yield call(logout, {});
     yield put(actions.authError());
   }
 }
