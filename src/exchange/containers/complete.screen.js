@@ -1,16 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useFormik } from "formik";
-import { Info } from "@material-ui/icons";
 import { formatAmount } from "../../shared/functions";
-import { processCodeInit, cancelExchangeInit } from "../../store/actions";
-import { transferCodeValidation } from "../helpers/validations";
 
-import { MuiAlert } from "../../components/UI/mui-alert.component";
-import Tooltip from "../../components/UI/tooltip.component";
-import { Input } from "../../components/UI/form-items/input.component";
-import { Button } from "../../components/UI/button.component";
+import { TransactionCode } from "../components/complete-items/transaction-code.component";
+import { EmailTransfer } from "../components/complete-items/email-transfer.component";
 import CopyButton from "../../components/UI/copy-button.component";
 import Card from "../../components/UI/card.component";
 
@@ -19,13 +13,7 @@ import TransferImg from "../assets/images/transfer.svg";
 import classes from "../assets/css/exchange-screens.module.scss";
 
 const CompleteExchange = ({ order }) => {
-  const [showInfo, setShowInfo] = useState(false);
   const dispatch = useDispatch();
-  const formik = useFormik({
-    initialValues: { transaction_code: "" },
-    validationSchema: transferCodeValidation,
-    onSubmit: (values) => dispatch(processCodeInit(values, order.id)),
-  });
   const isProcessing = useSelector((state) => state.Exchange.isProcessing);
 
   if (!order) return <Redirect to="/currency-exchange" />;
@@ -34,66 +22,51 @@ const CompleteExchange = ({ order }) => {
     <div className={classes.TransferCode}>
       <h1>¡Último paso!</h1>
       <img src={TransferImg} alt="transfer-money" className="mx-auto inline-block mb-2" />
-      <p className="font-bold">Transfiere desde la app de tu banco el monto de:</p>
-      <p className={classes.Amount}>
-        {`${order.currencySentSymbol} ${formatAmount(order.amountSent)}`} <CopyButton textToCopy={order.amountSent} />
-      </p>
+      <p>Ahora transfiere el monto de</p>
+      <p className={classes.Amount}>{`${order.currencySentSymbol} ${formatAmount(order.amountSent)}`}</p>
 
-      <h4>Banco a transferir:</h4>
-      <Card className={`${classes.TransferAccount} flex items-center justify-between`}>
-        <img src={`${process.env.PUBLIC_URL}/images/banks/${order.bankFromName.toLowerCase()}-logo.svg`} width={100} alt={order.bankFromName} />
-        <div className="text-right text-base">
-          <small>Cuenta corriente en {order.currencySent === "PEN" ? "Soles" : "Dólares"}:</small>
-          <p className="flex items-center mt-1">
-            {order.accountFromRaw} <CopyButton textToCopy={order.accountFromRaw} />
+      <p className="mb-2">desde tu banca por internet a la siguiente cuenta:</p>
+      <Card className={`${classes.TransferAccount} flex flex-col md:flex-row items-center justify-center md:justify-between`}>
+        <img src={`${process.env.PUBLIC_URL}/images/banks/${order.bankFromName.toLowerCase()}-logo.svg`} width={85} alt={order.bankFromName} />
+        <div className="text-center md:text-right text-base">
+          <span>Cuenta corriente en {order.currencySent === "PEN" ? "Soles" : "Dólares"}:</span>
+          <p className="flex items-center">
+            <span>{order.accountFromRaw}</span>
+            <CopyButton textToCopy={order.accountFromRaw} />
           </p>
         </div>
       </Card>
 
-      <Card className={`${classes.TransferAccount} mt-3 flex items-center justify-between`}>
-        <p className="text-left">Instakash SAC - RUC 20605285105</p>
-        <CopyButton textToCopy="20605285105" />
-      </Card>
+      <p className="font-bold my-4">Instakash SAC - RUC 20605285105</p>
 
-      <p className="mt-4 text-left">
-        Una vez realizado coloque el número de operación <b>emitido por su banco</b> dentro del casillero mostrado debajo y debe darle al botón de <i>"enviar"</i>.
-      </p>
-      <div className="flex items-center justify-end mb-3">
-        <span className="text-sm font-bold cursor-pointer underline">¿Donde lo encuentro?</span>
-        <Tooltip
-          title={<img src={`${process.env.PUBLIC_URL}/images/samples/transfer-${order.bankFromName.toLowerCase()}.png`} alt="ejemplo de transferencia" />}
-          placement="top-start"
-          disableHoverListener
-          onMouseEnter={() => setShowInfo(true)}
-          onClick={() => setShowInfo(true)}
-          onMouseLeave={() => setShowInfo(false)}
-          open={showInfo}>
-          <Info className="ml-2" />
-        </Tooltip>
+      <div className="flex flex-wrap justify-center items-center">
+        <section className="mx-3">
+          <p>Recibirás:</p>
+          <p className="font-bold text-green">
+            {order.currencyReceivedSymbol} {formatAmount(order.amountReceived)}
+          </p>
+        </section>
+        <section className="mx-3">
+          <p>Tipo de cambio:</p>
+          <p className="font-bold text-green">{order.rate}</p>
+        </section>
       </div>
-      <form onSubmit={formik.handleSubmit}>
-        <Input
-          name="transaction_code"
-          label="Ingresa el nro. de operación"
-          value={formik.values.transaction_code}
-          error={formik.errors.transaction_code}
-          touched={formik.touched.transaction_code}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-        <MuiAlert type="info" opened>
-          <span className="block  font-bold text-left">Solo posees 15 minutos para enviarnos el nro. de tu operación.</span>
-        </MuiAlert>
-        <div className="flex flex-col justify-center items-center">
-          <Button type="submit" className={`action-button mt-6 ld-ext-right ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
-            <span className="ld ld-ring ld-spin" />
-            Enviar
-          </Button>
-          <Button type="button" className="secondary-button mt-6" onClick={() => dispatch(cancelExchangeInit(order.id, "complete"))}>
-            Cancelar
-          </Button>
-        </div>
-      </form>
+
+      {order.bankFromClientActive ? (
+        <>
+          <p className="mt-4 text-left">
+            Una vez realizado coloque el número de operación <b>emitido por su banco</b> dentro del casillero mostrado debajo y debe darle al botón de <i>"enviar"</i>.
+          </p>
+          <TransactionCode dispatch={dispatch} order={order} isProcessing={isProcessing} />
+        </>
+      ) : (
+        <>
+          <p className="my-4 text-left">
+            Ahora deberás enviarnos la constancia de tu transferencia a nuestro correo <b>desde la APP de tu banco.</b>
+          </p>
+          <EmailTransfer dispatch={dispatch} order={order} isProcessing={isProcessing} />
+        </>
+      )}
     </div>
   );
 };

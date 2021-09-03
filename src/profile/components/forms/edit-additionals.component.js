@@ -61,7 +61,7 @@ const EditAdditionalData = ({ profile, onEdit }) => {
         />
       </div>
       <div className="flex flex-col items-center justify-center mt-3">
-        <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button ld-ext-right ${isProcessing ? "running" : ""}`}>
+        <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button ld-over ${isProcessing ? "running" : ""}`}>
           <span className="ld ld-ring ld-spin" />
           Actualizar datos
         </Button>

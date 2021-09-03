@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { RadioGroup, FormLabel } from "@material-ui/core";
@@ -13,12 +13,16 @@ import { CheckboxComponent } from "../../../components/UI/form-items/checkbox.co
 import { RadioComponent } from "../../../components/UI/form-items/radio.component";
 import { Button } from "../../../components/UI/button.component";
 
+import classes from "../../assets/css/account-components.module.scss";
+
 export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, value, index, ...rest }) => {
+  const [selectedBank, setSelectedBank] = useState(null);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       account_number: "",
       cci: "",
+      isDirect: true,
       bankId: "",
       currencyId: "",
       alias: "",
@@ -34,10 +38,19 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
       accept: false,
       accept2: false,
     },
+    enableReinitialize: true,
     validationSchema: addThirdPartyAccountSchema,
     onSubmit: (values) => dispatch(addAccountInit(values, addType)),
   });
   const isProcessing = useSelector((state) => state.Accounts.isProcessing);
+  const { bankId } = formik.values;
+
+  useEffect(() => {
+    if (bankId) {
+      const bankSelected = banks.find((b) => b.value === bankId);
+      setSelectedBank(bankSelected);
+    }
+  }, [bankId, banks]);
 
   const documentOptions = [
     { value: "DNI", label: "DNI" },
@@ -48,6 +61,20 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
   ];
 
   const onDocumentChangeHandler = (e) => (AllowOnlyNumbers(e.target.value) ? formik.setFieldValue("documentIdentity", e.target.value) : null);
+
+  const onBankChangeHandler = (e) => {
+    const {
+      target: { value },
+    } = e;
+    formik.handleChange(e);
+    formik.setFieldValue("account_number", "");
+    formik.setFieldValue("cci", "");
+
+    if (value) {
+      const bank = banks.find((b) => b.value === value);
+      formik.setFieldValue("isDirect", bank.isDirect);
+    }
+  };
 
   const onThirdPartyAccTypeChange = (e) => {
     formik.handleChange(e);
@@ -62,7 +89,7 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
 
   return (
     <div role="tabpanel" hidden={value !== index} {...rest} className="mt-8 max-w-sm mx-auto">
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className={classes.AccountForm}>
         <FormLabel component="legend">¿A quien le pertenece esta cuenta?</FormLabel>
         <RadioGroup aria-label="tipo de cuenta a terceros" name="thirdPartyAccType" value={formik.values.thirdPartyAccType} onChange={onThirdPartyAccTypeChange}>
           <div className="flex flex-wrap items-center justify-between">
@@ -141,20 +168,33 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
           label="Banco"
           value={formik.values.bankId}
           options={banks}
-          onChange={formik.handleChange}
+          onChange={onBankChangeHandler}
           error={formik.errors.bankId}
           touched={formik.touched.bankId}
         />
-        <Input
-          name="account_number"
-          label="Número de cuenta"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.account_number}
-          error={formik.errors.account_number}
-          touched={formik.touched.account_number}
-          helperText="Debe ser entre 13 y 14 caracteres"
-        />
+        {!formik.values.isDirect ? (
+          <Input
+            name="cci"
+            label="Número de cuenta interbancario"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.cci}
+            error={formik.errors.cci}
+            touched={formik.touched.cci}
+            helperText="Debe ser de 20 caracteres"
+          />
+        ) : (
+          <Input
+            name="account_number"
+            label="Número de cuenta"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.account_number}
+            error={formik.errors.account_number}
+            touched={formik.touched.account_number}
+            helperText="Debe ser entre 13 y 14 caracteres"
+          />
+        )}
         <SelectComponent
           name="acc_type"
           label="Tipo de cuenta"
@@ -183,6 +223,14 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
           touched={formik.touched.alias}
           helperText="Ej.: Tu nombre + banco + moneda"
         />
+        {selectedBank && !selectedBank.isDirect && (
+          <MuiAlert type="warning" opened>
+            Las <b>transferencias interbancarias</b> pueden demorar hasta 48 horas. Conoce más en nuestros{" "}
+            <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
+              términos y condiciones.
+            </a>
+          </MuiAlert>
+        )}
         <MuiAlert type="info" opened>
           Las cuentas a terceros solo pueden ser utilizadas para recibir el dinero solicitado.
         </MuiAlert>

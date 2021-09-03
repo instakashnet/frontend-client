@@ -30,7 +30,8 @@ export const resInterceptor = (instance) =>
 
       if (error.response) {
         const code = error.response.data.code;
-        if (code === 1001) store.dispatch(logoutInit());
+        if (code === 1001) store.dispatch(logoutInit("noToken"));
+
         if (code && code !== 4006) message = getCodeMessage(code);
 
         error.response.message = message;

@@ -32,9 +32,10 @@ export const deleteCoupon = () => ({
   type: types.DELETE_COUPON,
 });
 
-export const createExchangeInit = (values, profile) => ({
+export const createExchangeInit = (values, amountSent, profile) => ({
   type: types.CREATE_EXCHANGE_INIT,
   values,
+  amountSent,
   profile,
 });
 
