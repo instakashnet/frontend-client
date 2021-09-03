@@ -43,6 +43,16 @@ button.AddAccountTab {
   }
 }
 
+.AccountForm {
+  a {
+    color: inherit !important;
+  }
+
+  b {
+    color: inherit;
+  }
+}
+
 .AccordionSummary {
   background-color: $card-color !important;
   border-radius: 10px !important;

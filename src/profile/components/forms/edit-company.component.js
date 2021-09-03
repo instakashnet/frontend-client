@@ -51,7 +51,7 @@ const EditCompanyProfile = ({ profile, onCancelEdit }) => {
         </div>
 
         <div className="flex items-center justify-center mt-12">
-          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button ld-ext-right ${isProcessing ? "running" : ""}`}>
+          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button ld-over ${isProcessing ? "running" : ""}`}>
             <span className="ld ld-ring ld-spin" />
             Actualizar datos
           </Button>

@@ -164,7 +164,7 @@ const Calculator = ({ profile, setModal }) => {
             onDeleteCoupon={deleteCouponHandler}
           />
           {values.amount_received < 1 && <p className="error-msg">El monto mínimo a recibir es de $ 1.00</p>}
-          <Button type="submit" disabled={values.amount_received < 1 || disabled} className={`action-button mt-2 ld-ext-right ${isProcessing ? "running" : ""}`}>
+          <Button type="submit" disabled={values.amount_received < 1 || disabled} className={`action-button mt-2 ld-over ${isProcessing ? "running" : ""}`}>
             <span className="ld ld-ring ld-spin" />
             Comenzar cambio
           </Button>

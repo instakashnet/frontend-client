@@ -147,8 +147,10 @@ function* cancelExchange({ orderId, status, closeModal }) {
 }
 
 function* processCode({ values, orderId, processType, closeModal }) {
+  const processValue = { transaction_code: values ? values.transaction_code : null };
+
   try {
-    const res = yield exchangeService.put(`/order/step-4/${orderId}`, values);
+    const res = yield exchangeService.put(`/order/step-4/${orderId}`, processValue);
     if (res.status === 200) {
       if (processType === "details") {
         yield put(getOrdersInit());
