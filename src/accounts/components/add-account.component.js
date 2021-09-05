@@ -20,7 +20,7 @@ export const AddAccount = ({ order, addType }) => {
 
   const bankOptions = banks.map((bank) => ({
     value: bank.id,
-    label: bank.name,
+    label: bank.name.toUpperCase(),
     isDirect: !!bank.active,
     icon: `${process.env.PUBLIC_URL}/images/banks/${bank.name.toLowerCase()}-logo.svg`,
   }));
