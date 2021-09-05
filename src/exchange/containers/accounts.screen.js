@@ -67,7 +67,7 @@ const Accounts = ({ setModal, order }) => {
     formik.setFieldValue("funds_origin", e.target.value);
   };
 
-  const bankOptions = banks.map((bank) => ({ label: bank.name, value: bank.id, icon: `${process.env.PUBLIC_URL}/images/banks/${bank.name.toLowerCase()}-logo.svg` }));
+  const bankOptions = banks.map((bank) => ({ label: bank.name.toUpperCase(), value: bank.id, icon: `${process.env.PUBLIC_URL}/images/banks/${bank.name.toLowerCase()}-logo.svg` }));
   const accountOptions = filteredAccounts.map((account) => {
     return {
       account: account.account_number || account.cci,
