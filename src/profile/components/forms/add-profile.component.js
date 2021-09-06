@@ -89,7 +89,7 @@ const AddProfile = () => {
       <CheckboxComponent name="accept" value={formik.values.accept} onChange={formik.handleChange} error={formik.errors.accept}>
         Declaro que soy el representante legal de la empresa.
       </CheckboxComponent>
-      <Button type="submit" className={`ld-ext-right self-center action-button ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || invalidRuc || isProcessing}>
+      <Button type="submit" className={`ld-over self-center action-button ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || invalidRuc || isProcessing}>
         <span className="ld ld-ring ld-spin" />
         Agregar empresa
       </Button>

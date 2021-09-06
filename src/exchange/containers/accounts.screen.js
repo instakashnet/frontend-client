@@ -163,7 +163,7 @@ const Accounts = ({ setModal, order }) => {
         {(formik.values.accountInterbank || formik.values.bankInterbank) && (
           <MuiAlert type="warning" opened>
             <span className="block text-left">
-              <b>Las transferencias interbancarias pueden demorar hasta 48 horas.</b> Puede ver como manejamos las transferencias interbancarias en nuestros{" "}
+              <b>Las transferencias interbancarias pueden demorar hasta 48 horas.</b> Conozoca más sobre las transferencias interbancarias en nuestros{" "}
               <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
                 términos y condiciones.
               </a>
@@ -194,13 +194,13 @@ const Accounts = ({ setModal, order }) => {
           />
         )}
         <div className="flex flex-col items-center justify-center">
-          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button mt-4 ld-ext-right ${isProcessing ? "running" : ""}`}>
+          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button mt-4 ld-over ${isProcessing ? "running" : ""}`}>
             <span className="ld ld-ring ld-spin" />
             Continuar
           </Button>
           <Button
             type="button"
-            className={`secondary-button mt-4 ld-ext-right ${isProcessing ? "running" : ""}`}
+            className={`secondary-button mt-4 ld-over ${isProcessing ? "running" : ""}`}
             disabled={isProcessing}
             onClick={() => dispatch(cancelExchangeInit(order.id, "draft"))}>
             <span className="ld ld-ring ld-spin" />
