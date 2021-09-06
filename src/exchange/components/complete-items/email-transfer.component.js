@@ -12,8 +12,8 @@ export const EmailTransfer = ({ isProcessing, dispatch, order }) => {
   return (
     <>
       <Card className={`${classes.TransferAccount} flex items-center justify-between`}>
-        <p className="font-bold">contacto@instakash.net</p>
-        <CopyButton textToCopy="contacto@instakash.net" />
+        <p className="font-bold">pagos@instakash.net</p>
+        <CopyButton textToCopy="pagos@instakash.net" />
       </Card>
       <MuiAlert type="info" opened>
         <span className="block text-left">
