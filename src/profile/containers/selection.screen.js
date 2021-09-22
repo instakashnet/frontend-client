@@ -69,8 +69,8 @@ export const ModalInformation = () => {
     <div className="text-center">
       <h2>Estimado usuario</h2>
       <p className="my-3">
-        Gracias por la confianza, queremos informarle que en estos momentos la plataforma para empresas de <b>BCP</b> presenta problemas en su plataforma. Por tal movito las
-        operaciones a este banco pueden demorar. Estamos a la espera por la pronta solución del banco.
+        Gracias por la confianza, queremos informarle que en estos momentos la plataforma para empresas de <b>BCP</b> presenta problemas en su plataforma. Por tal movito no
+        realizaremos operaciones hacia este banco por el momento. Estamos a la espera por la pronta solución del banco.
       </p>
       <p className="mb-4 inline-block font-bold">Agradecemos su comprensión.</p>
       <Button onClick={closeModalHandler} className="action-button">
