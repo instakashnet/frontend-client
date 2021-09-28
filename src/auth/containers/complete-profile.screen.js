@@ -60,13 +60,7 @@ const CompleteProfile = ({ history }) => {
         setIsLoading(true);
 
         try {
-          const res = await axios.get(
-            `https://quertium.com/api/v1/reniec/dni/48860207?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.MTUzMg.Qk8XHyXBR9J6Xj1wmOur2pVEBQhRKaqsYGILcu9Y1vA`,
-            {
-              withCredentials: false,
-            }
-          );
-          console.log(res);
+          const res = await axios.post("https://api.migo.pe/api/v1/dni", { token: process.env.REACT_APP_MIGO_API, dni: document_identification });
           if (res.status === 200) {
             const names = res.data.nombre.split(" ");
             let firstName = names[1] || "";
