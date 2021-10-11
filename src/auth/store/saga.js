@@ -15,7 +15,7 @@ function* setAuthToken({ expiresIn, jwtToken }) {
   yield call([Cookies, "set"], "token", jwtToken, { expires });
 }
 
-function* loadUser() {
+function* loadUser({ token }) {
   // const authData = yield call([localStorage, "getItem"], "authData");
   // if (!authData) return yield put(actions.logoutSuccess());
 
@@ -26,7 +26,7 @@ function* loadUser() {
   // if (new Date(expDate) <= new Date()) return yield call(logout, {});
 
   try {
-    const res = yield authService.get("/users/session", { withCredentials: true });
+    const res = yield authService.get("/users/session", { withCredentials: true, headers: { "x-access-token": token } });
     console.log(res);
     // const resData = camelize(res.data);
     // yield call([sessionStorage, "setItem"], "userVerification", JSON.stringify({ verified: resData.verified, completed: resData.completed, isGoogle: resData.isGoogle }));
@@ -61,7 +61,7 @@ function* signin({ values }) {
     const res = yield authService.post("/auth/signin", values, { withCredentials: true });
     if (res.status === 200) {
       // yield call(setAuthToken, { expiresIn: res.data.expiresIn, jwtToken: });
-      yield call(loadUser);
+      yield call(loadUser, { token: res.data.accessToken });
     }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
