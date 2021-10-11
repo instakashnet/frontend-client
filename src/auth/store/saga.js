@@ -1,5 +1,6 @@
 import { put, all, takeLatest, call, delay, fork, takeEvery } from "redux-saga/effects";
-import camelize from "camelize";
+// import camelize from "camelize";
+import Cookies from "js-cookie";
 import * as actions from "./actions";
 import * as types from "./types";
 import { setAlertInit } from "../../store/actions";
@@ -7,60 +8,59 @@ import Swal from "sweetalert2";
 import { authService } from "../../services/auth.service";
 import history from "../../shared/history";
 
-function* setAuthToken(data, isRefresh = false) {
+function* setAuthToken({ expiresIn, jwtToken }) {
   const date = new Date();
-  const expDate = new Date(date.setSeconds(date.getSeconds() + data.expiresIn));
+  const expires = new Date(date.setSeconds(date.getSeconds() + expiresIn));
 
-  yield call([localStorage, "setItem"], "authData", JSON.stringify({ token: data.accessToken, expDate }));
-
-  if (isRefresh) yield call(setAuthTimeout, expDate.getTime() - new Date().getTime());
+  yield call([Cookies, "set"], "token", jwtToken, { expires });
 }
 
 function* loadUser() {
-  const authData = yield call([localStorage, "getItem"], "authData");
-  if (!authData) return yield put(actions.logoutSuccess());
+  // const authData = yield call([localStorage, "getItem"], "authData");
+  // if (!authData) return yield put(actions.logoutSuccess());
 
-  const { token, expDate } = JSON.parse(authData);
+  // const { token, expDate } = JSON.parse(authData);
 
-  if (!token) return yield call(clearUser);
+  // if (!token) return yield call(clearUser);
 
-  if (new Date(expDate) <= new Date()) return yield call(logout, {});
+  // if (new Date(expDate) <= new Date()) return yield call(logout, {});
 
   try {
-    const res = yield authService.get("/users/session");
-    const resData = camelize(res.data);
-    yield call([sessionStorage, "setItem"], "userVerification", JSON.stringify({ verified: resData.verified, completed: resData.completed, isGoogle: resData.isGoogle }));
+    const res = yield authService.get("/users/session", { withCredentials: true });
+    console.log(res);
+    // const resData = camelize(res.data);
+    // yield call([sessionStorage, "setItem"], "userVerification", JSON.stringify({ verified: resData.verified, completed: resData.completed, isGoogle: resData.isGoogle }));
 
-    if (!resData.verified) {
-      yield call([history, "push"], "/email-verification");
-      return yield put(actions.authError());
-    }
+    // if (!resData.verified) {
+    //   yield call([history, "push"], "/email-verification");
+    //   return yield put(actions.authError());
+    // }
 
-    if (!resData.completed) {
-      yield call([history, "push"], "/complete-profile");
-      return yield put(actions.authError());
-    }
+    // if (!resData.completed) {
+    //   yield call([history, "push"], "/complete-profile");
+    //   return yield put(actions.authError());
+    // }
 
-    const userRes = yield authService.get("/users/username");
-    yield put(actions.loadUserSuccess(token, userRes.data.username));
+    // const userRes = yield authService.get("/users/username");
+    // yield put(actions.loadUserSuccess(token, userRes.data.username));
 
-    yield call(setAuthTimeout, new Date(expDate).getTime() - new Date().getTime());
+    // yield call(setAuthTimeout, new Date(expDate).getTime() - new Date().getTime());
   } catch (error) {
     yield call(logout, {});
     yield put(actions.authError());
   }
 }
 
-function* setAuthTimeout(timeout) {
-  yield delay(timeout - 2000);
-  yield put(actions.logoutInit());
-}
+// function* setAuthTimeout(timeout) {
+//   yield delay(timeout - 2000);
+//   yield put(actions.logoutInit());
+// }
 
 function* signin({ values }) {
   try {
-    const res = yield authService.post("/auth/signin", values);
+    const res = yield authService.post("/auth/signin", values, { withCredentials: true });
     if (res.status === 200) {
-      yield call(setAuthToken, res.data);
+      // yield call(setAuthToken, { expiresIn: res.data.expiresIn, jwtToken: });
       yield call(loadUser);
     }
   } catch (error) {
