@@ -1,7 +1,7 @@
 import { useEffect, lazy } from "react";
 import { Switch, Router } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUserInit, getProfilesInit, selectProfileInit } from "./store/actions";
+import { getProfilesInit, selectProfileInit } from "./store/actions";
 import ReactPixel from "react-facebook-pixel";
 import history from "./shared/history";
 
@@ -38,9 +38,9 @@ function App() {
   const isAuth = useSelector((state) => state.Auth.isAuth);
   const profileSelected = JSON.parse(sessionStorage.getItem("profileSelected"));
 
-  useEffect(() => {
-    dispatch(loadUserInit());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(loadUserInit());
+  // }, [dispatch]);
 
   useEffect(() => {
     if (isAuth) {
