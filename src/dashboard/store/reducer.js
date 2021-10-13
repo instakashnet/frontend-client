@@ -1,4 +1,4 @@
-import * as types from './types';
+import * as types from "./types";
 const initialState = {
   orders: [],
   withdrawals: [],
@@ -10,6 +10,9 @@ const initialState = {
 
 export default function activityReducer(state = initialState, action) {
   switch (action.type) {
+    case types.GET_ORDERS_INIT:
+    case types.GET_WITHDRAWALS_INIT:
+      return { ...state, isLoading: true };
     case types.GET_ORDERS_SUCCESS:
       const filteredOrders = action.orders.reverse();
       return { ...state, orders: filteredOrders, isLoading: false };

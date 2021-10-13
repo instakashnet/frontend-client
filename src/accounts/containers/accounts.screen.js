@@ -18,7 +18,8 @@ import classes from "../assets/css/account-containers.module.scss";
 
 const Accounts = () => {
   const dispatch = useDispatch();
-  const { accounts, kashAccount, isLoading: accountsLoading } = useSelector((state) => state.Accounts);
+  const { accounts, kashAccount, isLoading } = useSelector((state) => state.Accounts);
+  console.log(isLoading);
 
   useEffect(() => {
     dispatch(getAccountsInit("users"));
@@ -45,36 +46,40 @@ const Accounts = () => {
 
   return (
     <Layout className="content-start">
-      {accountsLoading && <Spinner screen />}
-      <div className={classes.Accounts}>
-        {!accountsLoading && <KashAccount account={kashAccount} openModal={openModalHandler} />}
-        {!accountsLoading && accounts.length <= 0 && <NoAccount onAddAccount={addAccountHandler} />}
-        {!accountsLoading && accounts.length > 0 && (
-          <div className="grid grid-cols-1 lg:grid-cols-4">
-            <section className="mt-3 md:mt-6">
-              <h1 className="flex items-center justify-start ml-2 mt-5">
-                <CreditCard className="mr-3" />
-                <span>Mis cuentas</span>
-              </h1>
-              <div className="flex items-center flex-wrap lg:flex-nowrap justify-center md:justify-between my-5">
-                <Button type="button" onClick={addAccountHandler} className="action-button md:max-w-sm lg:max-w-xs lg:my-0">
-                  Agregar cuenta
-                </Button>
-              </div>
-              <p className="mt-3 text-sm">
-                Las cuentas que agregues deberán ser <b>tuyas o de tu empresa</b>. Puedes tener hasta <b>20 cuentas agregadas</b>, 10 cuentas en soles y 10 en dólares.
-              </p>
-            </section>
-            <section className="lg:col-span-3 md:ml-3">
-              <div className="grid grid-cols-1 align-center gap-4 mt-8">
-                {groupedAccounts.map((accounts, i) => (
-                  <AccountsList key={i} accounts={accounts} openDetails={openModalHandler} />
-                ))}
-              </div>
-            </section>
-          </div>
-        )}
-      </div>
+      {isLoading ? (
+        <Spinner screen />
+      ) : (
+        <div className={classes.Accounts}>
+          <KashAccount account={kashAccount} openModal={openModalHandler} />
+          {accounts.length <= 0 ? (
+            <NoAccount onAddAccount={addAccountHandler} />
+          ) : (
+            <div className="grid grid-cols-1 lg:grid-cols-4">
+              <section className="mt-3 md:mt-6">
+                <h1 className="flex items-center justify-start ml-2 mt-5">
+                  <CreditCard className="mr-3" />
+                  <span>Mis cuentas</span>
+                </h1>
+                <div className="flex items-center flex-wrap lg:flex-nowrap justify-center md:justify-between my-5">
+                  <Button type="button" onClick={addAccountHandler} className="action-button md:max-w-sm lg:max-w-xs lg:my-0">
+                    Agregar cuenta
+                  </Button>
+                </div>
+                <p className="mt-3 text-sm">
+                  Las cuentas que agregues deberán ser <b>tuyas o de tu empresa</b>. Puedes tener hasta <b>20 cuentas agregadas</b>, 10 cuentas en soles y 10 en dólares.
+                </p>
+              </section>
+              <section className="lg:col-span-3 md:ml-3">
+                <div className="grid grid-cols-1 align-center gap-4 mt-8">
+                  {groupedAccounts.map((accounts, i) => (
+                    <AccountsList key={i} accounts={accounts} openDetails={openModalHandler} />
+                  ))}
+                </div>
+              </section>
+            </div>
+          )}
+        </div>
+      )}
     </Layout>
   );
 };
