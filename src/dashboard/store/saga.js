@@ -7,7 +7,11 @@ import { exchangeService } from "../../services/exchange.service";
 function* getOrders() {
   try {
     const res = yield exchangeService.get("/order/user?enabled=true&limit=5");
-    if (res.status === 200) yield put(actions.getOrdersSuccess(res.data));
+    if (res.status === 200) {
+      const orders = res.data.ordersByUser.reverse();
+      const resData = { ...res.data, orders };
+      yield put(actions.getOrdersSuccess(resData));
+    }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
     yield put(actions.activityError());

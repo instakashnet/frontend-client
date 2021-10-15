@@ -2,17 +2,7 @@ import React, { useEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
 import { Route } from "react-router-dom";
-import {
-  getBanksInit,
-  getRatesInit,
-  validateCouponInit,
-  getLastOrderInit,
-  getCurenciesInit,
-  getAccountsInit,
-  getKashAccountInit,
-  openModal,
-  closeModal,
-} from "../../store/actions";
+import { getRatesInit, validateCouponInit, getLastOrderInit, openModal, closeModal } from "../../store/actions";
 import { useProfileInfo } from "../../shared/hooks/useProfileInfo";
 
 import Calculator from "./calculator.screen";
@@ -36,10 +26,6 @@ const Exchange = ({ history, location, match }) => {
   const { type: profileType } = profileInfo;
 
   useEffect(() => {
-    dispatch(getBanksInit());
-    dispatch(getCurenciesInit());
-    dispatch(getAccountsInit("orders"));
-    dispatch(getKashAccountInit());
     dispatch(getLastOrderInit());
   }, [dispatch]);
 
