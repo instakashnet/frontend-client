@@ -41,28 +41,24 @@ const Dashboard = ({ match }) => {
 
   return (
     <Layout className={`${orders.length <= 0 && withdrawals.length <= 0 ? "content-center" : "content-start"} max-screen`}>
-      {isLoading && <Spinner screen />}
-      {!isLoading &&
-        (orders.length <= 0 && withdrawals.length <= 0 ? (
-          <EmptyActivity />
-        ) : (
-          <>
-            <Route exact path={match.url}>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-                <TransferedCharts isLoading={isLoading} orderAmounts={orderAmounts} />
-                {isMobile ? (
-                  <MobileActivity openModal={openDetails} withdrawals={withdrawals} isLoading={isLoading} orders={orders} />
-                ) : (
-                  <RecentActivity openModal={openDetails} withdrawals={withdrawals} isLoading={isLoading} orders={orders} />
-                )}
-                <TotalTransfered kashAccount={kashAccount} totalAmount={totalAmount} isLoading={isLoading} className="flex-col" />
-              </div>
-            </Route>
-            <Route path={match.url + "/all"}>
-              <AllActivity orders={orders} openModal={openDetails} />
-            </Route>
-          </>
-        ))}
+      {isLoading ? (
+        <Spinner screen />
+      ) : orders.length <= 0 && withdrawals.length <= 0 ? (
+        <EmptyActivity />
+      ) : (
+        <>
+          <Route exact path={match.url}>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+              <TransferedCharts isLoading={isLoading} orderAmounts={orderAmounts} />
+              <RecentActivity openModal={openDetails} withdrawals={withdrawals} isLoading={isLoading} orders={orders} />
+              <TotalTransfered kashAccount={kashAccount} totalAmount={totalAmount} isLoading={isLoading} className="flex-col" />
+            </div>
+          </Route>
+          <Route path={match.url + "/all"}>
+            <AllActivity orders={orders} openModal={openDetails} />
+          </Route>
+        </>
+      )}
     </Layout>
   );
 };
