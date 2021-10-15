@@ -1,4 +1,4 @@
-import * as types from './types';
+import * as types from "./types";
 const initialState = {
   accounts: [],
   kashAccount: {},
@@ -9,6 +9,8 @@ const initialState = {
 
 const accountsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.GET_ACCOUNTS_INIT:
+      return { ...state, isLoading: true };
     case types.GET_ACCOUNTS_SUCCESS:
       return { ...state, accounts: action.accounts, isLoading: false };
     case types.GET_KASH_ACCOUNT_SUCCESS:
