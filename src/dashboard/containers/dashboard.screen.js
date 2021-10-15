@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route } from "react-router-dom";
-import { isMobile } from "react-device-detect";
 import { openSliderModal, getOrderDetailsInit, getAccountsInit, getOrdersInit, getWithdrawalsInit } from "../../store/actions";
 
 import Layout from "../../components/layout/layout.component";
@@ -10,7 +9,6 @@ import Spinner from "../../components/UI/spinner.component";
 import TransferedCharts from "../components/charts/transfered-charts.component";
 import AllActivity from "../components/activity/all-activity.component";
 import RecentActivity from "../components/activity/recent-activity.component";
-import MobileActivity from "../components/activity/mobile-activity.component";
 import OrderDetails from "../components/details/order-details.component";
 import WithdrawDetails from "../components/details/withdraw-details.component";
 import EmptyActivity from "../components/empty-activity.component";
