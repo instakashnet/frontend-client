@@ -1,5 +1,4 @@
 import React from "react";
-import Skeleton from "react-loading-skeleton";
 import { Link } from "react-router-dom";
 import { Cached, ArrowUpward } from "@material-ui/icons";
 import { formatAmount } from "../../shared/functions";
@@ -42,7 +41,6 @@ const TotalTransfered = ({ totalAmount, kashAccount, isLoading, className, type 
           <Cached className="mr-2" /> Soles cambiados
         </h2>
         <p className="mb-3 ml-2">Importe total en soles</p>
-        {isLoading && <Skeleton height={100} />}
         {!isLoading && (
           <Card className="flex items-center h-24 text-center flex-col p-6 justify-center w-full">
             <span className={classes.TotalAmount}>S/. {formatAmount(totalAmount)}</span>
@@ -54,7 +52,6 @@ const TotalTransfered = ({ totalAmount, kashAccount, isLoading, className, type 
           <ArrowUpward className="mr-2" /> Ahorro aproximado
         </h2>
         <p className="mb-3 ml-2">Importe en relación a otras casas y bancos</p>
-        {isLoading && <Skeleton height={100} />}
         {!isLoading && (
           <Card className="flex flex-col h-24 text-center p-6 items-center justify-center">
             <span className={classes.TotalAmount}>S/. {formatAmount(savings)}</span>

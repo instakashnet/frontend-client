@@ -1,4 +1,4 @@
-import { put, all, takeLatest, call, delay, fork, takeEvery } from "redux-saga/effects";
+import { put, all, takeLatest, call, fork, takeEvery, delay } from "redux-saga/effects";
 import camelize from "camelize";
 import * as actions from "./actions";
 import * as types from "./types";

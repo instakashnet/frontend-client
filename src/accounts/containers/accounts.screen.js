@@ -19,7 +19,6 @@ import classes from "../assets/css/account-containers.module.scss";
 const Accounts = () => {
   const dispatch = useDispatch();
   const { accounts, kashAccount, isLoading } = useSelector((state) => state.Accounts);
-  console.log(isLoading);
 
   useEffect(() => {
     dispatch(getAccountsInit("users"));
