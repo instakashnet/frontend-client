@@ -3,7 +3,11 @@ import * as Yup from "yup";
 export const completeExchangeValidation = (funds, amount, totalSent) =>
   Yup.object().shape({
     account_to_id: Yup.number().required("Debes seleccionar tu cuenta para recibir."),
-    bank_id: totalSent <= 0 ? Yup.number().notRequired() : Yup.number().required("Debes seleccionar el banco donde transferirás."),
+    bank_id: Yup.number().when("kashApplied", {
+      is: "yes",
+      then: totalSent <= 0 ? Yup.number().notRequired() : Yup.number().required("Debes seleccionar el banco donde transferirás."),
+      otherwise: Yup.number().required("Debes seleccionar el banco donde transferirás."),
+    }),
     funds_origin: funds ? Yup.string().required("Deles seleccionar una opción.") : Yup.string().notRequired(),
     funds_text: Yup.string().when("funds_origin", {
       is: "otros",
