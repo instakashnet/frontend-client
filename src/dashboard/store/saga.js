@@ -7,9 +7,7 @@ import { exchangeService } from "../../services/exchange.service";
 function* getOrders() {
   try {
     const res = yield exchangeService.get("/order/user?enabled=true&limit=5");
-    if (res.status === 200) {
-      console.log(res.data);
-    }
+    if (res.status === 200) yield put(actions.getOrdersSuccess(res.data));
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
     yield put(actions.activityError());
@@ -18,7 +16,7 @@ function* getOrders() {
 
 function* getWithdrawals() {
   try {
-    const res = yield exchangeService.get("/withdrawals/user");
+    const res = yield exchangeService.get("/withdrawals/user?limit=5");
     if (res.status === 200) yield put(actions.getWithdrawalsSuccess(res.data));
   } catch (error) {
     yield put(actions.activityError());

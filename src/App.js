@@ -1,7 +1,7 @@
 import { useEffect, lazy } from "react";
 import { Switch, Router } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfilesInit, selectProfileInit } from "./store/actions";
+import { getProfilesInit, selectProfileInit, loadUserInit } from "./store/actions";
 import ReactPixel from "react-facebook-pixel";
 import history from "./shared/history";
 
@@ -22,7 +22,6 @@ import ChangePassword from "./auth/containers/change-password.screen";
 import CompleteProfile from "./auth/containers/complete-profile.screen";
 
 // PRIVATE
-
 const ProfileSelection = lazy(() => import("./profile/containers/selection.screen"));
 const Welcome = lazy(() => import("./welcome/containers/Welcome"));
 const Dashboard = lazy(() => import("./dashboard/containers/dashboard.screen"));
@@ -38,9 +37,9 @@ function App() {
   const isAuth = useSelector((state) => state.Auth.isAuth);
   const profileSelected = JSON.parse(sessionStorage.getItem("profileSelected"));
 
-  // useEffect(() => {
-  //   dispatch(loadUserInit());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(loadUserInit());
+  }, [dispatch]);
 
   useEffect(() => {
     if (isAuth) {

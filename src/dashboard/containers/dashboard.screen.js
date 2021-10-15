@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route } from "react-router-dom";
 import { isMobile } from "react-device-detect";
-import { openSliderModal, getOrderDetailsInit, getTotalAmountInit, getAccountsInit, getOrderAmountsInit, getOrdersInit, getWithdrawalsInit } from "../../store/actions";
+import { openSliderModal, getOrderDetailsInit, getAccountsInit, getOrdersInit, getWithdrawalsInit } from "../../store/actions";
 
 import Layout from "../../components/layout/layout.component";
 import TotalTransfered from "../components/total-transfered.component";
