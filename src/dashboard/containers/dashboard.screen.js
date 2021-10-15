@@ -31,9 +31,7 @@ const Dashboard = ({ match }) => {
   };
 
   useEffect(() => {
-    dispatch(getTotalAmountInit());
     dispatch(getAccountsInit("kash"));
-    dispatch(getOrderAmountsInit());
   }, [dispatch]);
 
   useEffect(() => {
