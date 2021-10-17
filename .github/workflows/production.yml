@@ -17,7 +17,7 @@ jobs:
       REACT_APP_ACCOUNTS_API: ${{ secrets.ACCOUNTS_API }}
       REACT_APP_EXCHANGE_API: ${{ secrets.EXCHANGE_API }}
       REACT_APP_MIGO_API: ${{ secrets.MIGO_API }}
-      AWS_CF_DISTRIBUTION_ID: E3AWEGWITI90Z3
+      AWS_CF_DISTRIBUTION_ID: E2FBHRICZR02AV
       AWS_REGION: us-east-2
     strategy:
       matrix:
