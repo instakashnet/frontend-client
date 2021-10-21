@@ -1,5 +1,5 @@
 import React from "react";
-import { isMobile } from "react-device-detect";
+import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
 
 import { Button } from "../../components/UI/button.component";
 
@@ -12,6 +12,8 @@ import Dollar from "../assets/images/icons/dollar.svg";
 import classes from "../assets/css/exchange-components.module.scss";
 
 const Information = ({ onClose }) => {
+  const { isMobile } = useDeviceDetect();
+
   return (
     <div className={classes.Information}>
       <div className="flex items-end justify-center">

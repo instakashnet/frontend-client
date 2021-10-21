@@ -1,7 +1,7 @@
 import React from "react";
-import { isMobile } from "react-device-detect";
 import { _ } from "gridjs-react";
 import moment from "moment";
+import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
 
 import { AffiliatesTable } from "../components/affiliates-table.component";
 import Card from "../../components/UI/card.component";
@@ -12,6 +12,8 @@ import KashIcon from "../../assets/images/kash.svg";
 import classes from "../assets/css/affiliates-containers.module.scss";
 
 export const AffiliatesList = ({ affiliates, isLoading, ...rest }) => {
+  const { isMobile } = useDeviceDetect();
+
   const columns = [
     {
       id: "user",
