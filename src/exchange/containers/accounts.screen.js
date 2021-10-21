@@ -188,7 +188,7 @@ const Accounts = ({ setModal, order }) => {
           {(bankCCI || accountCCI) && (
             <MuiAlert type="warning" opened>
               <span className="block text-left">
-                <b>Las transferencias interbancarias pueden demorar hasta 48 horas.</b> Conozoca más sobre las transferencias interbancarias en nuestros{" "}
+                <b>Las transferencias interbancarias carrean comisiones y pueden demorar hasta 48 horas.</b> Conozoca más sobre las transferencias interbancarias en nuestros{" "}
                 <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
                   términos y condiciones.
                 </a>

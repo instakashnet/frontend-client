@@ -225,7 +225,7 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
         />
         {selectedBank && !selectedBank.isDirect && (
           <MuiAlert type="warning" opened>
-            Las <b>transferencias interbancarias</b> pueden demorar hasta 48 horas. Conoce más en nuestros{" "}
+            Las <b>transferencias interbancarias</b> carrean comisiones y pueden demorar hasta 48 horas. Conoce más en nuestros{" "}
             <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
               términos y condiciones.
             </a>
