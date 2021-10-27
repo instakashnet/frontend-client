@@ -16,6 +16,7 @@ jobs:
       REACT_APP_EXCHANGE_API: ${{ secrets.TEST_EXCHANGE_API }}
       REACT_APP_MIGO_API: ${{ secrets.MIGO_API }}
       AWS_CF_DISTRIBUTION_ID: EZJVBBURGQLSA
+      AWS_REGION: us-east-2
     strategy:
       matrix:
         node-version: [15.x]
