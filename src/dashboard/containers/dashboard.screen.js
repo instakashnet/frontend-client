@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { Route } from "react-router-dom";
+import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
+
+// REDUX
+import { useSelector, useDispatch } from "react-redux";
 import { openSliderModal, getOrderDetailsInit, getAccountsInit, getOrdersInit, getWithdrawalsInit } from "../../store/actions";
 
 import Layout from "../../components/layout/layout.component";
@@ -18,7 +21,19 @@ const Dashboard = ({ match }) => {
   const dispatch = useDispatch();
   const { orders, withdrawals, orderAmounts, totalAmount, isLoading } = useSelector((state) => state.Dashboard);
   const { kashAccount } = useSelector((state) => state.Accounts);
+  const { isMobile } = useDeviceDetect();
 
+  // EFFECTS
+  useEffect(() => {
+    dispatch(getAccountsInit("kash"));
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getOrdersInit());
+    dispatch(getWithdrawalsInit());
+  }, [dispatch]);
+
+  // HANDLERS
   const openDetails = (id, type = null) => {
     let SliderComponent;
 
@@ -28,15 +43,6 @@ const Dashboard = ({ match }) => {
     dispatch(getOrderDetailsInit(id, type));
     dispatch(openSliderModal(SliderComponent));
   };
-
-  useEffect(() => {
-    dispatch(getAccountsInit("kash"));
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(getOrdersInit());
-    dispatch(getWithdrawalsInit());
-  }, [dispatch]);
 
   return (
     <Layout className={`${orders.length <= 0 && withdrawals.length <= 0 ? "content-center" : "content-start"} max-screen`}>
@@ -49,8 +55,12 @@ const Dashboard = ({ match }) => {
           <Route exact path={match.url}>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
               <TransferedCharts isLoading={isLoading} orderAmounts={orderAmounts} />
-              <ActivityMobile openModal={openDetails} withdrawals={withdrawals} orders={orders} />
-              {/* <RecentActivity openModal={openDetails} withdrawals={withdrawals} isLoading={isLoading} orders={orders} /> */}
+              {isMobile ? (
+                <ActivityMobile openModal={openDetails} withdrawals={withdrawals} orders={orders} />
+              ) : (
+                <RecentActivity openModal={openDetails} withdrawals={withdrawals} isLoading={isLoading} orders={orders} />
+              )}
+
               <TotalTransfered kashAccount={kashAccount} totalAmount={totalAmount} isLoading={isLoading} className="flex-col" />
             </div>
           </Route>
