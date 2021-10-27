@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { isMobile } from "react-device-detect";
+import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
 import { toggleNav } from "../../store/actions";
 
 import Navigation from "./navigation/nav-items.component";
@@ -16,6 +16,7 @@ const Sidebar = () => {
   const location = useLocation();
   const opened = useSelector((state) => state.Nav.opened);
   const usercode = useSelector((state) => state.Auth.userCode);
+  const { isMobile } = useDeviceDetect();
 
   useEffect(() => {
     if (opened) dispatch(toggleNav());

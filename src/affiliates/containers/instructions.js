@@ -1,6 +1,6 @@
 import React from "react";
-import { isMobile } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
+import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
 import { openModal } from "../../store/actions";
 
 import StepsSwiper from "../components/steps-swiper.component";
@@ -21,6 +21,7 @@ import classes from "../assets/css/affiliates-containers.module.scss";
 export const Instructions = ({ ...rest }) => {
   const dispatch = useDispatch();
   const usercode = useSelector((state) => state.Auth.userCode);
+  const { isMobile } = useDeviceDetect();
 
   const editCodeHandler = () => {
     const ModalComponent = () => <EditCode title="Editar código" />;

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { isMobile } from "react-device-detect";
+import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
 import { useDispatch, useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 import { getRatesInit, validateCouponInit, getLastOrderInit, openModal, closeModal } from "../../store/actions";
@@ -20,10 +20,12 @@ import classes from "../assets/css/exchange-screens.module.scss";
 
 const Exchange = ({ history, location, match }) => {
   const dispatch = useDispatch();
-  const order = JSON.parse(sessionStorage.getItem("order"));
-  const { profileInfo } = useProfileInfo();
   const isLoading = useSelector((state) => state.Exchange.isLoading);
+  const { profileInfo } = useProfileInfo();
+  const { isMobile } = useDeviceDetect();
+
   const { type: profileType } = profileInfo;
+  const order = JSON.parse(sessionStorage.getItem("order"));
 
   useEffect(() => {
     dispatch(getLastOrderInit());

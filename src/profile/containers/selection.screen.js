@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProfileInit, openModal, closeModal } from "../../store/actions";
 
@@ -11,26 +11,29 @@ import { Button } from "../../components/UI/button.component";
 import classes from "../assets/css/profile-containers.module.scss";
 
 const Selection = () => {
-  const dispatch = useDispatch();
-  const { isLoading, profiles } = useSelector((state) => state.Profile);
+  const dispatch = useDispatch(),
+    { isLoading, profiles } = useSelector((state) => state.Profile);
 
   let ModalComponent = () => <ModalInformation isAlert alertType="warning" title="¡IMPORTANTE!" />;
 
+  // EFFECTS
+  // useEffect(() => {
+  //   let timeout;
+  //   const isRead = sessionStorage.getItem("isRead");
+
+  //   if (!isRead) {
+  //     timeout = setTimeout(() => {
+  //       dispatch(openModal(ModalComponent));
+  //     }, 600);
+  //   }
+  //   return () => timeout && clearTimeout(timeout);
+  // }, [dispatch]);
+
+  // HANDLERS
   const addProfileHandler = () => {
     ModalComponent = () => <AddProfile title="Agregar empresa" />;
     dispatch(openModal(ModalComponent));
   };
-  useEffect(() => {
-    let timeout;
-    const isRead = sessionStorage.getItem("isRead");
-
-    if (!isRead) {
-      timeout = setTimeout(() => {
-        dispatch(openModal(ModalComponent));
-      }, 600);
-    }
-    return () => timeout && clearTimeout(timeout);
-  }, [dispatch]);
 
   return (
     <Layout>

@@ -1,18 +1,18 @@
 import React from "react";
 
+// REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { isMobile } from "react-device-detect";
 import { Dialog, Slide, DialogContent } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 import { closeSliderModal } from "../../../store/actions";
 
 import classes from "./modal-components.module.scss";
 
-const Transition = React.forwardRef((props, ref) => <Slide direction={isMobile ? "up" : "left"} ref={ref} {...props} />);
+const Transition = React.forwardRef((props, ref) => <Slide direction={window.screen.width <= 768 ? "up" : "left"} ref={ref} {...props} />);
 
 export const SliderModal = ({ title, children }) => {
-  const isOpen = useSelector((state) => state.Modal.isSliderOpen);
   const dispatch = useDispatch();
+  const isOpen = useSelector((state) => state.Modal.isSliderOpen);
 
   const closeSliderModalHandler = () => dispatch(closeSliderModal());
 
@@ -25,7 +25,8 @@ export const SliderModal = ({ title, children }) => {
       keepMounted
       onClose={closeSliderModalHandler}
       aria-labelledby="slider-modal"
-      aria-describedby="slider-modal">
+      aria-describedby="slider-modal"
+    >
       <div className={classes.ModalHeader}>
         <h2>{title}</h2>
         <button onClick={closeSliderModalHandler} className={classes.Close}>
