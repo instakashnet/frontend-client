@@ -1,5 +1,5 @@
 import React from "react";
-import { isMobile } from "react-device-detect";
+import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
 
 import Male from "../../assets/images/profiles/male.svg";
 import Female from "../../assets/images/profiles/female.svg";
@@ -9,6 +9,8 @@ import Arrow from "../../assets/images/icons/arrow.svg";
 import classes from "./ui-components.module.scss";
 
 const ProfileInfo = ({ main, selected, openNav }) => {
+  const { isMobile } = useDeviceDetect();
+
   let Avatar;
   let profileName;
 
