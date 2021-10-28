@@ -13,10 +13,13 @@ import { Button } from "../../../components/UI/button.component";
 import classes from "../../assets/css/account-components.module.scss";
 
 export const PersonalAccount = ({ banks, currencies, accountTypes, isThird, addType, value, index, ...rest }) => {
-  const [selectedBank, setSelectedBank] = useState(null);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(),
+    [selectedBank, setSelectedBank] = useState(null),
+    [isInterbank, setIsInterbank] = useState(false);
+
+  // FORMIK
   const formik = useFormik({
-    initialValues: { account_number: "", cci: "", bankId: "", isDirect: true, currencyId: "", alias: "", acc_type: "", thirdParty: isThird, accept: false },
+    initialValues: { account_number: "", cci: "", bankId: "", interbank: false, isDirect: true, currencyId: "", alias: "", acc_type: "", thirdParty: isThird, accept: false },
     enableReinitialize: true,
     validationSchema: addAccountValidation,
     onSubmit: (values) => dispatch(addAccountInit(values, addType)),
@@ -41,6 +44,7 @@ export const PersonalAccount = ({ banks, currencies, accountTypes, isThird, addT
 
     if (value) {
       const bank = banks.find((b) => b.value === value);
+      setIsInterbank(bank.label.toLowerCase() === "interbank");
       formik.setFieldValue("isDirect", bank.isDirect);
     }
   };
@@ -77,6 +81,7 @@ export const PersonalAccount = ({ banks, currencies, accountTypes, isThird, addT
             value={formik.values.account_number}
             error={formik.errors.account_number}
             touched={formik.touched.account_number}
+            groupClass="mb-0"
             helperText="Debe ser entre 13 y 14 caracteres."
           />
         )}
@@ -115,6 +120,11 @@ export const PersonalAccount = ({ banks, currencies, accountTypes, isThird, addT
               términos y condiciones.
             </a>
           </MuiAlert>
+        )}
+        {isInterbank && (
+          <CheckboxComponent name="interbank" value={formik.values.interbank} onChange={formik.handleChange} error={formik.errors.interbank}>
+            ¿Es esta una cuenta de provincia?
+          </CheckboxComponent>
         )}
         <CheckboxComponent name="accept" value={formik.values.accept} onChange={formik.handleChange} error={formik.errors.accept}>
           Declaro que toda la información colocada es correcta, actual y asumo total responsabilidad de su veracidad.
