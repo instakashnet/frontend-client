@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProfileInit, openModal, closeModal } from "../../store/actions";
 
@@ -17,17 +17,17 @@ const Selection = () => {
   let ModalComponent = () => <ModalInformation isAlert alertType="warning" title="¡IMPORTANTE!" />;
 
   // EFFECTS
-  // useEffect(() => {
-  //   let timeout;
-  //   const isRead = sessionStorage.getItem("isRead");
+  useEffect(() => {
+    let timeout;
+    const isRead = sessionStorage.getItem("isRead");
 
-  //   if (!isRead) {
-  //     timeout = setTimeout(() => {
-  //       dispatch(openModal(ModalComponent));
-  //     }, 600);
-  //   }
-  //   return () => timeout && clearTimeout(timeout);
-  // }, [dispatch]);
+    if (!isRead) {
+      timeout = setTimeout(() => {
+        dispatch(openModal(ModalComponent));
+      }, 600);
+    }
+    return () => timeout && clearTimeout(timeout);
+  }, [dispatch]);
 
   // HANDLERS
   const addProfileHandler = () => {
@@ -72,8 +72,8 @@ export const ModalInformation = () => {
     <div className="text-center">
       <h2>Estimado usuario</h2>
       <p className="my-3">
-        Gracias por la confianza, queremos informarle que hoy Sábado 23 de octubre estaremos haciendo mantenimiento a nuestros servidores a las 2PM hora Perú, para poder brindarle
-        siempre el mejor servicio. Toda operación ingresada <b>despúes de las 2PM de hoy</b> será procesada el dia Lunes a las 9AM.
+        Gracias por la confianza, queremos informarle que el dia Lunes 01 de Noviembre no laboraremos por ser feriado. Toda operación ingresada <b>despúes de las 2:30PM de hoy</b>{" "}
+        será procesada el dia Martes 0xw2 a las 9AM.
       </p>
       <p className="mb-4 inline-block font-bold">Agradecemos su comprensión.</p>
       <Button onClick={closeModalHandler} className="action-button">
