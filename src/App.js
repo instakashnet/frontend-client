@@ -32,8 +32,6 @@ const Exchange = lazy(() => import("./exchange/containers/exchange.screen"));
 
 ReactPixel.init(process.env.REACT_APP_FB_PIXEL_ID, {}, { autoConfig: true, debug: false });
 
-console.log(process.env.REACT_APP_STAGE);
-
 function App() {
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.Auth.isAuth);
