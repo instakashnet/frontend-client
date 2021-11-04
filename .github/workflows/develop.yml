@@ -26,8 +26,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: yarn install
-      - name: Build tailwind CSS with post CSS
-        run: yarn build:css
       - name: Build de application
         run: yarn build:test
       - uses: jakejarvis/s3-sync-action@master

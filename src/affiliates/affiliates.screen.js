@@ -18,16 +18,20 @@ const a11yProps = (index) => {
 };
 
 const AffiliatesScreen = () => {
-  const [value, setValue] = useState(0);
-  const dispatch = useDispatch();
-  const { affiliates, isLoading } = useSelector((state) => state.Affiliates);
+  const dispatch = useDispatch(),
+    [value, setValue] = useState(0),
+    { affiliates, isLoading } = useSelector((state) => state.Affiliates),
+    completed = affiliates.filter((a) => a.orderSuccess).length,
+    notCompleted = affiliates.filter((a) => !a.orderSuccess).length;
 
+  // EFFECTS
   useEffect(() => {
     dispatch(getAffiliatesInit());
   }, [dispatch]);
 
-  const handleChange = (_, newValue) => setValue(newValue);
-  const handleChangeIndex = (index) => setValue(index);
+  // HANDLERS
+  const handleChange = (_, newValue) => setValue(newValue),
+    handleChangeIndex = (index) => setValue(index);
 
   return (
     <Layout className="max-screen content-start">
@@ -37,7 +41,7 @@ const AffiliatesScreen = () => {
       </Tabs>
       <SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
         <Instructions value={value} role="tabpanel" index={0} />
-        <AffiliatesList value={value} role="tabpanel" index={1} affiliates={affiliates} isLoading={isLoading} />
+        <AffiliatesList value={value} role="tabpanel" index={1} affiliates={affiliates} completed={completed} notCompleted={notCompleted} isLoading={isLoading} />
       </SwipeableViews>
     </Layout>
   );
