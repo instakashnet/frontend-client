@@ -11,8 +11,8 @@ jobs:
     env:
       REACT_APP_TEST_GOOGLE_ID: ${{ secrets.TEST_GOOGLE_CLIENT_ID }}
       REACT_APP_FB_PIXEL_ID: ${{ secrets.FB_PIXEL_ID }}
-      REACT_APP_MIGO_API: ${{ secrets.MIGO_API }}
       REACT_APP_DEV_API_URL: ${{ secrets.DEV_API_URL }}
+      REACT_APP_MIGO_API: ${{ secrets.MIGO_API }}
       AWS_CF_DISTRIBUTION_ID: EZJVBBURGQLSA
       AWS_REGION: us-east-2
     strategy:
@@ -26,8 +26,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: yarn install
-      - name: Build tailwind CSS with post CSS
-        run: yarn build:css
       - name: Build de application
         run: yarn build:test
       - uses: jakejarvis/s3-sync-action@master
