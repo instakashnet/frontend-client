@@ -35,6 +35,9 @@ export const completeProfileValidation = (isGoogle) =>
           .required("Debes colocar un teléfono de contacto.")
           .matches(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s/0-9]{10,13}$/, "Debes colocar un teléfono válido.")
       : Yup.string().notRequired(),
+    affiliate: Yup.string()
+      .notRequired()
+      .matches(/^[a-zA-Z0-9]+$/i, "Código de afiliado inválido."),
     identity_sex: Yup.string().required("Debes seleccionar una opción."),
   });
 
