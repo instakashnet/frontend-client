@@ -13,6 +13,7 @@ const authReducer = (state = initialState, action) => {
       return { ...state, isProcessing: false, isAuth: true, token: action.token, userCode: action.userCode };
 
     case types.SIGNGIN_INIT:
+    case types.SIGNIN_GOOGLE:
     case types.SIGNGUP_INIT:
     case types.LOADUSER_INIT:
     case types.COMPLETE_PROFILE_INIT:

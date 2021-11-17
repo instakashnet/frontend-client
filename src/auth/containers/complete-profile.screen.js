@@ -146,8 +146,25 @@ const CompleteProfile = ({ history }) => {
             isLoading={isLoading}
             disabled={isLoading}
           />
-          {isGoogle && <InputPhone value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} country="pe" />}
           <SelectComponent name="identity_sex" label="Sexo" value={formik.values.identity_sex} onChange={formik.handleChange} options={sexOptions} />
+          {isGoogle && (
+            <>
+              <InputPhone value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} country="pe" />
+              <h2 className="text-center mb-2">¿Te ha referido un amigo?</h2>
+              <Input
+                type="text"
+                label="Ingresa el código de afiliado"
+                name="affiliate"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.affiliate}
+                error={formik.errors.affiliate}
+                touched={formik.touched.affiliate}
+                autoComplete="off"
+              />
+            </>
+          )}
+
           <div className="flex justify-center mt-6 mb-3">
             <button type="button" className={classes.InfoButton} onClick={openModalHandler}>
               ¿Porque me piden estos datos?
@@ -156,7 +173,8 @@ const CompleteProfile = ({ history }) => {
           <Button
             type="submit"
             className={`action-button ld-over mt-3 ${isProcessing ? "running" : ""}`}
-            disabled={!formik.isValid || (document_type === "DNI" && invalidDNI) || isProcessing}>
+            disabled={!formik.isValid || (document_type === "DNI" && invalidDNI) || isProcessing}
+          >
             <span className="ld ld-ring ld-spin" />
             Completar
           </Button>
