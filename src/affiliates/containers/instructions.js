@@ -42,7 +42,7 @@ export const Instructions = ({ ...rest }) => {
               </p>
             </Step>
             <img src={Arrow1} className="hidden lg:block" alt="siguiente" />
-            <Step img={Step2Img} className={`self-end ${classes.Step2}`} title="2. Recibe ">
+            <Step img={Step2Img} className={`self-end ${classes.Step2}`} title="2. Recibe KASH por cada referido">
               <p>
                 Cada amigo registrado con tu codigo recibirá una tasa preferencial en su primer cambio y tu ganarás <b>1 KASH = 1 $</b>.
               </p>
