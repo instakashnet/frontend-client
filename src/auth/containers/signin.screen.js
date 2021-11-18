@@ -41,7 +41,7 @@ const Signin = () => {
 
   const signInGoogle = (res) => {
     if (res.error) if (res.error.includes("popup_closed")) return;
-    dispatch(signinGoogle(res.tokenId));
+    dispatch(signinGoogle(res.accessToken));
   };
 
   // useEffect(() => {

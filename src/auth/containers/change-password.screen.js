@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 
 // HELPERS
 import { changePasswordValidation } from "../helpers/formValidations";
-import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
+// import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
 
 // REDUX
 import { useSelector, useDispatch } from "react-redux";
@@ -19,12 +19,12 @@ import classes from "../assets/css/auth.containers.module.scss";
 
 const ChangePassword = (props) => {
   const query = new URLSearchParams(props.location.search),
-    linkingUrl = query.get("linkingUrl"),
+    // linkingUrl = query.get("linkingUrl"),
     token = query.get("t");
 
   // FOMRIK & REDUx
   const dispatch = useDispatch(),
-    { isMobile } = useDeviceDetect(),
+    // { isMobile } = useDeviceDetect(),
     { isProcessing } = useSelector((state) => state.Auth),
     formik = useFormik({
       initialValues: { password: "", confirmPassword: "" },
@@ -33,9 +33,9 @@ const ChangePassword = (props) => {
     });
 
   if (!token) return <Redirect to="/signin" />;
-  if (isMobile) {
-    if (linkingUrl && token) return window.location.replace(`${linkingUrl}change-password?t=${token}`);
-  }
+  // if (isMobile) {
+  //   if (linkingUrl && token) return window.location.replace(`${linkingUrl}change-password?t=${token}`);
+  // }
 
   return (
     <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
