@@ -72,8 +72,8 @@ export const ModalInformation = () => {
     <div className="text-center">
       <h2>Estimado usuario</h2>
       <p className="my-3">
-        Gracias por la confianza, queremos informarle que hoy Sábado 23 de octubre estaremos haciendo mantenimiento a nuestros servidores a las 2PM hora Perú, para poder brindarle
-        siempre el mejor servicio. Toda operación ingresada <b>despúes de las 2PM de hoy</b> será procesada el dia Lunes a las 9AM.
+        Gracias por la confianza, queremos informarle que el dia Viernes 05 de Noviembre laboraremos hasta la 1:00PM, esto debido a un mantenimiento programado en nuestra
+        plataforma. Todas las operaciones ingresadas <b>después de las 1:00PM</b> serán procesadas el dia Sàbado 06 de Noviembre desde las 9AM.
       </p>
       <p className="mb-4 inline-block font-bold">Agradecemos su comprensión.</p>
       <Button onClick={closeModalHandler} className="action-button">
