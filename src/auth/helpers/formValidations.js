@@ -9,9 +9,6 @@ export const signinValidation = Yup.object().shape({
 
 export const signupValidation = Yup.object().shape({
   email: Yup.string().required("Debes colocar un correo electrónico.").email("Coloca un correo válido."),
-  phone: Yup.string()
-    .required("Debes colocar un teléfono de contacto.")
-    .matches(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s/0-9]{9,14}$/, "Debes colocar un teléfono válido."),
   password: Yup.string()
     .required("Debes colocar una contraseña")
     .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{6,}$/, "Debe ser de al menos 6 caracteres, con 1 mayúscula y 1 número."),
@@ -22,24 +19,21 @@ export const signupValidation = Yup.object().shape({
   acceptTerms: Yup.boolean().oneOf([true], "Debes aceptar nuestros términos y condiciones."),
 });
 
-export const completeProfileValidation = (isGoogle) =>
-  Yup.object().shape({
-    first_name: Yup.string().required("Debes colocar un nombre."),
-    last_name: Yup.string().required("Debes colocar un apellido."),
-    document_type: Yup.string().required("Debes seleccionar un tipo de documento."),
-    document_identification: Yup.string()
-      .required("Coloca tu nro. de documento")
-      .matches(/^[0-9]{8,13}$/, "Número de documento ingresado inválido."),
-    phone: isGoogle
-      ? Yup.string()
-          .required("Debes colocar un teléfono de contacto.")
-          .matches(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s/0-9]{10,13}$/, "Debes colocar un teléfono válido.")
-      : Yup.string().notRequired(),
-    affiliate: Yup.string()
-      .notRequired()
-      .matches(/^[a-zA-Z0-9]+$/i, "Código de afiliado inválido."),
-    identity_sex: Yup.string().required("Debes seleccionar una opción."),
-  });
+export const completeProfileValidation = Yup.object().shape({
+  first_name: Yup.string().required("Debes colocar un nombre."),
+  last_name: Yup.string().required("Debes colocar un apellido."),
+  document_type: Yup.string().required("Debes seleccionar un tipo de documento."),
+  document_identification: Yup.string()
+    .required("Coloca tu nro. de documento")
+    .matches(/^[0-9]{8,13}$/, "Número de documento ingresado inválido."),
+  phone: Yup.string()
+    .required("Debes colocar un teléfono de contacto.")
+    .matches(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s/0-9]{10,13}$/, "Debes colocar un teléfono válido."),
+  affiliate: Yup.string()
+    .notRequired()
+    .matches(/^[a-zA-Z0-9]+$/i, "Código de afiliado inválido."),
+  identity_sex: Yup.string().required("Debes seleccionar una opción."),
+});
 
 export const emailValidation = Yup.object().shape({
   email: Yup.string().required("Debes colocar un correo electrónico.").email("Coloca un correo válido."),
