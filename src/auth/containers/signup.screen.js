@@ -7,7 +7,7 @@ import { signupValidation } from "../helpers/formValidations";
 import { signupInit } from "../store/actions";
 
 import { Input } from "../../components/UI/form-items/input.component";
-import { InputPhone } from "../../components/UI/form-items/phone-input.component";
+// import { InputPhone } from "../../components/UI/form-items/phone-input.component";
 
 import { Button } from "../../components/UI/button.component";
 import { CheckboxComponent } from "../../components/UI/form-items/checkbox.component";
@@ -18,12 +18,12 @@ const Signup = () => {
   const dispatch = useDispatch();
   const { isProcessing } = useSelector((state) => state.Auth);
   const formik = useFormik({
-    initialValues: { email: "", phone: "", password: "", confirmPassword: "", affiliate: "", allowPromotionalEmail: false, acceptTerms: false },
+    initialValues: { email: "", password: "", confirmPassword: "", affiliate: "", allowPromotionalEmail: false, acceptTerms: false },
     validationSchema: signupValidation,
     onSubmit: (values) => dispatch(signupInit(values)),
   });
 
-  const onPhoneChange = (value) => formik.setFieldValue("phone", value);
+  // const onPhoneChange = (value) => formik.setFieldValue("phone", value);
 
   return (
     <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
@@ -43,7 +43,7 @@ const Signup = () => {
             touched={formik.touched.email}
             iconEnd={Mail}
           />
-          <InputPhone country="pe" value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} autoComplete="username" />
+          {/* <InputPhone country="pe" value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} autoComplete="username" /> */}
           <Input
             type="password"
             name="password"
@@ -83,7 +83,8 @@ const Signup = () => {
             className={classes.Checkbox}
             value={formik.values.allowPromotionalEmail}
             error={formik.errors.allowPromotionalEmail}
-            onChange={formik.handleChange}>
+            onChange={formik.handleChange}
+          >
             Autorizo recibir notícias y promociones de parte de Instakash
           </CheckboxComponent>
           <CheckboxComponent name="acceptTerms" className={classes.Checkbox} value={formik.values.acceptTerms} error={formik.errors.acceptTerms} onChange={formik.handleChange}>

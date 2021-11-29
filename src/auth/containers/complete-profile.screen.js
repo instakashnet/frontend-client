@@ -34,7 +34,7 @@ const CompleteProfile = ({ history }) => {
   const formik = useFormik({
     initialValues: { type: "natural", first_name: "", last_name: "", identity_sex: "", phone: "", document_type: "DNI", document_identification: "", affiliate: "" },
     enableReinitialize: true,
-    validationSchema: completeProfileValidation(isGoogle),
+    validationSchema: completeProfileValidation,
     onSubmit: (values) => dispatch(completeProfileInit(values)),
   });
 
@@ -146,10 +146,10 @@ const CompleteProfile = ({ history }) => {
             isLoading={isLoading}
             disabled={isLoading}
           />
+          <InputPhone value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} country="pe" />
           <SelectComponent name="identity_sex" label="Sexo" value={formik.values.identity_sex} onChange={formik.handleChange} options={sexOptions} />
           {isGoogle && (
             <>
-              <InputPhone value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} country="pe" />
               <h2 className="text-center mb-2">¿Te ha referido un amigo?</h2>
               <Input
                 type="text"
