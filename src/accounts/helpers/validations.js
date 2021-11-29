@@ -50,9 +50,7 @@ export const addThirdPartyAccountSchema = Yup.object().shape({
   documentType: Yup.string().required("Debes seleccionar un tipo de documento."),
   razonSocial: Yup.string().when("thirdPartyAccType", {
     is: "juridica",
-    then: Yup.string()
-      .required("Debes colocar la razón social de la empresa.")
-      .matches(/^[a-zA-Z\s]+$/i, "Solo se aceptan letras."),
+    then: Yup.string().required("Debes colocar la razón social de la empresa."),
     otherwise: Yup.string().notRequired(),
   }),
   name: Yup.string().when("thirdPartyAccType", {
