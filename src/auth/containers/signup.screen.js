@@ -88,8 +88,15 @@ const Signup = () => {
             Autorizo recibir notícias y promociones de parte de Instakash
           </CheckboxComponent>
           <CheckboxComponent name="acceptTerms" className={classes.Checkbox} value={formik.values.acceptTerms} error={formik.errors.acceptTerms} onChange={formik.handleChange}>
-            Declaro que he leído y acepto sus <a href="https://instakash.net/politicas-de-privacidad">Términos y condiciones</a> y las{" "}
-            <a href="https://instakash.net/terminos-y-condiciones">Políticas de privacidad</a>.
+            Declaro que he leído y acepto sus{" "}
+            <a href="https://instakash.net/politicas-de-privacidad" target="_blank" rel="noopener noreferrer">
+              Términos y condiciones
+            </a>{" "}
+            y las{" "}
+            <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer">
+              Políticas de privacidad
+            </a>
+            .
           </CheckboxComponent>
           <Button type="submit" className={`action-button my-3 ld-over ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
             <span className="ld ld-ring ld-spin" />
