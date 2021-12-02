@@ -76,7 +76,6 @@ function* uploadDocument({ values, uploadType, setFile, setPercentage }) {
 
   try {
     const res = yield authService.post(URL, formData, {
-      timeout: 99999,
       onUploadProgress: ({ loaded, total }) => {
         const percentage = Math.floor((loaded * 100) / total);
         if (percentage < 100) setPercentage(percentage);

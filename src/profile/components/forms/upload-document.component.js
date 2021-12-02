@@ -16,9 +16,10 @@ const UploadDocument = ({ type, documentUrl, profileId }) => {
 
   const inputName = type === "frontal" ? "identity_photo" : "identity_photo_two";
   const onDrop = useCallback(
-    (acceptedFile) => {
-      setFile(acceptedFile[0]);
-      dispatch(uploadDocumentInit({ [inputName]: acceptedFile[0], profileId }, type, setFile, setPercentage));
+    (acceptedFiles) => {
+      setFile(acceptedFiles[0]);
+      const renamedFiles = acceptedFiles.map((file) => new File([file], type, { type: file.type }));
+      dispatch(uploadDocumentInit({ [inputName]: renamedFiles[0], profileId }, type, setFile, setPercentage));
     },
     [dispatch, inputName, type, profileId]
   );
