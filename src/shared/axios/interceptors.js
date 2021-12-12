@@ -1,5 +1,3 @@
-import { getCodeMessage } from "./error-codes";
-
 const requestLog = (config) => (process.env.NODE_ENV !== "production" ? console.log(`Request sent to ${config.url}`) : false);
 
 export const reqInterceptor = (instance) =>
@@ -27,10 +25,7 @@ export const resInterceptor = (instance) =>
       let message = "Ha ocurrido un error inesperado, por favor intenta más tarde, si el problema persiste contacte a soporte.";
 
       if (error.response) {
-        const code = error.response.data.code;
-        if (code && code !== 4006) message = getCodeMessage(code);
-
-        error.response.message = message;
+        error.response.message = error.response.data.error.message;
         return Promise.reject(error.response);
       } else if (error.request) {
         message = "Se ha caido la conexión, por favor revise su conexión a internet. Si el problema persiste contacte a soporte.";
