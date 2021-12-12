@@ -25,7 +25,6 @@ const authReducer = (state = initialState, action) => {
 
     case types.SIGNGUP_SUCCESS:
     case types.RECOVER_PASSWORD_SUCCESS:
-    case types.RESET_PASSWORD_SUCCESS:
     case types.VALIDATE_EMAIL_SUCCESS:
     case types.REFRESH_CODE_SUCCESS:
       return { ...state, isProcessing: false };
@@ -34,6 +33,7 @@ const authReducer = (state = initialState, action) => {
       return { ...state, userCode: action.userCode };
 
     case types.LOGOUT_SUCCESS:
+    case types.RESET_PASSWORD_SUCCESS:
       return { ...state, isProcessing: false, token: null, isAuth: false };
 
     case types.AUTH_ERROR:

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -13,29 +13,17 @@ import classes from "../assets/css/auth.containers.module.scss";
 
 const RecoverPassword = () => {
   const dispatch = useDispatch();
-  const [sent, setSent] = useState(false);
   const { isProcessing } = useSelector((state) => state.Auth);
 
-  const formik = useFormik({ initialValues: { email: "" }, validationSchema: emailValidation, onSubmit: (values) => dispatch(recoverPasswordInit(values, setSent)) });
+  const formik = useFormik({ initialValues: { email: "" }, validationSchema: emailValidation, onSubmit: (values) => dispatch(recoverPasswordInit(values)) });
 
   return (
     <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
       <div className={classes.AuthWrapper}>
-        {!sent ? (
-          <>
-            <h2>Tranquilo, lo solucionaremos</h2>
-            <p className="my-4">
-              Ingresa tu correo electrónico y te enviaremos <br /> un link para generar una nueva contraseña.
-            </p>
-          </>
-        ) : (
-          <>
-            <h2>Revisa tu correo electrónico</h2>
-            <p className="my-4">
-              Te hemos enviado un link para reiniciar tu contraseña <br /> Recuerda revisar la carpeta de spam.
-            </p>
-          </>
-        )}
+        <h2>Tranquilo, lo solucionaremos</h2>
+        <p className="my-4">
+          Ingresa tu correo electrónico y te enviaremos <br /> un link para generar una nueva contraseña.
+        </p>
         <form onSubmit={formik.handleSubmit}>
           <Input
             name="email"
@@ -47,10 +35,9 @@ const RecoverPassword = () => {
             touched={formik.touched.email}
             iconEnd={Mail}
           />
-          {sent && <p className="text-center mt-6">¿No te llegó el correo de confirmación?</p>}
           <Button type="submit" className={`action-button my-4 ld-over ${isProcessing ? "running" : ""}`} disabled={!formik.isValid || isProcessing}>
             <span className="ld ld-ring ld-spin" />
-            {sent ? "Reenviar correo" : "Enviar correo"}
+            Enviar correo
           </Button>
         </form>
         <p>

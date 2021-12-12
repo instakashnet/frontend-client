@@ -7,13 +7,11 @@ import Swal from "sweetalert2";
 import { authService } from "../../services/auth.service";
 import history from "../../shared/history";
 
-function* setAuthToken(data, isRefresh = false) {
+function* setAuthToken(data) {
   const date = new Date();
   const expDate = new Date(date.setSeconds(date.getSeconds() + data.expiresIn));
 
   yield call([localStorage, "setItem"], "authData", JSON.stringify({ token: data.accessToken, expDate }));
-
-  if (isRefresh) yield call(setAuthTimeout, expDate.getTime() - new Date().getTime());
 }
 
 function* loadUser() {
@@ -88,7 +86,7 @@ function* signup({ values }) {
     if (res.status === 201) {
       yield call(setAuthToken, res.data);
       yield put(actions.signupSuccess());
-      yield call([history, "push"], "/email-verification");
+      yield call([history, "push"], "/email-verification/OTP");
     }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
@@ -106,15 +104,19 @@ function* completeProfile({ values }) {
   }
 }
 
-function* validateEmail({ values }) {
-  const verificationCode = { verificationCode: `${values.otp_1}${values.otp_2}${values.otp_3}${values.otp_4}` };
+function* validateEmail({ values, otpType }) {
+  const validateValues = { verificationCode: `${values.otp_1}${values.otp_2}${values.otp_3}${values.otp_4}`, operation: otpType };
 
   try {
-    const res = yield authService.post("/auth/verify-code", verificationCode);
+    const res = yield authService.post("/auth/verify-code", validateValues);
 
     if (res.status === 200) {
       yield call(setAuthToken, res.data);
-      yield call(loadUser);
+      if (otpType === "PWD") {
+        yield put(actions.refreshCodeSuccess());
+        return yield call([history, "push"], "/change-password");
+      }
+      return yield call(loadUser);
     }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
@@ -135,24 +137,14 @@ function* refreshVerificationCode() {
   }
 }
 
-// function* refreshToken() {
-//   try {
-//     const res = yield authService.post("/auth/refresh");
-//     if (res.status === 200) {
-//       yield call(setAuthToken, res.data, true);
-//     } else yield call(logout);
-//   } catch (error) {
-//     yield call(logout);
-//   }
-// }
-
-function* recoverPassword({ values, setSent }) {
+function* recoverPassword({ values }) {
   try {
     const res = yield authService.post("/users/recover-password", values);
+
     if (res.status === 201) {
+      yield call(setAuthToken, res.data);
+      yield call([history, "push"], "/email-verification/PWD");
       yield put(actions.recoverPasswordSuccess());
-      yield call(setSent, true);
-      yield call([Swal, "fire"], "¡Correo enviado!", "Revisa tu correo electrónico", "success");
     }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
@@ -160,13 +152,14 @@ function* recoverPassword({ values, setSent }) {
   }
 }
 
-function* resetPassword({ values, token }) {
+function* resetPassword({ values }) {
   try {
-    const res = yield authService.post("/users/reset-password", values, { headers: { "x-access-token": token } });
+    const res = yield authService.post("/users/reset-password", values);
     if (res.status === 201) {
       yield put(actions.resetPasswordSuccess());
-      yield call([Swal, "fire"], "Contraseña cambiada", "Ya puedes ingresar con tu nueva contraseña.", "success");
+      yield call(clearUser);
       yield call([history, "push"], "/signin");
+      yield call([Swal, "fire"], "Contraseña cambiada", "Ya puedes ingresar con tu nueva contraseña.", "success");
     }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));

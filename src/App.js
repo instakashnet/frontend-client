@@ -59,7 +59,7 @@ function App() {
           <Switch>
             <PublicRoute exact path="/signin" component={Signin} />
             <PublicRoute exact path="/signup" component={Signup} />
-            <PublicRoute exact path="/email-verification" component={EmailValidationScreen} />
+            <PublicRoute path="/email-verification/:type" component={EmailValidationScreen} />
             <PublicRoute exact path="/recover-password" component={RecoverPassword} />
             <PublicRoute exact path="/change-password" component={ChangePassword} />
             <PublicRoute exact path="/complete-profile" component={CompleteProfile} />

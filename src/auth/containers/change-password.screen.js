@@ -1,10 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
-import { Redirect } from "react-router-dom";
 
 // HELPERS
 import { changePasswordValidation } from "../helpers/formValidations";
-// import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
 
 // REDUX
 import { useSelector, useDispatch } from "react-redux";
@@ -17,25 +15,20 @@ import { Button } from "../../components/UI/button.component";
 // STYLES
 import classes from "../assets/css/auth.containers.module.scss";
 
-const ChangePassword = (props) => {
-  const query = new URLSearchParams(props.location.search),
-    // linkingUrl = query.get("linkingUrl"),
-    token = query.get("t");
-
+const ChangePassword = ({ history }) => {
   // FOMRIK & REDUx
   const dispatch = useDispatch(),
-    // { isMobile } = useDeviceDetect(),
     { isProcessing } = useSelector((state) => state.Auth),
     formik = useFormik({
       initialValues: { password: "", confirmPassword: "" },
       validationSchema: changePasswordValidation,
-      onSubmit: (values) => dispatch(resetPasswordInit(values, token)),
+      onSubmit: (values) => dispatch(resetPasswordInit(values)),
     });
 
-  if (!token) return <Redirect to="/signin" />;
-  // if (isMobile) {
-  //   if (linkingUrl && token) return window.location.replace(`${linkingUrl}change-password?t=${token}`);
-  // }
+  useEffect(() => {
+    const authData = localStorage.getItem("authData");
+    if (!authData) return history.push("/signin");
+  }, [history]);
 
   return (
     <main className={`h-full md:h-screen ${classes.SignupBackground}`}>

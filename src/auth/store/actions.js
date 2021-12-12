@@ -54,9 +54,10 @@ export const resetPasswordSuccess = () => ({
   type: types.RESET_PASSWORD_SUCCESS,
 });
 
-export const validateEmailInit = (values) => ({
+export const validateEmailInit = (values, otpType) => ({
   type: types.VALIDATE_EMAIL_INIT,
   values,
+  otpType,
 });
 
 export const validateEmailSuccess = () => ({
