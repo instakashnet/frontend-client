@@ -7,7 +7,6 @@ import { signupValidation } from "../helpers/formValidations";
 import { signupInit } from "../store/actions";
 
 import { Input } from "../../components/UI/form-items/input.component";
-// import { InputPhone } from "../../components/UI/form-items/phone-input.component";
 
 import { Button } from "../../components/UI/button.component";
 import { CheckboxComponent } from "../../components/UI/form-items/checkbox.component";
@@ -22,8 +21,6 @@ const Signup = () => {
     validationSchema: signupValidation,
     onSubmit: (values) => dispatch(signupInit(values)),
   });
-
-  // const onPhoneChange = (value) => formik.setFieldValue("phone", value);
 
   return (
     <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
@@ -43,7 +40,6 @@ const Signup = () => {
             touched={formik.touched.email}
             iconEnd={Mail}
           />
-          {/* <InputPhone country="pe" value={formik.values.phone} onChange={onPhoneChange} error={formik.errors.phone} autoComplete="username" /> */}
           <Input
             type="password"
             name="password"
