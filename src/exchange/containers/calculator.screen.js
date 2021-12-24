@@ -24,6 +24,8 @@ const Calculator = ({ profile, setModal }) => {
   const temporalAmountSent = useRef(null);
   const { rates, isLoading, coupon, isProcessing } = useSelector((state) => state.Exchange);
 
+  console.log(profile);
+
   const dispatch = useDispatch();
 
   const formik = useFormik({
@@ -149,7 +151,8 @@ const Calculator = ({ profile, setModal }) => {
               onMouseEnter={() => setShowInfo(true)}
               onClick={() => setShowInfo(true)}
               onMouseLeave={() => setShowInfo(false)}
-              open={showInfo}>
+              open={showInfo}
+            >
               <Info className="ml-3" />
             </Tooltip>
           </p>

@@ -23,11 +23,13 @@ export const resInterceptor = (instance) =>
       console.log(error);
 
       let message = "Ha ocurrido un error inesperado, por favor intenta más tarde, si el problema persiste contacte a soporte.";
+      if (error.code === "ECONNABORTED") message = "Se ha agotado el tiempo de espera, por favor revise su conexión a internet. Si el problema persiste contacte a soporte.";
 
       if (error.response) {
-        error.response.message = error.response.data.error
-          ? error.response.data.error.message
-          : "Ha ocurrido un error inesperado, intente de nuevo. Si el problema persiste contacte a soporte.";
+        const code = error.response.data.code;
+        if (code) message = getCodeMessage(code);
+
+        error.response.message = message;
         return Promise.reject(error.response);
       } else if (error.request) {
         message = "Se ha caido la conexión, por favor revise su conexión a internet. Si el problema persiste contacte a soporte.";
