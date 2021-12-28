@@ -39,8 +39,8 @@ function* loadUser() {
       return yield put(actions.authError());
     }
 
-    const userRes = yield authService.get("/users/username");
-    yield put(actions.loadUserSuccess(token, userRes.data.username));
+    const user = { ...resData.user, verified: resData.verified, completed: resData.completed, isGoogle: resData.isGoogle, isReferal: resData.isReferal };
+    yield put(actions.loadUserSuccess(token, user));
 
     yield call(setAuthTimeout, new Date(expDate).getTime() - new Date().getTime());
   } catch (error) {

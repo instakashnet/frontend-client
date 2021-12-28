@@ -3,14 +3,14 @@ import { EDIT_USER_CODE_SUCCESS } from "../../profile/store/types";
 const initialState = {
   isProcessing: false,
   token: null,
-  userCode: null,
+  user: null,
   isAuth: false,
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.LOADUSER_SUCCESS:
-      return { ...state, isProcessing: false, isAuth: true, token: action.token, userCode: action.userCode };
+      return { ...state, isProcessing: false, isAuth: true, token: action.token, user: action.user };
 
     case types.SIGNGIN_INIT:
     case types.SIGNIN_GOOGLE:

@@ -4,10 +4,10 @@ export const loadUserInit = () => ({
   type: types.LOADUSER_INIT,
 });
 
-export const loadUserSuccess = (token, userCode) => ({
+export const loadUserSuccess = (token, user) => ({
   type: types.LOADUSER_SUCCESS,
   token,
-  userCode,
+  user,
 });
 
 export const completeProfileInit = (values) => ({
