@@ -18,7 +18,7 @@ const RecoverPassword = () => {
   const formik = useFormik({ initialValues: { email: "" }, validationSchema: emailValidation, onSubmit: (values) => dispatch(recoverPasswordInit(values)) });
 
   return (
-    <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
+    <main className={classes.SignupBackground}>
       <div className={classes.AuthWrapper}>
         <h2>Tranquilo, lo solucionaremos</h2>
         <p className="my-4">

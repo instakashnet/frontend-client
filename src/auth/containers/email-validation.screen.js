@@ -50,7 +50,7 @@ export const EmailValidationScreen = ({ history, match }) => {
   }, [history]);
 
   return (
-    <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
+    <main className={classes.SignupBackground}>
       <div className={classes.AuthWrapper}>
         <img src={VerificationIcon} alt="Verificación" />
         <h2 className="mt-5 mb-3">Ingresa el código enviado a tu correo</h2>

@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 100vh;
 
   @include respond(tablet) {
     background: url(../images/bg/coins.svg);
@@ -24,6 +25,7 @@
   font-size: 1rem;
   max-width: 26rem;
   justify-self: center;
+  height: 100%;
 
   > button {
     color: $base-green;
