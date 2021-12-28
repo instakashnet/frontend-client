@@ -19,13 +19,13 @@ import Spinner from "../../components/UI/spinner.component";
 import classes from "../assets/css/exchange-screens.module.scss";
 
 const Exchange = ({ history, location, match }) => {
-  const dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.Exchange.isLoading);
-  const { profileInfo } = useProfileInfo();
-  const { isMobile } = useDeviceDetect();
-
-  const { type: profileType } = profileInfo;
-  const order = JSON.parse(sessionStorage.getItem("order"));
+  const dispatch = useDispatch(),
+    isLoading = useSelector((state) => state.Exchange.isLoading),
+    user = useSelector((state) => state.Auth.user),
+    { profileInfo } = useProfileInfo(),
+    { isMobile } = useDeviceDetect(),
+    { type: profileType } = profileInfo,
+    order = JSON.parse(sessionStorage.getItem("order"));
 
   useEffect(() => {
     dispatch(getLastOrderInit());
@@ -34,9 +34,9 @@ const Exchange = ({ history, location, match }) => {
   useEffect(() => {
     if (location.pathname === "/currency-exchange" && !order) {
       dispatch(getRatesInit());
-      dispatch(validateCouponInit("NUEVOREFERIDO1", profileType));
+      if (user.isReferal) dispatch(validateCouponInit("NUEVOREFERIDO1", profileType));
     }
-  }, [location, dispatch, order, profileType]);
+  }, [location, dispatch, order, profileType, user.isReferal]);
 
   const preventLoad = (e) => {
     e.preventDefault();

@@ -20,7 +20,7 @@ import classes from "../assets/css/affiliates-containers.module.scss";
 
 export const Instructions = ({ ...rest }) => {
   const dispatch = useDispatch();
-  const usercode = useSelector((state) => state.Auth.userCode);
+  const user = useSelector((state) => state.Auth.user);
   const { isMobile } = useDeviceDetect();
 
   const editCodeHandler = () => {
@@ -57,7 +57,7 @@ export const Instructions = ({ ...rest }) => {
         )}
         <Card className={classes.CodeInfoCard}>
           <div className={classes.CodeWrapper}>
-            <UserCode userCode={usercode} />
+            <UserCode userCode={user.username} />
             <button onClick={editCodeHandler}>Editar mi código</button>
           </div>
           <p className="hidden md:block text-left">
@@ -71,7 +71,7 @@ export const Instructions = ({ ...rest }) => {
           <p className="md:mr-4 lg:mr-8">
             ¡Invita a tus amigos y gana <b>KASH</b> ahora!
           </p>
-          <ShareIcons userCode={usercode} className="mt-3 md:mt-0" />
+          <ShareIcons userCode={user.username} className="mt-3 md:mt-0" />
         </div>
       </article>
     </div>
