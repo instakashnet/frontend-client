@@ -22,15 +22,15 @@ export const resInterceptor = (instance) =>
       console.warn("Error status", error.response ? error.response.status : error.code);
       console.log(error);
 
-      let message = "Ha ocurrido un error inesperado, por favor intenta más tarde, si el problema persiste contacte a soporte.";
-
+      let message;
       if (error.response) {
-        error.response.message = error.response.data.error.message;
-        return Promise.reject(error.response);
-      } else if (error.request) {
-        message = "Se ha caido la conexión, por favor revise su conexión a internet. Si el problema persiste contacte a soporte.";
-        error.message = message;
-      } else error.message = message;
+        message = error.response.data.error
+          ? error.response.data.error.message
+          : "Ha ocurrido un error inesperado, por favor intenta de nuevo. Si el problema persiste contacte a soporte.";
+      } else if (error.request) message = "Se ha caido la conexión, por favor revise su conexión a internet. Si el problema persiste contacte a soporte.";
+
+      error.message = message;
+
       return Promise.reject(error);
     }
   );
