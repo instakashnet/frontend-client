@@ -22,7 +22,6 @@ import ChangePassword from "./auth/containers/change-password.screen";
 import CompleteProfile from "./auth/containers/complete-profile.screen";
 
 // PRIVATE
-const ProfileSelection = lazy(() => import("./profile/containers/selection.screen"));
 const Welcome = lazy(() => import("./welcome/containers/Welcome"));
 const Dashboard = lazy(() => import("./dashboard/containers/dashboard.screen"));
 const Affiliates = lazy(() => import("./affiliates/affiliates.screen"));
@@ -64,7 +63,6 @@ function App() {
             <PublicRoute exact path="/change-password" component={ChangePassword} />
             <PublicRoute exact path="/complete-profile" component={CompleteProfile} />
             <PrivateRoute exact path="/" component={asyncComponent(Welcome)} />
-            <PrivateRoute exact path="/profile-selection" component={asyncComponent(ProfileSelection)} />
             <PrivateRoute exact path="/my-profile" component={asyncComponent(MyProfile)} />
             <PrivateRoute exact path="/affiliate-program" component={asyncComponent(Affiliates)} />
             <PrivateRoute exact path="/my-accounts" component={asyncComponent(Accounts)} />
