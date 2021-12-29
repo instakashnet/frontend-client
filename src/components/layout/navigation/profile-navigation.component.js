@@ -1,14 +1,14 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useUserData } from "../../../shared/hooks/useProfileInfo";
+
+// REDUX
+import { useDispatch, useSelector } from "react-redux";
 import { logoutInit } from "../../../store/actions";
-import { useProfileInfo } from "../../../shared/hooks/useProfileInfo";
 
 import NavItem from "./nav-item.component";
 import ProgressBar from "../../UI/progress-bar.component";
 
-import Male from "../../../assets/images/profiles/male.svg";
-import Female from "../../../assets/images/profiles/female.svg";
-import Company from "../../../assets/images/profiles/company.svg";
+// ASSETS
 import Profile from "../../../assets/images/icons/avatar.svg";
 import ChangeProfile from "../../../assets/images/icons/profiles.svg";
 import Logout from "../../../assets/images/icons/logout.svg";
@@ -16,18 +16,9 @@ import Logout from "../../../assets/images/icons/logout.svg";
 import classes from "./navigation-components.module.scss";
 
 const ProfileNavigation = () => {
-  const dispatch = useDispatch();
-  const { profileInfo, profileCompleted } = useProfileInfo();
-
-  let Avatar = profileInfo.identity_sex === "male" ? Male : Female;
-  let profileName = `${profileInfo.first_name.split(" ")[0]} ${profileInfo.last_name.split(" ")[0]}`;
-  let profileType = "Usuario";
-
-  if (profileInfo.type === "juridica") {
-    Avatar = Company;
-    profileName = profileInfo.razon_social;
-    profileType = "Empresa";
-  }
+  const dispatch = useDispatch(),
+    user = useSelector((state) => state.Auth.user),
+    { completed, Avatar } = useUserData(user);
 
   return (
     <div className={classes.ProfileNavigation}>
@@ -36,19 +27,16 @@ const ProfileNavigation = () => {
           <img src={Avatar} alt="profile" />
         </div>
         <div className="text-left flex flex-col items-start">
-          <h3>{profileName}</h3>
-          <p>{profileType}</p>
+          <h3>{user.name}</h3>
         </div>
       </div>
-      {profileInfo.selected && (
-        <div className={classes.ProfileProgress}>
-          <h3>Progreso de tu perfil</h3>
-          <ProgressBar width={profileCompleted} />
-        </div>
-      )}
+      <div className={classes.ProfileProgress}>
+        <h3>Usuario completado</h3>
+        <ProgressBar width={completed} />
+      </div>
       <nav className="w-full mt-8">
         <ul>
-          {profileInfo.selected && <NavItem label="Ver perfil" icon={Profile} link="/my-profile" />}
+          <NavItem label="Ver perfil" icon={Profile} link="/my-profile" />
           <NavItem label="Cambiar perfil" icon={ChangeProfile} link="/profile-selection" />
           <li>
             <button className="flex items-center" onClick={() => dispatch(logoutInit())}>

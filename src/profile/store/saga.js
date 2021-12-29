@@ -31,20 +31,12 @@ function* addProfile({ values }) {
   }
 }
 
-function* setSelectedProfile(profileId, profile) {
-  let profileSelected = profile;
-
-  if (profileId) {
-    profileSelected = yield select((state) => state.Profile.profiles.find((p) => p.id === profileId));
-    yield call([sessionStorage, "setItem"], "profileSelected", JSON.stringify(profileSelected));
-  }
+function* selectProfile({ profileId }) {
+  const profileSelected = yield select((state) => state.Profile.profiles.find((p) => p.id === profileId));
+  yield call([sessionStorage, "setItem"], "profileSelected", JSON.stringify(profileSelected));
 
   yield put(actions.selectProfileSuccess(profileSelected));
-}
-
-function* selectProfile({ profileId, profile }) {
-  yield call(setSelectedProfile, profileId, profile);
-  if (profileId) yield call([history, "push"], "/");
+  yield call([history, "push"], "/currency-exchange");
 }
 
 function* editProfile({ values, setEdit }) {
@@ -56,7 +48,7 @@ function* editProfile({ values, setEdit }) {
     const res = yield authService.put("/users/profiles", profileValues);
     if (res.status === 200) {
       yield call(getProfiles);
-      yield call(setSelectedProfile, values.profileId);
+      yield call(selectProfile, values.profileId);
       yield put(actions.editProfileSuccess());
       if (setEdit) yield call(setEdit, false);
       yield put(setAlertInit("Su perfil ha sido actualizado correctamente.", "success"));
@@ -83,7 +75,7 @@ function* uploadDocument({ values, uploadType, setFile, setPercentage }) {
     });
     if (res.status === 200) {
       yield call(getProfiles);
-      yield call(setSelectedProfile, values.profileId);
+      yield call(selectProfile, values.profileId);
       yield call(setFile, null);
       yield put(actions.editProfileSuccess());
       yield put(setAlertInit("La foto se ha cargado correctamente.", "success"));

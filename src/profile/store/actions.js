@@ -10,10 +10,9 @@ export const getProfilesSuccess = (profiles, user) => ({
   user,
 });
 
-export const selectProfileInit = (profileId, profile = null) => ({
+export const selectProfileInit = (profileId) => ({
   type: types.SELECT_PROFILE_INIT,
   profileId,
-  profile,
 });
 
 export const selectProfileSuccess = (profile) => ({

@@ -3,7 +3,6 @@ import { LOGOUT_SUCCESS } from "../../auth/store/types";
 
 const initialState = {
   profiles: [],
-  user: null,
   profileSelected: null,
   isLoading: true,
   isProcessing: false,
