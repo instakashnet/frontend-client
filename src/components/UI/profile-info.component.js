@@ -8,7 +8,7 @@ import classes from "./ui-components.module.scss";
 
 const ProfileInfo = ({ user, openNav }) => {
   const { isMobile } = useDeviceDetect(),
-    { Avatar } = useUserData();
+    { Avatar } = useUserData(user);
 
   let firstName = user.name.split(" ")[0];
 

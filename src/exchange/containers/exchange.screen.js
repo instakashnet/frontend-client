@@ -3,7 +3,6 @@ import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
 import { useDispatch, useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 import { getRatesInit, validateCouponInit, getLastOrderInit, openModal, closeModal } from "../../store/actions";
-import { useUserData } from "../../shared/hooks/useProfileInfo";
 
 // SCREENS
 import Calculator from "./calculator.screen";
@@ -27,14 +26,12 @@ const Exchange = ({ history, location, match }) => {
     isLoading = useSelector((state) => state.Exchange.isLoading),
     user = useSelector((state) => state.Auth.user),
     profile = useSelector((state) => state.Profile.profileSelected),
-    { profileInfo } = useUserData(user),
     { isMobile } = useDeviceDetect(),
-    { type: profileType } = profileInfo,
     order = JSON.parse(sessionStorage.getItem("order"));
 
   // EFFECTS
   useEffect(() => {
-    if (!profile) history.push("/currency-exchange/profile-selection");
+    if (!profile) return history.push("/currency-exchange/profile-selection");
   }, [profile, history]);
 
   useEffect(() => {
@@ -44,9 +41,9 @@ const Exchange = ({ history, location, match }) => {
   useEffect(() => {
     if (location.pathname === "/currency-exchange" && !order) {
       dispatch(getRatesInit());
-      if (user.isReferal) dispatch(validateCouponInit("NUEVOREFERIDO1", profileType));
+      if (user.isReferal) dispatch(validateCouponInit("NUEVOREFERIDO1", profile?.type));
     }
-  }, [location, dispatch, order, profileType, user.isReferal]);
+  }, [location, dispatch, order, profile, user.isReferal]);
 
   useEffect(() => {
     if (order && order.status === 2 && location.pathname !== "/currency-exchange/complete") history.push("/currency-exchange/complete");

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Add } from "@material-ui/icons";
 
 // REDUX
 import { useSelector, useDispatch } from "react-redux";
@@ -9,6 +10,7 @@ import Spinner from "../../components/UI/spinner.component";
 import AddProfile from "../../profile/components/forms/add-profile.component";
 import { Button } from "../../components/UI/button.component";
 
+// CLASSES
 import classes from "../assets/css/exchange-screens.module.scss";
 
 const Selection = () => {
@@ -32,7 +34,7 @@ const Selection = () => {
       <div className={classes.ProfileSelectionWrapper}>
         <h1 className="mb-1">Selecciona tu perfil</h1>
         <p>La selección de perfil nos permite saber que tipo de facturación deseas. Para una boleta continua con tu usuario, o si deseas una factura usa una de tus empresas.</p>
-        <div className="flex items-start flex-wrap justify-center mt-10">
+        <div className="flex items-start flex-wrap justify-center mt-6">
           {isLoading ? (
             <Spinner />
           ) : (
@@ -46,10 +48,23 @@ const Selection = () => {
                   name={profile.type === "natural" ? `${profile.first_name} ${profile.last_name}` : profile.razon_social}
                 />
               ))}
-              {profiles.length < 4 && <SelectionCard onClick={addProfileHandler} type="add" name="Agregar empresa" />}
             </>
           )}
         </div>
+        {profiles.length < 4 && (
+          <>
+            <div className="flex items-center justify-center my-2">
+              {Array.from(Array(4 - profiles.length).keys()).map((i) => (
+                <button onClick={addProfileHandler} key={i} className={classes.AddProfile}>
+                  <Add htmlColor="#FFF" fontSize="large" />
+                </button>
+              ))}
+            </div>
+            <button onClick={addProfileHandler} className={classes.AddLink}>
+              Agregar perfil empresa
+            </button>
+          </>
+        )}
       </div>
     </>
   );
