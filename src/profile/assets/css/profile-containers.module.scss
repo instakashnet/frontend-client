@@ -2,48 +2,35 @@
 @import "../../../assets/css/breakpoints";
 @import "../../../assets/css/font-sizes";
 
-@include respond(desktop) {
-  .ProfileInfoSection {
-    max-width: 1280px;
-  }
-}
-
 .ProfileWrapper {
   padding: 3.5rem 0.5rem 1rem;
+
+  @include respond(desktop) {
+    display: grid;
+    padding: 0;
+    grid-template-columns: 0.8fr 1.2fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "navigation section section"
+      "navigation section section"
+      "navigation section section";
+  }
 }
 
-.ProfileInfoCard {
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
+.ProfileSection {
+  grid-area: section;
+  width: 100%;
+  max-width: 960px;
+  margin: auto;
+}
 
-  p {
-    font-size: 0.85rem;
-    color: #afafaf;
-  }
+.ProfileNavigation {
+  grid-area: navigation;
 
-  h2 {
-    font-weight: 600;
-    font-size: 1.2rem;
-    text-transform: capitalize;
-  }
-
-  h3 {
-    font-weight: bold;
-    font-size: 0.85rem;
-  }
-
-  ul {
-    li {
-      color: #afafaf;
-      font-size: 0.9rem;
-
-      &:first-of-type {
-        color: $base-green;
-        font-weight: bold;
-        font-size: 1rem;
-        margin-bottom: 0.2rem;
-      }
-    }
+  @include respond(desktop) {
+    margin-right: 1rem;
+    border-right: 1px solid #ccc;
   }
 }
 

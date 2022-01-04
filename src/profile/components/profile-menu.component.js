@@ -4,31 +4,34 @@ import { NavLink } from "react-router-dom";
 // CLASSES
 import classes from "../assets/css/profile-components.module.scss";
 
-export const ProfileMenu = ({ match }) => {
+export const ProfileMenu = ({ match, className }) => {
   return (
-    <nav className={classes.ProfileNav}>
+    <nav className={`${classes.ProfileNav} ${className || ""}`}>
       <div className={classes.ProfileNavItems}>
         <div className={classes.NavItem}>
           <NavLink exact activeClassName={classes.Active} to={match.url}>
-            Datos básicos
+            <span>Datos básicos</span>
+            <small>Nombre, Apellido, Teléfono y Correo</small>
           </NavLink>
           <div />
         </div>
         <div className={classes.NavItem}>
           <NavLink activeClassName={classes.Active} to={match.url + "/verify-identity"}>
-            Verificar identidad
+            <span>Verificar identidad</span>
+            <small>Debes verificar tu identidad</small>
           </NavLink>
           <div />
         </div>
         <div className={classes.NavItem}>
           <NavLink activeClassName={classes.Active} to={match.url + "/additionals"}>
-            Datos adicionales
+            <span>Datos adicionales</span>
+            <small>Fecha de nacimiento, Dirección, profesión y ocupación.</small>
           </NavLink>
           <div />
         </div>
         <div className={classes.NavItem}>
           <a href="https://instakash.net/faq" target="_blank" rel="noopener noreferrer">
-            Centro de ayuda
+            <span>Centro de ayuda</span>
           </a>
           <div />
         </div>

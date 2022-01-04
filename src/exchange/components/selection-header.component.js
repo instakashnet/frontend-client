@@ -11,7 +11,7 @@ export const SelectionHeader = ({ profile }) => {
       <div className="flex flex-col items-start">
         <p className="capitalize">
           <b>Perfil:</b>{" "}
-          {profile.razon_social ? `${profile.razon_social.substring(0, 17).toLowerCase()}${profile.razon_social.length > 17 ? "..." : ""}` : profile.first_name.toLowerCase()}
+          {profile.razon_social ? `${profile.razon_social.substring(0, 20).toLowerCase()}${profile.razon_social.length > 20 ? "..." : ""}` : profile.first_name.toLowerCase()}
           <br />
         </p>
       </div>

@@ -35,23 +35,29 @@ export const VerifyIdentityScreen = ({ user }) => {
       ) : (
         <>
           <h3>Selecciona tu documento</h3>
-          <button className={classes.DocumentSelect} onClick={() => setDocType("dni")}>
-            <div className="flex items-center">
-              <img src={DniIcon} width={25} alt="dni" className="mr-2" />
-              <div className="text-left">
-                <h4>Documento emitido por el gobierno</h4>
-                <p>DNI, CE, PTP</p>
+          <div className="grid mt-3 grid-cols-1 md:grid-cols-2 gap-4">
+            <button className={classes.DocumentSelect} onClick={() => setDocType("dni")}>
+              <div className="flex items-center">
+                <img src={DniIcon} width={25} alt="dni" className="mr-2" />
+                <div className="text-left">
+                  <h4>Documento emitido por el gobierno</h4>
+                  <p>DNI, CE, PTP</p>
+                </div>
               </div>
-            </div>
-            {docType === "dni" ? <RadioButtonCheckedOutlined fontSize="medium" htmlColor="#20a2a5" /> : <RadioButtonUncheckedOutlined fontSize="medium" htmlColor="#20a2a5" />}
-          </button>
-          <button className={classes.DocumentSelect} onClick={() => setDocType("passport")}>
-            <div className="flex items-center">
-              <img src={PassportIcon} width={20} alt="passport" className="mr-2" />
-              <h4>Pasaporte</h4>
-            </div>
-            {docType === "passport" ? <RadioButtonCheckedOutlined fontSize="medium" htmlColor="#20a2a5" /> : <RadioButtonUncheckedOutlined fontSize="medium" htmlColor="#20a2a5" />}
-          </button>
+              {docType === "dni" ? <RadioButtonCheckedOutlined fontSize="medium" htmlColor="#20a2a5" /> : <RadioButtonUncheckedOutlined fontSize="medium" htmlColor="#20a2a5" />}
+            </button>
+            <button className={classes.DocumentSelect} onClick={() => setDocType("passport")}>
+              <div className="flex items-center">
+                <img src={PassportIcon} width={20} alt="passport" className="mr-2" />
+                <h4>Pasaporte</h4>
+              </div>
+              {docType === "passport" ? (
+                <RadioButtonCheckedOutlined fontSize="medium" htmlColor="#20a2a5" />
+              ) : (
+                <RadioButtonUncheckedOutlined fontSize="medium" htmlColor="#20a2a5" />
+              )}
+            </button>
+          </div>
           <ul className="my-8">
             <li>El proceso de validación puede demorar hasta 5 minutos.</li>
             <li>Recibirás una notificación a tu correo cuando termine el proceso de validación.</li>
