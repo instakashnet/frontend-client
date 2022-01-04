@@ -10,13 +10,10 @@ export const useUserData = (user) => {
   const [Avatar, setAvatar] = useState(null);
 
   useEffect(() => {
-    if (
-      (user.address && user.dateBbirth && user.identityDocumentValidation !== "success") ||
-      (!user.address && !user.dateBbirth && user.identityDocumentValidation === "success")
-    ) {
+    if ((user.address && user.dateBirth && user.identityDocumentValidation !== "success") || (!user.address && !user.dateBirth && user.identityDocumentValidation === "success")) {
       setCompleted(66);
       setColor("#EB9824");
-    } else if (user.address && user.dateBbirth && user.identityDocumentValidation === "success") {
+    } else if (user.address && user.dateBirth && user.identityDocumentValidation === "success") {
       setCompleted(100);
       setColor("#F9F443");
     } else {

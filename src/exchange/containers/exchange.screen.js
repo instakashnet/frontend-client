@@ -96,7 +96,7 @@ const Exchange = ({ history, location, match }) => {
         <Spinner />
       ) : (
         <div className={classes.Exchange}>
-          {match.isExact && (
+          {profile && match.isExact && (
             <>
               <SelectionHeader profile={profile} />
               <div className={classes.Separator} />

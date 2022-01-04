@@ -54,7 +54,7 @@ function App() {
             <PublicRoute exact path="/change-password" component={ChangePassword} />
             <PublicRoute exact path="/complete-profile" component={CompleteProfile} />
             <PrivateRoute exact path="/" component={asyncComponent(Welcome)} />
-            <PrivateRoute exact path="/my-profile" component={asyncComponent(MyProfile)} />
+            <PrivateRoute path="/my-profile" component={asyncComponent(MyProfile)} />
             <PrivateRoute exact path="/affiliate-program" component={asyncComponent(Affiliates)} />
             <PrivateRoute exact path="/my-accounts" component={asyncComponent(Accounts)} />
             <PrivateRoute path="/currency-exchange" component={asyncComponent(Exchange)} />

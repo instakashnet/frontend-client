@@ -6,7 +6,7 @@ import classes from "./navigation-components.module.scss";
 const NavItem = ({ link, icon, label, ...rest }) => {
   return (
     <li>
-      <NavLink to={link} className={classes.NavItem} activeClassName={classes.Active} {...rest}>
+      <NavLink exact to={link} className={classes.NavItem} activeClassName={classes.Active} {...rest}>
         <img src={icon} alt={link} className="mr-3" />
         <span>{label}</span>
       </NavLink>

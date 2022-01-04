@@ -1,11 +1,33 @@
-import { put, all, fork, call, select, takeEvery, takeLatest } from "redux-saga/effects";
+import { put, all, fork, call, delay, select, takeEvery, takeLatest } from "redux-saga/effects";
 import * as types from "./types";
 import * as actions from "./actions";
+import { setUserData } from "../../auth/store/actions";
 import { authService } from "../../services/auth.service";
 import { setAlertInit, closeModal } from "../../store/actions";
+import { replaceSpace } from "../../shared/functions";
 import history from "../../shared/history";
 import Swal from "sweetalert2";
+import camelize from "camelize";
+import { uploadFile } from "react-s3";
 
+// UTILS
+const uploadToS3 = async (photo, docType) => {
+  const S3config = {
+    bucketName: process.env.REACT_APP_STAGE === "dev" ? "instakash-docs-dev" : "instakash-docs",
+    dirName: docType /* optional */,
+    region: "us-east-2",
+    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
+    secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
+  };
+
+  try {
+    return await uploadFile(photo, S3config);
+  } catch (error) {
+    throw error;
+  }
+};
+
+// SAGAS
 function* getProfiles() {
   try {
     const res = yield authService.get("/users/profiles");
@@ -14,6 +36,15 @@ function* getProfiles() {
     yield put(setAlertInit(error.message, "error"));
     yield put(actions.profilesError());
   }
+}
+
+function* getUserData() {
+  const res = yield authService.get("/users/session"),
+    resData = camelize(res.data),
+    user = { ...resData.user, verified: resData.verified, completed: resData.completed, isGoogle: resData.isGoogle, isReferal: resData.isReferal };
+
+  yield put(setUserData(user));
+  yield put(actions.getUserDataSuccess());
 }
 
 function* addProfile({ values }) {
@@ -39,19 +70,16 @@ function* selectProfile({ profileId }) {
   yield call([history, "push"], "/currency-exchange");
 }
 
-function* editProfile({ values, setEdit }) {
-  const profileValues = { ...values };
-
-  if (typeof values.pep === "boolean") profileValues.pep = values.pep ? "1" : "0";
-
+function* editAdditionalInfo({ values, setSubmitted }) {
   try {
-    const res = yield authService.put("/users/profiles", profileValues);
+    const res = yield authService.put("/users/profiles", values);
     if (res.status === 200) {
-      yield call(getProfiles);
-      yield call(selectProfile, values.profileId);
-      yield put(actions.editProfileSuccess());
-      if (setEdit) yield call(setEdit, false);
+      yield call(getUserData);
+      yield put(actions.editAdditionalInfoSuccess());
       yield put(setAlertInit("Su perfil ha sido actualizado correctamente.", "success"));
+      yield call(setSubmitted, true);
+      yield delay(2000);
+      yield call(setSubmitted, false);
     }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
@@ -59,32 +87,34 @@ function* editProfile({ values, setEdit }) {
   }
 }
 
-function* uploadDocument({ values, uploadType, setFile, setPercentage }) {
-  const formData = new FormData();
-  formData.append(uploadType === "frontal" ? "file-one" : "file-two", values.identity_photo || values.identity_photo_two);
-  let URL = "/users/upload-identity-photo";
-
-  if (uploadType === "trasera") URL = "/users/upload-identity-photo-two";
+function* uploadDocument({ photos, docType }) {
+  let uploaded;
 
   try {
-    const res = yield authService.post(URL, formData, {
-      onUploadProgress: ({ loaded, total }) => {
-        const percentage = Math.floor((loaded * 100) / total);
-        if (percentage < 100) setPercentage(percentage);
-      },
-    });
-    if (res.status === 200) {
-      yield call(getProfiles);
-      yield call(selectProfile, values.profileId);
-      yield call(setFile, null);
-      yield put(actions.editProfileSuccess());
-      yield put(setAlertInit("La foto se ha cargado correctamente.", "success"));
+    const resToken = yield authService.get("/users/generate-token"),
+      user = yield select((state) => state.Auth.user),
+      photosArray = docType === "dni" ? [photos.front, photos.back] : [photos.front];
+
+    for (let i = 0; i < photosArray.length; i++) {
+      const photoRes = yield fetch(photosArray[i]),
+        blob = yield photoRes.blob(),
+        docSide = docType === "passport" ? "front" : i > 0 ? "back" : "front",
+        photo = new File([blob], `${user.documentType}-${user.documentIdentification}-${replaceSpace(user.name)}-${docSide}-&Token&${resToken.data.accessToken}.jpg`);
+
+      const res = yield call(uploadToS3, photo, user.documentType.toLowerCase());
+      uploaded = res.result.status === 204;
+    }
+
+    if (uploaded) {
+      yield delay(2000);
+      yield call(getUserData);
+      yield put(actions.uploadDocumentSuccess());
+      yield put(closeModal());
     }
   } catch (error) {
+    console.log(error);
     yield put(setAlertInit(error.message, "error"));
     yield put(actions.profilesError());
-  } finally {
-    call(setPercentage, 0);
   }
 }
 
@@ -131,32 +161,55 @@ function* disableProfile({ id }) {
   }
 }
 
-export function* watchGetProfiles() {
+function* editBasicInfo({ values, editType }) {
+  let URL;
+
+  if (editType === "phone") URL = "/users/change-phone";
+  if (editType === "email") URL = "/users/change-email";
+
+  try {
+    const res = yield authService.put(URL, values);
+    console.log(res);
+  } catch (error) {
+    yield put(setAlertInit(error.message, "error"));
+    yield put(actions.profilesError());
+  }
+}
+
+function* watchGetProfiles() {
   yield takeEvery(types.GET_PROFILES_INIT, getProfiles);
 }
 
-export function* watchSelectProfile() {
+function* watchSelectProfile() {
   yield takeEvery(types.SELECT_PROFILE_INIT, selectProfile);
 }
 
-export function* watchAddProfile() {
+function* watchAddProfile() {
   yield takeLatest(types.ADD_PROFILE_INIT, addProfile);
 }
 
-export function* watchEditProfile() {
-  yield takeLatest(types.EDIT_PROFILE_INIT, editProfile);
+function* watchEditBasicInfo() {
+  yield takeLatest(types.EDIT_BASIC_INFO_INIT, editBasicInfo);
 }
 
-export function* watchUploadDocument() {
+function* watchEditAdditionalInfo() {
+  yield takeLatest(types.EDIT_ADDITIONAL_INFO_INIT, editAdditionalInfo);
+}
+
+function* watchUploadDocument() {
   yield takeLatest(types.UPLOAD_DOCUMENT_INIT, uploadDocument);
 }
 
-export function* watchEditUserCode() {
+function* watchEditUserCode() {
   yield takeLatest(types.EDIT_USER_CODE_INIT, editUserCode);
 }
 
-export function* watchDisableProfile() {
+function* watchDisableProfile() {
   yield takeLatest(types.DISABLE_PROFILE_INIT, disableProfile);
+}
+
+function* watchGetUserData() {
+  yield takeLatest(types.GET_USER_DATA_INIT, getUserData);
 }
 
 export default function* profilesSaga() {
@@ -164,9 +217,11 @@ export default function* profilesSaga() {
     fork(watchGetProfiles),
     fork(watchSelectProfile),
     fork(watchAddProfile),
-    fork(watchEditProfile),
+    fork(watchEditBasicInfo),
+    fork(watchEditAdditionalInfo),
     fork(watchUploadDocument),
     fork(watchEditUserCode),
     fork(watchDisableProfile),
+    fork(watchGetUserData),
   ]);
 }

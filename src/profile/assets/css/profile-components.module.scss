@@ -158,17 +158,43 @@
 }
 
 .InfoItem {
-  margin: 10px 0;
-  width: 100%;
-  max-width: 22rem;
+  padding: 0.7rem 0;
+  margin: 0.5rem 0.3rem 0;
+  border-bottom: 1px solid #e6e6e6;
 
   h4 {
-    color: $base-text;
-    margin-left: 10px;
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+    color: #979797;
   }
 
-  @include respond(tablet) {
-    margin: 10px 5px;
+  p {
+    font-size: 1rem;
+  }
+
+  button {
+    color: $base-green;
+    border-bottom: 1px solid $base-green;
+  }
+
+  .EditInputWrapper {
+    position: relative;
+
+    input {
+      padding-right: 70px;
+    }
+
+    .EditButtons {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      right: 10px;
+      top: 10px;
+    }
+
+    button {
+      border-bottom: none;
+    }
   }
 }
 
@@ -180,4 +206,157 @@
   border-radius: 10px;
   color: $base-text;
   font-size: 0.9rem;
+}
+
+.ProfileNav {
+  width: 100%;
+  min-height: 60px;
+  padding: 0.2rem 0.3rem;
+  background-color: $base-green;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  left: 0;
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.ProfileNavItems {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .NavItem {
+    min-width: auto;
+    position: relative;
+    margin: 0.2rem 1rem;
+
+    a {
+      color: #dddddd;
+      font-weight: bold;
+      display: inline-block;
+      line-height: 1.5;
+      transition: 250ms ease-out;
+      padding-bottom: 0.2rem;
+
+      &.Active {
+        color: #fff;
+
+        + div {
+          width: 100%;
+          position: absolute;
+          height: 2px;
+          bottom: -2px;
+          left: 0;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.VerifyIdentityWrapper {
+  margin-top: 2.5rem;
+
+  h3 {
+    font-weight: bold;
+    color: $base-green;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 1.15rem;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 1rem;
+
+    li {
+      margin: 0.5rem 0;
+    }
+  }
+}
+
+.DocumentSelect {
+  background-color: $card-color;
+  width: 100%;
+  min-height: 60px;
+  margin: 0 0 1.5rem;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h4 {
+    color: $base-green;
+    font-weight: bold;
+  }
+
+  p {
+    font-size: 0.8rem;
+  }
+}
+
+.UploadDocWrapper {
+  text-align: center;
+  padding: 0.2rem 0.5rem;
+
+  ul {
+    text-align: left;
+    list-style-image: url(../../../assets/images/icons/check.svg);
+    padding-left: 0.8rem;
+
+    li {
+      font-size: 0.85rem;
+      margin: 0.5rem 0;
+    }
+  }
+}
+
+.CameraWrapper {
+  padding: 0.2rem;
+  text-align: center;
+
+  h2 {
+    color: $base-green;
+    font-size: 1.25rem;
+  }
+}
+
+.PhotoButtonSquare {
+  width: 140px;
+  height: 115px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  display: flex !important;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.PassportButton {
+  width: 100%;
+  height: 135px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  display: flex !important;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
+
+  img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+  }
 }

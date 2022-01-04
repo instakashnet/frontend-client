@@ -120,15 +120,24 @@
 .AddAccount {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 15px;
-  border-radius: 4px;
-  background-color: #e1f2ec;
-  color: #20a2a5;
+  background-color: $card-color;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
   font-size: 0.9rem;
   width: 100%;
   position: relative;
   top: -9px;
   transition: 200ms ease-out;
+  font-weight: bold;
+  margin: 10px 0;
+
+  svg {
+    background-color: $base-green;
+    border-radius: 50%;
+  }
 
   &:hover,
   &:focus {

@@ -2,70 +2,48 @@
 @import "../../../assets/css/breakpoints";
 @import "../../../assets/css/font-sizes";
 
-.ProfileInfoSection {
-  max-width: 1280px;
+@include respond(desktop) {
+  .ProfileInfoSection {
+    max-width: 1280px;
+  }
 }
 
-.ProfileInfoWrapper {
-  h1 {
-    font-size: 1.5rem;
-    color: $base-green;
-    font-weight: bold;
+.ProfileWrapper {
+  padding: 3.5rem 0.5rem 1rem;
+}
+
+.ProfileInfoCard {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+
+  p {
+    font-size: 0.85rem;
+    color: #afafaf;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-transform: capitalize;
   }
 
   h3 {
-    color: $base-green;
-    font-size: 1.25rem;
-    padding: 10px 0 5px;
     font-weight: bold;
+    font-size: 0.85rem;
   }
 
-  hr {
-    border-bottom: 1px solid #e1f2ec;
-  }
+  ul {
+    li {
+      color: #afafaf;
+      font-size: 0.9rem;
 
-  h4 {
-    font-size: 1.05rem;
-    font-weight: bold;
-  }
-
-  p {
-    font-size: 0.9rem;
-  }
-
-  button {
-    color: $base-green;
-    font-size: 0.9rem;
-  }
-
-  form {
-    margin: 0 auto;
-    width: 100%;
-
-    button,
-    button[type="submit"] {
-      color: #676767;
-      max-width: 20rem;
-      margin: 10px 0;
+      &:first-of-type {
+        color: $base-green;
+        font-weight: bold;
+        font-size: 1rem;
+        margin-bottom: 0.2rem;
+      }
     }
-  }
-
-  @include respond(tablet) {
-    form {
-      max-width: 52rem;
-    }
-  }
-
-  @include respond(desktop) {
-    h1 {
-      font-size: 2.2rem;
-    }
-
-    h3 {
-      font-size: 1.4rem;
-    }
-
-    padding-bottom: 0;
   }
 }
 

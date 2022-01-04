@@ -8,7 +8,7 @@ import classes from "./form-items.module.scss";
 
 moment.locale("es");
 
-const DatePickerInput = ({ value, onChange, placeholder, error, label }) => {
+export const DatePickerInput = ({ value, onChange, placeholder, error, label }) => {
   const maxDate = moment().subtract(18, "years").toDate();
 
   return (
@@ -33,5 +33,3 @@ const DatePickerInput = ({ value, onChange, placeholder, error, label }) => {
     </div>
   );
 };
-
-export default DatePickerInput;
