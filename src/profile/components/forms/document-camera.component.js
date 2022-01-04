@@ -32,7 +32,7 @@ export const DocumentCamera = ({ setPhoto }) => {
             videoConstraints={{
               width: 1280,
               height: 720,
-              facingMode: "forward",
+              facingMode: "environment",
             }}
           />
           <Button className="action-button mt-8" onClick={capture}>
