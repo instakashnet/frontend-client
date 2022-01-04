@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import Webcam from "react-webcam";
+// import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
 
 // COMPONENTS
 import { Button } from "../../../components/UI/button.component";
@@ -7,15 +8,10 @@ import { Button } from "../../../components/UI/button.component";
 // CLASSES
 import classes from "../../assets/css/profile-components.module.scss";
 
-const videoConstraints = {
-  width: 1280,
-  height: 720,
-  facingMode: "user",
-};
-
 export const DocumentCamera = ({ setPhoto }) => {
-  const [preview, setPreview] = useState(null);
-  const webcamRef = useRef(null);
+  const [preview, setPreview] = useState(null),
+    webcamRef = useRef(null);
+  // { isMobile } = useDeviceDetect();
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -27,7 +23,18 @@ export const DocumentCamera = ({ setPhoto }) => {
       {!preview ? (
         <>
           <h2>Tomar foto</h2>
-          <Webcam audio={false} height={720} ref={webcamRef} screenshotFormat="image/jpeg" width={1280} videoConstraints={videoConstraints} />
+          <Webcam
+            audio={false}
+            height={720}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            width={1280}
+            videoConstraints={{
+              width: 1280,
+              height: 720,
+              facingMode: "forward",
+            }}
+          />
           <Button className="action-button mt-8" onClick={capture}>
             Tomar foto
           </Button>

@@ -37,7 +37,7 @@ const ChangePassword = ({ history }) => {
         <p className="mt-4 mb-6">
           Coloque su nueva contraseña para poder acceder nuevamente. <br /> Te aconsejamos crear una que te sea facil de recordar.
         </p>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
           <Input
             type="password"
             name="password"

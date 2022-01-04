@@ -15,7 +15,7 @@ export const useUserData = (user) => {
       setColor("#EB9824");
     } else if (user.address && user.dateBirth && user.identityDocumentValidation === "success") {
       setCompleted(100);
-      setColor("#F9F443");
+      setColor("#20a2a5");
     } else {
       setCompleted(33);
       setColor("#FF4B55");
