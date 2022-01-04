@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import Webcam from "react-webcam";
-// import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
 
 // COMPONENTS
 import { Button } from "../../../components/UI/button.component";
@@ -11,7 +10,6 @@ import classes from "../../assets/css/profile-components.module.scss";
 export const DocumentCamera = ({ setPhoto }) => {
   const [preview, setPreview] = useState(null),
     webcamRef = useRef(null);
-  // { isMobile } = useDeviceDetect();
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();

@@ -77,9 +77,11 @@ function* editAdditionalInfo({ values, setSubmitted }) {
       yield call(getUserData);
       yield put(actions.editAdditionalInfoSuccess());
       yield put(setAlertInit("Su perfil ha sido actualizado correctamente.", "success"));
-      yield call(setSubmitted, true);
-      yield delay(2000);
-      yield call(setSubmitted, false);
+      if (setSubmitted) {
+        yield call(setSubmitted, true);
+        yield delay(2000);
+        yield call(setSubmitted, false);
+      }
     }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));

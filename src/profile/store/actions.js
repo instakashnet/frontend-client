@@ -40,7 +40,7 @@ export const editBasicInfoSuccess = () => ({
   type: types.EDIT_BASIC_INFO_SUCCESS,
 });
 
-export const editAdditionalInfo = (values, setSubmitted) => ({
+export const editAdditionalInfo = (values, setSubmitted = null) => ({
   type: types.EDIT_ADDITIONAL_INFO_INIT,
   values,
   setSubmitted,
