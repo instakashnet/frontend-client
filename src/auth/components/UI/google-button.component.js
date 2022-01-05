@@ -6,9 +6,9 @@ import { Button } from "../../../components/UI/button.component";
 import classes from "../../assets/css/auth-components.module.scss";
 import GoogleIcon from "../../assets/images/icons/google.svg";
 
-export const GoogleButton = ({ onSuccess, onFailure }) => {
-  const clientId = process.env.REACT_APP_STAGE !== "prod" ? process.env.REACT_APP_TEST_GOOGLE_ID : process.env.REACT_APP_GOOGLE_ID;
+const clientId = process.env.REACT_APP_GOOGLE_ID;
 
+export const GoogleButton = ({ onSuccess, onFailure }) => {
   return (
     <GoogleLogin
       clientId={clientId}
