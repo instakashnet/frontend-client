@@ -16,7 +16,7 @@ import Timer from "../components/calculator-items/timer.component";
 
 import classes from "../assets/css/exchange-screens.module.scss";
 
-const Calculator = ({ profile, setModal }) => {
+const Calculator = ({ profile, setModal, user }) => {
   const dispatch = useDispatch(),
     [actualRates, setActualRates] = useState({ buy: 0, sell: 0 }),
     [couponRates, setCouponRates] = useState({ buy: 0, sell: 0 }),
@@ -37,7 +37,7 @@ const Calculator = ({ profile, setModal }) => {
     enableReinitialize: true,
     onSubmit: (values) => {
       if ((values.type === "sell" && values.amount_received >= 1000) || (values.type === "buy" && values.amount_sent >= 1000)) {
-        if (!profile.address || !profile.identity_photo || !profile.identity_photo_two) return setModal("complete");
+        if (user.level < 3) return setModal("complete");
       }
       return dispatch(createExchangeInit(values, temporalAmountSent ? temporalAmountSent.current : 0, profile));
     },

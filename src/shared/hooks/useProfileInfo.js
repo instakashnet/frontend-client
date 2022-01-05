@@ -10,10 +10,10 @@ export const useUserData = (user) => {
   const [Avatar, setAvatar] = useState(null);
 
   useEffect(() => {
-    if ((user.address && user.dateBirth && user.identityDocumentValidation !== "success") || (!user.address && !user.dateBirth && user.identityDocumentValidation === "success")) {
+    if (user.level === 2) {
       setCompleted(66);
       setColor("#EB9824");
-    } else if (user.address && user.dateBirth && user.identityDocumentValidation === "success") {
+    } else if (user.level === 3) {
       setCompleted(100);
       setColor("#20a2a5");
     } else {

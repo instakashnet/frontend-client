@@ -25,8 +25,8 @@ export const ProfileInfo = ({ user, color, completed, match }) => {
           <CircleProgress width={95} percentage={completed} fontSize="20px" strokeWidth={4} primaryColor={[color, color]} secondaryColor="#DDD" />
           <ul className="ml-3">
             <li>Perfil completados</li>
-            <li style={{ color: user.name && user.phone ? "#20a2a5" : "#AFAFAF" }}>
-              {user.name && user.phone ? (
+            <li style={{ color: user.level > 0 ? "#20a2a5" : "#AFAFAF" }}>
+              {user.level > 0 ? (
                 <>
                   <Check htmlColor="#20a2a5" /> Datos personales
                 </>
@@ -37,7 +37,7 @@ export const ProfileInfo = ({ user, color, completed, match }) => {
               )}
             </li>
             <li style={{ color: user.identityDocumentValidation === "success" ? "#20a2a5" : user.identityDocumentValidation === "pending" ? "#ffa755" : "#AFAFAF" }}>
-              {user.identityDocumentValidation === "success" ? (
+              {user.level > 2 ? (
                 <div className="flex items-center">
                   <Check htmlColor="#20a2a5" /> Idenitdad verificada
                 </div>
@@ -51,8 +51,8 @@ export const ProfileInfo = ({ user, color, completed, match }) => {
                 </div>
               )}
             </li>
-            <li style={{ color: user.address && user.dateBirth ? "#20a2a5" : "#AFAFAF" }}>
-              {user.address && user.dateBirth ? (
+            <li style={{ color: user.level > 1 ? "#20a2a5" : "#AFAFAF" }}>
+              {user.level > 1 ? (
                 <>
                   <Check htmlColor="#20a2a5" /> Datos adicionales
                 </>

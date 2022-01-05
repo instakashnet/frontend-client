@@ -106,7 +106,7 @@ const Exchange = ({ history, location, match }) => {
             <ProfileSelection />
           </Route>
           <Route exact path={match.url}>
-            <Calculator profile={profile} setModal={openModalHandler} />
+            <Calculator profile={profile} setModal={openModalHandler} user={user} />
           </Route>
           <Route path={match.url + "/step-2"}>
             <Accounts order={order} setModal={openModalHandler} />

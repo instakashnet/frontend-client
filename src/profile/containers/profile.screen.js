@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { useUserData } from "../../shared/hooks/useProfileInfo";
 import { Route } from "react-router-dom";
 
 // HOOKS
+import { useUserData } from "../../shared/hooks/useProfileInfo";
 import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
 
 // REDUX
