@@ -13,11 +13,11 @@ import { uploadFile } from "react-s3";
 // UTILS
 const uploadToS3 = async (photo, docType) => {
   const S3config = {
-    bucketName: process.env.REACT_APP_STAGE === "dev" || process.env.REACT_APP_STAGE === "test" ? "instakash-docs-dev" : "instakash-docs",
+    bucketName: process.env.REACT_APP_STAGE !== "prod" ? "instakash-docs" : "instakash-docs-dev",
     dirName: docType /* optional */,
     region: "us-east-2",
-    accessKeyId: "AKIASK3IUQPBETGMFCF7",
-    secretAccessKey: "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",
+    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
+    secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
   };
 
   try {
