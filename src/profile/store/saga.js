@@ -163,7 +163,7 @@ function* disableProfile({ id }) {
   }
 }
 
-function* editBasicInfo({ values, editType }) {
+function* editBasicInfo({ values, editType, setSubmitted }) {
   let URL;
 
   if (editType === "phone") URL = "/users/change-phone";
@@ -171,7 +171,12 @@ function* editBasicInfo({ values, editType }) {
 
   try {
     const res = yield authService.put(URL, values);
-    console.log(res);
+
+    if (res.status === 200) {
+      yield put(setAlertInit(`Tu ${editType === "phone" ? "teléfono" : "correo"} ha sido actualizado correctamente.`, "success"));
+      yield call(setSubmitted, true);
+      yield put(actions.editBasicInfoSuccess());
+    }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
     yield put(actions.profilesError());

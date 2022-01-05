@@ -11,7 +11,8 @@ import NavItem from "./nav-item.component";
 
 // ASSETS
 import Profile from "../../../assets/images/icons/avatar.svg";
-import ChangeProfile from "../../../assets/images/icons/profiles.svg";
+import VerifyIdentity from "../../../assets/images/icons/verify-identity.svg";
+import AdditionalInfo from "../../../assets/images/icons/additional-info.svg";
 import Logout from "../../../assets/images/icons/logout.svg";
 import Help from "../../../assets/images/icons/help.svg";
 
@@ -36,10 +37,10 @@ const ProfileNavigation = () => {
       <nav>
         <ul>
           <NavItem label="Datos básicos" icon={Profile} link="/my-profile" />
-          {user.identityVerification !== "success" && <NavItem label="Verificar identidad" icon={ChangeProfile} link="/my-profile/verify-identity" />}
-          <NavItem label="Datos Adicionales" icon={Profile} link="/my-profile/additionals" />
+          {user.identityVerification !== "success" && <NavItem label="Verificar identidad" icon={VerifyIdentity} link="/my-profile/verify-identity" />}
+          <NavItem label="Datos Adicionales" icon={AdditionalInfo} link="/my-profile/additionals" />
           <a href="https://instakash.net/faq" target="_blank" rel="noopener noreferrer" className={classes.NavItem}>
-            <img src={Help} alt="centro-de-ayuda" width={20} className="mr-3" />
+            <img src={Help} alt="centro-de-ayuda" width={26} className="mr-3" />
             Centro de ayuda
           </a>
         </ul>

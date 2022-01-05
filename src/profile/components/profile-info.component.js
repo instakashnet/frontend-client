@@ -66,7 +66,7 @@ export const ProfileInfo = ({ user, color, completed, match }) => {
         </div>
         <div className="mt-6 mb-2 lg:text-center">
           <h3>Completa tu perfil para cambios ilimitados.</h3>
-          <p>Tienes un límite menor a 5000 dólares por cambio.</p>
+          <p>Tienes un límite menor a 1000 dólares por cambio.</p>
         </div>
       </div>
       <ProfileMenu match={match} className={classes.ProfileNavDesktop} />

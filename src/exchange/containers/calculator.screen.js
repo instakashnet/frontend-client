@@ -17,14 +17,13 @@ import Timer from "../components/calculator-items/timer.component";
 import classes from "../assets/css/exchange-screens.module.scss";
 
 const Calculator = ({ profile, setModal }) => {
-  const [actualRates, setActualRates] = useState({ buy: 0, sell: 0 });
-  const [couponRates, setCouponRates] = useState({ buy: 0, sell: 0 });
-  const [isCouponMin, setIsCouponMin] = useState(false);
-  const [showInfo, setShowInfo] = useState(false);
-  const temporalAmountSent = useRef(null);
-  const { rates, isLoading, coupon, isProcessing } = useSelector((state) => state.Exchange);
-
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(),
+    [actualRates, setActualRates] = useState({ buy: 0, sell: 0 }),
+    [couponRates, setCouponRates] = useState({ buy: 0, sell: 0 }),
+    [isCouponMin, setIsCouponMin] = useState(false),
+    [showInfo, setShowInfo] = useState(false),
+    temporalAmountSent = useRef(null),
+    { rates, isLoading, coupon, isProcessing } = useSelector((state) => state.Exchange);
 
   const formik = useFormik({
     initialValues: {
@@ -37,7 +36,7 @@ const Calculator = ({ profile, setModal }) => {
     },
     enableReinitialize: true,
     onSubmit: (values) => {
-      if ((values.currency_received_id === 1 && values.amount_sent >= 15000) || (values.currency_received_id === 2 && values.amount_sent >= 5000)) {
+      if ((values.type === "sell" && values.amount_received >= 1000) || (values.type === "buy" && values.amount_sent >= 1000)) {
         if (!profile.address || !profile.identity_photo || !profile.identity_photo_two) return setModal("complete");
       }
       return dispatch(createExchangeInit(values, temporalAmountSent ? temporalAmountSent.current : 0, profile));
@@ -71,6 +70,7 @@ const Calculator = ({ profile, setModal }) => {
     // eslint-disable-next-line
   }, [coupon, setFieldValue]);
 
+  // HANDLERS
   const sellRate = coupon ? couponRates.sell : actualRates.sell;
   const buyRate = coupon ? couponRates.buy : actualRates.buy;
 
@@ -149,7 +149,8 @@ const Calculator = ({ profile, setModal }) => {
               onMouseEnter={() => setShowInfo(true)}
               onClick={() => setShowInfo(true)}
               onMouseLeave={() => setShowInfo(false)}
-              open={showInfo}>
+              open={showInfo}
+            >
               <Info className="ml-3" />
             </Tooltip>
           </p>

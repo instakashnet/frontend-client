@@ -9,15 +9,13 @@ const CompleteProfile = ({ onClose }) => {
     <div className={classes.CompleteProfile}>
       <h2 className="text-center">Completa tu perfil</h2>
       <p>
-        Para realizar operaciones mayores a <b>$ 5,000</b> o <b>S/. 15,000</b> deberás:
+        Para realizar operaciones mayores a <b>$ 1,000</b> deberás:
       </p>
       <ul className="my-3">
         <li>
           Completar tu <b>información de perfil</b> al 100%.
         </li>
-        <li>
-          Cargar ambas fotos de tu <b>documento de identidad</b>.
-        </li>
+        <li>Verificar tu identidad.</li>
       </ul>
       <p className="text-center">
         Haz click en <b>completar mi perfil</b> para agregar tus datos.
