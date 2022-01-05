@@ -12,7 +12,7 @@ export const DocumentCamera = ({ setPhoto }) => {
     webcamRef = useRef(null);
 
   const capture = React.useCallback(() => {
-    const imageSrc = webcamRef.current.getScreenshot();
+    const imageSrc = webcamRef.current.getScreenshot({ width: 1280, height: 720 });
     setPreview(imageSrc);
   }, [webcamRef]);
 

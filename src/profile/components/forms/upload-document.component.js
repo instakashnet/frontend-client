@@ -100,7 +100,7 @@ export const UploadDocument = ({ docType }) => {
               </button>
             </div>
           )}
-          <Button className={`action-button mt-6 ld-over ${isProcessing ? "running" : ""}`} onClick={uploadDocument} disabled={!frontPhoto || !backPhoto}>
+          <Button className={`action-button mt-6 ld-over ${isProcessing ? "running" : ""}`} onClick={uploadDocument} disabled={(docType === "dni" && !backPhoto) || !frontPhoto}>
             <span className="ld ld-ring ld-spin" />
             Subir documento
           </Button>
