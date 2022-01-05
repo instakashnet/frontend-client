@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProfileInit, openModal, closeModal } from "../../store/actions";
 
@@ -17,17 +17,17 @@ const Selection = () => {
   let ModalComponent = () => <ModalInformation isAlert alertType="warning" title="¡IMPORTANTE!" />;
 
   // EFFECTS
-  // useEffect(() => {
-  //   let timeout;
-  //   const isRead = sessionStorage.getItem("isRead");
+  useEffect(() => {
+    let timeout;
+    const isRead = sessionStorage.getItem("isRead");
 
-  //   if (!isRead) {
-  //     timeout = setTimeout(() => {
-  //       dispatch(openModal(ModalComponent));
-  //     }, 600);
-  //   }
-  //   return () => timeout && clearTimeout(timeout);
-  // }, [dispatch]);
+    if (!isRead) {
+      timeout = setTimeout(() => {
+        dispatch(openModal(ModalComponent));
+      }, 600);
+    }
+    return () => timeout && clearTimeout(timeout);
+  }, [dispatch]);
 
   // HANDLERS
   const addProfileHandler = () => {
@@ -72,8 +72,8 @@ export const ModalInformation = () => {
     <div className="text-center">
       <h2>Estimado usuario</h2>
       <p className="my-3">
-        Gracias por la confianza, queremos informarle que la plataforma de <b>BCP</b> presneta problemas en su plataforma. Por tal motivo, no podremos realizar operaciones hacia
-        este banco por el momento. A la espera de que el banco solucione en la brevedad posible.
+        Gracias por la confianza, queremos informarle que en estos momentos debido al alto flujo recibido en estos momentos las operaciones pueden demorar en procesarse más de lo
+        usual. Estamos trabajando para asi poder completar todos sus pedidos a la brevedad posible.
       </p>
       <p className="mb-4 inline-block font-bold">Agradecemos su comprensión.</p>
       <Button onClick={closeModalHandler} className="action-button">
