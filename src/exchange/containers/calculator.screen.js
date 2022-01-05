@@ -33,6 +33,7 @@ const Calculator = ({ profile, setModal, user }) => {
       type: "sell",
       amount_sent: 0,
       amount_received: 0,
+      couponName: "",
     },
     enableReinitialize: true,
     onSubmit: (values) => {
@@ -58,6 +59,8 @@ const Calculator = ({ profile, setModal, user }) => {
     // eslint-disable-next-line
   }, [rates, dispatch, setFieldValue]);
 
+  console.log(formik.values);
+
   useEffect(() => {
     if (coupon && actualRates.buy > 0 && actualRates.sell > 0) {
       setCouponRates({ buy: actualRates.buy + coupon.discount, sell: actualRates.sell - coupon.discount });
@@ -65,6 +68,7 @@ const Calculator = ({ profile, setModal, user }) => {
         "amount_received",
         type === "buy" ? (amount_sent * (actualRates.buy + coupon.discount)).toFixed(2) : (amount_sent / (actualRates.sell - coupon.discount)).toFixed(2)
       );
+      setFieldValue("couponName", coupon.name);
     }
 
     // eslint-disable-next-line
@@ -106,7 +110,14 @@ const Calculator = ({ profile, setModal, user }) => {
   const deleteCouponHandler = () => {
     dispatch(deleteCoupon());
     setActualRates({ buy: rates.buy, sell: rates.sell });
+    setFieldValue("couponName", "");
     setFieldValue("amount_received", values.type === "buy" ? values.amount_sent * rates.buy : values.amount_sent / rates.sell);
+  };
+
+  const clearCalulator = () => {
+    dispatch(deleteCoupon());
+    dispatch(getRatesInit());
+    setFieldValue("couponName", "");
   };
 
   useEffect(() => {
@@ -125,7 +136,7 @@ const Calculator = ({ profile, setModal, user }) => {
           <div className={classes.Timer}>
             <p>Se actualizará el tipo de cambio en:</p>
             <div className="flex items-center text-base">
-              <AccessAlarm className="mr-2" /> <Timer onFinish={() => dispatch(getRatesInit())} />
+              <AccessAlarm className="mr-2" /> <Timer onFinish={clearCalulator} />
             </div>
           </div>
         )}
