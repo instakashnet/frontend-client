@@ -23,13 +23,16 @@ export const resInterceptor = (instance) =>
       console.log(error);
 
       let message;
+      let code;
       if (error.response) {
-        message = error.response.data.error
-          ? error.response.data.error.message
-          : "Ha ocurrido un error inesperado, por favor intenta de nuevo. Si el problema persiste contacte a soporte.";
+        if (error.response.data.error) {
+          message = error.response.data.error.message;
+          code = error.response.data.error.code;
+        } else message = "Ha ocurrido un error inesperado, por favor intenta de nuevo. Si el problema persiste contacte a soporte.";
       } else if (error.request) message = "Se ha caido la conexión, por favor revise su conexión a internet. Si el problema persiste contacte a soporte.";
 
       error.message = message;
+      error.code = code;
 
       return Promise.reject(error);
     }

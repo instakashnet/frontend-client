@@ -59,8 +59,6 @@ const Calculator = ({ profile, setModal, user }) => {
     // eslint-disable-next-line
   }, [rates, dispatch, setFieldValue]);
 
-  console.log(formik.values);
-
   useEffect(() => {
     if (coupon && actualRates.buy > 0 && actualRates.sell > 0) {
       setCouponRates({ buy: actualRates.buy + coupon.discount, sell: actualRates.sell - coupon.discount });
