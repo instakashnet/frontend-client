@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import Webcam from "react-webcam";
+import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
 
 // COMPONENTS
 import { Button } from "../../../components/UI/button.component";
@@ -9,10 +10,11 @@ import classes from "../../assets/css/profile-components.module.scss";
 
 export const DocumentCamera = ({ setPhoto }) => {
   const [preview, setPreview] = useState(null),
-    webcamRef = useRef(null);
+    webcamRef = useRef(null),
+    { isMobile } = useDeviceDetect();
 
   const capture = React.useCallback(() => {
-    const imageSrc = webcamRef.current.getScreenshot({ width: 1280, height: 720 });
+    const imageSrc = webcamRef.current.getScreenshot();
     setPreview(imageSrc);
   }, [webcamRef]);
 
@@ -26,6 +28,7 @@ export const DocumentCamera = ({ setPhoto }) => {
             height={720}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
+            style={isMobile ? { transformOrigin: "0 0", transform: `translateX(${(480 + 640) / 2}px) rotate(90deg)` } : {}}
             width={1280}
             videoConstraints={{
               width: 1280,
