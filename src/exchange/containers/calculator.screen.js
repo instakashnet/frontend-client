@@ -16,17 +16,14 @@ import Timer from "../components/calculator-items/timer.component";
 
 import classes from "../assets/css/exchange-screens.module.scss";
 
-const Calculator = ({ profile, setModal }) => {
-  const [actualRates, setActualRates] = useState({ buy: 0, sell: 0 });
-  const [couponRates, setCouponRates] = useState({ buy: 0, sell: 0 });
-  const [isCouponMin, setIsCouponMin] = useState(false);
-  const [showInfo, setShowInfo] = useState(false);
-  const temporalAmountSent = useRef(null);
-  const { rates, isLoading, coupon, isProcessing } = useSelector((state) => state.Exchange);
-
-  console.log(profile);
-
-  const dispatch = useDispatch();
+const Calculator = ({ profile, setModal, user }) => {
+  const dispatch = useDispatch(),
+    [actualRates, setActualRates] = useState({ buy: 0, sell: 0 }),
+    [couponRates, setCouponRates] = useState({ buy: 0, sell: 0 }),
+    [isCouponMin, setIsCouponMin] = useState(false),
+    [showInfo, setShowInfo] = useState(false),
+    temporalAmountSent = useRef(null),
+    { rates, isLoading, coupon, isProcessing } = useSelector((state) => state.Exchange);
 
   const formik = useFormik({
     initialValues: {
@@ -36,11 +33,12 @@ const Calculator = ({ profile, setModal }) => {
       type: "sell",
       amount_sent: 0,
       amount_received: 0,
+      couponName: "",
     },
     enableReinitialize: true,
     onSubmit: (values) => {
-      if ((values.currency_received_id === 1 && values.amount_sent >= 15000) || (values.currency_received_id === 2 && values.amount_sent >= 5000)) {
-        if (!profile.address || !profile.identity_photo || !profile.identity_photo_two) return setModal("complete");
+      if ((values.type === "sell" && values.amount_received >= 1000) || (values.type === "buy" && values.amount_sent >= 1000)) {
+        if (user.level < 3) return setModal("complete");
       }
       return dispatch(createExchangeInit(values, temporalAmountSent ? temporalAmountSent.current : 0, profile));
     },
@@ -61,6 +59,8 @@ const Calculator = ({ profile, setModal }) => {
     // eslint-disable-next-line
   }, [rates, dispatch, setFieldValue]);
 
+  console.log(formik.values);
+
   useEffect(() => {
     if (coupon && actualRates.buy > 0 && actualRates.sell > 0) {
       setCouponRates({ buy: actualRates.buy + coupon.discount, sell: actualRates.sell - coupon.discount });
@@ -68,11 +68,13 @@ const Calculator = ({ profile, setModal }) => {
         "amount_received",
         type === "buy" ? (amount_sent * (actualRates.buy + coupon.discount)).toFixed(2) : (amount_sent / (actualRates.sell - coupon.discount)).toFixed(2)
       );
+      setFieldValue("couponName", coupon.name);
     }
 
     // eslint-disable-next-line
   }, [coupon, setFieldValue]);
 
+  // HANDLERS
   const sellRate = coupon ? couponRates.sell : actualRates.sell;
   const buyRate = coupon ? couponRates.buy : actualRates.buy;
 
@@ -108,7 +110,14 @@ const Calculator = ({ profile, setModal }) => {
   const deleteCouponHandler = () => {
     dispatch(deleteCoupon());
     setActualRates({ buy: rates.buy, sell: rates.sell });
+    setFieldValue("couponName", "");
     setFieldValue("amount_received", values.type === "buy" ? values.amount_sent * rates.buy : values.amount_sent / rates.sell);
+  };
+
+  const clearCalulator = () => {
+    dispatch(deleteCoupon());
+    dispatch(getRatesInit());
+    setFieldValue("couponName", "");
   };
 
   useEffect(() => {
@@ -127,7 +136,7 @@ const Calculator = ({ profile, setModal }) => {
           <div className={classes.Timer}>
             <p>Se actualizará el tipo de cambio en:</p>
             <div className="flex items-center text-base">
-              <AccessAlarm className="mr-2" /> <Timer onFinish={() => dispatch(getRatesInit())} />
+              <AccessAlarm className="mr-2" /> <Timer onFinish={clearCalulator} />
             </div>
           </div>
         )}

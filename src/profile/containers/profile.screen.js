@@ -1,50 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import { Route } from "react-router-dom";
+
+// HOOKS
+import { useUserData } from "../../shared/hooks/useProfileInfo";
+import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
+
+// REDUX
 import { useSelector, useDispatch } from "react-redux";
-import { disableProfileInit } from "../../store/actions";
-import { useProfileInfo } from "../../shared/hooks/useProfileInfo";
-import { ArrowDropDownCircle } from "@material-ui/icons";
+import { getUserData } from "../../store/actions";
 
-import Accordion from "../../components/UI/accordion.component";
-import PersonalInfo from "../components/personal-info.component";
-import CompanyInfo from "../components/company-info.component";
-import DocumentInfo from "../components/document-info.component";
-import EditAdditional from "../components/forms/edit-additionals.component";
-import AdditionalInfo from "../components/additional-info.component";
+// COMPONENTS
 import Layout from "../../components/layout/layout.component";
-import ProgressBar from "../../components/UI/progress-bar.component";
+import { ProfileMenu } from "../components/profile-menu.component";
+import { ProfileInfo } from "../components/profile-info.component";
 
+// SCREENS
+import { BasicInfoScreen } from "./basic-info.screen";
+import { VerifyIdentityScreen } from "./verify-identity.screen";
+import { AdditionalInfoScreen } from "./additional-info.screen";
+
+// CLASSES
 import classes from "../assets/css/profile-containers.module.scss";
 
-const Profile = () => {
-  const [edit, setEdit] = useState(false);
-  const dispatch = useDispatch();
-  const { user, isProcessing } = useSelector((state) => state.Profile);
-  const { profileInfo, profileCompleted, isCompleted } = useProfileInfo();
+const Profile = ({ match }) => {
+  const dispatch = useDispatch(),
+    user = useSelector((state) => state.Auth.user),
+    { completed, color } = useUserData(user),
+    { isMobile } = useDeviceDetect();
 
-  let InfoComponent = (props) => <PersonalInfo {...props} />;
-  if (profileInfo.type === "juridica") InfoComponent = (props) => <CompanyInfo {...props} />;
+  // EFFECTS
+  useEffect(() => {
+    dispatch(getUserData());
+  }, [dispatch]);
 
   return (
     <Layout className={classes.ProfileInfoSection}>
-      <div className={classes.ProfileInfoWrapper}>
-        <h1>Mi perfil</h1>
-        <p className="mb-4">Completa toda tu información de perfil para poder hacer operaciones mayores a 5mil USD.</p>
-        <ProgressBar width={profileCompleted} />
-        <div className="grid grid-cols-1 lg:grid-cols-3">
-          <div className="col-span-2 lg:mr-14 lg:mt-4">
-            <Accordion defaultExpanded title="Datos básicos" className={classes.AccordionTitle} Icon={ArrowDropDownCircle}>
-              <InfoComponent profile={profileInfo} personalProfile={profileInfo} user={user} onDisable={() => dispatch(disableProfileInit(profileInfo.id))} />
-            </Accordion>
-            {profileInfo.type === "natural" && (
-              <Accordion defaultExpanded title="Datos adicionales" className={classes.AccordionTitle} Icon={ArrowDropDownCircle}>
-                {edit ? <EditAdditional profile={profileInfo} onEdit={setEdit} /> : <AdditionalInfo profile={profileInfo} onEdit={setEdit} />}
-              </Accordion>
-            )}
-          </div>
-          <Accordion defaultExpanded title="Documento de identidad" className={classes.AccordionTitle} Icon={ArrowDropDownCircle}>
-            <DocumentInfo isCompleted={isCompleted} profile={profileInfo} isProcessing={isProcessing} />
-          </Accordion>
-        </div>
+      {isMobile && <ProfileMenu match={match} />}
+      <div className={classes.ProfileWrapper}>
+        <section className={classes.ProfileNavigation}>
+          <ProfileInfo completed={completed} color={color} user={user} match={match} />
+        </section>
+
+        <section className={classes.ProfileSection}>
+          <Route exact path={match.url}>
+            <BasicInfoScreen user={user} />
+          </Route>
+          <Route exact path={match.url + "/verify-identity"}>
+            <VerifyIdentityScreen user={user} />
+          </Route>
+          <Route exact path={match.url + "/additionals"}>
+            <AdditionalInfoScreen user={user} />
+          </Route>
+        </section>
       </div>
     </Layout>
   );

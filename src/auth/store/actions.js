@@ -4,10 +4,10 @@ export const loadUserInit = () => ({
   type: types.LOADUSER_INIT,
 });
 
-export const loadUserSuccess = (token, userCode) => ({
+export const loadUserSuccess = (token, user) => ({
   type: types.LOADUSER_SUCCESS,
   token,
-  userCode,
+  user,
 });
 
 export const completeProfileInit = (values) => ({
@@ -54,9 +54,10 @@ export const resetPasswordSuccess = () => ({
   type: types.RESET_PASSWORD_SUCCESS,
 });
 
-export const validateEmailInit = (values) => ({
+export const validateEmailInit = (values, otpType) => ({
   type: types.VALIDATE_EMAIL_INIT,
   values,
+  otpType,
 });
 
 export const validateEmailSuccess = () => ({
@@ -69,6 +70,11 @@ export const refreshCodeInit = () => ({
 
 export const refreshCodeSuccess = () => ({
   type: types.REFRESH_CODE_SUCCESS,
+});
+
+export const setUserData = (user) => ({
+  type: types.SET_USER_DATA,
+  user,
 });
 
 export const logoutInit = (logType = null) => ({

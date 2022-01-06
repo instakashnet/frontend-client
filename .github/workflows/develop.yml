@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - "develop"
+      - "features/*"
+      - "fixes/*"
 
 jobs:
   build:
@@ -15,6 +17,8 @@ jobs:
       REACT_APP_MIGO_API: ${{ secrets.MIGO_API }}
       AWS_CF_DISTRIBUTION_ID: EZJVBBURGQLSA
       AWS_REGION: us-east-2
+      REACT_APP_AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      REACT_APP_AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     strategy:
       matrix:
         node-version: [15.x]

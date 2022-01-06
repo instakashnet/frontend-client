@@ -15,7 +15,7 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const opened = useSelector((state) => state.Nav.opened);
-  const usercode = useSelector((state) => state.Auth.userCode);
+  const user = useSelector((state) => state.Auth.user);
   const { isMobile } = useDeviceDetect();
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const Sidebar = () => {
       <div className={`${classes.Sidebar} ${opened ? classes.Open : ""}`}>
         <Logo className={classes.Logo} />
         <Navigation />
-        <Affiliate usercode={usercode} />
+        <Affiliate usercode={user.username} />
       </div>
       {isMobile && <Backdrop opened={opened} onClick={() => dispatch(toggleNav())} />}
     </>

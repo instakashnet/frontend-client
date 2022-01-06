@@ -1,62 +1,113 @@
 import React, { useCallback, useState } from "react";
-import { Publish, InsertDriveFile, QueryBuilder } from "@material-ui/icons";
-import { useDropzone } from "react-dropzone";
+import { CameraAlt } from "@material-ui/icons";
+
+// REUDX
 import { useDispatch, useSelector } from "react-redux";
-import { uploadDocumentInit } from "../../store/actions";
+import { uploadDocumentInit } from "../../../store/actions";
 
-import Card from "../../../components/UI/card.component";
+// ASSETS
+import CorrectDoc from "../../../assets/images/illustrations/correct-doc.svg";
+import IncorrectDoc from "../../../assets/images/illustrations/incorrect-doc.svg";
 
+// COMPONENTS
+import { DocumentCamera } from "./document-camera.component";
+import { Button } from "../../../components/UI/button.component";
+
+// CLASSES
 import classes from "../../assets/css/profile-components.module.scss";
 
-const UploadDocument = ({ type, documentUrl, profileId }) => {
-  const dispatch = useDispatch();
-  const isProcessing = useSelector((state) => state.Profile.isProcessing);
-  const [percentage, setPercentage] = useState(0);
-  const [file, setFile] = useState(null);
+export const UploadDocument = ({ docType }) => {
+  const dispatch = useDispatch(),
+    isProcessing = useSelector((state) => state.Profile.isProcessing),
+    [openCamera, setOpenCamera] = useState(false),
+    [photoSide, setPhotoSide] = useState(""),
+    [frontPhoto, setFrontPhoto] = useState(null),
+    [backPhoto, setBackPhoto] = useState(null);
 
-  const inputName = type === "frontal" ? "identity_photo" : "identity_photo_two";
-  const onDrop = useCallback(
-    (acceptedFiles) => {
-      setFile(acceptedFiles[0]);
-      const renamedFiles = acceptedFiles.map((file) => new File([file], type, { type: file.type }));
-      dispatch(uploadDocumentInit({ [inputName]: renamedFiles[0], profileId }, type, setFile, setPercentage));
+  // HANDLERS
+  const onTakePhoto = async (side) => {
+      try {
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const videoDevices = devices.filter((dvc) => dvc.kind === "videoinput");
+
+        if (!videoDevices) alert("Debes user un dispoitivo con camara para poder validar tu identidad.");
+        setOpenCamera(true);
+        setPhotoSide(side);
+      } catch (error) {
+        console.log(error);
+      }
     },
-    [dispatch, inputName, type, profileId]
-  );
-
-  const FileIcon = file || documentUrl ? <InsertDriveFile fontSize="medium" /> : <Publish fontSize="medium" />;
-
-  const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: "image/jpeg, image/png, application/pdf", maxSize: 5242880, multiple: false });
+    setPhoto = useCallback(
+      (image) => {
+        if (photoSide === "front") setFrontPhoto(image);
+        if (photoSide === "back") setBackPhoto(image);
+        setOpenCamera(false);
+      },
+      [photoSide]
+    ),
+    uploadDocument = useCallback(() => {
+      dispatch(uploadDocumentInit({ front: frontPhoto, back: backPhoto }, docType));
+    }, [frontPhoto, backPhoto, docType, dispatch]);
 
   return (
-    <Card className={classes.AddFile}>
-      <div className="flex justify-center px-6 cursor-pointer" {...getRootProps()}>
-        <input {...getInputProps()} />
-        <span className="text-center">{FileIcon}</span>
-      </div>
-      {file && (
+    <div className={classes.UploadDocWrapper}>
+      {!openCamera ? (
         <>
-          <h4>{`${file.name.substring(0, 14)}${file.name.length > 15 ? "...." : ""}`}</h4>
-          {isProcessing && (
-            <p className="italic mt-2 flex font-bold items-center">
-              <QueryBuilder className="mr-1" style={{ color: "#676767" }} /> cargando foto: {percentage}%
-            </p>
+          <h2>Toma una foto</h2>
+          <p>Sube una foto de tu documento siguiendo las indicaciones para evitar que pueda haber rechazos en la verificación de tu identidad.</p>
+          <div className="flex items-center justify-center my-3">
+            <img src={CorrectDoc} width={125} alt="documento correcto" className="mx-2" />
+            <img src={IncorrectDoc} width={100} alt="documento incorrecto" className="mx-2" />
+          </div>
+          <ul className="my-5">
+            <li>La fotografía no debe estar borrosa, desenfocada ni pixelada.</li>
+            <li>Toda la información que aparece en el documento debe ser totalmente legigle.</li>
+            <li>El tipo y nro. de documento capturado debe ser el mismo usado en tu registro.</li>
+            <li>La foto no debe pesar más de 10MB.</li>
+          </ul>
+          {docType === "passport" ? (
+            <button onClick={() => onTakePhoto("front")} className={classes.PassportButton}>
+              {frontPhoto ? (
+                <img src={frontPhoto} alt="foto pasaporte" />
+              ) : (
+                <>
+                  <CameraAlt fontSize="small" htmlColor="#20a2a5" />
+                  <p>Foto pasaporte</p>
+                </>
+              )}
+            </button>
+          ) : (
+            <div className="flex items-center">
+              <button onClick={() => onTakePhoto("front")} className={classes.PhotoButtonSquare}>
+                {frontPhoto ? (
+                  <img src={frontPhoto} alt="foto frontal" />
+                ) : (
+                  <>
+                    <CameraAlt fontSize="small" htmlColor="#20a2a5" />
+                    <p>Foto frontal</p>
+                  </>
+                )}
+              </button>
+              <button onClick={() => onTakePhoto("back")} className={classes.PhotoButtonSquare}>
+                {backPhoto ? (
+                  <img src={backPhoto} alt="foto reversa" />
+                ) : (
+                  <>
+                    <CameraAlt fontSize="small" htmlColor="#20a2a5" />
+                    <p>Foto reverso</p>
+                  </>
+                )}
+              </button>
+            </div>
           )}
+          <Button className={`action-button mt-6 ld-over ${isProcessing ? "running" : ""}`} onClick={uploadDocument} disabled={(docType === "dni" && !backPhoto) || !frontPhoto}>
+            <span className="ld ld-ring ld-spin" />
+            Subir documento
+          </Button>
         </>
+      ) : (
+        <DocumentCamera setPhoto={setPhoto} />
       )}
-      {!file &&
-        (documentUrl ? (
-          <h4>
-            Foto <b>{type}</b> cargada
-          </h4>
-        ) : (
-          <h4>
-            Cargar <b>foto {type}</b>
-          </h4>
-        ))}
-      <p>.jpg, .png o .pdf | máximo 5MB</p>
-    </Card>
+    </div>
   );
 };
-
-export default React.memo(UploadDocument);

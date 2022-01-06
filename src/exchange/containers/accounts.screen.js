@@ -172,7 +172,7 @@ const Accounts = ({ setModal, order }) => {
           />
           {filteredAccounts.length < 10 && (
             <button className={classes.AddAccount} type="button" onClick={() => setModal("account")}>
-              Agregar cuenta <Add className="ml-2" />
+              Agregar cuenta <Add htmlColor="#FFF" className="ml-2" />
             </button>
           )}
           {interplaza && (

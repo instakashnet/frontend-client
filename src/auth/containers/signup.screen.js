@@ -27,7 +27,7 @@ const Signup = () => {
       <div className={classes.AuthWrapper}>
         <h2>¡Bienvenido a Instakash!</h2>
         <p className="mt-2 mb-4">Registrate y realiza tus operaciones de forma segura desde nuestra plataforma digital.</p>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
           <Input
             name="email"
             type="email"

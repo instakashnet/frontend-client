@@ -10,9 +10,8 @@ import Logo from "../UI/logo.component";
 import classes from "./layout-components.module.scss";
 
 const Header = () => {
-  const dispatch = useDispatch();
-  const { profiles } = useSelector((state) => state.Profile);
-  const profileSelected = JSON.parse(sessionStorage.getItem("profileSelected"));
+  const dispatch = useDispatch(),
+    user = useSelector((state) => state.Auth.user);
 
   const ModalComponent = () => <ProfileNavigation />;
 
@@ -34,7 +33,7 @@ const Header = () => {
         <a href="https://wa.link/05keps" target="_blank" rel="noopener noreferrer">
           <Whatsapp />
         </a>
-        <ProfileInfo main={profiles.find((profile) => profile.type === "natural")} openNav={openNav} selected={profileSelected} />
+        <ProfileInfo user={user} openNav={openNav} />
       </div>
     </div>
   );

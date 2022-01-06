@@ -3,29 +3,36 @@ import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
 import { useDispatch, useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 import { getRatesInit, validateCouponInit, getLastOrderInit, openModal, closeModal } from "../../store/actions";
-import { useProfileInfo } from "../../shared/hooks/useProfileInfo";
 
+// SCREENS
 import Calculator from "./calculator.screen";
 import Accounts from "./accounts.screen";
 import Complete from "./complete.screen";
+import ProfileSelection from "./selection.screen";
 
+// COMPONENTS
 import Layout from "../../components/layout/layout.component";
 import { AddAccount } from "../../accounts/components/add-account.component";
 import Information from "../components/information.component";
 import CompleteProfile from "../components/profile-modal.component";
 import { InfoButton } from "../components/info-button.component";
 import Spinner from "../../components/UI/spinner.component";
+import { SelectionHeader } from "../components/selection-header.component";
 
 import classes from "../assets/css/exchange-screens.module.scss";
 
 const Exchange = ({ history, location, match }) => {
-  const dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.Exchange.isLoading);
-  const { profileInfo } = useProfileInfo();
-  const { isMobile } = useDeviceDetect();
+  const dispatch = useDispatch(),
+    isLoading = useSelector((state) => state.Exchange.isLoading),
+    user = useSelector((state) => state.Auth.user),
+    profile = useSelector((state) => state.Profile.profileSelected),
+    { isMobile } = useDeviceDetect(),
+    order = JSON.parse(sessionStorage.getItem("order"));
 
-  const { type: profileType } = profileInfo;
-  const order = JSON.parse(sessionStorage.getItem("order"));
+  // EFFECTS
+  useEffect(() => {
+    if (!profile) return history.push("/currency-exchange/profile-selection");
+  }, [profile, history]);
 
   useEffect(() => {
     dispatch(getLastOrderInit());
@@ -34,15 +41,9 @@ const Exchange = ({ history, location, match }) => {
   useEffect(() => {
     if (location.pathname === "/currency-exchange" && !order) {
       dispatch(getRatesInit());
-      dispatch(validateCouponInit("NUEVOREFERIDO1", profileType));
+      if (user.isReferal) dispatch(validateCouponInit("NUEVOREFERIDO1", profile?.type));
     }
-  }, [location, dispatch, order, profileType]);
-
-  const preventLoad = (e) => {
-    e.preventDefault();
-    if (e) e.returnValue = "¿Deseas salir del proceso de cambio de divisas?";
-    return "";
-  };
+  }, [location, dispatch, order, profile, user.isReferal]);
 
   useEffect(() => {
     if (order && order.status === 2 && location.pathname !== "/currency-exchange/complete") history.push("/currency-exchange/complete");
@@ -67,6 +68,13 @@ const Exchange = ({ history, location, match }) => {
     return () => timer && clearTimeout(timer);
   }, [location, history]);
 
+  // HANDLERS
+  const preventLoad = (e) => {
+    e.preventDefault();
+    if (e) e.returnValue = "¿Deseas salir del proceso de cambio de divisas?";
+    return "";
+  };
+
   const onCloseHandler = () => {
     history.push("/my-profile");
     dispatch(closeModal());
@@ -88,8 +96,17 @@ const Exchange = ({ history, location, match }) => {
         <Spinner />
       ) : (
         <div className={classes.Exchange}>
+          {profile && match.isExact && (
+            <>
+              <SelectionHeader profile={profile} />
+              <div className={classes.Separator} />
+            </>
+          )}
+          <Route exact path={match.url + "/profile-selection"}>
+            <ProfileSelection />
+          </Route>
           <Route exact path={match.url}>
-            <Calculator profile={profileInfo} setModal={openModalHandler} />
+            <Calculator profile={profile} setModal={openModalHandler} user={user} />
           </Route>
           <Route path={match.url + "/step-2"}>
             <Accounts order={order} setModal={openModalHandler} />
@@ -97,8 +114,7 @@ const Exchange = ({ history, location, match }) => {
           <Route path={match.url + "/complete"}>
             <Complete order={order} />
           </Route>
-          {!isMobile && <Information />}
-          {isMobile && <InfoButton onInfoOpen={() => openModalHandler("info")} />}
+          {profile && (!isMobile ? <Information /> : <InfoButton onInfoOpen={() => openModalHandler("info")} />)}
         </div>
       )}
     </Layout>

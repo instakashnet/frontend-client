@@ -4,6 +4,7 @@
 .FormGroup {
   position: relative;
   margin-bottom: 20px !important;
+  width: 100%;
 
   input,
   select {
@@ -56,7 +57,7 @@
 
 .CheckGroup {
   width: 100%;
-  margin: 5px 0;
+  margin: 0;
 
   label {
     font-size: 0.85rem;

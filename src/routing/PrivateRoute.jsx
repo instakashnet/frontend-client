@@ -7,7 +7,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.Auth.isAuth);
-  const profileSelected = sessionStorage.getItem("profileSelected");
 
   useEffect(() => {
     history.listen(() => dispatch(closeSliderModal()));
@@ -18,15 +17,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) => {
-        if (isAuth) {
-          return !profileSelected && props.location.pathname !== "/profile-selection" ? (
-            <Redirect to={{ pathname: "/profile-selection", state: { from: props.location } }} />
-          ) : (
-            <Component {...props} />
-          );
-        } else {
-          return <Redirect to={{ pathname: "/signin", state: { from: props.location } }} />;
-        }
+        return isAuth ? <Component {...props} /> : <Redirect to={{ pathname: "/signin", state: { from: props.location } }} />;
       }}
     />
   );
