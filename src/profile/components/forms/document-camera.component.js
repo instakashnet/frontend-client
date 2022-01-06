@@ -27,7 +27,16 @@ export const DocumentCamera = ({ setPhoto }) => {
       {!preview ? (
         <>
           <h2>Tomar foto</h2>
-          <Webcam audio={false} height={1024} ref={webcamRef} screenshotFormat="image/jpeg" width={1024} videoConstraints={videoConstraints} forceScreenshotSourceSize />
+          <Webcam
+            imageSmoothing={false}
+            screenshotQuality={1}
+            height={1024}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            width={1024}
+            videoConstraints={videoConstraints}
+            forceScreenshotSourceSize
+          />
           <Button className="action-button mt-8" onClick={capture}>
             Tomar foto
           </Button>
