@@ -95,7 +95,7 @@ function* completeExchange({ values, orderId }) {
       yield call([history, "push"], "/currency-exchange/complete");
     }
   } catch (error) {
-    if (error.data && error.data.code === 4006) {
+    if (error.code === "C4006") {
       yield call(
         [Swal, "fire"],
         "Ha ocurrido un error",
