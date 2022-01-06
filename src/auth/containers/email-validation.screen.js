@@ -55,7 +55,7 @@ export const EmailValidationScreen = ({ history, match }) => {
         <img src={VerificationIcon} alt="Verificación" />
         <h2 className="mt-5 mb-3">Ingresa el código enviado a tu correo</h2>
         <p>Hemos enviado un código de 4 dígitos a tu correo. Por favor, ingresalo para continuar.</p>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
           <div className="flex items-center justify-center my-4">
             <OtpInput touched={formik.touched.otp_1} name="otp_1" value={formik.values.otp_1} onChange={onOtpChange} onBlur={formik.handleBlur} />
             <OtpInput touched={formik.touched.otp_2} name="otp_2" value={formik.values.otp_2} onChange={onOtpChange} onBlur={formik.handleBlur} />

@@ -72,6 +72,11 @@ export const refreshCodeSuccess = () => ({
   type: types.REFRESH_CODE_SUCCESS,
 });
 
+export const setUserData = (user) => ({
+  type: types.SET_USER_DATA,
+  user,
+});
+
 export const logoutInit = (logType = null) => ({
   type: types.LOGOUT_INIT,
   logType,

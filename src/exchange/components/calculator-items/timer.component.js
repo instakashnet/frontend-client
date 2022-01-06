@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Countdown from 'react-countdown';
+import React, { useState } from "react";
+import Countdown from "react-countdown";
 
 const Timer = ({ onFinish }) => {
   const [timerId, setTimerId] = useState(0);
@@ -7,7 +7,7 @@ const Timer = ({ onFinish }) => {
 
   const renderer = ({ minutes, seconds }) => (
     <span>
-      {minutes}:{`${seconds < 10 ? '0' : ''}${seconds}`}
+      {minutes}:{`${seconds < 10 ? "0" : ""}${seconds}`}
     </span>
   );
 

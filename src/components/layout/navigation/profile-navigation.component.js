@@ -1,33 +1,27 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+
+// HOOKS
+import { useUserData } from "../../../shared/hooks/useProfileInfo";
+
+// REDUX
+import { useDispatch, useSelector } from "react-redux";
 import { logoutInit } from "../../../store/actions";
-import { useProfileInfo } from "../../../shared/hooks/useProfileInfo";
 
 import NavItem from "./nav-item.component";
-import ProgressBar from "../../UI/progress-bar.component";
 
-import Male from "../../../assets/images/profiles/male.svg";
-import Female from "../../../assets/images/profiles/female.svg";
-import Company from "../../../assets/images/profiles/company.svg";
+// ASSETS
 import Profile from "../../../assets/images/icons/avatar.svg";
-import ChangeProfile from "../../../assets/images/icons/profiles.svg";
+import VerifyIdentity from "../../../assets/images/icons/verify-identity.svg";
+import AdditionalInfo from "../../../assets/images/icons/additional-info.svg";
 import Logout from "../../../assets/images/icons/logout.svg";
+import Help from "../../../assets/images/icons/help.svg";
 
 import classes from "./navigation-components.module.scss";
 
 const ProfileNavigation = () => {
-  const dispatch = useDispatch();
-  const { profileInfo, profileCompleted } = useProfileInfo();
-
-  let Avatar = profileInfo.identity_sex === "male" ? Male : Female;
-  let profileName = `${profileInfo.first_name.split(" ")[0]} ${profileInfo.last_name.split(" ")[0]}`;
-  let profileType = "Usuario";
-
-  if (profileInfo.type === "juridica") {
-    Avatar = Company;
-    profileName = profileInfo.razon_social;
-    profileType = "Empresa";
-  }
+  const dispatch = useDispatch(),
+    user = useSelector((state) => state.Auth.user),
+    { Avatar } = useUserData(user);
 
   return (
     <div className={classes.ProfileNavigation}>
@@ -36,27 +30,24 @@ const ProfileNavigation = () => {
           <img src={Avatar} alt="profile" />
         </div>
         <div className="text-left flex flex-col items-start">
-          <h3>{profileName}</h3>
-          <p>{profileType}</p>
+          <h3>{user.name.split(" ")[0] + " " + user.name.split(" ")[1]}</h3>
+          <p>Usuario completado</p>
         </div>
       </div>
-      {profileInfo.selected && (
-        <div className={classes.ProfileProgress}>
-          <h3>Progreso de tu perfil</h3>
-          <ProgressBar width={profileCompleted} />
-        </div>
-      )}
-      <nav className="w-full mt-8">
+      <nav>
         <ul>
-          {profileInfo.selected && <NavItem label="Ver perfil" icon={Profile} link="/my-profile" />}
-          <NavItem label="Cambiar perfil" icon={ChangeProfile} link="/profile-selection" />
-          <li>
-            <button className="flex items-center" onClick={() => dispatch(logoutInit())}>
-              <img src={Logout} alt="cerrar-sesión" width={20} className="mr-3" />
-              Cerrar sesión
-            </button>
-          </li>
+          <NavItem label="Datos básicos" icon={Profile} link="/my-profile" />
+          {user.identityVerification !== "success" && <NavItem label="Verificar identidad" icon={VerifyIdentity} link="/my-profile/verify-identity" />}
+          <NavItem label="Datos Adicionales" icon={AdditionalInfo} link="/my-profile/additionals" />
+          <a href="https://instakash.net/faq" target="_blank" rel="noopener noreferrer" className={classes.NavItem}>
+            <img src={Help} alt="centro-de-ayuda" width={26} className="mr-3" />
+            Centro de ayuda
+          </a>
         </ul>
+        <button className="flex items-center" onClick={() => dispatch(logoutInit())}>
+          <img src={Logout} alt="cerrar-sesión" width={20} className="mr-3" />
+          Cerrar sesión
+        </button>
       </nav>
     </div>
   );

@@ -26,20 +26,19 @@ function* loadUser() {
 
   try {
     const res = yield authService.get("/users/session");
-    const resData = camelize(res.data);
-    yield call([sessionStorage, "setItem"], "userVerification", JSON.stringify({ verified: resData.verified, completed: resData.completed, isGoogle: resData.isGoogle }));
+    const user = camelize(res.data.user);
+    yield call([sessionStorage, "setItem"], "userVerification", JSON.stringify(user));
 
-    if (!resData.verified) {
-      yield call([history, "push"], "/email-verification");
+    if (!user.verified) {
+      yield call([history, "push"], "/email-verification/OTP");
       return yield put(actions.authError());
     }
 
-    if (!resData.completed) {
+    if (!user.completed) {
       yield call([history, "push"], "/complete-profile");
       return yield put(actions.authError());
     }
 
-    const user = { ...resData.user, verified: resData.verified, completed: resData.completed, isGoogle: resData.isGoogle, isReferal: resData.isReferal };
     yield put(actions.loadUserSuccess(token, user));
 
     yield call(setAuthTimeout, new Date(expDate).getTime() - new Date().getTime());

@@ -10,10 +10,9 @@ export const getProfilesSuccess = (profiles, user) => ({
   user,
 });
 
-export const selectProfileInit = (profileId, profile = null) => ({
+export const selectProfileInit = (profileId) => ({
   type: types.SELECT_PROFILE_INIT,
   profileId,
-  profile,
 });
 
 export const selectProfileSuccess = (profile) => ({
@@ -30,22 +29,31 @@ export const addProfileSuccess = () => ({
   type: types.ADD_PROFILE_SUCCESS,
 });
 
-export const editProfileInit = (values, setEdit = null) => ({
-  type: types.EDIT_PROFILE_INIT,
+export const editBasicInfo = (values, editType, setSubmitted) => ({
+  type: types.EDIT_BASIC_INFO_INIT,
   values,
-  setEdit,
+  editType,
+  setSubmitted,
 });
 
-export const editProfileSuccess = () => ({
-  type: types.EDIT_PROFILE_SUCCESS,
+export const editBasicInfoSuccess = () => ({
+  type: types.EDIT_BASIC_INFO_SUCCESS,
 });
 
-export const uploadDocumentInit = (values, uploadType, setFile, setPercentage) => ({
+export const editAdditionalInfo = (values, setSubmitted = null) => ({
+  type: types.EDIT_ADDITIONAL_INFO_INIT,
+  values,
+  setSubmitted,
+});
+
+export const editAdditionalInfoSuccess = () => ({
+  type: types.EDIT_ADDITIONAL_INFO_SUCCESS,
+});
+
+export const uploadDocumentInit = (photos, docType) => ({
   type: types.UPLOAD_DOCUMENT_INIT,
-  values,
-  uploadType,
-  setFile,
-  setPercentage,
+  photos,
+  docType,
 });
 
 export const uploadDocumentSuccess = () => ({
@@ -65,6 +73,15 @@ export const editUserCodeSuccess = (userCode) => ({
 export const disableProfileInit = (id) => ({
   type: types.DISABLE_PROFILE_INIT,
   id,
+});
+
+export const getUserData = () => ({
+  type: types.GET_USER_DATA_INIT,
+});
+
+export const getUserDataSuccess = (user) => ({
+  type: types.GET_USER_DATA_SUCCESS,
+  user,
 });
 
 export const disableProfileSuccess = () => ({

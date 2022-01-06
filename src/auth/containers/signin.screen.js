@@ -59,9 +59,8 @@ const Signin = () => {
         <h1>Gana siempre con nosotros. Mejores tasas, mayor ahorro.</h1>
         <GoogleButton onSuccess={signInGoogle} onFailure={signInGoogle} />
         <p className={classes.SignInMessage}>o ingresa tus datos</p>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
           <input type="hidden" value="something" />
-
           <Input
             type="email"
             name="email"

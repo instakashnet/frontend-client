@@ -43,6 +43,7 @@
 .ModalBody {
   padding: 15px 15px 35px !important;
   font-size: 1rem;
+  background-color: $bg-color;
 
   b {
     color: $base-green;
@@ -93,7 +94,7 @@
 }
 
 .SliderModalBody {
-  padding: 15px 0 !important;
+  padding: 15px 0 0 !important;
 }
 
 .Close {

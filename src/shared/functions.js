@@ -28,3 +28,5 @@ export const AllowOnlyNumbers = (value) => {
   const re = /^[0-9\b]+$/;
   return value === "" || re.test(value);
 };
+
+export const replaceSpace = (text) => text.split(" ").join("-");

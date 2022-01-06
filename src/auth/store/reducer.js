@@ -1,5 +1,5 @@
 import * as types from "./types";
-import { EDIT_USER_CODE_SUCCESS } from "../../profile/store/types";
+
 const initialState = {
   isProcessing: false,
   token: null,
@@ -11,6 +11,8 @@ const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.LOADUSER_SUCCESS:
       return { ...state, isProcessing: false, isAuth: true, token: action.token, user: action.user };
+    case types.SET_USER_DATA:
+      return { ...state, user: action.user };
 
     case types.SIGNGIN_INIT:
     case types.SIGNIN_GOOGLE:
@@ -28,9 +30,6 @@ const authReducer = (state = initialState, action) => {
     case types.VALIDATE_EMAIL_SUCCESS:
     case types.REFRESH_CODE_SUCCESS:
       return { ...state, isProcessing: false };
-
-    case EDIT_USER_CODE_SUCCESS:
-      return { ...state, userCode: action.userCode };
 
     case types.LOGOUT_SUCCESS:
     case types.RESET_PASSWORD_SUCCESS:

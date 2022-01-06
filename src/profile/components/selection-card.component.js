@@ -1,25 +1,23 @@
 import React from "react";
 
-import Male from "../../assets/images/profiles/male.svg";
-import Female from "../../assets/images/profiles/female.svg";
+import MaleDark from "../../assets/images/profiles/male-dark.svg";
+import FemaleDark from "../../assets/images/profiles/female-dark.svg";
 import Company from "../../assets/images/profiles/company.svg";
-import Add from "../../assets/images/profiles/add.svg";
 
 import classes from "../assets/css/profile-components.module.scss";
 
 const SelectionBox = ({ type, sex, name, onClick }) => {
-  let Avatar = Male;
-  if (type === "add") Avatar = Add;
+  let Avatar = MaleDark;
   if (type === "juridica") Avatar = Company;
-  if (type === "natural") sex === "male" ? (Avatar = Male) : (Avatar = Female);
+  if (type === "natural") sex === "male" ? (Avatar = MaleDark) : (Avatar = FemaleDark);
 
   return (
-    <div className="flex flex-col items-center">
-      <button onClick={onClick} className={classes.SelectionCard}>
-        <img src={Avatar} alt="profile" className={type === "add" ? classes.Add : ""} />
-      </button>
-      <p className="mt-3 w-36">{name}</p>
-    </div>
+    <button onClick={onClick} className={classes.SelectionCard}>
+      <h2>Perfil {type === "natural" ? "natural" : "empresa"}</h2>
+      <img src={Avatar} alt="profile" />
+      <p className="my-3">{name.toLowerCase()}</p>
+      <p>Continuar como {type === "natural" ? "perfil natural" : "empresa"}</p>
+    </button>
   );
 };
 

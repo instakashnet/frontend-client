@@ -24,7 +24,7 @@ const RecoverPassword = () => {
         <p className="my-4">
           Ingresa tu correo electrónico y te enviaremos <br /> un link para generar una nueva contraseña.
         </p>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
           <Input
             name="email"
             placeholder="Correo electrónico"

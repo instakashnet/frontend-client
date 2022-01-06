@@ -2,99 +2,35 @@
 @import "../../../assets/css/breakpoints";
 @import "../../../assets/css/font-sizes";
 
-.ProfileSelectionWrapper {
-  display: grid;
-  align-content: center;
-  text-align: center;
-
-  h1 {
-    color: $base-green;
-    font-weight: bold;
-    font-size: $title;
-  }
-
-  h3 {
-    font-weight: bold;
-    font-size: $subtitle;
-  }
-
-  @include respond(tablet) {
-    h1 {
-      font-size: $title * 1.3;
-    }
-  }
-
-  @include respond(ldesktop) {
-    h1 {
-      font-size: $title * 1.6;
-    }
-  }
-}
-
-.ProfileInfoSection {
-  max-width: 1280px;
-}
-
-.ProfileInfoWrapper {
-  h1 {
-    font-size: 1.5rem;
-    color: $base-green;
-    font-weight: bold;
-  }
-
-  h3 {
-    color: $base-green;
-    font-size: 1.25rem;
-    padding: 10px 0 5px;
-    font-weight: bold;
-  }
-
-  hr {
-    border-bottom: 1px solid #e1f2ec;
-  }
-
-  h4 {
-    font-size: 1.05rem;
-    font-weight: bold;
-  }
-
-  p {
-    font-size: 0.9rem;
-  }
-
-  button {
-    color: $base-green;
-    font-size: 0.9rem;
-  }
-
-  form {
-    margin: 0 auto;
-    width: 100%;
-
-    button,
-    button[type="submit"] {
-      color: #676767;
-      max-width: 20rem;
-      margin: 10px 0;
-    }
-  }
-
-  @include respond(tablet) {
-    form {
-      max-width: 52rem;
-    }
-  }
+.ProfileWrapper {
+  padding: 3.5rem 0.5rem 1rem;
 
   @include respond(desktop) {
-    h1 {
-      font-size: 2.2rem;
-    }
+    display: grid;
+    padding: 0;
+    grid-template-columns: 0.8fr 1.2fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "navigation section section"
+      "navigation section section"
+      "navigation section section";
+  }
+}
 
-    h3 {
-      font-size: 1.4rem;
-    }
+.ProfileSection {
+  grid-area: section;
+  width: 100%;
+  max-width: 960px;
+  margin: auto;
+}
 
-    padding-bottom: 0;
+.ProfileNavigation {
+  grid-area: navigation;
+
+  @include respond(desktop) {
+    margin-right: 1rem;
+    border-right: 1px solid #ccc;
   }
 }
 

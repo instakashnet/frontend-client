@@ -107,7 +107,7 @@ const CompleteProfile = ({ history }) => {
       <div className={classes.AuthWrapper}>
         <h2>¡Felicidades, Tu cuenta ha sido creada!</h2>
         <p className="mt-2 mb-8">Por favor, completa tus datos</p>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
           <div className="grid grid-cols-3 w-full gap-2">
             <SelectComponent name="document_type" label="Tipo de doc." value={formik.values.document_type} onChange={onDocumentTypeHandler} options={documentOptions} />
             <Input
