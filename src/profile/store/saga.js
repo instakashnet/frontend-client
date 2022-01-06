@@ -14,7 +14,7 @@ import { uploadFile } from "react-s3";
 const uploadToS3 = async (photo, docType) => {
   const S3config = {
     bucketName: process.env.REACT_APP_STAGE !== "prod" ? "instakash-docs-dev" : "instakash-docs",
-    dirName: docType /* optional */,
+    dirName: docType,
     region: "us-east-2",
     accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
     secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
@@ -101,7 +101,7 @@ function* uploadDocument({ photos, docType }) {
       const photoRes = yield fetch(photosArray[i]),
         blob = yield photoRes.blob(),
         docSide = docType === "passport" ? "front" : i > 0 ? "back" : "front",
-        photo = new File([blob], `${user.documentType}-${user.documentIdentification}-${replaceSpace(user.name)}-${docSide}-&Token&${resToken.data.accessToken}.jpg`);
+        photo = new File([blob], `${user.documentType}-${user.documentIdentification}-${replaceSpace(user.name.toUpperCase())}-${docSide}-&Token&${resToken.data.accessToken}.jpg`);
 
       const res = yield call(uploadToS3, photo, user.documentType.toLowerCase());
       uploaded = res.result.status === 204;

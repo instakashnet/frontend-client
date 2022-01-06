@@ -53,12 +53,10 @@ const Selection = () => {
         </div>
         {profiles.length < 4 && (
           <>
-            <div className="flex items-center justify-center my-2">
-              {Array.from(Array(4 - profiles.length).keys()).map((i) => (
-                <button onClick={addProfileHandler} key={i} className={classes.AddProfile}>
-                  <Add htmlColor="#FFF" fontSize="large" />
-                </button>
-              ))}
+            <div className="flex items-center justify-center my-3">
+              <button onClick={addProfileHandler} className={classes.AddProfile}>
+                <Add htmlColor="#FFF" fontSize="large" />
+              </button>
             </div>
             <button onClick={addProfileHandler} className={classes.AddLink}>
               Agregar perfil empresa
