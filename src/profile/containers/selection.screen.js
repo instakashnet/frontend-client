@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProfileInit, openModal, closeModal } from "../../store/actions";
 
@@ -17,17 +17,17 @@ const Selection = () => {
   let ModalComponent = () => <ModalInformation isAlert alertType="warning" title="¡IMPORTANTE!" />;
 
   // EFFECTS
-  useEffect(() => {
-    let timeout;
-    const isRead = sessionStorage.getItem("isRead");
+  // useEffect(() => {
+  //   let timeout;
+  //   const isRead = sessionStorage.getItem("isRead");
 
-    if (!isRead) {
-      timeout = setTimeout(() => {
-        dispatch(openModal(ModalComponent));
-      }, 600);
-    }
-    return () => timeout && clearTimeout(timeout);
-  }, [dispatch]);
+  //   if (!isRead) {
+  //     timeout = setTimeout(() => {
+  //       dispatch(openModal(ModalComponent));
+  //     }, 600);
+  //   }
+  //   return () => timeout && clearTimeout(timeout);
+  // }, [dispatch]);
 
   // HANDLERS
   const addProfileHandler = () => {
