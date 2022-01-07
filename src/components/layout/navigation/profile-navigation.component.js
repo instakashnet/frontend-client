@@ -37,7 +37,7 @@ const ProfileNavigation = () => {
       <nav>
         <ul>
           <NavItem label="Datos básicos" icon={Profile} link="/my-profile" />
-          {user.identityVerification !== "success" && <NavItem label="Verificar identidad" icon={VerifyIdentity} link="/my-profile/verify-identity" />}
+          {user.level < 3 && <NavItem label="Verificar identidad" icon={VerifyIdentity} link="/my-profile/verify-identity" />}
           <NavItem label="Datos Adicionales" icon={AdditionalInfo} link="/my-profile/additionals" />
           <a href="https://instakash.net/faq" target="_blank" rel="noopener noreferrer" className={classes.NavItem}>
             <img src={Help} alt="centro-de-ayuda" width={26} className="mr-3" />
