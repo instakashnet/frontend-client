@@ -69,7 +69,7 @@ export const ProfileInfo = ({ user, color, completed, match }) => {
           <p>Tienes un límite menor a 1000 dólares por cambio.</p>
         </div>
       </div>
-      <ProfileMenu match={match} className={classes.ProfileNavDesktop} />
+      <ProfileMenu match={match} className={classes.ProfileNavDesktop} level={user.level} />
     </>
   );
 };

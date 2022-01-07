@@ -35,7 +35,7 @@ const Profile = ({ match }) => {
 
   return (
     <Layout className={classes.ProfileInfoSection}>
-      {isMobile && <ProfileMenu match={match} />}
+      {isMobile && <ProfileMenu match={match} level={user.level} />}
       <div className={classes.ProfileWrapper}>
         <section className={classes.ProfileNavigation}>
           <ProfileInfo completed={completed} color={color} user={user} match={match} />
