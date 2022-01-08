@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import { signinValidation } from "../helpers/formValidations";
 import { useSelector, useDispatch } from "react-redux";
-import { signinInit, signinGoogle, closeModal } from "../../store/actions";
+import { signinInit, signinGoogle, closeModal, openModal } from "../../store/actions";
 
 import { Input } from "../../components/UI/form-items/input.component";
 import { CheckboxComponent } from "../../components/UI/form-items/checkbox.component";
@@ -44,12 +44,12 @@ const Signin = () => {
     dispatch(signinGoogle(res.accessToken));
   };
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     dispatch(openModal());
-  //   }, 600);
-  //   return () => clearTimeout(timeout);
-  // }, [dispatch]);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      dispatch(openModal());
+    }, 600);
+    return () => clearTimeout(timeout);
+  }, [dispatch]);
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 h-full md:h-screen">
@@ -101,7 +101,7 @@ const Signin = () => {
           </Link>
         </p>
       </div>
-      <Modal title="¡IMPORTANTE!" isAlert alertType="danger">
+      <Modal title="¡IMPORTANTE!" isAlert alertType="warning">
         <Information />
       </Modal>
     </main>
@@ -114,10 +114,11 @@ export const Information = () => {
   return (
     <>
       <p className="mb-3 text-center">
-        En este momento nos encontramos realizando unas <b>mejoras y actualizaciones</b> en nuestra plataforma, todo para poder ofrecerle el mejor servicio posible. Estaremos de
-        vuelta a la brevedad posible.
+        Agradecidos siempre por la confianza, queremos informarle que en estos momentos la plataforma para empresas de <b>Interbank</b> se encuentra con problemas para realizar
+        transferencias. Por este motivo <b>no estaremos aceptando ni realizando</b> operaciones hacia este banco por el momento. Quedamos a la espera de que el banco solucione el
+        inconveniente.
       </p>
-      <p className="text-center mb-3">Agradecemos su comprensión.</p>
+      <p className="text-center my-4 font-bold">Agradecemos su comprensión.</p>
       <Button onClick={() => dispatch(closeModal())} className="action-button">
         Lo entiendo
       </Button>

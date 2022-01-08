@@ -8,16 +8,15 @@ import { closeModal } from "../../../store/actions";
 
 import classes from "./modal-components.module.scss";
 
-
 export const Modal = ({ title, isAlert, alertType, children }) => {
   const isOpen = useSelector((state) => state.Modal.isOpen);
   const dispatch = useDispatch();
 
   let InfoIcon;
 
-  if (alertType === "warning") InfoIcon = <WarningOutlined fontSize="large" htmlColor="#ffa755" />;
-  if (alertType === "info") InfoIcon = <InfoOutlined fontSize="large" htmlColor="#20a2a5" />;
-  if (alertType === "danger") InfoIcon = <ErrorOutline fontSize="large" htmlColor="#ff4b55" />;
+  if (alertType === "warning") InfoIcon = <WarningOutlined style={{ fontSize: 70 }} htmlColor="#ffa755" />;
+  if (alertType === "info") InfoIcon = <InfoOutlined style={{ fontSize: 70 }} htmlColor="#20a2a5" />;
+  if (alertType === "danger") InfoIcon = <ErrorOutline style={{ fontSize: 70 }} htmlColor="#ff4b55" />;
 
   return (
     <Dialog aria-labelledby="modal-title" classes={{ paper: classes.Modal }} open={isOpen} onClose={() => dispatch(closeModal())}>
