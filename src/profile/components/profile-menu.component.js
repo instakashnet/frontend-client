@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 // CLASSES
 import classes from "../assets/css/profile-components.module.scss";
 
-export const ProfileMenu = ({ match, className, level }) => {
+export const ProfileMenu = ({ match, className, user }) => {
   return (
     <nav className={`${classes.ProfileNav} ${className || ""}`}>
       <div className={classes.ProfileNavItems}>
@@ -15,7 +15,7 @@ export const ProfileMenu = ({ match, className, level }) => {
           </NavLink>
           <div />
         </div>
-        {level < 3 && (
+        {user.identityDocumentValidation !== "success" && (
           <div className={classes.NavItem}>
             <NavLink activeClassName={classes.Active} to={match.url + "/verify-identity"}>
               <span>Verificar identidad</span>

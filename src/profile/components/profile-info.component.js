@@ -25,8 +25,8 @@ export const ProfileInfo = ({ user, color, completed, match }) => {
           <CircleProgress width={95} percentage={completed} fontSize="20px" strokeWidth={4} primaryColor={[color, color]} secondaryColor="#DDD" />
           <ul className="ml-3">
             <li>Perfil completados</li>
-            <li style={{ color: user.level > 0 ? "#20a2a5" : "#AFAFAF" }}>
-              {user.level > 0 ? (
+            <li style={{ color: user.phone ? "#20a2a5" : "#AFAFAF" }}>
+              {user.phone ? (
                 <>
                   <Check htmlColor="#20a2a5" /> Datos personales
                 </>
@@ -37,7 +37,7 @@ export const ProfileInfo = ({ user, color, completed, match }) => {
               )}
             </li>
             <li style={{ color: user.identityDocumentValidation === "success" ? "#20a2a5" : user.identityDocumentValidation === "pending" ? "#ffa755" : "#AFAFAF" }}>
-              {user.level > 2 ? (
+              {user.identityDocumentValidation === "success" ? (
                 <div className="flex items-center">
                   <Check htmlColor="#20a2a5" /> Idenitdad verificada
                 </div>
@@ -51,8 +51,8 @@ export const ProfileInfo = ({ user, color, completed, match }) => {
                 </div>
               )}
             </li>
-            <li style={{ color: user.level > 1 ? "#20a2a5" : "#AFAFAF" }}>
-              {user.level > 1 ? (
+            <li style={{ color: user.address && user.dateBirth ? "#20a2a5" : "#AFAFAF" }}>
+              {user.address && user.dateBirth ? (
                 <>
                   <Check htmlColor="#20a2a5" /> Datos adicionales
                 </>
@@ -69,7 +69,7 @@ export const ProfileInfo = ({ user, color, completed, match }) => {
           <p>Tienes un límite menor a 1000 dólares por cambio.</p>
         </div>
       </div>
-      <ProfileMenu match={match} className={classes.ProfileNavDesktop} level={user.level} />
+      <ProfileMenu match={match} className={classes.ProfileNavDesktop} user={user} />
     </>
   );
 };
