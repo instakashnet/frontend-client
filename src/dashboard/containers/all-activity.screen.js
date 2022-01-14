@@ -3,19 +3,20 @@ import { _ } from "gridjs-react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { ArrowBack, Repeat } from "@material-ui/icons";
-import { formatAmount } from "../../../shared/functions";
+import { formatAmount } from "../../shared/functions";
 
 // REDUX
 import { useDispatch } from "react-redux";
 import { getOrdersInit } from "../../store/actions";
 
-import { StatusBadge } from "../../../components/UI/status-badge.component";
-import { Button } from "../../../components/UI/button.component";
-import ActivityTable from "../activity-table.component";
+import { StatusBadge } from "../../components/UI/status-badge.component";
+import { Button } from "../../components/UI/button.component";
+import ActivityTable from "../components/activity-table.component";
+import Spinner from "../../components/UI/spinner.component";
 
-import classes from "../../assets/css/activity-components.module.scss";
+import classes from "../assets/css/activity-components.module.scss";
 
-const AllActivity = ({ orders, openModal }) => {
+export const AllActivityScreen = ({ orders, isLoading, openModal }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -57,9 +58,11 @@ const AllActivity = ({ orders, openModal }) => {
     }));
   }
 
-  return (
+  return isLoading ? (
+    <Spinner screen />
+  ) : (
     <div className={classes.DashboardCard}>
-      <Link to="/dashboard/recent" className="flex items-center mb-6 text-base">
+      <Link to="/dashboard/all" className="flex items-center mb-6 text-base">
         <ArrowBack fontSize="large" className="mr-2" /> Regresar
       </Link>
       <h2 className="flex items-center mb-3">
@@ -69,5 +72,3 @@ const AllActivity = ({ orders, openModal }) => {
     </div>
   );
 };
-
-export default AllActivity;

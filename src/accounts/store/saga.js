@@ -76,7 +76,7 @@ function* withdrawKash({ values }) {
       yield put(actions.withdrawKashSuccess());
       yield call(getKashAccount);
       yield put(closeModal());
-      yield call([history, "push"], "/dashboard");
+      yield call([history, "push"], "/dashboard/recent");
     }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
