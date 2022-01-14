@@ -4,9 +4,9 @@ import * as actions from "./actions";
 import { setAlertInit } from "../../store/actions";
 import { exchangeService } from "../../services/exchange.service";
 
-function* getOrders() {
+function* getOrders({ limit, enabled }) {
   try {
-    const res = yield exchangeService.get("/order/user?enabled=true&limit=5");
+    const res = yield exchangeService.get(`/order/user?enabled=${enabled}&limit=${limit}`);
     if (res.status === 200) {
       const orders = res.data.ordersByUser.reverse();
       const resData = { ...res.data, orders };

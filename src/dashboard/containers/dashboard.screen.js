@@ -1,37 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Route } from "react-router-dom";
-import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
 
 // REDUX
 import { useSelector, useDispatch } from "react-redux";
-import { openSliderModal, getOrderDetailsInit, getAccountsInit, getOrdersInit, getWithdrawalsInit } from "../../store/actions";
+import { openSliderModal, getOrderDetailsInit } from "../../store/actions";
 
 import Layout from "../../components/layout/layout.component";
-import TotalTransfered from "../components/total-transfered.component";
-import Spinner from "../../components/UI/spinner.component";
-import TransferedCharts from "../components/charts/transfered-charts.component";
-import AllActivity from "../components/activity/all-activity.component";
-import RecentActivity from "../components/activity/recent-activity.component";
-import { ActivityMobile } from "../components/activity/mobile-activity.component";
+
+import { AllActivityScreen } from "./all-activity.screen";
 import OrderDetails from "../components/details/order-details.component";
 import WithdrawDetails from "../components/details/withdraw-details.component";
-import EmptyActivity from "../components/empty-activity.component";
+import { RecentActivityScreen } from "./recent-activity.screen";
 
 const Dashboard = ({ match }) => {
-  const dispatch = useDispatch();
-  const { orders, withdrawals, orderAmounts, totalAmount, isLoading } = useSelector((state) => state.Dashboard);
-  const { kashAccount } = useSelector((state) => state.Accounts);
-  const { isMobile } = useDeviceDetect();
-
-  // EFFECTS
-  useEffect(() => {
-    dispatch(getAccountsInit("kash"));
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(getOrdersInit());
-    dispatch(getWithdrawalsInit());
-  }, [dispatch]);
+  const dispatch = useDispatch(),
+    { orders, withdrawals, isLoading } = useSelector((state) => state.Dashboard);
 
   // HANDLERS
   const openDetails = (id, type = null) => {
@@ -46,29 +29,12 @@ const Dashboard = ({ match }) => {
 
   return (
     <Layout className={`${orders.length <= 0 && withdrawals.length <= 0 ? "content-center" : "content-start"} max-screen`}>
-      {isLoading ? (
-        <Spinner screen />
-      ) : orders.length <= 0 && withdrawals.length <= 0 ? (
-        <EmptyActivity />
-      ) : (
-        <>
-          <Route exact path={match.url}>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-              <TransferedCharts isLoading={isLoading} orderAmounts={orderAmounts} />
-              {isMobile ? (
-                <ActivityMobile openModal={openDetails} withdrawals={withdrawals} orders={orders} />
-              ) : (
-                <RecentActivity openModal={openDetails} withdrawals={withdrawals} isLoading={isLoading} orders={orders} />
-              )}
-
-              <TotalTransfered kashAccount={kashAccount} totalAmount={totalAmount} isLoading={isLoading} className="flex-col" />
-            </div>
-          </Route>
-          <Route path={match.url + "/all"}>
-            <AllActivity orders={orders} openModal={openDetails} />
-          </Route>
-        </>
-      )}
+      <Route exact path={match.url + "/recent"}>
+        <RecentActivityScreen orders={orders} withdrawals={withdrawals} openDetails={openDetails} />
+      </Route>
+      <Route path={match.url + "/all"}>
+        <AllActivityScreen orders={orders} isLoading={isLoading} openModal={openDetails} />
+      </Route>
     </Layout>
   );
 };

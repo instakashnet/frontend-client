@@ -1,7 +1,9 @@
-import * as types from './types';
+import * as types from "./types";
 
-export const getOrdersInit = () => ({
+export const getOrdersInit = (limit, enabled = false) => ({
   type: types.GET_ORDERS_INIT,
+  limit,
+  enabled,
 });
 
 export const getOrdersSuccess = (orders) => ({
