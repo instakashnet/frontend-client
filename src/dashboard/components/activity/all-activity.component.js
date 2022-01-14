@@ -59,7 +59,7 @@ const AllActivity = ({ orders, openModal }) => {
 
   return (
     <div className={classes.DashboardCard}>
-      <Link to="/dashboard" className="flex items-center mb-6 text-base">
+      <Link to="/dashboard/recent" className="flex items-center mb-6 text-base">
         <ArrowBack fontSize="large" className="mr-2" /> Regresar
       </Link>
       <h2 className="flex items-center mb-3">

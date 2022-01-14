@@ -77,7 +77,7 @@ function* completeExchange({ values, orderId }) {
 
     if (res.status === 200) {
       if (res.data.noBank) {
-        yield call([history, "push"], "/dashboard");
+        yield call([history, "push"], "/dashboard/recent");
         yield Swal.fire({
           title: "Solicitud completada",
           text: "Tu solicitud de cambio fue recibida y será procesada en breve. Puedes ver el detalle en tu tabla de actividades.",
@@ -155,7 +155,7 @@ function* processCode({ values, orderId, processType, closeModal }) {
       if (processType === "details") {
         yield put(getOrdersInit());
         yield call(closeModal);
-      } else yield call([history, "push"], "/dashboard");
+      } else yield call([history, "push"], "/dashboard/recent");
 
       yield call([sessionStorage, "removeItem"], "order");
 

@@ -62,7 +62,7 @@ export const AllActivityScreen = ({ orders, isLoading, openModal }) => {
     <Spinner screen />
   ) : (
     <div className={classes.DashboardCard}>
-      <Link to="/dashboard" className="flex items-center mb-6 text-base">
+      <Link to="/dashboard/all" className="flex items-center mb-6 text-base">
         <ArrowBack fontSize="large" className="mr-2" /> Regresar
       </Link>
       <h2 className="flex items-center mb-3">
