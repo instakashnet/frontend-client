@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import { signinValidation } from "../helpers/formValidations";
 import { useSelector, useDispatch } from "react-redux";
-import { signinInit, signinGoogle, closeModal } from "../../store/actions";
+import { signinInit, signinGoogle, closeModal, openModal } from "../../store/actions";
 
 import { Input } from "../../components/UI/form-items/input.component";
 import { CheckboxComponent } from "../../components/UI/form-items/checkbox.component";
@@ -44,12 +44,12 @@ const Signin = () => {
     dispatch(signinGoogle(res.accessToken));
   };
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     dispatch(openModal());
-  //   }, 600);
-  //   return () => clearTimeout(timeout);
-  // }, [dispatch]);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      dispatch(openModal());
+    }, 600);
+    return () => clearTimeout(timeout);
+  }, [dispatch]);
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 h-full md:h-screen">
@@ -114,8 +114,8 @@ export const Information = () => {
   return (
     <>
       <p className="mb-3 text-center">
-        Agradecidos siempre por la confianza, queremos informarle que en estos momentos la plataforma para empresas de <b>BCP</b> se encuentra con problemas para realizar
-        transferencias. Por este motivo las operaciones hacia este banco <b>pueden demorar más de lo usual</b>. Quedamos a la espera de que el banco solucione el inconveniente.
+        Agradecidos siempre por la confianza, queremos informarle que en estos momentos la plataforma para empresas de <b>Interbank</b> se encuentra con problemas para realizar
+        transferencias. Por este motivo no realizaremos operaciones hacia este banco <b>por el momento</b>. Quedamos a la espera de que el banco solucione el inconveniente.
       </p>
       <p className="text-center my-4 font-bold">Agradecemos su comprensión.</p>
       <Button onClick={() => dispatch(closeModal())} className="action-button">
