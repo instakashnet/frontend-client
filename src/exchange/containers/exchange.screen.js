@@ -16,14 +16,12 @@ import { AddAccount } from "../../accounts/components/add-account.component";
 import Information from "../components/information.component";
 import CompleteProfile from "../components/profile-modal.component";
 import { InfoButton } from "../components/info-button.component";
-import Spinner from "../../components/UI/spinner.component";
 import { SelectionHeader } from "../components/selection-header.component";
 
 import classes from "../assets/css/exchange-screens.module.scss";
 
 const Exchange = ({ history, location, match }) => {
   const dispatch = useDispatch(),
-    isLoading = useSelector((state) => state.Exchange.isLoading),
     user = useSelector((state) => state.Auth.user),
     profile = useSelector((state) => state.Profile.profileSelected),
     { isMobile } = useDeviceDetect(),
@@ -31,12 +29,10 @@ const Exchange = ({ history, location, match }) => {
 
   // EFFECTS
   useEffect(() => {
-    if (!profile) return history.push("/currency-exchange/profile-selection");
-  }, [profile, history]);
-
-  useEffect(() => {
-    dispatch(getLastOrderInit());
-  }, [dispatch]);
+    if (!profile) {
+      return history.push("/currency-exchange/profile-selection");
+    } else dispatch(getLastOrderInit());
+  }, [profile, history, dispatch]);
 
   useEffect(() => {
     if (location.pathname === "/currency-exchange" && !order) {
@@ -46,8 +42,8 @@ const Exchange = ({ history, location, match }) => {
   }, [location, dispatch, order, profile, user.isReferal]);
 
   useEffect(() => {
-    if (order && order.status === 2 && location.pathname !== "/currency-exchange/complete") history.push("/currency-exchange/complete");
-  }, [history, order, location]);
+    if (profile && order && order.status === 2 && location.pathname !== "/currency-exchange/complete") history.push("/currency-exchange/complete");
+  }, [profile, history, order, location]);
 
   useEffect(() => {
     if (location.pathname !== "/currency-exchange") {
@@ -92,31 +88,27 @@ const Exchange = ({ history, location, match }) => {
 
   return (
     <Layout className="content-center">
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <div className={classes.Exchange}>
-          {profile && match.isExact && (
-            <>
-              <SelectionHeader profile={profile} />
-              <div className={classes.Separator} />
-            </>
-          )}
-          <Route exact path={match.url + "/profile-selection"}>
-            <ProfileSelection />
-          </Route>
-          <Route exact path={match.url}>
-            <Calculator profile={profile} setModal={openModalHandler} user={user} />
-          </Route>
-          <Route path={match.url + "/step-2"}>
-            <Accounts order={order} setModal={openModalHandler} />
-          </Route>
-          <Route path={match.url + "/complete"}>
-            <Complete order={order} />
-          </Route>
-          {profile && (!isMobile ? <Information /> : <InfoButton onInfoOpen={() => openModalHandler("info")} />)}
-        </div>
-      )}
+      <div className={classes.Exchange}>
+        {profile && match.isExact && (
+          <>
+            <SelectionHeader profile={profile} />
+            <div className={classes.Separator} />
+          </>
+        )}
+        <Route exact path={match.url + "/profile-selection"}>
+          <ProfileSelection />
+        </Route>
+        <Route exact path={match.url}>
+          <Calculator profile={profile} setModal={openModalHandler} user={user} />
+        </Route>
+        <Route path={match.url + "/step-2"}>
+          <Accounts order={order} setModal={openModalHandler} />
+        </Route>
+        <Route path={match.url + "/complete"}>
+          <Complete order={order} />
+        </Route>
+        {profile && (!isMobile ? <Information /> : <InfoButton onInfoOpen={() => openModalHandler("info")} />)}
+      </div>
     </Layout>
   );
 };
