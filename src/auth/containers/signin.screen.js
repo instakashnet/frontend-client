@@ -114,8 +114,9 @@ export const Information = () => {
   return (
     <>
       <p className="mb-3 text-center">
-        Agradecidos siempre por la confianza, queremos informarle que en estos momentos la plataforma para empresas de <b>BCP</b> se encuentra con problemas para realizar
-        transferencias. Por este motivo no realizaremos operaciones hacia este banco <b>por el momento</b>. Quedamos a la espera de que el banco solucione el inconveniente.
+        Agradecidos siempre por la confianza, queremos informarle que la plataforma para empresas de <b>BCP</b> se encuentra con problemas en su plataforma. Por este motivo no
+        podemos realizar operaciones hacia este banco. Aidicionalmente, la plataforma de <b>Interbank</b> se encuentra con frecuentes retrasos para procesar transferencias, por
+        ello estamos presentando demoras en realizar sus pedidos. Quedamos a la espera de que los bancos solucionen dichos inconvenientes.
       </p>
       <p className="text-center my-4 font-bold">Agradecemos su comprensión.</p>
       <Button onClick={() => dispatch(closeModal())} className="action-button">
