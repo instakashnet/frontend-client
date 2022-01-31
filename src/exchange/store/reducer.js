@@ -1,7 +1,7 @@
 import * as types from "./types";
 const initialState = {
   rates: { buy: 0, sell: 0 },
-  isLoading: true,
+  isLoading: false,
   isProcessing: false,
   coupon: null,
   order: null,
@@ -10,6 +10,7 @@ const initialState = {
 const exchangeReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_LAST_ORDER_INIT:
+    case types.GET_RATES_INIT:
       return { ...state, isLoading: true };
     case types.GET_LAST_ORDER_SUCCESS:
       return { ...state, isLoading: false };
