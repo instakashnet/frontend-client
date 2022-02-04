@@ -9,7 +9,6 @@ import Input from "../components/calculator-items/currency-input.component";
 import CouponInput from "../components/calculator-items/coupon-input.component";
 
 import Swipe from "../components/calculator-items/swipe.component";
-import Spinner from "../../components/UI/spinner.component";
 import { Button } from "../../components/UI/button.component";
 import Tooltip from "../../components/UI/tooltip.component";
 import Timer from "../components/calculator-items/timer.component";
@@ -128,7 +127,7 @@ const Calculator = ({ profile, setModal, user }) => {
     <>
       <h1>¡Gana cambiando con Instakash!</h1>
       <h3>Mejores tasas, mayor ahorro.</h3>
-      {isLoading ? <Spinner /> : <Rates actualRates={actualRates} coupon={coupon} couponRates={couponRates} />}
+      {!isLoading && <Rates actualRates={actualRates} coupon={coupon} couponRates={couponRates} />}
       <form onSubmit={formik.handleSubmit} className={classes.ExchangeForm}>
         {!isLoading && (
           <div className={classes.Timer}>

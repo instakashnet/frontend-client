@@ -15,7 +15,6 @@ import { SelectComponent } from "../../components/UI/form-items/select.component
 import KashUsed from "../components/kash-used.component";
 import { Button } from "../../components/UI/button.component";
 import { Input } from "../../components/UI/form-items/input.component";
-import Spinner from "../../components/UI/spinner.component";
 
 import classes from "../assets/css/exchange-screens.module.scss";
 
@@ -141,9 +140,7 @@ const Accounts = ({ setModal, order }) => {
     <>
       <h1>Completa los datos</h1>
       <h3>Selecciona tu banco de envío y la cuenta donde recibes.</h3>
-      {isLoading ? (
-        <Spinner screen />
-      ) : (
+      {!isLoading && (
         <form onSubmit={formik.handleSubmit} className={classes.ExchangeForm}>
           {kashAccount.balance > 0 && <KashUsed formik={formik} onKashUsed={kashUsedHandler} totalAmount={totalAmountSent} balance={kashAccount.balance} order={order} />}
           {formik.values.kashApplied && totalAmountSent <= 0 ? null : (

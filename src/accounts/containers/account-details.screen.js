@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { EditOutlined, DeleteOutlineOutlined } from "@material-ui/icons";
-import { deleteAccountInit } from "../../store/actions";
-import Spinner from "../../components/UI/spinner.component";
+import { HashLoader } from "react-spinners";
 
+// REACT REDUX
+import { useSelector, useDispatch } from "react-redux";
+import { deleteAccountInit } from "../../store/actions";
+
+// COMPONENTS
 import EditAccount from "../components/forms/edit-account.component";
 import { Button } from "../../components/UI/button.component";
 
@@ -17,7 +20,11 @@ const AccountDetails = () => {
 
   return (
     <div className={classes.AccountDetails}>
-      {!edit && isProcessing && <Spinner full />}
+      {!edit && isProcessing && (
+        <div className="flex items-center justify-center p-8">
+          <HashLoader size={50} loading={isProcessing} margin={4} color="#0d8284" />
+        </div>
+      )}
       {!isProcessing && (
         <>
           <div className="grid grid-cols-2 md:grid-cols-3 mb-6">
