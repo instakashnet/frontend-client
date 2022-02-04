@@ -41,22 +41,18 @@ const TotalTransfered = ({ totalAmount, kashAccount, isLoading, className, type 
           <Cached className="mr-2" /> Soles cambiados
         </h2>
         <p className="mb-3 ml-2">Importe total en soles</p>
-        {!isLoading && (
-          <Card className="flex items-center h-24 text-center flex-col p-6 justify-center w-full">
-            <span className={classes.TotalAmount}>S/. {formatAmount(totalAmount)}</span>
-          </Card>
-        )}
+        <Card className="flex items-center h-24 text-center flex-col p-6 justify-center w-full">
+          <span className={classes.TotalAmount}>S/. {formatAmount(totalAmount)}</span>
+        </Card>
       </div>
       <div className={`${classes.DashboardCard} w-full ${type === "account" && "mx-0 md:mx-3"}`}>
         <h2>
           <ArrowUpward className="mr-2" /> Ahorro aproximado
         </h2>
         <p className="mb-3 ml-2">Importe en relación a otras casas y bancos</p>
-        {!isLoading && (
-          <Card className="flex flex-col h-24 text-center p-6 items-center justify-center">
-            <span className={classes.TotalAmount}>S/. {formatAmount(savings)}</span>
-          </Card>
-        )}
+        <Card className="flex flex-col h-24 text-center p-6 items-center justify-center">
+          <span className={classes.TotalAmount}>S/. {formatAmount(savings)}</span>
+        </Card>
       </div>
     </div>
   );

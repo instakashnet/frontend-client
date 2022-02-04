@@ -12,7 +12,6 @@ import { getOrdersInit } from "../../store/actions";
 import { StatusBadge } from "../../components/UI/status-badge.component";
 import { Button } from "../../components/UI/button.component";
 import ActivityTable from "../components/activity-table.component";
-import Spinner from "../../components/UI/spinner.component";
 
 import classes from "../assets/css/activity-components.module.scss";
 
@@ -58,17 +57,17 @@ export const AllActivityScreen = ({ orders, isLoading, openModal }) => {
     }));
   }
 
-  return isLoading ? (
-    <Spinner screen />
-  ) : (
-    <div className={classes.DashboardCard}>
-      <Link to="/dashboard/all" className="flex items-center mb-6 text-base">
-        <ArrowBack fontSize="large" className="mr-2" /> Regresar
-      </Link>
-      <h2 className="flex items-center mb-3">
-        <Repeat className="mr-2" size={20} /> Cambios de divisa realizados
-      </h2>
-      <ActivityTable data={data} columns={columns} />
-    </div>
+  return (
+    !isLoading && (
+      <div className={classes.DashboardCard}>
+        <Link to="/dashboard/recent" className="flex items-center mb-6 text-base">
+          <ArrowBack fontSize="large" className="mr-2" /> Regresar
+        </Link>
+        <h2 className="flex items-center mb-3">
+          <Repeat className="mr-2" size={20} /> Cambios de divisa realizados
+        </h2>
+        <ActivityTable data={data} columns={columns} />
+      </div>
+    )
   );
 };

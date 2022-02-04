@@ -7,6 +7,7 @@ import { getAffiliatesInit } from "../store/actions";
 import Layout from "../components/layout/layout.component";
 import { Instructions } from "./containers/instructions";
 import { AffiliatesList } from "./containers/affiliates-list";
+import Spinner from "../components/UI/spinner.component";
 
 import classes from "./assets/css/affiliates-containers.module.scss";
 
@@ -39,6 +40,7 @@ const AffiliatesScreen = () => {
         <Instructions value={value} role="tabpanel" index={0} />
         <AffiliatesList value={value} role="tabpanel" index={1} affiliates={affiliates} isLoading={isLoading} />
       </SwipeableViews>
+      {isLoading && <Spinner loading={isLoading} />}
     </Layout>
   );
 };

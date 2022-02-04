@@ -17,6 +17,7 @@ import Information from "../components/information.component";
 import CompleteProfile from "../components/profile-modal.component";
 import { InfoButton } from "../components/info-button.component";
 import { SelectionHeader } from "../components/selection-header.component";
+import Spinner from "../../components/UI/spinner.component";
 
 import classes from "../assets/css/exchange-screens.module.scss";
 
@@ -25,6 +26,7 @@ const Exchange = ({ history, location, match }) => {
     user = useSelector((state) => state.Auth.user),
     profile = useSelector((state) => state.Profile.profileSelected),
     { isMobile } = useDeviceDetect(),
+    isLoading = useSelector((state) => state.Exchange.isLoading),
     order = JSON.parse(sessionStorage.getItem("order"));
 
   // EFFECTS
@@ -109,6 +111,7 @@ const Exchange = ({ history, location, match }) => {
         </Route>
         {profile && (!isMobile ? <Information /> : <InfoButton onInfoOpen={() => openModalHandler("info")} />)}
       </div>
+      {isLoading && <Spinner loading={isLoading} />}
     </Layout>
   );
 };

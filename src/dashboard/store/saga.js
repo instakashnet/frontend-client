@@ -1,4 +1,4 @@
-import { put, takeEvery, all, fork, select, takeLatest } from "redux-saga/effects";
+import { put, takeEvery, all, fork, takeLatest } from "redux-saga/effects";
 import * as types from "./types";
 import * as actions from "./actions";
 import { setAlertInit } from "../../store/actions";
@@ -46,11 +46,17 @@ function* getTotalAmount() {
 }
 
 function* getOrderDetails({ id, detailsType }) {
-  let details = {};
+  try {
+    const res = yield exchangeService.get(`/order/detail/${id}?type=${detailsType}`);
+    if (res.status === 200) yield put(actions.getOrderDetailsSuccess(res.data));
+  } catch (error) {
+    yield put(setAlertInit(error.message, "error"));
+    yield put(actions.activityError());
+  }
 
-  if (detailsType === "order") details = yield select((state) => state.Dashboard.orders.find((order) => order.id === id));
-  if (detailsType === "withdrawal") details = yield select((state) => state.Dashboard.withdrawals.find((withdrawal) => withdrawal.id === id));
-  yield put(actions.getOrderDetailsSuccess(details));
+  // if (detailsType === "order") details = yield select((state) => state.Dashboard.orders.find((order) => order.id === id));
+  // if (detailsType === "withdrawal") details = yield select((state) => state.Dashboard.withdrawals.find((withdrawal) => withdrawal.id === id));
+  //
 }
 
 export function* watchGetOrders() {

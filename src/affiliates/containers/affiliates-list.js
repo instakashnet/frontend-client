@@ -5,13 +5,12 @@ import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
 
 import { AffiliatesTable } from "../components/affiliates-table.component";
 import Card from "../../components/UI/card.component";
-import Spinner from "../../components/UI/spinner.component";
 
 import KashIcon from "../../assets/images/kash.svg";
 
 import classes from "../assets/css/affiliates-containers.module.scss";
 
-export const AffiliatesList = ({ affiliates, isLoading, ...rest }) => {
+export const AffiliatesList = ({ affiliates, ...rest }) => {
   const { isMobile } = useDeviceDetect();
 
   const columns = [
@@ -76,7 +75,9 @@ export const AffiliatesList = ({ affiliates, isLoading, ...rest }) => {
           </b>{" "}
           Recuerda que ganas <b>KASH</b> cada vez que tus amigos se registran con tu código y <b>realizan su primer cambio.</b>
         </p>
-        <Card className={classes.TableCard}>{isLoading ? <Spinner /> : <AffiliatesTable columns={columns} data={data} />}</Card>
+        <Card className={classes.TableCard}>
+          <AffiliatesTable columns={columns} data={data} />
+        </Card>
         <h2 className="my-6 text-center">
           Invita más amigos y gana más <b>KASH</b>
         </h2>

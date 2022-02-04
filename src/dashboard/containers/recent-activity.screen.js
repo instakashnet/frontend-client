@@ -11,11 +11,10 @@ import TotalTransfered from "../components/total-transfered.component";
 import TransferedCharts from "../components/charts/transfered-charts.component";
 import RecentActivity from "../components/activity/recent-activity.component";
 import { ActivityMobile } from "../components/activity/mobile-activity.component";
-import Spinner from "../../components/UI/spinner.component";
 
 export const RecentActivityScreen = ({ orders, withdrawals, openDetails }) => {
   const dispatch = useDispatch(),
-    { orderAmounts, totalAmount, isLoading } = useSelector((state) => state.Dashboard),
+    { orderAmounts, totalAmount } = useSelector((state) => state.Dashboard),
     { kashAccount } = useSelector((state) => state.Accounts),
     { isMobile } = useDeviceDetect();
 
@@ -29,20 +28,18 @@ export const RecentActivityScreen = ({ orders, withdrawals, openDetails }) => {
     dispatch(getWithdrawalsInit());
   }, [dispatch]);
 
-  return isLoading ? (
-    <Spinner screen />
-  ) : orders.length <= 0 && withdrawals.length <= 0 ? (
+  return orders.length <= 0 && withdrawals.length <= 0 ? (
     <EmptyActivity />
   ) : (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-      <TransferedCharts isLoading={isLoading} orderAmounts={orderAmounts} />
+      <TransferedCharts orderAmounts={orderAmounts} />
       {isMobile ? (
         <ActivityMobile openModal={openDetails} withdrawals={withdrawals} orders={orders} />
       ) : (
-        <RecentActivity openModal={openDetails} withdrawals={withdrawals} isLoading={isLoading} orders={orders} />
+        <RecentActivity openModal={openDetails} withdrawals={withdrawals} orders={orders} />
       )}
 
-      <TotalTransfered kashAccount={kashAccount} totalAmount={totalAmount} isLoading={isLoading} className="flex-col" />
+      <TotalTransfered kashAccount={kashAccount} totalAmount={totalAmount} className="flex-col" />
     </div>
   );
 };
