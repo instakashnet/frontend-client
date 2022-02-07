@@ -14,20 +14,20 @@ import PublicRoute from "./routing/PublicRoute";
 import PrivateRoute from "./routing/PrivateRoute";
 
 // PUBLIC
-import Signin from "./auth/containers/signin.screen";
-import Signup from "./auth/containers/signup.screen";
-import { EmailValidationScreen } from "./auth/containers/email-validation.screen";
-import RecoverPassword from "./auth/containers/recover-password.screen";
-import ChangePassword from "./auth/containers/change-password.screen";
-import CompleteProfile from "./auth/containers/complete-profile.screen";
+import Signin from "./pages/auth/containers/signin.screen";
+import Signup from "./pages/auth/containers/signup.screen";
+import { EmailValidationScreen } from "./pages/auth/containers/email-validation.screen";
+import RecoverPassword from "./pages/auth/containers/recover-password.screen";
+import ChangePassword from "./pages/auth/containers/change-password.screen";
+import CompleteProfile from "./pages/auth/containers/complete-profile.screen";
 
 // PRIVATE
-const Welcome = lazy(() => import("./welcome/containers/Welcome"));
-const Dashboard = lazy(() => import("./dashboard/containers/dashboard.screen"));
-const Affiliates = lazy(() => import("./affiliates/affiliates.screen"));
-const MyProfile = lazy(() => import("./profile/containers/profile.screen"));
-const Accounts = lazy(() => import("./accounts/containers/accounts.screen"));
-const Exchange = lazy(() => import("./exchange/containers/exchange.screen"));
+const Welcome = lazy(() => import("./pages/welcome/containers/welcome.screen"));
+const Dashboard = lazy(() => import("./pages/dashboard/containers/dashboard.screen"));
+const Affiliates = lazy(() => import("./pages/affiliates/affiliates.screen"));
+const MyProfile = lazy(() => import("./pages/profile/containers/profile.screen"));
+const Accounts = lazy(() => import("./pages/accounts/containers/accounts.screen"));
+const Exchange = lazy(() => import("./pages/exchange/containers/exchange.screen"));
 
 ReactPixel.init(process.env.REACT_APP_FB_PIXEL_ID, {}, { autoConfig: true, debug: false });
 

@@ -1,8 +1,10 @@
 import React from "react";
 
+// COMPONENTS
 import Card from "../UI/card.component";
-import UserCode from "../../affiliates/components/user-code.component";
+import UserCode from "../../pages/affiliates/components/user-code.component";
 
+// ASSETS & CLASSES
 import KashImg from "../../assets/images/kash.svg";
 import classes from "./layout-components.module.scss";
 
