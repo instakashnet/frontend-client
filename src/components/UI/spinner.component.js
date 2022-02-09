@@ -1,10 +1,16 @@
-import React from 'react';
-import { ClockLoader } from 'react-spinners';
+import React from "react";
+import { HashLoader } from "react-spinners";
 
-const Spinner = ({ full, screen }) => {
+// CLASSES
+import classes from "./ui-components.module.scss";
+
+const Spinner = ({ loading }) => {
   return (
-    <div className={`flex items-center justify-center ${screen ? 'h-screen' : ''} ${full ? 'max-h-full' : ''}`}>
-      <ClockLoader size={85} color='#0d8284' />
+    <div className={classes.LoadingOverlay}>
+      <div className="flex items-center flex-col justify-center">
+        <HashLoader size={70} loading={loading} margin={4} color="#0d8284" />
+        <p className="mt-4">Cargando...</p>
+      </div>
     </div>
   );
 };
