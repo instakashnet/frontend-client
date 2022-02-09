@@ -100,11 +100,10 @@ const Exchange = ({ history, location, match }) => {
               <Complete order={order} />
             </Route>
           </>
-        ) : (
-          <Route path={match.url + "/profile-selection"}>
-            <ProfileSelection />
-          </Route>
-        )}
+        ) : null}
+        <Route path={match.url + "/profile-selection"}>
+          <ProfileSelection />
+        </Route>
         {profile && (!isMobile ? <Information /> : <InfoButton onInfoOpen={() => openModalHandler("info")} />)}
       </div>
       {isLoading && <Spinner loading={isLoading} />}
