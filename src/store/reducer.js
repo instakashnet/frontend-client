@@ -1,18 +1,18 @@
 import { combineReducers } from "redux";
 
 // CORE REDUCERS
-import Alert from "../core/store/alert/reducer";
-import Nav from "../core/store/menu/reducer";
-import Modal from "../core/store/modal/reducer";
-import Data from "../core/store/data/reducer";
+import Alert from "../services/core/alert/reducer";
+import Nav from "../services/core/menu/reducer";
+import Modal from "../services/core/modal/reducer";
+import Data from "../services/core/data/reducer";
 
 // MODULES
-import Auth from "../auth/store/reducer";
-import Profile from "../profile/store/reducer";
-import Dashboard from "../dashboard/store/reducer";
-import Accounts from "../accounts/store/reducer";
-import Exchange from "../exchange/store/reducer";
-import { affiliatesReducer as Affiliates } from "../affiliates/store/reducer";
+import Auth from "../services/auth/reducer";
+import Profile from "../services/profile/reducer";
+import Activity from "../services/activity/reducer";
+import Accounts from "../services/accounts/reducer";
+import Exchange from "../services/exchange/reducer";
+import { affiliatesReducer as Affiliates } from "../services/affiliates/reducer";
 
 const rootReducer = combineReducers({
   // GLOBAL
@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
   // MODULES
   Auth,
   Profile,
-  Dashboard,
+  Activity,
   Accounts,
   Exchange,
   Affiliates,
