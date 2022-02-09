@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 // REDUX
 import { useSelector, useDispatch } from "react-redux";
-import { signinInit, signinGoogle, closeModal, openModal } from "../../store/actions";
+import { signinInit, signinGoogle, closeModal, openModal } from "../../../store/actions";
 
 // FORMIK
 import { useFormik } from "formik";
