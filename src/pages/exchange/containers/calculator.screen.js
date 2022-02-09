@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { Info, AccessAlarm } from "@material-ui/icons";
-import { getRatesInit, validateCouponInit, createExchangeInit, deleteCoupon } from "../../../store/actions";
+import { getRatesInit, validateCouponInit, createExchangeInit, getLastOrderInit, deleteCoupon } from "../../../store/actions";
 
 // COMPONENTS
 import Rates from "../components/calculator-items/rates.component";
@@ -16,35 +16,42 @@ import Tooltip from "../../../components/UI/tooltip.component";
 // CLASSES
 import classes from "../assets/css/exchange-screens.module.scss";
 
-const Calculator = ({ profile, setModal, user }) => {
+const Calculator = ({ profile, setModal, user, history }) => {
   const dispatch = useDispatch(),
     [actualRates, setActualRates] = useState({ buy: 0, sell: 0 }),
     [couponRates, setCouponRates] = useState({ buy: 0, sell: 0 }),
     [isCouponMin, setIsCouponMin] = useState(false),
     [showInfo, setShowInfo] = useState(false),
     temporalAmountSent = useRef(null),
-    { rates, isLoading, coupon, isProcessing } = useSelector((state) => state.Exchange);
+    { rates, isLoading, coupon, isProcessing } = useSelector((state) => state.Exchange),
+    formik = useFormik({
+      initialValues: {
+        currency_sent_id: 2,
+        currency_received_id: 1,
+        rate_id: rates.id || "",
+        type: "sell",
+        amount_sent: 0,
+        amount_received: 0,
+        couponName: "",
+      },
+      enableReinitialize: true,
+      onSubmit: (values) => {
+        if ((values.type === "sell" && values.amount_received >= 1000) || (values.type === "buy" && values.amount_sent >= 1000)) {
+          if (user.level < 3) return setModal("complete");
+        }
+        return dispatch(createExchangeInit(values, temporalAmountSent?.current || 0, profile));
+      },
+    }),
+    { values, setFieldValue } = formik,
+    { type, amount_sent, amount_received } = values,
+    sellRate = coupon ? couponRates.sell : actualRates.sell,
+    buyRate = coupon ? couponRates.buy : actualRates.buy;
 
-  const formik = useFormik({
-    initialValues: {
-      currency_sent_id: 2,
-      currency_received_id: 1,
-      rate_id: rates.id || "",
-      type: "sell",
-      amount_sent: 0,
-      amount_received: 0,
-      couponName: "",
-    },
-    enableReinitialize: true,
-    onSubmit: (values) => {
-      if ((values.type === "sell" && values.amount_received >= 1000) || (values.type === "buy" && values.amount_sent >= 1000)) {
-        if (user.level < 3) return setModal("complete");
-      }
-      return dispatch(createExchangeInit(values, temporalAmountSent ? temporalAmountSent.current : 0, profile));
-    },
-  });
-  const { values, setFieldValue } = formik;
-  const { type, amount_sent, amount_received } = values;
+  // EFFECTS
+  useEffect(() => {
+    dispatch(getLastOrderInit());
+    dispatch(getRatesInit());
+  }, [dispatch]);
 
   useEffect(() => {
     if (coupon) dispatch(deleteCoupon());
@@ -55,9 +62,11 @@ const Calculator = ({ profile, setModal, user }) => {
       temporalAmountSent.current = amountSent;
       setFieldValue("amount_sent", amountSent.toFixed(2));
       setFieldValue("amount_received", 1000);
+
+      if (user.isReferal) dispatch(validateCouponInit("NUEVOREFERIDO1", profile?.type));
     }
     // eslint-disable-next-line
-  }, [rates, dispatch, setFieldValue]);
+  }, [rates, dispatch, user.isReferal, setFieldValue]);
 
   useEffect(() => {
     if (coupon && actualRates.buy > 0 && actualRates.sell > 0) {
@@ -73,15 +82,12 @@ const Calculator = ({ profile, setModal, user }) => {
   }, [coupon, setFieldValue]);
 
   // HANDLERS
-  const sellRate = coupon ? couponRates.sell : actualRates.sell;
-  const buyRate = coupon ? couponRates.buy : actualRates.buy;
-
-  const swipeCurrencyHandler = () => {
+  const swipeCurrencyHandler = useCallback(() => {
     setFieldValue("type", values.type === "buy" ? "sell" : "buy");
     setFieldValue("currency_sent_id", values.currency_received_id === 1 ? 1 : 2);
     setFieldValue("currency_received_id", values.currency_sent_id === 1 ? 1 : 2);
     setFieldValue("amount_received", values.type === "buy" ? (values.amount_sent / sellRate).toFixed(2) : (values.amount_sent * buyRate).toFixed(2));
-  };
+  }, [values, buyRate, sellRate, setFieldValue]);
 
   const currencyChangeHandler = ({ target: { name, rawValue } }) => {
     setFieldValue(name, +rawValue);
@@ -130,14 +136,12 @@ const Calculator = ({ profile, setModal, user }) => {
       <h3>Mejores tasas, mayor ahorro.</h3>
       {!isLoading && <Rates actualRates={actualRates} coupon={coupon} couponRates={couponRates} />}
       <form onSubmit={formik.handleSubmit} className={classes.ExchangeForm}>
-        {!isLoading && (
-          <div className={classes.Timer}>
-            <p>Se actualizará el tipo de cambio en:</p>
-            <div className="flex items-center text-base">
-              <AccessAlarm className="mr-2" /> <Timer onFinish={clearCalulator} />
-            </div>
+        <div className={classes.Timer}>
+          <p>Se actualizará el tipo de cambio en:</p>
+          <div className="flex items-center text-base">
+            <AccessAlarm className="mr-2" /> <Timer onFinish={clearCalulator} />
           </div>
-        )}
+        </div>
         <div className="relative">
           <Input name="amount_sent" value={amount_sent} currency={values.currency_sent_id} label="Envias" disabled={disabled} onChange={currencyChangeHandler} />
           <Swipe onSwipeCurrency={swipeCurrencyHandler} type={values.type} disabled={disabled} />
