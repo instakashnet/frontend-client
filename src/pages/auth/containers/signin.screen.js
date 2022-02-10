@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 // REDUX
 import { useSelector, useDispatch } from "react-redux";
-import { signinInit, signinGoogle, closeModal } from "../../../store/actions";
+import { signinInit, signinGoogle, closeModal, openModal } from "../../../store/actions";
 
 // FORMIK
 import { useFormik } from "formik";
@@ -50,12 +50,12 @@ const Signin = () => {
     dispatch(signinGoogle(res.accessToken));
   };
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     dispatch(openModal());
-  //   }, 600);
-  //   return () => clearTimeout(timeout);
-  // }, [dispatch]);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      dispatch(openModal());
+    }, 600);
+    return () => clearTimeout(timeout);
+  }, [dispatch]);
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 h-full md:h-screen">
