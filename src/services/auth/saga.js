@@ -55,7 +55,7 @@ function* setAuthTimeout(timeout) {
 
 function* signin({ values }) {
   try {
-    const res = yield authService.post("/auth/signin", values);
+    const res = yield authService.post("/auth/signin", values, { withCredentials: true });
     if (res.status === 200) {
       yield call(setAuthToken, res.data);
       yield call(loadUser);
