@@ -3,7 +3,7 @@ import { Add } from "@material-ui/icons";
 
 // REDUX
 import { useSelector, useDispatch } from "react-redux";
-import { selectProfileInit, getProfilesInit, openModal, closeModal } from "../../../store/actions";
+import { selectProfileInit, disableProfileInit, getProfilesInit, openModal, closeModal } from "../../../store/actions";
 
 // COMPONENTS
 import SelectionCard from "../../profile/components/selection-card.component";
@@ -42,7 +42,8 @@ const Selection = () => {
             <>
               {profiles.map((profile) => (
                 <SelectionCard
-                  onClick={() => dispatch(selectProfileInit(profile.id))}
+                  onSelect={() => dispatch(selectProfileInit(profile.id))}
+                  onDisable={() => dispatch(disableProfileInit(profile.id))}
                   key={profile.id}
                   type={profile.type}
                   sex={profile.identity_sex}
@@ -52,7 +53,7 @@ const Selection = () => {
             </>
           )}
         </div>
-        {profiles.length < 4 && (
+        {profiles.length < 6 && (
           <>
             <div className="flex items-center justify-center my-3">
               <button onClick={addProfileHandler} className={classes.AddProfile}>
