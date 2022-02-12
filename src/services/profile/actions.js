@@ -70,11 +70,6 @@ export const editUserCodeSuccess = (userCode) => ({
   userCode,
 });
 
-export const disableProfileInit = (id) => ({
-  type: types.DISABLE_PROFILE_INIT,
-  id,
-});
-
 export const getUserData = () => ({
   type: types.GET_USER_DATA_INIT,
 });
@@ -82,6 +77,11 @@ export const getUserData = () => ({
 export const getUserDataSuccess = (user) => ({
   type: types.GET_USER_DATA_SUCCESS,
   user,
+});
+
+export const disableProfileInit = (id) => ({
+  type: types.DISABLE_PROFILE_INIT,
+  id,
 });
 
 export const disableProfileSuccess = () => ({

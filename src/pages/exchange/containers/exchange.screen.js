@@ -104,7 +104,7 @@ const Exchange = ({ history, location, match }) => {
         <Route path={match.url + "/profile-selection"}>
           <ProfileSelection />
         </Route>
-        {profile && (!isMobile ? <Information /> : <InfoButton onInfoOpen={() => openModalHandler("info")} />)}
+        {profile && !location.pathname.includes("profile") && (!isMobile ? <Information /> : <InfoButton onInfoOpen={() => openModalHandler("info")} />)}
       </div>
       {isLoading && <Spinner loading={isLoading} />}
     </Layout>
