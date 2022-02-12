@@ -7,20 +7,20 @@ import Swal from "sweetalert2";
 import { authService } from "../auth.service";
 import history from "../../shared/history";
 
-function* setAuthToken(data) {
-  const date = new Date();
-  const expDate = new Date(date.setSeconds(date.getSeconds() + data.expiresIn));
-
-  yield call([localStorage, "setItem"], "authData", JSON.stringify({ token: data.accessToken, expDate }));
+function* refreshToken() {
+  try {
+    const res = yield authService.post("/auth/refresh");
+    console.log(res);
+  } catch (error) {
+    yield call(logout, {});
+    yield put(actions.authError());
+  }
 }
 
-function* loadUser() {
-  const authData = yield call([localStorage, "getItem"], "authData");
+function* loadUser(authData) {
   if (!authData) return yield put(actions.logoutSuccess());
 
-  const { token, expDate } = JSON.parse(authData);
-
-  if (!token) return yield call(clearUser);
+  const { token, expDate } = authData;
 
   if (new Date(expDate) <= new Date()) return yield call(logout, {});
 
@@ -55,10 +55,12 @@ function* setAuthTimeout(timeout) {
 
 function* signin({ values }) {
   try {
-    const res = yield authService.post("/auth/signin", values, { withCredentials: true });
+    const res = yield authService.post("/auth/signin", values);
     if (res.status === 200) {
-      yield call(setAuthToken, res.data);
-      yield call(loadUser);
+      let date = new Date();
+      let authData = { token: res.data.accessToken, expDate: new Date(date.setSeconds(date.getSeconds() + res.data.expiresIn)) };
+      yield put(actions.signinSuccess(res.data.accessToken));
+      yield call(loadUser, authData);
     }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
@@ -70,7 +72,6 @@ function* signinGoogle({ token }) {
   try {
     const res = yield authService.post("/auth/google", { token });
     if (res.status === 201 || res.status === 200) {
-      yield call(setAuthToken, res.data);
       yield call(loadUser);
     }
   } catch (error) {
@@ -83,7 +84,6 @@ function* signup({ values }) {
   try {
     const res = yield authService.post("/auth/signup", values);
     if (res.status === 201) {
-      yield call(setAuthToken, res.data);
       yield put(actions.signupSuccess());
       yield call([history, "push"], "/email-verification/OTP");
     }
@@ -110,7 +110,6 @@ function* validateEmail({ values, otpType }) {
     const res = yield authService.post("/auth/verify-code", validateValues);
 
     if (res.status === 200) {
-      yield call(setAuthToken, res.data);
       if (otpType === "PWD") {
         yield put(actions.refreshCodeSuccess());
         return yield call([history, "push"], "/change-password");
@@ -141,7 +140,7 @@ function* recoverPassword({ values }) {
     const res = yield authService.post("/users/recover-password", values);
 
     if (res.status === 201) {
-      yield call(setAuthToken, res.data);
+      // yield call(setAuthToken, res.data);
       yield call([history, "push"], "/email-verification/PWD");
       yield put(actions.recoverPasswordSuccess());
     }
@@ -173,17 +172,11 @@ function* clearUser() {
   yield put(actions.logoutSuccess());
 }
 
-function* logout({ logType }) {
-  const authData = yield call([localStorage, "getItem"], "authData");
-  if (!authData) return yield put(actions.logoutSuccess());
-
-  const { expDate } = JSON.parse(authData);
-  if (!logType && new Date(expDate) > new Date()) {
-    try {
-      yield authService.post("/auth/logout");
-    } catch (error) {
-      yield put(actions.authError());
-    }
+function* logout() {
+  try {
+    yield authService.post("/auth/logout");
+  } catch (error) {
+    yield put(actions.authError());
   }
 
   yield call(clearUser);
@@ -191,8 +184,8 @@ function* logout({ logType }) {
   yield put(actions.logoutSuccess());
 }
 
-export function* watchLoadUser() {
-  yield takeEvery(types.LOADUSER_INIT, loadUser);
+export function* watcRefreshToken() {
+  yield takeEvery(types.REFRESH_TOKEN_INIT, refreshToken);
 }
 
 export function* watchCompleteProfile() {
@@ -236,7 +229,7 @@ export default function* authSaga() {
     fork(watchSignin),
     fork(watchSignup),
     fork(watchLogout),
-    fork(watchLoadUser),
+    fork(watcRefreshToken),
     fork(watchCompleteProfile),
     fork(watchSigninGoogle),
     fork(watchRecoverPassword),

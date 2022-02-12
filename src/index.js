@@ -5,9 +5,12 @@ import { ThemeProvider } from "@material-ui/styles";
 import App from "./App";
 import store from "./store";
 import { theme } from "./components/layout/theme.component";
+import { injectStore } from "./shared/axios/interceptors";
 
 import "./assets/css/app.css";
 import "./assets/css/main.scss";
+
+injectStore(store);
 
 ReactDOM.render(
   <Provider store={store}>

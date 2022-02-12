@@ -14,10 +14,14 @@ const authReducer = (state = initialState, action) => {
     case types.SET_USER_DATA:
       return { ...state, user: action.user };
 
+    case types.REFRESH_TOKEN_INIT:
+      return { ...state, isLoading: true };
+    case types.REFRESH_TOKEN_SUCCESS:
+      return { ...state, isLoading: false, token: action.token };
+
     case types.SIGNGIN_INIT:
     case types.SIGNIN_GOOGLE:
     case types.SIGNGUP_INIT:
-    case types.LOADUSER_INIT:
     case types.COMPLETE_PROFILE_INIT:
     case types.RECOVER_PASSWORD_INIT:
     case types.RESET_PASSWORD_INIT:
@@ -26,10 +30,11 @@ const authReducer = (state = initialState, action) => {
       return { ...state, isProcessing: true };
 
     case types.SIGNGUP_SUCCESS:
+    case types.SIGNGIN_SUCCESS:
     case types.RECOVER_PASSWORD_SUCCESS:
     case types.VALIDATE_EMAIL_SUCCESS:
     case types.REFRESH_CODE_SUCCESS:
-      return { ...state, isProcessing: false };
+      return { ...state, isProcessing: false, token: action.token };
 
     case types.LOGOUT_SUCCESS:
     case types.RESET_PASSWORD_SUCCESS:

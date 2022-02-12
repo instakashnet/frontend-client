@@ -1,7 +1,7 @@
 import { useEffect, lazy } from "react";
 import { Switch, Router } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loadUserInit } from "./store/actions";
+import { refreshTokenInit } from "./store/actions";
 import ReactPixel from "react-facebook-pixel";
 import history from "./shared/history";
 
@@ -35,7 +35,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadUserInit());
+    dispatch(refreshTokenInit());
   }, [dispatch]);
 
   useEffect(() => {

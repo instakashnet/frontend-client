@@ -1,12 +1,16 @@
 import * as types from "./types";
 
-export const loadUserInit = () => ({
-  type: types.LOADUSER_INIT,
+export const refreshTokenInit = () => ({
+  type: types.REFRESH_TOKEN_INIT,
 });
 
-export const loadUserSuccess = (token, user) => ({
-  type: types.LOADUSER_SUCCESS,
+export const refreshTokenSuccess = (token) => ({
+  type: types.REFRESH_TOKEN_SUCCESS,
   token,
+});
+
+export const loadUserSuccess = (user) => ({
+  type: types.LOADUSER_SUCCESS,
   user,
 });
 
@@ -18,6 +22,11 @@ export const completeProfileInit = (values) => ({
 export const signinInit = (values) => ({
   type: types.SIGNGIN_INIT,
   values,
+});
+
+export const signinSuccess = (token) => ({
+  type: types.SIGNGIN_SUCCESS,
+  token,
 });
 
 export const signinGoogle = (token) => ({

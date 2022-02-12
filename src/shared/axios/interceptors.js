@@ -1,12 +1,15 @@
 const requestLog = (config) => (process.env.NODE_ENV !== "production" ? console.log(`Request sent to ${config.url}`) : false);
 
+let store;
+
+export const injectStore = (_store) => {
+  store = _store;
+};
+
 export const reqInterceptor = (instance) =>
   instance.interceptors.request.use(
     (config) => {
-      const authUser = localStorage.getItem("authData");
-      let accessToken;
-
-      if (authUser) accessToken = JSON.parse(authUser).token;
+      const accessToken = store.getState().Auth.token;
       if (accessToken) config.headers["x-access-token"] = accessToken;
 
       requestLog(config);
