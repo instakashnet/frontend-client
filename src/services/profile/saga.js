@@ -107,8 +107,7 @@ function* uploadDocument({ photos, docType }) {
     }
 
     if (uploaded) {
-      yield delay(2000);
-      yield call(getUserData);
+      // yield call(getUserData);
       yield put(actions.uploadDocumentSuccess());
       yield put(closeModal());
     }
@@ -150,8 +149,6 @@ function* disableProfile({ id }) {
       const res = yield authService.delete(`/users/active/${id}`, { data: { active: false } });
       if (res.status === 200) {
         yield call(getProfiles);
-        yield history.push("/profile-selection");
-        yield call([sessionStorage, "removeItem"], "profileSelected");
         yield put(actions.disableProfileSuccess());
         yield Swal.fire("Perfil eliminado", "El perfil ha sido eliminado correctamente. Deberá seleccionar un nuevo perfil.", "success");
       }

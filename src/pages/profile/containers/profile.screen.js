@@ -30,7 +30,7 @@ const Profile = ({ match }) => {
 
   // EFFECTS
   useEffect(() => {
-    dispatch(openSocketConnection());
+    dispatch(openSocketConnection("validation"));
     dispatch(getUserData());
 
     return () => {
