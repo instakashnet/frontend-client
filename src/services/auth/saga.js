@@ -1,4 +1,4 @@
-import { put, all, takeLatest, call, fork, takeEvery, delay } from "redux-saga/effects";
+import { put, all, takeLatest, call, fork, takeEvery } from "redux-saga/effects";
 import camelize from "camelize";
 import * as actions from "./actions";
 import * as types from "./types";
@@ -10,20 +10,17 @@ import history from "../../shared/history";
 function* refreshToken() {
   try {
     const res = yield authService.post("/auth/refresh");
-    console.log(res);
+    if (res.status === 200) {
+      yield put(actions.refreshTokenSuccess(res.data.accessToken));
+      yield call(loadUser);
+    }
   } catch (error) {
-    yield call(logout, {});
+    yield put(actions.logoutSuccess());
     yield put(actions.authError());
   }
 }
 
-function* loadUser(authData) {
-  if (!authData) return yield put(actions.logoutSuccess());
-
-  const { token, expDate } = authData;
-
-  if (new Date(expDate) <= new Date()) return yield call(logout, {});
-
+function* loadUser() {
   try {
     const res = yield authService.get("/users/session");
     const user = camelize(res.data.user);
@@ -39,28 +36,19 @@ function* loadUser(authData) {
       return yield put(actions.authError());
     }
 
-    yield put(actions.loadUserSuccess(token, user));
-
-    yield call(setAuthTimeout, new Date(expDate).getTime() - new Date().getTime());
+    yield put(actions.loadUserSuccess(user));
   } catch (error) {
     yield call(logout, {});
     yield put(actions.authError());
   }
 }
 
-function* setAuthTimeout(timeout) {
-  yield delay(timeout - 2000);
-  yield put(actions.logoutInit());
-}
-
 function* signin({ values }) {
   try {
     const res = yield authService.post("/auth/signin", values);
     if (res.status === 200) {
-      let date = new Date();
-      let authData = { token: res.data.accessToken, expDate: new Date(date.setSeconds(date.getSeconds() + res.data.expiresIn)) };
       yield put(actions.signinSuccess(res.data.accessToken));
-      yield call(loadUser, authData);
+      yield call(loadUser);
     }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
