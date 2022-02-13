@@ -86,9 +86,8 @@ export const setUserData = (user) => ({
   user,
 });
 
-export const logoutInit = (logType = null) => ({
+export const logoutInit = () => ({
   type: types.LOGOUT_INIT,
-  logType,
 });
 
 export const logoutSuccess = () => ({

@@ -1,5 +1,6 @@
-const requestLog = (config) => (process.env.NODE_ENV !== "production" ? console.log(`Request sent to ${config.url}`) : false);
+import { logoutSuccess } from "../store/actions";
 
+const requestLog = (config) => (process.env.NODE_ENV !== "production" ? console.log(`Request sent to ${config.url}`) : false);
 let store;
 
 export const injectStore = (_store) => {
@@ -22,8 +23,16 @@ export const resInterceptor = (instance) =>
   instance.interceptors.response.use(
     (res) => res,
     (error) => {
-      console.warn("Error status", error.response ? error.response.status : error.code);
+      const configRequest = error.config,
+        status = error.status || error.response.status;
+
+      console.warn("Error status: ", status || error.code);
       console.log(error);
+
+      if (status === 418 && !configRequest._retry) {
+        alert("Ha finalizado tu sesión, serás re dirigido y deberás iniciar sesión nuevamente.");
+        store.dispatch(logoutSuccess());
+      }
 
       let message;
       let code;

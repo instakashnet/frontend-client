@@ -143,7 +143,6 @@ function* resetPassword({ values }) {
     const res = yield authService.post("/users/reset-password", values);
     if (res.status === 201) {
       yield put(actions.resetPasswordSuccess());
-      yield call(clearUser);
       yield call([history, "push"], "/signin");
       yield call([Swal, "fire"], "Contraseña cambiada", "Ya puedes ingresar con tu nueva contraseña.", "success");
     }
@@ -153,13 +152,6 @@ function* resetPassword({ values }) {
   }
 }
 
-function* clearUser() {
-  yield call([localStorage, "removeItem"], "authData");
-  yield call([localStorage, "removeItem"], "userSession");
-  yield call([sessionStorage, "removeItem"], "profileSelected");
-  yield put(actions.logoutSuccess());
-}
-
 function* logout() {
   try {
     yield authService.post("/auth/logout");
@@ -167,7 +159,6 @@ function* logout() {
     yield put(actions.authError());
   }
 
-  yield call(clearUser);
   yield call([history, "push"], "/signin");
   yield put(actions.logoutSuccess());
 }

@@ -63,7 +63,6 @@ function* addProfile({ values }) {
 
 function* selectProfile({ profileId }) {
   const profileSelected = yield select((state) => state.Profile.profiles.find((p) => p.id === profileId));
-  yield call([sessionStorage, "setItem"], "profileSelected", JSON.stringify(profileSelected));
 
   yield put(actions.selectProfileSuccess(profileSelected));
   yield call([history, "push"], "/currency-exchange");
