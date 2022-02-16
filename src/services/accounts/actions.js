@@ -1,21 +1,31 @@
 import * as types from "./types";
 
+export const getBanks = (banks) => ({
+  type: types.GET_BANKS,
+  banks,
+});
+
+export const getCurrencies = (currencies) => ({
+  type: types.GET_CURRENCIES,
+  currencies,
+});
+
 export const getAccountsInit = (accType) => ({
-  type: types.GET_ACCOUNTS_INIT,
+  type: types.GET_ACCOUNTS.LOADING,
   accType,
 });
 
 export const getAccountsSuccess = (accounts) => ({
-  type: types.GET_ACCOUNTS_SUCCESS,
+  type: types.GET_ACCOUNTS.SUCCESS,
   accounts,
 });
 
 export const getKashAccountInit = () => ({
-  type: types.GET_KASH_ACCOUNT_INIT,
+  type: types.GET_KASH_ACCOUNT.LOADING,
 });
 
 export const getKashAccountSuccess = (account) => ({
-  type: types.GET_KASH_ACCOUNT_SUCCESS,
+  type: types.GET_KASH_ACCOUNT.SUCCESS,
   account,
 });
 

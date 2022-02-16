@@ -7,7 +7,7 @@ import { validateInterplaza } from "../../../shared/functions";
 
 // REDUX
 import { useSelector, useDispatch } from "react-redux";
-import { completeExchangeInit, cancelExchangeInit, getAccountsInit, getKashAccountInit, getBanksInit, getCurenciesInit } from "../../../store/actions";
+import { completeExchangeInit, cancelExchangeInit, getAccountsInit } from "../../../store/actions";
 
 // FORMIK
 import { useFormik } from "formik";
@@ -95,10 +95,7 @@ const Accounts = ({ setModal, order }) => {
 
   // EFFECTS
   useEffect(() => {
-    dispatch(getBanksInit());
-    dispatch(getKashAccountInit());
     dispatch(getAccountsInit("orders"));
-    dispatch(getCurenciesInit());
   }, [dispatch]);
 
   useEffect(() => {

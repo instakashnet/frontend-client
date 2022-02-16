@@ -1,13 +1,16 @@
 import { useEffect, lazy } from "react";
 import { Switch, Router } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { refreshTokenInit } from "./store/actions";
+
 import ReactPixel from "react-facebook-pixel";
 import history from "./shared/history";
 
-import Alert from "./components/UI/alert.component";
+// HOC
 import ScrollToTop from "./hoc/scroll-top.component";
+import { RefreshSession } from "./hoc/refresh-session.component";
 import asyncComponent from "./hoc/async.component";
+
+// COMPONENTS
+import Alert from "./components/UI/alert.component";
 
 // ROUTING
 import PublicRoute from "./routing/PublicRoute";
@@ -32,12 +35,6 @@ const Exchange = lazy(() => import("./pages/exchange/containers/exchange.screen"
 ReactPixel.init(process.env.REACT_APP_FB_PIXEL_ID, {}, { autoConfig: true, debug: false });
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(refreshTokenInit());
-  }, [dispatch]);
-
   useEffect(() => {
     ReactPixel.pageView();
   }, []);
@@ -45,7 +42,8 @@ function App() {
   return (
     <>
       <Router history={history}>
-        <ScrollToTop>
+        <RefreshSession>
+          <ScrollToTop />
           <Switch>
             <PublicRoute exact path="/signin" component={Signin} />
             <PublicRoute exact path="/signup" component={Signup} />
@@ -60,9 +58,9 @@ function App() {
             <PrivateRoute path="/currency-exchange" component={asyncComponent(Exchange)} />
             <PrivateRoute path="/dashboard" component={asyncComponent(Dashboard)} />
           </Switch>
-        </ScrollToTop>
+        </RefreshSession>
+        <Alert />
       </Router>
-      <Alert />
     </>
   );
 }

@@ -3,9 +3,11 @@ import Swal from "sweetalert2";
 import camelize from "camelize";
 import * as types from "./types";
 import * as actions from "./actions";
-import { exchangeService } from "../exchange.service";
 import { setAlertInit, getOrdersInit } from "../../store/actions";
 import history from "../../shared/history";
+
+// API SERVICES
+import { exchangeService } from "../../api/axios";
 
 function* getRates() {
   try {

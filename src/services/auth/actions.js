@@ -9,6 +9,10 @@ export const refreshTokenSuccess = (token) => ({
   token,
 });
 
+export const loadUserInit = () => ({
+  type: types.LOADUSER_INIT,
+});
+
 export const loadUserSuccess = (user) => ({
   type: types.LOADUSER_SUCCESS,
   user,

@@ -10,7 +10,7 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.LOADUSER_SUCCESS:
-      return { ...state, isProcessing: false, isAuth: true, token: action.token, user: action.user };
+      return { ...state, isProcessing: false, isAuth: true, user: action.user };
     case types.SET_USER_DATA:
       return { ...state, user: action.user };
 

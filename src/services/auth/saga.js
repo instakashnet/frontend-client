@@ -4,8 +4,10 @@ import * as actions from "./actions";
 import * as types from "./types";
 import { setAlertInit } from "../../store/actions";
 import Swal from "sweetalert2";
-import { authService } from "../auth.service";
 import history from "../../shared/history";
+
+// API SERVICES
+import { authService } from "../../api/axios";
 
 function* refreshToken() {
   try {
@@ -16,7 +18,6 @@ function* refreshToken() {
     }
   } catch (error) {
     yield put(actions.logoutSuccess());
-    yield put(actions.authError());
   }
 }
 
@@ -38,8 +39,7 @@ function* loadUser() {
 
     yield put(actions.loadUserSuccess(user));
   } catch (error) {
-    yield call(logout, {});
-    yield put(actions.authError());
+    yield put(actions.logoutInit());
   }
 }
 
@@ -48,7 +48,7 @@ function* signin({ values }) {
     const res = yield authService.post("/auth/signin", values);
     if (res.status === 200) {
       yield put(actions.signinSuccess(res.data.accessToken));
-      yield call(loadUser);
+      yield put(actions.loadUserInit());
     }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
@@ -179,6 +179,10 @@ export function* watchRefreshVerificationCode() {
   yield takeEvery(types.REFRESH_CODE_INIT, refreshVerificationCode);
 }
 
+export function* watchLoadUser() {
+  yield takeLatest(types.LOADUSER_INIT, loadUser);
+}
+
 export function* watchValidateEmail() {
   yield takeLatest(types.VALIDATE_EMAIL_INIT, validateEmail);
 }
@@ -205,6 +209,7 @@ export function* watchLogout() {
 
 export default function* authSaga() {
   yield all([
+    fork(watchLoadUser),
     fork(watchSignin),
     fork(watchSignup),
     fork(watchLogout),

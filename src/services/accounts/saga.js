@@ -1,33 +1,25 @@
 import { put, all, fork, call, select, takeLatest, takeEvery } from "redux-saga/effects";
+import Swal from "sweetalert2";
 import * as types from "./types";
 import * as actions from "./actions";
 import { closeModal, setAlertInit } from "../../store/actions";
-import { accountsService } from "../accounts.service";
-import { exchangeService } from "../exchange.service";
 import history from "../../shared/history";
-import Swal from "sweetalert2";
 
-function* getAccounts({ accType }) {
+// API SERVICES
+import { exchangeService, accountsService } from "../../api/axios";
+import { getBanks, getCurrencies, getAccounts } from "../../api/services/accounts.service";
+
+function* getAccountsSaga({ accType }) {
   try {
-    const res = yield accountsService.get(`/accounts?type=${accType}`);
+    const accounts = yield call(getAccounts, accType);
+    if (accType === "kash") return yield put(actions.getKashAccountSuccess(accounts.accounts));
 
-    if (res.status === 200) {
-      if (accType === "kash") return yield put(actions.getKashAccountSuccess(res.data.accounts));
+    const [banks, currencies] = yield all([call(getBanks), call(getCurrencies)]);
 
-      return yield put(actions.getAccountsSuccess(res.data.accounts));
-    }
+    yield put(actions.getBanks(banks.banks));
+    yield put(actions.getCurrencies(currencies.currencies));
+    yield put(actions.getAccountsSuccess(accounts.accounts));
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
-    yield put(actions.accountsError());
-  }
-}
-
-function* getKashAccount() {
-  try {
-    const res = yield accountsService.get("/accounts?type=kash");
-    if (res.status === 200) yield put(actions.getKashAccountSuccess(res.data.accounts));
-  } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.accountsError());
   }
 }
@@ -42,12 +34,11 @@ function* addAccount({ values, addType }) {
     const res = yield accountsService.post("/accounts", values);
     if (res.status === 201) {
       yield put(actions.addAccountSuccess());
-      yield call(getAccounts, { accType: addType });
+      // yield call(getAccounts, { accType: addType });
       yield put(setAlertInit("Cuenta agregada correctamente.", "success"));
       yield put(closeModal());
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.accountsError());
   }
 }
@@ -57,13 +48,12 @@ function* editAccount({ id, values, setEdit }) {
     const res = yield accountsService.put(`/accounts/${id}`, values);
     if (res.status === 200) {
       yield put(actions.editAccountSuccess());
-      yield call(getAccounts, { accType: "users" });
+      // yield call(getAccounts, { accType: "users" });
       yield call(setAccountDetails, { accId: id });
       yield put(setAlertInit("Cuenta editada correctamente.", "success"));
       yield call(setEdit, false);
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.accountsError());
   }
 }
@@ -74,12 +64,10 @@ function* withdrawKash({ values }) {
     if (res.status === 201) {
       yield call([Swal, "fire"], "Recibido", "La solicitud de retiro ha sido recibida. Puedes ver tu solicitud en la pantalla de actividades.", "success");
       yield put(actions.withdrawKashSuccess());
-      yield call(getKashAccount);
       yield put(closeModal());
       yield call([history, "push"], "/dashboard/recent");
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.accountsError());
   }
 }
@@ -99,23 +87,18 @@ function* deleteAccount({ account }) {
 
     if (result.isConfirmed) {
       yield accountsService.delete(`/accounts/${account.id}`);
-      yield call(getAccounts, { accType: "users" });
+      // yield call(getAccounts, { accType: "users" });
       yield put(setAlertInit("Cuenta eliminada correctamente.", "success"));
       yield put(actions.deleteAccountSuccess());
       yield put(closeModal());
     } else yield put(actions.accountsError());
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.accountsError());
   }
 }
 
 export function* watchGetAccounts() {
-  yield takeEvery(types.GET_ACCOUNTS_INIT, getAccounts);
-}
-
-export function* watchGetKashAccount() {
-  yield takeEvery(types.GET_KASH_ACCOUNT_INIT, getKashAccount);
+  yield takeEvery(types.GET_ACCOUNTS.LOADING, getAccountsSaga);
 }
 
 export function* watchSetAccountDetails() {
@@ -139,13 +122,5 @@ export function* watchDeleteAccount() {
 }
 
 export default function* accountsSaga() {
-  yield all([
-    fork(watchGetAccounts),
-    fork(wachAddAccount),
-    fork(watchSetAccountDetails),
-    fork(wachEditAccount),
-    fork(watchDeleteAccount),
-    fork(watchGetKashAccount),
-    fork(watchWithdrawKash),
-  ]);
+  yield all([fork(watchGetAccounts), fork(wachAddAccount), fork(watchSetAccountDetails), fork(wachEditAccount), fork(watchDeleteAccount), fork(watchWithdrawKash)]);
 }
