@@ -30,12 +30,12 @@ const Profile = ({ match }) => {
 
   // EFFECTS
   useEffect(() => {
-    // dispatch(openSocketConnection());
+    dispatch(openSocketConnection());
     dispatch(getUserData());
 
-    // return () => {
-    //   closeSocketConnection();
-    // };
+    return () => {
+      closeSocketConnection();
+    };
   }, [dispatch]);
 
   return (
