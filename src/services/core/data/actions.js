@@ -1,12 +1,12 @@
 import * as types from "./types";
 
-export const getScheduleInit = () => ({
-  type: types.GET_SCHEDULE_INIT,
+export const setIsClosedInit = () => ({
+  type: types.SET_IS_CLOSED.LOADING,
 });
 
-export const getScheduleSuccess = (schedule) => ({
-  type: types.GET_SCHEDULE_SUCCESS,
-  schedule,
+export const setIsClosedSuccess = (closed) => ({
+  type: types.SET_IS_CLOSED.SUCCESS,
+  closed,
 });
 
 export const dataError = () => ({

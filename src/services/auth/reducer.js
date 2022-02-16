@@ -2,6 +2,7 @@ import * as types from "./types";
 
 const initialState = {
   isProcessing: false,
+  isLoading: false,
   token: null,
   user: null,
   isAuth: false,
@@ -33,15 +34,17 @@ const authReducer = (state = initialState, action) => {
     case types.SIGNGIN_SUCCESS:
     case types.RECOVER_PASSWORD_SUCCESS:
     case types.VALIDATE_EMAIL_SUCCESS:
-    case types.REFRESH_CODE_SUCCESS:
       return { ...state, isProcessing: false, token: action.token };
+
+    case types.REFRESH_CODE_SUCCESS:
+      return { ...state, isProcessing: false };
 
     case types.LOGOUT_SUCCESS:
     case types.RESET_PASSWORD_SUCCESS:
-      return { ...state, isProcessing: false, token: null, isAuth: false };
+      return { ...state, token: null, isAuth: false, isProcessing: false, isLoading: false };
 
     case types.AUTH_ERROR:
-      return { ...state, token: null, isAuth: false, isProcessing: false };
+      return { ...state, isAuth: false, isProcessing: false, isLoading: false };
 
     default:
       return state;

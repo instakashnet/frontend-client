@@ -2,7 +2,6 @@ import { put, all, takeLatest, call, fork, takeEvery } from "redux-saga/effects"
 import camelize from "camelize";
 import * as actions from "./actions";
 import * as types from "./types";
-import { setAlertInit } from "../../store/actions";
 import Swal from "sweetalert2";
 import history from "../../shared/history";
 
@@ -27,15 +26,8 @@ function* loadUser() {
     const user = camelize(res.data.user);
     yield call([sessionStorage, "setItem"], "userVerification", JSON.stringify(user));
 
-    if (!user.verified) {
-      yield call([history, "push"], "/email-verification/OTP");
-      return yield put(actions.authError());
-    }
-
-    if (!user.completed) {
-      yield call([history, "push"], "/complete-profile");
-      return yield put(actions.authError());
-    }
+    if (!user.verified) return yield call([history, "push"], "/email-verification/OTP");
+    if (!user.completed) return yield call([history, "push"], "/complete-profile");
 
     yield put(actions.loadUserSuccess(user));
   } catch (error) {
@@ -51,7 +43,6 @@ function* signin({ values }) {
       yield put(actions.loadUserInit());
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
   }
 }
@@ -60,10 +51,10 @@ function* signinGoogle({ token }) {
   try {
     const res = yield authService.post("/auth/google", { token });
     if (res.status === 201 || res.status === 200) {
-      yield call(loadUser);
+      yield put(actions.signinSuccess(res.data.accessToken));
+      yield put(actions.loadUserInit());
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
   }
 }
@@ -72,11 +63,10 @@ function* signup({ values }) {
   try {
     const res = yield authService.post("/auth/signup", values);
     if (res.status === 201) {
-      yield put(actions.signupSuccess());
+      yield put(actions.signupSuccess(res.data.accessToken));
       yield call([history, "push"], "/email-verification/OTP");
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
   }
 }
@@ -86,7 +76,6 @@ function* completeProfile({ values }) {
     const res = yield authService.post("/users/profiles", values);
     if (res.status === 200) yield call(loadUser);
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
   }
 }
@@ -98,14 +87,11 @@ function* validateEmail({ values, otpType }) {
     const res = yield authService.post("/auth/verify-code", validateValues);
 
     if (res.status === 200) {
-      if (otpType === "PWD") {
-        yield put(actions.refreshCodeSuccess());
-        return yield call([history, "push"], "/change-password");
-      }
+      yield put(actions.validateEmailSuccess(res.data.accessToken));
+      if (otpType === "PWD") return yield call([history, "push"], "/change-password");
       return yield call(loadUser);
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
   }
 }
@@ -118,7 +104,6 @@ function* refreshVerificationCode() {
       yield put(actions.refreshCodeSuccess());
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
   }
 }
@@ -128,12 +113,10 @@ function* recoverPassword({ values }) {
     const res = yield authService.post("/users/recover-password", values);
 
     if (res.status === 201) {
-      // yield call(setAuthToken, res.data);
+      yield put(actions.recoverPasswordSuccess(res.data.accessToken));
       yield call([history, "push"], "/email-verification/PWD");
-      yield put(actions.recoverPasswordSuccess());
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
   }
 }
@@ -147,7 +130,6 @@ function* resetPassword({ values }) {
       yield call([Swal, "fire"], "Contraseña cambiada", "Ya puedes ingresar con tu nueva contraseña.", "success");
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
   }
 }

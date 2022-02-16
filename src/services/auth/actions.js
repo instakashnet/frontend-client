@@ -43,8 +43,9 @@ export const signupInit = (values) => ({
   values,
 });
 
-export const signupSuccess = () => ({
+export const signupSuccess = (token) => ({
   type: types.SIGNGUP_SUCCESS,
+  token,
 });
 
 export const recoverPasswordInit = (values, setSent) => ({
@@ -53,14 +54,14 @@ export const recoverPasswordInit = (values, setSent) => ({
   setSent,
 });
 
-export const recoverPasswordSuccess = () => ({
+export const recoverPasswordSuccess = (token) => ({
   type: types.RECOVER_PASSWORD_SUCCESS,
+  token,
 });
 
-export const resetPasswordInit = (values, token) => ({
+export const resetPasswordInit = (values) => ({
   type: types.RESET_PASSWORD_INIT,
   values,
-  token,
 });
 
 export const resetPasswordSuccess = () => ({
@@ -73,8 +74,9 @@ export const validateEmailInit = (values, otpType) => ({
   otpType,
 });
 
-export const validateEmailSuccess = () => ({
+export const validateEmailSuccess = (token) => ({
   type: types.VALIDATE_EMAIL_SUCCESS,
+  token,
 });
 
 export const refreshCodeInit = () => ({

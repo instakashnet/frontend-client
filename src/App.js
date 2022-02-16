@@ -1,8 +1,11 @@
 import { useEffect, lazy } from "react";
 import { Switch, Router } from "react-router-dom";
-
 import ReactPixel from "react-facebook-pixel";
 import history from "./shared/history";
+
+// REDUX
+import { useSelector, useDispatch } from "react-redux";
+import { setIsClosedInit, setIsClosedSuccess } from "./store/actions";
 
 // HOC
 import ScrollToTop from "./hoc/scroll-top.component";
@@ -11,6 +14,7 @@ import asyncComponent from "./hoc/async.component";
 
 // COMPONENTS
 import Alert from "./components/UI/alert.component";
+import { ClosedModal } from "./components/UI/modals/closed-modal.component";
 
 // ROUTING
 import PublicRoute from "./routing/PublicRoute";
@@ -35,9 +39,18 @@ const Exchange = lazy(() => import("./pages/exchange/containers/exchange.screen"
 ReactPixel.init(process.env.REACT_APP_FB_PIXEL_ID, {}, { autoConfig: true, debug: false });
 
 function App() {
+  const dispatch = useDispatch(),
+    isClosed = useSelector((state) => state.Data.isClosed),
+    isAuth = useSelector((state) => state.Auth.isAuth);
+
+  // EFFECTS
   useEffect(() => {
     ReactPixel.pageView();
   }, []);
+
+  useEffect(() => {
+    if (isAuth) dispatch(setIsClosedInit());
+  }, [dispatch, isAuth]);
 
   return (
     <>
@@ -60,6 +73,7 @@ function App() {
           </Switch>
         </RefreshSession>
         <Alert />
+        {isClosed && <ClosedModal onClose={() => dispatch(setIsClosedSuccess(false))} />}
       </Router>
     </>
   );
