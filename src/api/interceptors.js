@@ -32,7 +32,7 @@ export const setupAxiosInterceptors = (instance) => {
         configRequest._retry = true;
 
         alert("Ha finalizado tu sesión, deberás iniciar sesión nuevamente.");
-        store.dispatch(logoutSuccess());
+        return store.dispatch(logoutSuccess());
       } else {
         let message;
         let code;

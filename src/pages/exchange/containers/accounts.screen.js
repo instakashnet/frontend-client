@@ -25,9 +25,8 @@ import classes from "../assets/css/exchange-screens.module.scss";
 
 const Accounts = ({ setModal, order }) => {
   const dispatch = useDispatch(),
-    { accounts, isLoading, kashAccount } = useSelector((state) => state.Accounts),
+    { accounts, kashAccount, banks } = useSelector((state) => state.Accounts),
     { isProcessing, coupon } = useSelector((state) => state.Exchange),
-    { banks } = useSelector((state) => state.Data),
     [totalAmountSent, setTotalAmountSent] = useState(order.amountSent),
     [fundsInput, setFundsInput] = useState(false),
     [interplaza, setInterplaza] = useState(false),
@@ -142,98 +141,96 @@ const Accounts = ({ setModal, order }) => {
     <>
       <h1>Completa los datos</h1>
       <h3>Selecciona tu banco de envío y la cuenta donde recibes.</h3>
-      {!isLoading && (
-        <form onSubmit={formik.handleSubmit} className={classes.ExchangeForm}>
-          {kashAccount.balance > 0 && <KashUsed formik={formik} onKashUsed={kashUsedHandler} totalAmount={totalAmountSent} balance={kashAccount.balance} order={order} />}
-          {formik.values.kashApplied && totalAmountSent <= 0 ? null : (
-            <SelectComponent
-              name="bank_id"
-              label="¿Desde que banco nos envia su dinero?"
-              options={bankOptions}
-              onChange={onBankChangeHandler}
-              onBlur={formik.handleBlur}
-              value={formik.values.bank_id}
-              error={formik.errors.bank_id}
-              touched={formik.touched.bank_id}
-            />
-          )}
-
+      <form onSubmit={formik.handleSubmit} className={classes.ExchangeForm}>
+        {kashAccount.balance > 0 && <KashUsed formik={formik} onKashUsed={kashUsedHandler} totalAmount={totalAmountSent} balance={kashAccount.balance} order={order} />}
+        {formik.values.kashApplied && totalAmountSent <= 0 ? null : (
           <SelectComponent
-            name="account_to_id"
-            label="¿En que cuenta recibirás tu dinero?"
-            options={accountOptions}
-            value={formik.values.account_to_id}
-            onChange={onAccountChange}
-            error={formik.errors.account_to_id}
-            touched={formik.touched.account_to_id}
-            empty={accountOptions.length < 1}
-            emptyLabel="No has agregado ninguna cuenta"
+            name="bank_id"
+            label="¿Desde que banco nos envia su dinero?"
+            options={bankOptions}
+            onChange={onBankChangeHandler}
+            onBlur={formik.handleBlur}
+            value={formik.values.bank_id}
+            error={formik.errors.bank_id}
+            touched={formik.touched.bank_id}
           />
-          {filteredAccounts.length < 10 && (
-            <button className={classes.AddAccount} type="button" onClick={() => setModal("account")}>
-              Agregar cuenta <Add htmlColor="#FFF" className="ml-2" />
-            </button>
-          )}
-          {interplaza && (
-            <MuiAlert type="warning" opened>
-              <span className="block text-left">
-                <b>Cuentas interplaza de Interbank acarrean una comisión.</b> Conozca más en nuestros{" "}
-                <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
-                  términos y condiciones.
-                </a>
-              </span>
-            </MuiAlert>
-          )}
-          {(bankCCI || accountCCI) && (
-            <MuiAlert type="warning" opened>
-              <span className="block text-left">
-                <b>Las transferencias interbancarias carrean comisiones y pueden demorar hasta 48 horas.</b> Conozoca más sobre las transferencias interbancarias en nuestros{" "}
-                <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
-                  términos y condiciones.
-                </a>
-              </span>
-            </MuiAlert>
-          )}
-          {funds_origin && (
-            <SelectComponent
-              name="funds_origin"
-              label="Origen de los fondos"
-              options={fundsOptions}
-              value={formik.values.funds_origin}
-              error={formik.errors.funds_origin}
-              touched={formik.touched.funds_origin}
-              onChange={onFundsOriginChange}
-            />
-          )}
-          {fundsInput && (
-            <Input
-              type="text"
-              name="funds_text"
-              placeholder="Escribe el origen de tus fondos"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.funds_text}
-              error={formik.errors.funds_text}
-              touched={formik.touched.funds_text}
-            />
-          )}
-          <div className="flex flex-col items-center justify-center">
-            <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button mt-4 ld-over ${isProcessing ? "running" : ""}`}>
-              <span className="ld ld-ring ld-spin" />
-              Continuar
-            </Button>
-            <Button
-              type="button"
-              className={`secondary-button mt-4 ld-over ${isProcessing ? "running" : ""}`}
-              disabled={isProcessing}
-              onClick={() => dispatch(cancelExchangeInit(order.id, "draft"))}
-            >
-              <span className="ld ld-ring ld-spin" />
-              Cancelar
-            </Button>
-          </div>
-        </form>
-      )}
+        )}
+
+        <SelectComponent
+          name="account_to_id"
+          label="¿En que cuenta recibirás tu dinero?"
+          options={accountOptions}
+          value={formik.values.account_to_id}
+          onChange={onAccountChange}
+          error={formik.errors.account_to_id}
+          touched={formik.touched.account_to_id}
+          empty={accountOptions.length < 1}
+          emptyLabel="No has agregado ninguna cuenta"
+        />
+        {filteredAccounts.length < 10 && (
+          <button className={classes.AddAccount} type="button" onClick={() => setModal("account")}>
+            Agregar cuenta <Add htmlColor="#FFF" className="ml-2" />
+          </button>
+        )}
+        {interplaza && (
+          <MuiAlert type="warning" opened>
+            <span className="block text-left">
+              <b>Cuentas interplaza de Interbank acarrean una comisión.</b> Conozca más en nuestros{" "}
+              <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
+                términos y condiciones.
+              </a>
+            </span>
+          </MuiAlert>
+        )}
+        {(bankCCI || accountCCI) && (
+          <MuiAlert type="warning" opened>
+            <span className="block text-left">
+              <b>Las transferencias interbancarias carrean comisiones y pueden demorar hasta 48 horas.</b> Conozoca más sobre las transferencias interbancarias en nuestros{" "}
+              <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
+                términos y condiciones.
+              </a>
+            </span>
+          </MuiAlert>
+        )}
+        {funds_origin && (
+          <SelectComponent
+            name="funds_origin"
+            label="Origen de los fondos"
+            options={fundsOptions}
+            value={formik.values.funds_origin}
+            error={formik.errors.funds_origin}
+            touched={formik.touched.funds_origin}
+            onChange={onFundsOriginChange}
+          />
+        )}
+        {fundsInput && (
+          <Input
+            type="text"
+            name="funds_text"
+            placeholder="Escribe el origen de tus fondos"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.funds_text}
+            error={formik.errors.funds_text}
+            touched={formik.touched.funds_text}
+          />
+        )}
+        <div className="flex flex-col items-center justify-center">
+          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button mt-4 ld-over ${isProcessing ? "running" : ""}`}>
+            <span className="ld ld-ring ld-spin" />
+            Continuar
+          </Button>
+          <Button
+            type="button"
+            className={`secondary-button mt-4 ld-over ${isProcessing ? "running" : ""}`}
+            disabled={isProcessing}
+            onClick={() => dispatch(cancelExchangeInit(order.id, "draft"))}
+          >
+            <span className="ld ld-ring ld-spin" />
+            Cancelar
+          </Button>
+        </div>
+      </form>
     </>
   );
 };
