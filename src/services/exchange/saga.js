@@ -27,9 +27,7 @@ function* getLastOrder() {
     const res = yield exchangeService.get("/order/last-order");
     const data = camelize(res.data);
 
-    if (data.lastOrder) {
-      yield call([sessionStorage, "setItem"], "order", JSON.stringify(data.lastOrder));
-    } else yield call([sessionStorage, "removeItem"], "order");
+    if (data.lastOrder?.status === 2) yield call([history, "push"], "/currency-exchange/complete");
     yield put(actions.getLastOrderSuccess());
   } catch (error) {
     yield put(actions.exchangeError());

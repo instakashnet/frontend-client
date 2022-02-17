@@ -4,7 +4,7 @@ import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
 
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { getRatesInit, validateCouponInit, getLastOrderInit, openModal, closeModal } from "../../../store/actions";
+import { openModal, closeModal } from "../../../store/actions";
 
 // SCREENS
 import Calculator from "./calculator.screen";
@@ -35,24 +35,11 @@ const Exchange = ({ history, location, match }) => {
 
   // EFFECTS
   useEffect(() => {
-    if (!profile) {
-      return history.push("/currency-exchange/profile-selection");
-    } else dispatch(getLastOrderInit());
-  }, [profile, history, dispatch]);
+    if (!profile) history.push("/currency-exchange/profile-selection");
+  }, [profile, history]);
 
   useEffect(() => {
-    if (location.pathname === "/currency-exchange" && !order) {
-      dispatch(getRatesInit());
-      if (user.isReferal) dispatch(validateCouponInit("NUEVOREFERIDO1", profile?.type));
-    }
-  }, [location, dispatch, order, profile, user.isReferal]);
-
-  useEffect(() => {
-    if (profile && order && order.status === 2 && location.pathname !== "/currency-exchange/complete") history.push("/currency-exchange/complete");
-  }, [profile, history, order, location]);
-
-  useEffect(() => {
-    if (location.pathname !== "/currency-exchange") {
+    if (location.pathname !== "/currency-exchange" || location.pathname !== "/currency-exchange/profile-selection") {
       window.addEventListener("beforeunload", preventLoad);
       window.scrollTo(0, 0);
       return () => {
@@ -95,25 +82,29 @@ const Exchange = ({ history, location, match }) => {
   return (
     <Layout className="content-center">
       <div className={classes.Exchange}>
-        {profile && match.isExact && (
+        {profile ? (
           <>
-            <SelectionHeader profile={profile} />
-            <div className={classes.Separator} />
+            {match.isExact && (
+              <>
+                <SelectionHeader profile={profile} />
+                <div className={classes.Separator} />
+              </>
+            )}
+            <Route exact path={match.url}>
+              <Calculator profile={profile} setModal={openModalHandler} user={user} />
+            </Route>
+            <Route path={match.url + "/step-2"}>
+              <Accounts order={order} setModal={openModalHandler} />
+            </Route>
+            <Route path={match.url + "/complete"}>
+              <Complete order={order} />
+            </Route>
           </>
-        )}
-        <Route exact path={match.url + "/profile-selection"}>
+        ) : null}
+        <Route path={match.url + "/profile-selection"}>
           <ProfileSelection />
         </Route>
-        <Route exact path={match.url}>
-          <Calculator profile={profile} setModal={openModalHandler} user={user} />
-        </Route>
-        <Route path={match.url + "/step-2"}>
-          <Accounts order={order} setModal={openModalHandler} />
-        </Route>
-        <Route path={match.url + "/complete"}>
-          <Complete order={order} />
-        </Route>
-        {profile && (!isMobile ? <Information /> : <InfoButton onInfoOpen={() => openModalHandler("info")} />)}
+        {profile && !location.pathname.includes("profile") && (!isMobile ? <Information /> : <InfoButton onInfoOpen={() => openModalHandler("info")} />)}
       </div>
       {isLoading && <Spinner loading={isLoading} />}
     </Layout>

@@ -4,13 +4,13 @@ import * as types from "./types";
 
 let ws;
 
-const createWebsocketChannel = (token) =>
+const createWebsocketChannel = (token, service) =>
   eventChannel((emit) => {
     const connectToWs = () => {
-      ws = new WebSocket(`${process.env.REACT_APP_STAGE === "prod" ? process.env.REACT_APP_WS_URL : process.env.REACT_APP_WS_DEV_URL}/ws?token=${token}`);
+      ws = new WebSocket(`${process.env.REACT_APP_STAGE === "prod" ? process.env.REACT_APP_WS_URL : process.env.REACT_APP_WS_DEV_URL}/ws?token=${token}&service=${service}`);
 
       ws.onopen = () => {
-        console.log("Opening connection.");
+        console.log("Connection opened.");
       };
 
       ws.onerror = (error) => {
@@ -42,11 +42,11 @@ const createWebsocketChannel = (token) =>
     };
   });
 
-function* listeningSocketSaga(token) {
+function* listeningSocketSaga(...args) {
   let socketChannel;
 
   try {
-    socketChannel = yield call(createWebsocketChannel, token);
+    socketChannel = yield call(createWebsocketChannel, ...args);
     console.log(socketChannel);
   } catch (error) {
     console.log("Error connecting.. " + error);
@@ -57,6 +57,7 @@ function* listeningSocketSaga(token) {
 
   // }
 }
+
 
 function* connectToSocketSaga() {
   const token = yield select((state) => state.Auth.token),
