@@ -1,12 +1,20 @@
 import * as types from "./types";
 
+export const refreshTokenInit = () => ({
+  type: types.REFRESH_TOKEN_INIT,
+});
+
+export const refreshTokenSuccess = (token) => ({
+  type: types.REFRESH_TOKEN_SUCCESS,
+  token,
+});
+
 export const loadUserInit = () => ({
   type: types.LOADUSER_INIT,
 });
 
-export const loadUserSuccess = (token, user) => ({
+export const loadUserSuccess = (user) => ({
   type: types.LOADUSER_SUCCESS,
-  token,
   user,
 });
 
@@ -20,6 +28,11 @@ export const signinInit = (values) => ({
   values,
 });
 
+export const signinSuccess = (token) => ({
+  type: types.SIGNGIN_SUCCESS,
+  token,
+});
+
 export const signinGoogle = (token) => ({
   type: types.SIGNIN_GOOGLE,
   token,
@@ -30,8 +43,9 @@ export const signupInit = (values) => ({
   values,
 });
 
-export const signupSuccess = () => ({
+export const signupSuccess = (token) => ({
   type: types.SIGNGUP_SUCCESS,
+  token,
 });
 
 export const recoverPasswordInit = (values, setSent) => ({
@@ -40,14 +54,14 @@ export const recoverPasswordInit = (values, setSent) => ({
   setSent,
 });
 
-export const recoverPasswordSuccess = () => ({
+export const recoverPasswordSuccess = (token) => ({
   type: types.RECOVER_PASSWORD_SUCCESS,
+  token,
 });
 
-export const resetPasswordInit = (values, token) => ({
+export const resetPasswordInit = (values) => ({
   type: types.RESET_PASSWORD_INIT,
   values,
-  token,
 });
 
 export const resetPasswordSuccess = () => ({
@@ -60,8 +74,9 @@ export const validateEmailInit = (values, otpType) => ({
   otpType,
 });
 
-export const validateEmailSuccess = () => ({
+export const validateEmailSuccess = (token) => ({
   type: types.VALIDATE_EMAIL_SUCCESS,
+  token,
 });
 
 export const refreshCodeInit = () => ({
@@ -77,9 +92,8 @@ export const setUserData = (user) => ({
   user,
 });
 
-export const logoutInit = (logType = null) => ({
+export const logoutInit = () => ({
   type: types.LOGOUT_INIT,
-  logType,
 });
 
 export const logoutSuccess = () => ({

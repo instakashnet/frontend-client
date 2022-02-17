@@ -3,7 +3,7 @@ import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
 
 // REDUX
 import { useSelector, useDispatch } from "react-redux";
-import { getAccountsInit, getOrdersInit, getWithdrawalsInit } from "../../../store/actions";
+import { getOrdersInit, getWithdrawalsInit } from "../../../store/actions";
 
 // COMPONENTS
 import EmptyActivity from "../components/empty-activity.component";
@@ -19,9 +19,9 @@ export const RecentActivityScreen = ({ orders, withdrawals, openDetails }) => {
     { isMobile } = useDeviceDetect();
 
   // EFFECTS
-  useEffect(() => {
-    dispatch(getAccountsInit("kash"));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAccountsInit("kash"));
+  // }, [dispatch]);
 
   useEffect(() => {
     dispatch(getOrdersInit(5, true));

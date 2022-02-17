@@ -1,13 +1,15 @@
 import { put, all, fork, call, delay, select, takeEvery, takeLatest } from "redux-saga/effects";
 import * as types from "./types";
 import * as actions from "./actions";
-import { authService } from "../auth.service";
 import { setAlertInit, closeModal, setUserData } from "../../store/actions";
 import { replaceSpace } from "../../shared/functions";
 import history from "../../shared/history";
 import Swal from "sweetalert2";
 import camelize from "camelize";
 import { uploadFile } from "react-s3";
+
+// API SERVICES
+import { authService } from "../../api/axios";
 
 // UTILS
 const uploadToS3 = async (photo, docType) => {
@@ -63,7 +65,6 @@ function* addProfile({ values }) {
 
 function* selectProfile({ profileId }) {
   const profileSelected = yield select((state) => state.Profile.profiles.find((p) => p.id === profileId));
-  yield call([sessionStorage, "setItem"], "profileSelected", JSON.stringify(profileSelected));
 
   yield put(actions.selectProfileSuccess(profileSelected));
   yield call([history, "push"], "/currency-exchange");

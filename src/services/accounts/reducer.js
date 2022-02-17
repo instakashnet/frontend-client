@@ -1,5 +1,7 @@
 import * as types from "./types";
 const initialState = {
+  banks: [],
+  currencies: [],
   accounts: [],
   kashAccount: {},
   accountDetails: {},
@@ -9,12 +11,17 @@ const initialState = {
 
 const accountsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.GET_ACCOUNTS_INIT:
+    case types.GET_BANKS:
+      return { ...state, banks: action.banks };
+    case types.GET_CURRENCIES:
+      return { ...state, currencies: action.currencies };
+
+    case types.GET_ACCOUNTS.LOADING:
       return { ...state, isLoading: true };
-    case types.GET_ACCOUNTS_SUCCESS:
+    case types.GET_ACCOUNTS.SUCCESS:
       return { ...state, accounts: action.accounts, isLoading: false };
-    case types.GET_KASH_ACCOUNT_SUCCESS:
-      return { ...state, kashAccount: action.account, isLoading: false };
+    case types.GET_KASH_ACCOUNT.SUCCESS:
+      return { ...state, kashAccount: action.account };
     case types.ADD_ACCOUNT_INIT:
     case types.EDIT_ACCOUNT_INIT:
     case types.DELETE_ACCOUNT_INIT:

@@ -1,5 +1,5 @@
 import { END, eventChannel } from "redux-saga";
-import { call, fork, take, takeEvery, cancel, cancelled } from "redux-saga/effects";
+import { call, fork, take, takeEvery, cancel, select, cancelled } from "redux-saga/effects";
 import * as types from "./types";
 
 let ws;
@@ -58,13 +58,10 @@ function* listeningSocketSaga(...args) {
   // }
 }
 
-function* connectToSocketSaga({ service }) {
-  const authData = yield call([localStorage, "getItem"], "authData");
-  const token = JSON.parse(authData).token;
 
-  console.log(service);
-
-  const socket = yield fork(listeningSocketSaga, token, service);
+function* connectToSocketSaga() {
+  const token = yield select((state) => state.Auth.token),
+    socket = yield fork(listeningSocketSaga, token);
 
   // WHEN CLOSE IS CALLED CANCEL AND CLOSE SOCKET
   yield take(types.CLOSE_WEBSOCKET);

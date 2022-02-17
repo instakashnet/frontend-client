@@ -2,7 +2,9 @@ import { put, takeEvery, all, fork, takeLatest } from "redux-saga/effects";
 import * as types from "./types";
 import * as actions from "./actions";
 import { setAlertInit } from "../../store/actions";
-import { exchangeService } from "../../services/exchange.service";
+
+// API SERVICES
+import { exchangeService } from "../../api/axios";
 
 function* getOrders({ limit, enabled }) {
   try {
