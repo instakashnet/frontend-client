@@ -7,7 +7,7 @@ import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
 
 // REDUX
 import { useSelector, useDispatch } from "react-redux";
-import { getUserData } from "../../../store/actions";
+import { openSocketConnection, closeSocketConnection } from "../../../store/actions";
 
 // COMPONENTS
 import Layout from "../../../components/layout/layout.component";
@@ -30,12 +30,11 @@ const Profile = ({ match }) => {
 
   // EFFECTS
   useEffect(() => {
-    // dispatch(openSocketConnection("validation"));
-    dispatch(getUserData());
+    dispatch(openSocketConnection("validation"));
 
-    // return () => {
-    //   closeSocketConnection();
-    // };
+    return () => {
+      closeSocketConnection();
+    };
   }, [dispatch]);
 
   return (

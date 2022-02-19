@@ -108,7 +108,6 @@ function* uploadDocument({ photos, docType }) {
     }
 
     if (uploaded) {
-      // yield call(getUserData);
       yield put(actions.uploadDocumentSuccess());
       yield put(closeModal());
     }
