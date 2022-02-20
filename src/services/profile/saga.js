@@ -109,6 +109,7 @@ function* uploadDocument({ photos, docType }) {
 
     if (uploaded) {
       yield put(actions.uploadDocumentSuccess());
+      yield delay(3000);
       yield put(closeModal());
     }
   } catch (error) {

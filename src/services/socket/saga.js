@@ -63,7 +63,8 @@ function* listeningSocketSaga(...args) {
       switch (action.type) {
         case "validation":
           let user = yield select((state) => state.Auth.user);
-          user = { ...user, identityDocumentValidation: action.data.status };
+          console.log(action.data);
+          user = { ...user, identityDocumentValidation: action.data.status, level: action.data.level };
           yield put({ type: SET_USER_DATA, user });
           break;
         default:

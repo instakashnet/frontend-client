@@ -22,7 +22,7 @@ import { AdditionalInfoScreen } from "./additional-info.screen";
 // CLASSES
 import classes from "../assets/css/profile-containers.module.scss";
 
-const Profile = ({ match }) => {
+const Profile = ({ match, history }) => {
   const dispatch = useDispatch(),
     user = useSelector((state) => state.Auth.user),
     { completed, color } = useUserData(user),
@@ -50,7 +50,7 @@ const Profile = ({ match }) => {
             <BasicInfoScreen user={user} />
           </Route>
           <Route exact path={match.url + "/verify-identity"}>
-            <VerifyIdentityScreen user={user} />
+            <VerifyIdentityScreen user={user} history={history} />
           </Route>
           <Route exact path={match.url + "/additionals"}>
             <AdditionalInfoScreen user={user} />

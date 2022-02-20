@@ -4,7 +4,7 @@ export const DocumentFailed = () => {
   const [show, setShow] = useState(true);
 
   return show ? (
-    <div className="bg-red-100 border-t-4 border-red-500 text-red-700 px-3 py-2 rounded relative top-0 right-0 mb-4 w-full md:w-4/6" role="alert">
+    <div className="bg-red-100 border-t-4 border-red-500 mx-auto text-red-700 px-3 py-2 rounded relative top-0 right-0 mb-4 w-full md:w-4/6" role="alert">
       <div className="flex">
         <div className="pr-1 text-left">
           <strong className="font-bold">Error en la verificación. </strong>

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { RadioButtonUncheckedOutlined, RadioButtonCheckedOutlined } from "@material-ui/icons";
 
 // REDUX
@@ -18,7 +18,7 @@ import { DocumentFailed } from "../components/document-failed.component";
 // CLASSES
 import classes from "../assets/css/profile-components.module.scss";
 
-export const VerifyIdentityScreen = ({ user }) => {
+export const VerifyIdentityScreen = ({ user, history }) => {
   const [docType, setDocType] = useState(""),
     dispatch = useDispatch();
 
@@ -29,13 +29,18 @@ export const VerifyIdentityScreen = ({ user }) => {
     dispatch(openModal(ModalComponent));
   }, [docType, dispatch]);
 
+  // EFFECTS
+  useEffect(() => {
+    if (user.identityDocumentValidation === "success") history.goBack();
+  }, [user.identityDocumentValidation, history]);
+
   return (
     <div className={classes.VerifyIdentityWrapper}>
       {user.identityDocumentValidation === "pending" ? (
         <DocumentInReview />
       ) : (
         <>
-          <DocumentFailed />
+          {user.identityDocumentValidation === "failed" && <DocumentFailed />}
           <h2>Tipo de documento</h2>
           <div className="flex items-center justify-center">
             {user.documentType.toLowerCase() !== "pasaporte" ? (
