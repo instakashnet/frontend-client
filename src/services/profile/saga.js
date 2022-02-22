@@ -34,7 +34,6 @@ function* getProfiles() {
     const res = yield authService.get("/users/profiles");
     if (res.status === 200) yield put(actions.getProfilesSuccess(res.data.profiles, res.data.user));
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.profilesError());
   }
 }
@@ -58,7 +57,6 @@ function* addProfile({ values }) {
       yield put(closeModal());
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.profilesError());
   }
 }
@@ -84,7 +82,6 @@ function* editAdditionalInfo({ values, setSubmitted }) {
       }
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.profilesError());
   }
 }
@@ -108,13 +105,12 @@ function* uploadDocument({ photos, docType }) {
     }
 
     if (uploaded) {
+      yield delay(6000);
       yield put(actions.uploadDocumentSuccess());
-      yield delay(3000);
       yield put(closeModal());
     }
   } catch (error) {
     console.log(error);
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.profilesError());
   }
 }
@@ -129,7 +125,6 @@ function* editUserCode({ values }) {
       yield put(closeModal());
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.profilesError());
   }
 }
@@ -155,7 +150,6 @@ function* disableProfile({ id }) {
       }
     } else yield put(actions.profilesError());
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.profilesError());
   }
 }
@@ -175,7 +169,6 @@ function* editBasicInfo({ values, editType, setSubmitted }) {
       yield put(actions.editBasicInfoSuccess());
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.profilesError());
   }
 }

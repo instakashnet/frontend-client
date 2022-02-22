@@ -1,6 +1,7 @@
 import { put, all, takeLatest, call, fork, takeEvery } from "redux-saga/effects";
 import camelize from "camelize";
 import * as actions from "./actions";
+import { setAlertInit } from "../core/alert/actions";
 import * as types from "./types";
 import Swal from "sweetalert2";
 import history from "../../shared/history";
@@ -43,6 +44,7 @@ function* signin({ values }) {
       yield put(actions.loadUserInit());
     }
   } catch (error) {
+    yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
   }
 }
@@ -55,6 +57,7 @@ function* signinGoogle({ token }) {
       yield put(actions.loadUserInit());
     }
   } catch (error) {
+    yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
   }
 }
@@ -67,6 +70,7 @@ function* signup({ values }) {
       yield call([history, "push"], "/email-verification/OTP");
     }
   } catch (error) {
+    yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
   }
 }
@@ -92,6 +96,7 @@ function* validateEmail({ values, otpType }) {
       return yield call(loadUser);
     }
   } catch (error) {
+    yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
   }
 }
@@ -104,6 +109,7 @@ function* refreshVerificationCode() {
       yield put(actions.refreshCodeSuccess());
     }
   } catch (error) {
+    yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
   }
 }
@@ -117,6 +123,7 @@ function* recoverPassword({ values }) {
       yield call([history, "push"], "/email-verification/PWD");
     }
   } catch (error) {
+    yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
   }
 }
@@ -130,6 +137,7 @@ function* resetPassword({ values }) {
       yield call([Swal, "fire"], "Contraseña cambiada", "Ya puedes ingresar con tu nueva contraseña.", "success");
     }
   } catch (error) {
+    yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
   }
 }

@@ -95,6 +95,7 @@ const Accounts = ({ setModal, order }) => {
   // EFFECTS
   useEffect(() => {
     dispatch(getAccountsInit("orders"));
+    dispatch(getAccountsInit("kash"));
   }, [dispatch]);
 
   useEffect(() => {

@@ -29,6 +29,7 @@ const Accounts = () => {
   // EFFECTS
   useEffect(() => {
     dispatch(getAccountsInit("users"));
+    dispatch(getAccountsInit("kash"));
   }, [dispatch]);
 
   // HANDLERS
