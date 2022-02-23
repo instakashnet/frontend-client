@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import classes from "./navigation-components.module.scss";
+import classes from "../modules/nav-item.module.scss";
 
 const NavItem = ({ link, icon, label, ...rest }) => {
   return (

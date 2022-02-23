@@ -80,6 +80,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.2.5",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "postcss": "^8.2.7",
     "postcss-cli": "^8.3.1",
     "redux-logger": "^3.0.6",

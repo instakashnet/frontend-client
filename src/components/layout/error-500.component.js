@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 // ASSETS && CLASSES
 import IKIcon from "../../assets/images/icons/icon.svg";
-import classes from "./layout-components.module.scss";
+import classes from "./modules/error-500.module.scss";
 
 export const Error500 = ({ error }) => {
   console.log(error);

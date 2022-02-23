@@ -5,16 +5,14 @@ import { CameraAlt } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadDocumentInit } from "../../../../store/actions";
 
-// ASSETS
+// ASSETS && CLASSES
 import CorrectDoc from "../../../../assets/images/illustrations/correct-doc.svg";
 import IncorrectDoc from "../../../../assets/images/illustrations/incorrect-doc.svg";
+import classes from "../../assets/css/profile-components.module.scss";
 
 // COMPONENTS
 import { DocumentCamera } from "./document-camera.component";
 import { Button } from "../../../../components/UI/button.component";
-
-// CLASSES
-import classes from "../../assets/css/profile-components.module.scss";
 
 export const UploadDocument = ({ docType }) => {
   const dispatch = useDispatch(),

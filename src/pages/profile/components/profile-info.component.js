@@ -2,13 +2,13 @@ import React from "react";
 import { Remove, Check, ErrorOutline } from "@material-ui/icons";
 import { CircleProgress } from "react-gradient-progress";
 
-// COMPONENTS
-import { ProfileMenu } from "./profile-menu.component";
-
 // ASSETS & CLASSES
 import MaleLight from "../../../assets/images/profiles/male-light.svg";
 import FemaleLight from "../../../assets/images/profiles/female-light.svg";
 import classes from "../assets/css/profile-components.module.scss";
+
+// COMPONENTS
+import { ProfileMenu } from "./profile-menu.component";
 
 export const ProfileInfo = ({ user, color, completed, match }) => {
   return (
