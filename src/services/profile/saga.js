@@ -98,14 +98,16 @@ function* uploadDocument({ photos, docType }) {
       const photoRes = yield fetch(photosArray[i]),
         blob = yield photoRes.blob(),
         docSide = docType === "passport" ? "front" : i > 0 ? "back" : "front",
-        photo = new File([blob], `${user.documentType}-${user.documentIdentification}-${replaceSpace(user.name.toUpperCase())}-${docSide}-&Token&${resToken.data.accessToken}.jpg`);
+        photo = new File(
+          [blob],
+          `${user.documentType.toUpperCase()}-${user.documentIdentification}-${replaceSpace(user.name.toUpperCase())}-${docSide}-&Token&${resToken.data.accessToken}.jpg`
+        );
 
       const res = yield call(uploadToS3, photo, user.documentType.toLowerCase());
       uploaded = res.result.status === 204;
     }
 
     if (uploaded) {
-      yield delay(6000);
       yield put(actions.uploadDocumentSuccess());
       yield put(closeModal());
     }

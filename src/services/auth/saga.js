@@ -1,6 +1,7 @@
 import { put, all, takeLatest, call, fork, takeEvery } from "redux-saga/effects";
 import camelize from "camelize";
 import * as actions from "./actions";
+import { closeSocketConnection } from "../socket/actions";
 import { setAlertInit } from "../core/alert/actions";
 import * as types from "./types";
 import Swal from "sweetalert2";
@@ -80,6 +81,7 @@ function* completeProfile({ values }) {
     const res = yield authService.post("/users/profiles", values);
     if (res.status === 200) yield call(loadUser);
   } catch (error) {
+    yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
   }
 }
@@ -149,6 +151,7 @@ function* logout() {
     yield put(actions.authError());
   }
 
+  yield put(closeSocketConnection());
   yield call([history, "push"], "/signin");
   yield put(actions.logoutSuccess());
 }

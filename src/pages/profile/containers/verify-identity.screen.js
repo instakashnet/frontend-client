@@ -31,7 +31,7 @@ export const VerifyIdentityScreen = ({ user, history }) => {
 
   // EFFECTS
   useEffect(() => {
-    if (user.identityDocumentValidation === "success") history.goBack();
+    if (user.identityDocumentValidation === "success") history.replace("/my-profile");
   }, [user.identityDocumentValidation, history]);
 
   return (
