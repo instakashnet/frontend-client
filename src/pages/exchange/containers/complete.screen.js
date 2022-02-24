@@ -17,9 +17,9 @@ import Card from "../../../components/UI/card.component";
 import TransferImg from "../assets/images/transfer.svg";
 import classes from "../assets/css/exchange-screens.module.scss";
 
-const CompleteExchange = ({ order }) => {
+const CompleteExchange = () => {
   const dispatch = useDispatch();
-  const isProcessing = useSelector((state) => state.Exchange.isProcessing);
+  const { isProcessing, order } = useSelector((state) => state.Exchange);
 
   if (!order) return <Redirect to="/currency-exchange" />;
 
@@ -32,7 +32,7 @@ const CompleteExchange = ({ order }) => {
 
       <p className="mb-2">desde tu banca por internet a la siguiente cuenta:</p>
       <Card className={`${classes.TransferAccount} flex flex-col md:flex-row items-center justify-center md:justify-between`}>
-        <img src={`${process.env.PUBLIC_URL}/images/banks/${order.bankFromName.toLowerCase()}-logo.svg`} width={85} alt={order.bankFromName} />
+        <img src={`${process.env.PUBLIC_URL}/images/banks/${order?.bankFromName.toLowerCase()}-logo.svg`} width={85} alt={order.bankFromName} />
         <div className="text-center md:text-right text-base">
           <span>Cuenta corriente en {order.currencySent === "PEN" ? "Soles" : "Dólares"}:</span>
           <p className="flex items-center md:justify-end">

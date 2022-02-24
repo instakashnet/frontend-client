@@ -25,8 +25,8 @@ function* getLastOrder() {
     const res = yield exchangeService.get("/order/last-order");
     const data = camelize(res.data);
 
+    yield put(actions.getLastOrderSuccess(data.lastOrder));
     if (data.lastOrder?.status === 2) yield call([history, "push"], "/currency-exchange/complete");
-    yield put(actions.getLastOrderSuccess());
   } catch (error) {
     yield put(actions.exchangeError());
   }
@@ -127,7 +127,7 @@ function* cancelExchange({ orderId, status, closeModal }) {
 
       if (res.status === 202) {
         if (status === "details") {
-          yield put(getOrdersInit());
+          yield put(getOrdersInit(5));
           yield call(closeModal);
         }
 
