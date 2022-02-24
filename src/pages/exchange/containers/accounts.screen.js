@@ -23,19 +23,19 @@ import KashUsed from "../components/kash-used.component";
 // CLASSES
 import classes from "../assets/css/exchange-screens.module.scss";
 
-const Accounts = ({ setModal, order }) => {
+const Accounts = ({ setModal }) => {
   const dispatch = useDispatch(),
     { accounts, isLoading, kashAccount } = useSelector((state) => state.Accounts),
-    { isProcessing, coupon } = useSelector((state) => state.Exchange),
+    { isProcessing, coupon, order } = useSelector((state) => state.Exchange),
     { banks } = useSelector((state) => state.Data),
-    [totalAmountSent, setTotalAmountSent] = useState(order.amountSent),
+    [totalAmountSent, setTotalAmountSent] = useState(order?.amountSent),
     [fundsInput, setFundsInput] = useState(false),
     [interplaza, setInterplaza] = useState(false),
     [bankCCI, setBankCCI] = useState(false),
     [accountCCI, setAccountCCI] = useState(false),
     [filteredAccounts, setFilteredAccounts] = useState([]),
     history = useHistory(),
-    [funds_origin] = useState((order.currencyReceivedId === 1 && order.amountSent >= 15000) || (order.currencyReceivedId === 2 && order.amountSent >= 5000));
+    [funds_origin] = useState((order?.currencyReceivedId === 1 && order?.amountSent >= 15000) || (order?.currencyReceivedId === 2 && order?.amountSent >= 5000));
 
   if (!order) history.push("/currency-exchange");
 

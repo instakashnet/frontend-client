@@ -16,14 +16,14 @@ import Tooltip from "../../../components/UI/tooltip.component";
 // CLASSES
 import classes from "../assets/css/exchange-screens.module.scss";
 
-const Calculator = ({ profile, setModal, user, history }) => {
+const Calculator = ({ profile, setModal, user }) => {
   const dispatch = useDispatch(),
     [actualRates, setActualRates] = useState({ buy: 0, sell: 0 }),
     [couponRates, setCouponRates] = useState({ buy: 0, sell: 0 }),
     [isCouponMin, setIsCouponMin] = useState(false),
     [showInfo, setShowInfo] = useState(false),
     temporalAmountSent = useRef(null),
-    { rates, isLoading, coupon, isProcessing } = useSelector((state) => state.Exchange),
+    { rates, ratesLoading, coupon, isProcessing } = useSelector((state) => state.Exchange),
     formik = useFormik({
       initialValues: {
         currency_sent_id: 2,
@@ -128,13 +128,13 @@ const Calculator = ({ profile, setModal, user, history }) => {
     if (coupon && coupon.minimumAmount > 0) setIsCouponMin((type === "sell" && amount_received < coupon.minimumAmount) || (type === "buy" && amount_sent < coupon.minimumAmount));
   }, [coupon, amount_received, amount_sent, type]);
 
-  const disabled = (actualRates.buy <= 0 && actualRates.sell <= 0) || isLoading || isProcessing;
+  const disabled = (actualRates.buy <= 0 && actualRates.sell <= 0) || ratesLoading || isProcessing;
 
   return (
     <>
       <h1>¡Gana cambiando con Instakash!</h1>
       <h3>Mejores tasas, mayor ahorro.</h3>
-      {!isLoading && <Rates actualRates={actualRates} coupon={coupon} couponRates={couponRates} />}
+      {!ratesLoading && <Rates actualRates={actualRates} coupon={coupon} couponRates={couponRates} />}
       <form onSubmit={formik.handleSubmit} className={classes.ExchangeForm}>
         <div className={classes.Timer}>
           <p>Se actualizará el tipo de cambio en:</p>
@@ -173,7 +173,7 @@ const Calculator = ({ profile, setModal, user, history }) => {
             amountReceived={values.amount_received}
             isProcessing={isProcessing}
             disabled={disabled}
-            isLoading={isLoading}
+            isLoading={ratesLoading}
             onSendCoupon={sendCouponHandler}
             onDeleteCoupon={deleteCouponHandler}
           />

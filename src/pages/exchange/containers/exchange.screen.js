@@ -30,8 +30,7 @@ const Exchange = ({ history, location, match }) => {
     user = useSelector((state) => state.Auth.user),
     profile = useSelector((state) => state.Profile.profileSelected),
     { isMobile } = useDeviceDetect(),
-    isLoading = useSelector((state) => state.Exchange.isLoading),
-    order = JSON.parse(sessionStorage.getItem("order"));
+    { isLoading, order } = useSelector((state) => state.Exchange);
 
   // EFFECTS
   useEffect(() => {
@@ -94,10 +93,10 @@ const Exchange = ({ history, location, match }) => {
               <Calculator profile={profile} setModal={openModalHandler} user={user} />
             </Route>
             <Route path={match.url + "/step-2"}>
-              <Accounts order={order} setModal={openModalHandler} />
+              <Accounts setModal={openModalHandler} />
             </Route>
             <Route path={match.url + "/complete"}>
-              <Complete order={order} />
+              <Complete />
             </Route>
           </>
         ) : null}
