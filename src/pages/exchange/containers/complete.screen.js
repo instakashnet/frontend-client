@@ -17,9 +17,9 @@ import Card from "../../../components/UI/card.component";
 import TransferImg from "../assets/images/transfer.svg";
 import classes from "../assets/css/exchange-screens.module.scss";
 
-const CompleteExchange = ({ order }) => {
+const CompleteExchange = () => {
   const dispatch = useDispatch();
-  const isProcessing = useSelector((state) => state.Exchange.isProcessing);
+  const { isProcessing, order } = useSelector((state) => state.Exchange);
 
   if (!order) return <Redirect to="/currency-exchange" />;
 

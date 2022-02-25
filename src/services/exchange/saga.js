@@ -27,8 +27,8 @@ function* getLastOrder() {
     const res = yield exchangeService.get("/order/last-order");
     const data = camelize(res.data);
 
+    yield put(actions.getLastOrderSuccess(data.lastOrder));
     if (data.lastOrder?.status === 2) yield call([history, "push"], "/currency-exchange/complete");
-    yield put(actions.getLastOrderSuccess());
   } catch (error) {
     yield put(actions.exchangeError());
   }
@@ -54,7 +54,6 @@ function* createExchange({ values, amountSent, profile }) {
   try {
     const res = yield exchangeService.post("/order/step-2", exchangeValues);
     if (res.status === 201) {
-      yield call([sessionStorage, "setItem"], "order", JSON.stringify(res.data));
       yield put(actions.createExchangeSuccess(res.data));
       yield call([history, "push"], "/currency-exchange/step-2");
     }
@@ -90,7 +89,6 @@ function* completeExchange({ values, orderId }) {
         return yield put(actions.processCodeSuccess());
       }
 
-      yield call([sessionStorage, "setItem"], "order", JSON.stringify(res.data));
       yield put(actions.completeExchangeSuccess(res.data));
       yield call([history, "push"], "/currency-exchange/complete");
     }
@@ -129,11 +127,10 @@ function* cancelExchange({ orderId, status, closeModal }) {
 
       if (res.status === 202) {
         if (status === "details") {
-          yield put(getOrdersInit());
+          yield put(getOrdersInit(5));
           yield call(closeModal);
         }
 
-        yield call([sessionStorage, "removeItem"], "order");
         if (status === "complete" || status === "draft") yield call([history, "push"], "/currency-exchange");
 
         yield Swal.fire("Exitoso", "Su solicitud de cambio fue cancelada.", "success");
@@ -156,8 +153,6 @@ function* processCode({ values, orderId, processType, closeModal }) {
         yield put(getOrdersInit());
         yield call(closeModal);
       } else yield call([history, "push"], "/dashboard/recent");
-
-      yield call([sessionStorage, "removeItem"], "order");
 
       yield Swal.fire({
         title: "Solicitud completada",
