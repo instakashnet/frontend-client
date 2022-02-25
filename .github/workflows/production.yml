@@ -15,6 +15,7 @@ jobs:
       REACT_APP_MIGO_API: ${{ secrets.MIGO_API }}
       REACT_APP_AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
       REACT_APP_AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      REACT_APP_WS_URL: ${{ secrets.WS_URL }}
       AWS_CF_DISTRIBUTION_ID: E2FBHRICZR02AV
       AWS_REGION: us-east-2
     strategy:
