@@ -19,6 +19,7 @@ jobs:
       AWS_REGION: us-east-2
       REACT_APP_AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
       REACT_APP_AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      REACT_APP_WS_DEV_URL: ${{ secrets.WS_DEV_URL }}
     strategy:
       matrix:
         node-version: [15.x]

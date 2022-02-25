@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import KashIcon from "../../../assets/images/kash.svg";
 import classes from "../assets/css/account-components.module.scss";
 
-const KashAccount = ({ account, openModal }) => {
+export const KashAccount = ({ account, openModal }) => {
   return (
     <div className={classes.KashAccount}>
       <img src={KashIcon} alt="kash-icon" />
@@ -32,5 +32,3 @@ const KashAccount = ({ account, openModal }) => {
     </div>
   );
 };
-
-export default KashAccount;

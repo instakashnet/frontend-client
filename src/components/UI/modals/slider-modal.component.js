@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Dialog, Slide, DialogContent } from "@material-ui/core";
+import { Close } from "@material-ui/icons";
 
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { Dialog, Slide, DialogContent } from "@material-ui/core";
-import { Close } from "@material-ui/icons";
+import { useLocation } from "react-router-dom";
 import { closeSliderModal } from "../../../store/actions";
 
 import classes from "./modal-components.module.scss";
@@ -11,10 +12,17 @@ import classes from "./modal-components.module.scss";
 const Transition = React.forwardRef((props, ref) => <Slide direction={window.screen.width <= 768 ? "up" : "left"} ref={ref} {...props} />);
 
 export const SliderModal = ({ title, children }) => {
-  const dispatch = useDispatch();
-  const isOpen = useSelector((state) => state.Modal.isSliderOpen);
+  const dispatch = useDispatch(),
+    location = useLocation(),
+    isOpen = useSelector((state) => state.Modal.isSliderOpen);
 
+  // HANDLERS
   const closeSliderModalHandler = () => dispatch(closeSliderModal());
+
+  // EFFECTS
+  useEffect(() => {
+    dispatch(closeSliderModal());
+  }, [location, dispatch]);
 
   return (
     <Dialog

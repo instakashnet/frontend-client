@@ -7,7 +7,7 @@ import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
 
 // REDUX
 import { useSelector, useDispatch } from "react-redux";
-import { getUserData } from "../../../store/actions";
+import { openSocketConnection, closeSocketConnection } from "../../../store/actions";
 
 // COMPONENTS
 import Layout from "../../../components/layout/layout.component";
@@ -22,7 +22,7 @@ import { AdditionalInfoScreen } from "./additional-info.screen";
 // CLASSES
 import classes from "../assets/css/profile-containers.module.scss";
 
-const Profile = ({ match }) => {
+const Profile = ({ match, history }) => {
   const dispatch = useDispatch(),
     user = useSelector((state) => state.Auth.user),
     { completed, color } = useUserData(user),
@@ -30,12 +30,11 @@ const Profile = ({ match }) => {
 
   // EFFECTS
   useEffect(() => {
-    // dispatch(openSocketConnection("validation"));
-    dispatch(getUserData());
+    dispatch(openSocketConnection("validation"));
 
-    // return () => {
-    //   closeSocketConnection();
-    // };
+    return () => {
+      closeSocketConnection();
+    };
   }, [dispatch]);
 
   return (
@@ -51,7 +50,7 @@ const Profile = ({ match }) => {
             <BasicInfoScreen user={user} />
           </Route>
           <Route exact path={match.url + "/verify-identity"}>
-            <VerifyIdentityScreen user={user} />
+            <VerifyIdentityScreen user={user} history={history} />
           </Route>
           <Route exact path={match.url + "/additionals"}>
             <AdditionalInfoScreen user={user} />

@@ -7,16 +7,16 @@ import { useUserData } from "../../../shared/hooks/useProfileInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutInit } from "../../../store/actions";
 
-import NavItem from "./nav-item.component";
-
-// ASSETS
+// ASSETS && CLASSES
 import Profile from "../../../assets/images/icons/avatar.svg";
 import VerifyIdentity from "../../../assets/images/icons/verify-identity.svg";
 import AdditionalInfo from "../../../assets/images/icons/additional-info.svg";
 import Logout from "../../../assets/images/icons/logout.svg";
 import Help from "../../../assets/images/icons/help.svg";
+import classes from "../modules/profile-nav.module.scss";
 
-import classes from "./navigation-components.module.scss";
+// COMPONENTS
+import NavItem from "./nav-item.component";
 
 const ProfileNavigation = () => {
   const dispatch = useDispatch(),

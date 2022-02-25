@@ -4,7 +4,7 @@ import { CreditCard } from "@material-ui/icons";
 
 // REDUX
 import { useSelector, useDispatch } from "react-redux";
-import { getAccountsInit, getBanksInit, getCurenciesInit, setAccountDetailsInit, openModal } from "../../../store/actions";
+import { getAccountsInit, setAccountDetailsInit, openModal } from "../../../store/actions";
 
 // COMPONENTS
 import Layout from "../../../components/layout/layout.component";
@@ -14,7 +14,7 @@ import NoAccount from "../components/no-accounts.component";
 import Spinner from "../../../components/UI/spinner.component";
 import { AddAccount } from "../components/add-account.component";
 import AccountDetails from "./account-details.screen";
-import KashAccount from "../components/kash-account.component";
+import { KashAccount } from "../components/kash-account.component";
 import WithdrawKash from "../components/forms/withdraw-kash.component";
 
 // CLASSES
@@ -30,8 +30,6 @@ const Accounts = () => {
   useEffect(() => {
     dispatch(getAccountsInit("users"));
     dispatch(getAccountsInit("kash"));
-    dispatch(getBanksInit());
-    dispatch(getCurenciesInit());
   }, [dispatch]);
 
   // HANDLERS

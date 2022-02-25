@@ -3,7 +3,9 @@ import camelize from "camelize";
 import * as types from "./types";
 import { setAlertInit } from "../../store/actions";
 import * as actions from "./actions";
-import { authService } from "../../services/auth.service";
+
+// API SERVICES
+import { authService } from "../../api/axios";
 
 function* getAffiliates() {
   try {

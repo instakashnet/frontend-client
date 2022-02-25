@@ -27,7 +27,12 @@ export const EmailValidationScreen = ({ history, match }) => {
       validationSchema: emailValidationSchema,
       onSubmit: (values) => dispatch(validateEmailInit(values, type)),
     }),
-    { isProcessing } = useSelector((state) => state.Auth);
+    { isProcessing, token } = useSelector((state) => state.Auth);
+
+  // EFFECTS
+  useEffect(() => {
+    if (!token) return history.push("/signin");
+  }, [history, token]);
 
   // HANDLERS
   const onOtpChange = (e) => {
@@ -47,11 +52,6 @@ export const EmailValidationScreen = ({ history, match }) => {
       }
     }
   };
-
-  useEffect(() => {
-    const authData = localStorage.getItem("authData");
-    if (!authData) return history.push("/signin");
-  }, [history]);
 
   return (
     <main className={classes.SignupBackground}>

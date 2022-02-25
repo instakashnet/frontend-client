@@ -1,23 +1,22 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { RadioButtonUncheckedOutlined, RadioButtonCheckedOutlined } from "@material-ui/icons";
 
 // REDUX
 import { useDispatch } from "react-redux";
 import { openModal } from "../../../store/actions";
 
-// ASSETS
+// ASSETS && CLASSES
 import DniIcon from "../../../assets/images/icons/dni.svg";
 import PassportIcon from "../../../assets/images/icons/passport.svg";
+import classes from "../assets/css/profile-components.module.scss";
 
 // COMPONENTS
 import { Button } from "../../../components/UI/button.component";
 import { UploadDocument } from "../components/forms/upload-document.component";
 import { DocumentInReview } from "../components/document-in-review.component";
+import { DocumentFailed } from "../components/document-failed.component";
 
-// CLASSES
-import classes from "../assets/css/profile-components.module.scss";
-
-export const VerifyIdentityScreen = ({ user }) => {
+export const VerifyIdentityScreen = ({ user, history }) => {
   const [docType, setDocType] = useState(""),
     dispatch = useDispatch();
 
@@ -28,13 +27,19 @@ export const VerifyIdentityScreen = ({ user }) => {
     dispatch(openModal(ModalComponent));
   }, [docType, dispatch]);
 
+  // EFFECTS
+  useEffect(() => {
+    if (user.identityDocumentValidation === "success") history.replace("/my-profile");
+  }, [user.identityDocumentValidation, history]);
+
   return (
     <div className={classes.VerifyIdentityWrapper}>
       {user.identityDocumentValidation === "pending" ? (
         <DocumentInReview />
       ) : (
         <>
-          <h3>Selecciona tu documento</h3>
+          {user.identityDocumentValidation === "failed" && <DocumentFailed />}
+          <h2>Tipo de documento</h2>
           <div className="flex items-center justify-center">
             {user.documentType.toLowerCase() !== "pasaporte" ? (
               <button className={classes.DocumentSelect} onClick={() => setDocType("dni")}>
@@ -61,13 +66,16 @@ export const VerifyIdentityScreen = ({ user }) => {
               </button>
             )}
           </div>
-          <ul className="my-8">
-            <li>El proceso de validación puede demorar hasta 5 minutos.</li>
-            <li>Recibirás una notificación a tu correo cuando termine el proceso de validación.</li>
-            <li>Este proceso se realiza una única vez, luego podrás hacer tus camibos sin límite.</li>
-          </ul>
+          <section className="my-8 px-3 md:px-6">
+            <h3 className="text-left">Debes tener en cuenta</h3>
+            <ul>
+              <li>El proceso de validación puede demorar hasta 5 minutos.</li>
+              <li>Recibirás una notificación a tu correo cuando termine el proceso de validación.</li>
+              <li>Este proceso se realiza una única vez, luego podrás hacer tus camibos sin límite.</li>
+            </ul>
+          </section>
           <Button className="action-button" onClick={onDocUlpoad} disabled={!docType}>
-            Comenzar verificación
+            {user.identityDocumentValidation === "failed" ? "Verificar de nuevo" : "Comenzar verificación"}
           </Button>
         </>
       )}

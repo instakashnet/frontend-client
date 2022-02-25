@@ -18,7 +18,7 @@ import classes from "../assets/css/auth.containers.module.scss";
 const ChangePassword = ({ history }) => {
   // HOOKS
   const dispatch = useDispatch(),
-    { isProcessing } = useSelector((state) => state.Auth),
+    { isProcessing, token } = useSelector((state) => state.Auth),
     formik = useFormik({
       initialValues: { password: "", confirmPassword: "" },
       validationSchema: changePasswordValidation,
@@ -27,9 +27,8 @@ const ChangePassword = ({ history }) => {
 
   // EFFECTS
   useEffect(() => {
-    const authData = localStorage.getItem("authData");
-    if (!authData) return history.push("/signin");
-  }, [history]);
+    if (!token) return history.push("/signin");
+  }, [history, token]);
 
   return (
     <main className={`h-full md:h-screen ${classes.SignupBackground}`}>

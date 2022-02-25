@@ -9,7 +9,7 @@ import Backdrop from "../UI/backdrop.component";
 import Affiliate from "./affiliate-card.component";
 import Logo from "../UI/logo.component";
 
-import classes from "./layout-components.module.scss";
+import classes from "./modules/sidebar.module.scss";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
