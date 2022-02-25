@@ -30,7 +30,7 @@ const Exchange = ({ history, location, match }) => {
     user = useSelector((state) => state.Auth.user),
     profile = useSelector((state) => state.Profile.profileSelected),
     { isMobile } = useDeviceDetect(),
-    { isLoading, order } = useSelector((state) => state.Exchange.isLoading);
+    { isLoading, order } = useSelector((state) => state.Exchange);
 
   // EFFECTS
   useEffect(() => {

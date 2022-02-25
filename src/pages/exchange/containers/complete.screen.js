@@ -32,7 +32,7 @@ const CompleteExchange = () => {
 
       <p className="mb-2">desde tu banca por internet a la siguiente cuenta:</p>
       <Card className={`${classes.TransferAccount} flex flex-col md:flex-row items-center justify-center md:justify-between`}>
-        <img src={`${process.env.PUBLIC_URL}/images/banks/${order.bankFromName.toLowerCase()}-logo.svg`} width={85} alt={order.bankFromName} />
+        <img src={`${process.env.PUBLIC_URL}/images/banks/${order?.bankFromName.toLowerCase()}-logo.svg`} width={85} alt={order.bankFromName} />
         <div className="text-center md:text-right text-base">
           <span>Cuenta corriente en {order.currencySent === "PEN" ? "Soles" : "Dólares"}:</span>
           <p className="flex items-center md:justify-end">

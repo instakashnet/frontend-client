@@ -40,7 +40,7 @@ const exchangeReducer = (state = initialState, action) => {
     case types.CANCEL_EXCHANGE_SUCCESS:
       return { ...state, isProcessing: false, order: null };
     case types.EXCHANGE_ERROR:
-      return { ...state, isLoading: false, isProcessing: false };
+      return { ...state, isLoading: false, ratesLoading: false, isProcessing: false };
     default:
       return state;
   }

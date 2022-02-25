@@ -58,12 +58,15 @@ function App() {
         <RefreshSession>
           <ScrollToTop />
           <Switch>
+            {/* PUBLIC ROUTES */}
             <PublicRoute exact path="/signin" component={Signin} />
             <PublicRoute exact path="/signup" component={Signup} />
             <PublicRoute path="/email-verification/:type" component={EmailValidationScreen} />
             <PublicRoute exact path="/recover-password" component={RecoverPassword} />
             <PublicRoute exact path="/change-password" component={ChangePassword} />
             <PublicRoute exact path="/complete-profile" component={CompleteProfile} />
+
+            {/* PRIVATE ROUTES */}
             <PrivateRoute exact path="/" component={asyncComponent(Welcome)} />
             <PrivateRoute path="/my-profile" component={asyncComponent(MyProfile)} />
             <PrivateRoute exact path="/affiliate-program" component={asyncComponent(Affiliates)} />
