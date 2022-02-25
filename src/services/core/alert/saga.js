@@ -7,7 +7,7 @@ function* setAlert({ msg, alertType }) {
   const id = uuid.v4();
   const alert = { msg, type: alertType, id };
   yield put(actions.setAlertSuccess(alert));
-  yield delay(5000);
+  yield delay(500000);
   yield put(actions.removeAlert(id));
 }
 

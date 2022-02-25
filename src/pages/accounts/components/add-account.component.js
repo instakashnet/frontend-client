@@ -16,7 +16,7 @@ const a11yProps = (index) => {
 
 export const AddAccount = ({ order, addType }) => {
   const [value, setValue] = useState(0);
-  const { banks, currencies } = useSelector((state) => state.Data);
+  const { banks, currencies } = useSelector((state) => state.Accounts);
 
   const bankOptions = banks.map((bank) => ({
     value: bank.id,

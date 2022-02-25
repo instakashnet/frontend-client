@@ -1,4 +1,4 @@
-import { logoutSuccess, setAlertInit } from "../store/actions";
+import { logoutSuccess } from "../store/actions";
 
 const requestLog = (config) => (process.env.REACT_APP_STAGE === "dev" ? console.log(`Request sent to ${config.url}`) : false);
 
@@ -30,8 +30,6 @@ export const setupAxiosInterceptors = (instance) => {
 
       if (status === 418 && !configRequest._retry && store.getState().Auth.isAuth) {
         configRequest._retry = true;
-
-        alert("Ha finalizado tu sesión, deberás iniciar sesión nuevamente.");
         return store.dispatch(logoutSuccess());
       } else {
         let message;
@@ -45,11 +43,10 @@ export const setupAxiosInterceptors = (instance) => {
         } else if (error.request) message = "Se ha caido la conexión, por favor revise su conexión a internet. Si el problema persiste contacte a soporte.";
 
         error.code = code;
+        error.message = message;
 
-        if (!configRequest.url.includes("/refresh")) store.dispatch(setAlertInit(message, "error"));
+        return Promise.reject(error);
       }
-
-      return Promise.reject(error);
     }
   );
 };

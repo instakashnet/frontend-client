@@ -1,15 +1,14 @@
 import React from "react";
-import { Remove, Check } from "@material-ui/icons";
+import { Remove, Check, ErrorOutline } from "@material-ui/icons";
 import { CircleProgress } from "react-gradient-progress";
-import CircularProgress from "@material-ui/core/CircularProgress";
-
-// COMPONENTS
-import { ProfileMenu } from "./profile-menu.component";
 
 // ASSETS & CLASSES
 import MaleLight from "../../../assets/images/profiles/male-light.svg";
 import FemaleLight from "../../../assets/images/profiles/female-light.svg";
 import classes from "../assets/css/profile-components.module.scss";
+
+// COMPONENTS
+import { ProfileMenu } from "./profile-menu.component";
 
 export const ProfileInfo = ({ user, color, completed, match }) => {
   return (
@@ -34,14 +33,29 @@ export const ProfileInfo = ({ user, color, completed, match }) => {
                 </>
               )}
             </li>
-            <li style={{ color: user.identityDocumentValidation === "success" ? "#20a2a5" : user.identityDocumentValidation === "pending" ? "#ffa755" : "#AFAFAF" }}>
+            <li
+              style={{
+                color:
+                  user.identityDocumentValidation === "success"
+                    ? "#20a2a5"
+                    : user.identityDocumentValidation === "pending"
+                    ? "#ffa755"
+                    : user.identityDocumentValidation === "failed"
+                    ? "#ff4b55"
+                    : "#AFAFAF",
+              }}
+            >
               {user.identityDocumentValidation === "success" ? (
                 <div className="flex items-center">
                   <Check htmlColor="#20a2a5" /> Idenitdad verificada
                 </div>
               ) : user.identityDocumentValidation === "pending" ? (
                 <div className="flex items-center">
-                  <CircularProgress size={18} color="secondary" className="mr-2" /> Vertificando identidad
+                  <Remove htmlColor="#ffa755" /> Vertificando identidad
+                </div>
+              ) : user.identityDocumentValidation === "failed" ? (
+                <div className="flex items-center">
+                  <ErrorOutline htmlColor="#ff4b55" className="mr-1" /> Verificación fallida
                 </div>
               ) : (
                 <div className="flex items-center">

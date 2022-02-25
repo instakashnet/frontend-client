@@ -29,6 +29,7 @@
     "react-countdown": "^2.3.1",
     "react-dom": "^17.0.1",
     "react-dropzone": "^11.3.2",
+    "react-error-boundary": "^3.1.4",
     "react-facebook-pixel": "^1.0.4",
     "react-google-login": "^5.2.2",
     "react-gradient-progress": "^1.0.3",
@@ -79,6 +80,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.2.5",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "postcss": "^8.2.7",
     "postcss-cli": "^8.3.1",
     "redux-logger": "^3.0.6",

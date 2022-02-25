@@ -2,6 +2,7 @@ import * as types from "./types";
 const initialState = {
   rates: { buy: 0, sell: 0 },
   isLoading: false,
+  ratesLoading: false,
   isProcessing: false,
   coupon: null,
   order: null,
@@ -9,11 +10,13 @@ const initialState = {
 
 const exchangeReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.GET_LAST_ORDER_INIT:
     case types.GET_RATES_INIT:
+      return { ...state, ratesLoading: true };
+
+    case types.GET_LAST_ORDER_INIT:
       return { ...state, isLoading: true };
     case types.GET_LAST_ORDER_SUCCESS:
-      return { ...state, isLoading: false };
+      return { ...state, isLoading: false, order: action.order };
 
     case types.CREATE_EXCHANGE_INIT:
     case types.COMPLETE_EXCHANGE_INIT:
@@ -22,7 +25,7 @@ const exchangeReducer = (state = initialState, action) => {
     case types.VALIDATE_COUPON_INIT:
       return { ...state, isProcessing: true };
     case types.GET_RATES_SUCCESS:
-      return { ...state, rates: action.rates, isLoading: false };
+      return { ...state, rates: action.rates, ratesLoading: false };
     case types.VALIDATE_COUPON_SUCCESS:
       return { ...state, coupon: action.coupon, isProcessing: false };
 

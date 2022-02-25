@@ -1,6 +1,7 @@
 import { END, eventChannel } from "redux-saga";
-import { call, fork, take, takeEvery, cancel, select, cancelled } from "redux-saga/effects";
+import { call, fork, take, takeEvery, cancel, select, cancelled, put } from "redux-saga/effects";
 import * as types from "./types";
+import { SET_USER_DATA } from "../auth/types";
 
 let ws;
 
@@ -18,7 +19,15 @@ const createWebsocketChannel = (token, service) =>
       };
 
       ws.onmessage = (event) => {
-        console.log(event);
+        let message;
+
+        try {
+          message = JSON.parse(event.data);
+        } catch (error) {
+          console.log("Error parsing: ", event.data);
+        }
+
+        if (message) return emit(message);
       };
 
       ws.onclose = (e) => {
@@ -47,21 +56,31 @@ function* listeningSocketSaga(...args) {
 
   try {
     socketChannel = yield call(createWebsocketChannel, ...args);
-    console.log(socketChannel);
+
+    while (true) {
+      const action = yield take(socketChannel);
+
+      switch (action.type) {
+        case "validation":
+          let user = yield select((state) => state.Auth.user);
+          console.log(action.data);
+          user = { ...user, identityDocumentValidation: action.data.status, level: action.data.level };
+          yield put({ type: SET_USER_DATA, user });
+          break;
+        default:
+          break;
+      }
+    }
   } catch (error) {
     console.log("Error connecting.. " + error);
   } finally {
     if (yield cancelled()) socketChannel.close();
   }
-  // while (true) {
-
-  // }
 }
 
-
-function* connectToSocketSaga() {
+function* connectToSocketSaga({ service }) {
   const token = yield select((state) => state.Auth.token),
-    socket = yield fork(listeningSocketSaga, token);
+    socket = yield fork(listeningSocketSaga, token, service);
 
   // WHEN CLOSE IS CALLED CANCEL AND CLOSE SOCKET
   yield take(types.CLOSE_WEBSOCKET);

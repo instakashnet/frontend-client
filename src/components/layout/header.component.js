@@ -7,7 +7,7 @@ import ProfileInfo from "../UI/profile-info.component";
 import ProfileNavigation from "./navigation/profile-navigation.component";
 import Logo from "../UI/logo.component";
 
-import classes from "./layout-components.module.scss";
+import classes from "./modules/header.module.scss";
 
 const Header = () => {
   const dispatch = useDispatch(),

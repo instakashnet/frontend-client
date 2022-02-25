@@ -5,16 +5,14 @@ import { CameraAlt } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadDocumentInit } from "../../../../store/actions";
 
-// ASSETS
+// ASSETS && CLASSES
 import CorrectDoc from "../../../../assets/images/illustrations/correct-doc.svg";
 import IncorrectDoc from "../../../../assets/images/illustrations/incorrect-doc.svg";
+import classes from "../../assets/css/profile-components.module.scss";
 
 // COMPONENTS
 import { DocumentCamera } from "./document-camera.component";
 import { Button } from "../../../../components/UI/button.component";
-
-// CLASSES
-import classes from "../../assets/css/profile-components.module.scss";
 
 export const UploadDocument = ({ docType }) => {
   const dispatch = useDispatch(),
@@ -59,11 +57,13 @@ export const UploadDocument = ({ docType }) => {
             <img src={CorrectDoc} width={125} alt="documento correcto" className="mx-2" />
             <img src={IncorrectDoc} width={100} alt="documento incorrecto" className="mx-2" />
           </div>
-          <ul className="my-5">
+          <h3>¡Importante!</h3>
+          <ul className="my-2">
             <li>La fotografía no debe estar borrosa, desenfocada ni pixelada.</li>
-            <li>Toda la información que aparece en el documento debe ser totalmente legigle.</li>
+            <li>Verifique que la fotografía sea cercana y que no hayan otros elementos en la imagen.</li>
+            <li>Toda la información que aparece en el documento debe ser totalmente legible.</li>
             <li>El tipo y nro. de documento capturado debe ser el mismo usado en tu registro.</li>
-            <li>La foto no debe pesar más de 10MB.</li>
+            <li>La imagen no debe pesar más de 10MB.</li>
           </ul>
           {docType === "passport" ? (
             <button onClick={() => onTakePhoto("front")} className={classes.PassportButton}>
@@ -72,7 +72,7 @@ export const UploadDocument = ({ docType }) => {
               ) : (
                 <>
                   <CameraAlt fontSize="small" htmlColor="#20a2a5" />
-                  <p>Foto pasaporte</p>
+                  <p>Tomar foto pasaporte</p>
                 </>
               )}
             </button>
@@ -84,7 +84,7 @@ export const UploadDocument = ({ docType }) => {
                 ) : (
                   <>
                     <CameraAlt fontSize="small" htmlColor="#20a2a5" />
-                    <p>Foto frontal</p>
+                    <p>Toma foto frontal</p>
                   </>
                 )}
               </button>
@@ -94,7 +94,7 @@ export const UploadDocument = ({ docType }) => {
                 ) : (
                   <>
                     <CameraAlt fontSize="small" htmlColor="#20a2a5" />
-                    <p>Foto reverso</p>
+                    <p>Tomar foto reverso</p>
                   </>
                 )}
               </button>

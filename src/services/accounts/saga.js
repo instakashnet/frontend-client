@@ -9,6 +9,13 @@ import history from "../../shared/history";
 import { exchangeService, accountsService } from "../../api/axios";
 import { getBanks, getCurrencies, getAccounts } from "../../api/services/accounts.service";
 
+// UTILS
+function* setAccountDetails({ accId }) {
+  const accountDetails = yield select((state) => state.Accounts.accounts.find((account) => account.id === accId));
+  yield put(actions.setAccountDetailsSuccess(accountDetails));
+}
+
+// SAGAS
 function* getAccountsSaga({ accType }) {
   try {
     const accounts = yield call(getAccounts, accType);
@@ -24,17 +31,14 @@ function* getAccountsSaga({ accType }) {
   }
 }
 
-function* setAccountDetails({ accId }) {
-  const accountDetails = yield select((state) => state.Accounts.accounts.find((account) => account.id === accId));
-  yield put(actions.setAccountDetailsSuccess(accountDetails));
-}
-
 function* addAccount({ values, addType }) {
   try {
     const res = yield accountsService.post("/accounts", values);
     if (res.status === 201) {
+      const accounts = yield call(getAccounts, addType);
+      yield put(actions.getAccountsSuccess(accounts.accounts));
+
       yield put(actions.addAccountSuccess());
-      // yield call(getAccounts, { accType: addType });
       yield put(setAlertInit("Cuenta agregada correctamente.", "success"));
       yield put(closeModal());
     }
@@ -47,8 +51,10 @@ function* editAccount({ id, values, setEdit }) {
   try {
     const res = yield accountsService.put(`/accounts/${id}`, values);
     if (res.status === 200) {
+      const accounts = yield call(getAccounts, "users");
+      yield put(actions.getAccountsSuccess(accounts.accounts));
+
       yield put(actions.editAccountSuccess());
-      // yield call(getAccounts, { accType: "users" });
       yield call(setAccountDetails, { accId: id });
       yield put(setAlertInit("Cuenta editada correctamente.", "success"));
       yield call(setEdit, false);
@@ -87,9 +93,11 @@ function* deleteAccount({ account }) {
 
     if (result.isConfirmed) {
       yield accountsService.delete(`/accounts/${account.id}`);
-      // yield call(getAccounts, { accType: "users" });
-      yield put(setAlertInit("Cuenta eliminada correctamente.", "success"));
+      const accounts = yield call(getAccounts, "users");
+      yield put(actions.getAccountsSuccess(accounts.accounts));
+
       yield put(actions.deleteAccountSuccess());
+      yield put(setAlertInit("Cuenta eliminada correctamente.", "success"));
       yield put(closeModal());
     } else yield put(actions.accountsError());
   } catch (error) {
