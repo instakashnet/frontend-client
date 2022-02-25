@@ -5,12 +5,10 @@ import { SET_USER_DATA } from "../auth/types";
 
 let ws;
 
-// ${process.env.REACT_APP_STAGE === "prod" ? process.env.REACT_APP_WS_URL : process.env.REACT_APP_WS_DEV_URL}
-
 const createWebsocketChannel = (token, service) =>
   eventChannel((emit) => {
     const connectToWs = () => {
-      ws = new WebSocket(`wss://ws.instakash.net/ws?token=${token}&service=${service}`);
+      ws = new WebSocket(`${process.env.REACT_APP_STAGE === "prod" ? process.env.REACT_APP_WS_URL : process.env.REACT_APP_WS_DEV_URL}/ws?token=${token}&service=${service}`);
 
       ws.onopen = () => {
         console.log("Connection opened.");
@@ -65,7 +63,6 @@ function* listeningSocketSaga(...args) {
       switch (action.type) {
         case "validation":
           let user = yield select((state) => state.Auth.user);
-          console.log(action.data);
           user = { ...user, identityDocumentValidation: action.data.status, level: action.data.level };
           yield put({ type: SET_USER_DATA, user });
           break;
