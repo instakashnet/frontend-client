@@ -58,7 +58,6 @@ function* signinGoogle({ token }) {
       yield put(actions.loadUserInit());
     }
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
   }
 }
