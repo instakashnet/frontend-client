@@ -56,3 +56,5 @@ spec:
           value: AKIASK3IUQPBCJ2DJUJH
         - name: REACT_APP_AWS_SECRET_KEY 
           value: $REACT_APP_AWS_SECRET_KEY
+        - name: REACT_APP_WS_URL
+          value: $REACT_APP_WS_URL
