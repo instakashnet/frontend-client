@@ -3,9 +3,11 @@ import Swal from "sweetalert2";
 import camelize from "camelize";
 import * as types from "./types";
 import * as actions from "./actions";
-import { exchangeService } from "../exchange.service";
 import { setAlertInit, getOrdersInit } from "../../store/actions";
 import history from "../../shared/history";
+
+// API SERVICES
+import { exchangeService } from "../../api/axios";
 
 function* getRates() {
   try {
@@ -52,7 +54,6 @@ function* createExchange({ values, amountSent, profile }) {
   try {
     const res = yield exchangeService.post("/order/step-2", exchangeValues);
     if (res.status === 201) {
-      yield call([sessionStorage, "setItem"], "order", JSON.stringify(res.data));
       yield put(actions.createExchangeSuccess(res.data));
       yield call([history, "push"], "/currency-exchange/step-2");
     }
@@ -88,7 +89,6 @@ function* completeExchange({ values, orderId }) {
         return yield put(actions.processCodeSuccess());
       }
 
-      yield call([sessionStorage, "setItem"], "order", JSON.stringify(res.data));
       yield put(actions.completeExchangeSuccess(res.data));
       yield call([history, "push"], "/currency-exchange/complete");
     }
@@ -131,7 +131,6 @@ function* cancelExchange({ orderId, status, closeModal }) {
           yield call(closeModal);
         }
 
-        yield call([sessionStorage, "removeItem"], "order");
         if (status === "complete" || status === "draft") yield call([history, "push"], "/currency-exchange");
 
         yield Swal.fire("Exitoso", "Su solicitud de cambio fue cancelada.", "success");
@@ -154,8 +153,6 @@ function* processCode({ values, orderId, processType, closeModal }) {
         yield put(getOrdersInit());
         yield call(closeModal);
       } else yield call([history, "push"], "/dashboard/recent");
-
-      yield call([sessionStorage, "removeItem"], "order");
 
       yield Swal.fire({
         title: "Solicitud completada",

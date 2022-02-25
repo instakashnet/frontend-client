@@ -1,64 +1,48 @@
-import { put, all, takeLatest, call, fork, takeEvery, delay } from "redux-saga/effects";
+import { put, all, takeLatest, call, fork, takeEvery } from "redux-saga/effects";
 import camelize from "camelize";
 import * as actions from "./actions";
+import { closeSocketConnection } from "../socket/actions";
+import { setAlertInit } from "../core/alert/actions";
 import * as types from "./types";
-import { setAlertInit } from "../../store/actions";
 import Swal from "sweetalert2";
-import { authService } from "../auth.service";
 import history from "../../shared/history";
 
-function* setAuthToken(data) {
-  const date = new Date();
-  const expDate = new Date(date.setSeconds(date.getSeconds() + data.expiresIn));
+// API SERVICES
+import { authService } from "../../api/axios";
 
-  yield call([localStorage, "setItem"], "authData", JSON.stringify({ token: data.accessToken, expDate }));
+function* refreshToken() {
+  try {
+    const res = yield authService.post("/auth/refresh");
+    if (res.status === 200) {
+      yield put(actions.refreshTokenSuccess(res.data.accessToken));
+      yield call(loadUser);
+    }
+  } catch (error) {
+    yield put(actions.logoutSuccess());
+  }
 }
 
 function* loadUser() {
-  const authData = yield call([localStorage, "getItem"], "authData");
-  if (!authData) return yield put(actions.logoutSuccess());
-
-  const { token, expDate } = JSON.parse(authData);
-
-  if (!token) return yield call(clearUser);
-
-  if (new Date(expDate) <= new Date()) return yield call(logout, {});
-
   try {
     const res = yield authService.get("/users/session");
     const user = camelize(res.data.user);
     yield call([sessionStorage, "setItem"], "userVerification", JSON.stringify(user));
 
-    if (!user.verified) {
-      yield call([history, "push"], "/email-verification/OTP");
-      return yield put(actions.authError());
-    }
+    if (!user.verified) return yield call([history, "push"], "/email-verification/OTP");
+    if (!user.completed) return yield call([history, "push"], "/complete-profile");
 
-    if (!user.completed) {
-      yield call([history, "push"], "/complete-profile");
-      return yield put(actions.authError());
-    }
-
-    yield put(actions.loadUserSuccess(token, user));
-
-    yield call(setAuthTimeout, new Date(expDate).getTime() - new Date().getTime());
+    yield put(actions.loadUserSuccess(user));
   } catch (error) {
-    yield call(logout, {});
-    yield put(actions.authError());
+    yield put(actions.logoutInit());
   }
-}
-
-function* setAuthTimeout(timeout) {
-  yield delay(timeout - 2000);
-  yield put(actions.logoutInit());
 }
 
 function* signin({ values }) {
   try {
     const res = yield authService.post("/auth/signin", values);
     if (res.status === 200) {
-      yield call(setAuthToken, res.data);
-      yield call(loadUser);
+      yield put(actions.signinSuccess(res.data.accessToken));
+      yield put(actions.loadUserInit());
     }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
@@ -70,8 +54,8 @@ function* signinGoogle({ token }) {
   try {
     const res = yield authService.post("/auth/google", { token });
     if (res.status === 201 || res.status === 200) {
-      yield call(setAuthToken, res.data);
-      yield call(loadUser);
+      yield put(actions.signinSuccess(res.data.accessToken));
+      yield put(actions.loadUserInit());
     }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
@@ -83,8 +67,7 @@ function* signup({ values }) {
   try {
     const res = yield authService.post("/auth/signup", values);
     if (res.status === 201) {
-      yield call(setAuthToken, res.data);
-      yield put(actions.signupSuccess());
+      yield put(actions.signupSuccess(res.data.accessToken));
       yield call([history, "push"], "/email-verification/OTP");
     }
   } catch (error) {
@@ -110,11 +93,8 @@ function* validateEmail({ values, otpType }) {
     const res = yield authService.post("/auth/verify-code", validateValues);
 
     if (res.status === 200) {
-      yield call(setAuthToken, res.data);
-      if (otpType === "PWD") {
-        yield put(actions.refreshCodeSuccess());
-        return yield call([history, "push"], "/change-password");
-      }
+      yield put(actions.validateEmailSuccess(res.data.accessToken));
+      if (otpType === "PWD") return yield call([history, "push"], "/change-password");
       return yield call(loadUser);
     }
   } catch (error) {
@@ -141,9 +121,8 @@ function* recoverPassword({ values }) {
     const res = yield authService.post("/users/recover-password", values);
 
     if (res.status === 201) {
-      yield call(setAuthToken, res.data);
+      yield put(actions.recoverPasswordSuccess(res.data.accessToken));
       yield call([history, "push"], "/email-verification/PWD");
-      yield put(actions.recoverPasswordSuccess());
     }
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
@@ -156,7 +135,6 @@ function* resetPassword({ values }) {
     const res = yield authService.post("/users/reset-password", values);
     if (res.status === 201) {
       yield put(actions.resetPasswordSuccess());
-      yield call(clearUser);
       yield call([history, "push"], "/signin");
       yield call([Swal, "fire"], "Contraseña cambiada", "Ya puedes ingresar con tu nueva contraseña.", "success");
     }
@@ -166,33 +144,20 @@ function* resetPassword({ values }) {
   }
 }
 
-function* clearUser() {
-  yield call([localStorage, "removeItem"], "authData");
-  yield call([localStorage, "removeItem"], "userSession");
-  yield call([sessionStorage, "removeItem"], "profileSelected");
-  yield put(actions.logoutSuccess());
-}
-
-function* logout({ logType }) {
-  const authData = yield call([localStorage, "getItem"], "authData");
-  if (!authData) return yield put(actions.logoutSuccess());
-
-  const { expDate } = JSON.parse(authData);
-  if (!logType && new Date(expDate) > new Date()) {
-    try {
-      yield authService.post("/auth/logout");
-    } catch (error) {
-      yield put(actions.authError());
-    }
+function* logout() {
+  try {
+    yield authService.post("/auth/logout");
+  } catch (error) {
+    yield put(actions.authError());
   }
 
-  yield call(clearUser);
+  yield put(closeSocketConnection());
   yield call([history, "push"], "/signin");
   yield put(actions.logoutSuccess());
 }
 
-export function* watchLoadUser() {
-  yield takeEvery(types.LOADUSER_INIT, loadUser);
+export function* watcRefreshToken() {
+  yield takeEvery(types.REFRESH_TOKEN_INIT, refreshToken);
 }
 
 export function* watchCompleteProfile() {
@@ -205,6 +170,10 @@ export function* watchSignin() {
 
 export function* watchRefreshVerificationCode() {
   yield takeEvery(types.REFRESH_CODE_INIT, refreshVerificationCode);
+}
+
+export function* watchLoadUser() {
+  yield takeLatest(types.LOADUSER_INIT, loadUser);
 }
 
 export function* watchValidateEmail() {
@@ -233,10 +202,11 @@ export function* watchLogout() {
 
 export default function* authSaga() {
   yield all([
+    fork(watchLoadUser),
     fork(watchSignin),
     fork(watchSignup),
     fork(watchLogout),
-    fork(watchLoadUser),
+    fork(watcRefreshToken),
     fork(watchCompleteProfile),
     fork(watchSigninGoogle),
     fork(watchRecoverPassword),

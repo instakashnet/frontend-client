@@ -3,9 +3,9 @@ import { Button } from "../button.component";
 
 import classes from "./modal-components.module.scss";
 
-const OutOfTime = ({ onClose }) => {
+export const ClosedModal = ({ onClose }) => {
   return (
-    <main className={`h-screen ${classes.OutOfTimeBg}`}>
+    <div className={classes.OutOfTimeBg}>
       <div className={classes.OutOfTimeWrapper}>
         <h1>¡Ingreso fuera de horario!</h1>
         <p className="mb-6">
@@ -17,8 +17,6 @@ const OutOfTime = ({ onClose }) => {
           Lo entiendo
         </Button>
       </div>
-    </main>
+    </div>
   );
 };
-
-export default OutOfTime;

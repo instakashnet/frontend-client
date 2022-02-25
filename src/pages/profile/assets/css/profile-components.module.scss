@@ -6,6 +6,19 @@
   margin-top: 15px;
 }
 
+.DocumentFailedFlag {
+  position: fixed;
+  width: 70%;
+  right: 0;
+  top: 0;
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(255, 245, 245);
+  color: #ff4b55;
+}
+
 .AddFile {
   text-align: center;
   display: flex;
@@ -345,8 +358,9 @@
 }
 
 .VerifyIdentityWrapper {
-  margin-top: 2.5rem;
+  margin-top: 2rem;
   text-align: center;
+  position: relative;
 
   h1 {
     font-size: 1.5rem;
@@ -354,12 +368,17 @@
     color: $base-green;
   }
 
-  h3 {
+  h3,
+  h2 {
     font-weight: bold;
     color: $base-green;
-    text-align: center;
     margin-bottom: 0.5rem;
     font-size: 1.15rem;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 1.35rem;
   }
 
   ul {
@@ -400,15 +419,26 @@
   text-align: center;
   padding: 0.2rem 0.5rem;
 
+  h3 {
+    color: $base-green;
+    font-weight: bold;
+    text-align: left;
+  }
+
   ul {
     text-align: left;
     list-style-image: url(../../../../assets/images/icons/check.svg);
     padding-left: 0.8rem;
+    margin-bottom: 2rem;
 
     li {
       font-size: 0.85rem;
       margin: 0.5rem 0;
     }
+  }
+
+  button p {
+    font-size: 0.9rem;
   }
 }
 

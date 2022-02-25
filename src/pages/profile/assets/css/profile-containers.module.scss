@@ -3,7 +3,7 @@
 @import "../../../../assets/css/font-sizes";
 
 .ProfileWrapper {
-  padding: 3.5rem 0.5rem 1rem;
+  padding: 2rem 0.5rem 1rem;
 
   @include respond(desktop) {
     display: grid;
@@ -23,6 +23,14 @@
   width: 100%;
   max-width: 960px;
   margin: auto;
+  height: auto;
+  display: grid;
+  align-content: center;
+  position: relative;
+
+  @include respond(desktop) {
+    height: 100%;
+  }
 }
 
 .ProfileNavigation {
@@ -31,6 +39,7 @@
   @include respond(desktop) {
     margin-right: 1rem;
     border-right: 1px solid #ccc;
+    margin-bottom: 0;
   }
 }
 

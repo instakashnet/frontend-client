@@ -1,49 +1,41 @@
 import { all, fork, takeEvery, put } from "redux-saga/effects";
+import moment from "moment";
 import * as types from "./types";
 import * as actions from "./actions";
-import { accountsService } from "../../accounts.service";
-import { exchangeService } from "../../exchange.service";
 
-function* getBanks() {
-  try {
-    const res = yield accountsService.get("/banks/172");
-    if (res.status === 200) yield put(actions.getBanksSuccess(res.data.banks));
-  } catch (error) {
-    console.log(error);
-  }
-}
+// API SERVICES
+import { exchangeService } from "../../../api/axios";
 
-function* getCurrencies() {
-  try {
-    const res = yield accountsService.get("/currencies/country/172");
-    if (res.status === 200) yield put(actions.getCurenciesSuccess(res.data.currencies));
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-function* getSchedule() {
+function* setIsClosed() {
   try {
     const res = yield exchangeService.get("/schedules");
-    if (res.status === 200) yield put(actions.getScheduleSuccess(res.data));
+    let closed = false;
+
+    if (res.status === 200 && res.data?.length) {
+      res.data.forEach((day) => {
+        const actualDay = new Date().getDay();
+
+        if (day.idDayOfWeek === actualDay) {
+          if (!day.isWorkingDay) return (closed = true);
+
+          const actualTime = moment(new Date(), "HH:mm");
+          const startTime = moment(day.startTime, "HH:mm");
+          const endTime = moment(day.endTime, "HH:mm");
+
+          if (!actualTime.isAfter(startTime) || !actualTime.isBefore(endTime)) return (closed = true);
+        }
+      });
+    }
+    yield put(actions.setIsClosedSuccess(closed));
   } catch (error) {
-    console.log(error);
     yield put(actions.dataError());
   }
 }
 
-export function* watchGetBanks() {
-  yield takeEvery(types.GET_BANKS_INIT, getBanks);
-}
-
-export function* watchGetCurrencies() {
-  yield takeEvery(types.GET_CURRENCIES_INIT, getCurrencies);
-}
-
 export function* watchGetSchedule() {
-  yield takeEvery(types.GET_SCHEDULE_INIT, getSchedule);
+  yield takeEvery(types.SET_IS_CLOSED.LOADING, setIsClosed);
 }
 
 export default function* dataSaga() {
-  yield all([fork(watchGetBanks), fork(watchGetCurrencies), fork(watchGetSchedule)]);
+  yield all([fork(watchGetSchedule)]);
 }

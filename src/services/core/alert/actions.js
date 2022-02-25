@@ -1,17 +1,17 @@
 import * as types from "./types";
 
 export const setAlertInit = (msg, alertType) => ({
-  type: types.SET_ALERT_INIT,
+  type: types.SET_ALERT.INIT,
   msg,
   alertType,
 });
 
-export const setAlert = (alert) => ({
-  type: types.SET_ALERT,
+export const setAlertSuccess = (alert) => ({
+  type: types.SET_ALERT.SUCCESS,
   alert,
 });
 
 export const removeAlert = (id) => ({
-  type: types.REMOVE_ALERT,
+  type: types.SET_ALERT.REMOVE,
   id,
 });
