@@ -118,7 +118,7 @@ const Accounts = ({ setModal }) => {
     if (!e.target.value) return;
 
     const chosenAccount = filteredAccounts.find((account) => account.id === e.target.value);
-    setInterplaza(chosenAccount.bank?.name.toLowerCase() === "interbank");
+    setInterplaza(!!Number(chosenAccount.interbank));
     setAccountCCI(!!chosenAccount.cci);
   };
 
