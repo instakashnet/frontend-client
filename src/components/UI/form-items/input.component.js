@@ -1,9 +1,9 @@
 import React from "react";
-import { TextField, InputAdornment, CircularProgress } from "@material-ui/core";
+import { OutlinedInput, InputLabel, FormHelperText, InputAdornment, CircularProgress, FormControl } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { useState } from "react";
 
-import classes from "./form-items.module.scss";
+import classes from "../modules/form/input.module.scss";
 
 export const Input = ({ name, onChange, onBlur, value, label, type, error, touched, iconEnd, groupClass, isLoading, helperText, ...rest }) => {
   const [passwordType, setPasswordType] = useState("password");
@@ -24,8 +24,9 @@ export const Input = ({ name, onChange, onBlur, value, label, type, error, touch
   }
 
   return (
-    <div className={`${classes.FormGroup} ${groupClass || ""}`}>
-      <TextField
+    <FormControl variant="outlined" margin="normal" classes={{ root: classes.FormControl }}>
+      <InputLabel>{label}</InputLabel>
+      <OutlinedInput
         type={type === "password" ? passwordType : type}
         name={name}
         error={!!error && !!touched}
@@ -33,16 +34,15 @@ export const Input = ({ name, onChange, onBlur, value, label, type, error, touch
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        variant="outlined"
-        helperText={error && touched ? error : helperText ? helperText : ""}
         InputProps={InputProps}
         {...rest}
       />
+      <FormHelperText className={`${error && touched ? "error-msg" : ""}`}>{error && touched ? error : helperText ? helperText : ""}</FormHelperText>
       {type === "password" && (
         <button type="button" className="absolute right-3 top-2.5" onClick={onShowPassword}>
           {passwordType === "password" ? <Visibility className={classes.PasswordIcon} /> : <VisibilityOff className={classes.PasswordIcon} />}
         </button>
       )}
-    </div>
+    </FormControl>
   );
 };

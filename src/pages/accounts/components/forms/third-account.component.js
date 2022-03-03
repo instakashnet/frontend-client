@@ -98,7 +98,12 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
   return (
     <div role="tabpanel" hidden={value !== index} {...rest} className="mt-8 max-w-sm mx-auto">
       <form onSubmit={formik.handleSubmit} className={classes.AccountForm}>
-        <FormLabel component="legend">¿A quien le pertenece esta cuenta?</FormLabel>
+        <MuiAlert type="info" opened>
+          Las cuentas a terceros <b>solo pueden ser utilizadas</b> para recibir el dinero solicitado.
+        </MuiAlert>
+        <FormLabel component="legend" className="mt-3">
+          ¿A quien le pertenece esta cuenta?
+        </FormLabel>
         <RadioGroup aria-label="tipo de cuenta a terceros" name="thirdPartyAccType" value={formik.values.thirdPartyAccType} onChange={onThirdPartyAccTypeChange}>
           <div className="flex flex-wrap items-center justify-between">
             <RadioComponent value="natural" label="A una persona" />
@@ -106,25 +111,29 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
           </div>
         </RadioGroup>
         <div className="grid grid-cols-3 w-full gap-2">
-          <SelectComponent
-            name="documentType"
-            label="Tipo de doc."
-            value={formik.values.documentType}
-            onChange={formik.handleChange}
-            options={documentOptions}
-            disabled={formik.values.thirdPartyAccType === "juridica"}
-          />
-          <Input
-            name="documentIdentity"
-            type="text"
-            label="Nro. de documento"
-            value={formik.values.documentIdentity}
-            onChange={onDocumentChangeHandler}
-            onBlur={formik.handleBlur}
-            error={formik.errors.documentIdentity}
-            touched={formik.touched.documentIdentity}
-            groupClass="col-span-2"
-          />
+          <div className="mt-2">
+            <SelectComponent
+              name="documentType"
+              label="Tipo doc."
+              value={formik.values.documentType}
+              onChange={formik.handleChange}
+              options={documentOptions}
+              disabled={formik.values.thirdPartyAccType === "juridica"}
+            />
+          </div>
+          <div className="col-span-2">
+            <Input
+              name="documentIdentity"
+              type="text"
+              label="Nro. de documento"
+              value={formik.values.documentIdentity}
+              onChange={onDocumentChangeHandler}
+              onBlur={formik.handleBlur}
+              error={formik.errors.documentIdentity}
+              touched={formik.touched.documentIdentity}
+              groupClass="col-span-2"
+            />
+          </div>
         </div>
         {formik.values.thirdPartyAccType === "natural" ? (
           <Input
@@ -180,6 +189,9 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
           error={formik.errors.bankId}
           touched={formik.touched.bankId}
         />
+        <MuiAlert type="info" opened>
+          Operamos hacia interbank <b>solo en lima</b>. BCP e interbancarias a todo Perú de forma digital.
+        </MuiAlert>
         {!formik.values.isDirect ? (
           <Input
             name="cci"
@@ -239,9 +251,7 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
             </a>
           </MuiAlert>
         )}
-        <MuiAlert type="info" opened>
-          Las cuentas a terceros solo pueden ser utilizadas para recibir el dinero solicitado.
-        </MuiAlert>
+
         <CheckboxComponent name="accept" value={formik.values.accept} onChange={formik.handleChange} error={formik.errors.accept}>
           Declaro que toda la información colocada es correcta, actual y asumo total responsabilidad de su veracidad.
         </CheckboxComponent>

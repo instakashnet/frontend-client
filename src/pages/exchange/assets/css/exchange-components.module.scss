@@ -21,10 +21,11 @@
 .Information {
   position: relative;
   width: 100%;
-  margin-top: 20px;
+  top: 25px;
+  margin-bottom: 25px;
 
   @include respond(tablet) {
-    margin-top: 30px;
+    top: 55px;
   }
 }
 
@@ -38,7 +39,7 @@
   border-radius: 10px;
   box-shadow: none;
   background-color: $card-color;
-  padding: 5px;
+  padding: 10px 7px;
 
   p {
     font-size: 0.85rem;
@@ -63,9 +64,10 @@
   }
 
   @include respond(desktop) {
-    max-width: 12rem;
+    min-width: 14rem;
+    max-width: 15rem;
     margin: 0;
-    min-height: 8rem;
+    min-height: 10rem;
   }
 
   @include respond(ldesktop) {

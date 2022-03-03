@@ -19,7 +19,7 @@ export const Error500 = ({ error }) => {
         a la brevedad posible.
       </p>
       <p>De momento te ofrecemos la opción de:</p>
-      <Link to="/">Regresar</Link>
+      <Link to="/login">Regresar</Link>
     </div>
   );
 };

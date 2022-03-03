@@ -20,8 +20,7 @@ import classes from "../../assets/css/account-components.module.scss";
 
 export const PersonalAccount = ({ banks, currencies, accountTypes, isThird, addType, value, index, ...rest }) => {
   const dispatch = useDispatch(),
-    [selectedBank, setSelectedBank] = useState(null),
-    [isInterbank, setIsInterbank] = useState(false);
+    [selectedBank, setSelectedBank] = useState(null);
 
   // FORMIK
   const formik = useFormik({
@@ -31,7 +30,7 @@ export const PersonalAccount = ({ banks, currencies, accountTypes, isThird, addT
     onSubmit: (values) => dispatch(addAccountInit(values, addType)),
   });
   const isProcessing = useSelector((state) => state.Accounts.isProcessing);
-  const { bankId } = formik.values;
+  const { bankId, interbank } = formik.values;
 
   useEffect(() => {
     if (bankId) {
@@ -50,7 +49,6 @@ export const PersonalAccount = ({ banks, currencies, accountTypes, isThird, addT
 
     if (value) {
       const bank = banks.find((b) => b.value === value);
-      setIsInterbank(bank.label.toLowerCase() === "interbank");
       formik.setFieldValue("isDirect", bank.isDirect);
     }
   };
@@ -66,7 +64,11 @@ export const PersonalAccount = ({ banks, currencies, accountTypes, isThird, addT
           onChange={onBankChangeHandler}
           error={formik.errors.bankId}
           touched={formik.touched.bankId}
+          className="mb-0"
         />
+        <MuiAlert type="info" opened>
+          Operamos hacia interbank <b>solo en lima</b>. BCP e interbancarias a todo Perú de forma digital.
+        </MuiAlert>
         {!formik.values.isDirect ? (
           <Input
             name="cci"
@@ -127,16 +129,21 @@ export const PersonalAccount = ({ banks, currencies, accountTypes, isThird, addT
             </a>
           </MuiAlert>
         )}
-        {isInterbank && (
+        {/* {isInterbank && (
           <CheckboxComponent name="interbank" value={formik.values.interbank} onChange={formik.handleChange} error={formik.errors.interbank}>
-            ¿Es esta una cuenta de provincia?
+            ¿Esta cuenta es de provincia?
           </CheckboxComponent>
         )}
+        {interbank && (
+          <MuiAlert type="error" opened>
+            Te recordamos que operamos hacia interbank <b>solo en lima</b>.
+          </MuiAlert>
+        )} */}
         <CheckboxComponent name="accept" value={formik.values.accept} onChange={formik.handleChange} error={formik.errors.accept}>
-          Declaro que toda la información colocada es correcta, actual y asumo total responsabilidad de su veracidad.
+          Declaro que toda la información colocada es correcta y que esta cuenta es mía.
         </CheckboxComponent>
         <div className="flex justify-center">
-          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button mt-4 ld-over ${isProcessing ? "running" : ""}`}>
+          <Button type="submit" disabled={!formik.isValid || interbank || isProcessing} className={`action-button mt-4 ld-over ${isProcessing ? "running" : ""}`}>
             <span className="ld ld-ring ld-spin" />
             Agregar cuenta
           </Button>

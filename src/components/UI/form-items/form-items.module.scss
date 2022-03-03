@@ -40,16 +40,6 @@
   color: $placeholder;
 }
 
-.DateInput input {
-  border: 1px solid #ccb;
-  border-radius: 4px;
-  color: $base-text;
-}
-
-.DateError input {
-  border-color: $error;
-}
-
 .RadioGroup {
   margin: 5px 10px;
   cursor: pointer;
@@ -104,37 +94,6 @@
     color: #fff;
     background-color: $secondary-green;
   }
-}
-
-.CustomSelect {
-  padding-top: 14px !important;
-  padding-bottom: 14px !important;
-  background-color: #fff !important;
-}
-
-.PhoneWrapper {
-  font-size: 1rem !important;
-  font-family: inherit !important;
-}
-
-.PhoneInput {
-  width: 100% !important;
-  padding-top: 21px !important;
-  padding-bottom: 21px !important;
-  padding-left: 41px !important;
-}
-
-.PhoneError {
-  border-color: $error !important;
-
-  + .ButtonFlag {
-    border-color: $error !important;
-  }
-}
-
-.ButtonFlag {
-  border-right: none !important;
-  background-color: transparent !important;
 }
 
 .SwitchGroup {

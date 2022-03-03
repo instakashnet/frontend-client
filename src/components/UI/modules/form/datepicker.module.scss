@@ -1,0 +1,18 @@
+@import "../../../../assets/css/colors";
+
+.FormControl {
+  margin-top: 16px;
+
+  .DateInput {
+    input {
+      padding: 13px;
+      border: 1px solid #ccb;
+      border-radius: 4px;
+      color: $base-text;
+    }
+  }
+
+  .DateError input {
+    border-color: $error;
+  }
+}

@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+// COMPONENTS
 import Card from "../../../components/UI/card.component";
 import Layout from "../../../components/layout/layout.component";
 
+// CLASSES && ASSETS
 import ExchangeImg from "../images/exchange.svg";
 import AffiliateImg from "../images/affiliate.svg";
-
 import classes from "./welcome.module.scss";
 
 const Welcome = () => {
