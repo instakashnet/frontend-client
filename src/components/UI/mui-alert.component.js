@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Alert from "@material-ui/lab/Alert";
 import { Collapse } from "@material-ui/core";
 
-import classes from "./ui-components.module.scss";
+import classes from "./modules/mui-alert.module.scss";
 
 export const MuiAlert = ({ type, opened, children, ...rest }) => {
   const [isOpen, setIsOpen] = useState(opened);

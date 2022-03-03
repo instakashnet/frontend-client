@@ -1,0 +1,28 @@
+@import "../../../../assets/css/colors";
+
+.FormControl {
+  margin: 10px 0 15px;
+
+  .PhoneWrapper {
+    font-size: 1rem;
+    font-family: inherit;
+  }
+
+  .PhoneInput {
+    width: 100% !important;
+    padding: 12px 0 12px 56px !important;
+  }
+
+  .PhoneError {
+    border-color: $error;
+
+    + .ButtonFlag {
+      border-color: $error;
+    }
+  }
+
+  .ButtonFlag {
+    border-right: none !important;
+    background-color: transparent !important;
+  }
+}

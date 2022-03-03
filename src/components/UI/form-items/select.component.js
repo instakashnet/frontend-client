@@ -1,13 +1,13 @@
 import React from "react";
 import { FormControl, InputLabel, Select, MenuItem, FormHelperText } from "@material-ui/core";
 
-import classes from "./form-items.module.scss";
+import classes from "../modules/form/select.module.scss";
 
-export const SelectComponent = ({ name, value, options, label, empty, emptyLabel, error, touched, helperText, onChange, ...rest }) => {
+export const SelectComponent = ({ name, value, options, label, empty, emptyLabel, error, touched, helperText, onChange }) => {
   return (
-    <FormControl variant="outlined" className={classes.FormGroup}>
+    <FormControl classes={{ root: classes.FormControl }} variant="outlined">
       <InputLabel htmlFor={name}>{label}</InputLabel>
-      <Select error={!!error && !!touched} value={value} onChange={onChange} label={label} classes={{ select: classes.CustomSelect }} inputProps={{ name, id: name }} {...rest}>
+      <Select classes={{ outlined: classes.CustomSelect }} error={!!error && !!touched} value={value} onChange={onChange} label={label} inputProps={{ name, id: name }}>
         {empty && <MenuItem value="">{emptyLabel}</MenuItem>}
         {options.map((option) => (
           <MenuItem key={option.value} value={option.value}>

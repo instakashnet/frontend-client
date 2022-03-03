@@ -114,18 +114,21 @@ const CompleteProfile = ({ history }) => {
         <p className="mt-2 mb-8">Por favor, completa tus datos</p>
         <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
           <div className="grid grid-cols-3 w-full gap-2">
-            <SelectComponent name="document_type" label="Tipo de doc." value={formik.values.document_type} onChange={onDocumentTypeHandler} options={documentOptions} />
-            <Input
-              name="document_identification"
-              type="text"
-              label="Nro. de documento"
-              value={formik.values.document_identification}
-              onChange={onDocumentChangeHandler}
-              onBlur={formik.handleBlur}
-              error={invalidDNI ? invalidDNI : formik.errors.document_identification}
-              touched={formik.touched.document_identification}
-              groupClass="col-span-2"
-            />
+            <div className="grid place-items-center mt-2">
+              <SelectComponent name="document_type" label="Tipo de doc." value={formik.values.document_type} onChange={onDocumentTypeHandler} options={documentOptions} />
+            </div>
+            <div className="col-span-2">
+              <Input
+                name="document_identification"
+                type="text"
+                label="Nro. de documento"
+                value={formik.values.document_identification}
+                onChange={onDocumentChangeHandler}
+                onBlur={formik.handleBlur}
+                error={invalidDNI ? invalidDNI : formik.errors.document_identification}
+                touched={formik.touched.document_identification}
+              />
+            </div>
           </div>
           <Input
             name="first_name"

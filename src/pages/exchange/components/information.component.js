@@ -6,7 +6,6 @@ import { Button } from "../../../components/UI/button.component";
 
 // ASSETS & CLASSES
 import InfoImg from "../assets/images/exchange-user.png";
-import Clock from "../assets/images/icons/clock.svg";
 import Arrows from "../assets/images/icons/arrows.svg";
 import User from "../assets/images/icons/user.svg";
 import Dollar from "../assets/images/icons/dollar.svg";
@@ -25,17 +24,11 @@ const Information = ({ onClose }) => {
           </div>
           <div className={classes.InfoCard}>
             <img src={Arrows} alt="arrows" />
-            <p>
-              Recibimos solo transferencias. <br /> No aceptamos depósitos.
-            </p>
+            <p>Recibimos solo transferencias. No aceptamos depósitos.</p>
           </div>
           <div className={classes.InfoCard}>
             <img src={User} alt="clock" />
-            <p>La cuenta origen debe ser del mismo titular que registra el cambio.</p>
-          </div>
-          <div className={classes.InfoCard}>
-            <img src={Clock} alt="clock" />
-            <p>Las transacciones se procesan entre 10 a 25 minutos.</p>
+            <p>La cuenta de origen debe ser del mismo titular que registra el cambio.</p>
           </div>
           <div className={classes.InfoCard}>
             <img src={Dollar} alt="clock" />

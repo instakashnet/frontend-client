@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Add } from "@material-ui/icons";
 
-// HELPERS
-import { validateInterplaza } from "../../../shared/functions";
-
 // REDUX
 import { useSelector, useDispatch } from "react-redux";
 import { completeExchangeInit, cancelExchangeInit, getAccountsInit } from "../../../store/actions";
@@ -40,22 +37,21 @@ const Accounts = ({ setModal }) => {
 
   // FORMIK
   const formik = useFormik({
-      initialValues: {
-        account_to_id: "",
-        accountInterbank: false,
-        bank_id: "",
-        bankInterbank: false,
-        funds_origin: "",
-        funds_text: "",
-        couponName: coupon ? coupon.name : null,
-        kashApplied: "no",
-        kashUsed: "",
-      },
-      enableReinitialize: true,
-      validationSchema: completeExchangeValidation(funds_origin, kashAccount.balance, totalAmountSent),
-      onSubmit: (values) => dispatch(completeExchangeInit(values, order.id)),
-    }),
-    { account_to_id } = formik.values;
+    initialValues: {
+      account_to_id: "",
+      accountInterbank: false,
+      bank_id: "",
+      bankInterbank: false,
+      funds_origin: "",
+      funds_text: "",
+      couponName: coupon ? coupon.name : null,
+      kashApplied: "no",
+      kashUsed: "",
+    },
+    enableReinitialize: true,
+    validationSchema: completeExchangeValidation(funds_origin, kashAccount.balance, totalAmountSent),
+    onSubmit: (values) => dispatch(completeExchangeInit(values, order.id)),
+  });
 
   // OPTIONS
   const fundsOptions = [
@@ -99,11 +95,6 @@ const Accounts = ({ setModal }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    const chosenAccount = filteredAccounts.find((account) => account.id === account_to_id);
-    if (chosenAccount && chosenAccount.bank.id === 2) setInterplaza(validateInterplaza(chosenAccount.account_number));
-  }, [account_to_id, filteredAccounts]);
-
-  useEffect(() => {
     if (accounts.length) setFilteredAccounts(accounts.filter((account) => account.currency.id === order.currencyReceivedId));
   }, [accounts, order.currencyReceivedId]);
 
@@ -127,6 +118,7 @@ const Accounts = ({ setModal }) => {
     if (!e.target.value) return;
 
     const chosenAccount = filteredAccounts.find((account) => account.id === e.target.value);
+    setInterplaza(chosenAccount.bank?.name.toLowerCase() === "interbank");
     setAccountCCI(!!chosenAccount.cci);
   };
 
@@ -174,23 +166,16 @@ const Accounts = ({ setModal }) => {
           </button>
         )}
         {interplaza && (
-          <MuiAlert type="warning" opened>
-            <span className="block text-left">
-              <b>Cuentas interplaza de Interbank acarrean una comisión.</b> Conozca más en nuestros{" "}
-              <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
-                términos y condiciones.
-              </a>
-            </span>
+          <MuiAlert type="info" opened>
+            <b>No realizamos operaciones hacia cuentas Interbank que se encuentren fuera de lima</b>.
           </MuiAlert>
         )}
         {(bankCCI || accountCCI) && (
           <MuiAlert type="warning" opened>
-            <span className="block text-left">
-              <b>Las transferencias interbancarias carrean comisiones y pueden demorar hasta 48 horas.</b> Conozoca más sobre las transferencias interbancarias en nuestros{" "}
-              <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
-                términos y condiciones.
-              </a>
-            </span>
+            <b>Las transferencias interbancarias generan comisiones y pueden demorar hasta 48 horas.</b> Conozoca más en nuestros{" "}
+            <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
+              términos y condiciones.
+            </a>
           </MuiAlert>
         )}
         {funds_origin && (
