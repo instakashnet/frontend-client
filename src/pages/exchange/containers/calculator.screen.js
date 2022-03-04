@@ -132,7 +132,9 @@ const Calculator = ({ profile, setModal, user }) => {
 
   return (
     <>
-      <h1>¡Gana cambiando con Instakash!</h1>
+      <h1>
+        Ahorra cambiando con <br /> la mejor tasa del Perú
+      </h1>
       <h3>Mejores tasas, mayor ahorro.</h3>
       {!ratesLoading && <Rates actualRates={actualRates} coupon={coupon} couponRates={couponRates} />}
       <form onSubmit={formik.handleSubmit} className={classes.ExchangeForm}>
