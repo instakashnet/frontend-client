@@ -3,7 +3,6 @@ name: developCI
 on:
   push:
     branches:
-      - "develop"
       - "features/*"
       - "fixes/*"
 

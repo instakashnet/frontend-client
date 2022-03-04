@@ -19,11 +19,13 @@
     font-size: 1.4rem;
     color: $base-green;
     font-weight: bold;
+    line-height: 40px;
   }
 
   h3 {
     font-size: 1rem;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 15px;
     font-weight: bold;
   }
 
@@ -37,17 +39,11 @@
 
   @include respond(desktop) {
     h1 {
-      font-size: 2rem;
+      font-size: 2.1rem;
     }
 
     h3 {
       font-size: 1.2rem;
-    }
-  }
-
-  @include respond(ldesktop) {
-    h1 {
-      font-size: 2.5rem;
     }
   }
 }

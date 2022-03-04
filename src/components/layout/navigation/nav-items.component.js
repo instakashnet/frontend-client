@@ -12,7 +12,7 @@ const NavItems = () => {
     <nav className="w-full mt-6 md:mt-20 mb-12">
       <ul>
         <NavItem link="/dashboard/recent" icon={DashboardIcon} label="Mi actividad" />
-        <NavItem exact link="/currency-exchange" icon={ExchangeIcon} label="Cambio de divisas" />
+        <NavItem exact link="/currency-exchange" icon={ExchangeIcon} label="Cambiar dólares" />
         <NavItem exact link="/my-accounts" icon={AccountsIcon} label="Mis cuentas" />
         <NavItem exact link="/affiliate-program" icon={TrophyIcon} label="Recomienda y gana" />
       </ul>
