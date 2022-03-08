@@ -6,7 +6,7 @@ import { Dialog, DialogContent } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 import { closeModal } from "../../../store/actions";
 
-import classes from "./modal-components.module.scss";
+import classes from "../modules/modals/g-modal.module.scss";
 
 export const Modal = ({ title, isAlert, alertType, children }) => {
   const isOpen = useSelector((state) => state.Modal.isOpen);

@@ -1,0 +1,113 @@
+@import "../../../../assets/css/colors";
+@import "../../../../assets/css/breakpoints";
+
+.Modal {
+  width: 100%;
+  max-width: 33rem !important;
+  margin: 5px !important;
+
+  h2 {
+    color: $base-green;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  @include respond(desktop) {
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+.ModalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 15px 10px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid $base-green;
+
+  h2 {
+    color: $base-green;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  @include respond(desktop) {
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+.ModalBody {
+  padding: 15px 15px 35px !important;
+  font-size: 1rem;
+  background-color: $bg-color;
+
+  b {
+    color: $base-green;
+  }
+
+  button {
+    max-width: 20rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  form {
+    min-width: 19rem;
+
+    a {
+      color: $base-green;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+  }
+
+  @include respond(tablet) {
+    padding: 25px 20px 35px !important;
+  }
+}
+
+.Close {
+  color: $base-green;
+
+  svg {
+    font-size: 30px;
+  }
+
+  @include respond(tablet) {
+    svg {
+      font-size: 35px;
+    }
+  }
+}
+
+// Slider modal styles
+.SliderModalContainer {
+  align-items: flex-end !important;
+
+  @include respond(tablet) {
+    justify-content: flex-end !important;
+  }
+}
+
+.SliderModal {
+  height: 90vh;
+  max-height: 100% !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  width: 100%;
+  max-width: 25rem !important;
+
+  @include respond(tablet) {
+    max-width: 23rem !important;
+    height: 100vh;
+  }
+}
+
+.SliderModalBody {
+  padding: 15px 0 0 !important;
+}

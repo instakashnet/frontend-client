@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { closeSliderModal } from "../../../store/actions";
 
-import classes from "./modal-components.module.scss";
+import classes from "../modules/modals/g-modal.module.scss";
 
 const Transition = React.forwardRef((props, ref) => <Slide direction={window.screen.width <= 768 ? "up" : "left"} ref={ref} {...props} />);
 

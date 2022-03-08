@@ -1,7 +1,7 @@
 @import "../../../assets/css/colors";
 @import "../../../assets/css/breakpoints";
 
-.Modal {
+/* .Modal {
   width: 100%;
   max-width: 33rem !important;
   margin: 5px !important;
@@ -17,7 +17,7 @@
       font-size: 1.3rem;
     }
   }
-}
+} */
 
 .ModalHeader {
   display: flex;
@@ -40,7 +40,7 @@
   }
 }
 
-.ModalBody {
+/*.ModalBody {
   padding: 15px 15px 35px !important;
   font-size: 1rem;
   background-color: $bg-color;
@@ -69,33 +69,33 @@
   @include respond(tablet) {
     padding: 25px 20px 35px !important;
   }
-}
+} */
 
-.SliderModalContainer {
-  align-items: flex-end !important;
+// .SliderModalContainer {
+//   align-items: flex-end !important;
 
-  @include respond(tablet) {
-    justify-content: flex-end !important;
-  }
-}
+//   @include respond(tablet) {
+//     justify-content: flex-end !important;
+//   }
+// }
 
-.SliderModal {
-  height: 90vh;
-  max-height: 100% !important;
-  margin: 0 !important;
-  border-radius: 0 !important;
-  width: 100%;
-  max-width: 25rem !important;
+// .SliderModal {
+//   height: 90vh;
+//   max-height: 100% !important;
+//   margin: 0 !important;
+//   border-radius: 0 !important;
+//   width: 100%;
+//   max-width: 25rem !important;
 
-  @include respond(tablet) {
-    max-width: 23rem !important;
-    height: 100vh;
-  }
-}
+//   @include respond(tablet) {
+//     max-width: 23rem !important;
+//     height: 100vh;
+//   }
+// }
 
-.SliderModalBody {
-  padding: 15px 0 0 !important;
-}
+// .SliderModalBody {
+//   padding: 15px 0 0 !important;
+// }
 
 .Close {
   color: $base-green;
@@ -111,7 +111,7 @@
   }
 }
 
-.OutOfTimeBg {
+/* .OutOfTimeBg {
   background-color: #fff;
   background-image: url(../../../assets/images/outOfTime.svg);
   background-size: 100%;
@@ -156,4 +156,4 @@
       font-size: 2.3rem;
     }
   }
-}
+} */
