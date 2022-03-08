@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "./ui-components.module.scss";
+import classes from "./modules/card.module.scss";
 
 const Card = ({ className, children, ...rest }) => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "./ui-components.module.scss";
+import classes from "./modules/progress-bar.module.scss";
 
 const ProgressBar = ({ width }) => {
   let color;

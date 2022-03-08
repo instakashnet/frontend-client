@@ -1,7 +1,7 @@
 import React from "react";
 import { Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core";
 
-import classes from "./ui-components.module.scss";
+import classes from "./modules/accordion.module.scss";
 
 const AccordionComponent = ({ className, title, children, Icon, ...rest }) => {
   return (

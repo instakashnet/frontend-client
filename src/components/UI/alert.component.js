@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeAlert } from "../../store/actions";
 
-import classes from "./ui-components.module.scss";
+import classes from "./modules/alert.module.scss";
 
 const Alert = () => {
   const dispatch = useDispatch();

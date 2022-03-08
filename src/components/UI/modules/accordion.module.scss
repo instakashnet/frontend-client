@@ -1,0 +1,9 @@
+.Accordion {
+	box-shadow: none !important;
+	background-color: transparent !important;
+	margin-top: 40px;
+
+	&::before {
+		display: none;
+	}
+}

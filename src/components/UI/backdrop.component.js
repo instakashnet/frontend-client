@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "./ui-components.module.scss";
+import classes from "./modules/backdrop.module.scss";
 
 const Backdrop = ({ opened, onClick }) => {
   return opened ? <div className={classes.Backdrop} onClick={onClick} /> : null;

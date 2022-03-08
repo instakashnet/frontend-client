@@ -2,7 +2,7 @@ import React from "react";
 import { HashLoader } from "react-spinners";
 
 // CLASSES
-import classes from "./ui-components.module.scss";
+import classes from "./modules/spinner.module.scss";
 
 const Spinner = ({ loading }) => {
   return (
