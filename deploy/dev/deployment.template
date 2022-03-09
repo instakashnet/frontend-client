@@ -44,7 +44,7 @@ spec:
         env:
         - name: REACT_APP_STAGE 
           value: $ENVIRONMENT
-        - name: REACT_APP_API_URL 
+        - name: REACT_APP_DEV_API_URL 
           value: $REACT_APP_API_URL
         - name: REACT_APP_GOOGLE_ID 
           value: $REACT_APP_GOOGLE_ID 
