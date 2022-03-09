@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-client
+  namespace: app
+  labels:
+    app: frontend-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-client
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: frontend-client
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: nodegroup
+                operator: In
+                values:
+                - app
+      restartPolicy: Always
+      containers:
+      - name: frontend
+        image: 160743850946.dkr.ecr.us-east-2.amazonaws.com/frontend-client-repo:prod-$CODEBUILD_BUILD_NUMBER
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources:
+          requests:
+            memory: 128M
+            cpu: 128m
+	env:
+        - name: REACT_APP_STAGE
+          value: $ENVIRONMENT
+        - name: REACT_APP_API_URL
+          value: $REACT_APP_API_URL
+        - name: REACT_APP_GOOGLE_ID
+          value: $REACT_APP_GOOGLE_ID
+        - name: REACT_APP_FB_PIXEL_ID
+          value: $REACT_APP_FB_PIXEL_ID
+        - name: REACT_APP_MIGO_API
+          value: $REACT_APP_MIGO_API
+        - name: REACT_APP_AWS_ACCESS_KEY
+          value: $REACT_APP_AWS_ACCESS_KEY
+        - name: REACT_APP_AWS_SECRET_KEY
+          value: $REACT_APP_AWS_SECRET_KEY
+        - name: REACT_APP_WS_URL
+          value: $REACT_APP_WS_URL
