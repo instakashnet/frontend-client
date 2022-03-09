@@ -1,5 +1,4 @@
 @import "../../../../assets/css/colors";
-@import "../../../../assets/css/breakpoints";
 
 .FormControl {
   margin: 7px 0;
@@ -17,4 +16,8 @@
   svg {
     color: $placeholder;
   }
+}
+
+.PasswordIcon {
+  color: $placeholder;
 }
