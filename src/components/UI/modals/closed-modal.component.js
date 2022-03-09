@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "../button.component";
 
-import classes from "./modal-components.module.scss";
+import classes from "../modules/modals/closed-modal.module.scss";
 
 export const ClosedModal = ({ onClose }) => {
   return (

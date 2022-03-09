@@ -1,8 +1,6 @@
 import React from "react";
 import { Warning, Info } from "@material-ui/icons";
 
-import classes from "./modal-components.module.scss";
-
 const InfoModal = ({ type, children }) => {
   let IconType;
 
@@ -10,7 +8,7 @@ const InfoModal = ({ type, children }) => {
   if (type === "info") IconType = <Info fontSize="large" />;
 
   return (
-    <div className={classes.InfoModal}>
+    <div>
       {IconType}
       <h2>Estimado usuario</h2>
       {children}
