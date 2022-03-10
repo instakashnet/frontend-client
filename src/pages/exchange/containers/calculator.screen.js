@@ -18,6 +18,7 @@ import classes from "../assets/css/exchange-screens.module.scss";
 
 const Calculator = ({ profile, setModal, user }) => {
   const dispatch = useDispatch(),
+    [couponName, setCouponName] = useState(""),
     [actualRates, setActualRates] = useState({ buy: 0, sell: 0 }),
     [couponRates, setCouponRates] = useState({ buy: 0, sell: 0 }),
     [isCouponMin, setIsCouponMin] = useState(false),
@@ -103,11 +104,11 @@ const Calculator = ({ profile, setModal, user }) => {
     if (values.type === "sell") setFieldValue(inputName, totalAmount.toFixed(2));
   };
 
-  const sendCouponHandler = (couponName) => {
-    const bodyCoupon = couponName.trim();
+  const sendCouponHandler = (name) => {
+    const bodyCoupon = name.trim();
     const regex = /^((?=.*\d)?)(?=.*[a-zA-Z]).{6,}$/;
     if (bodyCoupon && regex.test(bodyCoupon)) {
-      dispatch(validateCouponInit(bodyCoupon.toUpperCase(), profile.type));
+      dispatch(validateCouponInit(bodyCoupon.toUpperCase(), profile.type, setCouponName));
     } else return;
   };
 
@@ -115,6 +116,7 @@ const Calculator = ({ profile, setModal, user }) => {
     dispatch(deleteCoupon());
     setActualRates({ buy: rates.buy, sell: rates.sell });
     setFieldValue("couponName", "");
+    setCouponName("");
     setFieldValue("amount_received", values.type === "buy" ? values.amount_sent * rates.buy : values.amount_sent / rates.sell);
   };
 
@@ -122,6 +124,7 @@ const Calculator = ({ profile, setModal, user }) => {
     dispatch(deleteCoupon());
     dispatch(getRatesInit());
     setFieldValue("couponName", "");
+    setCouponName("");
   };
 
   useEffect(() => {
@@ -171,6 +174,8 @@ const Calculator = ({ profile, setModal, user }) => {
           </p>
           <CouponInput
             coupon={coupon}
+            couponName={couponName}
+            setCouponName={setCouponName}
             minimum={isCouponMin}
             amountReceived={values.amount_received}
             isProcessing={isProcessing}
@@ -180,7 +185,11 @@ const Calculator = ({ profile, setModal, user }) => {
             onDeleteCoupon={deleteCouponHandler}
           />
           {values.amount_received < 1 && <p className="error-msg">El monto mínimo a recibir es de $ 1.00</p>}
-          <Button type="submit" disabled={values.amount_received < 1 || disabled} className={`action-button mt-2 ld-over ${isProcessing ? "running" : ""}`}>
+          <Button
+            type="submit"
+            disabled={values.amount_received < 1 || couponName.trim().length || disabled}
+            className={`action-button mt-2 ld-over ${isProcessing ? "running" : ""}`}
+          >
             <span className="ld ld-ring ld-spin" />
             Comenzar cambio
           </Button>
