@@ -18,10 +18,11 @@ export const getLastOrderSuccess = (order) => ({
   order,
 });
 
-export const validateCouponInit = (couponName, profileType = null) => ({
+export const validateCouponInit = (couponName, profileType = null, clearCoupon) => ({
   type: types.VALIDATE_COUPON_INIT,
   couponName,
   profileType,
+  clearCoupon,
 });
 
 export const validateCouponSuccess = (coupon) => ({

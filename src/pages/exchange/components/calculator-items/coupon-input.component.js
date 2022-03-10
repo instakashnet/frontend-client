@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Close } from "@material-ui/icons";
 
 // HELPERS
@@ -11,8 +11,7 @@ import { InlineInput } from "../../../../components/UI/form-items/inline-input.c
 import CouponImg from "../../assets/images/icons/coupon.svg";
 import classes from "../../assets/css/exchange-components.module.scss";
 
-const Coupon = ({ coupon, minimum, onSendCoupon, onDeleteCoupon, isProcessing, isLoading }) => {
-  const [couponName, setCouponName] = useState("");
+const Coupon = ({ coupon, couponName, setCouponName, minimum, onSendCoupon, onDeleteCoupon, isProcessing, isLoading }) => {
   const onCouponChange = (e) => setCouponName(e.target.value);
 
   return !coupon ? (
