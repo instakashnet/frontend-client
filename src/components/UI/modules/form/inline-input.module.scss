@@ -14,7 +14,6 @@
     background-color: #fff;
     border-radius: 4px;
     font-size: 0.9rem;
-    position: relative;
   }
 
   input:disabled,
@@ -45,6 +44,7 @@
 
   .FormControl {
     border-radius: 4px 0 0 4px;
+    width: 100%;
   }
 
   input {
