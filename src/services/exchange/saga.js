@@ -34,10 +34,13 @@ function* getLastOrder() {
   }
 }
 
-function* validateCoupon({ couponName, profileType }) {
+function* validateCoupon({ couponName, profileType, clearCoupon }) {
   try {
     const res = yield exchangeService.get(`/coupons/${couponName}/${profileType}`);
-    if (res.status === 200) yield put(actions.validateCouponSuccess({ name: couponName, discount: res.data.discount, minimumAmount: res.data.minAmountBuy }));
+    if (res.status === 200) {
+      yield put(actions.validateCouponSuccess({ name: couponName, discount: res.data.discount, minimumAmount: res.data.minAmountBuy }));
+      yield call(clearCoupon, "");
+    }
   } catch (error) {
     if (!couponName.includes("NUEVOREFERIDO")) yield put(setAlertInit(error.message, "error"));
     yield put(actions.exchangeError());
