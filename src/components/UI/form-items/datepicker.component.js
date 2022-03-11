@@ -9,7 +9,7 @@ import classes from "../modules/form/datepicker.module.scss";
 
 moment.locale("es");
 
-export const DatePickerInput = ({ value, onChange, placeholder, error, label }) => {
+export const DatePickerInput = ({ value, onChange, placeholder, error, label, establishedInfo }) => {
   const maxDate = moment().subtract(18, "years").toDate();
 
   return (
@@ -28,7 +28,7 @@ export const DatePickerInput = ({ value, onChange, placeholder, error, label }) 
           invalidDateMessage="Ingresa una fecha válida"
           invalidLabel="Ingresa una fecha válida"
           maxDate={maxDate}
-          className={`${classes.DateInput} ${value && error ? classes.DateError : ""}`}
+          className={`${classes.DateInput} ${establishedInfo && classes.EmptyInput} ${value && error ? classes.DateError : ""}`}
         />
       </MuiPickersUtilsProvider>
     </FormControl>

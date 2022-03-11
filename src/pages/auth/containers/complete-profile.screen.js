@@ -158,7 +158,7 @@ const CompleteProfile = ({ history }) => {
           <SelectComponent name="identity_sex" label="Sexo" value={formik.values.identity_sex} onChange={formik.handleChange} options={sexOptions} />
           {isGoogle && (
             <>
-              <h2 className="text-center mb-2">¿Te ha referido un amigo?</h2>
+              <h2 className="text-center mt-5 mb-0">¿Te ha referido un amigo?</h2>
               <Input
                 type="text"
                 label="Ingresa el código de afiliado"
@@ -173,7 +173,7 @@ const CompleteProfile = ({ history }) => {
             </>
           )}
 
-          <div className="flex justify-center mt-6 mb-3">
+          <div className="flex justify-center my-2">
             <button type="button" className={classes.InfoButton} onClick={openModalHandler}>
               ¿Por qué me piden estos datos?
             </button>
@@ -206,7 +206,7 @@ const DataInfo = () => {
   return (
     <>
       <p className="px-4 mb-6 text-center">
-        Al realizar una operación queremos estar seguro que eres tu quien lo realiza. Además, nos ayuda a saber según tu perfil registrado si debemos entregarte boleta o factura.
+        Al realizar una operación queremos estar seguro que eres tú quien lo realiza. Además, nos ayuda a saber según tu perfil registrado si debemos entregarte boleta o factura.
       </p>
       <Button className="action-button" onClick={() => dispatch(closeModal())}>
         De acuerdo

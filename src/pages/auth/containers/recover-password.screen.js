@@ -33,7 +33,8 @@ const RecoverPassword = () => {
         <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
           <Input
             name="email"
-            placeholder="Correo electrónico"
+            placeholder="johndoe@example.com"
+            label="Correo electrónico"
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}

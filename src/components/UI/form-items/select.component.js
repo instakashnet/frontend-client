@@ -33,7 +33,9 @@ export const SelectComponent = ({ name, value, options, label, empty, emptyLabel
           </MenuItem>
         ))}
       </Select>
-      <FormHelperText className={`${error && touched ? "error-msg" : ""}`}>{error && touched ? error : helperText ? helperText : ""}</FormHelperText>
+      <FormHelperText className={`${error && touched ? "error-msg" : ""}`}>
+        {error && touched ? error : helperText ? helperText : ""}
+      </FormHelperText>
     </FormControl>
   );
 };

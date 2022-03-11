@@ -69,9 +69,9 @@ export const AffiliatesList = ({ affiliates, ...rest }) => {
       <article className={classes.AffiliatesSection}>
         <h1>Mis referidos</h1>
         <p className="md:text-center">
-          Haz compartido tu código con{" "}
+          Has compartido tu código con{" "}
           <b>
-            {`${affiliates.length} ${totalAffiliates > 0 ? "amigos" : "amigo"}`} y has ganado {affiliatesCompleted} KASH.
+            {`${affiliates.length} ${totalAffiliates === 1 ? "amigo" : totalAffiliates >= 0 ? "amigos" : ""}`} y has ganado {affiliatesCompleted} KASH.
           </b>{" "}
           Recuerda que ganas <b>KASH</b> cada vez que tus amigos se registran con tu código y <b>realizan su primer cambio.</b>
         </p>

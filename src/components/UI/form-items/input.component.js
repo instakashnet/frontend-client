@@ -27,6 +27,7 @@ export const Input = ({ name, onChange, onBlur, value, label, type, error, touch
     <FormControl variant="outlined" margin="normal" classes={{ root: classes.FormControl }}>
       <InputLabel>{label}</InputLabel>
       <OutlinedInput
+        aria-describedby="input"
         type={type === "password" ? passwordType : type}
         name={name}
         error={!!error && !!touched}
@@ -37,7 +38,9 @@ export const Input = ({ name, onChange, onBlur, value, label, type, error, touch
         InputProps={InputProps}
         {...rest}
       />
-      <FormHelperText className={`${error && touched ? "error-msg" : ""}`}>{error && touched ? error : helperText ? helperText : ""}</FormHelperText>
+      <FormHelperText id="input" className={`${error && touched ? "error-msg" : ""}`}>
+        {error && touched ? error : helperText ? helperText : ""}
+      </FormHelperText>
       {type === "password" && (
         <button type="button" className="absolute right-3 top-2.5" onClick={onShowPassword}>
           {passwordType === "password" ? <Visibility className={classes.PasswordIcon} /> : <VisibilityOff className={classes.PasswordIcon} />}

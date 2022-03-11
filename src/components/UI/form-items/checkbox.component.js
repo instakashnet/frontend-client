@@ -1,5 +1,5 @@
 import React from "react";
-import { FormControlLabel, Checkbox, withStyles } from "@material-ui/core";
+import { FormControlLabel, Checkbox, withStyles, FormHelperText } from "@material-ui/core";
 
 import classes from "../modules/form/checkbox.module.scss";
 
@@ -16,7 +16,7 @@ export const CheckboxComponent = ({ name, value, touched, error, className, onCh
   return (
     <div className={`${classes.CheckGroup} ${className || ""}`}>
       <FormControlLabel className="text-sm" control={<GreenCheckbox checked={value} onChange={onChange} name={name} />} label={children} />
-      {touched && error && <p className="error-msg text-left">{error}</p>}
+      {!touched && error && <FormHelperText className="error-msg text-left">{error}</FormHelperText>}
     </div>
   );
 };

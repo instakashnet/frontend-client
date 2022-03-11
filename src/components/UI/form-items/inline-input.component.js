@@ -1,5 +1,5 @@
 import React from "react";
-import { OutlinedInput, InputLabel, FormControl } from "@material-ui/core";
+import { OutlinedInput, InputLabel, FormControl, FormHelperText } from "@material-ui/core";
 
 import { Button } from "../button.component";
 
@@ -12,7 +12,7 @@ export const InlineInput = ({ type, name, value, disabled, error, touched, butto
         <InputLabel htmlFor="inline-input">{label}</InputLabel>
         <OutlinedInput
           id="inline-input"
-          aria-describedby=""
+          aria-describedby="inline-helper-text"
           type={type}
           name={name}
           error={!!error && !!touched}
@@ -31,8 +31,9 @@ export const InlineInput = ({ type, name, value, disabled, error, touched, butto
           </Button>
         )}
       </div>
-
-      {error && touched && <p className="error-msg">{error}</p>}
+      <FormHelperText id="inline-helper-text" className={`${error && touched ? "error-msg" : ""}`}>
+        {error && touched ? error : helperText ? helperText : ""}
+      </FormHelperText>
     </FormControl>
   );
 };
