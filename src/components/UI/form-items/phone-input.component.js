@@ -7,7 +7,7 @@ import classes from "../modules/form/phone-input.module.scss";
 
 export const InputPhone = ({ onChange, value, country, error }) => {
   return (
-    <FormControl fullWidth classes={{ root: classes.FormControl }}>
+    <FormControl margin="normal" classes={{ root: classes.FormControl }}>
       <PhoneInput
         country={country}
         value={value}
@@ -15,11 +15,9 @@ export const InputPhone = ({ onChange, value, country, error }) => {
         containerClass={classes.PhoneWrapper}
         inputClass={`${classes.PhoneInput} ${error ? classes.PhoneError : ""}`}
         buttonClass={classes.ButtonFlag}
-        // placeholder="Número de teléfono"
         specialLabel="Teléfono"
       />
       <FormHelperText className={`${error ? "error-msg" : ""}`}>{error}</FormHelperText>
-      {/* {error && <p className="error-msg">{error}</p>} */}
     </FormControl>
   );
 };

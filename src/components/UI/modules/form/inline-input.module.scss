@@ -1,29 +1,26 @@
-// File imported by inline-input.component.js & upload-input.component.js
-
 @import "../../../../assets/css/colors";
 @import "../../../../assets/css/breakpoints";
 
-.FormGroup {
+.FormControl {
   position: relative;
   margin-bottom: 20px !important;
-  width: 100%;
 
   input,
   select {
     padding: 14px;
     background-color: #fff;
-    border-radius: 4px;
     font-size: 0.9rem;
+  }
+  
+  select {
+    padding: 15px 10px;
+    font-size: 0.85rem;
+    border-radius: 4px;
   }
 
   input:disabled,
   select:disabled {
     background-color: transparent;
-  }
-
-  select {
-    padding: 15px 10px;
-    font-size: 0.85rem;
   }
 
   svg {
@@ -42,11 +39,11 @@
   display: flex;
   align-items: center;
 
-  .FormControl {
+  .OutlinedInput {
     border-radius: 4px 0 0 4px;
     width: 100%;
   }
-
+  
   input {
     flex: 0.8;
     border-radius: 4px 0;

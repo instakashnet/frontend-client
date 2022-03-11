@@ -13,7 +13,7 @@ export const DatePickerInput = ({ value, onChange, placeholder, error, label }) 
   const maxDate = moment().subtract(18, "years").toDate();
 
   return (
-    <FormControl fullWidth classes={{ root: classes.FormControl }}>
+    <FormControl classes={{ root: classes.FormControl }}>
       {label && <InputLabel>{label}</InputLabel>}
       <MuiPickersUtilsProvider libInstance={moment} locale="es" utils={MomentUtils}>
         <DatePicker

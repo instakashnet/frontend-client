@@ -110,10 +110,10 @@ const CompleteProfile = ({ history }) => {
   return (
     <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
       <div className={classes.AuthWrapper}>
-        <h2>¡Felicidades, Tu cuenta ha sido creada!</h2>
+        <h2>¡Felicidades, tu cuenta ha sido creada!</h2>
         <p className="mt-2 mb-8">Por favor, completa tus datos</p>
         <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
-          <div className="grid grid-cols-3 w-full gap-2">
+          <div className="grid grid-cols-3 w-full gap-2 items-start">
             <div className="grid place-items-center mt-2">
               <SelectComponent name="document_type" label="Tipo de doc." value={formik.values.document_type} onChange={onDocumentTypeHandler} options={documentOptions} />
             </div>
@@ -175,7 +175,7 @@ const CompleteProfile = ({ history }) => {
 
           <div className="flex justify-center mt-6 mb-3">
             <button type="button" className={classes.InfoButton} onClick={openModalHandler}>
-              ¿Porque me piden estos datos?
+              ¿Por qué me piden estos datos?
             </button>
           </div>
           <Button
