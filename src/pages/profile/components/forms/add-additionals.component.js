@@ -35,7 +35,13 @@ export const AddAdditionalInfo = ({ user }) => {
   return (
     <form onSubmit={formik.handleSubmit} className="p-6 flex flex-col items-center">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3 w-full">
-        <DatePickerInput placeholder="Fecha de nacimiento" error={formik.errors.date_birth} value={formik.values.date_birth} onChange={onDateChange} />
+        <DatePickerInput
+          placeholder="Fecha de nacimiento"
+          error={formik.errors.date_birth}
+          value={formik.values.date_birth}
+          onChange={onDateChange}
+          establishedInfo
+        />
         <Input
           label="Dirección corta"
           name="address"

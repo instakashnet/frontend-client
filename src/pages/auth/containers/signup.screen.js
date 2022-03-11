@@ -31,7 +31,7 @@ const Signup = () => {
     <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
       <div className={classes.AuthWrapper}>
         <h2>¡Bienvenido a Instakash!</h2>
-        <p className="mt-2 mb-4">Registrate y realiza tus operaciones de forma segura desde nuestra plataforma digital.</p>
+        <p className="mt-2 mb-4">Regístrate y realiza tus operaciones de forma segura desde nuestra plataforma digital.</p>
         <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
           <Input
             name="email"
@@ -67,8 +67,9 @@ const Signup = () => {
             error={formik.errors.confirmPassword}
             touched={formik.touched.confirmPassword}
           />
-          <h2 className="text-center mb-2">¿Te ha referido un amigo?</h2>
+          <h2 className="text-center mt-5 mb-0">¿Te ha referido un amigo?</h2>
           <Input
+            className="mb-3"
             type="text"
             label="Ingresa el código de afiliado"
             name="affiliate"

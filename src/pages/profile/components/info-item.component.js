@@ -29,7 +29,7 @@ export const InfoItem = ({ label, item, value, edit, name, onChange, error, touc
       ) : (
         <div className={classes.EditInputWrapper}>
           {name === "date_birth" ? (
-            <DatePickerInput value={new Date(value)} onChange={onChange} error={error} />
+            <DatePickerInput value={new Date(value)} onChange={onChange} error={error} establishedInfo={false} />
           ) : (
             <Input name={name} value={value} onChange={onChange} error={error} touched={touched} />
           )}
