@@ -87,7 +87,7 @@ const Signup = () => {
             error={formik.errors.allowPromotionalEmail}
             onChange={formik.handleChange}
           >
-            Autorizo recibir notícias y promociones de parte de Instakash
+            Autorizo recibir noticias y promociones de parte de Instakash.
           </CheckboxComponent>
           <CheckboxComponent name="acceptTerms" className={classes.Checkbox} value={formik.values.acceptTerms} error={formik.errors.acceptTerms} onChange={formik.handleChange}>
             Declaro que he leído y acepto sus{" "}

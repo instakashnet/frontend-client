@@ -40,7 +40,7 @@ const Selection = () => {
       {isLoading && <Spinner screen />}
       {!isLoading && (
         <div className={classes.ProfileSelectionWrapper}>
-          <h1 className="mb-1">¡Nos alegra que estés aqui!</h1>
+          <h1 className="mb-1">¡Nos alegra que estés aquí!</h1>
           <h3>Selecciona el perfil que piensas usar hoy</h3>
           <div className="flex items-start flex-wrap justify-center mt-10">
             {profiles.map((profile) => (
@@ -72,8 +72,8 @@ export const ModalInformation = () => {
     <div className="text-center">
       <h2>Estimado usuario</h2>
       <p className="my-3">
-        Gracias por la confianza, queremos informarle que en estos momentos debido al alto flujo recibido en estos momentos las operaciones pueden demorar en procesarse más de lo
-        usual. Estamos trabajando para asi poder completar todos sus pedidos a la brevedad posible.
+        Gracias por la confianza, queremos informarle que debido al alto flujo recibido en estos momentos las operaciones pueden demorar en procesarse más de lo
+        usual. Estamos trabajando para así poder completar todos sus pedidos a la brevedad posible.
       </p>
       <p className="mb-4 inline-block font-bold">Agradecemos su comprensión.</p>
       <Button onClick={closeModalHandler} className="action-button">

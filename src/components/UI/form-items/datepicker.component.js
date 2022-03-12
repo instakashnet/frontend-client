@@ -28,7 +28,7 @@ export const DatePickerInput = ({ value, onChange, placeholder, error, label, es
           invalidDateMessage="Ingresa una fecha válida"
           invalidLabel="Ingresa una fecha válida"
           maxDate={maxDate}
-          className={`${classes.DateInput} ${establishedInfo && classes.EmptyInput} ${value && error ? classes.DateError : ""}`}
+          className={`${classes.DateInput} ${!establishedInfo && classes.EmptyInput} ${value && error ? classes.DateError : ""}`}
         />
       </MuiPickersUtilsProvider>
     </FormControl>

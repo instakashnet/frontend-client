@@ -71,7 +71,7 @@ export const VerifyIdentityScreen = ({ user, history }) => {
             <ul>
               <li>El proceso de validación puede demorar hasta 5 minutos.</li>
               <li>Recibirás una notificación a tu correo cuando termine el proceso de validación.</li>
-              <li>Este proceso se realiza una única vez, luego podrás hacer tus camibos sin límite.</li>
+              <li>Este proceso se realiza una única vez, luego podrás hacer tus cambios sin límite.</li>
             </ul>
           </section>
           <Button className="action-button" onClick={onDocUlpoad} disabled={!docType}>

@@ -17,8 +17,6 @@
   @include respond(desktop) {
     .DateInput.EmptyInput {
       margin-top: 7px;
-      position: relative;
-      // top: 7px;
     }
   }
 
