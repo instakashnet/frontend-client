@@ -21,12 +21,21 @@ phases:
       - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 160743850946.dkr.ecr.us-east-2.amazonaws.com
       - cd $CODEBUILD_SRC_DIR
       - echo 'Building image...'
-      - docker build -t 160743850946.dkr.ecr.us-east-2.amazonaws.com/frontend-client-repo:$ENVIRONMENT-$CODEBUILD_BUILD_NUMBER -t 160743850946.dkr.ecr.us-east-2.amazonaws.com/frontend-client-repo:$ENVIRONMENT-latest --build-arg REACT_APP_STAGE=$ENVIRONMENT .
+      - >-
+        docker build \
+        -t 160743850946.dkr.ecr.us-east-2.amazonaws.com/frontend-client-repo:$ENVIRONMENT-$CODEBUILD_BUILD_NUMBER \
+        -t 160743850946.dkr.ecr.us-east-2.amazonaws.com/frontend-client-repo:$ENVIRONMENT-latest \
+        --build-arg REACT_APP_STAGE=$ENVIRONMENT \
+        --build-arg REACT_APP_AWS_ACCESS_KEY=$REACT_APP_AWS_ACCESS_KEY \
+        --build-arg REACT_APP_AWS_SECRET_KEY=$REACT_APP_AWS_SECRET_KEY \
+        --build-arg REACT_APP_GOOGLE_ID=$REACT_APP_GOOGLE_ID \
+        --build-arg REACT_APP_FB_PIXEL_ID=$REACT_APP_FB_PIXEL_ID \
+        --build-arg REACT_APP_MIGO_API=$REACT_APP_MIGO_API . 
       - echo 'Pushing image into ECR...' 
       - docker push 160743850946.dkr.ecr.us-east-2.amazonaws.com/frontend-client-repo --all-tags
   post_build:
     commands:
-      - cd $CODEBUILD_SRC_DIR/deploy/$K8S_CLUSTER
+      - cd $CODEBUILD_SRC_DIR/deploy/base
       - envsubst < deployment.template > deployment.yaml
       - cat deployment.yaml
       - aws eks update-kubeconfig --region us-east-2 --name $K8S_CLUSTER 
