@@ -1,7 +1,25 @@
-FROM node:14 as build
+## Build Stage
+
+FROM 160743850946.dkr.ecr.us-east-2.amazonaws.com/docker-library:node14-alpine as build
+
+## Docker argunments for build:
 
 ARG REACT_APP_STAGE="dev"
+ARG REACT_APP_AWS_ACCESS_KEY="AWS_KEY"
+ARG REACT_APP_AWS_SECRET_KEY="AWS_SECRET"
+ARG REACT_APP_GOOGLE_ID="REACT_APP_GOOGLE_ID"
+ARG REACT_APP_FB_PIXEL_ID="REACT_APP_FB_PIXEL_ID"
+ARG REACT_APP_MIGO_API="REACT_APP_MIGO_API"
+
+
+## Docker environment variables:
+
 ENV REACT_APP_STAGE=$REACT_APP_STAGE
+ENV REACT_APP_GOOGLE_ID=$REACT_APP_GOOGLE_ID
+ENV REACT_APP_FB_PIXEL_ID=$REACT_APP_FB_PIXEL_ID
+ENV REACT_APP_MIGO_API=$REACT_APP_MIGO_API
+ENV REACT_APP_AWS_ACCESS_KEY=$REACT_APP_AWS_ACCESS_KEY
+ENV REACT_APP_AWS_SECRET_KEY=$REACT_APP_AWS_SECRET_KEY
 
 WORKDIR  /usr/src/app
 COPY package.json yarn.lock ./
@@ -10,8 +28,10 @@ COPY ./ ./
 RUN yarn build:$REACT_APP_STAGE
 
 FROM nginx:1.21.5-alpine
+
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
 COPY container /
+
 RUN \
   \
 # changed nginx uid / gid to 48
