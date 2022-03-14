@@ -172,10 +172,10 @@ const Accounts = ({ setModal }) => {
         )}
         {(bankCCI || accountCCI) && (
           <MuiAlert type="warning" opened>
-            <b>Las transferencias interbancarias generan comisiones y pueden demorar hasta 48 horas.</b> Conozoca más en nuestros{" "}
+            <b>Las transferencias interbancarias generan comisiones y pueden demorar hasta 48 horas.</b> Conozca más en nuestros{" "}
             <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
-              términos y condiciones.
-            </a>
+              términos y condiciones
+            </a>.
           </MuiAlert>
         )}
         {funds_origin && (

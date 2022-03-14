@@ -1,0 +1,9 @@
+@import "../../../../assets/css/colors";
+
+.resendCode {
+  transition: 250ms ease-out;
+
+  &:hover {
+    color: darken($color: $anchor-green, $amount: 10);
+  }
+}

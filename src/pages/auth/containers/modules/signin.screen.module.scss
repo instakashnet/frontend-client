@@ -1,0 +1,26 @@
+@import "../../../../assets/css/colors";
+
+.SignInMessage {
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 15px 0;
+  position: relative;
+  width: 100%;
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 26%;
+    background-color: lighten($color: $base-text, $amount: 30);
+    position: absolute;
+    left: 0;
+    top: 50%;
+  }
+
+  &::after {
+    left: auto;
+    right: 0;
+  }
+}

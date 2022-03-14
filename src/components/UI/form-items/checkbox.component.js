@@ -12,11 +12,11 @@ const GreenCheckbox = withStyles({
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 
-export const CheckboxComponent = ({ name, value, touched, error, className, onChange, children }) => {
+export const CheckboxComponent = ({ name, value, error, className, onChange, children }) => {
   return (
     <div className={`${classes.CheckGroup} ${className || ""}`}>
       <FormControlLabel className="text-sm" control={<GreenCheckbox checked={value} onChange={onChange} name={name} />} label={children} />
-      {touched && error && <FormHelperText className="error-msg text-left">{error}</FormHelperText>}
+      {error && <FormHelperText className="error-msg text-left">{error}</FormHelperText>}
     </div>
   );
 };

@@ -11,7 +11,7 @@ export const KashAccount = ({ account, openModal }) => {
       <div className="md:ml-6 ml-3 text-right md:text-left">
         <h2>{!account.balance ? "No posees ningún KASH" : `¡Tienes ${account.balance} KASH!`}</h2>
         <p className="block md:hidden">
-          <b>retiralos</b> o usalos en tus próximas <b>operaciones</b>.
+          <b>retíralos</b> o úsalos en tus próximas <b>operaciones</b>.
         </p>
         <p className="md:w-9/12 md:block hidden">
           Puedes <b>retirar</b> tus <b>KASH</b> o usarlos en tus próximas <b>operaciones</b> de cambios de divisas.

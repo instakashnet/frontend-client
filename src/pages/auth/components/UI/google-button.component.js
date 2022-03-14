@@ -20,7 +20,7 @@ export const GoogleButton = ({ onSuccess, onFailure }) => {
       cookiePolicy={"single_host_origin"}
       render={(props) => (
         <Button onClick={props.onClick} disabled={props.disabled} className={`secondary-button ${classes.GoogleButton}`}>
-          <img src={GoogleIcon} width={20} alt="google" className="mr-3" /> Ingresa con google
+          <img src={GoogleIcon} width={20} alt="google" className="mr-3" /> Ingresa con Google
         </Button>
       )}
     />

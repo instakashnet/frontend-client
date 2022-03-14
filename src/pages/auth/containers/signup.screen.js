@@ -16,7 +16,7 @@ import { Button } from "../../../components/UI/button.component";
 import { CheckboxComponent } from "../../../components/UI/form-items/checkbox.component";
 
 // CLASSES
-import classes from "../assets/css/auth.containers.module.scss";
+import sharedClass from "./modules/sharedClasses.module.scss";
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -28,8 +28,8 @@ const Signup = () => {
   });
 
   return (
-    <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
-      <div className={classes.AuthWrapper}>
+    <main className={`h-full md:h-screen ${sharedClass.AuthBackground}`}>
+      <div className={sharedClass.AuthWrapper}>
         <h2>¡Bienvenido a Instakash!</h2>
         <p className="mt-2 mb-4">Regístrate y realiza tus operaciones de forma segura desde nuestra plataforma digital.</p>
         <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
@@ -82,14 +82,18 @@ const Signup = () => {
           />
           <CheckboxComponent
             name="allowPromotionalEmail"
-            className={classes.Checkbox}
             value={formik.values.allowPromotionalEmail}
             error={formik.errors.allowPromotionalEmail}
             onChange={formik.handleChange}
           >
             Autorizo recibir noticias y promociones de parte de Instakash.
           </CheckboxComponent>
-          <CheckboxComponent name="acceptTerms" className={classes.Checkbox} value={formik.values.acceptTerms} error={formik.errors.acceptTerms} onChange={formik.handleChange}>
+          <CheckboxComponent
+            name="acceptTerms"
+            value={formik.values.acceptTerms}
+            error={formik.errors.acceptTerms}
+            onChange={formik.handleChange}
+          >
             Declaro que he leído y acepto sus{" "}
             <a href="https://instakash.net/politicas-de-privacidad" target="_blank" rel="noopener noreferrer">
               Términos y condiciones

@@ -67,7 +67,7 @@ export const PersonalAccount = ({ banks, currencies, accountTypes, isThird, addT
           className="mb-0"
         />
         <MuiAlert type="info" opened>
-          Operamos hacia interbank <b>solo en lima</b>. BCP e interbancarias a todo Perú de forma digital.
+          Operamos hacia interbank <b>solo en Lima</b>. BCP e interbancarias a todo Perú de forma digital.
         </MuiAlert>
         {!formik.values.isDirect ? (
           <Input
@@ -125,8 +125,9 @@ export const PersonalAccount = ({ banks, currencies, accountTypes, isThird, addT
           <MuiAlert type="warning" opened>
             Las <b>transferencias interbancarias</b> acarrean comisiones y pueden demorar hasta 48 horas. Conoce más en nuestros{" "}
             <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
-              términos y condiciones.
+              términos y condiciones
             </a>
+            .
           </MuiAlert>
         )}
         {/* {isInterbank && (
