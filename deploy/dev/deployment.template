@@ -32,7 +32,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: frontend
-        image: 160743850946.dkr.ecr.us-east-2.amazonaws.com/frontend-client-repo:prod-$CODEBUILD_BUILD_NUMBER
+        image: 160743850946.dkr.ecr.us-east-2.amazonaws.com/frontend-client-repo:dev-$CODEBUILD_BUILD_NUMBER
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -41,20 +41,4 @@ spec:
           requests:
             memory: 128M
             cpu: 128m
-        env:
-        - name: REACT_APP_STAGE 
-          value: "prod"
-        - name: REACT_APP_API_URL 
-          value: $REACT_APP_API_URL
-        - name: REACT_APP_GOOGLE_ID 
-          value: "836395718088-46p17n2ajjs23ngp905mo3m8ehcscla2.apps.googleusercontent.com"
-        - name: REACT_APP_FB_PIXEL_ID 
-          value: "604139833479218"
-        - name: REACT_APP_MIGO_API 
-          value: "jMkxIGIHkdh4zIvM5YzvfJkg3muBTCaMG7BP1bBM8HUJxQQZUGuQn1x64YCS"
-        - name: REACT_APP_AWS_ACCESS_KEY 
-          value: AKIASK3IUQPBCJ2DJUJH
-        - name: REACT_APP_AWS_SECRET_KEY 
-          value: $REACT_APP_AWS_SECRET_KEY
-        - name: REACT_APP_WS_URL
-          value: $REACT_APP_WS_URL
+
