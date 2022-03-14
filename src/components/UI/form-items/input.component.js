@@ -35,7 +35,7 @@ export const Input = ({ name, onChange, onBlur, value, label, type, error, touch
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        InputProps={InputProps}
+        inputProps={InputProps}
         {...rest}
       />
       <FormHelperText id="input" className={`${error && touched ? "error-msg" : ""}`}>

@@ -40,7 +40,7 @@ export const AddAdditionalInfo = ({ user }) => {
           error={formik.errors.date_birth}
           value={formik.values.date_birth}
           onChange={onDateChange}
-          establishedInfo={false}
+          establishedInfo
         />
         <Input
           label="Dirección corta"

@@ -16,7 +16,7 @@ export const CheckboxComponent = ({ name, value, touched, error, className, onCh
   return (
     <div className={`${classes.CheckGroup} ${className || ""}`}>
       <FormControlLabel className="text-sm" control={<GreenCheckbox checked={value} onChange={onChange} name={name} />} label={children} />
-      {!touched && error && <FormHelperText className="error-msg text-left">{error}</FormHelperText>}
+      {touched && error && <FormHelperText className="error-msg text-left">{error}</FormHelperText>}
     </div>
   );
 };
