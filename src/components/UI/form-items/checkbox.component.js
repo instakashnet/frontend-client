@@ -1,7 +1,7 @@
 import React from "react";
 import { FormControlLabel, Checkbox, withStyles, FormHelperText } from "@material-ui/core";
 
-import classes from "../modules/form/checkbox.module.scss";
+import classes from "../modules/form-items/checkbox.module.scss";
 
 const GreenCheckbox = withStyles({
   root: {

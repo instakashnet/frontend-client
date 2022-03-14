@@ -5,7 +5,7 @@ import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import "moment/locale/es";
 
-import classes from "../modules/form/datepicker.module.scss";
+import classes from "../modules/form-items/datepicker.module.scss";
 
 moment.locale("es");
 
