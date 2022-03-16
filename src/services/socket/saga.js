@@ -8,7 +8,7 @@ let ws;
 const createWebsocketChannel = (token, service) =>
   eventChannel((emit) => {
     const connectToWs = () => {
-      ws = new WebSocket(`${process.env.REACT_APP_STAGE === "prod" ? process.env.REACT_APP_WS_URL : process.env.REACT_APP_WS_DEV_URL}/ws?token=${token}&service=${service}`);
+      ws = new WebSocket(`${process.env.REACT_APP_STAGE === "prod" ? "wss://ws.instakash.net" : "wss://ws.dev.instakash.net"}/ws?token=${token}&service=${service}`);
 
       ws.onopen = () => {
         console.log("Connection opened.");
