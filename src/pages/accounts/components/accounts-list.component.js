@@ -6,7 +6,7 @@ import Accordion from "../../../components/UI/accordion.component";
 import AccountCard from "./account-card.component";
 
 // CLASSES
-import classes from "../assets/css/account-components.module.scss";
+import classes from "./modules/accounts-list.module.scss";
 
 const AccountsList = ({ accounts, openDetails }) => {
   let label;

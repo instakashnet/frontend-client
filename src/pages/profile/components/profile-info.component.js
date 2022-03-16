@@ -5,7 +5,7 @@ import { CircleProgress } from "react-gradient-progress";
 // ASSETS & CLASSES
 import MaleLight from "../../../assets/images/profiles/male-light.svg";
 import FemaleLight from "../../../assets/images/profiles/female-light.svg";
-import classes from "../assets/css/profile-components.module.scss";
+import classes from "./modules/profile-info.module.scss";
 
 // COMPONENTS
 import { ProfileMenu } from "./profile-menu.component";
@@ -47,7 +47,7 @@ export const ProfileInfo = ({ user, color, completed, match }) => {
             >
               {user.identityDocumentValidation === "success" ? (
                 <div className="flex items-center">
-                  <Check htmlColor="#20a2a5" /> Idenitdad verificada
+                  <Check htmlColor="#20a2a5" /> Identidad verificada
                 </div>
               ) : user.identityDocumentValidation === "pending" ? (
                 <div className="flex items-center">

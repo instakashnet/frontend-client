@@ -1,0 +1,19 @@
+@import "../../../../assets/css/colors";
+
+.AccountCard {
+  margin: 10px;
+  width: 17rem;
+  min-height: 7.5rem;
+  display: grid;
+  align-content: center;
+  font-size: 0.95rem;
+
+  button {
+    color: $base-green;
+    text-decoration: underline;
+  }
+
+  @media (min-width: 1366px) {
+    width: 19rem;
+  }
+}

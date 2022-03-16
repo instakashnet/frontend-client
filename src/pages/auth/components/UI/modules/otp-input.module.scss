@@ -1,0 +1,23 @@
+@import "../../../../../assets/css/colors";
+
+.OtpInput {
+  padding: 10px;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  background-color: $base-green;
+  text-align: center;
+  margin: 0 5px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.5rem;
+  outline: none;
+
+  &:placeholder-shown {
+    background-color: #c4c4c4;
+  }
+}
+
+.OtpError {
+  background-color: $error !important;
+}

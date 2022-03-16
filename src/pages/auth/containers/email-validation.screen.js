@@ -76,7 +76,7 @@ export const EmailValidationScreen = ({ history, match }) => {
             <span className="ld ld-ring ld-spin" />
             Validar
           </Button>
-          <Button onClick={() => history.goBack()} type="button" className="secondary-button">
+          <Button onClick={() => history.goBack()} type="button" className={`secondary-button ${classes.ReturnBtn}`}>
             Regresar
           </Button>
         </form>

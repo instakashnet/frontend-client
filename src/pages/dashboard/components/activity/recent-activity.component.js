@@ -8,12 +8,12 @@ import Card from "../../../../components/UI/card.component";
 import { OrderItem } from "../orders/order-item.component";
 
 // CLASSES
-import classes from "../../assets/css/activity-components.module.scss";
+import sharedClass from "../../assets/css/sharedClasses.module.scss";
 
 const RecentActivity = ({ orders, withdrawals, openModal }) => {
   return (
     <div>
-      <div className={classes.DashboardCard}>
+      <div className={sharedClass.DashboardCard}>
         <div className="flex items-center justify-between">
           <h2 className="flex font-bold items-center mb-2">
             <Repeat className="mr-2" size={20} /> Últimos cambios de divisa
@@ -28,7 +28,7 @@ const RecentActivity = ({ orders, withdrawals, openModal }) => {
           </Card>
         )}
       </div>
-      <div className={classes.DashboardCard}>
+      <div className={sharedClass.DashboardCard}>
         <div className="flex items-center justify-between">
           <h2 className="flex font-bold items-center mb-3">
             <Repeat className="mr-2" size={20} /> Últimos retiros KASH

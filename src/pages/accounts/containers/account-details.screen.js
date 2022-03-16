@@ -11,7 +11,7 @@ import EditAccount from "../components/forms/edit-account.component";
 import { Button } from "../../../components/UI/button.component";
 
 // CLASSES
-import classes from "../assets/css/account-containers.module.scss";
+import classes from "./modules/account-details.screen.module.scss";
 
 const AccountDetails = () => {
   const dispatch = useDispatch();

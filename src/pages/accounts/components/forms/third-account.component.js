@@ -21,7 +21,7 @@ import { RadioComponent } from "../../../../components/UI/form-items/radio.compo
 import { Button } from "../../../../components/UI/button.component";
 
 // COMPONENTS
-import classes from "../../assets/css/account-components.module.scss";
+import classes from "../modules/forms/add-account.module.scss";
 
 export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, value, index, ...rest }) => {
   const [selectedBank, setSelectedBank] = useState(null);
@@ -259,7 +259,7 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
         <div className="my-4">
           <CheckboxComponent name="accept2" value={formik.values.accept2} onChange={formik.handleChange} error={formik.errors.accept2}>
             Declaro que cuento con el consentimiento para el uso de los datos de la persona y/o empresa acá expuesta, en conformidad con el tratamiento de los mismos en relación a
-            sus <a href="!#">políticas de privacidad</a>.
+            sus <a href="https://instakash.net/politicas-de-privacidad">políticas de privacidad</a>.
           </CheckboxComponent>
         </div>
         <div className="flex justify-center">

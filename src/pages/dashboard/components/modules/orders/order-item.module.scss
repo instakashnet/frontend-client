@@ -1,0 +1,45 @@
+@import "../../../../../assets/css/colors";
+@import "../../../../../assets/css/breakpoints";
+
+.OrderItem {
+  padding: 5px 0;
+  font-size: 0.9rem;
+  transition: 250ms ease-out;
+
+  .OrderTitle {
+    display: flex;
+    align-items: center;
+
+    h4 {
+      margin-bottom: 3px;
+      font-weight: normal;
+
+      &:first-of-type {
+        margin-right: 20px;
+      }
+    }
+  }
+
+  .OrderView {
+    text-decoration: underline;
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-left: 5px;
+      color: $base-green;
+    }
+  }
+
+  .OrderInfo span {
+    color: $base-green;
+  }
+
+  @include respond(tablet) {
+    padding: 10px 20px;
+
+    &:first-of-type {
+      padding-top: 10px;
+    }
+  }
+}

@@ -34,7 +34,7 @@ const Selection = () => {
     <>
       <div className={classes.ProfileSelectionWrapper}>
         <h1 className="mb-1">Selecciona tu perfil</h1>
-        <p>La selección de perfil nos permite saber que tipo de facturación deseas. Para una boleta continua con tu usuario, o si deseas una factura usa una de tus empresas.</p>
+        <p>La selección de perfil nos permite saber qué tipo de facturación deseas. Para una boleta continúa con tu usuario, o si deseas una factura usa una de tus empresas.</p>
         <div className="flex items-start flex-wrap justify-center mt-6">
           {isLoading ? (
             <Spinner />
@@ -82,7 +82,7 @@ export const ModalInformation = () => {
     <div className="text-center">
       <h2>Estimado usuario</h2>
       <p className="my-3">
-        Gracias por la confianza, queremos informarle que la plataforma de <b>Interbank</b> presneta problemas en su plataforma. Por tal motivo, no podremos realizar operaciones
+        Gracias por la confianza, queremos informarle que la plataforma de <b>Interbank</b> presenta problemas en su plataforma. Por tal motivo, no podremos realizar operaciones
         hacia este banco por el momento. A la espera de que el banco solucione en la brevedad posible.
       </p>
       <p className="mb-4 inline-block font-bold">Agradecemos su comprensión.</p>

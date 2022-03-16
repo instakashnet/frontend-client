@@ -1,0 +1,25 @@
+@import "../../../../assets/css/colors";
+
+.AddAccountsTabs {
+  width: 100%;
+}
+
+button.AddAccountTab {
+  background-color: #e1f2ec;
+  color: $base-text;
+
+  &:first-of-type {
+    border-radius: 4px 0 0 0;
+
+    &[aria-selected="true"] {
+      box-shadow: 7px 3px 7px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &:last-of-type {
+    border-radius: 0 4px 0 0;
+    &[aria-selected="true"] {
+      box-shadow: -7px 3px 10px rgba(0, 0, 0, 0.06);
+    }
+  }
+}

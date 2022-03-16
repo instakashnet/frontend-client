@@ -6,7 +6,7 @@ import { Button } from "../../../../components/UI/button.component";
 
 // CLASSES & ASSETS
 import GoogleIcon from "../../assets/images/icons/google.svg";
-import classes from "../../assets/css/auth-components.module.scss";
+import classes from "./modules/google-button.module.scss";
 
 const clientId = process.env.REACT_APP_GOOGLE_ID;
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 // CLASSES
-import classes from "../../assets/css/auth-components.module.scss";
+import classes from "./modules/otp-input.module.scss";
 
 export const OtpInput = ({ name, value, onChange, onBlur, touched, ...rest }) => {
   return (

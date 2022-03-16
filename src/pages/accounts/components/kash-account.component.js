@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import KashIcon from "../../../assets/images/kash.svg";
-import classes from "../assets/css/account-components.module.scss";
+import classes from "./modules/kash-account.module.scss";
 
 export const KashAccount = ({ account, openModal }) => {
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 // CLASSES
-import classes from "../assets/css/profile-components.module.scss";
+import classes from "./modules/profile-menu.module.scss";
 
 export const ProfileMenu = ({ match, className, user }) => {
   return (

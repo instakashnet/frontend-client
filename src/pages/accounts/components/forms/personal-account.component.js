@@ -16,7 +16,7 @@ import { CheckboxComponent } from "../../../../components/UI/form-items/checkbox
 import { Button } from "../../../../components/UI/button.component";
 
 // CLASSES
-import classes from "../../assets/css/account-components.module.scss";
+import classes from "../modules/forms/add-account.module.scss";
 
 export const PersonalAccount = ({ banks, currencies, accountTypes, isThird, addType, value, index, ...rest }) => {
   const dispatch = useDispatch(),

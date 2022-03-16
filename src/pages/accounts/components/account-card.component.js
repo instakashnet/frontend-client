@@ -4,7 +4,7 @@ import React from "react";
 import Card from "../../../components/UI/card.component";
 
 // CLASSES
-import classes from "../assets/css/account-components.module.scss";
+import classes from "./modules/account-card.module.scss";
 
 const AccountCard = ({ account, openModal }) => {
   const accountNumber = account.account_number || account.cci;

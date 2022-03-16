@@ -8,7 +8,7 @@ import { openModal } from "../../../store/actions";
 // ASSETS && CLASSES
 import DniIcon from "../../../assets/images/icons/dni.svg";
 import PassportIcon from "../../../assets/images/icons/passport.svg";
-import classes from "../assets/css/profile-components.module.scss";
+import classes from "./modules/verify-identity.screen.module.scss";
 
 // COMPONENTS
 import { Button } from "../../../components/UI/button.component";

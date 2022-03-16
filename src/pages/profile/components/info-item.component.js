@@ -7,7 +7,7 @@ import { Input } from "../../../components/UI/form-items/input.component";
 import { DatePickerInput } from "../../../components/UI/form-items/datepicker.component";
 
 // CLASSES
-import classes from "../assets/css/profile-components.module.scss";
+import classes from "./modules/info-item.module.scss";
 
 export const InfoItem = ({ label, item, value, edit, name, onChange, error, touched, isProcessing, onSubmit, submitted }) => {
   const [editActive, setEditActive] = useState(false);
