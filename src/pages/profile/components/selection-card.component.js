@@ -5,7 +5,7 @@ import { HighlightOff } from "@material-ui/icons";
 import MaleDark from "../../../assets/images/profiles/male-dark.svg";
 import FemaleDark from "../../../assets/images/profiles/female-dark.svg";
 import Company from "../../../assets/images/profiles/company.svg";
-import classes from "../assets/css/profile-components.module.scss";
+import classes from "./modules/selection-card.module.scss";
 
 const SelectionBox = ({ type, sex, name, onSelect, onDisable }) => {
   let Avatar = MaleDark;

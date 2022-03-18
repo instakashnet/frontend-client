@@ -8,7 +8,7 @@ import { openModal } from "../../../store/actions";
 // ASSETS && CLASSES
 import DniIcon from "../../../assets/images/icons/dni.svg";
 import PassportIcon from "../../../assets/images/icons/passport.svg";
-import classes from "../assets/css/profile-components.module.scss";
+import classes from "./modules/verify-identity.screen.module.scss";
 
 // COMPONENTS
 import { Button } from "../../../components/UI/button.component";
@@ -71,7 +71,7 @@ export const VerifyIdentityScreen = ({ user, history }) => {
             <ul>
               <li>El proceso de validación puede demorar hasta 5 minutos.</li>
               <li>Recibirás una notificación a tu correo cuando termine el proceso de validación.</li>
-              <li>Este proceso se realiza una única vez, luego podrás hacer tus camibos sin límite.</li>
+              <li>Este proceso se realiza una única vez, luego podrás hacer tus cambios sin límite.</li>
             </ul>
           </section>
           <Button className="action-button" onClick={onDocUlpoad} disabled={!docType}>

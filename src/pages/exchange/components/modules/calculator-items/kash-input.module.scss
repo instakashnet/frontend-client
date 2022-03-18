@@ -1,0 +1,22 @@
+@import "../../../../../assets/css/colors";
+
+.KashInput {
+  margin-top: 5px;
+  position: relative;
+
+  input {
+    padding: 10px 10px 10px 20px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid $border-color;
+    background-color: transparent;
+  }
+
+  span {
+    color: $base-green;
+    font-weight: bold;
+    position: absolute;
+    right: 35px;
+    top: 10px;
+  }
+}

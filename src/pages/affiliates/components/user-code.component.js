@@ -3,7 +3,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import Tooltip from "../../../components/UI/tooltip.component";
 
-import classes from "../assets/css/affiliates-components.module.scss";
+import classes from "./modules/user-code.module.scss";
 
 const UserCode = ({ userCode }) => {
   const [open, setOpen] = useState(false);

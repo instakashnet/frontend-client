@@ -1,0 +1,68 @@
+@import "../../../../../assets/css/colors";
+@import "../../../../../assets/css/breakpoints";
+
+.UploadDocWrapper {
+  text-align: center;
+  padding: 0.2rem 0.5rem;
+
+  h3 {
+    color: $base-green;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  ul {
+    text-align: left;
+    list-style-image: url(../../../../../assets/images/icons/check.svg);
+    padding-left: 0.8rem;
+    margin-bottom: 2rem;
+
+    li {
+      font-size: 0.85rem;
+      margin: 0.5rem 0;
+    }
+  }
+
+  button p {
+    font-size: 0.9rem;
+  }
+}
+
+.PassportButton {
+  width: 100%;
+  height: 135px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  display: flex !important;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
+
+  img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.PhotoButtonSquare {
+  width: 140px;
+  height: 115px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  display: flex !important;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+  }
+
+  @include respond(tablet) {
+    width: 200px;
+  }
+}

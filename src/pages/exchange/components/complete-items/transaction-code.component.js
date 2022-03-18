@@ -27,7 +27,7 @@ export const TransactionCode = ({ isProcessing, dispatch, order }) => {
   return (
     <>
       <div className="flex items-center justify-end mb-3">
-        <span className="text-sm font-bold cursor-pointer underline">¿Donde lo encuentro?</span>
+        <span className="text-sm font-bold cursor-pointer underline">¿Dónde lo encuentro?</span>
         <Tooltip
           title={<img src={`${process.env.PUBLIC_URL}/images/samples/transfer-${order.bankFromName.toLowerCase()}.png`} alt="ejemplo de transferencia" />}
           placement="top-start"

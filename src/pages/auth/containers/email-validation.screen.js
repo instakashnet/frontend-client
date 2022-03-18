@@ -17,7 +17,8 @@ import { MuiAlert } from "../../../components/UI/mui-alert.component";
 import VerificationIcon from "../assets/images/icons/verification.svg";
 
 // CLASSES
-import classes from "../assets/css/auth.containers.module.scss";
+import sharedClass from "./modules/sharedClasses.module.scss";
+import classes from "./modules/email-validation.module.scss";
 
 export const EmailValidationScreen = ({ history, match }) => {
   const dispatch = useDispatch(),
@@ -54,11 +55,11 @@ export const EmailValidationScreen = ({ history, match }) => {
   };
 
   return (
-    <main className={classes.SignupBackground}>
-      <div className={classes.AuthWrapper}>
+    <main className={sharedClass.AuthBackground}>
+      <div className={sharedClass.AuthWrapper}>
         <img src={VerificationIcon} alt="Verificación" />
         <h2 className="mt-5 mb-3">Ingresa el código enviado a tu correo</h2>
-        <p>Hemos enviado un código de 4 dígitos a tu correo. Por favor, ingresalo para continuar.</p>
+        <p>Hemos enviado un código de 4 dígitos a tu correo. Por favor, ingrésalo para continuar.</p>
         <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
           <div className="flex items-center justify-center my-4">
             <OtpInput touched={formik.touched.otp_1} name="otp_1" value={formik.values.otp_1} onChange={onOtpChange} onBlur={formik.handleBlur} />
@@ -75,12 +76,12 @@ export const EmailValidationScreen = ({ history, match }) => {
             <span className="ld ld-ring ld-spin" />
             Validar
           </Button>
-          <Button onClick={() => history.goBack()} type="button" className="secondary-button">
+          <Button onClick={() => history.goBack()} type="button" className={`secondary-button ${classes.ReturnBtn}`}>
             Regresar
           </Button>
         </form>
         <p className="mt-8 mb-2">¿No recibiste el código?</p>
-        <button type="button" className="uppercase" onClick={() => dispatch(refreshCodeInit())}>
+        <button type="button" className={`uppercase ${classes.resendCode}`} onClick={() => dispatch(refreshCodeInit())}>
           Reenviar código
         </button>
       </div>

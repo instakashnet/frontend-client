@@ -13,7 +13,7 @@ import { StatusBadge } from "../../../../components/UI/status-badge.component";
 import { Button } from "../../../../components/UI/button.component";
 
 // CLASSES
-import classes from "../../assets/css/activity-components.module.scss";
+import classes from "../modules/details/order_withdraw-details.module.scss";
 
 const WithdrawalDetails = () => {
   const dispatch = useDispatch();

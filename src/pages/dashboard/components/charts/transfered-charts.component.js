@@ -7,11 +7,11 @@ import Card from "../../../../components/UI/card.component";
 import PieChart from "./pie-chart.component";
 
 // CLASSES
-import classes from "../../assets/css/activity-components.module.scss";
+import sharedClass from "../../assets/css/sharedClasses.module.scss";
 
 const TransferedCharts = ({ isLoading, orderAmounts }) => {
   return (
-    <div className={`${classes.DashboardCard} w-full hidden md:block`}>
+    <div className={`${sharedClass.DashboardCard} w-full hidden md:block`}>
       <h2 className="flex items-center mb-2">
         <AttachMoney className="mr-2" fontSize="medium" /> Total cambiado
       </h2>

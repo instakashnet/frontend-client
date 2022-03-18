@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "../assets/css/affiliates-components.module.scss";
+import classes from "./modules/step.module.scss";
 
 const Step = ({ img, title, className, children }) => {
   return (

@@ -4,7 +4,7 @@ import React from "react";
 import { convertRate } from "../../../../shared/functions";
 
 // CLASSES
-import classes from "../../assets/css/exchange-components.module.scss";
+import classes from "../modules/calculator-items/rates.module.scss";
 
 const Rates = ({ couponRates, coupon, actualRates }) => {
   return (

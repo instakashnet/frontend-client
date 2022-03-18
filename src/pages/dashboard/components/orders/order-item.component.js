@@ -8,7 +8,7 @@ import { formatAmount } from "../../../../shared/functions";
 import { StatusBadge } from "../../../../components/UI/status-badge.component";
 
 // CLASSES
-import classes from "../../assets/css/activity-components.module.scss";
+import classes from "../modules/orders/order-item.module.scss";
 
 export const OrderItem = ({ order, type, isMobile, openModal }) => {
   return (

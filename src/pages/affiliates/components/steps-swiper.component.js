@@ -9,7 +9,7 @@ import Step1Img from "../assets/images/step1.svg";
 import Step2Img from "../assets/images/step2.svg";
 import Step3Img from "../assets/images/step3.svg";
 import Step4Img from "../assets/images/step4.svg";
-import classes from "../assets/css/affiliates-components.module.scss";
+import classes from "./modules/steps-swiper.module.scss";
 
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css";
@@ -43,7 +43,7 @@ const StepsSwiper = () => {
       <SwiperSlide>
         <Step img={Step2Img} title="2. Disfruta tus recompensas">
           <p>
-            Cada amigo registrado con tu codigo recibirá una tasa preferencial en su primer cambio y tu ganarás <b>1 KASH = 1 $</b>.
+            Cada amigo registrado con tu codigo recibirá una tasa preferencial en su primer cambio y tú ganarás <b>1 KASH = 1 $</b>.
           </p>
         </Step>
       </SwiperSlide>

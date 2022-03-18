@@ -19,7 +19,8 @@ import { Modal } from "../../../components/UI/modals/modal.component";
 import Logo from "../../../components/UI/logo.component";
 
 // CLASSES
-import classes from "../assets/css/auth.containers.module.scss";
+import sharedClass from "./modules/sharedClasses.module.scss";
+import classes from "./modules/signin.screen.module.scss";
 
 const Signin = () => {
   const dispatch = useDispatch();
@@ -60,7 +61,7 @@ const Signin = () => {
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 h-full md:h-screen">
       <Background />
-      <div className={classes.AuthWrapper}>
+      <div className={sharedClass.AuthWrapper}>
         <Logo className="w-70 md:w-80 self-start" />
         <h1>Gana siempre con nosotros. Mejores tasas, mayor ahorro.</h1>
         <GoogleButton onSuccess={signInGoogle} onFailure={signInGoogle} />
@@ -120,7 +121,7 @@ export const Information = () => {
   return (
     <>
       <p className="mb-3 text-center">
-        Agradecidos siempre por la confianza, queremos informarle que en estos nos encontramos realizando unas actualizaciones importantes en nuestros servidores, debido a ello no
+        Agradecidos siempre por la confianza, queremos informarle que en estos instantes nos encontramos realizando unas actualizaciones importantes en nuestros servidores, debido a ello no
         podremos realizar operaciones por el momento. Estamos trabajando para poder ofrecerle siempre nuestro mejor servicio.
       </p>
       <p className="text-center my-4 font-bold">Agradecemos su comprensión.</p>

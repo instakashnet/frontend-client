@@ -1,0 +1,28 @@
+@import "../../../../assets/css/colors";
+
+.KashInfoWrapper {
+  margin: 10px 0 20px;
+
+  b {
+    color: $base-green;
+  }
+
+  p {
+    font-size: 1rem;
+    color: $base-text;
+  }
+
+  .KashTotalCard {
+    margin-top: 1rem;
+
+    p {
+      font-size: 1.1rem;
+    }
+
+    font-size: 1rem;
+  }
+}
+
+.KashRadioGroup {
+  margin: 0 auto;
+}

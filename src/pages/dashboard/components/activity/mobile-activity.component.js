@@ -9,7 +9,7 @@ import Card from "../../../../components/UI/card.component";
 import { OrderItem } from "../orders/order-item.component";
 
 // CLASSES
-import classes from "../../assets/css/activity-components.module.scss";
+import sharedClass from "../../assets/css/sharedClasses.module.scss";
 
 export const ActivityMobile = ({ orders, withdrawals, openModal }) => {
   const [ordersPage, setOrdersPage] = useState(1),
@@ -23,7 +23,7 @@ export const ActivityMobile = ({ orders, withdrawals, openModal }) => {
 
   return (
     <>
-      <div className={classes.DashboardCard}>
+      <div className={sharedClass.DashboardCard}>
         <h2 className="flex font-bold items-center mb-2">
           <Repeat className="mr-2" /> Últimos cambios de divisa
         </h2>
@@ -40,7 +40,7 @@ export const ActivityMobile = ({ orders, withdrawals, openModal }) => {
         </SwipeableViews>
         {groupedOrders.length > 1 && <Pagination count={groupedOrders.length} page={ordersPage} onChange={(_, value) => setOrdersPage(value)} color="primary" />}
       </div>
-      <div className={classes.DashboardCard}>
+      <div className={sharedClass.DashboardCard}>
         <h2 className="flex items-center mb-2">
           <Repeat className="mr-2" /> Últimos retiros KASH
         </h2>

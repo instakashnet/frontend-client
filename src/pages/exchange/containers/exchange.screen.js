@@ -22,7 +22,7 @@ import { SelectionHeader } from "../components/selection-header.component";
 import Spinner from "../../../components/UI/spinner.component";
 
 // CLASSES
-import classes from "../assets/css/exchange-screens.module.scss";
+import classes from "./modules/exchange.screen.module.scss";
 
 const Exchange = ({ history, location, match }) => {
   // HOOKS & VARIABLES

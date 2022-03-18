@@ -20,7 +20,7 @@ import { VerifyIdentityScreen } from "./verify-identity.screen";
 import { AdditionalInfoScreen } from "./additional-info.screen";
 
 // CLASSES
-import classes from "../assets/css/profile-containers.module.scss";
+import classes from "./modules/profile.screen.module.scss";
 
 const Profile = ({ match, history }) => {
   const dispatch = useDispatch(),
@@ -38,7 +38,7 @@ const Profile = ({ match, history }) => {
   }, [dispatch]);
 
   return (
-    <Layout className={classes.ProfileInfoSection}>
+    <Layout>
       {isMobile && <ProfileMenu match={match} user={user} />}
       <div className={classes.ProfileWrapper}>
         <section className={classes.ProfileNavigation}>
