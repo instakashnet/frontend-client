@@ -1,0 +1,31 @@
+@import "../../../../assets/css/colors";
+
+.AffiliatesTabs {
+  margin-bottom: 15px;
+  border-bottom: 2px solid $base-green;
+
+  > div > span {
+    display: none;
+  }
+}
+
+button.AffiliatesTab {
+  border-radius: 10px 0px 0px 0px;
+  background-color: #e1f2ec;
+  color: $base-text;
+  font-size: 1rem;
+  text-transform: capitalize;
+  font-family: inherit;
+  max-width: 12rem;
+
+  &[aria-selected="true"] {
+    background-color: $base-green;
+    color: #fff;
+    outline: 0;
+    box-shadow: -6px 1px 8px -3px rgba(0, 0, 0, 0.2);
+  }
+
+  &:last-of-type {
+    border-radius: 0px 10px 0px 0px;
+  }
+}

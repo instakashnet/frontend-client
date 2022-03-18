@@ -1,7 +1,7 @@
 import React from "react";
 import Cleave from "cleave.js/react";
 
-import classes from "../../assets/css/exchange-components.module.scss";
+import classes from "../modules/calculator-items/currency-input.module.scss";
 
 const Input = ({ name, value, currency, label, disabled, onChange }) => {
   return (

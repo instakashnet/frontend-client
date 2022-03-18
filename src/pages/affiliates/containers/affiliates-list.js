@@ -8,7 +8,8 @@ import Card from "../../../components/UI/card.component";
 
 // ASETS & CLASSES
 import KashIcon from "../../../assets/images/kash.svg";
-import classes from "../assets/css/affiliates-containers.module.scss";
+import sharedClass from "./modules/sharedClasses.module.scss";
+import classes from "./modules/affiliates-list.module.scss";
 
 export const AffiliatesList = ({ affiliates, ...rest }) => {
   const { isMobile } = useDeviceDetect();
@@ -66,12 +67,12 @@ export const AffiliatesList = ({ affiliates, ...rest }) => {
 
   return (
     <div {...rest}>
-      <article className={classes.AffiliatesSection}>
+      <article className={sharedClass.AffiliatesSection}>
         <h1>Mis referidos</h1>
         <p className="md:text-center">
-          Haz compartido tu código con{" "}
+          Has compartido tu código con{" "}
           <b>
-            {`${affiliates.length} ${totalAffiliates > 0 ? "amigos" : "amigo"}`} y has ganado {affiliatesCompleted} KASH.
+            {`${affiliates.length} ${totalAffiliates === 1 ? "amigo" : totalAffiliates >= 0 ? "amigos" : ""}`} y has ganado {affiliatesCompleted} KASH.
           </b>{" "}
           Recuerda que ganas <b>KASH</b> cada vez que tus amigos se registran con tu código y <b>realizan su primer cambio.</b>
         </p>

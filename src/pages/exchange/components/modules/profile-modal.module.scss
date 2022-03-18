@@ -1,0 +1,25 @@
+@import "../../../../assets/css/colors";
+
+.CompleteProfile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+
+  li {
+    background-image: url(../../../../assets/images/icons/check.svg);
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: left center;
+    padding-left: 25px;
+  }
+
+  b {
+    color: $base-green;
+  }
+
+  button {
+    margin-top: 20px;
+    font-size: 1rem;
+  }
+}

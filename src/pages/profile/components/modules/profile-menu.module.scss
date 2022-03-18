@@ -1,0 +1,123 @@
+@import "../../../../assets/css/colors";
+@import "../../../../assets/css/breakpoints";
+
+.ProfileNav {
+  width: 100%;
+  min-height: 60px;
+  padding: 0.2rem 0.3rem;
+  background-color: $base-green;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  left: 0;
+  top: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+
+  .ProfileNavItems {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .NavItem {
+      min-width: auto;
+      position: relative;
+      margin: 0.2rem 1rem;
+      color: #ddd;
+
+      a {
+        font-weight: bold;
+        display: inline-block;
+        line-height: 1.5;
+        transition: 250ms ease-out;
+        padding-bottom: 0.2rem;
+        position: relative;
+
+        span {
+          color: #dddddd;
+        }
+
+        small {
+          display: none;
+        }
+
+        &.Active {
+          span {
+            color: #fff;
+          }
+
+          + div {
+            width: 100%;
+            position: absolute;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  @include respond(desktop) {
+    background-color: transparent;
+    position: relative;
+    margin-top: 2rem;
+    padding: 0;
+
+    .ProfileNavItems {
+      position: static;
+      flex-direction: column;
+      width: 100%;
+
+      .NavItem {
+        margin: 0;
+        color: $base-green;
+        width: 100%;
+
+        a {
+          padding: 1.5rem 1rem;
+          display: flex;
+          flex-flow: column;
+          color: #676767;
+
+          span {
+            color: $base-green;
+          }
+
+          small {
+            font-weight: 400;
+            display: inline-block;
+          }
+
+          &.Active {
+            color: #676767;
+            background-color: #fff;
+
+            span {
+              color: $base-green;
+            }
+
+            + div {
+              display: none;
+            }
+          }
+
+          &:after {
+            content: "";
+            position: absolute;
+            right: 15px;
+            top: 25px;
+            width: 15px;
+            height: 15px;
+            background-image: url(../../../../assets/images/icons/arrow-right.svg);
+            background-size: 12px;
+            background-repeat: no-repeat;
+            z-index: 10;
+          }
+        }
+      }
+    }
+  }
+}

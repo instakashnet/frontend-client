@@ -4,7 +4,7 @@ import { useUserData } from "../../shared/hooks/useProfileInfo";
 
 import Arrow from "../../assets/images/icons/arrow.svg";
 
-import classes from "./ui-components.module.scss";
+import classes from "./modules/profile-info.module.scss";
 
 const ProfileInfo = ({ user, openNav }) => {
   const { isMobile } = useDeviceDetect(),

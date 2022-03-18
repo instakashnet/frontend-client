@@ -1,0 +1,27 @@
+@import "../../../../assets/css/breakpoints";
+
+.CheckGroup {
+  width: 100%;
+  margin: 0;
+
+  label {
+    font-size: 0.85rem;
+    cursor: pointer;
+
+    a,
+    span {
+      font-size: 0.85rem;
+    }
+  }
+
+  @include respond(tablet) {
+    label {
+      font-size: 0.9rem;
+
+      a,
+      span {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}

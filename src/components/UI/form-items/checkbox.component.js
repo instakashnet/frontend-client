@@ -1,7 +1,7 @@
 import React from "react";
-import { FormControlLabel, Checkbox, withStyles } from "@material-ui/core";
+import { FormControlLabel, Checkbox, withStyles, FormHelperText } from "@material-ui/core";
 
-import classes from "./form-items.module.scss";
+import classes from "../modules/form-items/checkbox.module.scss";
 
 const GreenCheckbox = withStyles({
   root: {
@@ -12,11 +12,11 @@ const GreenCheckbox = withStyles({
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 
-export const CheckboxComponent = ({ name, value, touched, error, className, onChange, children }) => {
+export const CheckboxComponent = ({ name, value, error, className, onChange, children }) => {
   return (
     <div className={`${classes.CheckGroup} ${className || ""}`}>
       <FormControlLabel className="text-sm" control={<GreenCheckbox checked={value} onChange={onChange} name={name} />} label={children} />
-      {touched && error && <p className="error-msg text-left">{error}</p>}
+      {error && <FormHelperText className="error-msg text-left">{error}</FormHelperText>}
     </div>
   );
 };

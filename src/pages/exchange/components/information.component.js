@@ -9,7 +9,7 @@ import InfoImg from "../assets/images/exchange-user.png";
 import Arrows from "../assets/images/icons/arrows.svg";
 import User from "../assets/images/icons/user.svg";
 import Dollar from "../assets/images/icons/dollar.svg";
-import classes from "../assets/css/exchange-components.module.scss";
+import classes from "./modules/information.module.scss";
 
 const Information = ({ onClose }) => {
   const { isMobile } = useDeviceDetect();
@@ -37,7 +37,7 @@ const Information = ({ onClose }) => {
         </div>
       </div>
       {isMobile && (
-        <Button type="button" className="action-button" onClick={onClose}>
+        <Button type="button" className="action-button mt-5 md:mt-0 md:mb-8" onClick={onClose}>
           Aceptar
         </Button>
       )}

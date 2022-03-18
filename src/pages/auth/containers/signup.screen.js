@@ -16,7 +16,7 @@ import { Button } from "../../../components/UI/button.component";
 import { CheckboxComponent } from "../../../components/UI/form-items/checkbox.component";
 
 // CLASSES
-import classes from "../assets/css/auth.containers.module.scss";
+import sharedClass from "./modules/sharedClasses.module.scss";
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -28,10 +28,10 @@ const Signup = () => {
   });
 
   return (
-    <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
-      <div className={classes.AuthWrapper}>
+    <main className={`h-full md:h-screen ${sharedClass.AuthBackground}`}>
+      <div className={sharedClass.AuthWrapper}>
         <h2>¡Bienvenido a Instakash!</h2>
-        <p className="mt-2 mb-4">Registrate y realiza tus operaciones de forma segura desde nuestra plataforma digital.</p>
+        <p className="mt-2 mb-4">Regístrate y realiza tus operaciones de forma segura desde nuestra plataforma digital.</p>
         <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
           <Input
             name="email"
@@ -67,8 +67,9 @@ const Signup = () => {
             error={formik.errors.confirmPassword}
             touched={formik.touched.confirmPassword}
           />
-          <h2 className="text-center mb-2">¿Te ha referido un amigo?</h2>
+          <h2 className="text-center mt-5 mb-0">¿Te ha referido un amigo?</h2>
           <Input
+            className="mb-3"
             type="text"
             label="Ingresa el código de afiliado"
             name="affiliate"
@@ -81,20 +82,24 @@ const Signup = () => {
           />
           <CheckboxComponent
             name="allowPromotionalEmail"
-            className={classes.Checkbox}
             value={formik.values.allowPromotionalEmail}
             error={formik.errors.allowPromotionalEmail}
             onChange={formik.handleChange}
           >
-            Autorizo recibir notícias y promociones de parte de Instakash
+            Autorizo recibir noticias y promociones de parte de Instakash.
           </CheckboxComponent>
-          <CheckboxComponent name="acceptTerms" className={classes.Checkbox} value={formik.values.acceptTerms} error={formik.errors.acceptTerms} onChange={formik.handleChange}>
+          <CheckboxComponent
+            name="acceptTerms"
+            value={formik.values.acceptTerms}
+            error={formik.errors.acceptTerms}
+            onChange={formik.handleChange}
+          >
             Declaro que he leído y acepto sus{" "}
-            <a href="https://instakash.net/politicas-de-privacidad" target="_blank" rel="noopener noreferrer">
+            <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer">
               Términos y condiciones
             </a>{" "}
             y las{" "}
-            <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer">
+            <a href="https://instakash.net/politicas-de-privacidad" target="_blank" rel="noopener noreferrer">
               Políticas de privacidad
             </a>
             .

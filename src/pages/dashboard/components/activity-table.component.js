@@ -2,7 +2,7 @@ import React from "react";
 import { Grid } from "gridjs-react";
 import "gridjs/dist/theme/mermaid.css";
 
-import classes from "../assets/css/activity-components.module.scss";
+import classes from "./modules/activity-table.module.scss";
 
 const ActivityTable = ({ data, columns }) => {
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 // CLASSES
-import classes from "../assets/css/profile-components.module.scss";
+import classes from "./modules/profile-menu.module.scss";
 
 export const ProfileMenu = ({ match, className, user }) => {
   return (
@@ -27,7 +27,7 @@ export const ProfileMenu = ({ match, className, user }) => {
         <div className={classes.NavItem}>
           <NavLink activeClassName={classes.Active} to={match.url + "/additionals"}>
             <span>Datos adicionales</span>
-            <small>Fecha de nacimiento, Dirección, profesión y ocupación.</small>
+            <small>Fecha de nacimiento, Dirección, Ocupación y Profesión</small>
           </NavLink>
           <div />
         </div>

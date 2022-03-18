@@ -1,0 +1,24 @@
+@import "../../../../assets/css/colors";
+@import "../../../../assets/css/breakpoints";
+
+.ExchangeForm {
+  max-width: 27rem;
+  margin: 20px auto;
+
+  p {
+    color: $base-green;
+    font-size: 1rem;
+  }
+
+  label {
+    text-align: left;
+  }
+
+  @include respond(tablet) {
+    margin: 20px auto;
+
+    p {
+      font-size: 1.1rem;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import React from "react";
 
 import Arrows from "../../assets/images/arrows.svg";
-import classes from "../../assets/css/exchange-components.module.scss";
+import classes from "../modules/calculator-items/swipe.module.scss";
 
 const Swipe = ({ onSwipeCurrency, type }) => {
   return (

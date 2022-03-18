@@ -5,7 +5,7 @@ import { Tabs, Tab } from "@material-ui/core";
 import { PersonalAccount } from "./forms/personal-account.component";
 import { ThirdPartyAccount } from "./forms/third-account.component";
 
-import classes from "../assets/css/account-components.module.scss";
+import classes from "./modules/add-account.module.scss";
 
 const a11yProps = (index) => {
   return {

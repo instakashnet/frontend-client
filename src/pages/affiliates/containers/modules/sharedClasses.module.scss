@@ -1,0 +1,59 @@
+@import "../../../../assets/css/colors";
+@import "../../../../assets/css/breakpoints";
+
+.AffiliatesSection {
+  max-width: 1536px;
+  margin: auto;
+
+  h1 {
+    color: $base-green;
+    font-weight: bold;
+    font-size: 1.7rem;
+    text-align: center;
+  }
+
+  h2 {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-weight: bold;
+    text-align: center;
+  }
+
+  b {
+    color: $base-green;
+  }
+
+  a {
+    color: $base-green;
+    text-decoration: underline;
+  }
+
+  @include respond(tablet) {
+    margin-top: 25px;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+    }
+  }
+
+  @include respond(desktop) {
+    h1 {
+      font-size: 3.3rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}

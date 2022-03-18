@@ -1,0 +1,49 @@
+/*
+File used by:
+- components/total-transfered.component.js
+- components/charts/transfered-charts.component.js
+- components/activity/all-activity.component.js
+- components/activity/mobile-activity.component.js
+- components/activity/recent-activity.component.js
+- containers/all-activity.screen.js
+*/
+@import "../../../../assets/css/colors";
+@import "../../../../assets/css/breakpoints";
+
+.DashboardCard {
+  margin: 10px 0;
+
+  h2 {
+    color: $base-green;
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  a {
+    font-size: 0.8rem;
+    text-decoration: underline;
+    color: $base-green;
+  }
+
+  > a {
+    transition: 200ms ease-out;
+    width: auto;
+    display: inline-block;
+
+    &:hover {
+      color: darken($color: $base-green, $amount: 15);
+    }
+  }
+
+  &:last-of-type {
+    margin-top: 40px;
+  }
+}

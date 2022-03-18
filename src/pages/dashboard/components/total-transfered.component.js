@@ -10,7 +10,8 @@ import Card from "../../../components/UI/card.component";
 
 // ASETS & CLASSES
 import KashIcon from "../../../assets/images/kash.svg";
-import classes from "../assets/css/activity-components.module.scss";
+import sharedClass from "../assets/css/sharedClasses.module.scss";
+import classes from "./modules/total-transfered.module.scss";
 
 const TotalTransfered = ({ totalAmount, kashAccount, isLoading, className, type }) => {
   let savings = 0;
@@ -39,16 +40,16 @@ const TotalTransfered = ({ totalAmount, kashAccount, isLoading, className, type 
           </>
         )}
       </Card>
-      <div className={`${classes.DashboardCard} w-full ${type === "account" && "mx-0 md:mx-3"}`}>
+      <div className={`${sharedClass.DashboardCard} w-full ${type === "account" && "mx-0 md:mx-3"}`}>
         <h2>
           <Cached className="mr-2" /> Soles cambiados
         </h2>
-        <p className="mb-3 ml-2">Importe total en soles</p>
+        <p className="mb-3 ml-2">Importe total en Soles</p>
         <Card className="flex items-center h-24 text-center flex-col p-6 justify-center w-full">
           <span className={classes.TotalAmount}>S/. {formatAmount(totalAmount)}</span>
         </Card>
       </div>
-      <div className={`${classes.DashboardCard} w-full ${type === "account" && "mx-0 md:mx-3"}`}>
+      <div className={`${sharedClass.DashboardCard} w-full ${type === "account" && "mx-0 md:mx-3"}`}>
         <h2>
           <ArrowUpward className="mr-2" /> Ahorro aproximado
         </h2>

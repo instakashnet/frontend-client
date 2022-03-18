@@ -31,7 +31,7 @@ import CompleteProfile from "./pages/auth/containers/complete-profile.screen";
 // PRIVATE
 const Welcome = lazy(() => import("./pages/welcome/containers/welcome.screen"));
 const Dashboard = lazy(() => import("./pages/dashboard/containers/dashboard.screen"));
-const Affiliates = lazy(() => import("./pages/affiliates/affiliates.screen"));
+const Affiliates = lazy(() => import("./pages/affiliates/containers/affiliates.screen"));
 const MyProfile = lazy(() => import("./pages/profile/containers/profile.screen"));
 const Accounts = lazy(() => import("./pages/accounts/containers/accounts.screen"));
 const Exchange = lazy(() => import("./pages/exchange/containers/exchange.screen"));

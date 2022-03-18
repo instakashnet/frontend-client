@@ -1,0 +1,42 @@
+@import "../../../../assets/css/colors";
+
+.InfoItem {
+  padding: 0.7rem 0;
+  margin: 0.5rem 0.3rem 0;
+  border-bottom: 1px solid #e6e6e6;
+
+  h4 {
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+    color: #979797;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  button {
+    color: $base-green;
+    border-bottom: 1px solid $base-green;
+  }
+
+  .EditInputWrapper {
+    position: relative;
+
+    input {
+      padding-right: 70px;
+    }
+
+    .EditButtons {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      right: 10px;
+      top: 34%;
+    }
+
+    button {
+      border-bottom: none;
+    }
+  }
+}

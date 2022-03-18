@@ -1,0 +1,17 @@
+@import "../../../../../assets/css/colors";
+
+.Coupon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  border: 1px dashed #c3e5d9;
+  background-color: $bg-gray;
+  color: $base-green;
+  border-radius: 5px;
+  margin-top: 15px;
+
+  p {
+    font-size: 0.9rem;
+  }
+}

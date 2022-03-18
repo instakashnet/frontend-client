@@ -1,0 +1,42 @@
+@import "../../../../assets/css/colors";
+
+.KashCard {
+  background-color: $light-yellow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 25px 10px;
+  margin: 10px 0;
+
+  h3 {
+    color: $base-green;
+    margin-top: 5px;
+    font-size: 1.1rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  a,
+  button {
+    background-color: $button-yellow;
+    border-radius: 15px;
+    margin: 0 10px;
+    padding: 5px 20px;
+    transition: 200ms ease-out;
+
+    &:hover,
+    &:focus {
+      background-color: darken($color: $button-yellow, $amount: 15);
+    }
+  }
+}
+
+.TotalAmount {
+  margin-top: 5px;
+  font-size: 1.25rem;
+  color: $base-green;
+  font-weight: bold;
+}

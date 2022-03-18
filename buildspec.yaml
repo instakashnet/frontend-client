@@ -1,8 +1,8 @@
 version: 0.2
 
-phases: 
+phases:
   install:
-    commands: 
+    commands:
       - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2&
       - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
       - apt-get install gettext-base
@@ -30,15 +30,13 @@ phases:
         --build-arg REACT_APP_AWS_SECRET_KEY=$REACT_APP_AWS_SECRET_KEY
         --build-arg REACT_APP_GOOGLE_ID=$REACT_APP_GOOGLE_ID
         --build-arg REACT_APP_FB_PIXEL_ID=$REACT_APP_FB_PIXEL_ID
-        --build-arg REACT_APP_MIGO_API=$REACT_APP_MIGO_API . 
-      - echo 'Pushing image into ECR...' 
+        --build-arg REACT_APP_MIGO_API=$REACT_APP_MIGO_API .
+      - echo 'Pushing image into ECR...'
       - docker push 160743850946.dkr.ecr.us-east-2.amazonaws.com/frontend-client-repo --all-tags
   post_build:
     commands:
       - cd $CODEBUILD_SRC_DIR/deploy/$K8S_CLUSTER
       - envsubst < deployment.template > deployment.yaml
       - cat deployment.yaml
-      - aws eks update-kubeconfig --region us-east-2 --name $K8S_CLUSTER 
+      - aws eks update-kubeconfig --region us-east-2 --name $K8S_CLUSTER
       - kubectl apply -f deployment.yaml -n app
-
-

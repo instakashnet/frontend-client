@@ -2,7 +2,7 @@ import React from "react";
 import { Grid } from "gridjs-react";
 import "gridjs/dist/theme/mermaid.css";
 
-import classes from "../assets/css/affiliates-components.module.scss";
+import classes from "./modules/affiliates-table.module.scss";
 
 export const AffiliatesTable = ({ columns, data }) => {
   return (
@@ -35,12 +35,12 @@ export const AffiliatesTable = ({ columns, data }) => {
             results: () => "afiliados",
             of: "de",
             to: "-",
-            noRecordsFound: "No se han encotrado afiliados.",
+            noRecordsFound: "No se han encontrado afiliados.",
           },
           search: {
             placeholder: "Buscar referido",
           },
-          noRecordsFound: "No se ha encotrado ningún afiliado.",
+          noRecordsFound: "No se ha encontrado ningún afiliado.",
         }}
       />
       <div className={classes.FilterButtons}>
