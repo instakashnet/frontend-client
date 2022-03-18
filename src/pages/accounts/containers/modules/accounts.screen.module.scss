@@ -1,0 +1,18 @@
+@import "../../../../assets/css/colors";
+
+.Accounts {
+  h1,
+  h3 {
+    font-size: 1.5rem;
+    color: $base-green;
+    font-weight: bold;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  svg {
+    color: $base-green;
+  }
+}

@@ -1,0 +1,26 @@
+@import "../../../../assets/css/colors";
+@import "../../../../assets/css/breakpoints";
+
+.FormControl {
+  margin-top: 16px;
+
+  .DateInput {
+    input {
+      margin: 9px 0 0;
+      padding: 13px;
+      border: 1px solid #ccb;
+      border-radius: 4px;
+      color: $base-text;
+    }
+  }
+
+  @include respond(desktop) {
+    .DateInput.EmptyInput {
+      margin-top: 7px;
+    }
+  }
+
+  .DateError input {
+    border-color: $error;
+  }
+}

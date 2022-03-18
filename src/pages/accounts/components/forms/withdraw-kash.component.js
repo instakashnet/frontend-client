@@ -38,7 +38,7 @@ const KashWithdraw = ({ kashAccount, accounts }) => {
           name="kashQty"
           type="number"
           value={formik.values.kashQty}
-          label="¿Que cantidad deseas retirar?"
+          label="¿Qué cantidad deseas retirar?"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={formik.errors.kashQty}

@@ -4,7 +4,7 @@ import React from "react";
 import { Button } from "../../../components/UI/button.component";
 
 // CLASSES
-import classes from "../assets/css/exchange-components.module.scss";
+import classes from "./modules/profile-modal.module.scss";
 
 const CompleteProfile = ({ onClose }) => {
   return (

@@ -9,7 +9,7 @@ import { InlineInput } from "../../../../components/UI/form-items/inline-input.c
 
 // ASSETS & CLASSES
 import CouponImg from "../../assets/images/icons/coupon.svg";
-import classes from "../../assets/css/exchange-components.module.scss";
+import classes from "../modules/calculator-items/coupon-input.module.scss";
 
 const Coupon = ({ coupon, couponName, setCouponName, minimum, onSendCoupon, onDeleteCoupon, isProcessing, isLoading }) => {
   const onCouponChange = (e) => setCouponName(e.target.value);
@@ -27,7 +27,7 @@ const Coupon = ({ coupon, couponName, setCouponName, minimum, onSendCoupon, onDe
     />
   ) : (
     <>
-      <p className="mt-5">¡Genial!, haz activado el cupón:</p>
+      <p className="mt-5">¡Genial! Has activado el cupón:</p>
       <div className={classes.Coupon}>
         <p className="flex items-center">
           <img src={CouponImg} alt="cupón" className="mr-2" /> {coupon.name}

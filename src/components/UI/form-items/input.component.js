@@ -3,7 +3,7 @@ import { OutlinedInput, InputLabel, FormHelperText, InputAdornment, CircularProg
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { useState } from "react";
 
-import classes from "../modules/form/input.module.scss";
+import classes from "../modules/form-items/input.module.scss";
 
 export const Input = ({ name, onChange, onBlur, value, label, type, error, touched, iconEnd, groupClass, isLoading, helperText, ...rest }) => {
   const [passwordType, setPasswordType] = useState("password");

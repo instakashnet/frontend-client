@@ -8,7 +8,8 @@ import Card from "../../../components/UI/card.component";
 
 // ASETS & CLASSES
 import KashIcon from "../../../assets/images/kash.svg";
-import classes from "../assets/css/affiliates-containers.module.scss";
+import sharedClass from "./modules/sharedClasses.module.scss";
+import classes from "./modules/affiliates-list.module.scss";
 
 export const AffiliatesList = ({ affiliates, ...rest }) => {
   const { isMobile } = useDeviceDetect();
@@ -66,7 +67,7 @@ export const AffiliatesList = ({ affiliates, ...rest }) => {
 
   return (
     <div {...rest}>
-      <article className={classes.AffiliatesSection}>
+      <article className={sharedClass.AffiliatesSection}>
         <h1>Mis referidos</h1>
         <p className="md:text-center">
           Has compartido tu código con{" "}

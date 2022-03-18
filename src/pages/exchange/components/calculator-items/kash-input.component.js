@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "../../assets/css/exchange-components.module.scss";
+import classes from "../modules/calculator-items/kash-input.module.scss";
 
 const KashInput = ({ name, value, error, touched, ...rest }) => {
   return (

@@ -18,7 +18,8 @@ import { Input } from "../../../components/UI/form-items/input.component";
 import KashUsed from "../components/kash-used.component";
 
 // CLASSES
-import classes from "../assets/css/exchange-screens.module.scss";
+import sharedClass from "./modules/sharedClasses.module.scss";
+import classes from "./modules/accounts.module.scss";
 
 const Accounts = ({ setModal }) => {
   const dispatch = useDispatch(),
@@ -134,12 +135,12 @@ const Accounts = ({ setModal }) => {
     <>
       <h1>Completa los datos</h1>
       <h3>Selecciona tu banco de envío y la cuenta donde recibes.</h3>
-      <form onSubmit={formik.handleSubmit} className={classes.ExchangeForm}>
+      <form onSubmit={formik.handleSubmit} className={sharedClass.ExchangeForm}>
         {kashAccount.balance > 0 && <KashUsed formik={formik} onKashUsed={kashUsedHandler} totalAmount={totalAmountSent} balance={kashAccount.balance} order={order} />}
         {formik.values.kashApplied && totalAmountSent <= 0 ? null : (
           <SelectComponent
             name="bank_id"
-            label="¿Desde que banco nos envia su dinero?"
+            label="¿Desde qué banco nos envía su dinero?"
             options={bankOptions}
             onChange={onBankChangeHandler}
             onBlur={formik.handleBlur}
@@ -151,7 +152,7 @@ const Accounts = ({ setModal }) => {
 
         <SelectComponent
           name="account_to_id"
-          label="¿En que cuenta recibirás tu dinero?"
+          label="¿En qué cuenta recibirás tu dinero?"
           options={accountOptions}
           value={formik.values.account_to_id}
           onChange={onAccountChange}
@@ -167,15 +168,15 @@ const Accounts = ({ setModal }) => {
         )}
         {interplaza && (
           <MuiAlert type="info" opened>
-            <b>No realizamos operaciones hacia cuentas Interbank que se encuentren fuera de lima</b>.
+            <b>No realizamos operaciones hacia cuentas Interbank que se encuentren fuera de Lima</b>.
           </MuiAlert>
         )}
         {(bankCCI || accountCCI) && (
           <MuiAlert type="warning" opened>
-            <b>Las transferencias interbancarias generan comisiones y pueden demorar hasta 48 horas.</b> Conozoca más en nuestros{" "}
+            <b>Las transferencias interbancarias generan comisiones y pueden demorar hasta 48 horas.</b> Conozca más en nuestros{" "}
             <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
-              términos y condiciones.
-            </a>
+              términos y condiciones
+            </a>.
           </MuiAlert>
         )}
         {funds_origin && (

@@ -1,0 +1,13 @@
+@import "../../../../assets/css/colors";
+
+.ReturnBtn {
+  transition: box-shadow 0.45s;
+}
+
+.resendCode {
+  transition: 250ms ease-out;
+
+  &:hover {
+    color: darken($color: $anchor-green, $amount: 10);
+  }
+}

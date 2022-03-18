@@ -20,7 +20,7 @@ import { InputPhone } from "../../../components/UI/form-items/phone-input.compon
 import { Button } from "../../../components/UI/button.component";
 
 // CLASSES
-import classes from "../assets/css/auth.containers.module.scss";
+import sharedClass from "./modules/sharedClasses.module.scss";
 
 const CompleteProfile = ({ history }) => {
   // HOOKS & VARIABLES
@@ -108,8 +108,8 @@ const CompleteProfile = ({ history }) => {
     onDocumentChangeHandler = (e) => (AllowOnlyNumbers(e.target.value) ? setFieldValue("document_identification", e.target.value) : null);
 
   return (
-    <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
-      <div className={classes.AuthWrapper}>
+    <main className={`h-full md:h-screen ${sharedClass.AuthBackground}`}>
+      <div className={sharedClass.AuthWrapper}>
         <h2>¡Felicidades, tu cuenta ha sido creada!</h2>
         <p className="mt-2 mb-8">Por favor, completa tus datos</p>
         <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
@@ -174,7 +174,7 @@ const CompleteProfile = ({ history }) => {
           )}
 
           <div className="flex justify-center my-2">
-            <button type="button" className={classes.InfoButton} onClick={openModalHandler}>
+            <button type="button" className={sharedClass.InfoButton} onClick={openModalHandler}>
               ¿Por qué me piden estos datos?
             </button>
           </div>

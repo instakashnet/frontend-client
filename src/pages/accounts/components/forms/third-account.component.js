@@ -21,7 +21,7 @@ import { RadioComponent } from "../../../../components/UI/form-items/radio.compo
 import { Button } from "../../../../components/UI/button.component";
 
 // COMPONENTS
-import classes from "../../assets/css/account-components.module.scss";
+import classes from "../modules/forms/add-account.module.scss";
 
 export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, value, index, ...rest }) => {
   const [selectedBank, setSelectedBank] = useState(null);
@@ -190,7 +190,7 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
           touched={formik.touched.bankId}
         />
         <MuiAlert type="info" opened>
-          Operamos hacia interbank <b>solo en lima</b>. BCP e interbancarias a todo Perú de forma digital.
+          Operamos hacia interbank <b>solo en Lima</b>. BCP e interbancarias a todo Perú de forma digital.
         </MuiAlert>
         {!formik.values.isDirect ? (
           <Input
@@ -245,10 +245,11 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
         />
         {selectedBank && !selectedBank.isDirect && (
           <MuiAlert type="warning" opened>
-            Las <b>transferencias interbancarias</b> carrean comisiones y pueden demorar hasta 48 horas. Conoce más en nuestros{" "}
+            Las <b>transferencias interbancarias</b> acarrean comisiones y pueden demorar hasta 48 horas. Conoce más en nuestros{" "}
             <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
-              términos y condiciones.
+              términos y condiciones
             </a>
+            .
           </MuiAlert>
         )}
 
@@ -258,7 +259,7 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
         <div className="my-4">
           <CheckboxComponent name="accept2" value={formik.values.accept2} onChange={formik.handleChange} error={formik.errors.accept2}>
             Declaro que cuento con el consentimiento para el uso de los datos de la persona y/o empresa acá expuesta, en conformidad con el tratamiento de los mismos en relación a
-            sus <a href="!#">políticas de privacidad</a>.
+            sus <a href="https://instakash.net/politicas-de-privacidad">políticas de privacidad</a>.
           </CheckboxComponent>
         </div>
         <div className="flex justify-center">

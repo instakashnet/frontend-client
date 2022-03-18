@@ -10,12 +10,12 @@ import Card from "../../../../components/UI/card.component";
 import CopyButton from "../../../../components/UI/copy-button.component";
 
 // CLASSES
-import classes from "../../assets/css/exchange-screens.module.scss";
+import classes from "../modules/complete-items/email-transfer.module.scss";
 
 export const EmailTransfer = ({ isProcessing, dispatch, order }) => {
   return (
     <>
-      <Card className={`${classes.TransferAccount} flex items-center justify-between`}>
+      <Card className={`${classes.EmailAddress} flex items-center justify-between`}>
         <p className="font-bold">pagos@instakash.net</p>
         <CopyButton textToCopy="pagos@instakash.net" />
       </Card>
@@ -23,8 +23,9 @@ export const EmailTransfer = ({ isProcessing, dispatch, order }) => {
         <span className="block text-left">
           Recuerda que <b>las transferencias interbancarias pueden demorar hasta 48 horas.</b> Te invitamos a informarte en nuestros{" "}
           <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
-            términos y condiciones.
+            términos y condiciones
           </a>
+          .
         </span>
       </MuiAlert>
       <div className="flex flex-col justify-center items-center">
