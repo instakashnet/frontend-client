@@ -1,0 +1,21 @@
+@import "../../../../../assets/css/colors";
+
+.Swipe {
+  padding: 6px;
+  position: absolute;
+  left: 20px;
+  top: 62px;
+  border-radius: 50%;
+  background-color: $button-yellow;
+  border: 6px solid $card-color;
+  transition: 350ms ease-in-out;
+  transform: rotate(0deg);
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.Rotate {
+  transform: rotate(180deg);
+}

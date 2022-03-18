@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 import tridimensionalKash from "../assets/images/3d-kash.svg";
 
-// import classes from "../assets/css/activity-components.module.scss";
 import classes from "./modules/empty-activity.module.scss";
 
 const NoActivity = () => {
@@ -12,7 +11,7 @@ const NoActivity = () => {
       <img src={tridimensionalKash} alt="kash" />
       <h1>Realiza tu primera operación</h1>
       <p>
-        Aún no has realizado ningún cambio. <br /> Comienza a visualizar tu actividad realizando tu primer cambio,
+        Aún no has realizado ningún cambio. <br /> Comienza a visualizar tu actividad realizando tu primer cambio.
       </p>
       <Link to="/currency-exchange" className="action-button">
         Realizar un cambio

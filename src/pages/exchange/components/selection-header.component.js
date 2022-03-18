@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { GroupOutlined } from "@material-ui/icons";
 
 // CLASSES
-import Classes from "../assets/css/exchange-components.module.scss";
+import classes from "./modules/selection-header.module.scss";
 
 export const SelectionHeader = ({ profile }) => {
   return (
-    <div className={Classes.HeaderSelection}>
+    <div className={classes.HeaderSelection}>
       <div className="flex flex-col items-start">
         <p className="capitalize">
           <b>Perfil:</b>{" "}

@@ -10,7 +10,7 @@ import { RadioComponent } from "../../../components/UI/form-items/radio.componen
 import Card from "../../../components/UI/card.component";
 
 // CLASSES
-import classes from "../assets/css/exchange-components.module.scss";
+import classes from "./modules/kash-used.module.scss";
 
 const KashUsed = ({ formik, balance, totalAmount, onKashUsed, order }) => {
   const { currencySentSymbol, amountSent } = order;
@@ -22,7 +22,7 @@ const KashUsed = ({ formik, balance, totalAmount, onKashUsed, order }) => {
           <FormLabel component="legend">
             tienes <b>{balance} KASH</b> disponibles, ¿Deseas canjearlos?
           </FormLabel>
-          <RadioGroup row aria-label="position" name="kashApplied" defaultValue="top" value={formik.values.kashApplied} onChange={formik.handleChange}>
+          <RadioGroup row aria-label="position" name="kashApplied" defaultValue="top" value={formik.values.kashApplied} onChange={formik.handleChange} className={classes.KashRadioGroup}>
             <RadioComponent label="SI" value="yes" checked={formik.values.kashApplied === "yes"} />
             <RadioComponent label="NO" value="no" checked={formik.values.kashApplied === "no"} />
           </RadioGroup>

@@ -12,7 +12,7 @@ import Spinner from "../../../components/UI/spinner.component";
 import { Button } from "../../../components/UI/button.component";
 
 // CLASSES
-import classes from "../assets/css/exchange-screens.module.scss";
+import classes from "./modules/selection.screen.module.scss";
 
 const Selection = () => {
   const dispatch = useDispatch(),

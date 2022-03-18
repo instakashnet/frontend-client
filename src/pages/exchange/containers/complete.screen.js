@@ -15,7 +15,7 @@ import Card from "../../../components/UI/card.component";
 
 // ASSETS & CLASSES
 import TransferImg from "../assets/images/transfer.svg";
-import classes from "../assets/css/exchange-screens.module.scss";
+import classes from "./modules/complete.screen.module.scss";
 
 const CompleteExchange = () => {
   const dispatch = useDispatch();

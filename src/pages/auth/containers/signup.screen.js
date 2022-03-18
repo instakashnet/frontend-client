@@ -95,11 +95,11 @@ const Signup = () => {
             onChange={formik.handleChange}
           >
             Declaro que he leído y acepto sus{" "}
-            <a href="https://instakash.net/politicas-de-privacidad" target="_blank" rel="noopener noreferrer">
+            <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer">
               Términos y condiciones
             </a>{" "}
             y las{" "}
-            <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer">
+            <a href="https://instakash.net/politicas-de-privacidad" target="_blank" rel="noopener noreferrer">
               Políticas de privacidad
             </a>
             .

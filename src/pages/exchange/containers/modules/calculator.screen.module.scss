@@ -1,0 +1,23 @@
+@import "../../../../assets/css/colors";
+@import "../../../../assets/css/breakpoints";
+
+.Timer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  @include respond(tablet) {
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+.MinAmount {
+  text-align: center;
+  margin-left: 0;
+}

@@ -1,0 +1,33 @@
+@import "../../../../../assets/css/colors";
+
+.Rates {
+  color: $base-green;
+
+  p {
+    font-size: 0.9rem;
+  }
+}
+
+.BuyCard,
+.SellCard {
+  border-radius: 10px 0 0 10px;
+  border-right: 1px solid $base-green;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
+  background-color: $card-color;
+  padding: 10px 25px;
+
+  h4 {
+    color: $base-green;
+  }
+}
+
+.SellCard {
+  border-radius: 0 10px 10px 0;
+  border-right: none;
+}
+
+.Price {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: $base-green;
+}

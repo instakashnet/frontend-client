@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { CameraAlt } from "@material-ui/icons";
 
-// REUDX
+// REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { uploadDocumentInit } from "../../../../store/actions";
 
