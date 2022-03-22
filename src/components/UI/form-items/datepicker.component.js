@@ -5,15 +5,15 @@ import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import "moment/locale/es";
 
-import classes from "../modules/form/datepicker.module.scss";
+import classes from "../modules/form-items/datepicker.module.scss";
 
 moment.locale("es");
 
-export const DatePickerInput = ({ value, onChange, placeholder, error, label }) => {
+export const DatePickerInput = ({ value, onChange, placeholder, error, label, establishedInfo }) => {
   const maxDate = moment().subtract(18, "years").toDate();
 
   return (
-    <FormControl fullWidth classes={{ root: classes.FormControl }}>
+    <FormControl classes={{ root: classes.FormControl }}>
       {label && <InputLabel>{label}</InputLabel>}
       <MuiPickersUtilsProvider libInstance={moment} locale="es" utils={MomentUtils}>
         <DatePicker
@@ -28,7 +28,7 @@ export const DatePickerInput = ({ value, onChange, placeholder, error, label }) 
           invalidDateMessage="Ingresa una fecha válida"
           invalidLabel="Ingresa una fecha válida"
           maxDate={maxDate}
-          className={`${classes.DateInput} ${value && error ? classes.DateError : ""}`}
+          className={`${classes.DateInput} ${!establishedInfo && classes.EmptyInput} ${value && error ? classes.DateError : ""}`}
         />
       </MuiPickersUtilsProvider>
     </FormControl>

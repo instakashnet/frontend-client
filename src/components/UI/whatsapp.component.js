@@ -1,7 +1,7 @@
 import React from "react";
 
 import WhatsappImg from "../../assets/images/icons/whatsapp.svg";
-import classes from "./ui-components.module.scss";
+import classes from "./modules/whatsapp.module.scss";
 
 const Whatsapp = () => {
   return (

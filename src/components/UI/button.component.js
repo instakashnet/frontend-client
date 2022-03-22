@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "./ui-components.module.scss";
+import classes from "./modules/button.module.scss";
 
 export const Button = ({ type, onClick, className, children, ...rest }) => {
   return (

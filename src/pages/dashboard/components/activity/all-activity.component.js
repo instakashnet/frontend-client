@@ -17,7 +17,7 @@ import { Button } from "../../../../components/UI/button.component";
 import ActivityTable from "../activity-table.component";
 
 // CLASSES
-import classes from "../../assets/css/activity-components.module.scss";
+import sharedClass from "../../assets/css/sharedClasses.module.scss";
 
 const AllActivity = ({ orders, openModal }) => {
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ const AllActivity = ({ orders, openModal }) => {
   }
 
   return (
-    <div className={classes.DashboardCard}>
+    <div className={sharedClass.DashboardCard}>
       <Link to="/dashboard/recent" className="flex items-center mb-6 text-base">
         <ArrowBack fontSize="large" className="mr-2" /> Regresar
       </Link>

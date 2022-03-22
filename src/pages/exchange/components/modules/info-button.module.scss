@@ -1,0 +1,11 @@
+@import "../../../../assets/css/colors";
+
+.InfoButton {
+  position: fixed;
+  cursor: pointer;
+  right: 20px;
+  bottom: 20px;
+  color: #fff;
+  border-radius: 50%;
+  background-color: $base-green;
+}

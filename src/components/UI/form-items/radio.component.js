@@ -1,7 +1,7 @@
 import React from "react";
 import { Radio, FormControlLabel } from "@material-ui/core";
 
-import classes from "./form-items.module.scss";
+import classes from "../modules/form-items/radio.module.scss";
 
 export const RadioComponent = ({ label, value, ...rest }) => {
   return (

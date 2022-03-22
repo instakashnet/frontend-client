@@ -5,7 +5,7 @@ import { Button } from "../../../components/UI/button.component";
 
 // ASSETS & CLASSES
 import NoAccountImg from "../assets/images/no-accounts.svg";
-import classes from "../assets/css/account-components.module.scss";
+import classes from "./modules/no-accounts.module.scss";
 
 const NoAccounts = ({ onAddAccount }) => {
   return (

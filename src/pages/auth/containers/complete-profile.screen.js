@@ -20,7 +20,7 @@ import { InputPhone } from "../../../components/UI/form-items/phone-input.compon
 import { Button } from "../../../components/UI/button.component";
 
 // CLASSES
-import classes from "../assets/css/auth.containers.module.scss";
+import sharedClass from "./modules/sharedClasses.module.scss";
 
 const CompleteProfile = ({ history }) => {
   // HOOKS & VARIABLES
@@ -108,12 +108,12 @@ const CompleteProfile = ({ history }) => {
     onDocumentChangeHandler = (e) => (AllowOnlyNumbers(e.target.value) ? setFieldValue("document_identification", e.target.value) : null);
 
   return (
-    <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
-      <div className={classes.AuthWrapper}>
-        <h2>¡Felicidades, Tu cuenta ha sido creada!</h2>
+    <main className={`h-full md:h-screen ${sharedClass.AuthBackground}`}>
+      <div className={sharedClass.AuthWrapper}>
+        <h2>¡Felicidades, tu cuenta ha sido creada!</h2>
         <p className="mt-2 mb-8">Por favor, completa tus datos</p>
         <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
-          <div className="grid grid-cols-3 w-full gap-2">
+          <div className="grid grid-cols-3 w-full gap-2 items-start">
             <div className="grid place-items-center mt-2">
               <SelectComponent name="document_type" label="Tipo de doc." value={formik.values.document_type} onChange={onDocumentTypeHandler} options={documentOptions} />
             </div>
@@ -158,7 +158,7 @@ const CompleteProfile = ({ history }) => {
           <SelectComponent name="identity_sex" label="Sexo" value={formik.values.identity_sex} onChange={formik.handleChange} options={sexOptions} />
           {isGoogle && (
             <>
-              <h2 className="text-center mb-2">¿Te ha referido un amigo?</h2>
+              <h2 className="text-center mt-5 mb-0">¿Te ha referido un amigo?</h2>
               <Input
                 type="text"
                 label="Ingresa el código de afiliado"
@@ -173,9 +173,9 @@ const CompleteProfile = ({ history }) => {
             </>
           )}
 
-          <div className="flex justify-center mt-6 mb-3">
-            <button type="button" className={classes.InfoButton} onClick={openModalHandler}>
-              ¿Porque me piden estos datos?
+          <div className="flex justify-center my-2">
+            <button type="button" className={sharedClass.InfoButton} onClick={openModalHandler}>
+              ¿Por qué me piden estos datos?
             </button>
           </div>
           <Button
@@ -206,7 +206,7 @@ const DataInfo = () => {
   return (
     <>
       <p className="px-4 mb-6 text-center">
-        Al realizar una operación queremos estar seguro que eres tu quien lo realiza. Además, nos ayuda a saber según tu perfil registrado si debemos entregarte boleta o factura.
+        Al realizar una operación queremos estar seguro que eres tú quien lo realiza. Además, nos ayuda a saber según tu perfil registrado si debemos entregarte boleta o factura.
       </p>
       <Button className="action-button" onClick={() => dispatch(closeModal())}>
         De acuerdo

@@ -1,0 +1,23 @@
+@import "../../../../assets/css/colors";
+
+.FormControl {
+  margin: 7px 0;
+
+  input {
+    padding: 14px;
+    background-color: #fff;
+    border-radius: 4px;
+
+    &:disabled {
+      background-color: transparent;
+    }
+  }
+
+  svg {
+    color: $placeholder;
+  }
+}
+
+.PasswordIcon {
+  color: $placeholder;
+}

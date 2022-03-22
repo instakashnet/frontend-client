@@ -20,7 +20,7 @@ import { Input } from "../../../../components/UI/form-items/input.component";
 import CopyButton from "../../../../components/UI/copy-button.component";
 
 // CLASSES
-import classes from "../../assets/css/activity-components.module.scss";
+import classes from "../modules/details/order_withdraw-details.module.scss";
 
 const OrderDetails = () => {
   const { details, detailsLoading } = useSelector((state) => state.Activity),
@@ -62,12 +62,12 @@ const OrderDetails = () => {
             <h4>Solicitado:</h4>
             <span className={classes.Price}>{`${details.currencyReceivedSymbol} ${formatAmount(details.amountReceived)}`}</span>
           </div>
-          {details.kashApplied && (
+          {details.kashApplied ? (
             <div className="flex items-center justify-between pr-2 my-3">
               <h4>KASH canjeados:</h4>
               <span className={classes.Price}>{details.kashUsed} KASH</span>
             </div>
-          )}
+          ) : null}
           <div className="flex items-center justify-between pr-2 my-3">
             <h4>Tasa de cambio:</h4>
             <span>{convertRate(details.rate)}</span>

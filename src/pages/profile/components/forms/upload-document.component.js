@@ -1,14 +1,14 @@
 import React, { useCallback, useState } from "react";
 import { CameraAlt } from "@material-ui/icons";
 
-// REUDX
+// REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { uploadDocumentInit } from "../../../../store/actions";
 
 // ASSETS && CLASSES
 import CorrectDoc from "../../../../assets/images/illustrations/correct-doc.svg";
 import IncorrectDoc from "../../../../assets/images/illustrations/incorrect-doc.svg";
-import classes from "../../assets/css/profile-components.module.scss";
+import classes from "../modules/forms/upload-document.module.scss";
 
 // COMPONENTS
 import { DocumentCamera } from "./document-camera.component";
@@ -28,7 +28,7 @@ export const UploadDocument = ({ docType }) => {
         const devices = await navigator.mediaDevices.enumerateDevices();
         const videoDevices = devices.filter((dvc) => dvc.kind === "videoinput");
 
-        if (!videoDevices) alert("Debes user un dispoitivo con camara para poder validar tu identidad.");
+        if (!videoDevices) alert("Debes usar un dispositivo con cámara para poder validar tu identidad.");
         setOpenCamera(true);
         setPhotoSide(side);
       } catch (error) {
@@ -62,7 +62,7 @@ export const UploadDocument = ({ docType }) => {
             <li>La fotografía no debe estar borrosa, desenfocada ni pixelada.</li>
             <li>Verifique que la fotografía sea cercana y que no hayan otros elementos en la imagen.</li>
             <li>Toda la información que aparece en el documento debe ser totalmente legible.</li>
-            <li>El tipo y nro. de documento capturado debe ser el mismo usado en tu registro.</li>
+            <li>El tipo y número de documento capturado debe ser el mismo usado en tu registro.</li>
             <li>La imagen no debe pesar más de 10MB.</li>
           </ul>
           {docType === "passport" ? (

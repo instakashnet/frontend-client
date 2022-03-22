@@ -17,7 +17,7 @@ import { Button } from "../../../components/UI/button.component";
 import ActivityTable from "../components/activity-table.component";
 
 // CLASSES
-import classes from "../assets/css/activity-components.module.scss";
+import sharedClass from "../assets/css/sharedClasses.module.scss";
 
 export const AllActivityScreen = ({ orders, isLoading, openModal }) => {
   const dispatch = useDispatch();
@@ -63,7 +63,7 @@ export const AllActivityScreen = ({ orders, isLoading, openModal }) => {
 
   return (
     !isLoading && (
-      <div className={classes.DashboardCard}>
+      <div className={sharedClass.DashboardCard}>
         <Link to="/dashboard/recent" className="flex items-center mb-6 text-base">
           <ArrowBack fontSize="large" className="mr-2" /> Regresar
         </Link>

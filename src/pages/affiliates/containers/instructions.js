@@ -16,7 +16,8 @@ import Step3Img from "../assets/images/step3.svg";
 import Arrow1 from "../assets/images/arrow1.svg";
 import Arrow2 from "../assets/images/arrow2.svg";
 
-import classes from "../assets/css/affiliates-containers.module.scss";
+import sharedClass from "./modules/sharedClasses.module.scss";
+import classes from "./modules/instructions.module.scss";
 
 export const Instructions = ({ ...rest }) => {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ export const Instructions = ({ ...rest }) => {
 
   return (
     <div {...rest}>
-      <article className={classes.AffiliatesSection}>
+      <article className={sharedClass.AffiliatesSection}>
         <h1>¡Recomienda y gana!</h1>
         <h3>Comparte el código con tus amigos</h3>
         {isMobile && <StepsSwiper />}
@@ -44,7 +45,7 @@ export const Instructions = ({ ...rest }) => {
             <img src={Arrow1} className="hidden lg:block" alt="siguiente" />
             <Step img={Step2Img} className={`self-end ${classes.Step2}`} title="2. Recibe KASH por cada referido">
               <p>
-                Cada amigo registrado con tu codigo recibirá una tasa preferencial en su primer cambio y tu ganarás <b>1 KASH = 1 $</b>.
+                Cada amigo registrado con tu codigo recibirá una tasa preferencial en su primer cambio y tú ganarás <b>1 KASH = 1 $</b>.
               </p>
             </Step>
             <img src={Arrow2} className="hidden lg:block" alt="siguiente" />

@@ -14,7 +14,8 @@ import { Button } from "../../../components/UI/button.component";
 import Tooltip from "../../../components/UI/tooltip.component";
 
 // CLASSES
-import classes from "../assets/css/exchange-screens.module.scss";
+import sharedClass from "./modules/sharedClasses.module.scss";
+import classes from "./modules/calculator.screen.module.scss";
 
 const Calculator = ({ profile, setModal, user }) => {
   const dispatch = useDispatch(),
@@ -140,7 +141,7 @@ const Calculator = ({ profile, setModal, user }) => {
       </h1>
       <h3>Mejores tasas, mayor ahorro.</h3>
       {!ratesLoading && <Rates actualRates={actualRates} coupon={coupon} couponRates={couponRates} />}
-      <form onSubmit={formik.handleSubmit} className={classes.ExchangeForm}>
+      <form onSubmit={formik.handleSubmit} className={sharedClass.ExchangeForm}>
         <div className={classes.Timer}>
           <p>Se actualizará el tipo de cambio en:</p>
           <div className="flex items-center text-base">
@@ -148,7 +149,14 @@ const Calculator = ({ profile, setModal, user }) => {
           </div>
         </div>
         <div className="relative">
-          <Input name="amount_sent" value={amount_sent} currency={values.currency_sent_id} label="Envias" disabled={disabled} onChange={currencyChangeHandler} />
+          <Input
+            name="amount_sent"
+            value={amount_sent}
+            currency={values.currency_sent_id}
+            label="Envías"
+            disabled={disabled}
+            onChange={currencyChangeHandler}
+          />
           <Swipe onSwipeCurrency={swipeCurrencyHandler} type={values.type} disabled={disabled} />
           <Input
             name="amount_received"
@@ -161,7 +169,7 @@ const Calculator = ({ profile, setModal, user }) => {
           <p className="flex items-center justify-center w-full">
             ¿Montos mayores a $ 5,000.00?
             <Tooltip
-              title="Escribenos a nuestro canal de whatsapp para recibir una tasa preferencial."
+              title="Escríbenos a nuestro canal de WhatsApp para recibir una tasa preferencial."
               placement="top-start"
               disableHoverListener
               onMouseEnter={() => setShowInfo(true)}
@@ -184,7 +192,7 @@ const Calculator = ({ profile, setModal, user }) => {
             onSendCoupon={sendCouponHandler}
             onDeleteCoupon={deleteCouponHandler}
           />
-          {values.amount_received < 1 && <p className="error-msg">El monto mínimo a recibir es de $ 1.00</p>}
+          {values.amount_received < 1 && <p className={`error-msg ${classes.MinAmount}`}>El monto mínimo a recibir es de $ 1.00</p>}
           <Button
             type="submit"
             disabled={values.amount_received < 1 || couponName.trim().length || disabled}

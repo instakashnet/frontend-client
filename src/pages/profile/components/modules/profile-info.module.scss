@@ -1,0 +1,54 @@
+@import "../../../../assets/css/colors";
+@import "../../../../assets/css/breakpoints";
+
+.ProfileInfoCard {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background-color: $card-color;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+
+  p {
+    font-size: 0.85rem;
+    color: #afafaf;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+  }
+
+  h3 {
+    font-weight: bold;
+    font-size: 0.85rem;
+  }
+
+  ul {
+    li {
+      color: #afafaf;
+      font-size: 0.9rem;
+
+      &:first-of-type {
+        color: $base-green;
+        font-weight: bold;
+        font-size: 1rem;
+        margin-bottom: 0.2rem;
+      }
+    }
+  }
+
+  @include respond(desktop) {
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+
+.ProfileNavDesktop {
+  display: none;
+
+  @include respond(desktop) {
+    display: flex;
+  }
+}

@@ -18,7 +18,7 @@ import { KashAccount } from "../components/kash-account.component";
 import WithdrawKash from "../components/forms/withdraw-kash.component";
 
 // CLASSES
-import classes from "../assets/css/account-containers.module.scss";
+import classes from "./modules/accounts.screen.module.scss";
 
 const Accounts = () => {
   // HOOKS

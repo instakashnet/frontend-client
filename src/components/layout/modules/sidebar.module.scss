@@ -18,6 +18,7 @@
   z-index: 999;
   transition: 400ms ease-out;
   overflow-y: auto;
+  overflow-x: hidden;
 
   &.Open {
     transform: translateX(0);

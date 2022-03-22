@@ -13,7 +13,7 @@ import { Input } from "../../../components/UI/form-items/input.component";
 import { Button } from "../../../components/UI/button.component";
 
 // CLASSES
-import classes from "../assets/css/auth.containers.module.scss";
+import sharedClass from "./modules/sharedClasses.module.scss";
 
 const ChangePassword = ({ history }) => {
   // HOOKS
@@ -31,11 +31,11 @@ const ChangePassword = ({ history }) => {
   }, [history, token]);
 
   return (
-    <main className={`h-full md:h-screen ${classes.SignupBackground}`}>
-      <div className={classes.AuthWrapper}>
+    <main className={`h-full md:h-screen ${sharedClass.AuthBackground}`}>
+      <div className={sharedClass.AuthWrapper}>
         <h2>Ingrese su nueva contraseña</h2>
         <p className="mt-4 mb-6">
-          Coloque su nueva contraseña para poder acceder nuevamente. <br /> Te aconsejamos crear una que te sea facil de recordar.
+          Coloque su nueva contraseña para poder acceder nuevamente. <br /> Te aconsejamos crear una que te sea fácil de recordar.
         </p>
         <form onSubmit={formik.handleSubmit} className="flex flex-col items-center">
           <Input
