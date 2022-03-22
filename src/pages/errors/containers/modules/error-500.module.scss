@@ -12,11 +12,14 @@
   padding: 0 1rem .75rem;
   background: radial-gradient(50% 87.9% at 50% 50%, rgba(196, 196, 196, 0) 0%, rgba(0, 163, 143, 0.03) 100%);
 
-  .SuperKashWrapper {
-    img {
-      width: 210px;
-      margin-bottom: 2rem;
-    }
+  .SuperKash500 {
+    background-image: url("../../assets/images/superkash_500.svg");
+    background-size: 100%;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    width: 235px;
+    height: 160px;
+    margin-bottom: 1rem;
   }
 
   .Error500Desc {
@@ -69,10 +72,8 @@
   
 
   @media screen and (max-width: 300px) {
-    .SuperKashWrapper {
-      img {
-        width: 170px;
-      }
+    .SuperKash500 {
+      width: 190px;
     }
 
     .Error500Desc {
@@ -87,17 +88,16 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
 
-    .SuperKashWrapper {
+    .SuperKash500 {
+      margin: 0;
+      background-image: url("../../assets/images/500_vector.svg");
+      width: 100%;
+      height: 100%;
+
       grid-column: 2 / span 1;
       grid-row: 1 / span 2;
       align-self: flex-end;
       justify-self: flex-end;
-
-      img {
-        width: 100%;
-        max-width: 390px;
-        margin-bottom: 0;
-      }
     }
 
     .Error500Desc {
@@ -122,6 +122,11 @@
   }
 
   @media screen and (min-width: 1020px) {
+    .SuperKash500 {
+      background-size: 78%;
+      background-position: bottom right;
+    }
+
     .Error500Desc {
       justify-self: flex-start;
 
@@ -138,14 +143,12 @@
   @include respond(desktop) {
     grid-template-columns: 1fr 1.2fr;
 
-    .SuperKashWrapper {
-      img {
-        max-width: 100%;
-      }
+    .SuperKash500 {
+      background-size: 100%;
     }
 
     .Error500Desc {
-      margin-top: 15%;
+      margin-top: 19%;
       padding-left: 13.9%;
       grid-column: 1 / span 1;
       justify-self: flex-end;
@@ -170,10 +173,8 @@
   }
 
   @include respond(ldesktop) {
-    .SuperKashWrapper {
-      img {
-        width: 50vw;
-      }
+    .SuperKash500 {
+      background-size: 87%;
     }
 
     .Error500Desc {
