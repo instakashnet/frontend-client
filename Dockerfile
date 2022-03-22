@@ -23,7 +23,7 @@ ENV REACT_APP_AWS_SECRET_KEY=$REACT_APP_AWS_SECRET_KEY
 
 RUN \
     apk update && \
-    apk add build-dependencies build-base gcc wget git && \
+    apk add build-base gcc wget git && \
     apk add --no-cache python3 py3-pip && \
     pip3 install --upgrade pip
 
