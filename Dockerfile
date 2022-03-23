@@ -21,6 +21,12 @@ ENV REACT_APP_MIGO_API=$REACT_APP_MIGO_API
 ENV REACT_APP_AWS_ACCESS_KEY=$REACT_APP_AWS_ACCESS_KEY
 ENV REACT_APP_AWS_SECRET_KEY=$REACT_APP_AWS_SECRET_KEY
 
+RUN \
+    apk update && \
+    apk add build-base gcc wget git && \
+    apk add --no-cache python3 py3-pip && \
+    pip3 install --upgrade pip
+
 WORKDIR  /usr/src/app
 COPY package.json yarn.lock ./
 RUN yarn
