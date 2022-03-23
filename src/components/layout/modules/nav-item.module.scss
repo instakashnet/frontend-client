@@ -3,20 +3,26 @@
 .NavItem {
   padding: 16px 0 16px 30px;
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 12% 1fr;
   align-items: center;
   transition: 250ms ease-in-out;
   color: $base-green;
   font-weight: bold;
+  
+  img {
+    align-self: center;
+    justify-self: center;
+  }
+  
+  &:hover,
+  &:focus {
+    background-color: #c3e5d9;
+  }
 
   @media screen and (min-width: 768px) {
     padding-left: 45px;
     font-size: 1.1rem;
-  }
-
-  &:hover,
-  &:focus {
-    background-color: #c3e5d9;
   }
 }
 
