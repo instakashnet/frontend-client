@@ -9,7 +9,7 @@ import Logo from "../UI/logo.component";
 
 import classes from "./modules/header.module.scss";
 
-const Header = () => {
+const Header = ({ containerRef }) => {
   const dispatch = useDispatch(),
     user = useSelector((state) => state.Auth.user);
 
@@ -18,7 +18,7 @@ const Header = () => {
   const openNav = () => dispatch(openSliderModal(ModalComponent));
 
   return (
-    <div className={classes.Header}>
+    <div className={classes.Header} ref={containerRef}>
       <button onClick={() => dispatch(toggleNav())} className={classes.NavButton}>
         <span />
         <span />

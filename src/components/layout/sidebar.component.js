@@ -11,7 +11,7 @@ import Logo from "../UI/logo.component";
 
 import classes from "./modules/sidebar.module.scss";
 
-const Sidebar = () => {
+const Sidebar = ({ headerVisible }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const opened = useSelector((state) => state.Nav.opened);
@@ -31,7 +31,7 @@ const Sidebar = () => {
   return (
     <>
       <div className={`${classes.Sidebar} ${opened ? classes.Open : ""}`}>
-        <Logo className={classes.Logo} />
+        <Logo className={`${classes.Logo} ${headerVisible && classes.Invisible}`} />
         <Navigation />
         <Affiliate usercode={user.username} />
       </div>
