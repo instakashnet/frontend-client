@@ -1,5 +1,5 @@
 import { useEffect, lazy } from "react";
-import { Switch, Router } from "react-router-dom";
+import { Switch, Router, Route } from "react-router-dom";
 import ReactPixel from "react-facebook-pixel";
 import history from "./shared/history";
 
@@ -27,6 +27,9 @@ import { EmailValidationScreen } from "./pages/auth/containers/email-validation.
 import RecoverPassword from "./pages/auth/containers/recover-password.screen";
 import ChangePassword from "./pages/auth/containers/change-password.screen";
 import CompleteProfile from "./pages/auth/containers/complete-profile.screen";
+
+// ERROR 404
+import Error404 from "./pages/errors/containers/error-404.screen.js";
 
 // PRIVATE
 const Welcome = lazy(() => import("./pages/welcome/containers/welcome.screen"));
@@ -73,6 +76,9 @@ function App() {
             <PrivateRoute exact path="/my-accounts" component={asyncComponent(Accounts)} />
             <PrivateRoute path="/currency-exchange" component={asyncComponent(Exchange)} />
             <PrivateRoute path="/dashboard" component={asyncComponent(Dashboard)} />
+
+            {/* ERROR ROUTE */}
+            <Route path="*" component={Error404} />
           </Switch>
         </RefreshSession>
         <Alert />

@@ -1,6 +1,6 @@
 ## Build Stage
 
-FROM 160743850946.dkr.ecr.us-east-2.amazonaws.com/docker-library:node14-alpine as build
+FROM 160743850946.dkr.ecr.us-east-2.amazonaws.com/docker-library:node14-alpine-arm64 as build
 
 ## Docker argunments for build:
 
@@ -21,13 +21,19 @@ ENV REACT_APP_MIGO_API=$REACT_APP_MIGO_API
 ENV REACT_APP_AWS_ACCESS_KEY=$REACT_APP_AWS_ACCESS_KEY
 ENV REACT_APP_AWS_SECRET_KEY=$REACT_APP_AWS_SECRET_KEY
 
+RUN \
+    apk update && \
+    apk add build-base gcc wget git && \
+    apk add --no-cache python3 py3-pip && \
+    pip3 install --upgrade pip
+
 WORKDIR  /usr/src/app
 COPY package.json yarn.lock ./
 RUN yarn
 COPY ./ ./
 RUN yarn build:$REACT_APP_STAGE
 
-FROM nginx:1.21.5-alpine
+FROM 160743850946.dkr.ecr.us-east-2.amazonaws.com/docker-library:nginx-alpine-arm64
 
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
 COPY container /

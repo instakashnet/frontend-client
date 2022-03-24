@@ -1,0 +1,199 @@
+@import "../../../../assets/css/colors";
+@import "../../../../assets/css/breakpoints";
+
+.Error404Wrapper {
+  font-family: 'Roboto', sans-serif;
+  min-height: calc(100vh);
+  width: 100%;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+  padding: 0 1rem .75rem;
+  background: radial-gradient(50% 87.9% at 50% 50%, rgba(196, 196, 196, 0) 0%, rgba(0, 163, 143, 0.03) 100%);
+
+  .SuperKash404 {
+    background-image: url("../../assets/images/superkash_404.svg");
+    background-size: 100%;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    width: 235px;
+    height: 225px;
+  }
+
+  .Error404Desc {
+    display: grid;
+    justify-items: center;
+  
+    h1 {
+      font-weight: 900;
+      font-size: 5rem;
+      color: $base-green;
+      text-transform: uppercase;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+    }
+  
+    h2 {
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: $base-green;
+    }
+  
+    p {
+      font-size: 1.02rem;
+      font-weight: 400;
+      margin: 0.6rem 0;
+      color: $base-green;
+  
+      span {
+        display: inline-block;
+      }
+    }
+  
+    a {
+      background-color: $button-yellow;
+      color: $base-text;
+      font-family: sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      padding: 10px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 10rem;
+      box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+      margin-top: 1rem;
+
+      transition: box-shadow 0.4s;
+    }
+  }
+  
+
+  @media screen and (max-width: 300px) {
+    .SuperKash404 {
+      width: 190px;
+    }
+
+    .Error404Desc {
+      p, a {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  @include respond(tablet) {
+    padding: 0 0 0 1rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+
+    .SuperKash404 {
+      margin: 0;
+      background-image: url("../../assets/images/404_vector.svg");
+      width: 100%;
+      height: 100%;
+
+      grid-column: 2 / span 1;
+      grid-row: 1 / span 2;
+      align-self: flex-end;
+      justify-self: flex-end;
+    }
+
+    .Error404Desc {
+      grid-column: 1 / span 2;
+      grid-row: 1 / span 2;
+      align-self: center;
+      justify-items: flex-start;
+  
+      h1 {
+        font-size: 5.25rem;
+      }
+  
+      h2 {
+        font-size: 1.5rem;
+      }
+  
+      p {
+        text-align: initial;
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1020px) {
+    .SuperKash404 {
+      background-size: 78%;
+      background-position: bottom right;
+    }
+
+    .Error404Desc {
+      justify-self: flex-start;
+
+      a {
+        max-width: 19rem;
+        
+        &:hover {
+          box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.35);
+        }
+      }
+    }
+  }
+
+  @include respond(desktop) {
+    grid-template-columns: 1fr 1.2fr;
+
+    .SuperKash404 {
+      background-size: 100%;
+    }
+
+    .Error404Desc {
+      margin-top: 19%;
+      padding-left: 13.9%;
+      grid-column: 1 / span 1;
+      justify-self: flex-end;
+
+      h1 {
+        font-size: 10rem;
+        margin-bottom: -2.25rem;
+      }
+
+      h2 {
+        font-size: 1.7rem;
+      }
+
+      p {
+        font-size: 1.25rem;
+      }
+
+      a {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  @include respond(ldesktop) {
+    .SuperKash404 {
+      background-size: 87%;
+    }
+
+    .Error404Desc {
+      margin-top: 6rem;
+
+      h1 {
+        font-size: 11.5rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1.4rem;
+      }
+
+      a {
+        font-size: 1.05rem;
+      }
+    }
+  }
+}

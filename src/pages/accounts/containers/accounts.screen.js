@@ -69,7 +69,7 @@ const Accounts = () => {
               </p>
             </section>
             <section className="lg:col-span-3 md:ml-3">
-              <div className="grid grid-cols-1 align-center gap-4 mt-8">
+              <div className="grid grid-cols-1 align-center gap-4 mt-8 lg:ml-4">
                 {groupedAccounts.map((accounts, i) => (
                   <AccountsList key={i} accounts={accounts} openDetails={openModalHandler} />
                 ))}
