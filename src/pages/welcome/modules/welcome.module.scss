@@ -76,7 +76,7 @@
 
   &:last-of-type {
     background-image: url(../images/card-bg-right.svg);
-    background-position-x: right;
+    background-position-x: 100.5%;
     background-position-y: 100%;
   }
 
@@ -93,7 +93,7 @@
 
   img {
     position: relative;
-    top: calc(16.5rem - 15.4rem);
+    top: calc(16.5rem - 15.25rem);
     left: 1rem;
     width: 8rem;
   }
@@ -110,10 +110,6 @@
     min-height: 19rem;
     background-position-y: 110%;
 
-    &:first-of-type {
-      margin-right: 15px;
-    }
-
     h4 {
       font-size: 1.4rem;
     }
@@ -124,6 +120,32 @@
 
     p {
       font-size: 1rem;
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    &:first-of-type {
+      margin-right: 15px;
+    }
+
+    // WIDTH BETWEEN 1000px AND 1180px
+    @media screen and (max-width: 1180px) {
+      &:last-of-type {
+        padding-left: 3.5rem;
+  
+        img {
+          left: -1rem;
+        }
+      }
+
+      @media screen and (max-width: 1024px) {
+        &:last-of-type {
+          img {
+            left: -3rem;
+          }
+        }
+      }
+
     }
   }
 

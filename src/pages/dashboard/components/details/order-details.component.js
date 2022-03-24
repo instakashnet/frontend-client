@@ -143,7 +143,7 @@ const OrderDetails = () => {
               </form>
             </>
           ) : (
-            <Button type="button" className="action-button mt-6" onClick={closeModalHandler}>
+            <Button type="button" className="action-button block mt-8 mx-auto" onClick={closeModalHandler}>
               Aceptar
             </Button>
           )}
