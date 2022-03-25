@@ -47,7 +47,7 @@ const WithdrawalDetails = () => {
         <span>{`*********${details.accountToIdRaw.substring(details.accountToIdRaw.length - 4, details.accountToIdRaw.length)}`}</span>
       </div>
 
-      <Button type="button" className="action-button mt-6" onClick={closeModalHandler}>
+      <Button type="button" className="action-button block mt-8 mx-auto" onClick={closeModalHandler}>
         Aceptar
       </Button>
     </div>

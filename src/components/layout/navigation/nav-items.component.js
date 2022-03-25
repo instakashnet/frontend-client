@@ -10,7 +10,7 @@ import TrophyIcon from "../../../assets/images/icons/trophy.svg";
 
 const NavItems = () => {
   return (
-    <nav className="w-full mt-6 md:mt-20 mb-12">
+    <nav className="w-full mt-6 md:mt-4 mb-12">
       <ul>
         <NavItem link="/" icon={HomeIcon} label="Inicio" />
         <NavItem link="/dashboard/recent" icon={DashboardIcon} label="Mi actividad" />

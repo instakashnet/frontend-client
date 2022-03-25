@@ -34,7 +34,7 @@ const Welcome = () => {
           <Card className={classes.OptionCard}>
             <div className="lg:w-2/3 md:mt-6 md:pl-6">
               <h4>¡Gana KASH recomendando!</h4>
-              <p>Comparte tu código de afiliado y gana KASH y más beneficios.</p>
+              <p>Comparte tu código de afiliado: gana KASH y más beneficios.</p>
               <Link className="action-button" to="/affiliate-program">
                 Saber más
               </Link>
