@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 // COMPONENTS
-import Card from "../../../components/UI/card.component";
 import Layout from "../../../components/layout/layout.component";
+import Card from "../../../components/UI/card.component";
 
 // CLASSES && ASSETS
 import ExchangeImg from "../images/exchange.svg";
