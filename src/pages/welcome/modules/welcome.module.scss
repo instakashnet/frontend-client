@@ -73,6 +73,7 @@
   min-height: 15rem;
   width: 100%;
   margin: 15px 0;
+  overflow: hidden;
 
   &:last-of-type {
     background-image: url(../images/card-bg-right.svg);
