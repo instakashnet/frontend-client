@@ -1,9 +1,7 @@
 @import "../../../assets/css/colors";
 @import "../../../assets/css/breakpoints";
-@import "../../UI/modules/card.module.scss";
 
 .AffiliateCard {
-  @extend .Card;
   background-color: transparent;
   box-shadow: none;
   width: 100%;
