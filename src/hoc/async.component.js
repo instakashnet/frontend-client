@@ -1,8 +1,8 @@
 import React, { Suspense } from "react";
 
 // COMPONENTS
-import { CustomErrorBoundary } from "../hoc/error-boundary.component";
 import Spinner from "../components/UI/spinner.component";
+import { CustomErrorBoundary } from "../hoc/error-boundary.component";
 
 const asyncComponent = (Component) => {
   return (props) => {

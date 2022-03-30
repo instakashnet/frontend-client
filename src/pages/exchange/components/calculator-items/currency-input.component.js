@@ -1,5 +1,5 @@
-import React from "react";
 import Cleave from "cleave.js/react";
+import React from "react";
 
 import classes from "../modules/calculator-items/currency-input.module.scss";
 

@@ -1,23 +1,24 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-
-// REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { signinInit, signinGoogle, closeModal } from "../../../store/actions";
-
 // FORMIK
 import { useFormik } from "formik";
-import { signinValidation } from "../helpers/formValidations";
+import React, { useEffect } from "react";
+// REDUX
+import { useDispatch,useSelector } from "react-redux";
+// REACT ROUTER
+import { Link } from "react-router-dom";
 
 // COMPONENTS
-import { GoogleButton } from "../components/UI/google-button.component";
-import Background from "../components/layout/background.component";
-import { Input } from "../../../components/UI/form-items/input.component";
-import { CheckboxComponent } from "../../../components/UI/form-items/checkbox.component";
 import { Button } from "../../../components/UI/button.component";
-import { Modal } from "../../../components/UI/modals/modal.component";
+import { CheckboxComponent } from "../../../components/UI/form-items/checkbox.component";
+import { Input } from "../../../components/UI/form-items/input.component";
 import Logo from "../../../components/UI/logo.component";
-
+import { Modal } from "../../../components/UI/modals/modal.component";
+// REDUX ACTIONS
+import { closeModal,signinGoogle, signinInit } from "../../../store/actions";
+// COMPONENTS
+import Background from "../components/layout/background.component";
+import { GoogleButton } from "../components/UI/google-button.component";
+// HELPER
+import { signinValidation } from "../helpers/formValidations";
 // CLASSES
 import sharedClass from "./modules/sharedClasses.module.scss";
 import classes from "./modules/signin.screen.module.scss";

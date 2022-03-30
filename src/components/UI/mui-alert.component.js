@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import Alert from "@material-ui/lab/Alert";
 import { Collapse } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+import React, { useState } from "react";
 
 import classes from "./modules/mui-alert.module.scss";
 

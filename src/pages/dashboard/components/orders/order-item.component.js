@@ -1,12 +1,10 @@
-import React from "react";
 import { ArrowRight } from "@material-ui/icons";
-
-// HELPERS
-import { formatAmount } from "../../../../shared/functions";
+import React from "react";
 
 // COMPONENTS
 import { StatusBadge } from "../../../../components/UI/status-badge.component";
-
+// HELPER
+import { formatAmount } from "../../../../shared/functions";
 // CLASSES
 import classes from "../modules/orders/order-item.module.scss";
 

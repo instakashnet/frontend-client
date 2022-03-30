@@ -1,11 +1,10 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-
-import { WarningOutlined, InfoOutlined, ErrorOutline } from "@material-ui/icons";
 import { Dialog, DialogContent } from "@material-ui/core";
+import { ErrorOutline,InfoOutlined, WarningOutlined } from "@material-ui/icons";
 import { Close } from "@material-ui/icons";
-import { closeModal } from "../../../store/actions";
+import React from "react";
+import { useDispatch,useSelector } from "react-redux";
 
+import { closeModal } from "../../../store/actions";
 import classes from "../modules/modals/g-modal.module.scss";
 
 export const Modal = ({ title, isAlert, alertType, children }) => {

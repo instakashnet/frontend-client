@@ -1,5 +1,5 @@
-import * as types from "./types";
 import { LOGOUT_SUCCESS } from "../auth/types";
+import * as types from "./types";
 
 const initialState = {
   profiles: [],

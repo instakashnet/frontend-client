@@ -1,15 +1,16 @@
+import { DeleteOutlineOutlined,EditOutlined } from "@material-ui/icons";
 import React, { useState } from "react";
-import { EditOutlined, DeleteOutlineOutlined } from "@material-ui/icons";
+// REDUX
+import { useDispatch,useSelector } from "react-redux";
+// REACT SPINNERS
 import { HashLoader } from "react-spinners";
 
-// REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { deleteAccountInit } from "../../../store/actions";
-
-// COMPONENTS
-import EditAccount from "../components/forms/edit-account.component";
+// COMPONENT
 import { Button } from "../../../components/UI/button.component";
-
+// REDUX ACTIONS
+import { deleteAccountInit } from "../../../store/actions";
+// COMPONENT
+import EditAccount from "../components/forms/edit-account.component";
 // CLASSES
 import classes from "./modules/account-details.screen.module.scss";
 

@@ -1,21 +1,20 @@
 import React from "react";
-
-// HOOKS
-import { useUserData } from "../../../shared/hooks/useProfileInfo";
-
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { logoutInit } from "../../../store/actions";
 
-// ASSETS && CLASSES
-import Profile from "../../../assets/images/icons/avatar.svg";
-import VerifyIdentity from "../../../assets/images/icons/verify-identity.svg";
+// ASSETS
 import AdditionalInfo from "../../../assets/images/icons/additional-info.svg";
-import Logout from "../../../assets/images/icons/logout.svg";
+import Profile from "../../../assets/images/icons/avatar.svg";
 import Help from "../../../assets/images/icons/help.svg";
+import Logout from "../../../assets/images/icons/logout.svg";
+import VerifyIdentity from "../../../assets/images/icons/verify-identity.svg";
+// HOOK
+import { useUserData } from "../../../shared/hooks/useProfileInfo";
+// REDUX ACTION
+import { logoutInit } from "../../../store/actions";
+// CLASSES
 import classes from "../modules/profile-nav.module.scss";
-
-// COMPONENTS
+// COMPONENT
 import NavItem from "./nav-item.component";
 
 const ProfileNavigation = () => {

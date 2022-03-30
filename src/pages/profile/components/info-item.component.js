@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Check, Clear } from "@material-ui/icons";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { Check, Clear } from "@material-ui/icons";
+import React, { useEffect,useState } from "react";
 
 // COMPONENTS
-import { Input } from "../../../components/UI/form-items/input.component";
 import { DatePickerInput } from "../../../components/UI/form-items/datepicker.component";
-
+import { Input } from "../../../components/UI/form-items/input.component";
 // CLASSES
 import classes from "./modules/info-item.module.scss";
 

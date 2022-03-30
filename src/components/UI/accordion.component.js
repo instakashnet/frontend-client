@@ -1,5 +1,5 @@
+import { Accordion, AccordionDetails,AccordionSummary } from "@material-ui/core";
 import React from "react";
-import { Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core";
 
 import classes from "./modules/accordion.module.scss";
 

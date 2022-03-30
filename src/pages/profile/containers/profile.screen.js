@@ -1,26 +1,26 @@
 import React, { useEffect } from "react";
+// REDUX
+import { useDispatch,useSelector } from "react-redux";
+// REACT ROUTER
 import { Route } from "react-router-dom";
 
-// HOOKS
-import { useUserData } from "../../../shared/hooks/useProfileInfo";
-import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
-
-// REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { openSocketConnection, closeSocketConnection } from "../../../store/actions";
-
-// COMPONENTS
+// COMPONENT
 import Layout from "../../../components/layout/layout.component";
-import { ProfileMenu } from "../components/profile-menu.component";
+// HOOKS
+import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
+import { useUserData } from "../../../shared/hooks/useProfileInfo";
+// REDUX ACTIONS
+import { closeSocketConnection,openSocketConnection } from "../../../store/actions";
+// COMPONENTS
 import { ProfileInfo } from "../components/profile-info.component";
-
+import { ProfileMenu } from "../components/profile-menu.component";
 // SCREENS
-import { BasicInfoScreen } from "./basic-info.screen";
-import { VerifyIdentityScreen } from "./verify-identity.screen";
 import { AdditionalInfoScreen } from "./additional-info.screen";
-
+import { BasicInfoScreen } from "./basic-info.screen";
 // CLASSES
 import classes from "./modules/profile.screen.module.scss";
+// SCREEN
+import { VerifyIdentityScreen } from "./verify-identity.screen";
 
 const Profile = ({ match, history }) => {
   const dispatch = useDispatch(),

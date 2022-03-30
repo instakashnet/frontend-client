@@ -1,10 +1,9 @@
-import React from "react";
 import { ArrowDropDown } from "@material-ui/icons";
+import React from "react";
 
 // COMPONENTS
 import Accordion from "../../../components/UI/accordion.component";
 import AccountCard from "./account-card.component";
-
 // CLASSES
 import classes from "./modules/accounts-list.module.scss";
 

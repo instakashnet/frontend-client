@@ -1,22 +1,22 @@
-import React, { useEffect } from "react";
-import _ from "lodash";
 import { CreditCard } from "@material-ui/icons";
-
+import _ from "lodash";
+import React, { useEffect } from "react";
 // REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { getAccountsInit, setAccountDetailsInit, openModal } from "../../../store/actions";
+import { useDispatch,useSelector } from "react-redux";
 
 // COMPONENTS
 import Layout from "../../../components/layout/layout.component";
 import { Button } from "../../../components/UI/button.component";
-import AccountsList from "../components/accounts-list.component";
-import NoAccount from "../components/no-accounts.component";
 import Spinner from "../../../components/UI/spinner.component";
+// REDUX ACTIONS
+import { getAccountsInit, openModal,setAccountDetailsInit } from "../../../store/actions";
+// COMPONENTS
+import AccountsList from "../components/accounts-list.component";
 import { AddAccount } from "../components/add-account.component";
-import AccountDetails from "./account-details.screen";
-import { KashAccount } from "../components/kash-account.component";
 import WithdrawKash from "../components/forms/withdraw-kash.component";
-
+import { KashAccount } from "../components/kash-account.component";
+import NoAccount from "../components/no-accounts.component";
+import AccountDetails from "./account-details.screen";
 // CLASSES
 import classes from "./modules/accounts.screen.module.scss";
 

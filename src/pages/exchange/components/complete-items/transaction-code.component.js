@@ -1,18 +1,17 @@
-import React, { useState } from "react";
 import { Info } from "@material-ui/icons";
-
 // FORMIK
 import { useFormik } from "formik";
-import { transferCodeValidation } from "../../helpers/validations";
-
-// REDUX
-import { processCodeInit, cancelExchangeInit } from "../../../../store/actions";
+import React, { useState } from "react";
 
 // COMPONENTS
+import { Button } from "../../../../components/UI/button.component";
+import { Input } from "../../../../components/UI/form-items/input.component";
 import { MuiAlert } from "../../../../components/UI/mui-alert.component";
 import Tooltip from "../../../../components/UI/tooltip.component";
-import { Input } from "../../../../components/UI/form-items/input.component";
-import { Button } from "../../../../components/UI/button.component";
+// REDUX ACTIONS
+import { cancelExchangeInit,processCodeInit } from "../../../../store/actions";
+// HELPER
+import { transferCodeValidation } from "../../helpers/validations";
 
 export const TransactionCode = ({ isProcessing, dispatch, order }) => {
   const [showInfo, setShowInfo] = useState(false);

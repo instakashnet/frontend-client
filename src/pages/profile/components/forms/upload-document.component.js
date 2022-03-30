@@ -1,18 +1,19 @@
-import React, { useCallback, useState } from "react";
 import { CameraAlt } from "@material-ui/icons";
-
+import React, { useCallback, useState } from "react";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { uploadDocumentInit } from "../../../../store/actions";
 
-// ASSETS && CLASSES
+// ASSETS
 import CorrectDoc from "../../../../assets/images/illustrations/correct-doc.svg";
 import IncorrectDoc from "../../../../assets/images/illustrations/incorrect-doc.svg";
-import classes from "../modules/forms/upload-document.module.scss";
-
-// COMPONENTS
-import { DocumentCamera } from "./document-camera.component";
+// COMPONENT
 import { Button } from "../../../../components/UI/button.component";
+// REDUX ACTION
+import { uploadDocumentInit } from "../../../../store/actions";
+// CLASSES
+import classes from "../modules/forms/upload-document.module.scss";
+// COMPONENT
+import { DocumentCamera } from "./document-camera.component";
 
 export const UploadDocument = ({ docType }) => {
   const dispatch = useDispatch(),

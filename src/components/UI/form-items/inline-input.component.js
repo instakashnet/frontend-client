@@ -1,8 +1,7 @@
+import { FormControl, FormHelperText,InputLabel, OutlinedInput } from "@material-ui/core";
 import React from "react";
-import { OutlinedInput, InputLabel, FormControl, FormHelperText } from "@material-ui/core";
 
 import { Button } from "../button.component";
-
 import classes from "../modules/form-items/inline-input.module.scss";
 
 export const InlineInput = ({ type, name, value, disabled, error, touched, buttonLabel, className, buttonType, onClick, helperText, label, ...rest }) => {

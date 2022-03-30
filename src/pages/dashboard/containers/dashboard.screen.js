@@ -1,16 +1,17 @@
 import React from "react";
-import { Route } from "react-router-dom";
-
 // REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { openSliderModal, getOrderDetailsInit } from "../../../store/actions";
+import { useDispatch,useSelector } from "react-redux";
+// REACT ROUTER
+import { Route } from "react-router-dom";
 
 // COMPONENTS
 import Layout from "../../../components/layout/layout.component";
 import Spinner from "../../../components/UI/spinner.component";
+// REDUX ACTIONS
+import { getOrderDetailsInit,openSliderModal } from "../../../store/actions";
+// COMPONENTS
 import OrderDetails from "../components/details/order-details.component";
 import WithdrawDetails from "../components/details/withdraw-details.component";
-
 // SCREENS
 import { AllActivityScreen } from "./all-activity.screen";
 import { RecentActivityScreen } from "./recent-activity.screen";

@@ -2,7 +2,6 @@ import React from "react";
 
 // COMPONENTS
 import Card from "../../../components/UI/card.component";
-
 // CLASSES
 import classes from "./modules/account-card.module.scss";
 

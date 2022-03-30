@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useSelector } from "react-redux";
 
-import Sidebar from "./sidebar.component";
-import Header from "./header.component";
-import { SliderModal } from "../UI/modals/slider-modal.component";
-import { Modal } from "../UI/modals/modal.component";
 import { useIntersectionElements } from "../../shared/hooks/useIntersectionElements";
+import { Modal } from "../UI/modals/modal.component";
+import { SliderModal } from "../UI/modals/slider-modal.component";
+import Header from "./header.component";
+import Sidebar from "./sidebar.component";
 
 const Layout = ({ className, children }) => {
   const [modalProps, setModalProps] = useState({});

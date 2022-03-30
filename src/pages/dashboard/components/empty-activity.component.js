@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import tridimensionalKash from "../assets/images/3d-kash.svg";
-
 import classes from "./modules/empty-activity.module.scss";
 
 const NoActivity = () => {

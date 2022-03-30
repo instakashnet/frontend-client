@@ -1,6 +1,6 @@
 import React from "react";
-import { convertHexToRGB } from "../../shared/functions";
 
+import { convertHexToRGB } from "../../shared/functions";
 import classes from "./modules/status-badge.module.scss";
 
 export const StatusBadge = ({ name, color, className }) => {

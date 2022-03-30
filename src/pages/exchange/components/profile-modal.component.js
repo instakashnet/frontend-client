@@ -2,7 +2,6 @@ import React from "react";
 
 // COMPONENTS
 import { Button } from "../../../components/UI/button.component";
-
 // CLASSES
 import classes from "./modules/profile-modal.module.scss";
 
