@@ -1,11 +1,11 @@
-import React from "react";
 import { useFormik } from "formik";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { usernameValidation } from "../../helpers/validations";
-import { editUserCodeInit } from "../../../../store/actions";
 
-import { Input } from "../../../../components/UI/form-items/input.component";
 import { Button } from "../../../../components/UI/button.component";
+import { Input } from "../../../../components/UI/form-items/input.component";
+import { editUserCodeInit } from "../../../../store/actions";
+import { usernameValidation } from "../../helpers/validations";
 
 const EditUserCode = () => {
   const dispatch = useDispatch();

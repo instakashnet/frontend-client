@@ -1,11 +1,11 @@
-import { put, takeEvery, all, fork } from "redux-saga/effects";
 import camelize from "camelize";
-import * as types from "./types";
-import { setAlertInit } from "../../store/actions";
-import * as actions from "./actions";
+import { all, fork,put, takeEvery } from "redux-saga/effects";
 
 // API SERVICES
 import { authService } from "../../api/axios";
+import { setAlertInit } from "../../store/actions";
+import * as actions from "./actions";
+import * as types from "./types";
 
 function* getAffiliates() {
   try {

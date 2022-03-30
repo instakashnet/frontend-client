@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import { FileCopy } from "@material-ui/icons";
+import React, { useEffect,useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
 import Tooltip from "./tooltip.component";
 
 const CopyButton = ({ textToCopy }) => {

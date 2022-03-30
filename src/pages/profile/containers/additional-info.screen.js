@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import moment from "moment";
-
-// REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { editAdditionalInfo } from "../../../store/actions";
-
 // FORMIK
 import { useFormik } from "formik";
+import moment from "moment";
+import React, { useState } from "react";
+// REDUX
+import { useDispatch,useSelector } from "react-redux";
 
-// COMPONENTS
+// COMPONENT
 import Card from "../../../components/UI/card.component";
-import { InfoItem } from "../components/info-item.component";
+// REDUX ACTION
+import { editAdditionalInfo } from "../../../store/actions";
+// COMPONENTS
 import { AddAdditionalInfo } from "../components/forms/add-additionals.component";
+import { InfoItem } from "../components/info-item.component";
 
 export const AdditionalInfoScreen = ({ user }) => {
   const [submitted, setSubmitted] = useState(false),

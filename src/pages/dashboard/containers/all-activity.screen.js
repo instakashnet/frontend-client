@@ -1,23 +1,23 @@
-import React, { useEffect } from "react";
+import { ArrowBack, Repeat } from "@material-ui/icons";
 import { _ } from "gridjs-react";
 import moment from "moment";
-import { Link } from "react-router-dom";
-import { ArrowBack, Repeat } from "@material-ui/icons";
-
-// HELPERS
-import { formatAmount } from "../../../shared/functions";
-
+import React, { useEffect } from "react";
 // REDUX
 import { useDispatch } from "react-redux";
-import { getOrdersInit } from "../../../store/actions";
+// REACT ROUTER
+import { Link } from "react-router-dom";
 
 // COMPONENTS
-import { StatusBadge } from "../../../components/UI/status-badge.component";
 import { Button } from "../../../components/UI/button.component";
-import ActivityTable from "../components/activity-table.component";
-
+import { StatusBadge } from "../../../components/UI/status-badge.component";
+// HELPERS
+import { formatAmount } from "../../../shared/functions";
+// REDUX ACTIONS
+import { getOrdersInit } from "../../../store/actions";
 // CLASSES
 import sharedClass from "../assets/css/sharedClasses.module.scss";
+// COMPONENT
+import ActivityTable from "../components/activity-table.component";
 
 export const AllActivityScreen = ({ orders, isLoading, openModal }) => {
   const dispatch = useDispatch();

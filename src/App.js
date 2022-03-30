@@ -1,35 +1,32 @@
-import { useEffect, lazy } from "react";
-import { Switch, Router, Route } from "react-router-dom";
+import { lazy,useEffect } from "react";
 import ReactPixel from "react-facebook-pixel";
-import history from "./shared/history";
-
-// REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { setIsClosedInit, setIsClosedSuccess } from "./store/actions";
-
-// HOC
-import ScrollToTop from "./hoc/scroll-top.component";
-import { RefreshSession } from "./hoc/refresh-session.component";
-import asyncComponent from "./hoc/async.component";
+// REACT REDUX
+import { useDispatch,useSelector } from "react-redux";
+// REACT ROUTER
+import { Route,Router, Switch } from "react-router-dom";
 
 // COMPONENTS
 import Alert from "./components/UI/alert.component";
 import { ClosedModal } from "./components/UI/modals/closed-modal.component";
-
-// ROUTING
-import PublicRoute from "./routing/PublicRoute";
-import PrivateRoute from "./routing/PrivateRoute";
-
+// HOC
+import asyncComponent from "./hoc/async.component";
+import { RefreshSession } from "./hoc/refresh-session.component";
+import ScrollToTop from "./hoc/scroll-top.component";
 // PUBLIC
-import Signin from "./pages/auth/containers/signin.screen";
-import Signup from "./pages/auth/containers/signup.screen";
-import { EmailValidationScreen } from "./pages/auth/containers/email-validation.screen";
-import RecoverPassword from "./pages/auth/containers/recover-password.screen";
 import ChangePassword from "./pages/auth/containers/change-password.screen";
 import CompleteProfile from "./pages/auth/containers/complete-profile.screen";
-
+import { EmailValidationScreen } from "./pages/auth/containers/email-validation.screen";
+import RecoverPassword from "./pages/auth/containers/recover-password.screen";
+import Signin from "./pages/auth/containers/signin.screen";
+import Signup from "./pages/auth/containers/signup.screen";
 // ERROR 404
 import Error404 from "./pages/errors/containers/error-404.screen.js";
+// ROUTING
+import PrivateRoute from "./routing/PrivateRoute";
+import PublicRoute from "./routing/PublicRoute";
+import history from "./shared/history";
+// REDUX ACTIONS
+import { setIsClosedInit, setIsClosedSuccess } from "./store/actions";
 
 // PRIVATE
 const Welcome = lazy(() => import("./pages/welcome/containers/welcome.screen"));

@@ -1,7 +1,7 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { removeAlert } from "../../store/actions";
+import { useDispatch,useSelector } from "react-redux";
 
+import { removeAlert } from "../../store/actions";
 import classes from "./modules/alert.module.scss";
 
 const Alert = () => {

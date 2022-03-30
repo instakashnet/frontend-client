@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 // ASSETS
-import MaleLight from "../../assets/images/profiles/male-light.svg";
 import FemaleLight from "../../assets/images/profiles/female-light.svg";
+import MaleLight from "../../assets/images/profiles/male-light.svg";
 
 export const useUserData = (user) => {
   const [completed, setCompleted] = useState(0);

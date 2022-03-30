@@ -1,13 +1,13 @@
-import { put, all, fork, call, select, takeLatest, takeEvery } from "redux-saga/effects";
+import { all, call, fork, put, select, takeEvery,takeLatest } from "redux-saga/effects";
 import Swal from "sweetalert2";
-import * as types from "./types";
-import * as actions from "./actions";
-import { closeModal, setAlertInit } from "../../store/actions";
-import history from "../../shared/history";
 
 // API SERVICES
-import { exchangeService, accountsService } from "../../api/axios";
-import { getBanks, getCurrencies, getAccounts } from "../../api/services/accounts.service";
+import { accountsService,exchangeService } from "../../api/axios";
+import { getAccounts,getBanks, getCurrencies } from "../../api/services/accounts.service";
+import history from "../../shared/history";
+import { closeModal, setAlertInit } from "../../store/actions";
+import * as actions from "./actions";
+import * as types from "./types";
 
 // UTILS
 function* setAccountDetails({ accId }) {

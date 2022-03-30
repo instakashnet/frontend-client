@@ -1,12 +1,10 @@
-import React from "react";
 import { Close } from "@material-ui/icons";
-
-// HELPERS
-import { formatAmount } from "../../../../shared/functions";
+import React from "react";
 
 // COMPONENTS
 import { InlineInput } from "../../../../components/UI/form-items/inline-input.component";
-
+// HELPERS
+import { formatAmount } from "../../../../shared/functions";
 // ASSETS & CLASSES
 import CouponImg from "../../assets/images/icons/coupon.svg";
 import classes from "../modules/calculator-items/coupon-input.module.scss";

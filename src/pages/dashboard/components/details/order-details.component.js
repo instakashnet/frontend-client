@@ -1,24 +1,23 @@
-import React from "react";
-import moment from "moment";
-import { HashLoader } from "react-spinners";
-
-// HELPERS
-import { formatAmount, convertRate } from "../../../../shared/functions";
-
 // FORMIK
 import { useFormik } from "formik";
-import { transactionCodeValidation } from "../../helpers/validations";
-
+import moment from "moment";
+import React from "react";
 // REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { closeSliderModal, processCodeInit, cancelExchangeInit } from "../../../../store/actions";
+import { useDispatch,useSelector } from "react-redux";
+// REACT SPINNER
+import { HashLoader } from "react-spinners";
 
 // COMPONENTS
-import { StatusBadge } from "../../../../components/UI/status-badge.component";
 import { Button } from "../../../../components/UI/button.component";
-import { Input } from "../../../../components/UI/form-items/input.component";
 import CopyButton from "../../../../components/UI/copy-button.component";
-
+import { Input } from "../../../../components/UI/form-items/input.component";
+import { StatusBadge } from "../../../../components/UI/status-badge.component";
+// HELPER
+import { convertRate,formatAmount } from "../../../../shared/functions";
+// REDUX ACTIONS
+import { cancelExchangeInit,closeSliderModal, processCodeInit } from "../../../../store/actions";
+// HELPER
+import { transactionCodeValidation } from "../../helpers/validations";
 // CLASSES
 import classes from "../modules/details/order_withdraw-details.module.scss";
 

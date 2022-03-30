@@ -1,17 +1,15 @@
-import React from "react";
 import moment from "moment";
-
-// HELPERS
-import { formatAmount } from "../../../../shared/functions";
-
+import React from "react";
 // REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { closeSliderModal } from "../../../../store/actions";
+import { useDispatch,useSelector } from "react-redux";
 
 // COMPONENTS
-import { StatusBadge } from "../../../../components/UI/status-badge.component";
 import { Button } from "../../../../components/UI/button.component";
-
+import { StatusBadge } from "../../../../components/UI/status-badge.component";
+// HELPER
+import { formatAmount } from "../../../../shared/functions";
+// REDUX ACTIONS
+import { closeSliderModal } from "../../../../store/actions";
 // CLASSES
 import classes from "../modules/details/order_withdraw-details.module.scss";
 

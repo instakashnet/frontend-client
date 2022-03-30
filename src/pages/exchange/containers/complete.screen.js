@@ -1,20 +1,20 @@
 import React from "react";
+// REDUX
+import { useDispatch,useSelector } from "react-redux";
+// REACT ROUTER
 import { Redirect } from "react-router-dom";
 
-// REDUX
-import { useSelector, useDispatch } from "react-redux";
-
-// HELPERS
-import { formatAmount } from "../../../shared/functions";
-
 // COMPONENTS
-import { TransactionCode } from "../components/complete-items/transaction-code.component";
-import { EmailTransfer } from "../components/complete-items/email-transfer.component";
-import CopyButton from "../../../components/UI/copy-button.component";
 import Card from "../../../components/UI/card.component";
-
-// ASSETS & CLASSES
+import CopyButton from "../../../components/UI/copy-button.component";
+// HELPER
+import { formatAmount } from "../../../shared/functions";
+// ASSET
 import TransferImg from "../assets/images/transfer.svg";
+// COMPONENTS
+import { EmailTransfer } from "../components/complete-items/email-transfer.component";
+import { TransactionCode } from "../components/complete-items/transaction-code.component";
+// CLASSES
 import classes from "./modules/complete.screen.module.scss";
 
 const CompleteExchange = () => {

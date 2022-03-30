@@ -1,9 +1,10 @@
-import React from "react";
-import moment from "moment";
-import { FormControl, InputLabel } from "@material-ui/core";
-import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
-import MomentUtils from "@date-io/moment";
 import "moment/locale/es";
+
+import MomentUtils from "@date-io/moment";
+import { FormControl, InputLabel } from "@material-ui/core";
+import { DatePicker,MuiPickersUtilsProvider } from "@material-ui/pickers";
+import moment from "moment";
+import React from "react";
 
 import classes from "../modules/form-items/datepicker.module.scss";
 

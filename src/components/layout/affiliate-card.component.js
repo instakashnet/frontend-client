@@ -1,11 +1,11 @@
 import React from "react";
 
-// COMPONENTS
-import Card from "../UI/card.component";
-import UserCode from "../../pages/affiliates/components/user-code.component";
-
-// ASSETS & CLASSES
+// ASSETS
 import KashImg from "../../assets/images/kash.svg";
+// COMPONENTS
+import UserCode from "../../pages/affiliates/components/user-code.component";
+import Card from "../UI/card.component";
+// CLASSES
 import classes from "./modules/affiliate-card.module.scss";
 
 const Affiliate = ({ usercode }) => {

@@ -1,10 +1,10 @@
-import React from "react";
 import { HighlightOff } from "@material-ui/icons";
+import React from "react";
 
 // ASSETS & CLASSES
-import MaleDark from "../../../assets/images/profiles/male-dark.svg";
-import FemaleDark from "../../../assets/images/profiles/female-dark.svg";
 import Company from "../../../assets/images/profiles/company.svg";
+import FemaleDark from "../../../assets/images/profiles/female-dark.svg";
+import MaleDark from "../../../assets/images/profiles/male-dark.svg";
 import classes from "./modules/selection-card.module.scss";
 
 const SelectionBox = ({ type, sex, name, onSelect, onDisable }) => {

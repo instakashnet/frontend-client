@@ -1,17 +1,17 @@
-import React from "react";
-
 // FORMIK
 import { useFormik } from "formik";
-import { editProfileValidation } from "../../helpers/validations";
-
+import React from "react";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { editAdditionalInfo } from "../../../../store/actions";
 
 // COMPONENTS
-import { Input } from "../../../../components/UI/form-items/input.component";
-import { DatePickerInput } from "../../../../components/UI/form-items/datepicker.component";
 import { Button } from "../../../../components/UI/button.component";
+import { DatePickerInput } from "../../../../components/UI/form-items/datepicker.component";
+import { Input } from "../../../../components/UI/form-items/input.component";
+// REDUX ACTIONS
+import { editAdditionalInfo } from "../../../../store/actions";
+// HELPER
+import { editProfileValidation } from "../../helpers/validations";
 
 export const AddAdditionalInfo = ({ user }) => {
   const dispatch = useDispatch();

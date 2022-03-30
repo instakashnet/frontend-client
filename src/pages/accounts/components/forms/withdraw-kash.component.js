@@ -1,17 +1,17 @@
-import React from "react";
-
-// REACT REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { withdrawKashInit } from "../../../../store/actions";
-
 // FORMIK
 import { useFormik } from "formik";
-import { kashWithdrawalValidation } from "../../helpers/validations";
+import React from "react";
+// REACT REDUX
+import { useDispatch,useSelector } from "react-redux";
 
 // COMPONENTS
+import { Button } from "../../../../components/UI/button.component";
 import { Input } from "../../../../components/UI/form-items/input.component";
 import { SelectComponent } from "../../../../components/UI/form-items/select.component";
-import { Button } from "../../../../components/UI/button.component";
+// REDUX ACTIONS
+import { withdrawKashInit } from "../../../../store/actions";
+// HELPER
+import { kashWithdrawalValidation } from "../../helpers/validations";
 
 const KashWithdraw = ({ kashAccount, accounts }) => {
   const dispatch = useDispatch();

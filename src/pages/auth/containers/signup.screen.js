@@ -1,20 +1,20 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import { Mail } from "@material-ui/icons";
-
-// REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { signupInit } from "../../../store/actions";
-
 // FORMIK
 import { useFormik } from "formik";
-import { signupValidation } from "../helpers/formValidations";
+import React from "react";
+// REDUX
+import { useDispatch,useSelector } from "react-redux";
+// REACT ROUTER
+import { Link } from "react-router-dom";
 
 // COMPONENTS
-import { Input } from "../../../components/UI/form-items/input.component";
 import { Button } from "../../../components/UI/button.component";
 import { CheckboxComponent } from "../../../components/UI/form-items/checkbox.component";
-
+import { Input } from "../../../components/UI/form-items/input.component";
+// REDUX ACTIONS
+import { signupInit } from "../../../store/actions";
+// HELPER
+import { signupValidation } from "../helpers/formValidations";
 // CLASSES
 import sharedClass from "./modules/sharedClasses.module.scss";
 

@@ -1,10 +1,12 @@
+import { Tab,Tabs } from "@material-ui/core";
 import React, { useState } from "react";
+// REDUX
 import { useSelector } from "react-redux";
-import { Tabs, Tab } from "@material-ui/core";
 
+// COMPONENTS
 import { PersonalAccount } from "./forms/personal-account.component";
 import { ThirdPartyAccount } from "./forms/third-account.component";
-
+// CLASSES
 import classes from "./modules/add-account.module.scss";
 
 const a11yProps = (index) => {

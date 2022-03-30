@@ -1,15 +1,15 @@
+import { ArrowUpward,Cached } from "@material-ui/icons";
 import React from "react";
+// REACT ROUTER
 import { Link } from "react-router-dom";
-import { Cached, ArrowUpward } from "@material-ui/icons";
 
-// HELPERS
-import { formatAmount } from "../../../shared/functions";
-
+// ASSETS
+import KashIcon from "../../../assets/images/kash.svg";
 // COMPONENTS
 import Card from "../../../components/UI/card.component";
-
-// ASETS & CLASSES
-import KashIcon from "../../../assets/images/kash.svg";
+// HELPERS
+import { formatAmount } from "../../../shared/functions";
+// CLASSES
 import sharedClass from "../assets/css/sharedClasses.module.scss";
 import classes from "./modules/total-transfered.module.scss";
 

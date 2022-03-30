@@ -1,14 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import { Repeat } from "@material-ui/icons";
 import _ from "lodash";
+import React from "react";
+// REACT ROUTER
+import { Link } from "react-router-dom";
 
-// COMPONENTS
+// COMPONENT
 import Card from "../../../../components/UI/card.component";
-import { OrderItem } from "../orders/order-item.component";
-
 // CLASSES
 import sharedClass from "../../assets/css/sharedClasses.module.scss";
+// COMPONENT
+import { OrderItem } from "../orders/order-item.component";
 
 const RecentActivity = ({ orders, withdrawals, openModal }) => {
   return (

@@ -1,14 +1,13 @@
-import React from "react";
 import { FormControl, FormLabel, RadioGroup } from "@material-ui/core";
-
-// HELPERS
-import { formatAmount } from "../../../shared/functions";
+import React from "react";
 
 // COMPONENTS
-import KashInput from "./calculator-items/kash-input.component";
-import { RadioComponent } from "../../../components/UI/form-items/radio.component";
 import Card from "../../../components/UI/card.component";
-
+import { RadioComponent } from "../../../components/UI/form-items/radio.component";
+// HELPERS
+import { formatAmount } from "../../../shared/functions";
+// COMPONENT
+import KashInput from "./calculator-items/kash-input.component";
 // CLASSES
 import classes from "./modules/kash-used.module.scss";
 

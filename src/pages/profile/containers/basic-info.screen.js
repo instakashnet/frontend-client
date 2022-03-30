@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-
-// REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { editBasicInfo } from "../../../store/actions";
-
 // FORMIK
 import { useFormik } from "formik";
+import React, { useState } from "react";
+// REDUX
+import { useDispatch,useSelector } from "react-redux";
 
-// COMPONENTS
+// COMPONENT
 import Card from "../../../components/UI/card.component";
+// REDUX ACTION
+import { editBasicInfo } from "../../../store/actions";
+// COMPONENT
 import { InfoItem } from "../components/info-item.component";
 
 export const BasicInfoScreen = ({ user }) => {

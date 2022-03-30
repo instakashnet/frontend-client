@@ -1,14 +1,14 @@
 import React from "react";
-import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
 
-// COMPONENTS
+// COMPONENT
 import { Button } from "../../../components/UI/button.component";
-
+// HOOK
+import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
 // ASSETS & CLASSES
 import InfoImg from "../assets/images/exchange-user.png";
 import Arrows from "../assets/images/icons/arrows.svg";
-import User from "../assets/images/icons/user.svg";
 import Dollar from "../assets/images/icons/dollar.svg";
+import User from "../assets/images/icons/user.svg";
 import classes from "./modules/information.module.scss";
 
 const Information = ({ onClose }) => {
