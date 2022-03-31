@@ -53,11 +53,11 @@ const OrderDetails = () => {
           </div>
           <div className="flex items-center justify-between pr-2 my-3">
             <h4>Fecha:</h4>
-            {details.completedAt ? (
+            <span>{details.completedAt ? (
               moment(details.completedAt).format("DD/MM/YY - hh:mm a")
             ) : (
               moment(details.created).format("DD/MM/YY - hh:mm a")
-            )}
+            )}</span>
           </div>
           <div className="flex items-center justify-between pr-2 my-3">
             <h4>Solicitado:</h4>
