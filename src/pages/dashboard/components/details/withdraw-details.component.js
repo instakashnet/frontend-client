@@ -31,7 +31,7 @@ const WithdrawalDetails = () => {
       </div>
       <div className="flex items-center justify-between pr-2 my-3">
         <h4>Fecha:</h4>
-        <span>{moment(details.createdAt).format("DD/MM/YY [-] HH:mm")}</span>
+        <span>{moment(details.createdAt).format("DD/MM/YY - hh:mm a")}</span>
       </div>
       <div className="flex items-center justify-between pr-2 my-3">
         <h4>Solicitado:</h4>

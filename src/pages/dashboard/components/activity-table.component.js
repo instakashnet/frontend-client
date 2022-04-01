@@ -26,7 +26,7 @@ const ActivityTable = ({ data, columns }) => {
           of: "de",
           to: "-",
           loading: "Cargando...",
-          noRecordsFound: "No se han encotrado registros.",
+          noRecordsFound: "No se han encontrado registros.",
         },
       }}
     />

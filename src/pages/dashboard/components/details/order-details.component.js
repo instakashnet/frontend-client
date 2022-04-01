@@ -51,12 +51,16 @@ const OrderDetails = () => {
             <h4>Pedido:</h4>
             <span>{details.uuid}</span>
           </div>
-          {details.completedAt && (
-            <div className="flex items-center justify-between pr-2 my-3">
-              <h4>Fecha:</h4>
-              <span>{moment(details.completedAt).format("DD/MM/YY [-] HH:mm")}</span>
-            </div>
-          )}
+          <div className="flex items-center justify-between pr-2 my-3">
+            <h4>Fecha:</h4>
+            <span>
+              {details.completedAt ? (
+                moment(details.completedAt).format("DD/MM/YY - hh:mm a")
+              ) : (
+                moment(details.created).format("DD/MM/YY - hh:mm a")
+              )}
+            </span>
+          </div>
           <div className="flex items-center justify-between pr-2 my-3">
             <h4>Solicitado:</h4>
             <span className={classes.Price}>{`${details.currencyReceivedSymbol} ${formatAmount(details.amountReceived)}`}</span>
