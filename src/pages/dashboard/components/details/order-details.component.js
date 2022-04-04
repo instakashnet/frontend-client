@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import moment from "moment";
 import React from "react";
 // REDUX
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // REACT SPINNER
 import { HashLoader } from "react-spinners";
 
@@ -13,9 +13,9 @@ import CopyButton from "../../../../components/UI/copy-button.component";
 import { Input } from "../../../../components/UI/form-items/input.component";
 import { StatusBadge } from "../../../../components/UI/status-badge.component";
 // HELPER
-import { convertRate,formatAmount } from "../../../../shared/functions";
+import { convertRate, formatAmount } from "../../../../shared/functions";
 // REDUX ACTIONS
-import { cancelExchangeInit,closeSliderModal, processCodeInit } from "../../../../store/actions";
+import { cancelExchangeInit, closeSliderModal, processCodeInit } from "../../../../store/actions";
 // HELPER
 import { transactionCodeValidation } from "../../helpers/validations";
 // CLASSES
@@ -53,13 +53,7 @@ const OrderDetails = () => {
           </div>
           <div className="flex items-center justify-between pr-2 my-3">
             <h4>Fecha:</h4>
-            <span>
-              {details.completedAt ? (
-                moment(details.completedAt).format("DD/MM/YY - hh:mm a")
-              ) : (
-                moment(details.created).format("DD/MM/YY - hh:mm a")
-              )}
-            </span>
+            <span>{details.completedAt ? moment(details.completedAt).format("DD/MM/YY - hh:mm a") : moment(details.created).format("DD/MM/YY - hh:mm a")}</span>
           </div>
           <div className="flex items-center justify-between pr-2 my-3">
             <h4>Solicitado:</h4>
@@ -102,7 +96,7 @@ const OrderDetails = () => {
             </>
           )}
 
-          {details.estateId === 2 ? (
+          {details.statusId === 2 ? (
             <>
               <h2 className="mt-5">Completa tu operación</h2>
               <h3>Cuenta a transferir:</h3>
