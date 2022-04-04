@@ -1,12 +1,10 @@
 import { Dialog, DialogContent,Slide } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
-import React, { useEffect } from "react";
+import React from "react";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-// REACT ROUTER
-import { useLocation } from "react-router-dom";
 
-// REDUX ACTIONS
+// REDUX ACTION
 import { closeSliderModal } from "../../../store/actions";
 // CLASSES
 import classes from "../modules/modals/g-modal.module.scss";
@@ -15,16 +13,10 @@ const Transition = React.forwardRef((props, ref) => <Slide direction={window.scr
 
 export const SliderModal = ({ title, children }) => {
   const dispatch = useDispatch(),
-    location = useLocation(),
     isOpen = useSelector((state) => state.Modal.isSliderOpen);
 
   // HANDLERS
   const closeSliderModalHandler = () => dispatch(closeSliderModal());
-
-  // EFFECTS
-  useEffect(() => {
-    dispatch(closeSliderModal());
-  }, [location, dispatch]);
 
   return (
     <Dialog
