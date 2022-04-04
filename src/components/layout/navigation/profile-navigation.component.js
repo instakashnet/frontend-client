@@ -25,7 +25,7 @@ const ProfileNavigation = () => {
   const closeSliderModalHandler = () => dispatch(closeSliderModal());
 
   const logoutHandler = () => {
-    closeSliderModalHandler();
+    setTimeout(() => closeSliderModalHandler(), 5000);
     dispatch(logoutInit());
   };
 
