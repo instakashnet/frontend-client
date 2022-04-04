@@ -10,8 +10,8 @@ import Logout from "../../../assets/images/icons/logout.svg";
 import VerifyIdentity from "../../../assets/images/icons/verify-identity.svg";
 // HOOK
 import { useUserData } from "../../../shared/hooks/useProfileInfo";
-// REDUX ACTION
-import { logoutInit } from "../../../store/actions";
+// REDUX ACTIONS
+import { closeSliderModal, logoutInit } from "../../../store/actions";
 // CLASSES
 import classes from "../modules/profile-nav.module.scss";
 // COMPONENT
@@ -21,6 +21,13 @@ const ProfileNavigation = () => {
   const dispatch = useDispatch(),
     user = useSelector((state) => state.Auth.user),
     { Avatar } = useUserData(user);
+
+  const closeSliderModalHandler = () => dispatch(closeSliderModal());
+
+  const logoutHandler = () => {
+    setTimeout(() => closeSliderModalHandler(), 5000);
+    dispatch(logoutInit());
+  };
 
   return (
     <div className={classes.ProfileNavigation}>
@@ -35,15 +42,15 @@ const ProfileNavigation = () => {
       </div>
       <nav>
         <ul>
-          <NavItem label="Datos básicos" icon={Profile} link="/my-profile" />
-          {user.level < 3 && <NavItem label="Verificar identidad" icon={VerifyIdentity} link="/my-profile/verify-identity" />}
-          <NavItem label="Datos Adicionales" icon={AdditionalInfo} link="/my-profile/additionals" />
-          <a href="https://instakash.net/faq" target="_blank" rel="noopener noreferrer" className={classes.NavItem}>
+          <NavItem label="Datos básicos" icon={Profile} link="/my-profile" onClick={closeSliderModalHandler} />
+          {user.level < 3 && <NavItem label="Verificar identidad" icon={VerifyIdentity} link="/my-profile/verify-identity" onClick={closeSliderModalHandler} />}
+          <NavItem label="Datos Adicionales" icon={AdditionalInfo} link="/my-profile/additionals" onClick={closeSliderModalHandler} />
+          <a href="https://instakash.net/faq" target="_blank" rel="noopener noreferrer" className={classes.NavItem} onClick={closeSliderModalHandler}>
             <img src={Help} alt="centro-de-ayuda" width={26} className="mr-3" />
             Centro de ayuda
           </a>
         </ul>
-        <button className="flex items-center" onClick={() => dispatch(logoutInit())}>
+        <button className="flex items-center" onClick={logoutHandler}>
           <img src={Logout} alt="cerrar-sesión" width={20} className="mr-3" />
           Cerrar sesión
         </button>
