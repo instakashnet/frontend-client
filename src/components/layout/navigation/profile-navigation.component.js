@@ -24,11 +24,6 @@ const ProfileNavigation = () => {
 
   const closeSliderModalHandler = () => dispatch(closeSliderModal());
 
-  const logoutHandler = () => {
-    closeSliderModalHandler();
-    dispatch(logoutInit());
-  };
-
   return (
     <div className={classes.ProfileNavigation}>
       <div className={classes.ProfileInfo}>
@@ -50,7 +45,7 @@ const ProfileNavigation = () => {
             Centro de ayuda
           </a>
         </ul>
-        <button className="flex items-center" onClick={logoutHandler}>
+        <button className="flex items-center" onClick={() => dispatch(logoutInit())}>
           <img src={Logout} alt="cerrar-sesión" width={20} className="mr-3" />
           Cerrar sesión
         </button>
