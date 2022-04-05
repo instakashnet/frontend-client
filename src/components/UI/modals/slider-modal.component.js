@@ -1,6 +1,6 @@
 import { Dialog, DialogContent,Slide } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
-import React from "react";
+import React, { useEffect } from "react";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 
@@ -17,6 +17,11 @@ export const SliderModal = ({ title, children }) => {
 
   // HANDLERS
   const closeSliderModalHandler = () => dispatch(closeSliderModal());
+
+  // EFFECT
+  useEffect(() => {
+    return () => dispatch(closeSliderModal());
+  }, [dispatch]);
 
   return (
     <Dialog
