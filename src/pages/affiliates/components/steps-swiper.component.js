@@ -1,18 +1,17 @@
+import "swiper/swiper.min.css";
+import "swiper/components/navigation/navigation.min.css";
+
+import { ArrowLeft, ArrowRight } from "@material-ui/icons";
 import React, { useRef } from "react";
 import SwiperCore, { Navigation } from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { ArrowLeft, ArrowRight } from "@material-ui/icons";
-
-import Step from "./step.component";
 
 import Step1Img from "../assets/images/step1.svg";
 import Step2Img from "../assets/images/step2.svg";
 import Step3Img from "../assets/images/step3.svg";
 import Step4Img from "../assets/images/step4.svg";
 import classes from "./modules/steps-swiper.module.scss";
-
-import "swiper/swiper.min.css";
-import "swiper/components/navigation/navigation.min.css";
+import Step from "./step.component";
 
 SwiperCore.use([Navigation]);
 

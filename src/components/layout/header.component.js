@@ -1,13 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleNav, openSliderModal } from "../../store/actions";
 
-import Whatsapp from "../UI/whatsapp.component";
-import ProfileInfo from "../UI/profile-info.component";
-import ProfileNavigation from "./navigation/profile-navigation.component";
+import { openSliderModal,toggleNav } from "../../store/actions";
 import Logo from "../UI/logo.component";
-
+import ProfileInfo from "../UI/profile-info.component";
+import Whatsapp from "../UI/whatsapp.component";
 import classes from "./modules/header.module.scss";
+import ProfileNavigation from "./navigation/profile-navigation.component";
 
 const Header = ({ containerRef }) => {
   const dispatch = useDispatch(),

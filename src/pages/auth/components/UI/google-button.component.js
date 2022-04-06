@@ -3,7 +3,6 @@ import GoogleLogin from "react-google-login";
 
 // COMPONENTS
 import { Button } from "../../../../components/UI/button.component";
-
 // CLASSES & ASSETS
 import GoogleIcon from "../../assets/images/icons/google.svg";
 import classes from "./modules/google-button.module.scss";

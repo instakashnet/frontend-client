@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
 import { Add } from "@material-ui/icons";
-
+import React, { useEffect } from "react";
 // REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { selectProfileInit, disableProfileInit, getProfilesInit, openModal, closeModal } from "../../../store/actions";
+import { useDispatch,useSelector } from "react-redux";
 
 // COMPONENTS
-import SelectionCard from "../../profile/components/selection-card.component";
-import AddProfile from "../../profile/components/forms/add-profile.component";
-import Spinner from "../../../components/UI/spinner.component";
 import { Button } from "../../../components/UI/button.component";
-
+import Spinner from "../../../components/UI/spinner.component";
+// REDUX ACTIONS
+import { closeModal,disableProfileInit, getProfilesInit, openModal, selectProfileInit } from "../../../store/actions";
+// COMPONENTS
+import AddProfile from "../../profile/components/forms/add-profile.component";
+import SelectionCard from "../../profile/components/selection-card.component";
 // CLASSES
 import classes from "./modules/selection.screen.module.scss";
 

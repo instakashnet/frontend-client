@@ -1,17 +1,15 @@
-import React from "react";
 import moment from "moment";
-
-// HELPERS
-import { formatAmount } from "../../../../shared/functions";
-
+import React from "react";
 // REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { closeSliderModal } from "../../../../store/actions";
+import { useDispatch,useSelector } from "react-redux";
 
 // COMPONENTS
-import { StatusBadge } from "../../../../components/UI/status-badge.component";
 import { Button } from "../../../../components/UI/button.component";
-
+import { StatusBadge } from "../../../../components/UI/status-badge.component";
+// HELPER
+import { formatAmount } from "../../../../shared/functions";
+// REDUX ACTIONS
+import { closeSliderModal } from "../../../../store/actions";
 // CLASSES
 import classes from "../modules/details/order_withdraw-details.module.scss";
 
@@ -33,7 +31,7 @@ const WithdrawalDetails = () => {
       </div>
       <div className="flex items-center justify-between pr-2 my-3">
         <h4>Fecha:</h4>
-        <span>{moment(details.createdAt).format("DD/MM/YY [-] HH:mm")}</span>
+        <span>{moment(details.createdAt).format("DD/MM/YY - hh:mm a")}</span>
       </div>
       <div className="flex items-center justify-between pr-2 my-3">
         <h4>Solicitado:</h4>
@@ -47,7 +45,7 @@ const WithdrawalDetails = () => {
         <span>{`*********${details.accountToIdRaw.substring(details.accountToIdRaw.length - 4, details.accountToIdRaw.length)}`}</span>
       </div>
 
-      <Button type="button" className="action-button mt-6" onClick={closeModalHandler}>
+      <Button type="button" className="action-button block mt-8 mx-auto" onClick={closeModalHandler}>
         Aceptar
       </Button>
     </div>

@@ -1,28 +1,30 @@
 import React, { useEffect } from "react";
-import { Route } from "react-router-dom";
-import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
-
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { openModal, closeModal } from "../../../store/actions";
-
-// SCREENS
-import Calculator from "./calculator.screen";
-import Accounts from "./accounts.screen";
-import Complete from "./complete.screen";
-import ProfileSelection from "./selection.screen";
+// REACT ROUTER
+import { Route } from "react-router-dom";
 
 // COMPONENTS
+import Layout from "../../../components/layout/layout.component";
+import Spinner from "../../../components/UI/spinner.component";
+// HOOK
+import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
+// REDUX ACTIONS
+import { closeModal,openModal } from "../../../store/actions";
+// COMPONENTS
+import { AddAccount } from "../../accounts/components/add-account.component";
+import { InfoButton } from "../components/info-button.component";
 import Information from "../components/information.component";
 import CompleteProfile from "../components/profile-modal.component";
-import { InfoButton } from "../components/info-button.component";
-import Layout from "../../../components/layout/layout.component";
-import { AddAccount } from "../../accounts/components/add-account.component";
 import { SelectionHeader } from "../components/selection-header.component";
-import Spinner from "../../../components/UI/spinner.component";
-
+// SCREENS
+import Accounts from "./accounts.screen";
+import Calculator from "./calculator.screen";
+import Complete from "./complete.screen";
 // CLASSES
 import classes from "./modules/exchange.screen.module.scss";
+// SCREEN
+import ProfileSelection from "./selection.screen";
 
 const Exchange = ({ history, location, match }) => {
   // HOOKS & VARIABLES

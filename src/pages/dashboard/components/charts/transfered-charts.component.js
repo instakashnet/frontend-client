@@ -1,13 +1,13 @@
-import React from "react";
 import { AttachMoney } from "@material-ui/icons";
+import React from "react";
 import Skeleton from "react-loading-skeleton";
 
-// COMPONENTS
+// COMPONENT
 import Card from "../../../../components/UI/card.component";
-import PieChart from "./pie-chart.component";
-
 // CLASSES
 import sharedClass from "../../assets/css/sharedClasses.module.scss";
+// COMPONENT
+import PieChart from "./pie-chart.component";
 
 const TransferedCharts = ({ isLoading, orderAmounts }) => {
   return (

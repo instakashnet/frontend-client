@@ -1,21 +1,20 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { AccessAlarm,Info } from "@material-ui/icons";
 import { useFormik } from "formik";
-import { useSelector, useDispatch } from "react-redux";
-import { Info, AccessAlarm } from "@material-ui/icons";
-import { getRatesInit, validateCouponInit, createExchangeInit, getLastOrderInit, deleteCoupon } from "../../../store/actions";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useDispatch,useSelector } from "react-redux";
 
-// COMPONENTS
-import Rates from "../components/calculator-items/rates.component";
-import Input from "../components/calculator-items/currency-input.component";
-import CouponInput from "../components/calculator-items/coupon-input.component";
-import Swipe from "../components/calculator-items/swipe.component";
-import Timer from "../components/calculator-items/timer.component";
 import { Button } from "../../../components/UI/button.component";
 import Tooltip from "../../../components/UI/tooltip.component";
-
+import { createExchangeInit, deleteCoupon,getLastOrderInit, getRatesInit, validateCouponInit } from "../../../store/actions";
+import CouponInput from "../components/calculator-items/coupon-input.component";
+import Input from "../components/calculator-items/currency-input.component";
+// COMPONENTS
+import Rates from "../components/calculator-items/rates.component";
+import Swipe from "../components/calculator-items/swipe.component";
+import Timer from "../components/calculator-items/timer.component";
+import classes from "./modules/calculator.screen.module.scss";
 // CLASSES
 import sharedClass from "./modules/sharedClasses.module.scss";
-import classes from "./modules/calculator.screen.module.scss";
 
 const Calculator = ({ profile, setModal, user }) => {
   const dispatch = useDispatch(),

@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
-
 //FORMIK
 import { useFormik } from "formik";
-import { addAccountValidation } from "../../helpers/validations";
-
+import React, { useEffect, useState } from "react";
 // REACT-REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { addAccountInit } from "../../../../store/actions";
+import { useDispatch,useSelector } from "react-redux";
 
 // COMPONENTS
-import { MuiAlert } from "../../../../components/UI/mui-alert.component";
+import { Button } from "../../../../components/UI/button.component";
+import { CheckboxComponent } from "../../../../components/UI/form-items/checkbox.component";
 import { Input } from "../../../../components/UI/form-items/input.component";
 import { SelectComponent } from "../../../../components/UI/form-items/select.component";
-import { CheckboxComponent } from "../../../../components/UI/form-items/checkbox.component";
-import { Button } from "../../../../components/UI/button.component";
-
+import { MuiAlert } from "../../../../components/UI/mui-alert.component";
+// REDUX ACTIONS
+import { addAccountInit } from "../../../../store/actions";
+// HELPER TO FORMIK
+import { addAccountValidation } from "../../helpers/validations";
 // CLASSES
 import classes from "../modules/forms/add-account.module.scss";
 

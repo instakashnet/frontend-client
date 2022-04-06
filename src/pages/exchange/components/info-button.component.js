@@ -1,5 +1,5 @@
-import React from "react";
 import { Info } from "@material-ui/icons";
+import React from "react";
 
 import classes from "./modules/info-button.module.scss";
 

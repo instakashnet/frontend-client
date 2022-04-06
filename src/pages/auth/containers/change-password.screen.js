@@ -1,17 +1,16 @@
-import React, { useEffect } from "react";
-
 // FORMIK
-import { changePasswordValidation } from "../helpers/formValidations";
 import { useFormik } from "formik";
-
+import React, { useEffect } from "react";
 // REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { resetPasswordInit } from "../../../store/actions";
+import { useDispatch,useSelector } from "react-redux";
 
 // COMPONENTS
-import { Input } from "../../../components/UI/form-items/input.component";
 import { Button } from "../../../components/UI/button.component";
-
+import { Input } from "../../../components/UI/form-items/input.component";
+// REDUX ACTIONS
+import { resetPasswordInit } from "../../../store/actions";
+// HELPER TO FORMIK
+import { changePasswordValidation } from "../helpers/formValidations";
 // CLASSES
 import sharedClass from "./modules/sharedClasses.module.scss";
 

@@ -1,7 +1,8 @@
-import React from "react";
-import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
-import { AccessAlarm } from "@material-ui/icons";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { AccessAlarm } from "@material-ui/icons";
+import React from "react";
+
+import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
 
 export const DocumentInReview = () => {
   const { isMobile } = useDeviceDetect();

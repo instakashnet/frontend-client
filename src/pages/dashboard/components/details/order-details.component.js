@@ -1,24 +1,23 @@
-import React from "react";
-import moment from "moment";
-import { HashLoader } from "react-spinners";
-
-// HELPERS
-import { formatAmount, convertRate } from "../../../../shared/functions";
-
 // FORMIK
 import { useFormik } from "formik";
-import { transactionCodeValidation } from "../../helpers/validations";
-
+import moment from "moment";
+import React from "react";
 // REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { closeSliderModal, processCodeInit, cancelExchangeInit } from "../../../../store/actions";
+import { useDispatch, useSelector } from "react-redux";
+// REACT SPINNER
+import { HashLoader } from "react-spinners";
 
 // COMPONENTS
-import { StatusBadge } from "../../../../components/UI/status-badge.component";
 import { Button } from "../../../../components/UI/button.component";
-import { Input } from "../../../../components/UI/form-items/input.component";
 import CopyButton from "../../../../components/UI/copy-button.component";
-
+import { Input } from "../../../../components/UI/form-items/input.component";
+import { StatusBadge } from "../../../../components/UI/status-badge.component";
+// HELPER
+import { convertRate, formatAmount } from "../../../../shared/functions";
+// REDUX ACTIONS
+import { cancelExchangeInit, closeSliderModal, processCodeInit } from "../../../../store/actions";
+// HELPER
+import { transactionCodeValidation } from "../../helpers/validations";
 // CLASSES
 import classes from "../modules/details/order_withdraw-details.module.scss";
 
@@ -52,12 +51,10 @@ const OrderDetails = () => {
             <h4>Pedido:</h4>
             <span>{details.uuid}</span>
           </div>
-          {details.completedAt && (
-            <div className="flex items-center justify-between pr-2 my-3">
-              <h4>Fecha:</h4>
-              <span>{moment(details.completedAt).format("DD/MM/YY [-] HH:mm")}</span>
-            </div>
-          )}
+          <div className="flex items-center justify-between pr-2 my-3">
+            <h4>Fecha:</h4>
+            <span>{details.completedAt ? moment(details.completedAt).format("DD/MM/YY - hh:mm a") : moment(details.created).format("DD/MM/YY - hh:mm a")}</span>
+          </div>
           <div className="flex items-center justify-between pr-2 my-3">
             <h4>Solicitado:</h4>
             <span className={classes.Price}>{`${details.currencyReceivedSymbol} ${formatAmount(details.amountReceived)}`}</span>
@@ -99,7 +96,7 @@ const OrderDetails = () => {
             </>
           )}
 
-          {details.estateId === 2 ? (
+          {details.statusId === 2 ? (
             <>
               <h2 className="mt-5">Completa tu operación</h2>
               <h3>Cuenta a transferir:</h3>
@@ -143,7 +140,7 @@ const OrderDetails = () => {
               </form>
             </>
           ) : (
-            <Button type="button" className="action-button mt-6" onClick={closeModalHandler}>
+            <Button type="button" className="action-button block mt-8 mx-auto" onClick={closeModalHandler}>
               Aceptar
             </Button>
           )}

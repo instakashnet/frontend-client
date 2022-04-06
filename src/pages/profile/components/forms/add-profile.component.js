@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-
-// HELPERS
-import { AllowOnlyNumbers } from "../../../../shared/functions";
-
-// REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { addProfileInit } from "../../../../store/actions";
-
 // FORMIK
 import { useFormik } from "formik";
-import { addProfileValidation } from "../../helpers/validations";
+import React, { useEffect, useState } from "react";
+// REDUX
+import { useDispatch,useSelector } from "react-redux";
 
 // COMPONENTS
-import { Input } from "../../../../components/UI/form-items/input.component";
-import { CheckboxComponent } from "../../../../components/UI/form-items/checkbox.component";
 import { Button } from "../../../../components/UI/button.component";
+import { CheckboxComponent } from "../../../../components/UI/form-items/checkbox.component";
+import { Input } from "../../../../components/UI/form-items/input.component";
+// HELPER
+import { AllowOnlyNumbers } from "../../../../shared/functions";
+// REDUX ACTION
+import { addProfileInit } from "../../../../store/actions";
+// HELPER
+import { addProfileValidation } from "../../helpers/validations";
 
 const AddProfile = () => {
   const dispatch = useDispatch();

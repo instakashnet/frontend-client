@@ -2,7 +2,6 @@ import React from "react";
 
 // COMPONENTS
 import { Button } from "../../../components/UI/button.component";
-
 // ASSETS & CLASSES
 import NoAccountImg from "../assets/images/no-accounts.svg";
 import classes from "./modules/no-accounts.module.scss";

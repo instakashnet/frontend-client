@@ -1,24 +1,22 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-
 // FORMIK
 import { useFormik } from "formik";
-import { completeProfileValidation } from "../helpers/formValidations";
-
+import React, { useEffect, useState } from "react";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { logoutInit, completeProfileInit, openModal, closeModal } from "../../../store/actions";
-
-// HELPERS
-import { AllowOnlyNumbers } from "../../../shared/functions";
 
 // COMPONENTS
-import { Modal } from "../../../components/UI/modals/modal.component";
-import { Input } from "../../../components/UI/form-items/input.component";
-import { SelectComponent } from "../../../components/UI/form-items/select.component";
-import { InputPhone } from "../../../components/UI/form-items/phone-input.component";
 import { Button } from "../../../components/UI/button.component";
-
+import { Input } from "../../../components/UI/form-items/input.component";
+import { InputPhone } from "../../../components/UI/form-items/phone-input.component";
+import { SelectComponent } from "../../../components/UI/form-items/select.component";
+import { Modal } from "../../../components/UI/modals/modal.component";
+// HELPER
+import { AllowOnlyNumbers } from "../../../shared/functions";
+// REDUX ACTIONS
+import { closeModal,completeProfileInit, logoutInit, openModal } from "../../../store/actions";
+// HELPER TO FORMIK
+import { completeProfileValidation } from "../helpers/formValidations";
 // CLASSES
 import sharedClass from "./modules/sharedClasses.module.scss";
 

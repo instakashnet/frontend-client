@@ -1,23 +1,27 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
-import { openModal } from "../../../store/actions";
 
-import StepsSwiper from "../components/steps-swiper.component";
-import Step from "../components/step.component";
-import UserCode from "../components/user-code.component";
-import EditCode from "../components/forms/edit-code.component";
-import ShareIcons from "../components/share-icons.component";
+// COMPONENT
 import Card from "../../../components/UI/card.component";
-
+// HOOK
+import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
+// REDUX ACTIONS
+import { openModal } from "../../../store/actions";
+// ASSETS
+import Arrow1 from "../assets/images/arrow1.svg";
+import Arrow2 from "../assets/images/arrow2.svg";
 import Step1Img from "../assets/images/step1.svg";
 import Step2Img from "../assets/images/step2.svg";
 import Step3Img from "../assets/images/step3.svg";
-import Arrow1 from "../assets/images/arrow1.svg";
-import Arrow2 from "../assets/images/arrow2.svg";
-
-import sharedClass from "./modules/sharedClasses.module.scss";
+// COMPONENTS
+import EditCode from "../components/forms/edit-code.component";
+import ShareIcons from "../components/share-icons.component";
+import Step from "../components/step.component";
+import StepsSwiper from "../components/steps-swiper.component";
+import UserCode from "../components/user-code.component";
+// CLASSES
 import classes from "./modules/instructions.module.scss";
+import sharedClass from "./modules/sharedClasses.module.scss";
 
 export const Instructions = ({ ...rest }) => {
   const dispatch = useDispatch();

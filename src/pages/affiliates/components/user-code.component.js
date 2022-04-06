@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import Tooltip from "../../../components/UI/tooltip.component";
-
 import classes from "./modules/user-code.module.scss";
 
 const UserCode = ({ userCode }) => {

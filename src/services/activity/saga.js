@@ -1,10 +1,10 @@
-import { put, takeEvery, all, fork, takeLatest } from "redux-saga/effects";
-import * as types from "./types";
-import * as actions from "./actions";
-import { setAlertInit } from "../../store/actions";
+import { all, fork, put, takeEvery, takeLatest } from "redux-saga/effects";
 
 // API SERVICES
 import { exchangeService } from "../../api/axios";
+import { setAlertInit } from "../../store/actions";
+import * as actions from "./actions";
+import * as types from "./types";
 
 function* getOrders({ limit, enabled }) {
   try {

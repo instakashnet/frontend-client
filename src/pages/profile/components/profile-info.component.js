@@ -1,13 +1,12 @@
+import { Check, ErrorOutline,Remove } from "@material-ui/icons";
 import React from "react";
-import { Remove, Check, ErrorOutline } from "@material-ui/icons";
 import { CircleProgress } from "react-gradient-progress";
 
 // ASSETS & CLASSES
-import MaleLight from "../../../assets/images/profiles/male-light.svg";
 import FemaleLight from "../../../assets/images/profiles/female-light.svg";
+import MaleLight from "../../../assets/images/profiles/male-light.svg";
 import classes from "./modules/profile-info.module.scss";
-
-// COMPONENTS
+// COMPONENT
 import { ProfileMenu } from "./profile-menu.component";
 
 export const ProfileInfo = ({ user, color, completed, match }) => {

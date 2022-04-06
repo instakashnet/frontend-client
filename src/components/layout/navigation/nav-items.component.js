@@ -1,16 +1,15 @@
 import React from "react";
 
-import NavItem from "./nav-item.component";
-
-import HomeIcon from "../../../assets/images/icons/home.svg";
+import AccountsIcon from "../../../assets/images/icons/accounts.svg";
 import DashboardIcon from "../../../assets/images/icons/dashboard.svg";
 import ExchangeIcon from "../../../assets/images/icons/exchange.svg";
-import AccountsIcon from "../../../assets/images/icons/accounts.svg";
+import HomeIcon from "../../../assets/images/icons/home.svg";
 import TrophyIcon from "../../../assets/images/icons/trophy.svg";
+import NavItem from "./nav-item.component";
 
 const NavItems = () => {
   return (
-    <nav className="w-full mt-6 md:mt-20 mb-12">
+    <nav className="w-full mt-6 md:mt-4 mb-12">
       <ul>
         <NavItem link="/" icon={HomeIcon} label="Inicio" />
         <NavItem link="/dashboard/recent" icon={DashboardIcon} label="Mi actividad" />

@@ -1,6 +1,6 @@
+import { GroupOutlined } from "@material-ui/icons";
 import React from "react";
 import { Link } from "react-router-dom";
-import { GroupOutlined } from "@material-ui/icons";
 
 // CLASSES
 import classes from "./modules/selection-header.module.scss";

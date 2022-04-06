@@ -1,9 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useRef,useState } from "react";
 import Webcam from "react-webcam";
 
 // COMPONENTS
 import { Button } from "../../../../components/UI/button.component";
-
 // CLASSES
 import classes from "../modules/forms/document-camera.module.scss";
 

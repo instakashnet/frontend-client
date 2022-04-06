@@ -2,7 +2,6 @@ import React from "react";
 
 // HELPERS
 import { convertRate } from "../../../../shared/functions";
-
 // CLASSES
 import classes from "../modules/calculator-items/rates.module.scss";
 

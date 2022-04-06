@@ -1,15 +1,15 @@
-import { put, all, fork, call, delay, select, takeEvery, takeLatest } from "redux-saga/effects";
-import * as types from "./types";
-import * as actions from "./actions";
-import { setAlertInit, closeModal, setUserData } from "../../store/actions";
-import { replaceSpace } from "../../shared/functions";
-import history from "../../shared/history";
-import Swal from "sweetalert2";
 import camelize from "camelize";
 import { uploadFile } from "react-s3";
+import { all, call, delay, fork, put, select, takeEvery, takeLatest } from "redux-saga/effects";
+import Swal from "sweetalert2";
 
 // API SERVICES
 import { authService } from "../../api/axios";
+import { replaceSpace } from "../../shared/functions";
+import history from "../../shared/history";
+import { closeModal, setAlertInit, setUserData } from "../../store/actions";
+import * as actions from "./actions";
+import * as types from "./types";
 
 // UTILS
 const uploadToS3 = async (photo, docType) => {

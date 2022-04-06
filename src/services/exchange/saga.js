@@ -1,13 +1,13 @@
-import { put, takeEvery, takeLatest, all, fork, call } from "redux-saga/effects";
-import Swal from "sweetalert2";
 import camelize from "camelize";
-import * as types from "./types";
-import * as actions from "./actions";
-import { setAlertInit, getOrdersInit } from "../../store/actions";
-import history from "../../shared/history";
+import { all, call,fork, put, takeEvery, takeLatest } from "redux-saga/effects";
+import Swal from "sweetalert2";
 
 // API SERVICES
 import { exchangeService } from "../../api/axios";
+import history from "../../shared/history";
+import { getOrdersInit,setAlertInit } from "../../store/actions";
+import * as actions from "./actions";
+import * as types from "./types";
 
 function* getRates() {
   try {

@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+
 import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
 import { toggleNav } from "../../store/actions";
-
-import Navigation from "./navigation/nav-items.component";
 import Backdrop from "../UI/backdrop.component";
-import Affiliate from "./affiliate-card.component";
 import Logo from "../UI/logo.component";
-
+import Affiliate from "./affiliate-card.component";
 import classes from "./modules/sidebar.module.scss";
+import Navigation from "./navigation/nav-items.component";
 
 const Sidebar = ({ headerVisible }) => {
   const dispatch = useDispatch();

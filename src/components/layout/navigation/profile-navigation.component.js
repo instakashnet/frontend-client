@@ -1,27 +1,28 @@
 import React from "react";
-
-// HOOKS
-import { useUserData } from "../../../shared/hooks/useProfileInfo";
-
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { logoutInit } from "../../../store/actions";
 
-// ASSETS && CLASSES
-import Profile from "../../../assets/images/icons/avatar.svg";
-import VerifyIdentity from "../../../assets/images/icons/verify-identity.svg";
+// ASSETS
 import AdditionalInfo from "../../../assets/images/icons/additional-info.svg";
-import Logout from "../../../assets/images/icons/logout.svg";
+import Profile from "../../../assets/images/icons/avatar.svg";
 import Help from "../../../assets/images/icons/help.svg";
+import Logout from "../../../assets/images/icons/logout.svg";
+import VerifyIdentity from "../../../assets/images/icons/verify-identity.svg";
+// HOOK
+import { useUserData } from "../../../shared/hooks/useProfileInfo";
+// REDUX ACTIONS
+import { closeSliderModal, logoutInit } from "../../../store/actions";
+// CLASSES
 import classes from "../modules/profile-nav.module.scss";
-
-// COMPONENTS
+// COMPONENT
 import NavItem from "./nav-item.component";
 
 const ProfileNavigation = () => {
   const dispatch = useDispatch(),
     user = useSelector((state) => state.Auth.user),
     { Avatar } = useUserData(user);
+
+  const closeSliderModalHandler = () => dispatch(closeSliderModal());
 
   return (
     <div className={classes.ProfileNavigation}>
@@ -36,10 +37,10 @@ const ProfileNavigation = () => {
       </div>
       <nav>
         <ul>
-          <NavItem label="Datos básicos" icon={Profile} link="/my-profile" />
-          {user.level < 3 && <NavItem label="Verificar identidad" icon={VerifyIdentity} link="/my-profile/verify-identity" />}
-          <NavItem label="Datos Adicionales" icon={AdditionalInfo} link="/my-profile/additionals" />
-          <a href="https://instakash.net/faq" target="_blank" rel="noopener noreferrer" className={classes.NavItem}>
+          <NavItem label="Datos básicos" icon={Profile} link="/my-profile" onClick={closeSliderModalHandler} />
+          {user.level < 3 && <NavItem label="Verificar identidad" icon={VerifyIdentity} link="/my-profile/verify-identity" onClick={closeSliderModalHandler} />}
+          <NavItem label="Datos Adicionales" icon={AdditionalInfo} link="/my-profile/additionals" onClick={closeSliderModalHandler} />
+          <a href="https://instakash.net/faq" target="_blank" rel="noopener noreferrer" className={classes.NavItem} onClick={closeSliderModalHandler}>
             <img src={Help} alt="centro-de-ayuda" width={26} className="mr-3" />
             Centro de ayuda
           </a>

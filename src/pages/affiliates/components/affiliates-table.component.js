@@ -1,6 +1,7 @@
-import React from "react";
-import { Grid } from "gridjs-react";
 import "gridjs/dist/theme/mermaid.css";
+
+import { Grid } from "gridjs-react";
+import React from "react";
 
 import classes from "./modules/affiliates-table.module.scss";
 

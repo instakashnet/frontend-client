@@ -1,10 +1,10 @@
-import { all, fork, takeEvery, put } from "redux-saga/effects";
 import moment from "moment";
-import * as types from "./types";
-import * as actions from "./actions";
+import { all, fork, put,takeEvery } from "redux-saga/effects";
 
 // API SERVICES
 import { exchangeService } from "../../../api/axios";
+import * as actions from "./actions";
+import * as types from "./types";
 
 function* setIsClosed() {
   try {

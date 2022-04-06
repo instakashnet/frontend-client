@@ -1,19 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import { Mail } from "@material-ui/icons";
-
 // FORMIK
 import { useFormik } from "formik";
-import { emailValidation } from "../helpers/formValidations";
-
+import React from "react";
 // REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { recoverPasswordInit } from "../../../store/actions";
+import { useDispatch,useSelector } from "react-redux";
+// REACT ROUTER
+import { Link } from "react-router-dom";
 
 // COMPONENTS
-import { Input } from "../../../components/UI/form-items/input.component";
 import { Button } from "../../../components/UI/button.component";
-
+import { Input } from "../../../components/UI/form-items/input.component";
+// REDUX ACTIONS
+import { recoverPasswordInit } from "../../../store/actions";
+// HELPER TO FORMIK
+import { emailValidation } from "../helpers/formValidations";
 // CLASSES
 import sharedClass from "./modules/sharedClasses.module.scss";
 

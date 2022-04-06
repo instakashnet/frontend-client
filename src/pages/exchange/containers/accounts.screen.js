@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { Add } from "@material-ui/icons";
-
-// REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { completeExchangeInit, cancelExchangeInit, getAccountsInit } from "../../../store/actions";
-
 // FORMIK
 import { useFormik } from "formik";
-import { completeExchangeValidation } from "../helpers/validations";
+import React, { useEffect, useState } from "react";
+// REDUX
+import { useDispatch,useSelector } from "react-redux";
+// REACT ROUTER
+import { useHistory } from "react-router-dom";
 
 // COMPONENTS
-import { MuiAlert } from "../../../components/UI/mui-alert.component";
-import { SelectComponent } from "../../../components/UI/form-items/select.component";
 import { Button } from "../../../components/UI/button.component";
 import { Input } from "../../../components/UI/form-items/input.component";
+import { SelectComponent } from "../../../components/UI/form-items/select.component";
+import { MuiAlert } from "../../../components/UI/mui-alert.component";
+// REDUX ACTIONS
+import { cancelExchangeInit, completeExchangeInit, getAccountsInit } from "../../../store/actions";
+// COMPONENT
 import KashUsed from "../components/kash-used.component";
-
+// HELPER
+import { completeExchangeValidation } from "../helpers/validations";
 // CLASSES
-import sharedClass from "./modules/sharedClasses.module.scss";
 import classes from "./modules/accounts.module.scss";
+import sharedClass from "./modules/sharedClasses.module.scss";
 
 const Accounts = ({ setModal }) => {
   const dispatch = useDispatch(),

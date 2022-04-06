@@ -1,16 +1,16 @@
-import React from "react";
-
 // FORMIK
 import { useFormik } from "formik";
-import { editAccountValidation } from "../../helpers/validations";
-
+import React from "react";
 // REACT REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { editAccountInit } from "../../../../store/actions";
 
+import { Button } from "../../../../components/UI/button.component";
 // COMPONENTS
 import { Input } from "../../../../components/UI/form-items/input.component";
-import { Button } from "../../../../components/UI/button.component";
+// REDUX ACTIONS
+import { editAccountInit } from "../../../../store/actions";
+// HELPER TO FORMIK
+import { editAccountValidation } from "../../helpers/validations";
 
 const EditAccount = ({ account, cancelEdit, setEdit }) => {
   const dispatch = useDispatch();

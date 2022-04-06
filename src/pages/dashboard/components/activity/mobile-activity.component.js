@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import _ from "lodash";
-import SwipeableViews from "react-swipeable-views";
 import { Repeat } from "@material-ui/icons";
 import { Pagination } from "@material-ui/lab";
+import _ from "lodash";
+import React, { useState } from "react";
+import SwipeableViews from "react-swipeable-views";
 
 // COMPONENTS
 import Card from "../../../../components/UI/card.component";
-import { OrderItem } from "../orders/order-item.component";
-
 // CLASSES
 import sharedClass from "../../assets/css/sharedClasses.module.scss";
+// COMPONENT
+import { OrderItem } from "../orders/order-item.component";
 
 export const ActivityMobile = ({ orders, withdrawals, openModal }) => {
   const [ordersPage, setOrdersPage] = useState(1),

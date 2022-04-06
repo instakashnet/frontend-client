@@ -1,15 +1,18 @@
-import React from "react";
 import { _ } from "gridjs-react";
 import moment from "moment";
-import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
+import React from "react";
 
-import { AffiliatesTable } from "../components/affiliates-table.component";
-import Card from "../../../components/UI/card.component";
-
-// ASETS & CLASSES
+// ASSETS
 import KashIcon from "../../../assets/images/kash.svg";
-import sharedClass from "./modules/sharedClasses.module.scss";
+// COMPONENT
+import Card from "../../../components/UI/card.component";
+// HOOK
+import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
+// COMPONENT
+import { AffiliatesTable } from "../components/affiliates-table.component";
+// CLASSES
 import classes from "./modules/affiliates-list.module.scss";
+import sharedClass from "./modules/sharedClasses.module.scss";
 
 export const AffiliatesList = ({ affiliates, ...rest }) => {
   const { isMobile } = useDeviceDetect();

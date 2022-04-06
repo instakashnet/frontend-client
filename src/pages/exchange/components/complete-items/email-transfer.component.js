@@ -1,14 +1,12 @@
 import React from "react";
 
-// REDUX
-import { processCodeInit, cancelExchangeInit } from "../../../../store/actions";
-
 // COMPONENTS
 import { Button } from "../../../../components/UI/button.component";
-import { MuiAlert } from "../../../../components/UI/mui-alert.component";
 import Card from "../../../../components/UI/card.component";
 import CopyButton from "../../../../components/UI/copy-button.component";
-
+import { MuiAlert } from "../../../../components/UI/mui-alert.component";
+// REDUX ACTIONS
+import { cancelExchangeInit,processCodeInit } from "../../../../store/actions";
 // CLASSES
 import classes from "../modules/complete-items/email-transfer.module.scss";
 

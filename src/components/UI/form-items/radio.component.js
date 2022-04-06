@@ -1,5 +1,5 @@
+import { FormControlLabel,Radio } from "@material-ui/core";
 import React from "react";
-import { Radio, FormControlLabel } from "@material-ui/core";
 
 import classes from "../modules/form-items/radio.module.scss";
 

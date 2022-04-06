@@ -1,20 +1,21 @@
+import { RadioButtonCheckedOutlined,RadioButtonUncheckedOutlined } from "@material-ui/icons";
 import React, { useCallback, useEffect, useState } from "react";
-import { RadioButtonUncheckedOutlined, RadioButtonCheckedOutlined } from "@material-ui/icons";
-
 // REDUX
 import { useDispatch } from "react-redux";
-import { openModal } from "../../../store/actions";
 
-// ASSETS && CLASSES
+// ASSETS
 import DniIcon from "../../../assets/images/icons/dni.svg";
 import PassportIcon from "../../../assets/images/icons/passport.svg";
-import classes from "./modules/verify-identity.screen.module.scss";
-
-// COMPONENTS
+// COMPONENT
 import { Button } from "../../../components/UI/button.component";
-import { UploadDocument } from "../components/forms/upload-document.component";
-import { DocumentInReview } from "../components/document-in-review.component";
+// REDUX ACTION
+import { openModal } from "../../../store/actions";
+// COMPONENTS
 import { DocumentFailed } from "../components/document-failed.component";
+import { DocumentInReview } from "../components/document-in-review.component";
+import { UploadDocument } from "../components/forms/upload-document.component";
+// CLASSES
+import classes from "./modules/verify-identity.screen.module.scss";
 
 export const VerifyIdentityScreen = ({ user, history }) => {
   const [docType, setDocType] = useState(""),

@@ -1,6 +1,7 @@
-import React from "react";
-import { Grid } from "gridjs-react";
 import "gridjs/dist/theme/mermaid.css";
+
+import { Grid } from "gridjs-react";
+import React from "react";
 
 import classes from "./modules/activity-table.module.scss";
 
@@ -25,7 +26,7 @@ const ActivityTable = ({ data, columns }) => {
           of: "de",
           to: "-",
           loading: "Cargando...",
-          noRecordsFound: "No se han encotrado registros.",
+          noRecordsFound: "No se han encontrado registros.",
         },
       }}
     />
