@@ -36,6 +36,10 @@ const Exchange = ({ history, location, match }) => {
 
   // EFFECTS
   useEffect(() => {
+    if (!profile) history.push("/currency-exchange/profile-selection");
+  }, [profile, history]);
+
+  useEffect(() => {
     if (location.pathname !== "/currency-exchange" || location.pathname !== "/currency-exchange/profile-selection") {
       window.addEventListener("beforeunload", preventLoad);
       window.scrollTo(0, 0);
@@ -79,21 +83,25 @@ const Exchange = ({ history, location, match }) => {
   return (
     <Layout className="content-center">
       <div className={classes.Exchange}>
-        {match.isExact && (
+        {profile ? (
           <>
-            <SelectionHeader profile={profile} />
-            <div className={classes.Separator} />
+            {match.isExact && (
+              <>
+                <SelectionHeader profile={profile} />
+                <div className={classes.Separator} />
+              </>
+            )}
+            <Route exact path={match.url}>
+              <Calculator profile={profile} setModal={openModalHandler} user={user} />
+            </Route>
+            <Route path={match.url + "/step-2"}>
+              <Accounts setModal={openModalHandler} />
+            </Route>
+            <Route path={match.url + "/complete"}>
+              <Complete />
+            </Route>
           </>
-        )}
-        <Route exact path={match.url}>
-          <Calculator profile={profile} setModal={openModalHandler} user={user} />
-        </Route>
-        <Route path={match.url + "/step-2"}>
-          <Accounts setModal={openModalHandler} />
-        </Route>
-        <Route path={match.url + "/complete"}>
-          <Complete />
-        </Route>
+        ) : null}
         <Route path={match.url + "/profile-selection"}>
           <ProfileSelection />
         </Route>

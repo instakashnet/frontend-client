@@ -5,16 +5,16 @@ export const useIntersectionElements = (options) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    let element = containerRef.current,
-      observer = new IntersectionObserver((entries) => {
+    let observer = new IntersectionObserver((entries) => {
       const [intersection] = entries;
       setIsVisible(intersection.isIntersecting);
     }, options);
 
-    if (element) observer.observe(element);
+    if (containerRef.current) observer.observe(containerRef.current);
 
     return () => {
-      if (element) observer.unobserve(element);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      if (containerRef.current) observer.unobserve(containerRef.current);
     };
 
   }, [containerRef, options]);
