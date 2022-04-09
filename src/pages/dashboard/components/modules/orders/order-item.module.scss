@@ -31,9 +31,16 @@
     }
   }
 
-  .OrderInfo span {
-    color: $base-green;
+  .OrderInfo {
+    span {
+      color: $base-green;
+    }
+
+    .OrderDate::first-letter {
+      text-transform: uppercase;
+    }
   }
+
 
   @include respond(tablet) {
     padding: 10px 20px;
