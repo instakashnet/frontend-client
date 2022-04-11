@@ -1,12 +1,11 @@
 import React from "react";
-
 // COMPONENTS
 import { Button } from "../../../../components/UI/button.component";
 import Card from "../../../../components/UI/card.component";
 import CopyButton from "../../../../components/UI/copy-button.component";
 import { MuiAlert } from "../../../../components/UI/mui-alert.component";
 // REDUX ACTIONS
-import { cancelExchangeInit,processCodeInit } from "../../../../store/actions";
+import { cancelExchangeInit, processCodeInit } from "../../../../store/actions";
 // CLASSES
 import classes from "../modules/complete-items/email-transfer.module.scss";
 
@@ -19,7 +18,7 @@ export const EmailTransfer = ({ isProcessing, dispatch, order }) => {
       </Card>
       <MuiAlert type="info" opened>
         <span className="block text-left">
-          Recuerda que <b>las transferencias interbancarias pueden demorar hasta 48 horas.</b> Te invitamos a informarte en nuestros{" "}
+          Recuerda que <b>las transferencias interbancarias pueden demorar hasta 24 horas.</b> Te invitamos a informarte en nuestros{" "}
           <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
             términos y condiciones
           </a>
