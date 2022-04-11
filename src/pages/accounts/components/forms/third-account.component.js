@@ -1,10 +1,9 @@
-import { FormLabel,RadioGroup } from "@material-ui/core";
+import { FormLabel, RadioGroup } from "@material-ui/core";
 // FORMIK
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 // REACT REDUX
-import { useDispatch,useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 // COMPONENTS
 import { Button } from "../../../../components/UI/button.component";
 import { CheckboxComponent } from "../../../../components/UI/form-items/checkbox.component";
@@ -243,7 +242,7 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
         />
         {selectedBank && !selectedBank.isDirect && (
           <MuiAlert type="warning" opened>
-            Las <b>transferencias interbancarias</b> acarrean comisiones y pueden demorar hasta 48 horas. Conoce más en nuestros{" "}
+            Las <b>transferencias interbancarias</b> acarrean comisiones y pueden demorar hasta 24 horas. Conoce más en nuestros{" "}
             <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
               términos y condiciones
             </a>

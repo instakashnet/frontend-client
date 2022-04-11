@@ -3,10 +3,9 @@ import { Add } from "@material-ui/icons";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 // REDUX
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // REACT ROUTER
 import { useHistory } from "react-router-dom";
-
 // COMPONENTS
 import { Button } from "../../../components/UI/button.component";
 import { Input } from "../../../components/UI/form-items/input.component";
@@ -174,10 +173,11 @@ const Accounts = ({ setModal }) => {
         )}
         {(bankCCI || accountCCI) && (
           <MuiAlert type="warning" opened>
-            <b>Las transferencias interbancarias generan comisiones y pueden demorar hasta 48 horas.</b> Conozca más en nuestros{" "}
+            <b>Las transferencias interbancarias generan comisiones y pueden demorar hasta 24 horas.</b> Conozca más en nuestros{" "}
             <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
               términos y condiciones
-            </a>.
+            </a>
+            .
           </MuiAlert>
         )}
         {funds_origin && (
