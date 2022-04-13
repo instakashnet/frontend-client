@@ -12,14 +12,14 @@ export const withdrawKashSvc = async (values) => {
 
 // GET RATES
 export const getRatesSvc = async () => {
- try {
-   const response = await exchangeService.get("/rates");
-   if (response.status >= 400) throw new Error(response.errors[0]);
+  try {
+    const response = await exchangeService.get("/rates");
+    if (response.status >= 400) throw new Error(response.errors[0]);
 
-   return response.data[0];
- } catch (error) {
-   throw new Error(error);
- }
+    return response.data[0];
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 // GET LAST ORDER

@@ -1,14 +1,14 @@
 import camelize from "camelize";
-import { all, call,fork, put, takeEvery, takeLatest } from "redux-saga/effects";
+import { all, call, fork, put, takeEvery, takeLatest } from "redux-saga/effects";
 import Swal from "sweetalert2";
-
 // API SERVICES
 import { exchangeService } from "../../api/axios";
 import { getLastOrderSvc, getRatesSvc, validateCouponSvc } from "../../api/services/exchange.service";
 import history from "../../shared/history";
-import { getOrdersInit,setAlertInit } from "../../store/actions";
+import { getOrdersInit, setAlertInit } from "../../store/actions";
 import * as actions from "./actions";
 import * as types from "./types";
+
 
 function* getRates() {
   try {
@@ -52,6 +52,7 @@ function* createExchange({ values, amountSent, profile }) {
   const exchangeValues = {
     ...values,
     amount_sent: amountSent,
+    amount_received: parseFloat(values.amount_received),
     profile_id: profile.id,
   };
 
