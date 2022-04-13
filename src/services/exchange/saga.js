@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 
 // API SERVICES
 import { exchangeService } from "../../api/axios";
+import { getLastOrderSvc, getRatesSvc, validateCouponSvc } from "../../api/services/exchange.service";
 import history from "../../shared/history";
 import { getOrdersInit,setAlertInit } from "../../store/actions";
 import * as actions from "./actions";
@@ -11,12 +12,10 @@ import * as types from "./types";
 
 function* getRates() {
   try {
-    const res = yield exchangeService.get("/rates");
-    if (res.status === 200) {
-      const rates = { id: res.data[0].id, buy: +res.data[0].buy, sell: +res.data[0].sell };
+    const res = yield call(getRatesSvc);
+    const rates = { id: res.id, buy: +res.buy, sell: +res.sell };
 
-      yield put(actions.getRatesSuccess(rates));
-    }
+    yield put(actions.getRatesSuccess(rates));
   } catch (error) {
     yield put(actions.exchangeError());
   }
@@ -24,8 +23,8 @@ function* getRates() {
 
 function* getLastOrder() {
   try {
-    const res = yield exchangeService.get("/order/last-order");
-    const data = camelize(res.data);
+    const res = yield call(getLastOrderSvc);
+    const data = camelize(res);
 
     yield put(actions.getLastOrderSuccess(data.lastOrder));
     if (data.lastOrder?.status === 2) yield call([history, "push"], "/currency-exchange/complete");
@@ -36,11 +35,13 @@ function* getLastOrder() {
 
 function* validateCoupon({ couponName, profileType, clearCoupon }) {
   try {
-    const res = yield exchangeService.get(`/coupons/${couponName}/${profileType}`);
-    if (res.status === 200) {
-      yield put(actions.validateCouponSuccess({ name: couponName, discount: res.data.discount, minimumAmount: res.data.minAmountBuy }));
-      yield call(clearCoupon, "");
-    }
+    //const res = yield exchangeService.get(`/coupons/${couponName}/${profileType}`);
+    console.log("validateCoupon SAGA.JS:", couponName);
+    console.log("validateCoupon SAGA.JS:", profileType);
+    console.log("validateCoupon SAGA.JS:", clearCoupon);
+    const res = yield call(validateCouponSvc, couponName, profileType);
+    yield put(actions.validateCouponSuccess({ name: couponName, discount: res.discount, minimumAmount: res.minAmountBuy }));
+    yield call(clearCoupon, "");
   } catch (error) {
     if (!couponName.includes("NUEVOREFERIDO")) yield put(setAlertInit(error.message, "error"));
     yield put(actions.exchangeError());

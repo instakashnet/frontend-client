@@ -26,11 +26,11 @@ export const OrderItem = ({ order, type, isMobile, openModal }) => {
         <div className={classes.OrderInfo}>
           <p>{order.uuid}</p>
           <span>{order.currencyReceivedSymbol ? `${order.currencyReceivedSymbol} ${formatAmount(order.amountReceived)}` : `${order.kashQty} KASH`}</span>
-          <p className={classes.OrderDate}>{order.completedAt ? (
-            moment(order.completedAt).format("MMM D hh:mm a")
-          ) : (
-            moment(order.created).format("MMM D hh:mm a")
-          )}</p>
+          <p className={classes.OrderDate}>{order.completedAt
+          ? moment(order.completedAt).format("MMM D hh:mm a")
+          : type === "withdrawal"
+          ? moment(order.createdAt).format("MMM D hh:mm a")
+          : moment(order.created).format("MMM D hh:mm a")}</p>
         </div>
         <StatusBadge
           name={order.estateName ? order.estateName.toLowerCase() : order.statusName.toLowerCase()}

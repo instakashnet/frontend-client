@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 // REACT ROUTER
 import { Link } from "react-router-dom";
 
@@ -11,6 +12,7 @@ import ExchangeImg from "../images/exchange.svg";
 import classes from "../modules/welcome.module.scss";
 
 const Welcome = () => {
+  console.log("REDUX STATE:", useSelector(state => state));
   return (
     <Layout className="content-start mt-8">
       <div className={classes.WelcomeWrapper}>
