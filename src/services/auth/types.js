@@ -31,4 +31,5 @@ export const VALIDATE_EMAIL_SUCCESS = "VALIDATE_EMAIL_SUCCESS";
 
 export const SET_USER_DATA = "auth/SET_USER_DATA";
 
-export const AUTH_ERROR = "AUTH_ERROR";
+export const AUTH_ERROR = "@auth/AUTH_ERROR";
+export const GOOGLE_ERROR = "@auth/GOOGLE_ERROR";

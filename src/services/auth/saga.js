@@ -1,7 +1,6 @@
 import camelize from "camelize";
-import { all, call, fork, put, takeEvery,takeLatest } from "redux-saga/effects";
+import { all, call, fork, put, takeEvery, takeLatest } from "redux-saga/effects";
 import Swal from "sweetalert2";
-
 // API SERVICES
 import { authService } from "../../api/axios";
 import history from "../../shared/history";

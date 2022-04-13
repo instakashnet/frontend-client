@@ -103,3 +103,7 @@ export const logoutSuccess = () => ({
 export const authError = () => ({
   type: types.AUTH_ERROR,
 });
+
+export const googleError = () => ({
+  type: types.GOOGLE_ERROR,
+});

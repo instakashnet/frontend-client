@@ -46,6 +46,9 @@ const authReducer = (state = initialState, action) => {
     case types.AUTH_ERROR:
       return { ...state, isAuth: false, isProcessing: false, isLoading: false };
 
+    case types.GOOGLE_ERROR:
+      return { ...state, isProcessing: false };
+
     default:
       return state;
   }
