@@ -52,7 +52,6 @@ function* createExchange({ values, amountSent, profile }) {
   const exchangeValues = {
     ...values,
     amount_sent: amountSent,
-    amount_received: parseFloat(values.amount_received),
     profile_id: profile.id,
   };
 

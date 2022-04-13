@@ -2,13 +2,14 @@ import { CreditCard } from "@material-ui/icons";
 import _ from "lodash";
 import React, { useEffect } from "react";
 // REDUX
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
+
 // COMPONENTS
 import Layout from "../../../components/layout/layout.component";
 import { Button } from "../../../components/UI/button.component";
 import Spinner from "../../../components/UI/spinner.component";
 // REDUX ACTIONS
-import { getAccountsInit, openModal, setAccountDetailsInit } from "../../../store/actions";
+import { getAccountsInit, openModal,setAccountDetailsInit } from "../../../store/actions";
 // COMPONENTS
 import AccountsList from "../components/accounts-list.component";
 import { AddAccount } from "../components/add-account.component";

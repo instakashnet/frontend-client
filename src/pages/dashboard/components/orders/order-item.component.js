@@ -1,6 +1,5 @@
 import { ArrowRight } from "@material-ui/icons";
 import moment from "moment";
-import "moment/locale/es";
 import React from "react";
 
 // COMPONENTS
