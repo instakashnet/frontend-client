@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 // REACT ROUTER
 import { Link } from "react-router-dom";
-
 // COMPONENTS
 import Layout from "../../../components/layout/layout.component";
 import Card from "../../../components/UI/card.component";
@@ -11,8 +10,9 @@ import AffiliateImg from "../images/affiliate.svg";
 import ExchangeImg from "../images/exchange.svg";
 import classes from "../modules/welcome.module.scss";
 
+
 const Welcome = () => {
-  console.log("REDUX STATE:", useSelector(state => state));
+  console.log("JWT:", useSelector(state => state.Auth.token));
   return (
     <Layout className="content-start mt-8">
       <div className={classes.WelcomeWrapper}>

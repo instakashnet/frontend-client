@@ -28,7 +28,7 @@ export const getLastOrderSvc = async () => {
     const response = await exchangeService.get("/order/last-order");
     if (response.status >= 400) throw new Error(response.errors[0]);
 
-    return response.data;
+    return response.data["last_order"];
   } catch (error) {
     throw new Error(error);
   }
@@ -38,11 +38,53 @@ export const getLastOrderSvc = async () => {
 export const validateCouponSvc = async (couponName, profileType) => {
   try {
     const response = await exchangeService.get(`/coupons/${couponName}/${profileType}`);
-    console.log("Nombre de cupón:", couponName, "Tipo de perfil:", profileType);
-    console.log("validateCouponSvc RESPONSE:", response);
     if (response.status >= 400) throw new Error(response.errors[0]);
 
     return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// CREATE EXCHANGE
+export const createExchangeSvc = async (exchangeValues) => {
+  try {
+    const response = await exchangeService.post("/order/step-2", exchangeValues);
+    if (response.status >= 400) throw new Error(response.errors[0]);
+
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// COMPLETE EXCHANGE
+export const completeExchangeSvc = async (orderId, exchangeValues) => {
+  try {
+    const response = await exchangeService.put(`/order/step-3/${orderId}`, exchangeValues);
+    if (response.status >= 400) throw new Error(response.errors[0]);
+
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// DELETE EXCHANGE
+export const cancelExchangeSvc = async (URL) => {
+  try {
+    const response = await exchangeService.delete(URL);
+    if (response.status >= 400) throw new Error(response.errors[0]);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// PROCESS CODE
+export const processCodeSvc = async (orderId, processValue) => {
+  try {
+    const response = await exchangeService.put(`/order/step-4/${orderId}`, processValue);
+    if (response.status >= 400) throw new Error(response.errors[0]);
   } catch (error) {
     throw new Error(error);
   }

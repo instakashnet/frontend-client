@@ -21,6 +21,7 @@ import { signinValidation } from "../helpers/formValidations";
 // CLASSES
 import sharedClass from "./modules/sharedClasses.module.scss";
 import classes from "./modules/signin.screen.module.scss";
+
 const Signin = () => {
   const dispatch = useDispatch();
   const { isProcessing } = useSelector((state) => state.Auth);
