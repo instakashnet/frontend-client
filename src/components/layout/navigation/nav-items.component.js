@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-
 // ICONS
 import AccountsIcon from "../../../assets/images/icons/accounts.svg";
 import DashboardIcon from "../../../assets/images/icons/dashboard.svg";
@@ -9,6 +8,7 @@ import HomeIcon from "../../../assets/images/icons/home.svg";
 import TrophyIcon from "../../../assets/images/icons/trophy.svg";
 // COMPONENT
 import NavItem from "./nav-item.component";
+
 
 const NavItems = () => {
   const profile = useSelector((state) => state.Profile.profileSelected);
@@ -25,5 +25,4 @@ const NavItems = () => {
     </nav>
   );
 };
-
 export default NavItems;

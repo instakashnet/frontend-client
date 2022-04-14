@@ -35,3 +35,26 @@ export const getAccounts = async (type) => {
     throw new Error(error);
   }
 };
+
+// ADD ACCOUNT
+export const addAccountSvc = async (values) => {
+  try {
+    const response = await accountsService.post("/accounts", values);
+    if (response.status >= 400) throw new Error(response.errors[0]);    
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// EDIT ACCOUNT
+export const editAccountSvc = async (id, values) => {
+  try {
+    const response = await accountsService.put(`/accounts/${id}`, values);
+    if (response.status >= 400) throw new Error(response.errors[0]);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// DELETE ACCOUNT
+export const deleteAccountSvc = async (id) => await accountsService.delete(`/accounts/${id}`);

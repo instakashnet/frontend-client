@@ -7,9 +7,9 @@ export const useIntersectionElements = (options) => {
   useEffect(() => {
     let element = containerRef.current,
       observer = new IntersectionObserver((entries) => {
-      const [intersection] = entries;
-      setIsVisible(intersection.isIntersecting);
-    }, options);
+        const [intersection] = entries;
+        setIsVisible(intersection.isIntersecting);
+      }, options);
 
     if (element) observer.observe(element);
 

@@ -2,13 +2,12 @@
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
 // REDUX
-import { useDispatch,useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 // COMPONENTS
 import { Button } from "../../../components/UI/button.component";
 import { MuiAlert } from "../../../components/UI/mui-alert.component";
 // REDUX ACTIONS
-import { refreshCodeInit,validateEmailInit } from "../../../store/actions";
+import { refreshCodeInit, validateEmailInit } from "../../../store/actions";
 // ASSET
 import VerificationIcon from "../assets/images/icons/verification.svg";
 // COMPONENT
@@ -18,6 +17,7 @@ import { emailValidationSchema } from "../helpers/formValidations";
 // CLASSES
 import classes from "./modules/email-validation.module.scss";
 import sharedClass from "./modules/sharedClasses.module.scss";
+
 
 export const EmailValidationScreen = ({ history, match }) => {
   const dispatch = useDispatch(),

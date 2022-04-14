@@ -18,9 +18,9 @@ export const CustomErrorBoundary = ({ children }) => {
 
     process.env.REACT_APP_STAGE === "prod"
       ? Sentry.withScope((scope) => {
-          scope.setExtras(info);
-          Sentry.captureException(new Error(errorString));
-        })
+        scope.setExtras(info);
+        Sentry.captureException(new Error(errorString));
+      })
       : console.log(errorString);
   };
 

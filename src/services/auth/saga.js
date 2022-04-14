@@ -1,22 +1,18 @@
-import camelize from "camelize";
-import { all, call, fork, put, takeEvery,takeLatest } from "redux-saga/effects";
+import { all, call, fork, put, takeEvery, takeLatest } from "redux-saga/effects";
 import Swal from "sweetalert2";
-
-// API SERVICES
-import { authService } from "../../api/axios";
+import { completeProfileSvc, loadUserSvc, logoutSvc, recoverPswdSvc, refreshVCodeSvc, refreskTokenSvc, resetPswdSvc, signinGoogleSvc, signinSvc, signupSvc, validateEmailSvc } from "../../api/services/auth.service";
 import history from "../../shared/history";
 import { setAlertInit } from "../core/alert/actions";
 import { closeSocketConnection } from "../socket/actions";
 import * as actions from "./actions";
 import * as types from "./types";
 
+
 function* refreshToken() {
   try {
-    const res = yield authService.post("/auth/refresh");
-    if (res.status === 200) {
-      yield put(actions.refreshTokenSuccess(res.data.accessToken));
-      yield call(loadUser);
-    }
+    const token = yield call(refreskTokenSvc);
+    yield put(actions.refreshTokenSuccess(token));
+    yield call(loadUser);
   } catch (error) {
     yield put(actions.logoutSuccess());
   }
@@ -24,8 +20,7 @@ function* refreshToken() {
 
 function* loadUser() {
   try {
-    const res = yield authService.get("/users/session");
-    const user = camelize(res.data.user);
+    const user = yield call(loadUserSvc);
     yield call([sessionStorage, "setItem"], "userVerification", JSON.stringify(user));
 
     if (!user.verified) return yield call([history, "push"], "/email-verification/OTP");
@@ -39,11 +34,9 @@ function* loadUser() {
 
 function* signin({ values }) {
   try {
-    const res = yield authService.post("/auth/signin", values);
-    if (res.status === 200) {
-      yield put(actions.signinSuccess(res.data.accessToken));
-      yield put(actions.loadUserInit());
-    }
+    const token = yield call(signinSvc, values);
+    yield put(actions.signinSuccess(token));
+    yield put(actions.loadUserInit());
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
@@ -52,11 +45,9 @@ function* signin({ values }) {
 
 function* signinGoogle({ token }) {
   try {
-    const res = yield authService.post("/auth/google", { token });
-    if (res.status === 201 || res.status === 200) {
-      yield put(actions.signinSuccess(res.data.accessToken));
-      yield put(actions.loadUserInit());
-    }
+    const accessTkn = yield call(signinGoogleSvc, token);
+    yield put(actions.signinSuccess(accessTkn));
+    yield put(actions.loadUserInit());
   } catch (error) {
     yield put(actions.authError());
   }
@@ -64,11 +55,9 @@ function* signinGoogle({ token }) {
 
 function* signup({ values }) {
   try {
-    const res = yield authService.post("/auth/signup", values);
-    if (res.status === 201) {
-      yield put(actions.signupSuccess(res.data.accessToken));
-      yield call([history, "push"], "/email-verification/OTP");
-    }
+    const token = yield call(signupSvc, values);
+    yield put(actions.signupSuccess(token));
+    yield call([history, "push"], "/email-verification/OTP");
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
@@ -77,8 +66,8 @@ function* signup({ values }) {
 
 function* completeProfile({ values }) {
   try {
-    const res = yield authService.post("/users/profiles", values);
-    if (res.status === 200) yield call(loadUser);
+    yield call(completeProfileSvc, values);
+    yield call(loadUser);
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
@@ -89,13 +78,12 @@ function* validateEmail({ values, otpType }) {
   const validateValues = { verificationCode: `${values.otp_1}${values.otp_2}${values.otp_3}${values.otp_4}`, operation: otpType };
 
   try {
-    const res = yield authService.post("/auth/verify-code", validateValues);
+    const token = yield call(validateEmailSvc, validateValues);
+    yield put(actions.validateEmailSuccess(token));
 
-    if (res.status === 200) {
-      yield put(actions.validateEmailSuccess(res.data.accessToken));
-      if (otpType === "PWD") return yield call([history, "push"], "/change-password");
-      return yield call(loadUser);
-    }
+    if (otpType === "PWD") return yield call([history, "push"], "/change-password");
+
+    return yield call(loadUser);
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
@@ -104,11 +92,9 @@ function* validateEmail({ values, otpType }) {
 
 function* refreshVerificationCode() {
   try {
-    const res = yield authService.get("/auth/refresh-code");
-    if (res.status === 200) {
-      yield call([Swal, "fire"], "¡Correo enviado!", "Revisa tu correo electrónico con el nuevo código de verificación.", "success");
-      yield put(actions.refreshCodeSuccess());
-    }
+    yield call(refreshVCodeSvc);
+    yield call([Swal, "fire"], "¡Correo enviado!", "Revisa tu correo electrónico con el nuevo código de verificación.", "success");
+    yield put(actions.refreshCodeSuccess());
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
@@ -117,12 +103,9 @@ function* refreshVerificationCode() {
 
 function* recoverPassword({ values }) {
   try {
-    const res = yield authService.post("/users/recover-password", values);
-
-    if (res.status === 201) {
-      yield put(actions.recoverPasswordSuccess(res.data.accessToken));
-      yield call([history, "push"], "/email-verification/PWD");
-    }
+    const token = yield call(recoverPswdSvc, values);
+    yield put(actions.recoverPasswordSuccess(token));
+    yield call([history, "push"], "/email-verification/PWD");
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
@@ -131,12 +114,10 @@ function* recoverPassword({ values }) {
 
 function* resetPassword({ values }) {
   try {
-    const res = yield authService.post("/users/reset-password", values);
-    if (res.status === 201) {
-      yield put(actions.resetPasswordSuccess());
-      yield call([history, "push"], "/signin");
-      yield call([Swal, "fire"], "Contraseña cambiada", "Ya puedes ingresar con tu nueva contraseña.", "success");
-    }
+    yield call(resetPswdSvc, values);
+    yield put(actions.resetPasswordSuccess());
+    yield call([history, "push"], "/signin");
+    yield call([Swal, "fire"], "Contraseña cambiada", "Ya puedes ingresar con tu nueva contraseña.", "success");
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));
     yield put(actions.authError());
@@ -145,7 +126,7 @@ function* resetPassword({ values }) {
 
 function* logout() {
   try {
-    yield authService.post("/auth/logout");
+    yield call(logoutSvc);
   } catch (error) {
     yield put(actions.authError());
   }

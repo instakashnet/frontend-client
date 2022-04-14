@@ -1,7 +1,6 @@
 import React from "react";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-
 // ASSETS
 import AdditionalInfo from "../../../assets/images/icons/additional-info.svg";
 import Profile from "../../../assets/images/icons/avatar.svg";
@@ -16,6 +15,7 @@ import { closeSliderModal, logoutInit } from "../../../store/actions";
 import classes from "../modules/profile-nav.module.scss";
 // COMPONENT
 import NavItem from "./nav-item.component";
+
 
 const ProfileNavigation = () => {
   const dispatch = useDispatch(),

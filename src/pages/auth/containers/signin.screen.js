@@ -2,10 +2,9 @@
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
 // REDUX
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // REACT ROUTER
 import { Link } from "react-router-dom";
-
 // COMPONENTS
 import { Button } from "../../../components/UI/button.component";
 import { CheckboxComponent } from "../../../components/UI/form-items/checkbox.component";
@@ -13,7 +12,7 @@ import { Input } from "../../../components/UI/form-items/input.component";
 import Logo from "../../../components/UI/logo.component";
 import { Modal } from "../../../components/UI/modals/modal.component";
 // REDUX ACTIONS
-import { closeModal,signinGoogle, signinInit } from "../../../store/actions";
+import { closeModal, signinGoogle, signinInit } from "../../../store/actions";
 // COMPONENTS
 import Background from "../components/layout/background.component";
 import { GoogleButton } from "../components/UI/google-button.component";
@@ -26,7 +25,6 @@ import classes from "./modules/signin.screen.module.scss";
 const Signin = () => {
   const dispatch = useDispatch();
   const { isProcessing } = useSelector((state) => state.Auth);
-
   const formik = useFormik({
     initialValues: { email: "", password: "", rememberMe: false },
     validationSchema: signinValidation,
@@ -38,7 +36,6 @@ const Signin = () => {
     },
   });
   const { setFieldValue } = formik;
-
   useEffect(() => {
     const rememberMe = localStorage.getItem("rememberMe");
     if (rememberMe) {
@@ -48,7 +45,9 @@ const Signin = () => {
   }, [setFieldValue]);
 
   const signInGoogle = (res) => {
-    if (res.error) if (res.error.includes("popup_closed")) return;
+    console.log(res);
+    if (res.error && (res.error.includes("closed") || res.error.includes("failed"))) return;
+
     dispatch(signinGoogle(res.accessToken));
   };
 
@@ -58,7 +57,6 @@ const Signin = () => {
   //   }, 600);
   //   return () => clearTimeout(timeout);
   // }, [dispatch]);
-
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 h-full md:h-screen">
       <Background />
@@ -115,15 +113,13 @@ const Signin = () => {
     </main>
   );
 };
-
 export const Information = () => {
   const dispatch = useDispatch();
-
   return (
     <>
       <p className="mb-3 text-center">
-        Agradecidos siempre por la confianza, queremos informarle que en estos instantes nos encontramos realizando unas actualizaciones importantes en nuestros servidores, debido a ello no
-        podremos realizar operaciones por el momento. Estamos trabajando para poder ofrecerle siempre nuestro mejor servicio.
+        Agradecidos siempre por la confianza, queremos informarle que en estos instantes nos encontramos realizando unas actualizaciones importantes en nuestros servidores, debido
+        a ello no podremos realizar operaciones por el momento. Estamos trabajando para poder ofrecerle siempre nuestro mejor servicio.
       </p>
       <p className="text-center my-4 font-bold">Agradecemos su comprensión.</p>
       <Button onClick={() => dispatch(closeModal())} className="action-button">
@@ -132,5 +128,4 @@ export const Information = () => {
     </>
   );
 };
-
 export default Signin;

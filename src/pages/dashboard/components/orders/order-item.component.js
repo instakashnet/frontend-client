@@ -2,13 +2,13 @@ import { ArrowRight } from "@material-ui/icons";
 import moment from "moment";
 import "moment/locale/es";
 import React from "react";
-
 // COMPONENTS
 import { StatusBadge } from "../../../../components/UI/status-badge.component";
 // HELPER
 import { formatAmount } from "../../../../shared/functions";
 // CLASSES
 import classes from "../modules/orders/order-item.module.scss";
+
 
 export const OrderItem = ({ order, type, isMobile, openModal }) => {
   return (
@@ -26,11 +26,11 @@ export const OrderItem = ({ order, type, isMobile, openModal }) => {
         <div className={classes.OrderInfo}>
           <p>{order.uuid}</p>
           <span>{order.currencyReceivedSymbol ? `${order.currencyReceivedSymbol} ${formatAmount(order.amountReceived)}` : `${order.kashQty} KASH`}</span>
-          <p className={classes.OrderDate}>{order.completedAt ? (
-            moment(order.completedAt).format("MMM D hh:mm a")
-          ) : (
-            moment(order.created).format("MMM D hh:mm a")
-          )}</p>
+          <p className={classes.OrderDate}>{order.completedAt
+            ? moment(order.completedAt).format("MMM D hh:mm a")
+            : type === "withdrawal"
+              ? moment(order.createdAt).format("MMM D hh:mm a")
+              : moment(order.created).format("MMM D hh:mm a")}</p>
         </div>
         <StatusBadge
           name={order.estateName ? order.estateName.toLowerCase() : order.statusName.toLowerCase()}
