@@ -1,10 +1,12 @@
 import { exchangeService } from "../axios";
 
-// WITHDRAW KASH
-export const withdrawKashSvc = async (values) => {
+// GET SCHEDULES
+export const getSchedulesSvc = async () => {
   try {
-    const response = await exchangeService.post("/withdrawals/user", values);
+    const response = await exchangeService.get("/schedules");
     if (response.status >= 400) throw new Error(response.errors[0]);
+
+    return response.data;
   } catch (error) {
     throw new Error(error);
   }
@@ -22,6 +24,18 @@ export const getRatesSvc = async () => {
   }
 };
 
+// GET ORDERS
+export const getOrdersSvc = async (limit, enabled) => {
+  try {
+    const response = await exchangeService.get(`/order/user?enabled=${enabled}&limit=${limit}`);
+    if (response.status >= 400) throw new Error(response.errors[0]);
+
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 // GET LAST ORDER
 export const getLastOrderSvc = async () => {
   try {
@@ -34,6 +48,54 @@ export const getLastOrderSvc = async () => {
   }
 };
 
+// GET WITHDRAWALS
+export const getWithdrawalsSvc = async () => {
+  try {
+    const response = await exchangeService.get("/withdrawals/user?limit=5");
+    if (response.status >= 400) throw new Error(response.errors[0]);
+
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// GET ORDER AMOUNTS
+export const getOrderAmountsSvc = async () => {
+  try {
+    const response = await exchangeService.get("/order/data/total-processed/user");
+    if (response.status >= 400) throw new Error(response.errors[0]);
+
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// GET TOTAL AMOUNT
+export const getTotalAmountSvc = async () => {
+  try {
+    const response = await exchangeService.get("/order/data/user");
+    if (response.status >= 400) throw new Error(response.errors[0]);
+
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// GET ORDER DETAILS
+export const getOrderDetailsSvc = async (id, detailsType) => {
+  try {
+    const response = await exchangeService.get(`/order/detail/${id}?type=${detailsType}`);
+    if (response.status >= 400) throw new Error(response.errors[0]);
+
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 // VALIDATE COUPON
 export const validateCouponSvc = async (couponName, profileType) => {
   try {
@@ -41,6 +103,16 @@ export const validateCouponSvc = async (couponName, profileType) => {
     if (response.status >= 400) throw new Error(response.errors[0]);
 
     return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// WITHDRAW KASH
+export const withdrawKashSvc = async (values) => {
+  try {
+    const response = await exchangeService.post("/withdrawals/user", values);
+    if (response.status >= 400) throw new Error(response.errors[0]);
   } catch (error) {
     throw new Error(error);
   }
@@ -70,20 +142,20 @@ export const completeExchangeSvc = async (orderId, exchangeValues) => {
   }
 };
 
-// DELETE EXCHANGE
-export const cancelExchangeSvc = async (URL) => {
+// PROCESS CODE
+export const processCodeSvc = async (orderId, processValue) => {
   try {
-    const response = await exchangeService.delete(URL);
+    const response = await exchangeService.put(`/order/step-4/${orderId}`, processValue);
     if (response.status >= 400) throw new Error(response.errors[0]);
   } catch (error) {
     throw new Error(error);
   }
 };
 
-// PROCESS CODE
-export const processCodeSvc = async (orderId, processValue) => {
+// DELETE EXCHANGE
+export const cancelExchangeSvc = async (URL) => {
   try {
-    const response = await exchangeService.put(`/order/step-4/${orderId}`, processValue);
+    const response = await exchangeService.delete(URL);
     if (response.status >= 400) throw new Error(response.errors[0]);
   } catch (error) {
     throw new Error(error);

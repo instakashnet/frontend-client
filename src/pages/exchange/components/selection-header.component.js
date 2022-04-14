@@ -2,9 +2,9 @@ import { GroupOutlined } from "@material-ui/icons";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import history from "../../../shared/history";
-
 // CLASSES
 import classes from "./modules/selection-header.module.scss";
+
 
 export const SelectionHeader = ({ profile }) => {
   useEffect(() => profile || history.push("/currency-exchange/profile-selection"), [profile]);

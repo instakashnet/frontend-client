@@ -1,17 +1,5 @@
 import { authService } from "../axios";
 
-// REFRESH TOKEN
-export const refreskTokenSvc = async () => {
-  try {
-    const response = await authService.post("/auth/refresh");
-    if (response.status >= 400) throw new Error(response.erorrs[0]);
-
-    return response.data.accessToken;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
 // LOAD USER
 export const loadUserSvc = async () => {
   try {
@@ -19,6 +7,64 @@ export const loadUserSvc = async () => {
     if (response.status >= 400) throw new Error(response.errors[0]);
 
     return response.data.user;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// REFRESH VERIFICATION CODE
+export const refreshVCodeSvc = async () => {
+  try {
+    const response = await authService.get("/auth/refresh-code");
+    if (response.status >= 400) throw new Error(response.errors[0]);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// GET AFFILIATES
+export const getAffiliatesSvc = async () => {
+  try {
+    const response = await authService.get("/users/affiliates");
+    if (response.status >= 400) throw new Error(response.errors[0]);
+
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// GET PROFILES
+export const getProfilesSvc = async () => {
+  try {
+    const response = await authService.get("/users/profiles");
+    if (response.status >= 400) throw new Error(response.errors[0]);
+
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// GENERATE TOKEN
+export const generateTokenSvc = async () => {
+  try {
+    const response = await authService.get("/users/generate-token");
+    if (response.status >= 400) throw new Error(response.errors[0]);
+
+    return response.data.accessToken;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+// REFRESH TOKEN
+export const refreskTokenSvc = async () => {
+  try {
+    const response = await authService.post("/auth/refresh");
+    if (response.status >= 400) throw new Error(response.erorrs[0]);
+
+    return response.data.accessToken;
   } catch (error) {
     throw new Error(error);
   }
@@ -82,20 +128,9 @@ export const validateEmailSvc = async (validateValues) => {
   }
 };
 
-// REFRESH VERIFICATION CODE
-export const refreshVCodeSvc = async () => {
-  try {
-    const response = await authService.get("/auth/refresh-code");
-    if (response.status >= 400) throw new Error(response.errors[0]);
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
 // RECOVER PASSWORD
 export const recoverPswdSvc = async (values) => {
   try {
-    console.log("RECUPERANDO");
     const response = await authService.post("/users/recover-password", values);
     if (response.status >= 400) throw new Error(response.errors[0]);
 
@@ -124,3 +159,49 @@ export const logoutSvc = async () => {
     throw new Error(error);
   }
 };
+
+// EDIT BASIC INFO
+export const editBasicInfoSvc = async (URL, values) => {
+  try {
+    const response = await authService.put(URL, values);
+    if (response.status >= 400) throw new Error(response.errors[0]);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// EDIT ADDITIONAL INFO
+export const editAddInfoSvc = async (values) => {
+  try {
+    const response = await authService.put("/users/profiles", values);
+    if (response.status >= 400) throw new Error(response.errors[0]);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// USERCODE
+export const userCodeSvc = async (values) => {
+  try {
+    let response = undefined;
+    values
+      ? response = await authService.put("/users/username", values)
+      : response = await authService.get("/users/username");
+
+    if (response.status >= 400) throw new Error(response.errors[0]);
+
+    if (!values) return response.data.username;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// DELETE PROFILE
+export const deleteProfileSvc = async (id) => {
+  try {
+    const response = await authService.delete(`/users/active/${id}`, { data: { active: false } });
+    if (response.status >= 400) throw new Error(response.errors[0]);
+  } catch (error) {
+    throw new Error(error);
+  }
+}
