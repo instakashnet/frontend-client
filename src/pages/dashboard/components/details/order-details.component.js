@@ -6,7 +6,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 // REACT SPINNER
 import { HashLoader } from "react-spinners";
-
 // COMPONENTS
 import { Button } from "../../../../components/UI/button.component";
 import CopyButton from "../../../../components/UI/copy-button.component";
@@ -20,6 +19,7 @@ import { cancelExchangeInit, closeSliderModal, processCodeInit } from "../../../
 import { transactionCodeValidation } from "../../helpers/validations";
 // CLASSES
 import classes from "../modules/details/order_withdraw-details.module.scss";
+
 
 const OrderDetails = () => {
   const { details, detailsLoading } = useSelector((state) => state.Activity),

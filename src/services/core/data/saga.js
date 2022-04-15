@@ -1,21 +1,20 @@
 import moment from "moment";
-import { all, fork, put,takeEvery } from "redux-saga/effects";
-
-// API SERVICES
-import { exchangeService } from "../../../api/axios";
+import { all, call, fork, put, takeEvery } from "redux-saga/effects";
+import { getSchedulesSvc } from "../../../api/services/exchange.service";
 import * as actions from "./actions";
 import * as types from "./types";
 
+
 function* setIsClosed() {
   try {
-    const res = yield exchangeService.get("/schedules");
+    const res = yield call(getSchedulesSvc);
     let closed = false;
 
-    if (res.status === 200 && res.data?.length) {
-      res.data.forEach((day) => {
-        const actualDay = new Date().getDay();
+    if (res?.length) {
+      res.forEach((day) => {
+        const currentDay = new Date().getDay();
 
-        if (day.idDayOfWeek === actualDay) {
+        if (day.idDayOfWeek === currentDay) {
           if (!day.isWorkingDay) return (closed = true);
 
           const actualTime = moment(new Date(), "HH:mm");

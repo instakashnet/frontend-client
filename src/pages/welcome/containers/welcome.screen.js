@@ -1,7 +1,6 @@
 import React from "react";
 // REACT ROUTER
 import { Link } from "react-router-dom";
-
 // COMPONENTS
 import Layout from "../../../components/layout/layout.component";
 import Card from "../../../components/UI/card.component";
@@ -9,6 +8,7 @@ import Card from "../../../components/UI/card.component";
 import AffiliateImg from "../images/affiliate.svg";
 import ExchangeImg from "../images/exchange.svg";
 import classes from "../modules/welcome.module.scss";
+
 
 const Welcome = () => {
   return (
