@@ -12,7 +12,7 @@ import { Input } from "../../../components/UI/form-items/input.component";
 import Logo from "../../../components/UI/logo.component";
 import { Modal } from "../../../components/UI/modals/modal.component";
 // REDUX ACTIONS
-import { closeModal, signinGoogle, signinInit } from "../../../store/actions";
+import { closeModal, openModal, signinGoogle, signinInit } from "../../../store/actions";
 // COMPONENTS
 import Background from "../components/layout/background.component";
 import { GoogleButton } from "../components/UI/google-button.component";
@@ -53,12 +53,12 @@ const Signin = () => {
     dispatch(signinGoogle(res.accessToken));
   };
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     dispatch(openModal());
-  //   }, 600);
-  //   return () => clearTimeout(timeout);
-  // }, [dispatch]);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      dispatch(openModal());
+    }, 600);
+    return () => clearTimeout(timeout);
+  }, [dispatch]);
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 h-full md:h-screen">
@@ -123,8 +123,8 @@ export const Information = () => {
   return (
     <>
       <p className="mb-3 text-center">
-        Agradecidos siempre por la confianza, queremos informarle que en estos instantes nos encontramos realizando unas actualizaciones importantes en nuestros servidores, debido
-        a ello no podremos realizar operaciones por el momento. Estamos trabajando para poder ofrecerle siempre nuestro mejor servicio.
+        Agradecidos siempre por la confianza, queremos informarle que en estos momentos la plataforma para empresas de BCP no está permitiendo realizar transferencias. Por este
+        motivo <b>las operaciones hacía BCP no se podrán hacer por el momento.</b> Estamos a la espera que el banco solucione el inconveniente.
       </p>
       <p className="text-center my-4 font-bold">Agradecemos su comprensión.</p>
       <Button onClick={() => dispatch(closeModal())} className="action-button">
