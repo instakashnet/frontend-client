@@ -25,7 +25,6 @@ import classes from "./modules/signin.screen.module.scss";
 const Signin = () => {
   const dispatch = useDispatch();
   const { isProcessing } = useSelector((state) => state.Auth);
-
   const formik = useFormik({
     initialValues: { email: "", password: "", rememberMe: false },
     validationSchema: signinValidation,
@@ -37,7 +36,6 @@ const Signin = () => {
     },
   });
   const { setFieldValue } = formik;
-
   useEffect(() => {
     const rememberMe = localStorage.getItem("rememberMe");
     if (rememberMe) {
@@ -116,10 +114,8 @@ const Signin = () => {
     </main>
   );
 };
-
 export const Information = () => {
   const dispatch = useDispatch();
-
   return (
     <>
       <p className="mb-3 text-center">
@@ -133,5 +129,4 @@ export const Information = () => {
     </>
   );
 };
-
 export default Signin;

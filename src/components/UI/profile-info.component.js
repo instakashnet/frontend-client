@@ -1,9 +1,9 @@
 import React from "react";
-
 import Arrow from "../../assets/images/icons/arrow.svg";
 import { useDeviceDetect } from "../../shared/hooks/useDeviceDetect";
 import { useUserData } from "../../shared/hooks/useProfileInfo";
 import classes from "./modules/profile-info.module.scss";
+
 
 const ProfileInfo = ({ user, openNav }) => {
   const { isMobile } = useDeviceDetect(),
