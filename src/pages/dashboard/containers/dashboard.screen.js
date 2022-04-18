@@ -1,20 +1,20 @@
 import React from "react";
 // REDUX
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // REACT ROUTER
 import { Route } from "react-router-dom";
-
 // COMPONENTS
 import Layout from "../../../components/layout/layout.component";
 import Spinner from "../../../components/UI/spinner.component";
 // REDUX ACTIONS
-import { getOrderDetailsInit,openSliderModal } from "../../../store/actions";
+import { getOrderDetailsInit, openSliderModal } from "../../../store/actions";
 // COMPONENTS
 import OrderDetails from "../components/details/order-details.component";
 import WithdrawDetails from "../components/details/withdraw-details.component";
 // SCREENS
 import { AllActivityScreen } from "./all-activity.screen";
 import { RecentActivityScreen } from "./recent-activity.screen";
+
 
 const Dashboard = ({ match }) => {
   const dispatch = useDispatch(),
