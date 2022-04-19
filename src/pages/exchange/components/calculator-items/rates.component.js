@@ -1,9 +1,9 @@
 import React from "react";
-
 // HELPERS
 import { convertRate } from "../../../../shared/functions";
 // CLASSES
 import classes from "../modules/calculator-items/rates.module.scss";
+
 
 const Rates = ({ couponRates, coupon, actualRates }) => {
   return (
@@ -20,11 +20,11 @@ const Rates = ({ couponRates, coupon, actualRates }) => {
           </div>
           <div className="flex items-center justify-center mt-2">
             <div className={classes.BuyCard}>
-              <h4>Compramos a</h4>
+              <h4>Compramos:</h4>
               <span className={classes.Price}>S/. {convertRate(couponRates.buy)}</span>
             </div>
             <div className={classes.SellCard}>
-              <h4>Vendemos a</h4>
+              <h4>Vendemos:</h4>
               <span className={classes.Price}>S/. {convertRate(couponRates.sell)}</span>
             </div>
           </div>
@@ -32,11 +32,11 @@ const Rates = ({ couponRates, coupon, actualRates }) => {
       ) : (
         <div className="flex items-center justify-center mt-2">
           <div className={classes.BuyCard}>
-            <h4>Compramos a</h4>
+            <h4>Compramos:</h4>
             <span className={classes.Price}>S/. {convertRate(actualRates.buy)}</span>
           </div>
           <div className={classes.SellCard}>
-            <h4>Vendemos a</h4>
+            <h4>Vendemos:</h4>
             <span className={classes.Price}>S/. {convertRate(actualRates.sell)}</span>
           </div>
         </div>

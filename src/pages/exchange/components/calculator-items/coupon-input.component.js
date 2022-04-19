@@ -1,6 +1,5 @@
 import { Close } from "@material-ui/icons";
 import React from "react";
-
 // COMPONENTS
 import { InlineInput } from "../../../../components/UI/form-items/inline-input.component";
 // HELPERS
@@ -8,6 +7,7 @@ import { formatAmount } from "../../../../shared/functions";
 // ASSETS & CLASSES
 import CouponImg from "../../assets/images/icons/coupon.svg";
 import classes from "../modules/calculator-items/coupon-input.module.scss";
+
 
 const Coupon = ({ coupon, couponName, setCouponName, minimum, onSendCoupon, onDeleteCoupon, isProcessing, isLoading }) => {
   const onCouponChange = (e) => setCouponName(e.target.value);
@@ -19,7 +19,7 @@ const Coupon = ({ coupon, couponName, setCouponName, minimum, onSendCoupon, onDe
       onClick={() => onSendCoupon(couponName)}
       disabled={isProcessing || isLoading}
       onChange={onCouponChange}
-      label="Ingrese su cupón aquí"
+      label="Agrega tu cupón de descuento"
       buttonLabel="Agregar"
       className="mt-4"
     />
