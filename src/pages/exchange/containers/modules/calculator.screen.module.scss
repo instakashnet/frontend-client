@@ -1,6 +1,24 @@
 @import "../../../../assets/css/colors";
 @import "../../../../assets/css/breakpoints";
 
+.CalculatorContainer {
+  width: fit-content;
+  margin: 0 auto 23px;
+  padding-top: 30px;
+  box-shadow: none;
+
+  .CalculatorTitle {
+    color: #0D8284;
+    font-size: 1.6rem;
+  }
+
+  @include respond(desktop) {
+    .CalculatorTitle {
+      font-size: 2.1rem;
+    }
+  }
+}
+
 .Timer {
   display: flex;
   align-items: center;
@@ -8,6 +26,7 @@
 
   p {
     font-size: 0.9rem;
+    color: #676767;
   }
 
   @include respond(tablet) {

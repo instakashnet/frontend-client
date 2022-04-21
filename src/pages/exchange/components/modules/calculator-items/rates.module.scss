@@ -1,33 +1,57 @@
 @import "../../../../../assets/css/colors";
+@import "../../../../../assets/css/breakpoints";
 
 .Rates {
-  color: $base-green;
-
   p {
     font-size: 0.9rem;
+    transition: opacity 0.5s;
+  }
+
+  @include respond(tablet) {
+    p {
+      font-size: 0.98rem;
+    }
   }
 }
 
 .BuyCard,
 .SellCard {
-  border-radius: 10px 0 0 10px;
-  border-right: 1px solid $base-green;
-  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
   background-color: $card-color;
-  padding: 10px 25px;
+  padding: 7px 7px;
+  transition: opacity 0.5s;
 
   h4 {
-    color: $base-green;
+    color: #0D8284;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+
+  @include respond(tablet) {
+    padding: 10px 12px;
+
+    h4 {
+      font-size: 1.05rem;
+    }
   }
 }
 
-.SellCard {
-  border-radius: 0 10px 10px 0;
-  border-right: none;
+.Faint {
+  opacity: 0.4;
+}
+
+.RatesDivider {
+  display: block;
+  background-color: #cacaca;
+  height: 35px;
+  width: 1px;
 }
 
 .Price {
-  font-size: 1.3rem;
+  font-size: 1rem;
+  color: #0D8284;
   font-weight: bold;
-  color: $base-green;
+
+  @include respond(tablet) {
+    font-size: 1.05rem;
+  }
 }
