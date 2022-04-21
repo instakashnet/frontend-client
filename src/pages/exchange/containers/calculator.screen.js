@@ -1,20 +1,19 @@
-import { AccessAlarm,Info } from "@material-ui/icons";
 import { useFormik } from "formik";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../../components/UI/button.component";
-import Tooltip from "../../../components/UI/tooltip.component";
-import { createExchangeInit, deleteCoupon,getLastOrderInit, getRatesInit, validateCouponInit } from "../../../store/actions";
+import Card from "../../../components/UI/card.component";
+import { createExchangeInit, deleteCoupon, getLastOrderInit, getRatesInit, validateCouponInit } from "../../../store/actions";
 import CouponInput from "../components/calculator-items/coupon-input.component";
 import Input from "../components/calculator-items/currency-input.component";
 // COMPONENTS
 import Rates from "../components/calculator-items/rates.component";
 import Swipe from "../components/calculator-items/swipe.component";
 import Timer from "../components/calculator-items/timer.component";
-import classes from "./modules/calculator.screen.module.scss";
 // CLASSES
+import classes from "./modules/calculator.screen.module.scss";
 import sharedClass from "./modules/sharedClasses.module.scss";
+
 
 const Calculator = ({ profile, setModal, user }) => {
   const dispatch = useDispatch(),
@@ -22,7 +21,6 @@ const Calculator = ({ profile, setModal, user }) => {
     [actualRates, setActualRates] = useState({ buy: 0, sell: 0 }),
     [couponRates, setCouponRates] = useState({ buy: 0, sell: 0 }),
     [isCouponMin, setIsCouponMin] = useState(false),
-    [showInfo, setShowInfo] = useState(false),
     temporalAmountSent = useRef(null),
     { rates, ratesLoading, coupon, isProcessing } = useSelector((state) => state.Exchange),
     formik = useFormik({
@@ -135,73 +133,61 @@ const Calculator = ({ profile, setModal, user }) => {
 
   return (
     <>
-      <h1>
-        Ahorra cambiando con <br /> la mejor tasa del Perú
-      </h1>
-      <h3>Mejores tasas, mayor ahorro.</h3>
-      {!ratesLoading && <Rates actualRates={actualRates} coupon={coupon} couponRates={couponRates} />}
-      <form onSubmit={formik.handleSubmit} className={sharedClass.ExchangeForm}>
-        <div className={classes.Timer}>
-          <p>Se actualizará el tipo de cambio en:</p>
-          <div className="flex items-center text-base">
-            <AccessAlarm className="mr-2" /> <Timer onFinish={clearCalulator} />
+      <Card className={classes.CalculatorContainer}>
+        <h1 className={classes.CalculatorTitle}>
+          Compra y gana <br />con Instakash
+        </h1>
+        {!ratesLoading && <Rates actualRates={actualRates} coupon={coupon} couponRates={couponRates} currency={values.currency_sent_id} />}
+        <form onSubmit={formik.handleSubmit} className={sharedClass.ExchangeForm} id="calculator-form">
+          <div className={classes.Timer}>
+            <p>Se actualizará el tipo de cambio en:</p>
+            <div className="flex items-center text-base font-bold">
+              <Timer onFinish={clearCalulator} />
+            </div>
           </div>
-        </div>
-        <div className="relative">
-          <Input
-            name="amount_sent"
-            value={amount_sent}
-            currency={values.currency_sent_id}
-            label="Envías"
-            disabled={disabled}
-            onChange={currencyChangeHandler}
-          />
-          <Swipe onSwipeCurrency={swipeCurrencyHandler} type={values.type} disabled={disabled} />
-          <Input
-            name="amount_received"
-            value={values.amount_received}
-            currency={values.currency_received_id}
-            label="Recibes"
-            disabled={disabled}
-            onChange={currencyChangeHandler}
-          />
-          <p className="flex items-center justify-center w-full">
-            ¿Montos mayores a $ 5,000.00?
-            <Tooltip
-              title="Escríbenos a nuestro canal de WhatsApp para recibir una tasa preferencial."
-              placement="top-start"
-              disableHoverListener
-              onMouseEnter={() => setShowInfo(true)}
-              onClick={() => setShowInfo(true)}
-              onMouseLeave={() => setShowInfo(false)}
-              open={showInfo}
-            >
-              <Info className="ml-3" />
-            </Tooltip>
-          </p>
-          <CouponInput
-            coupon={coupon}
-            couponName={couponName}
-            setCouponName={setCouponName}
-            minimum={isCouponMin}
-            amountReceived={values.amount_received}
-            isProcessing={isProcessing}
-            disabled={disabled}
-            isLoading={ratesLoading}
-            onSendCoupon={sendCouponHandler}
-            onDeleteCoupon={deleteCouponHandler}
-          />
-          {values.amount_received < 1 && <p className={`error-msg ${classes.MinAmount}`}>El monto mínimo a recibir es de $ 1.00</p>}
-          <Button
-            type="submit"
-            disabled={values.amount_received < 1 || couponName.trim().length || disabled}
-            className={`action-button mt-2 ld-over ${isProcessing ? "running" : ""}`}
-          >
-            <span className="ld ld-ring ld-spin" />
-            Comenzar cambio
-          </Button>
-        </div>
-      </form>
+          <div className="relative">
+            <Input
+              name="amount_sent"
+              value={amount_sent}
+              currency={values.currency_sent_id}
+              label="Envías"
+              disabled={disabled}
+              onChange={currencyChangeHandler}
+            />
+            <Swipe onSwipeCurrency={swipeCurrencyHandler} type={values.type} disabled={disabled} />
+            <Input
+              name="amount_received"
+              value={values.amount_received}
+              currency={values.currency_received_id}
+              label="Recibes"
+              disabled={disabled}
+              onChange={currencyChangeHandler}
+            />
+            <CouponInput
+              coupon={coupon}
+              couponName={couponName}
+              setCouponName={setCouponName}
+              minimum={isCouponMin}
+              amountReceived={values.amount_received}
+              isProcessing={isProcessing}
+              disabled={disabled}
+              isLoading={ratesLoading}
+              onSendCoupon={sendCouponHandler}
+              onDeleteCoupon={deleteCouponHandler}
+            />
+            {values.amount_received < 1 && <p className={`error-msg ${classes.MinAmount}`}>El monto mínimo a recibir es de $ 1.00</p>}
+          </div>
+        </form>
+      </Card>
+      <Button
+        type="submit"
+        form="calculator-form"
+        disabled={values.amount_received < 1 || couponName.trim().length || disabled}
+        className={`action-button mt-2 ld-over ${isProcessing ? "running" : ""}`}
+      >
+        <span className="ld ld-ring ld-spin" />
+        Regístrate y cambia
+      </Button>
     </>
   );
 };

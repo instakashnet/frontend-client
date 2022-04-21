@@ -1,4 +1,15 @@
 @import "../../../../../assets/css/colors";
+@import "../../../../../assets/css/breakpoints";
+
+.InputDesc.InputDesc {
+  color: #afafaf;
+  font-size: 0.79rem;
+  margin-top: -18px;
+
+  @include respond(tablet) {
+    font-size: 0.85rem;
+  }
+}
 
 .Coupon {
   display: flex;
@@ -13,5 +24,14 @@
 
   p {
     font-size: 0.9rem;
+  }
+}
+
+.WarningTxt.WarningTxt {
+  font-size: 0.9rem;
+  margin: 7px 0 8px 15px;
+
+  @include respond(desktop) {
+    font-size: 0.95rem;
   }
 }

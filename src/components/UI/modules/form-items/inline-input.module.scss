@@ -10,7 +10,7 @@
     padding: 14px;
     font-size: 0.9rem;
   }
-  
+
   select {
     padding: 15px 10px;
     font-size: 0.85rem;
@@ -27,6 +27,7 @@
   }
 
   @include respond(tablet) {
+
     select,
     input {
       font-size: 1rem;
@@ -37,26 +38,48 @@
 .FlexInput {
   display: flex;
   align-items: center;
+  border: 1px solid #cacaca;
+  border-radius: 4px;
 
   .OutlinedInput {
-    border-radius: 4px 0 0 4px;
+    padding-left: 10px;
+    border-right: 1px solid #cacaca;
     width: 100%;
     background-color: #fff;
   }
-  
+
   input {
-    flex: 0.8;
-    border-radius: 4px 0;
-    border-right: none;
+    flex: 50%;
+    padding: 3.5px 0;
   }
 
-  button {
-    flex: 0.2;
-    padding: 11.5px 15px;
-    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.1);
-    font-size: 1rem;
-    border-radius: 0 3px 3px 0;
+  .InputBtn {
+    flex: 0.1;
+    padding: 14px 8px;
+    box-shadow: none;
+    font-size: 0.95rem;
+    border-radius: 0;
     color: #fff;
     background-color: $secondary-green;
+
+    &:disabled {
+      background-color: transparent;
+      color: #cacaca;
+      text-decoration-line: underline;
+    }
+  }
+
+  @include respond(desktop) {
+    input {
+      font-size: 1.05rem;
+
+      &::placeholder {
+        font-size: 0.98rem;
+      }
+    }
+
+    .InputBtn {
+      font-size: 1rem;
+    }
   }
 }

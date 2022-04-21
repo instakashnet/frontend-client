@@ -24,6 +24,7 @@ import Complete from "./complete.screen";
 import classes from "./modules/exchange.screen.module.scss";
 // SCREEN
 import ProfileSelection from "./selection.screen";
+
 const Exchange = ({ history, location, match }) => {
   // HOOKS & VARIABLES
   const dispatch = useDispatch(),
@@ -49,6 +50,7 @@ const Exchange = ({ history, location, match }) => {
     } else timer && clearTimeout(timer);
     return () => timer && clearTimeout(timer);
   }, [location, history]);
+
   // HANDLERS
   const preventLoad = (e) => {
     e.preventDefault();

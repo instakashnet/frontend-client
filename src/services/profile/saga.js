@@ -1,4 +1,5 @@
 import camelize from "camelize";
+import moment from "moment";
 import { uploadFile } from "react-s3";
 import { all, call, delay, fork, put, select, takeEvery, takeLatest } from "redux-saga/effects";
 import Swal from "sweetalert2";
@@ -12,9 +13,13 @@ import * as types from "./types";
 
 // UTILS
 const uploadToS3 = async (photo, docType) => {
+  const current = moment(),
+    yearMonth = current.format("YYYYMM"),
+    day = current.format("DD");
+
   const S3config = {
     bucketName: process.env.REACT_APP_STAGE !== "prod" ? "instakash-docs-dev" : "instakash-docs",
-    dirName: docType,
+    dirName: `${docType}/${yearMonth}/${day}`,
     region: "us-east-2",
     accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
     secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,

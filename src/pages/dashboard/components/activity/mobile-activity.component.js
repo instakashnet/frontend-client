@@ -3,13 +3,13 @@ import { Pagination } from "@material-ui/lab";
 import _ from "lodash";
 import React, { useState } from "react";
 import SwipeableViews from "react-swipeable-views";
-
 // COMPONENTS
 import Card from "../../../../components/UI/card.component";
 // CLASSES
 import sharedClass from "../../assets/css/sharedClasses.module.scss";
 // COMPONENT
 import { OrderItem } from "../orders/order-item.component";
+
 
 export const ActivityMobile = ({ orders, withdrawals, openModal }) => {
   const [ordersPage, setOrdersPage] = useState(1),
@@ -47,9 +47,9 @@ export const ActivityMobile = ({ orders, withdrawals, openModal }) => {
         <SwipeableViews style={{ padding: "0 10px 0 0" }} index={withdrawalsPage - 1} slideStyle={{ padding: "0 5px" }} onChangeIndex={onWithdrawalsChange}>
           {groupedWithdrawals.map((withdrawals, i) => (
             <div className="flex flex-col items-center py-4" key={i}>
-              {withdrawals.map((widthdrawal) => (
-                <Card key={widthdrawal.id} className="mb-5 w-full">
-                  <OrderItem order={widthdrawal} type="widthdrawal" openModal={openModal} isMobile />
+              {withdrawals.map((withdrawal) => (
+                <Card key={withdrawal.id} className="mb-5 w-full">
+                  <OrderItem order={withdrawal} type="withdrawal" openModal={openModal} isMobile />
                 </Card>
               ))}
             </div>
