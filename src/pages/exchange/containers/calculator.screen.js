@@ -17,6 +17,7 @@ import sharedClass from "./modules/sharedClasses.module.scss";
 
 const Calculator = ({ profile, setModal, user }) => {
   const dispatch = useDispatch(),
+    [couponInputFocused, setCouponInputFocused] = useState(false),
     [couponName, setCouponName] = useState(""),
     [actualRates, setActualRates] = useState({ buy: 0, sell: 0 }),
     [couponRates, setCouponRates] = useState({ buy: 0, sell: 0 }),
@@ -118,6 +119,8 @@ const Calculator = ({ profile, setModal, user }) => {
     setFieldValue("amount_received", values.type === "buy" ? values.amount_sent * rates.buy : values.amount_sent / rates.sell);
   };
 
+  const couponFocusedHandler = ({ type }) => setCouponInputFocused(type === "focus");
+
   const clearCalulator = () => {
     dispatch(deleteCoupon());
     dispatch(getRatesInit());
@@ -135,15 +138,13 @@ const Calculator = ({ profile, setModal, user }) => {
     <>
       <Card className={classes.CalculatorContainer}>
         <h1 className={classes.CalculatorTitle}>
-          Compra y gana <br />con Instakash
+          Comienza el cambio
         </h1>
         {!ratesLoading && <Rates actualRates={actualRates} coupon={coupon} couponRates={couponRates} currency={values.currency_sent_id} />}
         <form onSubmit={formik.handleSubmit} className={sharedClass.ExchangeForm} id="calculator-form">
           <div className={classes.Timer}>
-            <p>Se actualizará el tipo de cambio en:</p>
-            <div className="flex items-center text-base font-bold">
-              <Timer onFinish={clearCalulator} />
-            </div>
+            <p className={classes.TimerP}>Se actualizará el tipo de cambio en:</p>
+            <Timer onFinish={clearCalulator} time={300000} />
           </div>
           <div className="relative">
             <Input
@@ -167,6 +168,8 @@ const Calculator = ({ profile, setModal, user }) => {
               coupon={coupon}
               couponName={couponName}
               setCouponName={setCouponName}
+              couponInputFocused={couponInputFocused}
+              couponFocusedHandler={couponFocusedHandler}
               minimum={isCouponMin}
               amountReceived={values.amount_received}
               isProcessing={isProcessing}
@@ -186,7 +189,7 @@ const Calculator = ({ profile, setModal, user }) => {
         className={`action-button mt-2 ld-over ${isProcessing ? "running" : ""}`}
       >
         <span className="ld ld-ring ld-spin" />
-        Regístrate y cambia
+        Comenzar cambio
       </Button>
     </>
   );

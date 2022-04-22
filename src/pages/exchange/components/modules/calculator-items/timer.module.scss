@@ -1,6 +1,11 @@
 .Progress {
-  margin-right: 6px;
   color: #0D8284;
+  position: absolute;
+  left: 0;
+}
+
+.BackgroundProgress {
+  color: #cacaca;
 }
 
 .Time {

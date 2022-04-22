@@ -120,7 +120,7 @@ export const Information = () => {
     <>
       <p className="mb-3 text-center">
         Agradecidos siempre por la confianza, queremos informarle que en estos momentos la plataforma para empresas de BCP no está permitiendo realizar transferencias. Por este
-        motivo <b>las operaciones hacía BCP no se podrán hacer por el momento.</b> Estamos a la espera que el banco solucione el inconveniente.
+        motivo <b>las operaciones hacia BCP no se podrán hacer por el momento.</b> Estamos a la espera que el banco solucione el inconveniente.
       </p>
       <p className="text-center my-4 font-bold">Agradecemos su comprensión.</p>
       <Button onClick={() => dispatch(closeModal())} className="action-button">

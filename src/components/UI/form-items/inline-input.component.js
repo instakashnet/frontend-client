@@ -7,7 +7,7 @@ import classes from "../modules/form-items/inline-input.module.scss";
 export const InlineInput = ({ type, name, value, disabled, error, touched, buttonLabel, className, buttonType, onClick, helperText, label, icon, ...rest }) => {
   return (
     <FormControl margin="normal" classes={{ root: classes.FormControl }}>
-      <div className={classes.FlexInput}>
+      <div className={`${classes.FlexInput} ${className}`}>
         <Input
           id="inline-input"
           aria-describedby="inline-helper-text"
