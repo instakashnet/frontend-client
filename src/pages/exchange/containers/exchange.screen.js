@@ -16,6 +16,7 @@ import { InfoButton } from "../components/info-button.component";
 import Information from "../components/information.component";
 import CompleteProfile from "../components/profile-modal.component";
 import { SelectionHeader } from "../components/selection-header.component";
+import { Steps } from "../components/steps.component";
 // SCREENS
 import Accounts from "./accounts.screen";
 import Calculator from "./calculator.screen";
@@ -24,6 +25,7 @@ import Complete from "./complete.screen";
 import classes from "./modules/exchange.screen.module.scss";
 // SCREEN
 import ProfileSelection from "./selection.screen";
+import { TransferCodeScreen } from "./transfer-code.screen";
 
 const Exchange = ({ history, location, match }) => {
   // HOOKS & VARIABLES
@@ -68,14 +70,17 @@ const Exchange = ({ history, location, match }) => {
     if (type === "info") ModalComponent = () => <Information title="¡IMPORTANTE!" onClose={() => dispatch(closeModal())} />;
     dispatch(openModal(ModalComponent));
   };
+
   return (
     <Layout className="content-center">
       <div className={classes.Exchange}>
-        {match.isExact && (
+        {match.isExact ? (
           <>
             <SelectionHeader profile={profile} />
             <div className={classes.Separator} />
           </>
+        ) : (
+          !location.pathname.includes("profile") && <Steps location={location.pathname} />
         )}
         <Route exact path={match.url}>
           <Calculator profile={profile} setModal={openModalHandler} user={user} />
@@ -85,6 +90,9 @@ const Exchange = ({ history, location, match }) => {
         </Route>
         <Route path={match.url + "/complete"}>
           <Complete />
+        </Route>
+        <Route path={match.url + "/transfer-code"}>
+          <TransferCodeScreen />
         </Route>
         <Route path={match.url + "/profile-selection"}>
           <ProfileSelection />

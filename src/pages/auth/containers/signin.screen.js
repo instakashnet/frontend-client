@@ -113,6 +113,7 @@ const Signin = () => {
     </main>
   );
 };
+
 export const Information = () => {
   const dispatch = useDispatch();
   return (

@@ -203,14 +203,14 @@ const Accounts = ({ setModal }) => {
             touched={formik.touched.funds_text}
           />
         )}
-        <div className="flex flex-col items-center justify-center">
-          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button mt-4 ld-over ${isProcessing ? "running" : ""}`}>
+        <div className="flex flex-col lg:flex-row items-center justify-center">
+          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button m-3 ld-over ${isProcessing ? "running" : ""} lg:order-2`}>
             <span className="ld ld-ring ld-spin" />
             Continuar
           </Button>
           <Button
             type="button"
-            className={`secondary-button mt-4 ld-over ${isProcessing ? "running" : ""}`}
+            className={`secondary-button m-3 ld-over ${isProcessing ? "running" : ""}`}
             disabled={isProcessing}
             onClick={() => dispatch(cancelExchangeInit(order.id, "draft"))}
           >
