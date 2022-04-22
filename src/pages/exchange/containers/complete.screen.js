@@ -1,37 +1,35 @@
 import React from "react";
 // REDUX
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // REACT ROUTER
-import { Redirect } from "react-router-dom";
-
+import { Link, Redirect } from "react-router-dom";
+import { Button } from "../../../components/UI/button.component";
 // COMPONENTS
 import Card from "../../../components/UI/card.component";
 import CopyButton from "../../../components/UI/copy-button.component";
 // HELPER
 import { formatAmount } from "../../../shared/functions";
-// ASSET
-import TransferImg from "../assets/images/transfer.svg";
-// COMPONENTS
-import { EmailTransfer } from "../components/complete-items/email-transfer.component";
-import { TransactionCode } from "../components/complete-items/transaction-code.component";
+import { cancelExchangeInit } from "../../../store/actions";
+import Timer from "../components/calculator-items/timer.component";
 // CLASSES
 import classes from "./modules/complete.screen.module.scss";
 
 const CompleteExchange = () => {
-  const dispatch = useDispatch();
-  const { isProcessing, order } = useSelector((state) => state.Exchange);
+  const dispatch = useDispatch(),
+    { order, isProcessing } = useSelector((state) => state.Exchange);
 
   if (!order) return <Redirect to="/currency-exchange" />;
 
+  const time = new Date(order.expiredAt).getTime() - new Date().getTime();
+
   return (
     <div className={classes.TransferCode}>
-      <h1>¡Último paso!</h1>
-      <img src={TransferImg} alt="transfer-money" className="mx-auto inline-block mb-2" />
-      <p>Ahora transfiere el monto de</p>
+      <h1>Realiza la transferencia</h1>
+      <p>Transfiere desde tu banca por internet {order?.bankFromName} el importe de:</p>
       <p className={classes.Amount}>{`${order.currencySentSymbol} ${formatAmount(order.amountSent)}`}</p>
 
-      <p className="mb-2">desde tu banca por internet a la siguiente cuenta:</p>
-      <Card className={`${classes.TransferAccount} flex flex-col md:flex-row items-center justify-center md:justify-between`}>
+      <p className="font-bold text-left mt-3">Datos para transferir:</p>
+      <Card className={`${classes.TransferAccount} mt-2 flex flex-wrap items-center justify-between`}>
         <img src={`${process.env.PUBLIC_URL}/images/banks/${order?.bankFromName.toLowerCase()}-logo.svg`} width={85} alt={order.bankFromName} />
         <div className="text-center md:text-right text-base">
           <span>Cuenta corriente en {order.currencySent === "PEN" ? "Soles" : "Dólares"}:</span>
@@ -42,36 +40,31 @@ const CompleteExchange = () => {
         </div>
       </Card>
 
-      <p className="font-bold my-4">Instakash SAC - RUC 20605285105</p>
+      <Card className={`${classes.TransferAccount} flex items-center justify-between mt-5`}>
+        <p className="font-bold my-4">Instakash SAC - RUC 20605285105</p>
+        <CopyButton textToCopy="20605285105" />
+      </Card>
 
-      <div className="flex flex-wrap justify-center items-center">
-        <section className="mx-3">
-          <p>Recibirás:</p>
-          <p className="font-bold text-green">
-            {order.currencyReceivedSymbol} {formatAmount(order.amountReceived)}
-          </p>
-        </section>
-        <section className="mx-3">
-          <p>Tipo de cambio:</p>
-          <p className="font-bold text-green">{order.rate}</p>
-        </section>
+      <p className="font-bold mt-5">¿Ya realizaste tu transferencia?</p>
+      <div className="flex flex-col lg:flex-row items-center justify-center">
+        <Link to="/currency-exchange/transfer-code" className={`${classes.ActionButton} m-3 lg:order-2`}>
+          Continuar
+        </Link>
+
+        <Button
+          type="button"
+          className={`secondary-button m-3 ld-over ${isProcessing ? "running" : ""}`}
+          disabled={isProcessing}
+          onClick={() => dispatch(cancelExchangeInit(order.id, "complete"))}
+        >
+          <span className="ld ld-ring ld-spin" />
+          Cancelar
+        </Button>
       </div>
-
-      {order.bankFromClientActive ? (
-        <>
-          <p className="mt-4 text-left">
-            Una vez realizado coloque el número de operación <b>emitido por su banco</b> dentro del casillero mostrado debajo y debe darle al botón de <i>"enviar"</i>.
-          </p>
-          <TransactionCode dispatch={dispatch} order={order} isProcessing={isProcessing} />
-        </>
-      ) : (
-        <>
-          <p className="my-4 text-left">
-            Ahora deberás enviarnos la constancia de tu transferencia a nuestro correo <b>desde la APP de tu banco.</b>
-          </p>
-          <EmailTransfer dispatch={dispatch} order={order} isProcessing={isProcessing} />
-        </>
-      )}
+      <div className="flex items-center justify-between mt-1">
+        <p>Tiempo para completar tu operación:</p>
+        <Timer onFinish={() => {}} time={time > 0 ? time : 10} />
+      </div>
     </div>
   );
 };

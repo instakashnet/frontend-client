@@ -6,8 +6,8 @@ import classes from "../modules/calculator-items/timer.module.scss";
 
 const Timer = ({ onFinish, time }) => {
   // VARIABLES
-  const [timerId, setTimerId] = useState(0);
-  const [countdown, setCountdown] = useState(Date.now() + time);
+  const [timerId, setTimerId] = useState(0),
+    [countdown, setCountdown] = useState(Date.now() + time);
 
   const progressStyles = {
     position: "relative",

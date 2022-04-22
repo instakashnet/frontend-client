@@ -14,7 +14,6 @@ import Timer from "../components/calculator-items/timer.component";
 import classes from "./modules/calculator.screen.module.scss";
 import sharedClass from "./modules/sharedClasses.module.scss";
 
-
 const Calculator = ({ profile, setModal, user }) => {
   const dispatch = useDispatch(),
     [couponInputFocused, setCouponInputFocused] = useState(false),
@@ -147,14 +146,7 @@ const Calculator = ({ profile, setModal, user }) => {
             <Timer onFinish={clearCalulator} time={300000} />
           </div>
           <div className="relative">
-            <Input
-              name="amount_sent"
-              value={amount_sent}
-              currency={values.currency_sent_id}
-              label="Envías"
-              disabled={disabled}
-              onChange={currencyChangeHandler}
-            />
+            <Input name="amount_sent" value={amount_sent} currency={values.currency_sent_id} label="Envías" disabled={disabled} onChange={currencyChangeHandler} />
             <Swipe onSwipeCurrency={swipeCurrencyHandler} type={values.type} disabled={disabled} />
             <Input
               name="amount_received"

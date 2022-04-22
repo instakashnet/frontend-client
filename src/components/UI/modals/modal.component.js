@@ -1,9 +1,7 @@
 import { Dialog, DialogContent } from "@material-ui/core";
-import { ErrorOutline,InfoOutlined, WarningOutlined } from "@material-ui/icons";
-import { Close } from "@material-ui/icons";
+import { Close, ErrorOutline, InfoOutlined, WarningOutlined } from "@material-ui/icons";
 import React from "react";
-import { useDispatch,useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../../store/actions";
 import classes from "../modules/modals/g-modal.module.scss";
 
