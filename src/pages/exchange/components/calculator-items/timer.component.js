@@ -4,11 +4,10 @@ import Countdown from "react-countdown";
 // CLASSES
 import classes from "../modules/calculator-items/timer.module.scss";
 
-const Timer = ({ onFinish }) => {
+const Timer = ({ onFinish, time }) => {
   // VARIABLES
-  const time = 300000;
-  const [timerId, setTimerId] = useState(0);
-  const [countdown, setCountdown] = useState(Date.now() + time);
+  const [timerId, setTimerId] = useState(0),
+    [countdown, setCountdown] = useState(Date.now() + time);
 
   // HANDLERS
   const renderer = ({ total, formatted: { minutes, seconds } }) => {
@@ -31,7 +30,9 @@ const Timer = ({ onFinish }) => {
   };
 
   return (
-    <Countdown key={timerId} date={countdown} renderer={renderer} onComplete={onComplete} />
+    <div className="flex items-center text-base font-bold">
+      <Countdown key={timerId} date={countdown} renderer={renderer} onComplete={onComplete} />
+    </div>
   );
 };
 

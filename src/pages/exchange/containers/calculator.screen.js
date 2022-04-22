@@ -14,7 +14,6 @@ import Timer from "../components/calculator-items/timer.component";
 import classes from "./modules/calculator.screen.module.scss";
 import sharedClass from "./modules/sharedClasses.module.scss";
 
-
 const Calculator = ({ profile, setModal, user }) => {
   const dispatch = useDispatch(),
     [couponName, setCouponName] = useState(""),
@@ -135,25 +134,17 @@ const Calculator = ({ profile, setModal, user }) => {
     <>
       <Card className={classes.CalculatorContainer}>
         <h1 className={classes.CalculatorTitle}>
-          Compra y gana <br />con Instakash
+          Compra y gana <br />
+          con Instakash
         </h1>
         {!ratesLoading && <Rates actualRates={actualRates} coupon={coupon} couponRates={couponRates} currency={values.currency_sent_id} />}
         <form onSubmit={formik.handleSubmit} className={sharedClass.ExchangeForm} id="calculator-form">
           <div className={classes.Timer}>
             <p>Se actualizará el tipo de cambio en:</p>
-            <div className="flex items-center text-base font-bold">
-              <Timer onFinish={clearCalulator} />
-            </div>
+            <Timer onFinish={clearCalulator} time={300000} />
           </div>
           <div className="relative">
-            <Input
-              name="amount_sent"
-              value={amount_sent}
-              currency={values.currency_sent_id}
-              label="Envías"
-              disabled={disabled}
-              onChange={currencyChangeHandler}
-            />
+            <Input name="amount_sent" value={amount_sent} currency={values.currency_sent_id} label="Envías" disabled={disabled} onChange={currencyChangeHandler} />
             <Swipe onSwipeCurrency={swipeCurrencyHandler} type={values.type} disabled={disabled} />
             <Input
               name="amount_received"
@@ -186,7 +177,7 @@ const Calculator = ({ profile, setModal, user }) => {
         className={`action-button mt-2 ld-over ${isProcessing ? "running" : ""}`}
       >
         <span className="ld ld-ring ld-spin" />
-        Regístrate y cambia
+        Comenzar cambio
       </Button>
     </>
   );

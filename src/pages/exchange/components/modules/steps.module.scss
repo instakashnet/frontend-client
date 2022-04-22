@@ -1,0 +1,72 @@
+@import "../../../../assets/css/colors";
+
+.StepsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 22rem;
+  margin: 0 auto 1.5rem;
+  position: relative;
+
+  &::before,
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 30px;
+    top: 70%;
+    width: 85%;
+    height: 2px;
+    background-color: #676767;
+    z-index: 0;
+  }
+
+  &:after {
+    background-color: $base-green;
+    width: 0;
+  }
+
+  &.Progress2:after {
+    width: 40%;
+  }
+
+  &.Progress3:after {
+    width: 85%;
+  }
+}
+
+.StepItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: 250ms ease-out;
+  z-index: 10;
+
+  p {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  span {
+    font-size: 1.6rem;
+    font-weight: 500;
+    display: inline-block;
+    padding: 0.05rem 0.75rem;
+    border-radius: 50%;
+    background-color: $bg-color;
+    border: 1px solid #676767;
+  }
+
+  &.Active {
+    p {
+      color: $base-green;
+    }
+
+    span {
+      background-color: $base-green;
+      border-color: $base-green;
+      color: #fff;
+    }
+  }
+}
