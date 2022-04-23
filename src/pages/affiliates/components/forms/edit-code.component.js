@@ -1,16 +1,16 @@
 import { useFormik } from "formik";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { Button } from "../../../../components/UI/button.component";
 import { Input } from "../../../../components/UI/form-items/input.component";
 import { editUserCodeInit } from "../../../../store/actions";
 import { usernameValidation } from "../../helpers/validations";
 
+
 const EditUserCode = () => {
   const dispatch = useDispatch();
   const isProcessing = useSelector((state) => state.Profile.isProcessing);
-  const username = useSelector((state) => state.Auth.userCode);
+  const username = useSelector((state) => state.Auth.userCode || "");
   const formik = useFormik({
     initialValues: { username },
     enableReinitialize: true,

@@ -1,13 +1,18 @@
 import { Box, CircularProgress } from "@material-ui/core";
 import React, { useState } from "react";
 import Countdown from "react-countdown";
+import { useDispatch } from "react-redux";
+import { closeModal, openModal } from "../../../../store/actions";
 // CLASSES
 import classes from "../modules/calculator-items/timer.module.scss";
+// COMPONENTS
+import UpdateRates from "../rates-modal.component";
 
 const Timer = ({ onFinish, time }) => {
   // VARIABLES
   const [timerId, setTimerId] = useState(0),
     [countdown, setCountdown] = useState(Date.now() + time);
+  const dispatch = useDispatch();
 
   const progressStyles = {
     position: "relative",
@@ -34,10 +39,16 @@ const Timer = ({ onFinish, time }) => {
     );
   };
 
-  const onComplete = async () => {
+  const refreshRates = async () => {
     await onFinish();
     setCountdown(Date.now() + time);
     setTimerId((prev) => prev + 1);
+    dispatch(closeModal());
+  };
+
+  const onComplete = () => {
+    let modalContent = () => <UpdateRates onClose={refreshRates} strictClose />;
+    dispatch(openModal(modalContent));
   };
 
   return (

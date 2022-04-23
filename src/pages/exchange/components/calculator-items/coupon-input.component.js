@@ -21,12 +21,14 @@ const Coupon = ({ coupon, couponName, setCouponName, couponInputFocused, couponF
         onChange={onCouponChange}
         label="Agrega tu cupón de descuento"
         buttonLabel="Agregar"
-        className={couponInputFocused ? classes.InputFocused : ""}
+        className={`${couponInputFocused ? classes.InputFocused : ""} ${couponInputFocused && !couponName ? classes.InputError : ""}`}
         icon={CouponImg}
         onFocus={couponFocusedHandler}
         onBlur={couponFocusedHandler}
       />
-      <p className={classes.InlineInputDesc}>Al agregar tu cupón de descuento obtendrás una mejor tasa.</p>
+      {!couponName && couponInputFocused
+        ? <p className={`error-msg ${classes.InlineInputDesc}`}>Aún no has agregado tu cupón</p>
+        : <p className={classes.InlineInputDesc}>Al agregar tu cupón de descuento obtendrás una mejor tasa.</p>}
     </>
   ) : (
     <>
