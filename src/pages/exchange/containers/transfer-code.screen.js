@@ -1,14 +1,30 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { closeModal, openModal } from "../../../store/actions";
 import Timer from "../components/calculator-items/timer.component";
 import { EmailTransfer } from "../components/complete-items/email-transfer.component";
 import { TransactionCode } from "../components/complete-items/transaction-code.component";
+import OrderTimeout from "../components/timeout-modal.component";
 import classes from "./modules/complete.screen.module.scss";
 
 export const TransferCodeScreen = () => {
   const dispatch = useDispatch(),
+    history = useHistory(),
     { isProcessing, order } = useSelector((state) => state.Exchange),
     time = new Date(order.expiredAt).getTime() - new Date().getTime();
+
+  // HANDLERS
+  const onTimeout = () => {
+    dispatch(closeModal());
+    history.push("/currency-exchange");
+  };
+
+  const orderTimeoutHandler = () => {
+    let modalContent = () => <OrderTimeout onClose={onTimeout} strictClose />;
+
+    dispatch(openModal(modalContent));
+  };
 
   return (
     <div className={classes.TransferCode}>
@@ -31,7 +47,7 @@ export const TransferCodeScreen = () => {
       )}
       <div className="flex items-center justify-between mt-1">
         <p>Tiempo para completar tu operación:</p>
-        <Timer onFinish={() => { }} time={time > 0 ? time : 10} />
+        <Timer onFinish={orderTimeoutHandler} time={time > 0 ? time : 10} />
       </div>
     </div>
   );
