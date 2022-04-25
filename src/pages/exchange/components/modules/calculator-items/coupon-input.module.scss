@@ -1,7 +1,15 @@
 @import "../../../../../assets/css/colors";
 @import "../../../../../assets/css/breakpoints";
 
-.InputDesc.InputDesc {
+.InputFocused {
+  border: 1px solid #0d8284;
+}
+
+.InputError {
+  border: 1px solid #ff4b55;
+}
+
+.InlineInputDesc.InlineInputDesc {
   color: #afafaf;
   font-size: 0.79rem;
   margin-top: -18px;
@@ -12,18 +20,67 @@
 }
 
 .Coupon {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 15px;
-  border: 1px dashed #c3e5d9;
-  background-color: $bg-gray;
-  color: $base-green;
-  border-radius: 5px;
-  margin-top: 15px;
+  padding: 12.4px 25px;
+  border: 2px dashed #0d8284;
+  color: #0d8284;
+  margin-top: 35px;
+  font-weight: 600;
 
   p {
     font-size: 0.9rem;
+    color: #0d8284;
+  }
+
+  button {
+    text-decoration-line: underline;
+    font-weight: 600;
+    font-size: 15.2px;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: -0.6%;
+    width: 10px;
+    height: 22px;
+    background-color: #fff;
+    border-top: 1px dashed #0d8284;
+    border-right: 2px dashed #0d8284;
+    border-bottom: 1px dashed #0d8284;
+    border-radius: 0 10px 10px 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: -0.5%;
+    width: 10px;
+    height: 22px;
+    background-color: #fff;
+    border-top: 1px dashed #0d8284;
+    border-left: 2px dashed #0d8284;
+    border-bottom: 1px dashed #0d8284;
+    border-radius: 10px 0 0 10px;
+  }
+
+  @include respond(ldesktop) {
+    &::after {
+      right: -0.6%;
+    }
+  }
+}
+
+.CouponDesc.CouponDesc {
+  color: #afafaf;
+  font-size: 0.79rem;
+  margin-top: 4px;
+
+  @include respond(tablet) {
+    font-size: 0.85rem;
   }
 }
 

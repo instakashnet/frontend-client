@@ -1,12 +1,15 @@
 import { useFormik } from "formik";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+// COMPONENTS
 import { Button } from "../../../components/UI/button.component";
 import Card from "../../../components/UI/card.component";
+import { Modal } from "../../../components/UI/modals/modal.component";
+// REDUX ACTIONS
 import { createExchangeInit, deleteCoupon, getLastOrderInit, getRatesInit, validateCouponInit } from "../../../store/actions";
+// COMPONENTS
 import CouponInput from "../components/calculator-items/coupon-input.component";
 import Input from "../components/calculator-items/currency-input.component";
-// COMPONENTS
 import Rates from "../components/calculator-items/rates.component";
 import Swipe from "../components/calculator-items/swipe.component";
 import Timer from "../components/calculator-items/timer.component";
@@ -16,6 +19,7 @@ import sharedClass from "./modules/sharedClasses.module.scss";
 
 const Calculator = ({ profile, setModal, user }) => {
   const dispatch = useDispatch(),
+    [couponInputFocused, setCouponInputFocused] = useState(false),
     [couponName, setCouponName] = useState(""),
     [actualRates, setActualRates] = useState({ buy: 0, sell: 0 }),
     [couponRates, setCouponRates] = useState({ buy: 0, sell: 0 }),
@@ -44,6 +48,8 @@ const Calculator = ({ profile, setModal, user }) => {
     { type, amount_sent, amount_received } = values,
     sellRate = coupon ? couponRates.sell : actualRates.sell,
     buyRate = coupon ? couponRates.buy : actualRates.buy;
+
+  const ModalComponent = useSelector((state) => state.Modal.Component);
 
   // EFFECTS
   useEffect(() => {
@@ -117,7 +123,9 @@ const Calculator = ({ profile, setModal, user }) => {
     setFieldValue("amount_received", values.type === "buy" ? values.amount_sent * rates.buy : values.amount_sent / rates.sell);
   };
 
-  const clearCalulator = () => {
+  const couponFocusedHandler = ({ type }) => setCouponInputFocused(type === "focus");
+
+  const clearCalculator = () => {
     dispatch(deleteCoupon());
     dispatch(getRatesInit());
     setFieldValue("couponName", "");
@@ -134,14 +142,13 @@ const Calculator = ({ profile, setModal, user }) => {
     <>
       <Card className={classes.CalculatorContainer}>
         <h1 className={classes.CalculatorTitle}>
-          Compra y gana <br />
-          con Instakash
+          Comienza el cambio
         </h1>
         {!ratesLoading && <Rates actualRates={actualRates} coupon={coupon} couponRates={couponRates} currency={values.currency_sent_id} />}
         <form onSubmit={formik.handleSubmit} className={sharedClass.ExchangeForm} id="calculator-form">
           <div className={classes.Timer}>
-            <p>Se actualizará el tipo de cambio en:</p>
-            <Timer onFinish={clearCalulator} time={300000} />
+            <p className={classes.TimerP}>Se actualizará el tipo de cambio en:</p>
+            <Timer onFinish={clearCalculator} time={300000} />
           </div>
           <div className="relative">
             <Input name="amount_sent" value={amount_sent} currency={values.currency_sent_id} label="Envías" disabled={disabled} onChange={currencyChangeHandler} />
@@ -158,8 +165,9 @@ const Calculator = ({ profile, setModal, user }) => {
               coupon={coupon}
               couponName={couponName}
               setCouponName={setCouponName}
+              couponInputFocused={couponInputFocused}
+              couponFocusedHandler={couponFocusedHandler}
               minimum={isCouponMin}
-              amountReceived={values.amount_received}
               isProcessing={isProcessing}
               disabled={disabled}
               isLoading={ratesLoading}
@@ -179,6 +187,11 @@ const Calculator = ({ profile, setModal, user }) => {
         <span className="ld ld-ring ld-spin" />
         Comenzar cambio
       </Button>
+      {ModalComponent && (
+        <Modal {...ModalComponent().props}>
+          <ModalComponent />
+        </Modal>
+      )}
     </>
   );
 };

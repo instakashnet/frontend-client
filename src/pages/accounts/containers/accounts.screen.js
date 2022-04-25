@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 // COMPONENTS
 import Layout from "../../../components/layout/layout.component";
 import { Button } from "../../../components/UI/button.component";
+import { Modal } from "../../../components/UI/modals/modal.component";
 import Spinner from "../../../components/UI/spinner.component";
 // REDUX ACTIONS
 import { getAccountsInit, openModal, setAccountDetailsInit } from "../../../store/actions";
@@ -14,7 +15,7 @@ import AccountsList from "../components/accounts-list.component";
 import { AddAccount } from "../components/add-account.component";
 import WithdrawKash from "../components/forms/withdraw-kash.component";
 import { KashAccount } from "../components/kash-account.component";
-import NoAccount from "../components/no-accounts.component";
+import NoAccounts from "../components/no-accounts.component";
 import AccountDetails from "./account-details.screen";
 // CLASSES
 import classes from "./modules/accounts.screen.module.scss";
@@ -23,6 +24,7 @@ const Accounts = () => {
   // HOOKS
   const dispatch = useDispatch(),
     { accounts, kashAccount, isLoading } = useSelector((state) => state.Accounts),
+    ModalComponent = useSelector((state) => state.Modal.Component),
     groupedAccounts = _.map(_.groupBy(accounts, (account) => account.currency.id));
 
   // EFFECTS
@@ -34,23 +36,23 @@ const Accounts = () => {
   // HANDLERS
   const addAccountHandler = () => openModalHandler("add"),
     openModalHandler = (type, accId = null) => {
-      let ModalComponent;
+      let modalContent;
 
-      if (type === "add") ModalComponent = () => <AddAccount title="Agregar cuenta" addType="users" />;
-      if (type === "details") ModalComponent = () => <AccountDetails title="Datos de la cuenta" />;
-      if (type === "withdrawal") ModalComponent = () => <WithdrawKash title="Retirar KASH" accounts={accounts} kashAccount={kashAccount} />;
+      if (type === "add") modalContent = () => <AddAccount title="Agregar cuenta" addType="users" />;
+      if (type === "details") modalContent = () => <AccountDetails title="Datos de la cuenta" />;
+      if (type === "withdrawal") modalContent = () => <WithdrawKash title="Retirar KASH" accounts={accounts} kashAccount={kashAccount} />;
 
       if (accId) dispatch(setAccountDetailsInit(accId));
 
-      dispatch(openModal(ModalComponent));
-    };
+      dispatch(openModal(modalContent));
+    }
 
   return (
     <Layout className="content-start">
       <div className={classes.Accounts}>
         <KashAccount account={kashAccount} openModal={openModalHandler} />
         {accounts.length <= 0 ? (
-          <NoAccount onAddAccount={addAccountHandler} />
+          <NoAccounts onAddAccount={addAccountHandler} />
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-4">
             <section className="mt-3 md:mt-6">
@@ -75,6 +77,11 @@ const Accounts = () => {
               </div>
             </section>
           </div>
+        )}
+        {ModalComponent && (
+          <Modal {...ModalComponent().props}>
+            <ModalComponent />
+          </Modal>
         )}
       </div>
       {isLoading && <Spinner loading={isLoading} />}

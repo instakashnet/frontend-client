@@ -22,16 +22,16 @@ export const TransferCodeScreen = () => {
         </>
       ) : (
         <>
-          <h1>Envianos el voucher de tu banco</h1>
+          <h1>Envíanos el voucher de tu banco</h1>
           <p className="my-3 text-left">
-            Envianos la constancia de tu transferencia a nuestro correo <b>desde la APP de tu banco.</b>
+            Envíanos la constancia de tu transferencia a nuestro correo <b>desde la APP de tu banco.</b>
           </p>
           <EmailTransfer dispatch={dispatch} order={order} isProcessing={isProcessing} />
         </>
       )}
       <div className="flex items-center justify-between mt-1">
         <p>Tiempo para completar tu operación:</p>
-        <Timer onFinish={() => {}} time={time > 0 ? time : 10} />
+        <Timer onFinish={() => { }} time={time > 0 ? time : 10} />
       </div>
     </div>
   );

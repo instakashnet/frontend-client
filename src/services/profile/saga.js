@@ -3,13 +3,21 @@ import moment from "moment";
 import { uploadFile } from "react-s3";
 import { all, call, delay, fork, put, select, takeEvery, takeLatest } from "redux-saga/effects";
 import Swal from "sweetalert2";
-import { completeProfileSvc, deleteProfileSvc, editAddInfoSvc, editBasicInfoSvc, generateTokenSvc, getProfilesSvc, loadUserSvc, userCodeSvc } from "../../api/services/auth.service";
+import {
+  completeProfileSvc,
+  deleteProfileSvc,
+  editAddInfoSvc,
+  editBasicInfoSvc,
+  generateTokenSvc,
+  getProfilesSvc,
+  loadUserSvc,
+  userCodeSvc,
+} from "../../api/services/auth.service";
 import { replaceSpace } from "../../shared/functions";
 import history from "../../shared/history";
 import { closeModal, setAlertInit, setUserData } from "../../store/actions";
 import * as actions from "./actions";
 import * as types from "./types";
-
 
 // UTILS
 const uploadToS3 = async (photo, docType) => {
@@ -104,10 +112,7 @@ function* uploadDocument({ photos, docType }) {
       const photoRes = yield fetch(photosArray[i]),
         blob = yield photoRes.blob(),
         docSide = docType === "passport" ? "front" : i > 0 ? "back" : "front",
-        photo = new File(
-          [blob],
-          `${user.documentType.toUpperCase()}-${user.documentIdentification}-${replaceSpace(user.name.toUpperCase())}-${docSide}-&Token&${resToken}.jpg`
-        );
+        photo = new File([blob], `${user.documentType.toUpperCase()}-${user.documentIdentification}-${replaceSpace(user.name.toUpperCase())}-${docSide}-&Token&${resToken}.jpg`);
 
       const res = yield call(uploadToS3, photo, user.documentType.toLowerCase());
       uploaded = res.result.status === 204;

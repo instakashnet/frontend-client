@@ -57,6 +57,7 @@ const Signin = () => {
   //   }, 600);
   //   return () => clearTimeout(timeout);
   // }, [dispatch]);
+
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 h-full md:h-screen">
       <Background />
@@ -119,8 +120,8 @@ export const Information = () => {
   return (
     <>
       <p className="mb-3 text-center">
-        Agradecidos siempre por la confianza, queremos informarle que en estos instantes nos encontramos realizando unas actualizaciones importantes en nuestros servidores, debido
-        a ello no podremos realizar operaciones por el momento. Estamos trabajando para poder ofrecerle siempre nuestro mejor servicio.
+        Agradecidos siempre por la confianza, queremos informarle que en estos momentos la plataforma para empresas de BCP no está permitiendo realizar transferencias. Por este
+        motivo <b>las operaciones hacia BCP no se podrán hacer por el momento.</b> Estamos a la espera que el banco solucione el inconveniente.
       </p>
       <p className="text-center my-4 font-bold">Agradecemos su comprensión.</p>
       <Button onClick={() => dispatch(closeModal())} className="action-button">

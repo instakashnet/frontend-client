@@ -1,13 +1,13 @@
-import { Check, ErrorOutline,Remove } from "@material-ui/icons";
+import { Check, ErrorOutline, Remove } from "@material-ui/icons";
 import React from "react";
 import { CircleProgress } from "react-gradient-progress";
-
 // ASSETS & CLASSES
 import FemaleLight from "../../../assets/images/profiles/female-light.svg";
 import MaleLight from "../../../assets/images/profiles/male-light.svg";
 import classes from "./modules/profile-info.module.scss";
 // COMPONENT
 import { ProfileMenu } from "./profile-menu.component";
+
 
 export const ProfileInfo = ({ user, color, completed, match }) => {
   return (
@@ -38,10 +38,10 @@ export const ProfileInfo = ({ user, color, completed, match }) => {
                   user.identityDocumentValidation === "success"
                     ? "#20a2a5"
                     : user.identityDocumentValidation === "pending"
-                    ? "#ffa755"
-                    : user.identityDocumentValidation === "failed"
-                    ? "#ff4b55"
-                    : "#AFAFAF",
+                      ? "#ffa755"
+                      : user.identityDocumentValidation === "failed"
+                        ? "#ff4b55"
+                        : "#AFAFAF",
               }}
             >
               {user.identityDocumentValidation === "success" ? (
@@ -50,7 +50,7 @@ export const ProfileInfo = ({ user, color, completed, match }) => {
                 </div>
               ) : user.identityDocumentValidation === "pending" ? (
                 <div className="flex items-center">
-                  <Remove htmlColor="#ffa755" /> Vertificando identidad
+                  <Remove htmlColor="#ffa755" /> Verificando identidad
                 </div>
               ) : user.identityDocumentValidation === "failed" ? (
                 <div className="flex items-center">
