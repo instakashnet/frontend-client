@@ -1,25 +1,20 @@
 import { Box, CircularProgress } from "@material-ui/core";
 import React, { useState } from "react";
 import Countdown from "react-countdown";
-import { useDispatch } from "react-redux";
-import { closeModal, openModal } from "../../../../store/actions";
 // CLASSES
 import classes from "../modules/calculator-items/timer.module.scss";
-// COMPONENTS
-import UpdateRates from "../rates-modal.component";
 
 const Timer = ({ onFinish, time }) => {
   // VARIABLES
   const [timerId, setTimerId] = useState(0),
     [countdown, setCountdown] = useState(Date.now() + time);
-  const dispatch = useDispatch();
 
   const progressStyles = {
     position: "relative",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginRight: "6px"
+    marginRight: "6px",
   };
 
   // HANDLERS
@@ -39,21 +34,15 @@ const Timer = ({ onFinish, time }) => {
     );
   };
 
-  const refreshRates = async () => {
+  const completeHandler = async () => {
     await onFinish();
     setCountdown(Date.now() + time);
     setTimerId((prev) => prev + 1);
-    dispatch(closeModal());
-  };
-
-  const onComplete = () => {
-    let modalContent = () => <UpdateRates onClose={refreshRates} strictClose />;
-    dispatch(openModal(modalContent));
   };
 
   return (
     <div className="flex items-center text-base font-bold">
-      <Countdown key={timerId} date={countdown} renderer={renderer} onComplete={onComplete} />
+      <Countdown key={timerId} date={countdown} renderer={renderer} onComplete={completeHandler} />
     </div>
   );
 };

@@ -1,26 +1,35 @@
 import React from "react";
-// REDUX
 import { useDispatch, useSelector } from "react-redux";
-// REACT ROUTER
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { Button } from "../../../components/UI/button.component";
-// COMPONENTS
 import Card from "../../../components/UI/card.component";
 import CopyButton from "../../../components/UI/copy-button.component";
-// HELPER
 import { formatAmount } from "../../../shared/functions";
-import { cancelExchangeInit } from "../../../store/actions";
+import { cancelExchangeInit, closeModal, openModal } from "../../../store/actions";
 import Timer from "../components/calculator-items/timer.component";
-// CLASSES
+import OrderTimeout from "../components/timeout-modal.component";
 import classes from "./modules/complete.screen.module.scss";
 
 const CompleteExchange = () => {
   const dispatch = useDispatch(),
+    history = useHistory(),
     { order, isProcessing } = useSelector((state) => state.Exchange);
 
   if (!order) return <Redirect to="/currency-exchange" />;
 
-  const time = new Date(order.expiredAt).getTime() - new Date().getTime();
+  const time = new Date(order.expiredAt).getTime() - new Date().getTime() + 3000;
+
+  // HANDLERS
+  const onTimeout = () => {
+    dispatch(closeModal());
+    history.push("/currency-exchange");
+  };
+
+  const orderTimeoutHandler = () => {
+    let modalContent = () => <OrderTimeout onClose={onTimeout} strictClose />;
+
+    dispatch(openModal(modalContent));
+  };
 
   return (
     <div className={classes.TransferCode}>
@@ -63,7 +72,7 @@ const CompleteExchange = () => {
       </div>
       <div className="flex items-center justify-between mt-1">
         <p>Tiempo para completar tu operación:</p>
-        <Timer onFinish={() => {}} time={time > 0 ? time : 10} />
+        <Timer onFinish={orderTimeoutHandler} time={time > 0 ? time : 10} />
       </div>
     </div>
   );
