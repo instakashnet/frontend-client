@@ -1,7 +1,8 @@
 @import "../../../../assets/css/colors";
+@import "../../../../assets/css/breakpoints";
 
 .AccountDetails {
-  width: 100%;
+  width: 89vw;
 
   hr {
     margin: 15px 0;
@@ -34,6 +35,14 @@
       color: #fff;
       background-color: $error;
     }
+  }
+
+  @media screen and (max-width: 280px) {
+    width: 85vw;
+  }
+
+  @include respond(tablet) {
+    width: 488px;
   }
 
   @media screen and (min-width: 992px) {

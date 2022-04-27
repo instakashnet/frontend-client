@@ -34,10 +34,13 @@ const Timer = ({ onFinish, time }) => {
     );
   };
 
-  const completeHandler = async () => {
-    await onFinish();
-    setCountdown(Date.now() + time);
-    setTimerId((prev) => prev + 1);
+  /* ENTREGA A LA FUNCIÓN DE LA PROP LOS REINICIADORES DEL RELOJ CUENTA ATRÁS
+  PARA QUE SE GESTIONEN APARTE */
+  const completeHandler = () => {
+    onFinish(() => {
+      setCountdown(Date.now() + time);
+      setTimerId((prev) => prev + 1);
+    });
   };
 
   return (

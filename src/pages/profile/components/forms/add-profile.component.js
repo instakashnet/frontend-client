@@ -3,8 +3,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 // REDUX
-import { useDispatch,useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 // COMPONENTS
 import { Button } from "../../../../components/UI/button.component";
 import { CheckboxComponent } from "../../../../components/UI/form-items/checkbox.component";
@@ -15,6 +14,7 @@ import { AllowOnlyNumbers } from "../../../../shared/functions";
 import { addProfileInit } from "../../../../store/actions";
 // HELPER
 import { addProfileValidation } from "../../helpers/validations";
+
 
 const AddProfile = () => {
   const dispatch = useDispatch();
@@ -58,7 +58,7 @@ const AddProfile = () => {
   const onRucChangeHandler = (e) => (AllowOnlyNumbers(e.target.value) ? setFieldValue("ruc", e.target.value) : false);
 
   return (
-    <form onSubmit={formik.handleSubmit} className="max-w-sm mx-auto">
+    <form onSubmit={formik.handleSubmit} className="max-w-sm md:mx-5">
       <h2 className="text-center mb-4">Agrega tu perfil de empresa para tus facturas.</h2>
       <Input
         type="text"
