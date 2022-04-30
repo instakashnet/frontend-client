@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { openSliderModal,toggleNav } from "../../store/actions";
+import { openSliderModal, toggleNav } from "../../store/actions";
 import Logo from "../UI/logo.component";
 import ProfileInfo from "../UI/profile-info.component";
 import Whatsapp from "../UI/whatsapp.component";
@@ -25,7 +24,11 @@ const Header = ({ containerRef }) => {
       </button>
       <Logo className="lg:w-52 md:w-44 w-40 mr-4 hidden md:block" />
       <div className={classes.Hours}>
-        <p>Lunes a Domingo: 9am - 9pm</p>
+        <p>
+          Lunes a Domingo: 9am - 9pm
+          <br />
+          Feriados: Cerrados
+        </p>
       </div>
       <div className="flex items-center ml-auto">
         <a href="https://wa.link/05keps" target="_blank" rel="noopener noreferrer">
