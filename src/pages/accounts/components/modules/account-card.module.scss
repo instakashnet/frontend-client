@@ -1,4 +1,6 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .AccountCard {
   margin: 10px;
@@ -6,7 +8,7 @@
   min-height: 7.5rem;
   display: grid;
   align-content: center;
-  font-size: 0.95rem;
+  font-size: math.div($body, 1.052);
 
   button {
     color: $base-green;

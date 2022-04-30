@@ -99,23 +99,27 @@ function* completeExchange({ values, orderId }) {
   }
 }
 
-function* cancelExchange({ orderId, status, closeModal }) {
+function* cancelExchange({ orderId, status, necessaryConfirm, closeModal }) {
   try {
-    const result = yield Swal.fire({
-      icon: "warning",
-      title: "¿Estás seguro?",
-      text: "Deberás crear una nueva operación para recibir tu cambio.",
-      showCancelButton: true,
-      cancelButtonColor: "#ffeb4d",
-      confirmButtonColor: "#ff4b55",
-      confirmButtonText: "Continuar",
-      cancelButtonText: "Regresar",
-    });
+    let result = { isConfirmed: necessaryConfirm };
+
+    if (necessaryConfirm) {
+      result = yield Swal.fire({
+        icon: "warning",
+        title: "¿Estás seguro?",
+        text: "Deberás crear una nueva operación para recibir tu cambio.",
+        showCancelButton: true,
+        cancelButtonColor: "#ffeb4d",
+        confirmButtonColor: "#ff4b55",
+        confirmButtonText: "Continuar",
+        cancelButtonText: "Regresar",
+      });
+    }
 
     let URL = `/order/cancel/${orderId}`;
     if (status === "draft") URL = `/order/draft/${orderId}`;
 
-    if (result.isConfirmed) {
+    if (!necessaryConfirm || result.isConfirmed) {
       yield call(cancelExchangeSvc, URL);
 
       if (status === "details") {
@@ -125,8 +129,10 @@ function* cancelExchange({ orderId, status, closeModal }) {
 
       if (status === "complete" || status === "draft") yield call([history, "push"], "/currency-exchange");
 
-      yield Swal.fire("Exitoso", "Su solicitud de cambio fue cancelada.", "success");
+      if (result.isConfirmed) yield Swal.fire("Exitoso", "Su solicitud de cambio fue cancelada.", "success");
+
       yield put(actions.cancelExchangeSuccess());
+
     } else yield put(actions.exchangeError());
   } catch (error) {
     yield put(setAlertInit(error.message, "error"));

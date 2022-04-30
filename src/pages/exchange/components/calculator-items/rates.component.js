@@ -12,8 +12,14 @@ const Rates = ({ couponRates, coupon, actualRates, currency }) => {
   return (
     <div className={classes.Rates}>
       <div className="flex items-center justify-center mt-3">
-        <p className={`${classes.BeforeRate} ${!conditionCouponRates ? classes.Hidden : ""} ${conditionToBuy ? classes.Faint : ""}`}>Antes: {convertRate(actualRates.buy)}</p>
-        <p className={`${classes.BeforeRate} ${!conditionCouponRates ? classes.Hidden : ""} ${conditionToSell ? classes.Faint : ""}`}>Antes: {convertRate(actualRates.sell)}</p>
+        <p
+          className={`${classes.BeforeRate} ${!conditionCouponRates ? classes.Hidden : ""} ${conditionToBuy ? classes.Faint : ""}`}>
+          Antes: {convertRate(actualRates.buy)}
+        </p>
+        <p
+          className={`${classes.BeforeRate} ${!conditionCouponRates ? classes.Hidden : ""} ${conditionToSell ? classes.Faint : ""}`}>
+          Antes: {convertRate(actualRates.sell)}
+        </p>
       </div>
       <div className="flex items-center justify-center">
         <div className={`${classes.BuyCard} ${conditionToBuy ? classes.Faint : ""}`}>

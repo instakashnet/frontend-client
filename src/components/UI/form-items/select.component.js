@@ -1,7 +1,7 @@
-import { FormControl, FormHelperText,InputLabel, MenuItem, Select } from "@material-ui/core";
+import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from "@material-ui/core";
 import React from "react";
-
 import classes from "../modules/form-items/select.module.scss";
+
 
 export const SelectComponent = ({ name, value, options, label, empty, emptyLabel, error, touched, helperText, onChange }) => {
   return (

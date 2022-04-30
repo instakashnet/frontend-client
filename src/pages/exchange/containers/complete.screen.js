@@ -11,18 +11,25 @@ import OrderTimeout from "../components/timeout-modal.component";
 import classes from "./modules/complete.screen.module.scss";
 
 const CompleteExchange = () => {
+  // VARIABLES
   const dispatch = useDispatch(),
     history = useHistory(),
     { order, isProcessing } = useSelector((state) => state.Exchange);
 
   if (!order) return <Redirect to="/currency-exchange" />;
 
-  const time = new Date(order.expiredAt).getTime() - new Date().getTime() + 3000;
+  let now = new Date().getTime(),
+    orderExpire = new Date(order.expiredAt).getTime();
+
+  const time = orderExpire - now;
 
   // HANDLERS
   const onTimeout = () => {
+    (now - orderExpire) < 40000
+      ? dispatch(cancelExchangeInit(order.id, "complete", false))
+      : history.push("/currency-exchange");
+
     dispatch(closeModal());
-    history.push("/currency-exchange");
   };
 
   const orderTimeoutHandler = () => {

@@ -1,5 +1,5 @@
-@import "../../../../../assets/css/colors";
 @import "../../../../../assets/css/breakpoints";
+@import "../../../../../assets/css/colors";
 
 .Swipe {
   padding: 7px;
@@ -8,8 +8,8 @@
   top: 40px;
   z-index: 1;
   border-radius: 50%;
-  background-color: #67BE9F;
-  border: 4px solid $card-color;
+  background-color: $tertiary-green;
+  border: 4px solid #fff;
   transition: 350ms ease-in-out;
   transform: rotate(0deg);
 

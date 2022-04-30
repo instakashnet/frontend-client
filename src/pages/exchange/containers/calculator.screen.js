@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../../components/UI/button.component";
 import Card from "../../../components/UI/card.component";
-import { Modal } from "../../../components/UI/modals/modal.component";
 import { closeModal, createExchangeInit, deleteCoupon, getLastOrderInit, getRatesInit, openModal, validateCouponInit } from "../../../store/actions";
 import { CalculatorForm } from "../components/calculator-items/calculator-form.component";
 import Rates from "../components/calculator-items/rates.component";
@@ -18,7 +17,6 @@ const Calculator = ({ profile, setModal, user }) => {
     [isCouponMin, setIsCouponMin] = useState(false),
     temporalAmountSent = useRef(null),
     { rates, ratesLoading, coupon, isProcessing } = useSelector((state) => state.Exchange),
-    ModalComponent = useSelector((state) => state.Modal.Component),
     formik = useFormik({
       initialValues: {
         currency_sent_id: 2,
@@ -85,11 +83,15 @@ const Calculator = ({ profile, setModal, user }) => {
     dispatch(getRatesInit());
     setFieldValue("couponName", "");
     dispatch(closeModal());
-    // setCouponName("");
   };
 
-  const timeFinishHandler = () => {
-    let modalContent = () => <UpdateRates onClose={clearCalculator} strictClose />;
+  const timeFinishHandler = (restartCountdown) => {
+    const resetAll = () => {
+      restartCountdown();
+      clearCalculator();
+    };
+
+    let modalContent = () => <UpdateRates onClose={resetAll} strictClose />;
     dispatch(openModal(modalContent));
   };
 
@@ -121,12 +123,6 @@ const Calculator = ({ profile, setModal, user }) => {
         <span className="ld ld-ring ld-spin" />
         Comenzar cambio
       </Button>
-
-      {ModalComponent && (
-        <Modal {...ModalComponent().props}>
-          <ModalComponent />
-        </Modal>
-      )}
     </>
   );
 };

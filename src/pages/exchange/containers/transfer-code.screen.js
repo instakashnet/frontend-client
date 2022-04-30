@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { closeModal, openModal } from "../../../store/actions";
+import { cancelExchangeInit, closeModal, openModal } from "../../../store/actions";
 import Timer from "../components/calculator-items/timer.component";
 import { EmailTransfer } from "../components/complete-items/email-transfer.component";
 import { TransactionCode } from "../components/complete-items/transaction-code.component";
@@ -9,15 +9,23 @@ import OrderTimeout from "../components/timeout-modal.component";
 import classes from "./modules/complete.screen.module.scss";
 
 export const TransferCodeScreen = () => {
+  // VARIABLES
   const dispatch = useDispatch(),
     history = useHistory(),
-    { isProcessing, order } = useSelector((state) => state.Exchange),
-    time = new Date(order.expiredAt).getTime() - new Date().getTime();
+    { order, isProcessing } = useSelector((state) => state.Exchange);
+
+  let now = new Date().getTime(),
+    orderExpire = new Date(order.expiredAt).getTime();
+
+  const time = orderExpire - now;
 
   // HANDLERS
   const onTimeout = () => {
+    (now - orderExpire) < 40000
+      ? dispatch(cancelExchangeInit(order.id, "complete", false))
+      : history.push("/currency-exchange");
+
     dispatch(closeModal());
-    history.push("/currency-exchange");
   };
 
   const orderTimeoutHandler = () => {

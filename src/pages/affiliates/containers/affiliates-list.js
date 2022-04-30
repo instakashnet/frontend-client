@@ -1,7 +1,6 @@
 import { _ } from "gridjs-react";
 import moment from "moment";
 import React from "react";
-
 // ASSETS
 import KashIcon from "../../../assets/images/kash.svg";
 // COMPONENT
@@ -14,7 +13,8 @@ import { AffiliatesTable } from "../components/affiliates-table.component";
 import classes from "./modules/affiliates-list.module.scss";
 import sharedClass from "./modules/sharedClasses.module.scss";
 
-export const AffiliatesList = ({ affiliates, ...rest }) => {
+
+export const AffiliatesList = ({ affiliates, isLoading, ...rest }) => {
   const { isMobile } = useDeviceDetect();
 
   const columns = [

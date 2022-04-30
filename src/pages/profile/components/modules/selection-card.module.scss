@@ -1,11 +1,13 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/font-sizes";
 
 .SelectionCard {
   width: 300px;
   min-height: 325px;
   border-radius: 15px;
-  background-color: $card-color;
+  background-color: #fff;
   transition: 250ms ease-in-out;
   margin: 20px 0;
   padding: 20px;
@@ -33,7 +35,7 @@
   h2 {
     color: $base-green;
     font-weight: bold;
-    font-size: 1.6rem;
+    font-size: math.div($title, 2.5);
   }
 
   &:hover,
@@ -42,7 +44,7 @@
   }
 
   p {
-    font-size: 0.9rem;
+    font-size: math.div($body, 1.111);
 
     &:first-of-type {
       text-transform: capitalize;

@@ -1,5 +1,7 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/font-sizes";
 
 p.Completed {
   color: $base-green !important;
@@ -34,7 +36,7 @@ img.NoReward {
   justify-content: center;
 
   h4 {
-    font-size: 2rem;
+    font-size: math.div($title, 2);
   }
 
   p {

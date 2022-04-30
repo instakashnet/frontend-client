@@ -1,12 +1,14 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/font-sizes";
 
 .Information {
   position: relative;
   width: 100%;
   top: 25px;
   margin-bottom: 25px;
-  color: #0d8284;
+  color: $base-green;
 
   button {
     color: initial;
@@ -36,7 +38,7 @@
   font-weight: bold;
   text-align: left;
   margin-bottom: 10px;
-  font-size: 1.3rem;
+  font-size: math.div($title, 3.076);
   z-index: 1;
 
   @include respond(tablet) {
@@ -82,7 +84,7 @@
   background-color: #fff;
 
   p {
-    font-size: 0.85rem;
+    font-size: math.div($body, 1.176);
     margin-left: 20px;
   }
 

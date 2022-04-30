@@ -1,9 +1,11 @@
+@use "sass:math";
 @import "../../../../../assets/css/colors";
 @import "../../../../../assets/css/breakpoints";
+@import "../../../../../assets/css/font-sizes";
 
 .OrderItem {
   padding: 5px 0;
-  font-size: 0.9rem;
+  font-size: math.div($title, 4.444);
   transition: 250ms ease-out;
 
   .OrderTitle {
