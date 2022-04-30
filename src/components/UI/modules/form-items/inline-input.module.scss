@@ -1,5 +1,7 @@
-@import "../../../../assets/css/colors";
+@use "sass:math";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .FormControl {
   position: relative;
@@ -8,12 +10,12 @@
   input,
   select {
     padding: 14px;
-    font-size: 0.9rem;
+    font-size: math.div($body, 1.11);
   }
 
   select {
     padding: 15px 10px;
-    font-size: 0.85rem;
+    font-size: math.div($body, 1.17);
     border-radius: 4px;
   }
 
@@ -23,14 +25,14 @@
   }
 
   svg {
-    color: $placeholder;
+    color: $text-placeholder;
   }
 
   @include respond(tablet) {
 
     select,
     input {
-      font-size: 1rem;
+      font-size: $body;
     }
   }
 }
@@ -38,12 +40,12 @@
 .FlexInput {
   display: flex;
   align-items: center;
-  border: 1px solid #cacaca;
+  border: 1px solid $input-empty;
   border-radius: 4px;
 
   .OutlinedInput {
     padding-left: 10px;
-    border-right: 1px solid #cacaca;
+    border-right: 1px solid $input-empty;
     width: 100%;
     background-color: #fff;
   }
@@ -57,28 +59,28 @@
     flex: 0.1;
     padding: 14px 8px;
     box-shadow: none;
-    font-size: 0.95rem;
+    font-size: math.div($button, 1.57);
     border-radius: 0;
-    color: #20a2a5;
+    color: $secondary-green;
     text-decoration-line: underline;
 
     &:disabled {
       background-color: transparent;
-      color: #cacaca;
+      color: $text-placeholder;
     }
   }
 
   @include respond(desktop) {
     input {
-      font-size: 1.05rem;
+      font-size: $body * 1.05;
 
       &::placeholder {
-        font-size: 0.98rem;
+        font-size: math.div($body, 1.02);
       }
     }
 
     .InputBtn {
-      font-size: 1rem;
+      font-size: math.div($button, 1.5);
     }
   }
 }

@@ -1,21 +1,23 @@
-@import "../../../../../assets/css/colors";
+@use "sass:math";
 @import "../../../../../assets/css/breakpoints";
+@import "../../../../../assets/css/colors";
+@import "../../../../../assets/css/font-sizes";
 
 .InputFocused {
-  border: 1px solid #0d8284;
+  border: 1px solid $base-green;
 }
 
 .InputError {
-  border: 1px solid #ff4b55;
+  border: 1px solid $error;
 }
 
 .InlineInputDesc.InlineInputDesc {
-  color: #afafaf;
-  font-size: 0.79rem;
+  color: $input-empty;
+  font-size: math.div($body, 1.2658);
   margin-top: -18px;
 
   @include respond(tablet) {
-    font-size: 0.85rem;
+    font-size: math.div($body, 1.176);
   }
 }
 
@@ -25,20 +27,20 @@
   align-items: center;
   justify-content: space-between;
   padding: 12.4px 25px;
-  border: 2px dashed #0d8284;
-  color: #0d8284;
+  border: 2px dashed $base-green;
+  color: $base-green;
   margin-top: 35px;
   font-weight: 600;
 
   p {
-    font-size: 0.9rem;
-    color: #0d8284;
+    font-size: math.div($body, 1.111);
+    color: $base-green;
   }
 
   button {
     text-decoration-line: underline;
     font-weight: 600;
-    font-size: 15.2px;
+    font-size: math.div($button, 1.578);
   }
 
   &::before {
@@ -48,9 +50,9 @@
     width: 10px;
     height: 22px;
     background-color: #fff;
-    border-top: 1px dashed #0d8284;
-    border-right: 2px dashed #0d8284;
-    border-bottom: 1px dashed #0d8284;
+    border-top: 1px dashed $base-green;
+    border-right: 2px dashed $base-green;
+    border-bottom: 1px dashed $base-green;
     border-radius: 0 10px 10px 0;
   }
 
@@ -61,9 +63,9 @@
     width: 10px;
     height: 22px;
     background-color: #fff;
-    border-top: 1px dashed #0d8284;
-    border-left: 2px dashed #0d8284;
-    border-bottom: 1px dashed #0d8284;
+    border-top: 1px dashed $base-green;
+    border-left: 2px dashed $base-green;
+    border-bottom: 1px dashed $base-green;
     border-radius: 10px 0 0 10px;
   }
 
@@ -75,20 +77,20 @@
 }
 
 .CouponDesc.CouponDesc {
-  color: #afafaf;
-  font-size: 0.79rem;
+  color: $input-empty;
+  font-size: math.div($body, 1.265);
   margin-top: 4px;
 
   @include respond(tablet) {
-    font-size: 0.85rem;
+    font-size: math.div($body, 1.176);
   }
 }
 
 .WarningTxt.WarningTxt {
-  font-size: 0.9rem;
+  font-size: math.div($body, 1.111);
   margin: 7px 0 8px 15px;
 
   @include respond(desktop) {
-    font-size: 0.95rem;
+    font-size: math.div($body, 1.052);
   }
 }

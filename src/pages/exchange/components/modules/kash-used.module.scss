@@ -1,4 +1,6 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .KashInfoWrapper {
   margin: 10px 0 20px;
@@ -8,18 +10,18 @@
   }
 
   p {
-    font-size: 1rem;
-    color: $base-text;
+    font-size: $body;
+    color: $text-body;
   }
 
   .KashTotalCard {
     margin-top: 1rem;
 
     p {
-      font-size: 1.1rem;
+      font-size: $body * 1.1;
     }
 
-    font-size: 1rem;
+    font-size: $body;
   }
 }
 

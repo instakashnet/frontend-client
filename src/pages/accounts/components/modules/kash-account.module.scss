@@ -1,8 +1,10 @@
-@import "../../../../assets/css/colors";
+@use "sass:math";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .KashAccount {
-  background-color: $light-yellow;
+  background-color: #fffbdb;
   display: flex;
   align-items: center;
   padding: 25px 20px;
@@ -19,12 +21,12 @@
   h2 {
     color: $base-green;
     font-weight: bold;
-    font-size: 1.4rem;
+    font-size: math.div($title, 2.857);
     margin-bottom: 10px;
   }
 
   a {
-    font-size: 0.9rem;
+    font-size: math.div($body, 1.111);
     text-decoration: underline;
     color: $base-green;
     margin-top: 10px;
@@ -43,24 +45,24 @@
     a {
       padding: 7px 25px;
       border-radius: 25px;
-      color: $base-text;
+      color: $text-body;
       margin-top: 20px;
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: math.div($button, 1.666);
     }
 
     button {
       margin-top: 10px;
       padding: 7px 25px;
       border-radius: 25px;
-      font-size: 0.9rem;
-      color: $base-text;
+      font-size: math.div($button, 1.666);
+      color: $text-body;
       text-decoration: none;
     }
 
     @include respond(tablet) {
       a {
-        font-size: 1.05rem;
+        font-size: math.div($button, 1.428);
       }
     }
   }
@@ -77,19 +79,19 @@
     }
 
     h2 {
-      font-size: 1.8rem;
+      font-size: math.div($title, 2.222);
     }
 
     p {
-      font-size: 1.1rem;
+      font-size: $body * 1.1;
     }
 
     a {
-      font-size: 1rem;
+      font-size: $body;
     }
 
     button {
-      font-size: 1.05rem;
+      font-size: math.div($button, 1.428);
       margin-left: 0;
     }
 
@@ -101,7 +103,7 @@
       }
 
       button {
-        font-size: 1.05rem;
+        font-size: math.div($button, 1.428);
         margin-top: 20px;
       }
     }

@@ -1,5 +1,8 @@
+@import "../../../../../assets/css/colors";
+@import "../../../../../assets/css/font-sizes";
+
 .Progress {
-  color: #0D8284;
+  color: $base-green;
   position: absolute;
   left: 0;
 }
@@ -9,5 +12,5 @@
 }
 
 .Time {
-  font-size: 18px;
+  font-size: $body * 1.125;
 }

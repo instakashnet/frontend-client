@@ -1,4 +1,6 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .CompleteProfile {
   display: flex;
@@ -20,6 +22,6 @@
 
   button {
     margin-top: 20px;
-    font-size: 1rem;
+    font-size: math.div($button, 1.5);
   }
 }

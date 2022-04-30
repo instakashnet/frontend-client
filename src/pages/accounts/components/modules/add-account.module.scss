@@ -1,17 +1,17 @@
-@import "../../../../assets/css/colors";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/colors";
 
 .AddAccountsTabs {
   width: 100%;
 
   @include respond(tablet) {
-    width: 488px;
+    width: 473px;
   }
 }
 
 button.AddAccountTab {
-  background-color: #e1f2ec;
-  color: $base-text;
+  background-color: $navigation-focus;
+  color: $text-body;
 
   &:first-of-type {
     border-radius: 4px 0 0 0;

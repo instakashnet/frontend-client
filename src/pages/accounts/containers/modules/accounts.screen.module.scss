@@ -1,4 +1,6 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .Accounts {
   width: 100%;
@@ -7,13 +9,13 @@
 
   h1,
   h3 {
-    font-size: 1.5rem;
+    font-size: math.div($title, 2.666);
     color: $base-green;
     font-weight: bold;
   }
 
   h3 {
-    font-size: 1.1rem;
+    font-size: math.div($title, 3.636);
   }
 
   svg {

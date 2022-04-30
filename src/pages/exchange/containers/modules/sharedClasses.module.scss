@@ -1,5 +1,6 @@
 @import "../../../../assets/css/colors";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/font-sizes";
 
 .ExchangeForm {
   max-width: 27rem;
@@ -7,7 +8,7 @@
 
   p {
     color: $base-green;
-    font-size: 1rem;
+    font-size: $body;
   }
 
   label {
@@ -18,7 +19,7 @@
     margin: 20px auto;
 
     p {
-      font-size: 1.1rem;
+      font-size: $body * 1.05;
     }
   }
 }

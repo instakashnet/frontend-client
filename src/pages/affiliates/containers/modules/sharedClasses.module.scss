@@ -1,5 +1,7 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/font-sizes";
 
 .AffiliatesSection {
   max-width: 1536px;
@@ -8,13 +10,13 @@
   h1 {
     color: $base-green;
     font-weight: bold;
-    font-size: 1.7rem;
+    font-size: math.div($title, 2.352);
     text-align: center;
   }
 
   h2 {
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: math.div($title, 2.666);
   }
 
   h3 {
@@ -35,25 +37,25 @@
     margin-top: 25px;
 
     h1 {
-      font-size: 2rem;
+      font-size: math.div($title, 2);
     }
 
     h3 {
-      font-size: 1.2rem;
+      font-size: math.div($title, 3.333);
     }
   }
 
   @include respond(desktop) {
     h1 {
-      font-size: 3.3rem;
+      font-size: math.div($title, 1.212);
     }
 
     h3 {
-      font-size: 1.3rem;
+      font-size: math.div($title, 3.076);
     }
 
     p {
-      font-size: 1rem;
+      font-size: $body;
     }
   }
 }

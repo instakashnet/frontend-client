@@ -18,7 +18,7 @@ import KashUsed from "../components/kash-used.component";
 // HELPER
 import { completeExchangeValidation } from "../helpers/validations";
 // CLASSES
-import classes from "./modules/accounts.module.scss";
+import classes from "./modules/accounts.screen.module.scss";
 import sharedClass from "./modules/sharedClasses.module.scss";
 
 const Accounts = ({ setModal }) => {
@@ -132,7 +132,7 @@ const Accounts = ({ setModal }) => {
   };
 
   return (
-    <>
+    <article className={classes.Accounts}>
       <h1>Completa los datos</h1>
       <h3>Selecciona tu banco de envío y la cuenta donde recibes.</h3>
       <form onSubmit={formik.handleSubmit} className={sharedClass.ExchangeForm}>
@@ -219,7 +219,7 @@ const Accounts = ({ setModal }) => {
           </Button>
         </div>
       </form>
-    </>
+    </article>
   );
 };
 

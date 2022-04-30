@@ -1,5 +1,7 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/font-sizes";
 
 .AccountDetails {
   width: 89vw;
@@ -9,7 +11,7 @@
   }
 
   h4 {
-    font-size: 0.9rem;
+    font-size: math.div($title, 4.444);
     margin-bottom: 5px;
   }
 
@@ -20,7 +22,7 @@
   button {
     display: flex;
     align-items: center;
-    font-size: 0.9rem;
+    font-size: math.div($button, 1.666);
     justify-content: center;
   }
 

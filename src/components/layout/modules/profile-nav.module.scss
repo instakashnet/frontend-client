@@ -1,4 +1,6 @@
+@use "sass:math";
 @import "../../../assets/css/colors";
+@import "../../../assets/css/font-sizes";
 
 .ProfileNavigation {
   padding: 10px 0;
@@ -14,14 +16,17 @@
     max-width: 100% !important;
     transition: 250ms ease-in-out;
 
-    &:hover,
+    &:hover {
+      background-color: $navigation-hover;
+    }
+
     &:focus {
-      background-color: #c3e5d9;
+      background-color: $navigation-focus;
     }
 
     @media screen and (min-width: 768px) {
       padding-left: 45px !important;
-      font-size: 1.1rem;
+      font-size: $body * 1.1;
     }
   }
 
@@ -33,10 +38,10 @@
     flex-direction: column;
     align-items: flex-start;
 
-    > ul {
+    >ul {
       width: 100%;
 
-      > a {
+      >a {
         padding: 16px 0 16px 34px;
         width: 100%;
         display: flex;
@@ -47,38 +52,25 @@
 
         @media screen and (min-width: 768px) {
           padding-left: 45px;
-          font-size: 1.1rem;
+          font-size: $body * 1.1;
         }
 
-        &:hover,
+        &:hover {
+          background-color: $navigation-hover;
+        }
+
         &:focus {
-          background-color: #c3e5d9;
+          background-color: $navigation-focus
         }
       }
     }
 
-    > button {
+    >button {
       border-top: 1px solid #b6d4d4;
       margin-top: auto;
       color: $base-green;
       font-weight: bold;
     }
-  }
-}
-
-.ProfileProgress {
-  padding: 0 40px;
-  margin-top: 30px;
-
-  h3,
-  p {
-    color: $base-green;
-    font-weight: 400;
-    font-size: 1rem;
-  }
-
-  p {
-    font-size: 0.9rem;
   }
 }
 
@@ -101,7 +93,7 @@
   padding: 0 40px;
 
   h3 {
-    font-size: 1.1rem;
+    font-size: math.div($title, 3.63);
     font-weight: bold;
     margin-bottom: 5px;
     color: $base-green;

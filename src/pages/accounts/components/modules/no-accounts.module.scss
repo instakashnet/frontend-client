@@ -1,4 +1,6 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .NoAccountWrapper {
   margin-top: 80px;
@@ -14,7 +16,7 @@
   }
 
   h1 {
-    font-size: 1.4rem;
+    font-size: math.div($title, 2.857);
     color: $base-green;
     font-weight: bold;
     margin: 15px 0 10px;

@@ -1,5 +1,7 @@
-@import "../../../../assets/css/colors";
+@use "sass:math";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .Step2 img {
   width: 190px;
@@ -24,14 +26,14 @@
     color: #f2c94c !important;
   }
 
-  > p {
+  >p {
     max-width: 35rem;
     margin-left: 45px;
   }
 
   @include respond(tablet) {
     padding: 25px;
-    background-color: #20a2a5 !important;
+    background-color: $secondary-green !important;
   }
 
   @include respond(desktop) {
@@ -39,7 +41,7 @@
     margin-top: 30px;
 
     p {
-      font-size: 1rem;
+      font-size: $body;
     }
   }
 }
@@ -54,7 +56,7 @@
     text-decoration: underline;
     color: $base-green;
     margin-top: 5px;
-    font-size: 0.95rem;
+    font-size: math.div($button, 1.578);
   }
 
   @include respond(tablet) {

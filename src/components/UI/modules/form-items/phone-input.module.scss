@@ -1,10 +1,11 @@
 @import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .FormControl {
   margin: 10px 0 15px;
 
   .PhoneWrapper {
-    font-size: 1rem;
+    font-size: $body;
     font-family: inherit;
   }
 
@@ -16,7 +17,7 @@
   .PhoneError {
     border-color: $error;
 
-    + .ButtonFlag {
+    +.ButtonFlag {
       border-color: $error;
     }
   }

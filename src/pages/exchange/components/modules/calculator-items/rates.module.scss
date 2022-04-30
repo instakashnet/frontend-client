@@ -1,51 +1,53 @@
-@import "../../../../../assets/css/colors";
+@use "sass:math";
 @import "../../../../../assets/css/breakpoints";
+@import "../../../../../assets/css/colors";
+@import "../../../../../assets/css/font-sizes";
 
 .Rates {
   .BeforeRate {
     margin-bottom: -3px;
-    margin-right: 30px;
-    font-size: 0.9rem;
+    margin-right: 6px;
+    font-size: math.div($body, 1.111);
     text-decoration: line-through;
     transition: opacity 0.5s;
 
     &:last-of-type {
       margin-right: 0;
-      margin-left: 45px;
+      margin-left: 50px;
     }
   }
 
   @include respond(tablet) {
     .BeforeRate {
-      font-size: 0.96875rem;
-      margin-right: 55px;
+      font-size: math.div($body, 1.032);
+      margin-right: 20px;
     }
   }
 }
 
 .BuyCard,
 .SellCard {
-  background-color: $card-color;
+  background-color: #fff;
   padding: 0 7px 7px;
   transition: opacity 0.5s;
 
   h4 {
-    color: #0D8284;
+    color: $base-green;
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: math.div($title, 4.444);
   }
 
   @include respond(tablet) {
     padding: 0 12px 10px;
 
     h4 {
-      font-size: 1rem;
+      font-size: math.div($title, 4);
     }
   }
 
   @include respond(ldesktop) {
     h4 {
-      font-size: 1.0625rem;
+      font-size: math.div($title, 3.764);
     }
   }
 }
@@ -65,14 +67,4 @@
   height: 32px;
   width: 1px;
   top: -7px;
-}
-
-.Price {
-  font-size: 1rem;
-  color: #0D8284;
-  font-weight: bold;
-
-  @include respond(tablet) {
-    font-size: 1.05rem;
-  }
 }

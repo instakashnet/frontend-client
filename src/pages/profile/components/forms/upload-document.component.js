@@ -2,7 +2,6 @@ import { CameraAlt } from "@material-ui/icons";
 import React, { useCallback, useState } from "react";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-
 // ASSETS
 import CorrectDoc from "../../../../assets/images/illustrations/correct-doc.svg";
 import IncorrectDoc from "../../../../assets/images/illustrations/incorrect-doc.svg";
@@ -15,6 +14,7 @@ import classes from "../modules/forms/upload-document.module.scss";
 // COMPONENT
 import { DocumentCamera } from "./document-camera.component";
 
+
 export const UploadDocument = ({ docType }) => {
   const dispatch = useDispatch(),
     isProcessing = useSelector((state) => state.Profile.isProcessing),
@@ -25,17 +25,17 @@ export const UploadDocument = ({ docType }) => {
 
   // HANDLERS
   const onTakePhoto = async (side) => {
-      try {
-        const devices = await navigator.mediaDevices.enumerateDevices();
-        const videoDevices = devices.filter((dvc) => dvc.kind === "videoinput");
+    try {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const videoDevices = devices.filter((dvc) => dvc.kind === "videoinput");
 
-        if (!videoDevices) alert("Debes usar un dispositivo con cámara para poder validar tu identidad.");
-        setOpenCamera(true);
-        setPhotoSide(side);
-      } catch (error) {
-        console.log(error);
-      }
-    },
+      if (!videoDevices) alert("Debes usar un dispositivo con cámara para poder validar tu identidad.");
+      setOpenCamera(true);
+      setPhotoSide(side);
+    } catch (error) {
+      console.log(error);
+    }
+  },
     setPhoto = useCallback(
       (image) => {
         if (photoSide === "front") setFrontPhoto(image);
@@ -85,7 +85,7 @@ export const UploadDocument = ({ docType }) => {
                 ) : (
                   <>
                     <CameraAlt fontSize="small" htmlColor="#20a2a5" />
-                    <p>Toma foto frontal</p>
+                    <p>Tomar foto frontal</p>
                   </>
                 )}
               </button>

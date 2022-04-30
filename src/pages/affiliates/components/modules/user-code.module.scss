@@ -1,11 +1,13 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .UserCode {
   display: flex;
   align-items: center;
 
   p {
-    background-color: #fff7b8;
+    background-color: $fill-refer;
     color: $base-green;
     border: 1.5px dashed $base-green;
     border-right: none;
@@ -13,7 +15,7 @@
     flex: 0.8;
     padding: 10px 13px;
     text-align: center;
-    font-size: 0.95rem;
+    font-size: math.div($body, 1.052);
   }
 
   span {
@@ -25,6 +27,6 @@
     padding: 12px 15px;
     cursor: pointer;
     margin-left: 0;
-    font-size: 1rem;
+    font-size: math.div($button, 1.5);
   }
 }

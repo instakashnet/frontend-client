@@ -1,5 +1,7 @@
+@use "sass:math";
 @import "../../../../../assets/css/colors";
 @import "../../../../../assets/css/breakpoints";
+@import "../../../../../assets/css/font-sizes";
 
 .UploadDocWrapper {
   text-align: center;
@@ -18,13 +20,13 @@
     margin-bottom: 2rem;
 
     li {
-      font-size: 0.85rem;
+      font-size: math.div($body, 1.176);
       margin: 0.5rem 0;
     }
   }
 
   button p {
-    font-size: 0.9rem;
+    font-size: math.div($button, 1.666);
   }
 }
 

@@ -1,6 +1,7 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
-@import "../../../../assets/css/font-sizes";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/font-sizes";
 
 .ProfileSelectionWrapper {
   display: grid;
@@ -11,23 +12,18 @@
   h1 {
     color: $base-green;
     font-weight: bold;
-    font-size: $title;
-  }
-
-  h3 {
-    font-weight: bold;
-    font-size: $subtitle;
+    font-size: math.div($title, 2.66);
   }
 
   @include respond(tablet) {
     h1 {
-      font-size: $title * 1.3;
+      font-size: math.div($title, 2.05);
     }
   }
 
   @include respond(ldesktop) {
     h1 {
-      font-size: $title * 1.6;
+      font-size: math.div($title, 1.65);
     }
   }
 

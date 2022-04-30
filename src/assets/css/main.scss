@@ -1,6 +1,8 @@
-@import "./fonts";
-@import "./colors";
+@use "sass:math";
 @import "./breakpoints";
+@import "./colors";
+@import "./fonts";
+@import "./font-sizes";
 
 html {
   height: 100%;
@@ -8,16 +10,16 @@ html {
 }
 
 body {
-  font-family: sans-serif;
-  font-size: 14px;
-  color: #676767;
-  background-color: $bg-color;
+  font-family: "Roboto", sans-serif;
+  font-size: math.div($body, 1.14);
+  color: $text-body;
+  background-color: $light-color;
   overflow: auto;
   height: 100%;
   position: relative;
 
   @include respond(tablet) {
-    font-size: 16px;
+    font-size: $body;
     height: auto;
   }
 }
@@ -32,7 +34,7 @@ body {
   width: 100%;
   height: 100%;
   min-height: 100vh;
-  background-color: $bg-color;
+  background-color: $light-color;
 
   @include respond(tablet) {
     grid-template-columns: 17rem 1fr;
@@ -66,11 +68,15 @@ body {
 }
 
 .action-button {
-  background-color: $button-yellow;
+  background-color: $button-main;
+
+  &:hover {
+    background-color: $button-hover;
+  }
 }
 
 .secondary-button {
-  background-color: #fff;
+  background-color: $button-secondary;
 }
 
 .input-spinner {
@@ -83,13 +89,13 @@ body {
 /* FORM GLOBALS */
 
 input::placeholder {
-  font-size: 0.9rem;
+  font-size: math.div($body, 1.11);
 }
 
 .error-msg {
-  color: #ff4b55 !important;
+  color: $error !important;
   margin: 5px 0 5px 15px;
-  font-size: 0.8rem;
+  font-size: math.div($body, 1.25);
   text-align: left;
 }
 
@@ -98,7 +104,7 @@ input::placeholder {
 }
 
 .input-error {
-  border-color: #ff4b55 !important;
+  border-color: $error !important;
 }
 
 /* REACT MODAL */
@@ -136,8 +142,10 @@ input::placeholder {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .slider-modal {
@@ -187,7 +195,7 @@ input::placeholder {
 
 .swiper-pagination-fraction,
 .swiper-pagination-custom,
-.swiper-container-horizontal > .swiper-pagination-bullets {
+.swiper-container-horizontal>.swiper-pagination-bullets {
   bottom: -5px !important;
 
   @media screen and (min-width: 768px) {
@@ -204,7 +212,7 @@ input::placeholder {
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #20a2a5 !important;
+  background-color: $secondary-green !important;
 }
 
 /* CLASS COLORS */
@@ -232,7 +240,7 @@ input::placeholder {
 }
 
 .MuiAccordionDetails-root {
-  background-color: $bg-color;
+  background-color: $light-color;
 }
 
 .MuiFormControl-root {
@@ -265,14 +273,14 @@ input::placeholder {
 
 .swal2-title {
   color: $base-green;
-  font-size: 1.5rem;
+  font-size: $body * 1.5;
 }
 
 .swal2-content {
-  font-size: 1.1rem;
-  color: #676767;
+  font-size: $body * 1.1;
+  color: $text-body;
 }
 
 .swal2-styled.swal2-cancel {
-  color: #676767;
+  color: $text-body;
 }

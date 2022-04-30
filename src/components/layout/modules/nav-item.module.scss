@@ -1,4 +1,5 @@
 @import "../../../assets/css/colors";
+@import "../../../assets/css/font-sizes";
 
 .NavItem {
   padding: 16px 0 16px 30px;
@@ -9,24 +10,27 @@
   transition: 250ms ease-in-out;
   color: $base-green;
   font-weight: bold;
-  
+
   img {
     align-self: center;
     justify-self: center;
   }
-  
-  &:hover,
+
+  &:hover {
+    background-color: $navigation-hover;
+  }
+
   &:focus {
-    background-color: #c3e5d9;
+    background-color: $navigation-focus;
   }
 
   @media screen and (min-width: 768px) {
     padding-left: 45px;
-    font-size: 1.1rem;
+    font-size: $body * 1.1;
   }
 }
 
 .Active {
-  background-color: #c3e5d9;
+  background-color: $navigation-focus;
   border-right: 4px solid $base-green;
 }
