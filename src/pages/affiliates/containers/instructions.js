@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 // COMPONENT
 import Card from "../../../components/UI/card.component";
+import { Modal } from "../../../components/UI/modals/modal.component";
 // HOOK
 import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
 // REDUX ACTIONS
@@ -23,14 +23,17 @@ import UserCode from "../components/user-code.component";
 import classes from "./modules/instructions.module.scss";
 import sharedClass from "./modules/sharedClasses.module.scss";
 
+
 export const Instructions = ({ ...rest }) => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.Auth.user);
+  const user = useSelector((state) => state.Auth.user),
+    ModalComponent = useSelector((state) => state.Modal.Component);
   const { isMobile } = useDeviceDetect();
 
+  // HANDLERS
   const editCodeHandler = () => {
-    const ModalComponent = () => <EditCode title="Editar código" />;
-    dispatch(openModal(ModalComponent));
+    let modalContent = () => <EditCode title="Editar código" />;
+    dispatch(openModal(modalContent));
   };
 
   return (
@@ -79,6 +82,11 @@ export const Instructions = ({ ...rest }) => {
           <ShareIcons userCode={user.username} className="mt-3 md:mt-0" />
         </div>
       </article>
+      {ModalComponent && (
+        <Modal {...ModalComponent().props}>
+          <ModalComponent />
+        </Modal>
+      )}
     </div>
   );
 };

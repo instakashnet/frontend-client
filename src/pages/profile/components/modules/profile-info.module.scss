@@ -1,39 +1,41 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/font-sizes";
 
 .ProfileInfoCard {
   padding: 0.5rem 1rem;
   border-radius: 10px;
-  background-color: $card-color;
+  background-color: #fff;
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
 
   p {
-    font-size: 0.85rem;
+    font-size: math.div($body, 1.176);
     color: #afafaf;
   }
 
   h2 {
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size: math.div($title, 3.333);
     text-transform: capitalize;
   }
 
   h3 {
     font-weight: bold;
-    font-size: 0.85rem;
+    font-size: math.div($subtitle, 1.764);
   }
 
   ul {
     li {
       color: #afafaf;
-      font-size: 0.9rem;
+      font-size: math.div($body, 1.111);
 
       &:first-of-type {
         color: $base-green;
         font-weight: bold;
-        font-size: 1rem;
+        font-size: $body;
         margin-bottom: 0.2rem;
       }
     }

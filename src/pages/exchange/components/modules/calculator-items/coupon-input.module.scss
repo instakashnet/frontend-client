@@ -1,17 +1,96 @@
+@use "sass:math";
+@import "../../../../../assets/css/breakpoints";
 @import "../../../../../assets/css/colors";
+@import "../../../../../assets/css/font-sizes";
+
+.InputFocused {
+  border: 1px solid $base-green;
+}
+
+.InputError {
+  border: 1px solid $error;
+}
+
+.InlineInputDesc.InlineInputDesc {
+  color: $input-empty;
+  font-size: math.div($body, 1.2658);
+  margin-top: -18px;
+
+  @include respond(tablet) {
+    font-size: math.div($body, 1.176);
+  }
+}
 
 .Coupon {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 15px;
-  border: 1px dashed #c3e5d9;
-  background-color: $bg-gray;
+  padding: 12.4px 25px;
+  border: 2px dashed $base-green;
   color: $base-green;
-  border-radius: 5px;
-  margin-top: 15px;
+  margin-top: 35px;
+  font-weight: 600;
 
   p {
-    font-size: 0.9rem;
+    font-size: math.div($body, 1.111);
+    color: $base-green;
+  }
+
+  button {
+    text-decoration-line: underline;
+    font-weight: 600;
+    font-size: math.div($button, 1.578);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: -0.6%;
+    width: 10px;
+    height: 22px;
+    background-color: #fff;
+    border-top: 1px dashed $base-green;
+    border-right: 2px dashed $base-green;
+    border-bottom: 1px dashed $base-green;
+    border-radius: 0 10px 10px 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: -0.5%;
+    width: 10px;
+    height: 22px;
+    background-color: #fff;
+    border-top: 1px dashed $base-green;
+    border-left: 2px dashed $base-green;
+    border-bottom: 1px dashed $base-green;
+    border-radius: 10px 0 0 10px;
+  }
+
+  @include respond(ldesktop) {
+    &::after {
+      right: -0.6%;
+    }
+  }
+}
+
+.CouponDesc.CouponDesc {
+  color: $input-empty;
+  font-size: math.div($body, 1.265);
+  margin-top: 4px;
+
+  @include respond(tablet) {
+    font-size: math.div($body, 1.176);
+  }
+}
+
+.WarningTxt.WarningTxt {
+  font-size: math.div($body, 1.111);
+  margin: 7px 0 8px 15px;
+
+  @include respond(desktop) {
+    font-size: math.div($body, 1.052);
   }
 }

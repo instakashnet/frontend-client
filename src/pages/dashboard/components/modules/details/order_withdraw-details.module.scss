@@ -1,9 +1,11 @@
+@use "sass:math";
 @import "../../../../../assets/css/colors";
 @import "../../../../../assets/css/breakpoints";
+@import "../../../../../assets/css/font-sizes";
 
 .Details {
   width: 100%;
-  font-size: 1rem;
+  font-size: $body;
   height: 100%;
   padding: 15px 25px;
 
@@ -21,11 +23,11 @@
   }
 
   h2 {
-    font-size: 1.2rem;
+    font-size: math.div($title, 3.333);
     margin-bottom: 15px;
 
     @include respond(tablet) {
-      font-size: 1.3rem;
+      font-size: math.div($title, 3.076);
       padding: 20px 10px;
     }
   }

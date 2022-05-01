@@ -1,5 +1,7 @@
-@import "../../../assets/css/colors";
+@use "sass:math";
 @import "../../../assets/css/breakpoints";
+@import "../../../assets/css/colors";
+@import "../../../assets/css/font-sizes";
 
 .Header {
   box-shadow: 3px 5px 12px rgba(10, 67, 68, 0.1);
@@ -10,7 +12,7 @@
   justify-content: space-between;
   color: $base-green;
   font-weight: bold;
-  font-size: 0.85rem;
+  font-size: math.div($body, 1.17);
   grid-area: header;
   position: fixed;
   z-index: 19;

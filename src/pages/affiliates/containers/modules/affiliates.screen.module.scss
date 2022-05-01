@@ -1,19 +1,21 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .AffiliatesTabs {
   margin-bottom: 15px;
   border-bottom: 2px solid $base-green;
 
-  > div > span {
+  >div>span {
     display: none;
   }
 }
 
 button.AffiliatesTab {
   border-radius: 10px 0px 0px 0px;
-  background-color: #e1f2ec;
-  color: $base-text;
-  font-size: 1rem;
+  background-color: $navigation-focus;
+  color: $text-body;
+  font-size: math.div($button, 1.5);
   text-transform: capitalize;
   font-family: inherit;
   max-width: 12rem;

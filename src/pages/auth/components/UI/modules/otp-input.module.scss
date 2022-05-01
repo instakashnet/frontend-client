@@ -1,4 +1,5 @@
 @import "../../../../../assets/css/colors";
+@import "../../../../../assets/css/font-sizes";
 
 .OtpInput {
   padding: 10px;
@@ -10,7 +11,7 @@
   margin: 0 5px;
   color: #fff;
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: $body * 1.5;
   outline: none;
 
   &:placeholder-shown {

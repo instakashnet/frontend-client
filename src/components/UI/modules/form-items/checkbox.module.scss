@@ -1,26 +1,28 @@
+@use "sass:math";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/font-sizes";
 
 .CheckGroup {
   width: 100%;
   margin: 0;
 
   label {
-    font-size: 0.85rem;
+    font-size: math.div($body, 1.17);
     cursor: pointer;
 
     a,
     span {
-      font-size: 0.85rem;
+      font-size: math.div($body, 1.17);
     }
   }
 
   @include respond(tablet) {
     label {
-      font-size: 0.9rem;
+      font-size: math.div($body, 1.11);
 
       a,
       span {
-        font-size: 0.9rem;
+        font-size: math.div($body, 1.11);
       }
     }
   }

@@ -8,6 +8,6 @@
   transition: 250ms ease-out;
 
   &:hover {
-    color: darken($color: $anchor-green, $amount: 10);
+    color: darken($color: $secondary-green, $amount: 10);
   }
 }

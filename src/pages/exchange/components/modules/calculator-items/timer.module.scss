@@ -1,0 +1,16 @@
+@import "../../../../../assets/css/colors";
+@import "../../../../../assets/css/font-sizes";
+
+.Progress {
+  color: $base-green;
+  position: absolute;
+  left: 0;
+}
+
+.BackgroundProgress {
+  color: #cacaca;
+}
+
+.Time {
+  font-size: $body * 1.125;
+}

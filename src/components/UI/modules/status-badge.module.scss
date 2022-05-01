@@ -1,19 +1,21 @@
-@import "../../../assets/css/colors";
+@use "sass:math";
+@import "../../../assets/css/font-sizes";
 @import "../../../assets/css/breakpoints";
+@import "../../../assets/css/colors";
 
 .StatusBadge {
-	color: $base-text;
+	color: $text-body;
 	font-weight: bold;
 	padding: 2.5px 5px;
 	border-width: 1.5px;
 	border-style: solid;
-	font-size: 0.8rem;
+	font-size: math.div($body, 1.25);
 	border-radius: 4px;
 	text-transform: capitalize;
 	max-width: 7rem;
 	text-align: center;
 
 	@include respond(desktop) {
-		font-size: 0.9rem;
+		font-size: math.div($body, 1.11);
 	}
 }

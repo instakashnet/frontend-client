@@ -1,31 +1,37 @@
-import { FormControl, FormHelperText,InputLabel, OutlinedInput } from "@material-ui/core";
+import { FormControl, FormHelperText, Input, InputAdornment } from "@material-ui/core";
 import React from "react";
-
 import { Button } from "../button.component";
 import classes from "../modules/form-items/inline-input.module.scss";
 
-export const InlineInput = ({ type, name, value, disabled, error, touched, buttonLabel, className, buttonType, onClick, helperText, label, ...rest }) => {
+
+export const InlineInput = ({ type, name, value, disabled, error, touched, buttonLabel, className, buttonType, onClick, helperText, label, icon, ...rest }) => {
   return (
-    <FormControl variant="outlined" margin="normal" classes={{ root: classes.FormControl }}>
-      <div className={classes.FlexInput}>
-        <InputLabel htmlFor="inline-input">{label}</InputLabel>
-        <OutlinedInput
+    <FormControl margin="normal" classes={{ root: classes.FormControl }}>
+      <div className={`${classes.FlexInput} ${className}`}>
+        <Input
           id="inline-input"
           aria-describedby="inline-helper-text"
           type={type}
           name={name}
+          placeholder={label}
           error={!!error && !!touched}
           label={label}
           value={value}
           classes={{ root: classes.OutlinedInput }}
+          startAdornment={
+            <InputAdornment
+              position="start">
+              <img src={icon} alt="Ícono" />
+            </InputAdornment>
+          }
           {...rest}
         />
         {buttonType === "submit" ? (
-          <Button type="submit" disabled={disabled}>
+          <Button type="submit" disabled={disabled} className={classes.InputBtn}>
             {buttonLabel}
           </Button>
         ) : (
-          <Button type="button" disabled={disabled} onClick={onClick}>
+          <Button type="button" disabled={disabled} className={classes.InputBtn} onClick={onClick}>
             {buttonLabel}
           </Button>
         )}

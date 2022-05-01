@@ -1,4 +1,6 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .InfoItem {
   padding: 0.7rem 0;
@@ -6,13 +8,13 @@
   border-bottom: 1px solid #e6e6e6;
 
   h4 {
-    font-size: 0.85rem;
+    font-size: math.div($title, 4.705);
     margin-bottom: 0.3rem;
     color: #979797;
   }
 
   p {
-    font-size: 1rem;
+    font-size: $body;
   }
 
   button {

@@ -1,13 +1,13 @@
-import { RadioButtonCheckedOutlined,RadioButtonUncheckedOutlined } from "@material-ui/icons";
+import { RadioButtonCheckedOutlined, RadioButtonUncheckedOutlined } from "@material-ui/icons";
 import React, { useCallback, useEffect, useState } from "react";
 // REDUX
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 // ASSETS
 import DniIcon from "../../../assets/images/icons/dni.svg";
 import PassportIcon from "../../../assets/images/icons/passport.svg";
-// COMPONENT
+// COMPONENTS
 import { Button } from "../../../components/UI/button.component";
+import { Modal } from "../../../components/UI/modals/modal.component";
 // REDUX ACTION
 import { openModal } from "../../../store/actions";
 // COMPONENTS
@@ -17,15 +17,18 @@ import { UploadDocument } from "../components/forms/upload-document.component";
 // CLASSES
 import classes from "./modules/verify-identity.screen.module.scss";
 
+
 export const VerifyIdentityScreen = ({ user, history }) => {
   const [docType, setDocType] = useState(""),
     dispatch = useDispatch();
 
-  // HANDLERS
-  const onDocUlpoad = useCallback(() => {
-    let ModalComponent = () => <UploadDocument docType={docType} />;
+  const ModalComponent = useSelector((state) => state.Modal.Component);
 
-    dispatch(openModal(ModalComponent));
+  // HANDLERS
+  const onDocUpload = useCallback(() => {
+    let modalContent = () => <UploadDocument title="Verificar identidad" docType={docType} />;
+
+    dispatch(openModal(modalContent));
   }, [docType, dispatch]);
 
   // EFFECTS
@@ -75,10 +78,15 @@ export const VerifyIdentityScreen = ({ user, history }) => {
               <li>Este proceso se realiza una única vez, luego podrás hacer tus cambios sin límite.</li>
             </ul>
           </section>
-          <Button className="action-button" onClick={onDocUlpoad} disabled={!docType}>
+          <Button className="action-button" onClick={onDocUpload} disabled={!docType}>
             {user.identityDocumentValidation === "failed" ? "Verificar de nuevo" : "Comenzar verificación"}
           </Button>
         </>
+      )}
+      {ModalComponent && (
+        <Modal {...ModalComponent().props}>
+          <ModalComponent />
+        </Modal>
       )}
     </div>
   );

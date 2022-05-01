@@ -18,7 +18,7 @@ import KashUsed from "../components/kash-used.component";
 // HELPER
 import { completeExchangeValidation } from "../helpers/validations";
 // CLASSES
-import classes from "./modules/accounts.module.scss";
+import classes from "./modules/accounts.screen.module.scss";
 import sharedClass from "./modules/sharedClasses.module.scss";
 
 const Accounts = ({ setModal }) => {
@@ -132,7 +132,7 @@ const Accounts = ({ setModal }) => {
   };
 
   return (
-    <>
+    <article className={classes.Accounts}>
       <h1>Completa los datos</h1>
       <h3>Selecciona tu banco de envío y la cuenta donde recibes.</h3>
       <form onSubmit={formik.handleSubmit} className={sharedClass.ExchangeForm}>
@@ -203,14 +203,14 @@ const Accounts = ({ setModal }) => {
             touched={formik.touched.funds_text}
           />
         )}
-        <div className="flex flex-col items-center justify-center">
-          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button mt-4 ld-over ${isProcessing ? "running" : ""}`}>
+        <div className="flex flex-col lg:flex-row items-center justify-center">
+          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button m-3 ld-over ${isProcessing ? "running" : ""} lg:order-2`}>
             <span className="ld ld-ring ld-spin" />
             Continuar
           </Button>
           <Button
             type="button"
-            className={`secondary-button mt-4 ld-over ${isProcessing ? "running" : ""}`}
+            className={`secondary-button m-3 ld-over ${isProcessing ? "running" : ""}`}
             disabled={isProcessing}
             onClick={() => dispatch(cancelExchangeInit(order.id, "draft"))}
           >
@@ -219,7 +219,7 @@ const Accounts = ({ setModal }) => {
           </Button>
         </div>
       </form>
-    </>
+    </article>
   );
 };
 

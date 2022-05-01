@@ -1,8 +1,7 @@
-import { ArrowUpward,Cached } from "@material-ui/icons";
+import { ArrowUpward, Cached } from "@material-ui/icons";
 import React from "react";
 // REACT ROUTER
 import { Link } from "react-router-dom";
-
 // ASSETS
 import KashIcon from "../../../assets/images/kash.svg";
 // COMPONENTS
@@ -13,7 +12,8 @@ import { formatAmount } from "../../../shared/functions";
 import sharedClass from "../assets/css/sharedClasses.module.scss";
 import classes from "./modules/total-transfered.module.scss";
 
-const TotalTransfered = ({ totalAmount, kashAccount, isLoading, className, type }) => {
+
+const TotalTransfered = ({ totalAmount, kashAccount, className, type }) => {
   let savings = 0;
   if (totalAmount >= 0) savings = totalAmount * 0.03;
 

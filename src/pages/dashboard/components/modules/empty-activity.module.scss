@@ -1,5 +1,7 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/font-sizes";
 
 .NoActivity {
   height: 100%;
@@ -8,7 +10,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 1rem;
+  font-size: $body;
 
   img {
     position: relative;
@@ -17,7 +19,7 @@
 
   h1 {
     color: $base-green;
-    font-size: 1.8rem;
+    font-size: math.div($title, 2.222);
     font-weight: bold;
     margin-bottom: 15px;
   }
@@ -38,7 +40,7 @@
 
   @include respond(desktop) {
     h1 {
-      font-size: 2.3rem;
+      font-size: math.div($title, 1.739);
     }
 
     img {

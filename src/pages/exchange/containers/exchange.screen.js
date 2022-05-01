@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 // COMPONENTS
 import Layout from "../../../components/layout/layout.component";
+import { Modal } from "../../../components/UI/modals/modal.component";
 import Spinner from "../../../components/UI/spinner.component";
 // HOOK
 import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
@@ -16,6 +17,7 @@ import { InfoButton } from "../components/info-button.component";
 import Information from "../components/information.component";
 import CompleteProfile from "../components/profile-modal.component";
 import { SelectionHeader } from "../components/selection-header.component";
+import { Steps } from "../components/steps.component";
 // SCREENS
 import Accounts from "./accounts.screen";
 import Calculator from "./calculator.screen";
@@ -24,11 +26,14 @@ import Complete from "./complete.screen";
 import classes from "./modules/exchange.screen.module.scss";
 // SCREEN
 import ProfileSelection from "./selection.screen";
+import { TransferCodeScreen } from "./transfer-code.screen";
+
 const Exchange = ({ history, location, match }) => {
   // HOOKS & VARIABLES
   const dispatch = useDispatch(),
     user = useSelector((state) => state.Auth.user),
     profile = useSelector((state) => state.Profile.profileSelected),
+    ModalComponent = useSelector((state) => state.Modal.Component),
     { isMobile } = useDeviceDetect(),
     { isLoading, order } = useSelector((state) => state.Exchange);
 
@@ -49,6 +54,7 @@ const Exchange = ({ history, location, match }) => {
     } else timer && clearTimeout(timer);
     return () => timer && clearTimeout(timer);
   }, [location, history]);
+
   // HANDLERS
   const preventLoad = (e) => {
     e.preventDefault();
@@ -60,20 +66,23 @@ const Exchange = ({ history, location, match }) => {
     dispatch(closeModal());
   };
   const openModalHandler = (type = null) => {
-    let ModalComponent;
-    if (type === "account") ModalComponent = () => <AddAccount title="Agregar cuenta" order={order} addType="orders" />;
-    if (type === "complete") ModalComponent = () => <CompleteProfile title="Completar perfil" onClose={onCloseHandler} />;
-    if (type === "info") ModalComponent = () => <Information title="¡IMPORTANTE!" onClose={() => dispatch(closeModal())} />;
-    dispatch(openModal(ModalComponent));
+    let modalContent;
+    if (type === "account") modalContent = () => <AddAccount title="Agregar cuenta" order={order} addType="orders" />;
+    if (type === "complete") modalContent = () => <CompleteProfile title="Completar perfil" onClose={onCloseHandler} />;
+    if (type === "info") modalContent = () => <Information title="¡IMPORTANTE!" onClose={() => dispatch(closeModal())} />;
+    dispatch(openModal(modalContent));
   };
+
   return (
     <Layout className="content-center">
       <div className={classes.Exchange}>
-        {match.isExact && (
+        {match.isExact ? (
           <>
             <SelectionHeader profile={profile} />
             <div className={classes.Separator} />
           </>
+        ) : (
+          !location.pathname.includes("profile") && <Steps location={location.pathname} />
         )}
         <Route exact path={match.url}>
           <Calculator profile={profile} setModal={openModalHandler} user={user} />
@@ -84,12 +93,20 @@ const Exchange = ({ history, location, match }) => {
         <Route path={match.url + "/complete"}>
           <Complete />
         </Route>
+        <Route path={match.url + "/transfer-code"}>
+          <TransferCodeScreen />
+        </Route>
         <Route path={match.url + "/profile-selection"}>
           <ProfileSelection />
         </Route>
         {profile && !location.pathname.includes("profile") && (!isMobile ? <Information /> : <InfoButton onInfoOpen={() => openModalHandler("info")} />)}
       </div>
       {isLoading && <Spinner loading={isLoading} />}
+      {ModalComponent && (
+        <Modal {...ModalComponent().props}>
+          <ModalComponent />
+        </Modal>
+      )}
     </Layout>
   );
 };

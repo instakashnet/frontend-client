@@ -99,7 +99,7 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
           Las cuentas a terceros <b>solo pueden ser utilizadas</b> para recibir el dinero solicitado.
         </MuiAlert>
         <FormLabel component="legend" className="mt-3">
-          ¿A quien le pertenece esta cuenta?
+          ¿A quién le pertenece esta cuenta?
         </FormLabel>
         <RadioGroup aria-label="tipo de cuenta a terceros" name="thirdPartyAccType" value={formik.values.thirdPartyAccType} onChange={onThirdPartyAccTypeChange}>
           <div className="flex flex-wrap items-center justify-between">
