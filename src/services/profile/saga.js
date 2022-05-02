@@ -11,7 +11,7 @@ import {
   generateTokenSvc,
   getProfilesSvc,
   loadUserSvc,
-  userCodeSvc,
+  userCodeSvc
 } from "../../api/services/auth.service";
 import { replaceSpace } from "../../shared/functions";
 import history from "../../shared/history";
@@ -131,9 +131,8 @@ function* uploadDocument({ photos, docType }) {
 function* editUserCode({ values }) {
   try {
     yield call(userCodeSvc, values);
-
-    const userResponse = yield call(userCodeSvc);
-    yield put(actions.editUserCodeSuccess(userResponse));
+    yield call(getUserData);
+    yield put(actions.editUserCodeSuccess());
     yield put(setAlertInit("Tu código ha sido editado correctamente.", "success"));
     yield put(closeModal());
   } catch (error) {
