@@ -174,8 +174,14 @@ function* editBasicInfo({ values, editType, setSubmitted }) {
     yield call(editBasicInfoSvc, URL, values);
 
     yield put(setAlertInit(`Tu ${editType === "phone" ? "teléfono" : "correo"} ha sido actualizado correctamente.`, "success"));
-    yield call(setSubmitted, true);
+    yield call(getUserData);
     yield put(actions.editBasicInfoSuccess());
+
+    if (setSubmitted) {
+      yield call(setSubmitted, true);
+      yield delay(2000);
+      yield call(setSubmitted, false);
+    }
   } catch (error) {
     yield put(actions.profilesError());
   }

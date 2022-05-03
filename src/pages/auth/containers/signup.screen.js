@@ -3,10 +3,9 @@ import { Mail } from "@material-ui/icons";
 import { useFormik } from "formik";
 import React from "react";
 // REDUX
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // REACT ROUTER
 import { Link } from "react-router-dom";
-
 // COMPONENTS
 import { Button } from "../../../components/UI/button.component";
 import { CheckboxComponent } from "../../../components/UI/form-items/checkbox.component";
@@ -17,6 +16,7 @@ import { signupInit } from "../../../store/actions";
 import { signupValidation } from "../helpers/formValidations";
 // CLASSES
 import sharedClass from "./modules/sharedClasses.module.scss";
+
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const Signup = () => {
           <Input
             name="email"
             type="email"
-            label="Correo eletrónico"
+            label="Correo electrónico"
             autoComplete="off"
             value={formik.values.email}
             onChange={formik.handleChange}
