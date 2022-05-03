@@ -10,7 +10,7 @@ import { usernameValidation } from "../../helpers/validations";
 const EditUserCode = () => {
   const dispatch = useDispatch();
   const isProcessing = useSelector((state) => state.Profile.isProcessing);
-  const username = useSelector((state) => state.Auth.userCode || "");
+  const username = useSelector((state) => state.Auth.user.username);
   const formik = useFormik({
     initialValues: { username },
     enableReinitialize: true,
