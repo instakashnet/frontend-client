@@ -2,6 +2,8 @@ import { InfoOutlined } from "@material-ui/icons";
 // FORMIK
 import { useFormik } from "formik";
 import React, { useState } from "react";
+// SWEET ALERT
+import Swal from "sweetalert2";
 // COMPONENTS
 import { Button } from "../../../../components/UI/button.component";
 import { Input } from "../../../../components/UI/form-items/input.component";
@@ -18,7 +20,22 @@ export const TransactionCode = ({ isProcessing, dispatch, order }) => {
     initialValues: { transaction_code: "" },
     enableReinitialize: true,
     validationSchema: transferCodeValidation,
-    onSubmit: (values) => dispatch(processCodeInit(values, order.id)),
+    onSubmit: async (values) => {
+      let result = await Swal.fire({
+        icon: "question",
+        title: `¿${values.transaction_code} es el número de operación correcto?`,
+        text: "Después de continuar no podrás modificarlo.",
+        showCancelButton: true,
+        cancelButtonColor: "#ffeb4d",
+        confirmButtonColor: "#ff4b55",
+        confirmButtonText: "Continuar",
+        cancelButtonText: "Regresar",
+      });
+
+      if (result.isConfirmed) {
+        dispatch(processCodeInit(values, order.id));
+      } else return;
+    },
   });
 
   return (
