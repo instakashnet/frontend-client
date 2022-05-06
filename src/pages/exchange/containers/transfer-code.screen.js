@@ -26,7 +26,7 @@ export const TransferCodeScreen = () => {
 
   // EFFECTS
   useEffect(() => {
-    if (!order) history.push("/");
+    if (!order) history.push("/currency-exchange");
   }, [history, order]);
 
   // HANDLERS
