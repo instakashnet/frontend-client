@@ -1,7 +1,10 @@
 import camelize from "camelize";
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
+// API SERVICE
 import { getAffiliatesSvc } from "../../api/services/auth.service";
-import { setAlertInit } from "../../store/actions";
+// SNACKBAR ALERT ACTIONS
+import { snackActions } from "../../hoc/snackbar-configurator.component";
+// REDUX
 import * as actions from "./actions";
 import * as types from "./types";
 
@@ -12,7 +15,7 @@ function* getAffiliates() {
     const affiliatesData = camelize(res.affiliates);
     yield put(actions.getAffiliatesSuccess(affiliatesData));
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    yield snackActions.negative(error.message);
     yield put(actions.affiliatesError());
   }
 }

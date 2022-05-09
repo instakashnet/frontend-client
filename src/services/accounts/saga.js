@@ -1,11 +1,15 @@
-import { all, call, fork, put, select, takeEvery,takeLatest } from "redux-saga/effects";
+import { all, call, fork, put, select, takeEvery, takeLatest } from "redux-saga/effects";
+// SWEET ALERT
 import Swal from "sweetalert2";
-
 // API SERVICES
-import { addAccountSvc, deleteAccountSvc, editAccountSvc, getAccounts,getBanks, getCurrencies } from "../../api/services/accounts.service";
+import { addAccountSvc, deleteAccountSvc, editAccountSvc, getAccounts, getBanks, getCurrencies } from "../../api/services/accounts.service";
 import { withdrawKashSvc } from "../../api/services/exchange.service";
+// SNACKBAR ALERT ACTIONS
+import { snackActions } from "../../hoc/snackbar-configurator.component";
+// HISTORY
 import history from "../../shared/history";
-import { closeModal, setAlertInit } from "../../store/actions";
+// REDUX
+import { closeModal } from "../../store/actions";
 import * as actions from "./actions";
 import * as types from "./types";
 
@@ -39,7 +43,7 @@ function* addAccount({ values, addType }) {
 
     yield put(actions.getAccountsSuccess(accounts.accounts));
     yield put(actions.addAccountSuccess());
-    yield put(setAlertInit("Cuenta agregada correctamente.", "success"));
+    yield snackActions.positive("Cuenta agregada correctamente.");
     yield put(closeModal());
   } catch (error) {
     yield put(actions.accountsError());
@@ -55,7 +59,7 @@ function* editAccount({ id, values, setEdit }) {
     yield put(actions.getAccountsSuccess(accounts.accounts));
     yield put(actions.editAccountSuccess());
     yield call(setAccountDetails, { accId: id });
-    yield put(setAlertInit("Cuenta editada correctamente.", "success"));
+    yield snackActions.positive("Cuenta editada correctamente.");
     yield call(setEdit, false);
   } catch (error) {
     yield put(actions.accountsError());
@@ -94,7 +98,7 @@ function* deleteAccount({ account }) {
       yield put(actions.getAccountsSuccess(accounts.accounts));
 
       yield put(actions.deleteAccountSuccess());
-      yield put(setAlertInit("Cuenta eliminada correctamente.", "success"));
+      yield snackActions.positive("Cuenta eliminada correctamente.");
       yield put(closeModal());
     } else yield put(actions.accountsError());
   } catch (error) {
