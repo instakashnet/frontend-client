@@ -34,8 +34,6 @@ const Accounts = ({ setModal }) => {
     history = useHistory(),
     [funds_origin] = useState((order?.currencyReceivedId === 1 && order?.amountSent >= 15000) || (order?.currencyReceivedId === 2 && order?.amountSent >= 5000));
 
-  if (!order) history.push("/currency-exchange");
-
   // FORMIK
   const formik = useFormik({
     initialValues: {
@@ -91,13 +89,17 @@ const Accounts = ({ setModal }) => {
 
   // EFFECTS
   useEffect(() => {
+    if (!order) history.push("/currency-exchange");
+  }, [history, order]);
+
+  useEffect(() => {
     dispatch(getAccountsInit("orders"));
     dispatch(getAccountsInit("kash"));
   }, [dispatch]);
 
   useEffect(() => {
-    if (accounts.length) setFilteredAccounts(accounts.filter((account) => account.currency.id === order.currencyReceivedId));
-  }, [accounts, order.currencyReceivedId]);
+    if (accounts.length) setFilteredAccounts(accounts.filter((account) => account.currency.id === order?.currencyReceivedId));
+  }, [accounts, order?.currencyReceivedId]);
 
   // HANDLERS
   const onFundsOriginChange = (e) => {
@@ -136,7 +138,7 @@ const Accounts = ({ setModal }) => {
       <h1>Completa los datos</h1>
       <h3>Selecciona tu banco de envío y la cuenta donde recibes.</h3>
       <form onSubmit={formik.handleSubmit} className={sharedClass.ExchangeForm}>
-        {kashAccount.balance > 0 && <KashUsed formik={formik} onKashUsed={kashUsedHandler} totalAmount={totalAmountSent} balance={kashAccount.balance} order={order} />}
+        {order && kashAccount.balance > 0 && <KashUsed formik={formik} onKashUsed={kashUsedHandler} totalAmount={totalAmountSent} balance={kashAccount.balance} order={order} />}
         {formik.values.kashApplied && totalAmountSent <= 0 ? null : (
           <SelectComponent
             name="bank_id"
