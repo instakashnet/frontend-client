@@ -120,8 +120,8 @@ export const Information = () => {
   return (
     <>
       <p className="mb-3 text-center">
-        Agradecidos siempre por la confianza, queremos informarle que <b>el día Domingo 1 de Mayo no estaremos atendiendo operaciones</b>. Todo pedido registrado en este día será
-        atendido en nuestro horario de apertura del siguiente día útil.
+        Agradecidos siempre por la confianza, queremos informarle que en estos momentos la plataforma para empresas de Interbank presenta inconvenientes para procesar las
+        transferencias, por tal motivo en este momento no estraremos realizando operaciones hacia este banco.
       </p>
       <p className="text-center my-4 font-bold">Agradecemos su comprensión.</p>
       <Button onClick={() => dispatch(closeModal())} className="action-button">

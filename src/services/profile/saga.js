@@ -2,7 +2,9 @@ import camelize from "camelize";
 import moment from "moment";
 import { uploadFile } from "react-s3";
 import { all, call, delay, fork, put, select, takeEvery, takeLatest } from "redux-saga/effects";
+// SWEET ALERT
 import Swal from "sweetalert2";
+// API SERVICES
 import {
   completeProfileSvc,
   deleteProfileSvc,
@@ -13,9 +15,14 @@ import {
   loadUserSvc,
   userCodeSvc
 } from "../../api/services/auth.service";
+// SNACKBAR ALERT ACTIONS
+import { snackActions } from "../../hoc/snackbar-configurator.component";
+// HELPERS
 import { replaceSpace } from "../../shared/functions";
+// HISTORY
 import history from "../../shared/history";
-import { closeModal, setAlertInit, setUserData } from "../../store/actions";
+// REDUX
+import { closeModal, setUserData } from "../../store/actions";
 import * as actions from "./actions";
 import * as types from "./types";
 
@@ -67,7 +74,7 @@ function* addProfile({ values }) {
   try {
     yield call(completeProfileSvc, values);
 
-    yield put(setAlertInit("El perfil ha sido agregado correctamente.", "success"));
+    yield snackActions.positive("El perfil ha sido agregado correctamente.");
     yield put(actions.addProfileSuccess());
     yield put(actions.getProfilesInit());
     yield put(closeModal());
@@ -88,7 +95,7 @@ function* editAdditionalInfo({ values, setSubmitted }) {
     yield call(editAddInfoSvc, values);
     yield call(getUserData);
     yield put(actions.editAdditionalInfoSuccess());
-    yield put(setAlertInit("Su perfil ha sido actualizado correctamente.", "success"));
+    yield snackActions.positive("Tu perfil ha sido actualizado correctamente.");
 
     if (setSubmitted) {
       yield call(setSubmitted, true);
@@ -133,10 +140,10 @@ function* editUserCode({ values }) {
     yield call(userCodeSvc, values);
     yield call(getUserData);
     yield put(actions.editUserCodeSuccess());
-    yield put(setAlertInit("Tu código ha sido editado correctamente.", "success"));
+    yield snackActions.positive("Tu código ha sido editado correctamente.");
     yield put(closeModal());
   } catch (error) {
-    yield put(setAlertInit("El código de afiliado que intentas agregar ya existe. Por favor, intenta con otro.", "error"));
+    yield snackActions.negative(error.message);
     yield put(actions.profilesError());
   }
 }
@@ -173,7 +180,7 @@ function* editBasicInfo({ values, editType, setSubmitted }) {
   try {
     yield call(editBasicInfoSvc, URL, values);
 
-    yield put(setAlertInit(`Tu ${editType === "phone" ? "teléfono" : "correo"} ha sido actualizado correctamente.`, "success"));
+    yield snackActions.positive(`Tu ${editType === "phone" ? "teléfono" : "correo"} ha sido actualizado correctamente.`);
     yield call(getUserData);
     yield put(actions.editBasicInfoSuccess());
 

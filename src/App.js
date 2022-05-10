@@ -1,17 +1,16 @@
-import { lazy,useEffect } from "react";
+import { lazy, useEffect } from "react";
 import ReactPixel from "react-facebook-pixel";
 // REACT REDUX
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // REACT ROUTER
-import { Route,Router, Switch } from "react-router-dom";
-
-// COMPONENTS
-import Alert from "./components/UI/alert.component";
+import { Route, Router, Switch } from "react-router-dom";
+// COMPONENT
 import { ClosedModal } from "./components/UI/modals/closed-modal.component";
 // HOC
 import asyncComponent from "./hoc/async.component";
 import { RefreshSession } from "./hoc/refresh-session.component";
 import ScrollToTop from "./hoc/scroll-top.component";
+import { SnackbarConfigurator } from "./hoc/snackbar-configurator.component";
 // PUBLIC
 import ChangePassword from "./pages/auth/containers/change-password.screen";
 import CompleteProfile from "./pages/auth/containers/complete-profile.screen";
@@ -78,7 +77,8 @@ function App() {
             <Route path="*" component={Error404} />
           </Switch>
         </RefreshSession>
-        <Alert />
+        {/* NOTISTACK ALERT */}
+        <SnackbarConfigurator />
         {isClosed && <ClosedModal onClose={() => dispatch(setIsClosedSuccess(false))} />}
       </Router>
     </>
