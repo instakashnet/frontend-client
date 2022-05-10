@@ -137,7 +137,6 @@ function* editUserCode({ values }) {
     yield put(setAlertInit("Tu código ha sido editado correctamente.", "success"));
     yield put(closeModal());
   } catch (error) {
-    yield put(setAlertInit("El código de afiliado que intentas agregar ya existe. Por favor, intenta con otro.", "error"));
     yield put(actions.profilesError());
   }
 }
