@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+// REDUX
 import { useDispatch, useSelector } from "react-redux";
+// REACT ROUTER
 import { useHistory } from "react-router-dom";
+// REDUX ACTIONS
 import { cancelExchangeInit, closeModal, openModal } from "../../../store/actions";
+// COMPONENTS
 import Timer from "../components/calculator-items/timer.component";
 import { EmailTransfer } from "../components/complete-items/email-transfer.component";
 import { TransactionCode } from "../components/complete-items/transaction-code.component";
 import OrderTimeout from "../components/timeout-modal.component";
+// CLASSES
 import classes from "./modules/complete.screen.module.scss";
 
 export const TransferCodeScreen = () => {
@@ -15,9 +20,14 @@ export const TransferCodeScreen = () => {
     { order, isProcessing } = useSelector((state) => state.Exchange);
 
   let now = new Date().getTime(),
-    orderExpire = new Date(order.expiredAt).getTime();
+    orderExpire = order ? new Date(order.expiredAt).getTime() : 0;
 
   const time = orderExpire - now;
+
+  // EFFECTS
+  useEffect(() => {
+    if (!order) history.push("/currency-exchange");
+  }, [history, order]);
 
   // HANDLERS
   const onTimeout = () => {
@@ -36,7 +46,7 @@ export const TransferCodeScreen = () => {
 
   return (
     <div className={classes.TransferCode}>
-      {order.bankFromClientActive ? (
+      {order && order.bankFromClientActive ? (
         <>
           <h1>Ingresa el número de operación</h1>
           <p className="mt-3">

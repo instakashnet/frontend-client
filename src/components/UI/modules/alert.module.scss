@@ -1,15 +1,46 @@
-@import "./keyframes.module";
+@use "sass:math";
+@import "../../../assets/css/colors";
+@import "../../../assets/css/font-sizes";
+@import "../../../assets/css/breakpoints";
 
 .Alert {
-	position: fixed;
-	bottom: -100%;
+	font-size: math.div($body, 1.111);
 	width: 100vw;
 	max-width: 400px;
-	right: 1px;
-	animation: enter-leave 5s ease-in-out;
-	z-index: 10000;
+	padding: 15px;
+	display: grid;
+	grid-template-columns: min-content 1fr min-content;
+	grid-template-rows: 1fr;
+	column-gap: 7px;
+	align-items: flex-start;
 
-	@media screen and (min-width: 768px) {
+	.AlertIcon {
+		margin-right: 3px;
+	}
+
+	@include respond(tablet) {
 		right: 25px;
+		font-size: $body;
+
+		.AlertIcon {
+			font-size: $body * 1.5625;
+		}
+	}
+}
+
+/* STYLES FOR EACH TYPE OF ALERT */
+.PositiveAlert {
+	background-color: $positive-bg-alert;
+
+	.AlertIcon {
+		color: $base-green;
+	}
+}
+
+.NegativeAlert {
+	background-color: $negative-bg-alert;
+
+	.AlertIcon {
+		color: $negative-icon-alert;
 	}
 }

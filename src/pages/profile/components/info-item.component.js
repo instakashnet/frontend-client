@@ -1,12 +1,12 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Check, Clear } from "@material-ui/icons";
-import React, { useEffect,useState } from "react";
-
+import React, { useEffect, useState } from "react";
 // COMPONENTS
 import { DatePickerInput } from "../../../components/UI/form-items/datepicker.component";
 import { Input } from "../../../components/UI/form-items/input.component";
 // CLASSES
 import classes from "./modules/info-item.module.scss";
+
 
 export const InfoItem = ({ label, item, value, edit, name, onChange, error, touched, isProcessing, onSubmit, submitted }) => {
   const [editActive, setEditActive] = useState(false);
