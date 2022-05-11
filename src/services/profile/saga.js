@@ -74,7 +74,7 @@ function* addProfile({ values }) {
   try {
     yield call(completeProfileSvc, values);
 
-    yield snackActions.positive("El perfil ha sido agregado correctamente.");
+    yield snackActions.success("El perfil ha sido agregado correctamente.");
     yield put(actions.addProfileSuccess());
     yield put(actions.getProfilesInit());
     yield put(closeModal());
@@ -95,7 +95,7 @@ function* editAdditionalInfo({ values, setSubmitted }) {
     yield call(editAddInfoSvc, values);
     yield call(getUserData);
     yield put(actions.editAdditionalInfoSuccess());
-    yield snackActions.positive("Tu perfil ha sido actualizado correctamente.");
+    yield snackActions.success("Tu perfil ha sido actualizado correctamente.");
 
     if (setSubmitted) {
       yield call(setSubmitted, true);
@@ -140,10 +140,10 @@ function* editUserCode({ values }) {
     yield call(userCodeSvc, values);
     yield call(getUserData);
     yield put(actions.editUserCodeSuccess());
-    yield snackActions.positive("Tu código ha sido editado correctamente.");
+    yield snackActions.success("Tu código ha sido editado correctamente.");
     yield put(closeModal());
   } catch (error) {
-    yield snackActions.negative(error.message);
+    yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }
@@ -180,7 +180,7 @@ function* editBasicInfo({ values, editType, setSubmitted }) {
   try {
     yield call(editBasicInfoSvc, URL, values);
 
-    yield snackActions.positive(`Tu ${editType === "phone" ? "teléfono" : "correo"} ha sido actualizado correctamente.`);
+    yield snackActions.success(`Tu ${editType === "phone" ? "teléfono" : "correo"} ha sido actualizado correctamente.`);
     yield call(getUserData);
     yield put(actions.editBasicInfoSuccess());
 

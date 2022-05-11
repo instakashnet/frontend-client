@@ -4,6 +4,8 @@
 @import "../../../assets/css/breakpoints";
 
 .Alert {
+	border-radius: 4px;
+	border: 1px solid transparent;
 	font-size: math.div($body, 1.111);
 	width: 100vw;
 	max-width: 400px;
@@ -29,18 +31,29 @@
 }
 
 /* STYLES FOR EACH TYPE OF ALERT */
-.PositiveAlert {
-	background-color: $positive-bg-alert;
+.SuccessAlert {
+	background-color: $success-bg-alert;
+	border-color: $base-green;
 
 	.AlertIcon {
 		color: $base-green;
 	}
 }
 
-.NegativeAlert {
-	background-color: $negative-bg-alert;
+.ErrorAlert {
+	background-color: $error-bg-alert;
+	border-color: $error-border-alert;
 
 	.AlertIcon {
-		color: $negative-icon-alert;
+		color: $error-icon-alert;
+	}
+}
+
+.WarningAlert {
+	background-color: $warning-bg-alert;
+	border-color: $warning-icon-alert;
+
+	.AlertIcon {
+		color: $warning-icon-alert;
 	}
 }

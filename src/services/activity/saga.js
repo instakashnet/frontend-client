@@ -15,7 +15,7 @@ function* getOrders({ limit, enabled }) {
     const resData = { ...res, orders };
     yield put(actions.getOrdersSuccess(resData));
   } catch (error) {
-    yield snackActions.negative(error.message);
+    yield snackActions.error(error.message);
     yield put(actions.activityError());
   }
 }
@@ -52,7 +52,7 @@ function* getOrderDetails({ id, detailsType }) {
     const res = yield call(getOrderDetailsSvc, id, detailsType);
     yield put(actions.getOrderDetailsSuccess(res));
   } catch (error) {
-    yield snackActions.negative(error.message);
+    yield snackActions.error(error.message);
     yield put(actions.activityError());
   }
 }

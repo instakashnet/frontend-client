@@ -10,7 +10,9 @@ import classes from "./modules/alert.module.scss";
 
 const Alert = React.forwardRef((props, ref) => {
   // VARIABLES
-  const { id, message, type } = props;
+  const { id, message, type } = props,
+    conditionTypeAlert = type === "success" ? classes.SuccessAlert :
+      type === "error" ? classes.ErrorAlert : classes.WarningAlert;
 
   // HANDLERS
   const { closeSnackbar } = useSnackbar(),
@@ -18,7 +20,7 @@ const Alert = React.forwardRef((props, ref) => {
 
   return (
     <SnackbarContent ref={ref}>
-      <div className={`${classes.Alert} ${type === "positive" ? classes.PositiveAlert : classes.NegativeAlert}`}>
+      <div className={`${classes.Alert} ${conditionTypeAlert}`}>
         <InfoOutlined className={classes.AlertIcon} />
         <p>{message}</p>
         <button type="button" onClick={handleClose}>

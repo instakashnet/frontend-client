@@ -15,7 +15,7 @@ function* getAffiliates() {
     const affiliatesData = camelize(res.affiliates);
     yield put(actions.getAffiliatesSuccess(affiliatesData));
   } catch (error) {
-    yield snackActions.negative(error.message);
+    yield snackActions.error(error.message);
     yield put(actions.affiliatesError());
   }
 }
