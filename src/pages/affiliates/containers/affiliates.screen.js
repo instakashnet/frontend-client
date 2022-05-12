@@ -1,8 +1,7 @@
-import { Tab,Tabs } from "@material-ui/core";
+import { Tab, Tabs } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SwipeableViews from "react-swipeable-views";
-
 import Layout from "../../../components/layout/layout.component";
 import Spinner from "../../../components/UI/spinner.component";
 import { getAffiliatesInit } from "../../../store/actions";

@@ -67,6 +67,7 @@ export const AffiliatesList = ({ affiliates, isLoading, ...rest }) => {
   const affiliatesCompleted = totalAffiliates > 0 ? affiliates.filter((a) => a.orderSuccess).length : 0;
   const affiliatesCompletedPercentage = totalAffiliates > 0 ? (affiliatesCompleted / totalAffiliates) * 100 : 100;
   const affiliatesNotCompleted = totalAffiliates > 0 ? affiliates.filter((a) => !a.orderSuccess).length : 0;
+  const kashEarned = affiliatesCompleted * 2;
 
   return (
     <div {...rest}>
@@ -75,7 +76,7 @@ export const AffiliatesList = ({ affiliates, isLoading, ...rest }) => {
         <p className="md:text-center">
           Has compartido tu código con{" "}
           <b>
-            {`${affiliates.length} ${totalAffiliates === 1 ? "amigo" : totalAffiliates >= 0 ? "amigos" : ""}`} y has ganado {affiliatesCompleted} KASH.
+            {`${affiliates.length} ${totalAffiliates === 1 ? "amigo" : totalAffiliates >= 0 ? "amigos" : ""}`} y has ganado {kashEarned} KASH.
           </b>{" "}
           Recuerda que ganas <b>KASH</b> cada vez que tus amigos se registran con tu código y <b>realizan su primer cambio.</b>
         </p>
@@ -99,7 +100,7 @@ export const AffiliatesList = ({ affiliates, isLoading, ...rest }) => {
             <p>Completados</p>
           </Card>
           <Card className={classes.AffiliatesTotalCard}>
-            <h4>{affiliatesCompleted}</h4>
+            <h4>{kashEarned}</h4>
             <p>Kash ganados</p>
           </Card>
         </div>
