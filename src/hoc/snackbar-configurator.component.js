@@ -17,18 +17,21 @@ export const SnackbarConfigurator = () => {
 }
 
 export const snackActions = {
-  positive: (msg) => {
-    snackActions.toast(msg, { type: "positive" });
+  success: (msg) => {
+    snackActions.toast(msg, { type: "success" });
   },
-  negative: (msg) => {
-    snackActions.toast(msg, { type: "negative" });
+  error: (msg) => {
+    snackActions.toast(msg, { type: "error" });
+  },
+  warning: (msg) => {
+    snackActions.toast(msg, { type: "warning" });
   },
   toast: (msg, options) => {
     useSnackbarRef.enqueueSnackbar(msg,
       {
         ...options,
         content: (key) => {
-          const { type } = options || { type: "positive" };
+          const { type } = options || { type: "success" };
 
           return (
             <Alert

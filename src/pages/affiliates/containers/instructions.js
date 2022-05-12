@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-// COMPONENT
+// COMPONENTS
 import Card from "../../../components/UI/card.component";
 import { Modal } from "../../../components/UI/modals/modal.component";
 // HOOK
@@ -52,7 +52,7 @@ export const Instructions = ({ ...rest }) => {
             <img src={Arrow1} className="hidden lg:block" alt="siguiente" />
             <Step img={Step2Img} className={`self-end ${classes.Step2}`} title="2. Recibe KASH por cada referido">
               <p>
-                Cada amigo registrado con tu codigo recibirá una tasa preferencial en su primer cambio y tú ganarás <b>1 KASH = 1 $</b>.
+                Cada amigo registrado con tu código recibirá una tasa preferencial en su primer cambio y tú ganarás <b>2 KASH (1 KASH = 1 $)</b>.
               </p>
             </Step>
             <img src={Arrow2} className="hidden lg:block" alt="siguiente" />

@@ -43,7 +43,7 @@ function* addAccount({ values, addType }) {
 
     yield put(actions.getAccountsSuccess(accounts.accounts));
     yield put(actions.addAccountSuccess());
-    yield snackActions.positive("Cuenta agregada correctamente.");
+    yield snackActions.success("Cuenta agregada correctamente.");
     yield put(closeModal());
   } catch (error) {
     yield put(actions.accountsError());
@@ -59,7 +59,7 @@ function* editAccount({ id, values, setEdit }) {
     yield put(actions.getAccountsSuccess(accounts.accounts));
     yield put(actions.editAccountSuccess());
     yield call(setAccountDetails, { accId: id });
-    yield snackActions.positive("Cuenta editada correctamente.");
+    yield snackActions.success("Cuenta editada correctamente.");
     yield call(setEdit, false);
   } catch (error) {
     yield put(actions.accountsError());
@@ -98,7 +98,7 @@ function* deleteAccount({ account }) {
       yield put(actions.getAccountsSuccess(accounts.accounts));
 
       yield put(actions.deleteAccountSuccess());
-      yield snackActions.positive("Cuenta eliminada correctamente.");
+      yield snackActions.success("Cuenta eliminada correctamente.");
       yield put(closeModal());
     } else yield put(actions.accountsError());
   } catch (error) {
