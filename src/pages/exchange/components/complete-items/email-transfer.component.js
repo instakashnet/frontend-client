@@ -5,11 +5,11 @@ import Card from "../../../../components/UI/card.component";
 import CopyButton from "../../../../components/UI/copy-button.component";
 import { MuiAlert } from "../../../../components/UI/mui-alert.component";
 // REDUX ACTIONS
-import { cancelExchangeInit, processCodeInit } from "../../../../store/actions";
+import { processCodeInit } from "../../../../store/actions";
 // CLASSES
 import classes from "../modules/complete-items/email-transfer.module.scss";
 
-export const EmailTransfer = ({ isProcessing, dispatch, order }) => {
+export const EmailTransfer = ({ isProcessing, dispatch, order, goBack }) => {
   return (
     <>
       <Card className={`${classes.EmailAddress} flex items-center justify-between`}>
@@ -35,8 +35,8 @@ export const EmailTransfer = ({ isProcessing, dispatch, order }) => {
           <span className="ld ld-ring ld-spin" />
           Completar cambio
         </Button>
-        <Button type="button" className="secondary-button mt-6" onClick={() => dispatch(cancelExchangeInit(order.id, "complete"))}>
-          Cancelar
+        <Button type="button" className="secondary-button mt-6" onClick={goBack}>
+          Regresar
         </Button>
       </div>
     </>

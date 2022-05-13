@@ -4,7 +4,7 @@
 @import "../../../../assets/css/font-sizes";
 
 p.Completed {
-  color: $base-green !important;
+  color: $base-green  !important;
   font-weight: bold;
 }
 
@@ -50,5 +50,9 @@ img.NoReward {
 
   &:last-of-type {
     color: #eab726;
+  }
+
+  @include respond(tablet) {
+    width: 8.6rem;
   }
 }
