@@ -1,9 +1,15 @@
 import { all, call, fork, put, takeEvery, takeLatest } from "redux-saga/effects";
+// SWEET ALERT
 import Swal from "sweetalert2";
+// API SERVICES
 import { completeProfileSvc, loadUserSvc, logoutSvc, recoverPswdSvc, refreshVCodeSvc, refreskTokenSvc, resetPswdSvc, signinGoogleSvc, signinSvc, signupSvc, validateEmailSvc } from "../../api/services/auth.service";
+// SNACKBAR ALERT ACTIONS
+import { snackActions } from "../../hoc/snackbar-configurator.component";
+// HISTORY
 import history from "../../shared/history";
-import { setAlertInit } from "../core/alert/actions";
+// SOCKET
 import { closeSocketConnection } from "../socket/actions";
+// REDUX
 import * as actions from "./actions";
 import * as types from "./types";
 
@@ -38,7 +44,7 @@ function* signin({ values }) {
     yield put(actions.signinSuccess(token));
     yield put(actions.loadUserInit());
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    yield snackActions.error(error.message);
     yield put(actions.authError());
   }
 }
@@ -59,7 +65,7 @@ function* signup({ values }) {
     yield put(actions.signupSuccess(token));
     yield call([history, "push"], "/email-verification/OTP");
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    yield snackActions.error(error.message);
     yield put(actions.authError());
   }
 }
@@ -69,7 +75,7 @@ function* completeProfile({ values }) {
     yield call(completeProfileSvc, values);
     yield call(loadUser);
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    yield snackActions.error(error.message);
     yield put(actions.authError());
   }
 }
@@ -85,7 +91,7 @@ function* validateEmail({ values, otpType }) {
 
     return yield call(loadUser);
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    yield snackActions.error(error.message);
     yield put(actions.authError());
   }
 }
@@ -96,7 +102,7 @@ function* refreshVerificationCode() {
     yield call([Swal, "fire"], "¡Correo enviado!", "Revisa tu correo electrónico con el nuevo código de verificación.", "success");
     yield put(actions.refreshCodeSuccess());
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    yield snackActions.error(error.message);
     yield put(actions.authError());
   }
 }
@@ -107,7 +113,7 @@ function* recoverPassword({ values }) {
     yield put(actions.recoverPasswordSuccess(token));
     yield call([history, "push"], "/email-verification/PWD");
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    yield snackActions.error(error.message);
     yield put(actions.authError());
   }
 }
@@ -119,7 +125,7 @@ function* resetPassword({ values }) {
     yield call([history, "push"], "/signin");
     yield call([Swal, "fire"], "Contraseña cambiada", "Ya puedes ingresar con tu nueva contraseña.", "success");
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    yield snackActions.error(error.message);
     yield put(actions.authError());
   }
 }

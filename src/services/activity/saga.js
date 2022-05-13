@@ -1,6 +1,9 @@
 import { all, call, fork, put, takeEvery, takeLatest } from "redux-saga/effects";
+// API SERVICES
 import { getOrderAmountsSvc, getOrderDetailsSvc, getOrdersSvc, getTotalAmountSvc, getWithdrawalsSvc } from "../../api/services/exchange.service";
-import { setAlertInit } from "../../store/actions";
+// SNACKBAR ALERT ACTIONS
+import { snackActions } from "../../hoc/snackbar-configurator.component";
+// REDUX
 import * as actions from "./actions";
 import * as types from "./types";
 
@@ -12,7 +15,7 @@ function* getOrders({ limit, enabled }) {
     const resData = { ...res, orders };
     yield put(actions.getOrdersSuccess(resData));
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    yield snackActions.error(error.message);
     yield put(actions.activityError());
   }
 }
@@ -49,7 +52,7 @@ function* getOrderDetails({ id, detailsType }) {
     const res = yield call(getOrderDetailsSvc, id, detailsType);
     yield put(actions.getOrderDetailsSuccess(res));
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    yield snackActions.error(error.message);
     yield put(actions.activityError());
   }
 }

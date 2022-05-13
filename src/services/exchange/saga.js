@@ -1,8 +1,14 @@
 import { all, call, fork, put, takeEvery, takeLatest } from "redux-saga/effects";
+// SWEET ALERT
 import Swal from "sweetalert2";
+// API SERVICES
 import { cancelExchangeSvc, completeExchangeSvc, createExchangeSvc, getLastOrderSvc, getRatesSvc, processCodeSvc, validateCouponSvc } from "../../api/services/exchange.service";
+// SNACKBAR ALERT ACTIONS
+import { snackActions } from "../../hoc/snackbar-configurator.component";
+// HISTORY
 import history from "../../shared/history";
-import { getOrdersInit, setAlertInit } from "../../store/actions";
+// REDUX
+import { getOrdersInit } from "../../store/actions";
 import * as actions from "./actions";
 import * as types from "./types";
 
@@ -35,7 +41,7 @@ function* validateCoupon({ couponName, profileType, clearCoupon }) {
     yield put(actions.validateCouponSuccess({ name: couponName, discount: res.discount, minimumAmount: res.minAmountBuy }));
     yield call(clearCoupon, "");
   } catch (error) {
-    if (!couponName.includes("NUEVOREFERIDO")) yield put(setAlertInit(error.message, "error"));
+    if (!couponName.includes("NUEVOREFERIDO")) yield snackActions.error(error.message);
     yield put(actions.exchangeError());
   }
 }
@@ -53,7 +59,7 @@ function* createExchange({ values, amountSent, profile }) {
     yield put(actions.createExchangeSuccess(res));
     yield call([history, "push"], "/currency-exchange/step-2");
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    yield snackActions.error(error.message);
     yield put(actions.exchangeError());
   }
 }
@@ -93,7 +99,7 @@ function* completeExchange({ values, orderId }) {
         `En este momento no podemos crear su pedido hacia el banco que está solicitando. Por favor intente nuevamente con un monto menor. Si el problema persiste contáctese con atención al cliente.`,
         "error"
       );
-    } else yield put(setAlertInit(error.message, "error"));
+    } else yield snackActions.error(error.message);
 
     yield put(actions.exchangeError());
   }
@@ -135,7 +141,7 @@ function* cancelExchange({ orderId, status, necessaryConfirm, closeModal }) {
 
     } else yield put(actions.exchangeError());
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    yield snackActions.error(error.message);
     yield put(actions.exchangeError());
   }
 }
@@ -160,7 +166,7 @@ function* processCode({ values, orderId, processType, closeModal }) {
     });
     yield put(actions.processCodeSuccess());
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    yield snackActions.error(error.message);
     yield put(actions.exchangeError());
     if (error.data && error.data.code === 4005 && processType !== "details") yield call([history, "push"], "/currency-exchange");
   }

@@ -14,7 +14,7 @@ import classes from "./modules/affiliates-list.module.scss";
 import sharedClass from "./modules/sharedClasses.module.scss";
 
 
-export const AffiliatesList = ({ affiliates, isLoading, ...rest }) => {
+export const AffiliatesList = ({ affiliates, isLoading, kashBalance, ...rest }) => {
   const { isMobile } = useDeviceDetect();
 
   const columns = [
@@ -75,7 +75,7 @@ export const AffiliatesList = ({ affiliates, isLoading, ...rest }) => {
         <p className="md:text-center">
           Has compartido tu código con{" "}
           <b>
-            {`${affiliates.length} ${totalAffiliates === 1 ? "amigo" : totalAffiliates >= 0 ? "amigos" : ""}`} y has ganado {affiliatesCompleted} KASH.
+            {`${affiliates.length} ${totalAffiliates === 1 ? "amigo" : totalAffiliates >= 0 ? "amigos" : ""}`} y has ganado {affiliatesCompleted * 2} KASH.
           </b>{" "}
           Recuerda que ganas <b>KASH</b> cada vez que tus amigos se registran con tu código y <b>realizan su primer cambio.</b>
         </p>
@@ -99,8 +99,8 @@ export const AffiliatesList = ({ affiliates, isLoading, ...rest }) => {
             <p>Completados</p>
           </Card>
           <Card className={classes.AffiliatesTotalCard}>
-            <h4>{affiliatesCompleted}</h4>
-            <p>Kash ganados</p>
+            <h4>{kashBalance}</h4>
+            <p>Kash disponibles</p>
           </Card>
         </div>
       </article>

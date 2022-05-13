@@ -24,6 +24,7 @@
     "js-cookie": "^3.0.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
+    "notistack": "^1.0.10",
     "npm": "^7.6.3",
     "react": "^17.0.1",
     "react-chartjs-2": "^2.11.1",

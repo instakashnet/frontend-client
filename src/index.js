@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@material-ui/styles";
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
+import { SnackbarProvider } from "notistack";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
@@ -28,7 +29,11 @@ injectStore(store);
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <App />
+      <SnackbarProvider
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+        maxSnack={4}>
+        <App />
+      </SnackbarProvider>
     </ThemeProvider>
   </Provider>,
   document.getElementById("root")

@@ -2,23 +2,40 @@ import { InfoOutlined } from "@material-ui/icons";
 // FORMIK
 import { useFormik } from "formik";
 import React, { useState } from "react";
+// SWEET ALERT
+import Swal from "sweetalert2";
 // COMPONENTS
 import { Button } from "../../../../components/UI/button.component";
 import { Input } from "../../../../components/UI/form-items/input.component";
 import Tooltip from "../../../../components/UI/tooltip.component";
 // REDUX ACTIONS
-import { cancelExchangeInit, processCodeInit } from "../../../../store/actions";
+import { processCodeInit } from "../../../../store/actions";
 // HELPER
 import { transferCodeValidation } from "../../helpers/validations";
 
-export const TransactionCode = ({ isProcessing, dispatch, order }) => {
+export const TransactionCode = ({ isProcessing, dispatch, order, goBack }) => {
   const [showInfo, setShowInfo] = useState(false);
 
   const formik = useFormik({
     initialValues: { transaction_code: "" },
     enableReinitialize: true,
     validationSchema: transferCodeValidation,
-    onSubmit: (values) => dispatch(processCodeInit(values, order.id)),
+    onSubmit: async (values) => {
+      let result = await Swal.fire({
+        icon: "question",
+        title: `¿${values.transaction_code} es el número de operación correcto?`,
+        text: "Después de continuar no podrás modificarlo.",
+        showCancelButton: true,
+        cancelButtonColor: "#ffeb4d",
+        confirmButtonColor: "#ff4b55",
+        confirmButtonText: "Continuar",
+        cancelButtonText: "Regresar",
+      });
+
+      if (result.isConfirmed) {
+        dispatch(processCodeInit(values, order.id));
+      } else return;
+    },
   });
 
   return (
@@ -52,8 +69,8 @@ export const TransactionCode = ({ isProcessing, dispatch, order }) => {
             <span className="ld ld-ring ld-spin" />
             Completar cambio
           </Button>
-          <Button type="button" className="secondary-button m-3" onClick={() => dispatch(cancelExchangeInit(order.id, "complete"))}>
-            Cancelar
+          <Button type="button" className="secondary-button m-3" onClick={goBack}>
+            Regresar
           </Button>
         </div>
       </form>
