@@ -23,13 +23,13 @@ function* setAccountDetails({ accId }) {
 function* getAccountsSaga({ accType }) {
   try {
     const accounts = yield call(getAccounts, accType);
-    if (accType === "kash") return yield put(actions.getKashAccountSuccess(accounts.accounts));
+    if (accType === "kash") return yield put(actions.getKashAccountSuccess(accounts));
 
     const [banks, currencies] = yield all([call(getBanks), call(getCurrencies)]);
 
-    yield put(actions.getBanks(banks.banks));
-    yield put(actions.getCurrencies(currencies.currencies));
-    yield put(actions.getAccountsSuccess(accounts.accounts));
+    yield put(actions.getBanks(banks));
+    yield put(actions.getCurrencies(currencies));
+    yield put(actions.getAccountsSuccess(accounts));
   } catch (error) {
     yield put(actions.accountsError());
   }
@@ -41,11 +41,12 @@ function* addAccount({ values, addType }) {
 
     const accounts = yield call(getAccounts, addType);
 
-    yield put(actions.getAccountsSuccess(accounts.accounts));
+    yield put(actions.getAccountsSuccess(accounts));
     yield put(actions.addAccountSuccess());
     yield snackActions.success("Cuenta agregada correctamente.");
     yield put(closeModal());
   } catch (error) {
+    yield snackActions.error(error.message);
     yield put(actions.accountsError());
   }
 }
@@ -56,12 +57,13 @@ function* editAccount({ id, values, setEdit }) {
 
     const accounts = yield call(getAccounts, "users");
 
-    yield put(actions.getAccountsSuccess(accounts.accounts));
+    yield put(actions.getAccountsSuccess(accounts));
     yield put(actions.editAccountSuccess());
     yield call(setAccountDetails, { accId: id });
     yield snackActions.success("Cuenta editada correctamente.");
     yield call(setEdit, false);
   } catch (error) {
+    yield snackActions.error(error.message);
     yield put(actions.accountsError());
   }
 }
@@ -95,7 +97,7 @@ function* deleteAccount({ account }) {
     if (result.isConfirmed) {
       yield call(deleteAccountSvc, account.id);
       const accounts = yield call(getAccounts, "users");
-      yield put(actions.getAccountsSuccess(accounts.accounts));
+      yield put(actions.getAccountsSuccess(accounts));
 
       yield put(actions.deleteAccountSuccess());
       yield snackActions.success("Cuenta eliminada correctamente.");

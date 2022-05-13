@@ -3,10 +3,9 @@ import { Mail } from "@material-ui/icons";
 import { useFormik } from "formik";
 import React from "react";
 // REDUX
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // REACT ROUTER
 import { Link } from "react-router-dom";
-
 // COMPONENTS
 import { Button } from "../../../components/UI/button.component";
 import { Input } from "../../../components/UI/form-items/input.component";
@@ -17,7 +16,12 @@ import { emailValidation } from "../helpers/formValidations";
 // CLASSES
 import sharedClass from "./modules/sharedClasses.module.scss";
 
+
 const RecoverPassword = () => {
+  // PROVISIONAL
+  console.log("TOKEN RECOVER PASSWORD:", useSelector((state) => state.Auth.token));
+  // PROVISIONAL
+
   const dispatch = useDispatch();
   const { isProcessing } = useSelector((state) => state.Auth);
 

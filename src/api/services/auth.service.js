@@ -28,7 +28,7 @@ export const getAffiliatesSvc = async () => {
     const response = await authService.get("/users/affiliates");
     if (response.status >= 400) throw new Error(response.errors[0]);
 
-    return response.data;
+    return response.data.affiliates;
   } catch (error) {
     throw new Error(error);
   }
