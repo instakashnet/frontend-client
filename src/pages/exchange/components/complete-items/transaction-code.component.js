@@ -9,11 +9,11 @@ import { Button } from "../../../../components/UI/button.component";
 import { Input } from "../../../../components/UI/form-items/input.component";
 import Tooltip from "../../../../components/UI/tooltip.component";
 // REDUX ACTIONS
-import { cancelExchangeInit, processCodeInit } from "../../../../store/actions";
+import { processCodeInit } from "../../../../store/actions";
 // HELPER
 import { transferCodeValidation } from "../../helpers/validations";
 
-export const TransactionCode = ({ isProcessing, dispatch, order }) => {
+export const TransactionCode = ({ isProcessing, dispatch, order, goBack }) => {
   const [showInfo, setShowInfo] = useState(false);
 
   const formik = useFormik({
@@ -69,8 +69,8 @@ export const TransactionCode = ({ isProcessing, dispatch, order }) => {
             <span className="ld ld-ring ld-spin" />
             Completar cambio
           </Button>
-          <Button type="button" className="secondary-button m-3" onClick={() => dispatch(cancelExchangeInit(order.id, "complete"))}>
-            Cancelar
+          <Button type="button" className="secondary-button m-3" onClick={goBack}>
+            Regresar
           </Button>
         </div>
       </form>
