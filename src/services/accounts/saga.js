@@ -31,6 +31,7 @@ function* getAccountsSaga({ accType }) {
     yield put(actions.getCurrencies(currencies));
     yield put(actions.getAccountsSuccess(accounts));
   } catch (error) {
+    yield snackActions.error(error.message);
     yield put(actions.accountsError());
   }
 }
@@ -77,6 +78,7 @@ function* withdrawKash({ values }) {
     yield put(closeModal());
     yield call([history, "push"], "/dashboard/recent");
   } catch (error) {
+    yield snackActions.error(error.message);
     yield put(actions.accountsError());
   }
 }
@@ -104,6 +106,7 @@ function* deleteAccount({ account }) {
       yield put(closeModal());
     } else yield put(actions.accountsError());
   } catch (error) {
+    yield snackActions.error(error.message);
     yield put(actions.accountsError());
   }
 }

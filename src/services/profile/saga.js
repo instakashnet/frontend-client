@@ -103,6 +103,7 @@ function* editAdditionalInfo({ values, setSubmitted }) {
       yield call(setSubmitted, false);
     }
   } catch (error) {
+    yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }
@@ -167,6 +168,7 @@ function* disableProfile({ id }) {
       yield Swal.fire("Perfil eliminado", "El perfil ha sido eliminado correctamente. Deberá seleccionar un nuevo perfil.", "success");
     } else yield put(actions.profilesError());
   } catch (error) {
+    snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }
@@ -190,6 +192,7 @@ function* editBasicInfo({ values, editType, setSubmitted }) {
       yield call(setSubmitted, false);
     }
   } catch (error) {
+    yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }

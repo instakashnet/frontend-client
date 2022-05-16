@@ -62,7 +62,7 @@ export const generateTokenSvc = async () => {
 export const refreskTokenSvc = async () => {
   try {
     const response = await authService.post("/auth/refresh");
-    if (response.status >= 400) throw new Error(response.erorrs[0]);
+    if (response.status >= 400) throw new Error(response.errors[0]);
 
     return response.data.accessToken;
   } catch (error) {
@@ -144,7 +144,7 @@ export const recoverPswdSvc = async (values) => {
 export const resetPswdSvc = async (values) => {
   try {
     const response = await authService.post("/users/reset-password", values);
-    if (response.status >= 400) throw new Error(response.erorrs[0]);
+    if (response.status >= 400) throw new Error(response.errors[0]);
   } catch (error) {
     throw new Error(error);
   }

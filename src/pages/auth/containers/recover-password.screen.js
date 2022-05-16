@@ -18,10 +18,6 @@ import sharedClass from "./modules/sharedClasses.module.scss";
 
 
 const RecoverPassword = () => {
-  // PROVISIONAL
-  console.log("TOKEN RECOVER PASSWORD:", useSelector((state) => state.Auth.token));
-  // PROVISIONAL
-
   const dispatch = useDispatch();
   const { isProcessing } = useSelector((state) => state.Auth);
 

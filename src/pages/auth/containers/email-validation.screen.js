@@ -20,10 +20,6 @@ import sharedClass from "./modules/sharedClasses.module.scss";
 
 
 export const EmailValidationScreen = ({ history, match }) => {
-  // PROVISIONAL
-  console.log("TOKEN VALIDACIÓN DE EMAIL:", useSelector((state) => state.Auth.token));
-  // PROVISIONAL
-
   const dispatch = useDispatch(),
     { type } = match.params,
     formik = useFormik({

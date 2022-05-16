@@ -41,7 +41,7 @@ function* validateCoupon({ couponName, profileType, clearCoupon }) {
     yield put(actions.validateCouponSuccess({ name: couponName, discount: res.discount, minimumAmount: res.minAmountBuy }));
     yield call(clearCoupon, "");
   } catch (error) {
-    if (!couponName.includes("NUEVOREFERIDO")) yield snackActions.error(error.message);
+    if (!couponName.includes("NUEVOREFERIDO") || (couponName.includes("NUEVOREFERIDO") && profileType === "juridica")) yield snackActions.error(error.message);
     yield put(actions.exchangeError());
   }
 }
