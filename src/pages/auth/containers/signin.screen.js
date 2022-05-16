@@ -45,7 +45,6 @@ const Signin = () => {
   }, [setFieldValue]);
 
   const signInGoogle = (res) => {
-    console.log(res);
     if (res.error && (res.error.includes("closed") || res.error.includes("failed"))) return;
 
     dispatch(signinGoogle(res.accessToken));
