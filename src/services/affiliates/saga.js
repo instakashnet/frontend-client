@@ -12,7 +12,7 @@ import * as types from "./types";
 function* getAffiliates() {
   try {
     const res = yield call(getAffiliatesSvc);
-    const affiliatesData = camelize(res.affiliates);
+    const affiliatesData = camelize(res);
     yield put(actions.getAffiliatesSuccess(affiliatesData));
   } catch (error) {
     yield snackActions.error(error.message);

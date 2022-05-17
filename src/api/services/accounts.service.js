@@ -6,7 +6,7 @@ export const getBanks = async () => {
     const response = await accountsService.get("/banks/172");
     if (response.status >= 400) throw new Error(response.errors[0]);
 
-    return response.data;
+    return response.data.banks;
   } catch (error) {
     throw new Error(error);
   }
@@ -18,7 +18,7 @@ export const getCurrencies = async () => {
     const response = await accountsService.get("/currencies/country/172");
     if (response.status >= 400) throw new Error(response.errors[0]);
 
-    return response.data;
+    return response.data.currencies;
   } catch (error) {
     throw new Error(error);
   }
@@ -30,7 +30,7 @@ export const getAccounts = async (type) => {
     const response = await accountsService.get(`/accounts?type=${type}`);
     if (response.status >= 400) throw new Error(response.errors[0]);
 
-    return response.data;
+    return response.data.accounts;
   } catch (error) {
     throw new Error(error);
   }
@@ -40,7 +40,7 @@ export const getAccounts = async (type) => {
 export const addAccountSvc = async (values) => {
   try {
     const response = await accountsService.post("/accounts", values);
-    if (response.status >= 400) throw new Error(response.errors[0]);    
+    if (response.status >= 400) throw new Error(response.errors[0]);
   } catch (error) {
     throw new Error(error);
   }
