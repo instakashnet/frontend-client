@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 // REDUX
-import { useDispatch,useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 // HOOK
 import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
 // REDUX ACTIONS
-import { getAccountsInit,getOrdersInit, getWithdrawalsInit } from "../../../store/actions";
+import { getOrdersInit, getWithdrawalsInit } from "../../../store/actions";
 // COMPONENTS
 import { ActivityMobile } from "../components/activity/mobile-activity.component";
 import RecentActivity from "../components/activity/recent-activity.component";
@@ -16,14 +15,12 @@ import TotalTransfered from "../components/total-transfered.component";
 export const RecentActivityScreen = ({ orders, withdrawals, openDetails }) => {
   const dispatch = useDispatch(),
     { orderAmounts, totalAmount } = useSelector((state) => state.Activity),
-    { kashAccount } = useSelector((state) => state.Accounts),
     { isMobile } = useDeviceDetect();
 
   // EFFECTS
   useEffect(() => {
     dispatch(getOrdersInit(5, true));
     dispatch(getWithdrawalsInit());
-    dispatch(getAccountsInit("kash"));
   }, [dispatch]);
 
   return orders.length <= 0 && withdrawals.length <= 0 ? (
@@ -37,7 +34,7 @@ export const RecentActivityScreen = ({ orders, withdrawals, openDetails }) => {
         <RecentActivity openModal={openDetails} withdrawals={withdrawals} orders={orders} />
       )}
 
-      <TotalTransfered kashAccount={kashAccount} totalAmount={totalAmount} className="flex-col" />
+      <TotalTransfered totalAmount={totalAmount} className="flex-col" />
     </div>
   );
 };
