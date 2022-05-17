@@ -25,6 +25,7 @@ function* getWithdrawals() {
     const res = yield call(getWithdrawalsSvc);
     yield put(actions.getWithdrawalsSuccess(res));
   } catch (error) {
+    yield snackActions.error(error.message);
     yield put(actions.activityError());
   }
 }
