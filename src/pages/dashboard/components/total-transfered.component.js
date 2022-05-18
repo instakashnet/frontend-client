@@ -1,9 +1,5 @@
 import { ArrowUpward, Cached } from "@material-ui/icons";
 import React from "react";
-// REACT ROUTER
-import { Link } from "react-router-dom";
-// ASSETS
-import KashIcon from "../../../assets/images/kash.svg";
 // COMPONENTS
 import Card from "../../../components/UI/card.component";
 // HELPERS
@@ -12,34 +8,12 @@ import { formatAmount } from "../../../shared/functions";
 import sharedClass from "../assets/css/sharedClasses.module.scss";
 import classes from "./modules/total-transfered.module.scss";
 
-
-const TotalTransfered = ({ totalAmount, kashAccount, className, type }) => {
+const TotalTransfered = ({ totalAmount, className, type }) => {
   let savings = 0;
   if (totalAmount >= 0) savings = totalAmount * 0.03;
 
   return (
     <div className={`flex flex-wrap md:flex-nowrap ${className || ""}`}>
-      <Card className={classes.KashCard}>
-        <img src={KashIcon} alt="kash" />
-        <h3>
-          {kashAccount && kashAccount.balance > 0 ? (
-            <span>
-              ¡Tienes <b>{kashAccount.balance}</b> KASH!
-            </span>
-          ) : (
-            "No posees ningún KASH"
-          )}
-        </h3>
-        {kashAccount.balance > 0 && (
-          <>
-            <p>¿Quieres cambiar o retirar?</p>
-            <div className="flex items-center justify-between mt-3">
-              <Link to="/currency-exchange">Cambiar</Link>
-              <Link to="/my-accounts">Retirar</Link>
-            </div>
-          </>
-        )}
-      </Card>
       <div className={`${sharedClass.DashboardCard} w-full ${type === "account" && "mx-0 md:mx-3"}`}>
         <h2>
           <Cached className="mr-2" /> Soles cambiados

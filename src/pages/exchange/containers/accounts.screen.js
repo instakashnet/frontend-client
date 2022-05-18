@@ -11,6 +11,7 @@ import { Button } from "../../../components/UI/button.component";
 import { Input } from "../../../components/UI/form-items/input.component";
 import { SelectComponent } from "../../../components/UI/form-items/select.component";
 import { MuiAlert } from "../../../components/UI/mui-alert.component";
+import { validateInterplaza } from "../../../shared/functions";
 // REDUX ACTIONS
 import { cancelExchangeInit, completeExchangeInit, getAccountsInit } from "../../../store/actions";
 // COMPONENT
@@ -121,8 +122,8 @@ const Accounts = ({ setModal }) => {
     if (!e.target.value) return;
 
     const chosenAccount = filteredAccounts.find((account) => account.id === e.target.value);
-    setInterplaza(!!Number(chosenAccount.interbank));
-    setAccountCCI(!!chosenAccount.cci);
+    if (chosenAccount?.bank.name.toLowerCase() === "interbank") setInterplaza(validateInterplaza(chosenAccount.account_number));
+    setAccountCCI(!!chosenAccount?.cci);
   };
 
   const kashUsedHandler = (e) => {
