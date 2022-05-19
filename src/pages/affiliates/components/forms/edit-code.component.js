@@ -20,7 +20,7 @@ const EditUserCode = () => {
 
   return (
     <div className="text-center">
-      <p>Puede editar su código de afiliado para que sea más facil de compartir y recordar.</p>
+      <p>Puedes editar tu código de afiliado para que sea más fácil de compartir y recordar.</p>
       <form onSubmit={formik.handleSubmit} className="mt-6 text-left max-w-sm mx-auto">
         <Input
           name="username"

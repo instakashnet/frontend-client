@@ -59,7 +59,7 @@ export const generateTokenSvc = async () => {
 }
 
 // REFRESH TOKEN
-export const refreskTokenSvc = async () => {
+export const refreshTokenSvc = async () => {
   try {
     const response = await authService.post("/auth/refresh");
     if (response.status >= 400) throw new Error(response.errors[0]);

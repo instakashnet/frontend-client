@@ -20,6 +20,7 @@ function* getRates() {
 
     yield put(actions.getRatesSuccess(rates));
   } catch (error) {
+    yield snackActions.error(error.message);
     yield put(actions.exchangeError());
   }
 }
