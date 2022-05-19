@@ -11,7 +11,7 @@ import * as types from "./types";
 function* getOrders({ limit, enabled }) {
   try {
     const res = yield call(getOrdersSvc, limit, enabled);
-    const orders = res.ordersByUser.reverse();
+    const orders = res?.ordersByUser?.reverse();
     const resData = { ...res, orders };
     yield put(actions.getOrdersSuccess(resData));
   } catch (error) {

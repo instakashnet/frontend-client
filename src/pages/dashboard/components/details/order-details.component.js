@@ -31,17 +31,13 @@ const OrderDetails = () => {
       onSubmit: (values) => dispatch(processCodeInit(values, details.id, "details", closeModalHandler)),
     });
 
+  // HANDLERS
   const closeModalHandler = () => dispatch(closeSliderModal());
   const cancelExchangeHandler = () => dispatch(cancelExchangeInit(details.id, "details", closeModalHandler));
 
   return (
     <div className={classes.Details}>
-      {detailsLoading ? (
-        <div className="flex items-center flex-col justify-center mt-12">
-          <HashLoader size={60} loading={detailsLoading} margin={4} color="#0d8284" />
-          <p className="mt-4">Cargando...</p>
-        </div>
-      ) : (
+      {!detailsLoading && details ? (
         <>
           <div className="flex items-center justify-between">
             <h4>Estado:</h4>
@@ -145,6 +141,11 @@ const OrderDetails = () => {
             </Button>
           )}
         </>
+      ) : (
+        <div className="flex items-center flex-col justify-center mt-12">
+          <HashLoader size={60} loading={detailsLoading} margin={4} color="#0d8284" />
+          <p className="mt-4">Cargando...</p>
+        </div>
       )}
     </div>
   );

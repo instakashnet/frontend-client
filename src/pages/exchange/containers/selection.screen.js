@@ -40,20 +40,22 @@ const Selection = () => {
             <Spinner />
           ) : (
             <>
-              {profiles.map((profile) => (
-                <SelectionCard
-                  onSelect={() => dispatch(selectProfileInit(profile.id))}
-                  onDisable={() => dispatch(disableProfileInit(profile.id))}
-                  key={profile.id}
-                  type={profile.type}
-                  sex={profile.identity_sex}
-                  name={profile.type === "natural" ? `${profile.first_name} ${profile.last_name}` : profile.razon_social}
-                />
-              ))}
+              {profiles && (
+                profiles.map((profile) => (
+                  <SelectionCard
+                    onSelect={() => dispatch(selectProfileInit(profile.id))}
+                    onDisable={() => dispatch(disableProfileInit(profile.id))}
+                    key={profile.id}
+                    type={profile.type}
+                    sex={profile.identity_sex}
+                    name={profile.type === "natural" ? `${profile.first_name} ${profile.last_name}` : profile.razon_social}
+                  />
+                ))
+              )}
             </>
           )}
         </div>
-        {profiles.length < 6 && (
+        {profiles?.length < 6 && (
           <>
             <div className="flex items-center justify-center my-3">
               <button onClick={addProfileHandler} className={classes.AddProfile}>
