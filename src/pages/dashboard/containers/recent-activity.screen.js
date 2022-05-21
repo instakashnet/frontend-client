@@ -14,7 +14,7 @@ export const RecentActivityScreen = ({ orders, withdrawals, openDetails }) => {
   const { orderAmounts, totalAmount } = useSelector((state) => state.Activity),
     { isMobile } = useDeviceDetect();
 
-  return orders.length <= 0 && withdrawals.length <= 0 ? (
+  return orders?.length <= 0 && withdrawals?.length <= 0 ? (
     <EmptyActivity />
   ) : (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
