@@ -75,7 +75,7 @@ export const UploadDocument = ({ docType }) => {
         </ul>
         {docType === "passport" ? (
           <label htmlFor="passport-photo" className={classes.PassportButton}>
-            <input type="file" name="passport-photo" id="passport-photo" accept=".jpg, .jpeg, .png" capture="environment" onChange={(e) => onTakePhoto(e, "front")} />
+            <input type="file" name="passport-photo" id="passport-photo" accept=".jpg, .jpeg" capture="environment" onChange={(e) => onTakePhoto(e, "front")} />
             {frontPhoto ? (
               <img src={frontPhoto} alt="foto pasaporte" />
             ) : (
@@ -88,7 +88,7 @@ export const UploadDocument = ({ docType }) => {
         ) : (
           <div className="flex items-center">
             <label htmlFor="front-photo" className={classes.PhotoButtonSquare}>
-              <input type="file" name="front-photo" id="front-photo" accept=".jpg, .jpeg, .png" capture="environment" onChange={(e) => onTakePhoto(e, "front")} />
+              <input type="file" name="front-photo" id="front-photo" accept=".jpg, .jpeg" capture="environment" onChange={(e) => onTakePhoto(e, "front")} />
               {frontPhoto ? (
                 <img src={frontPhoto} alt="foto frontal" />
               ) : (
@@ -99,7 +99,7 @@ export const UploadDocument = ({ docType }) => {
               )}
             </label>
             <label htmlFor="back-photo" className={classes.PhotoButtonSquare}>
-              <input type="file" name="back-photo" id="back-photo" accept=".jpg, .jpeg, .png" capture="environment" onChange={(e) => onTakePhoto(e, "back")} />
+              <input type="file" name="back-photo" id="back-photo" accept=".jpg, .jpeg" capture="environment" onChange={(e) => onTakePhoto(e, "back")} />
               {backPhoto ? (
                 <img src={backPhoto} alt="foto reversa" />
               ) : (
