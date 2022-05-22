@@ -31,3 +31,15 @@ export const AllowOnlyNumbers = (value) => {
 };
 
 export const replaceSpace = (text) => text.split(" ").join("-");
+
+export const encodeFileToBase64URL = (file) => {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+
+    reader.addEventListener("load", () => {
+      resolve(reader.result);
+    });
+
+    reader.readAsDataURL(file);
+  });
+};
