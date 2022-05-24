@@ -9,6 +9,7 @@
   width: fit-content;
   max-width: 33rem !important;
   margin: 5px !important;
+  overflow-x: hidden;
 
   h2 {
     color: $base-green;
@@ -52,6 +53,7 @@
   padding: 15px 15px 35px !important;
   font-size: $body;
   background-color: $light-color;
+  overflow-x: hidden;
 
   b {
     color: $base-green;

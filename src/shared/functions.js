@@ -43,3 +43,21 @@ export const encodeFileToBase64URL = (file) => {
     reader.readAsDataURL(file);
   });
 };
+
+// DYNAMIC IMPORTS HANDLER
+export const importsHandler = (lazyImport, attemptsLeft) => {
+  return new Promise((resolve, reject) => {
+    lazyImport()
+      .then(resolve)
+      .catch((error) => {
+        setTimeout(() => {
+          if (attemptsLeft === 1) {
+            reject(error);
+            return;
+          };
+
+          importsHandler(lazyImport, attemptsLeft - 1).then(resolve, reject);
+        }, 1500);
+      });
+  })
+};
