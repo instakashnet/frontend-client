@@ -23,17 +23,20 @@ import Error404 from "./pages/errors/containers/error-404.screen.js";
 // ROUTING
 import PrivateRoute from "./routing/PrivateRoute";
 import PublicRoute from "./routing/PublicRoute";
+// DYNAMIC IMPORTS HANDLER
+import { importsHandler } from "./shared/functions";
+// HISTORY
 import history from "./shared/history";
 // REDUX ACTIONS
 import { setIsClosedInit, setIsClosedSuccess } from "./store/actions";
 
 // PRIVATE
-const Welcome = lazy(() => import("./pages/welcome/containers/welcome.screen"));
-const Dashboard = lazy(() => import("./pages/dashboard/containers/dashboard.screen"));
-const Affiliates = lazy(() => import("./pages/affiliates/containers/affiliates.screen"));
-const MyProfile = lazy(() => import("./pages/profile/containers/profile.screen"));
-const Accounts = lazy(() => import("./pages/accounts/containers/accounts.screen"));
-const Exchange = lazy(() => import("./pages/exchange/containers/exchange.screen"));
+const Welcome = lazy(() => importsHandler(() => import("./pages/welcome/containers/welcome.screen"), 2));
+const Dashboard = lazy(() => importsHandler(() => import("./pages/dashboard/containers/dashboard.screen"), 2));
+const Affiliates = lazy(() => importsHandler(() => import("./pages/affiliates/containers/affiliates.screen"), 2));
+const MyProfile = lazy(() => importsHandler(() => import("./pages/profile/containers/profile.screen"), 2));
+const Accounts = lazy(() => importsHandler(() => import("./pages/accounts/containers/accounts.screen"), 2));
+const Exchange = lazy(() => importsHandler(() => import("./pages/exchange/containers/exchange.screen"), 2));
 
 ReactPixel.init(process.env.REACT_APP_FB_PIXEL_ID, {}, { autoConfig: true, debug: false });
 

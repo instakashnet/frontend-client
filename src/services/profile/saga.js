@@ -53,6 +53,7 @@ function* getProfiles() {
     const res = yield call(getProfilesSvc);
     yield put(actions.getProfilesSuccess(res.profiles, res.user));
   } catch (error) {
+    yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }
@@ -79,6 +80,7 @@ function* addProfile({ values }) {
     yield put(actions.getProfilesInit());
     yield put(closeModal());
   } catch (error) {
+    yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }
@@ -132,6 +134,7 @@ function* uploadDocument({ photos, docType }) {
     }
   } catch (error) {
     console.log(error);
+    yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }

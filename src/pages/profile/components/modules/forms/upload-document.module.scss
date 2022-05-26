@@ -6,6 +6,7 @@
 .UploadDocWrapper {
   text-align: center;
   padding: 0.2rem 0.5rem;
+  overflow: hidden;
 
   h3 {
     color: $base-green;
@@ -25,12 +26,19 @@
     }
   }
 
-  button p {
+  label p {
     font-size: math.div($button, 1.666);
+  }
+
+  input[type="file"] {
+    opacity: 0;
+    height: 0;
+    width: 0;
   }
 }
 
 .PassportButton {
+  cursor: pointer;
   width: 100%;
   height: 135px;
   background-color: #eee;
@@ -40,6 +48,8 @@
   align-items: center;
   justify-content: center;
   object-fit: contain;
+  margin-left: auto;
+  margin-right: auto;
 
   img {
     object-fit: contain;
@@ -49,6 +59,7 @@
 }
 
 .PhotoButtonSquare {
+  cursor: pointer;
   width: 140px;
   height: 115px;
   background-color: #eee;
@@ -57,6 +68,8 @@
   flex-flow: column;
   align-items: center;
   justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
 
   img {
     object-fit: contain;

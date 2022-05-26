@@ -27,7 +27,7 @@ export const Modal = ({ title, isAlert, alertType, strictClose, children }) => {
           </button>
         </div>
       )}
-      <DialogContent className={classes.ModalBody}>
+      <DialogContent classes={{ root: classes.ModalBody }}>
         {isAlert && <div className="flex justify-center mb-3">{InfoIcon}</div>}
         {children}
       </DialogContent>

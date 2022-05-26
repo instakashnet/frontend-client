@@ -2,7 +2,7 @@ import { all, call, fork, put, takeEvery, takeLatest } from "redux-saga/effects"
 // SWEET ALERT
 import Swal from "sweetalert2";
 // API SERVICES
-import { completeProfileSvc, loadUserSvc, logoutSvc, recoverPswdSvc, refreshVCodeSvc, refreskTokenSvc, resetPswdSvc, signinGoogleSvc, signinSvc, signupSvc, validateEmailSvc } from "../../api/services/auth.service";
+import { completeProfileSvc, loadUserSvc, logoutSvc, recoverPswdSvc, refreshTokenSvc, refreshVCodeSvc, resetPswdSvc, signinGoogleSvc, signinSvc, signupSvc, validateEmailSvc } from "../../api/services/auth.service";
 // SNACKBAR ALERT ACTIONS
 import { snackActions } from "../../hoc/snackbar-configurator.component";
 // HISTORY
@@ -16,7 +16,7 @@ import * as types from "./types";
 
 function* refreshToken() {
   try {
-    const token = yield call(refreskTokenSvc);
+    const token = yield call(refreshTokenSvc);
     yield put(actions.refreshTokenSuccess(token));
     yield call(loadUser);
   } catch (error) {
@@ -55,6 +55,7 @@ function* signinGoogle({ token }) {
     yield put(actions.signinSuccess(accessTkn));
     yield put(actions.loadUserInit());
   } catch (error) {
+    yield snackActions.error(error.message);
     yield put(actions.authError());
   }
 }
