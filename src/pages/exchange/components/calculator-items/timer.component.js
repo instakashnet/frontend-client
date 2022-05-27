@@ -34,8 +34,8 @@ const Timer = ({ onFinish, time }) => {
     );
   };
 
-  /* ENTREGA A LA FUNCIÓN DE LA PROP LOS REINICIADORES DEL RELOJ CUENTA ATRÁS
-  PARA QUE SE GESTIONEN APARTE */
+  /* Entrega a la función de la prop los reiniciadores del reloj cuenta atrás
+  para que se gestionen aparte */
   const completeHandler = () => {
     onFinish(() => {
       setCountdown(Date.now() + time);

@@ -5,7 +5,6 @@ export const formatAmount = (amount) => {
 export const convertRate = (amount) => Number(amount).toFixed(4);
 
 export const validateInterplaza = (accountNumber) => {
-  console.log({ accountNumber });
   const firstAccNumber = Number(accountNumber.substring(0, 1));
 
   let interplaza = false;
