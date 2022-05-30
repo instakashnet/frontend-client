@@ -99,7 +99,7 @@ const Accounts = ({ setModal }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (accounts.length) setFilteredAccounts(accounts.filter((account) => account.currency.id === order?.currencyReceivedId));
+    if (accounts?.length) setFilteredAccounts(accounts.filter((account) => account.currency.id === order?.currencyReceivedId));
   }, [accounts, order?.currencyReceivedId]);
 
   // HANDLERS

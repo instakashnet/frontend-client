@@ -51,7 +51,7 @@ const Accounts = () => {
     <Layout className="content-start">
       <div className={classes.Accounts}>
         <KashAccount account={kashAccount} openModal={openModalHandler} />
-        {accounts.length <= 0 ? (
+        {!accounts || accounts.length <= 0 ? (
           <NoAccounts onAddAccount={addAccountHandler} />
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-4">

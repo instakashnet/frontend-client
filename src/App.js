@@ -31,12 +31,12 @@ import history from "./shared/history";
 import { setIsClosedInit, setIsClosedSuccess } from "./store/actions";
 
 // PRIVATE
-const Welcome = lazy(() => importsHandler(() => import("./pages/welcome/containers/welcome.screen"), 2));
-const Dashboard = lazy(() => importsHandler(() => import("./pages/dashboard/containers/dashboard.screen"), 2));
-const Affiliates = lazy(() => importsHandler(() => import("./pages/affiliates/containers/affiliates.screen"), 2));
-const MyProfile = lazy(() => importsHandler(() => import("./pages/profile/containers/profile.screen"), 2));
-const Accounts = lazy(() => importsHandler(() => import("./pages/accounts/containers/accounts.screen"), 2));
-const Exchange = lazy(() => importsHandler(() => import("./pages/exchange/containers/exchange.screen"), 2));
+const Welcome = lazy(() => importsHandler(() => import("./pages/welcome/containers/welcome.screen")));
+const Dashboard = lazy(() => importsHandler(() => import("./pages/dashboard/containers/dashboard.screen")));
+const Affiliates = lazy(() => importsHandler(() => import("./pages/affiliates/containers/affiliates.screen")));
+const MyProfile = lazy(() => importsHandler(() => import("./pages/profile/containers/profile.screen")));
+const Accounts = lazy(() => importsHandler(() => import("./pages/accounts/containers/accounts.screen")));
+const Exchange = lazy(() => importsHandler(() => import("./pages/exchange/containers/exchange.screen")));
 
 ReactPixel.init(process.env.REACT_APP_FB_PIXEL_ID, {}, { autoConfig: true, debug: false });
 
