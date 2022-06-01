@@ -12,15 +12,15 @@ const Layout = ({ className, children }) => {
   const [sliderProps, setSliderProps] = useState({});
   const { SliderComponent } = useSelector((state) => state.Modal);
 
-  useEffect(() => {
-    if (SliderComponent) setSliderProps(SliderComponent().props);
-  }, [SliderComponent]);
-
   const { containerRef, isVisible } = useIntersectionElements({
     root: null,
     margin: 0,
     threshold: 0.21,
   });
+
+  useEffect(() => {
+    if (SliderComponent) setSliderProps(SliderComponent().props);
+  }, [SliderComponent]);
 
   return (
     <main className="main-app">

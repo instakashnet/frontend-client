@@ -25,26 +25,30 @@ export const UploadDocument = ({ docType }) => {
   // HANDLERS
   const onTakePhoto = async (e, side) => {
     try {
-      const fileTaken = e.target.files;
+      const fileTaken = e.target.files[0];
 
       if (navigator.mediaDevices) {
         const devices = await navigator.mediaDevices.enumerateDevices();
         const videoDevices = devices.filter((dvc) => dvc.kind === "videoinput");
         if (!videoDevices) return alert("Debes usar un dispositivo con cámara para poder validar tu identidad.");
-      }
+      };
 
-      if (fileTaken.length <= 0) return;
-      if (fileTaken[0].size >= 10485760) return alert("La imagen no debe pesar más de 10MB.");
+      if (e.target.files.length <= 0) return;
+      if (fileTaken.size >= 10485760) return alert("La imagen no debe pesar más de 10MB.");
 
-      const URLFilePreview = (window.URL || window.webkitURL).createObjectURL(fileTaken[0]),
-        dataImgBase64 = await encodeFileToBase64URL(fileTaken[0]);
+      const URLFilePreview = (window.URL || window.webkitURL).createObjectURL(fileTaken),
+        dataImgBase64 = await encodeFileToBase64URL(fileTaken),
+        acceptedFormats = e.target.accept.match(/.\w+/g),
+        correctFormat = acceptedFormats.join().includes(fileTaken.type.split("/")[1]);
+
+      if (!correctFormat) {
+        return alert(`Las imágenes de tu documento deben ser de tipo ${new Intl.ListFormat("es", { type: "disjunction" }).format(acceptedFormats)}`);
+      };
 
       if (side === "front") {
         setFrontPhoto(URLFilePreview);
         setFrontPhotoBase64(dataImgBase64);
-      };
-
-      if (side === "back") {
+      } else if (side === "back") {
         setBackPhoto(URLFilePreview);
         setBackPhotoBase64(dataImgBase64);
       };

@@ -40,18 +40,16 @@ const Selection = () => {
             <Spinner />
           ) : (
             <>
-              {profiles && (
-                profiles.map((profile) => (
-                  <SelectionCard
-                    onSelect={() => dispatch(selectProfileInit(profile.id))}
-                    onDisable={() => dispatch(disableProfileInit(profile.id))}
-                    key={profile.id}
-                    type={profile.type}
-                    sex={profile.identity_sex}
-                    name={profile.type === "natural" ? `${profile.first_name} ${profile.last_name}` : profile.razon_social}
-                  />
-                ))
-              )}
+              {profiles?.map((profile) => (
+                <SelectionCard
+                  onSelect={() => dispatch(selectProfileInit(profile.id))}
+                  onDisable={() => dispatch(disableProfileInit(profile.id))}
+                  key={profile.id}
+                  type={profile.type}
+                  sex={profile.identity_sex}
+                  name={profile.type === "natural" ? `${profile.first_name} ${profile.last_name}` : profile.razon_social}
+                />
+              ))}
             </>
           )}
         </div>
