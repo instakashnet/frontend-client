@@ -25,9 +25,9 @@ const Header = ({ containerRef }) => {
       <Logo className="lg:w-52 md:w-44 w-40 mr-4 hidden md:block" />
       <div className={classes.Hours}>
         <p>
-          Lunes a Domingo: 9am - 9pm
+          Lunes a Sábado: 9am - 8pm
           <br />
-          Feriados: Cerrados
+          Domingos y Feriados: Cerrados
         </p>
       </div>
       <div className="flex items-center ml-auto">
