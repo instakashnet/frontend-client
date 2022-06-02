@@ -30,7 +30,8 @@ export const setupAxiosInterceptors = (instance) => {
 
       if (status === 418 && !configRequest._retry && store.getState().Auth.isAuth) {
         configRequest._retry = true;
-        return store.dispatch(logoutSuccess());
+        store.dispatch(logoutSuccess());
+        return Promise.reject();
       } else {
         let message;
         let code;
