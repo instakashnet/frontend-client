@@ -53,7 +53,7 @@ const Selection = () => {
             </>
           )}
         </div>
-        {profiles?.length < 6 && (
+        {profiles?.length <= 3 && (
           <>
             <div className="flex items-center justify-center my-3">
               <button onClick={addProfileHandler} className={classes.AddProfile}>
