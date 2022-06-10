@@ -4,11 +4,11 @@ import { exchangeService } from "../axios";
 export const getSchedulesSvc = async () => {
   try {
     const response = await exchangeService.get("/schedules");
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -16,11 +16,11 @@ export const getSchedulesSvc = async () => {
 export const getRatesSvc = async () => {
   try {
     const response = await exchangeService.get("/rates");
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data[0];
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -28,11 +28,11 @@ export const getRatesSvc = async () => {
 export const getOrdersSvc = async (limit, enabled) => {
   try {
     const response = await exchangeService.get(`/order/user?enabled=${enabled}&limit=${limit}`);
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -40,11 +40,11 @@ export const getOrdersSvc = async (limit, enabled) => {
 export const getLastOrderSvc = async () => {
   try {
     const response = await exchangeService.get("/order/last-order");
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data["last_order"];
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -52,11 +52,11 @@ export const getLastOrderSvc = async () => {
 export const getWithdrawalsSvc = async () => {
   try {
     const response = await exchangeService.get("/withdrawals/user?limit=5");
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -64,11 +64,11 @@ export const getWithdrawalsSvc = async () => {
 export const getOrderAmountsSvc = async () => {
   try {
     const response = await exchangeService.get("/order/data/total-processed/user");
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -76,11 +76,11 @@ export const getOrderAmountsSvc = async () => {
 export const getTotalAmountSvc = async () => {
   try {
     const response = await exchangeService.get("/order/data/user");
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -88,11 +88,11 @@ export const getTotalAmountSvc = async () => {
 export const getOrderDetailsSvc = async (id, detailsType) => {
   try {
     const response = await exchangeService.get(`/order/detail/${id}?type=${detailsType}`);
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -100,11 +100,11 @@ export const getOrderDetailsSvc = async (id, detailsType) => {
 export const validateCouponSvc = async (couponName, profileType) => {
   try {
     const response = await exchangeService.get(`/coupons/${couponName}/${profileType}`);
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -112,9 +112,9 @@ export const validateCouponSvc = async (couponName, profileType) => {
 export const withdrawKashSvc = async (values) => {
   try {
     const response = await exchangeService.post("/withdrawals/user", values);
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -122,11 +122,11 @@ export const withdrawKashSvc = async (values) => {
 export const createExchangeSvc = async (exchangeValues) => {
   try {
     const response = await exchangeService.post("/order/step-2", exchangeValues);
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -134,11 +134,11 @@ export const createExchangeSvc = async (exchangeValues) => {
 export const completeExchangeSvc = async (orderId, exchangeValues) => {
   try {
     const response = await exchangeService.put(`/order/step-3/${orderId}`, exchangeValues);
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -146,9 +146,9 @@ export const completeExchangeSvc = async (orderId, exchangeValues) => {
 export const processCodeSvc = async (orderId, processValue) => {
   try {
     const response = await exchangeService.put(`/order/step-4/${orderId}`, processValue);
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -156,8 +156,8 @@ export const processCodeSvc = async (orderId, processValue) => {
 export const cancelExchangeSvc = async (URL) => {
   try {
     const response = await exchangeService.delete(URL);
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
