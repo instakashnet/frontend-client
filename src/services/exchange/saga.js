@@ -99,7 +99,7 @@ function* completeExchange({ values, orderId }) {
       yield call(
         [Swal, "fire"],
         "Ha ocurrido un error",
-        `En este momento no podemos crear su pedido hacia el banco que está solicitando. Por favor intente nuevamente con un monto menor. Si el problema persiste contáctese con atención al cliente.`,
+        "En este momento no podemos crear su pedido hacia el banco que está solicitando. Por favor, intente nuevamente con un monto menor. Si el problema persiste contáctese con atención al cliente.",
         "error"
       );
     } else if (error.message) yield snackActions.error(error.message);
@@ -171,7 +171,7 @@ function* processCode({ values, orderId, processType, closeModal }) {
   } catch (error) {
     if (error.message) yield snackActions.error(error.message);
     yield put(actions.exchangeError());
-    if (error.data && error.data.code === 4005 && processType !== "details") yield call([history, "push"], "/currency-exchange");
+    if (error.code === 4005 && processType !== "details") yield call([history, "push"], "/currency-exchange");
   }
 }
 

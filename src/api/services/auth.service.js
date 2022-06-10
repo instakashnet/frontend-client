@@ -4,11 +4,11 @@ import { authService } from "../axios";
 export const loadUserSvc = async () => {
   try {
     const response = await authService.get("/users/session");
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data.user;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -16,9 +16,9 @@ export const loadUserSvc = async () => {
 export const refreshVCodeSvc = async () => {
   try {
     const response = await authService.get("/auth/refresh-code");
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -26,11 +26,11 @@ export const refreshVCodeSvc = async () => {
 export const getAffiliatesSvc = async () => {
   try {
     const response = await authService.get("/users/affiliates");
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data.affiliates;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -38,11 +38,11 @@ export const getAffiliatesSvc = async () => {
 export const getProfilesSvc = async () => {
   try {
     const response = await authService.get("/users/profiles");
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -50,11 +50,11 @@ export const getProfilesSvc = async () => {
 export const generateTokenSvc = async () => {
   try {
     const response = await authService.get("/users/generate-token");
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data.accessToken;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 }
 
@@ -62,11 +62,11 @@ export const generateTokenSvc = async () => {
 export const refreshTokenSvc = async () => {
   try {
     const response = await authService.post("/auth/refresh");
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data.accessToken;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -74,11 +74,11 @@ export const refreshTokenSvc = async () => {
 export const signinSvc = async (values) => {
   try {
     const response = await authService.post("/auth/signin", values);
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data.accessToken;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 }
 
@@ -86,11 +86,11 @@ export const signinSvc = async (values) => {
 export const signinGoogleSvc = async (token) => {
   try {
     const response = await authService.post("/auth/google", { token });
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data.accessToken;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -98,11 +98,11 @@ export const signinGoogleSvc = async (token) => {
 export const signupSvc = async (values) => {
   try {
     const response = await authService.post("/auth/signup", values);
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data.accessToken;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -110,9 +110,9 @@ export const signupSvc = async (values) => {
 export const completeProfileSvc = async (values) => {
   try {
     const response = await authService.post("/users/profiles", values);
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 }
 
@@ -120,11 +120,11 @@ export const completeProfileSvc = async (values) => {
 export const validateEmailSvc = async (validateValues) => {
   try {
     const response = await authService.post("/auth/verify-code", validateValues);
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data.accessToken;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -132,11 +132,11 @@ export const validateEmailSvc = async (validateValues) => {
 export const recoverPswdSvc = async (values) => {
   try {
     const response = await authService.post("/users/recover-password", values);
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     return response.data.accessToken;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -144,9 +144,9 @@ export const recoverPswdSvc = async (values) => {
 export const resetPswdSvc = async (values) => {
   try {
     const response = await authService.post("/users/reset-password", values);
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -154,9 +154,9 @@ export const resetPswdSvc = async (values) => {
 export const logoutSvc = async () => {
   try {
     const response = await authService.post("/auth/logout");
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -164,9 +164,9 @@ export const logoutSvc = async () => {
 export const editBasicInfoSvc = async (URL, values) => {
   try {
     const response = await authService.put(URL, values);
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -174,9 +174,9 @@ export const editBasicInfoSvc = async (URL, values) => {
 export const editAddInfoSvc = async (values) => {
   try {
     const response = await authService.put("/users/profiles", values);
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -188,11 +188,11 @@ export const userCodeSvc = async (values) => {
       ? response = await authService.put("/users/username", values)
       : response = await authService.get("/users/username");
 
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
     if (!values) return response.data.username;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -200,8 +200,8 @@ export const userCodeSvc = async (values) => {
 export const deleteProfileSvc = async (id) => {
   try {
     const response = await authService.delete(`/users/active/${id}`, { data: { active: false } });
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 }
