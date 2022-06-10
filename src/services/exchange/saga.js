@@ -12,7 +12,6 @@ import { getOrdersInit } from "../../store/actions";
 import * as actions from "./actions";
 import * as types from "./types";
 
-
 function* getRates() {
   try {
     const res = yield call(getRatesSvc);
@@ -99,7 +98,7 @@ function* completeExchange({ values, orderId }) {
       yield call(
         [Swal, "fire"],
         "Ha ocurrido un error",
-        "En este momento no podemos crear su pedido hacia el banco que está solicitando. Por favor, intente nuevamente con un monto menor. Si el problema persiste contáctese con atención al cliente.",
+        "En este momento no podemos crear su pedido hacia el banco que está solicitando. Por favor intente más tarde o contáctanos.",
         "error"
       );
     } else if (error.message) yield snackActions.error(error.message);
@@ -141,7 +140,6 @@ function* cancelExchange({ orderId, status, necessaryConfirm, closeModal }) {
       if (result.isConfirmed) yield Swal.fire("Exitoso", "Su solicitud de cambio fue cancelada.", "success");
 
       yield put(actions.cancelExchangeSuccess());
-
     } else yield put(actions.exchangeError());
   } catch (error) {
     if (error.message) yield snackActions.error(error.message);
