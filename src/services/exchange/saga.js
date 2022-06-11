@@ -97,8 +97,8 @@ function* completeExchange({ values, orderId }) {
     if (error.code === "C4006") {
       yield call(
         [Swal, "fire"],
-        "Ha ocurrido un error",
-        "En este momento no podemos crear su pedido hacia el banco que está solicitando. Por favor intente más tarde o contáctanos.",
+        "Lo sentimos",
+        "En este momento no podemos crear tu pedido hacia el banco que estás solicitando. Por favor intenta más tarde o contáctanos.",
         "error"
       );
     } else if (error.message) yield snackActions.error(error.message);
