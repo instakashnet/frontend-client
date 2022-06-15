@@ -102,7 +102,7 @@ const Calculator = ({ profile, setModal, user }) => {
         {!ratesLoading && <Rates actualRates={actualRates} coupon={coupon} couponRates={couponRates} currency={values.currency_sent_id} />}
         <div className={classes.Timer}>
           <p className={classes.TimerP}>Se actualizará el tipo de cambio en:</p>
-          <Timer onFinish={timeFinishHandler} time={300000} />
+          <Timer onFinish={timeFinishHandler} time={180000} />
         </div>
         <CalculatorForm
           isCouponMin={isCouponMin}
