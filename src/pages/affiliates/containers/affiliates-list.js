@@ -1,6 +1,5 @@
 import { _ } from "gridjs-react";
 import moment from "moment";
-import React from "react";
 // ASSETS
 import KashIcon from "../../../assets/images/kash.svg";
 // COMPONENT
@@ -65,7 +64,7 @@ export const AffiliatesList = ({ affiliates, isLoading, kashBalance, ...rest }) 
 
   const totalAffiliates = affiliates.length;
   const affiliatesCompleted = totalAffiliates > 0 ? affiliates.filter((a) => a.orderSuccess).length : 0;
-  const affiliatesCompletedPercentage = totalAffiliates > 0 ? (affiliatesCompleted / totalAffiliates) * 100 : 100;
+  const affiliatesCompletedPercentage = totalAffiliates > 0 ? Math.round((affiliatesCompleted / totalAffiliates) * 100) : 100;
   const affiliatesNotCompleted = totalAffiliates > 0 ? affiliates.filter((a) => !a.orderSuccess).length : 0;
 
   return (
