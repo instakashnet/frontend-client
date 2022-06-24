@@ -1,6 +1,6 @@
 // FORMIK
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 // REACT ROUTER
@@ -12,7 +12,7 @@ import { Input } from "../../../components/UI/form-items/input.component";
 import Logo from "../../../components/UI/logo.component";
 import { Modal } from "../../../components/UI/modals/modal.component";
 // REDUX ACTIONS
-import { closeModal, signinGoogle, signinInit } from "../../../store/actions";
+import { closeModal, openModal, signinGoogle, signinInit } from "../../../store/actions";
 // COMPONENTS
 import Background from "../components/layout/background.component";
 import { GoogleButton } from "../components/UI/google-button.component";
@@ -50,12 +50,12 @@ const Signin = () => {
     dispatch(signinGoogle(res.accessToken));
   };
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     dispatch(openModal());
-  //   }, 600);
-  //   return () => clearTimeout(timeout);
-  // }, [dispatch]);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      dispatch(openModal());
+    }, 600);
+    return () => clearTimeout(timeout);
+  }, [dispatch]);
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 h-full md:h-screen">
@@ -119,8 +119,9 @@ export const Information = () => {
   return (
     <>
       <p className="mb-3 text-center">
-        Agradecidos siempre por la confianza, queremos informarle que en estos momentos la plataforma para empresas de Interbank presenta inconvenientes para procesar las
-        transferencias, por tal motivo en este momento no estraremos realizando operaciones hacia este banco.
+        Agradecidos siempre por la confianza. Queremos informarle que{" "}
+        <b>toda transferencia interbancaria realizada el 24/06 desde las 11:30AM será procesada a partir del Lunes 27/6.</b> Esto debido a mantenimientos que estarán realizando los
+        bancos.
       </p>
       <p className="text-center my-4 font-bold">Agradecemos su comprensión.</p>
       <Button onClick={() => dispatch(closeModal())} className="action-button">
