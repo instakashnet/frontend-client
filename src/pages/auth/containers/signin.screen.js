@@ -120,7 +120,7 @@ export const Information = () => {
     <>
       <p className="mb-3 text-center">
         Agradecidos siempre por la confianza. Queremos informarle que{" "}
-        <b>debido a un mantenimiento programado por los bancos, todas las operaciones ingresadas hoy 25/06 desde las 2:30AM serán procesadas a partir del Lunes 27/6.</b>
+        <b>debido a un mantenimiento programado por los bancos, todas las operaciones ingresadas hoy 25/06 desde las 14:30 (2:30PM) serán procesadas a partir del Lunes 27/6.</b>
       </p>
       <p className="text-center my-4 font-bold">Agradecemos su comprensión.</p>
       <Button onClick={() => dispatch(closeModal())} className="action-button">
