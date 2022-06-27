@@ -19,7 +19,7 @@ function* getRates() {
 
     yield put(actions.getRatesSuccess(rates));
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.exchangeError());
   }
 }
@@ -42,7 +42,7 @@ function* validateCoupon({ couponName, profileType, clearCoupon }) {
     yield call(clearCoupon, "");
   } catch (error) {
     if (!couponName.includes("NUEVOREFERIDO") || (couponName.includes("NUEVOREFERIDO") && profileType === "juridica")) {
-      if (error.message) yield snackActions.error(error.message);
+      if (error?.message) yield snackActions.error(error.message);
     }
     yield put(actions.exchangeError());
   }
@@ -61,7 +61,7 @@ function* createExchange({ values, amountSent, profile }) {
     yield put(actions.createExchangeSuccess(res));
     yield call([history, "push"], "/currency-exchange/step-2");
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.exchangeError());
   }
 }
@@ -101,7 +101,7 @@ function* completeExchange({ values, orderId }) {
         "En este momento no podemos crear tu pedido hacia el banco que estás solicitando. Por favor intenta más tarde o contáctanos.",
         "error"
       );
-    } else if (error.message) yield snackActions.error(error.message);
+    } else if (error?.message) yield snackActions.error(error.message);
 
     yield put(actions.exchangeError());
   }
@@ -142,7 +142,7 @@ function* cancelExchange({ orderId, status, necessaryConfirm, closeModal }) {
       yield put(actions.cancelExchangeSuccess());
     } else yield put(actions.exchangeError());
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.exchangeError());
   }
 }
@@ -167,7 +167,7 @@ function* processCode({ values, orderId, processType, closeModal }) {
     });
     yield put(actions.processCodeSuccess());
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.exchangeError());
     if (error.code === 4005 && processType !== "details") yield call([history, "push"], "/currency-exchange");
   }
