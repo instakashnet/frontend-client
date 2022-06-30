@@ -53,7 +53,7 @@ function* getProfiles() {
     const res = yield call(getProfilesSvc);
     yield put(actions.getProfilesSuccess(res.profiles, res.user));
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }
@@ -80,7 +80,7 @@ function* addProfile({ values }) {
     yield put(actions.getProfilesInit());
     yield put(closeModal());
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }
@@ -105,7 +105,7 @@ function* editAdditionalInfo({ values, setSubmitted }) {
       yield call(setSubmitted, false);
     }
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }
@@ -134,7 +134,7 @@ function* uploadDocument({ photos, docType }) {
     }
   } catch (error) {
     console.log(error);
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }
@@ -147,7 +147,7 @@ function* editUserCode({ values }) {
     yield snackActions.success("Tu código ha sido editado correctamente.");
     yield put(closeModal());
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }
@@ -171,7 +171,7 @@ function* disableProfile({ id }) {
       yield Swal.fire("Perfil eliminado", "El perfil ha sido eliminado correctamente. Deberá seleccionar un nuevo perfil.", "success");
     } else yield put(actions.profilesError());
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }
@@ -195,7 +195,7 @@ function* editBasicInfo({ values, editType, setSubmitted }) {
       yield call(setSubmitted, false);
     }
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }

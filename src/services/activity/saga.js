@@ -15,7 +15,7 @@ function* getOrders({ limit, enabled }) {
     const resData = { ...res, orders };
     yield put(actions.getOrdersSuccess(resData));
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.activityError());
   }
 }
@@ -25,7 +25,7 @@ function* getWithdrawals() {
     const res = yield call(getWithdrawalsSvc);
     yield put(actions.getWithdrawalsSuccess(res));
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.activityError());
   }
 }
@@ -53,7 +53,7 @@ function* getOrderDetails({ id, detailsType }) {
     const res = yield call(getOrderDetailsSvc, id, detailsType);
     yield put(actions.getOrderDetailsSuccess(res));
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.activityError());
   }
 }
