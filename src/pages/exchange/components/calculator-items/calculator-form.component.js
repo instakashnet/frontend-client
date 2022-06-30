@@ -1,9 +1,12 @@
 import cls from "classnames";
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
+// REDUX ACTIONS
 import { deleteCoupon, validateCouponInit } from "../../../../store/actions";
+// CLASSES
 import classes from "../../containers/modules/calculator.screen.module.scss";
 import sharedClass from "../../containers/modules/sharedClasses.module.scss";
+// COMPONENTS
 import CouponInput from "./coupon-input.component";
 import Input from "./currency-input.component";
 import Swipe from "./swipe.component";
@@ -87,7 +90,11 @@ export const CalculatorForm = ({
         onSendCoupon={sendCouponHandler}
         onDeleteCoupon={deleteCouponHandler}
       />
-      {values.amount_received < 1 && <p className={`error-msg ${classes.MinAmount}`}>El monto mínimo a recibir es de $ 1.00</p>}
+      {(values.type === "buy" && values.amount_sent < 40) ? (
+        <p className={`error-msg ${classes.MinAmount}`}>El monto mínimo a enviar es de $ 40.00</p>
+      ) : (values.type === "sell" && values.amount_received < 40) ? (
+        <p className={`error-msg ${classes.MinAmount}`}>El monto mínimo a recibir es de $ 40.00</p>
+      ) : null}
     </form>
   );
 };

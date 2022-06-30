@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 // COMPONENTS
 import { InlineInput } from "../../../../components/UI/form-items/inline-input.component";
 // HELPERS
@@ -17,7 +17,7 @@ const Coupon = ({ coupon, couponName, setCouponName, couponInputFocused, couponF
         name="couponName"
         value={couponName}
         onClick={() => onSendCoupon(couponName)}
-        disabled={isProcessing || isLoading || !couponName}
+        disabled={isProcessing || isLoading || !couponName || couponName.length < 6}
         onChange={onCouponChange}
         label="Agrega tu cupón de descuento"
         buttonLabel="Agregar"
@@ -28,7 +28,7 @@ const Coupon = ({ coupon, couponName, setCouponName, couponInputFocused, couponF
       />
       {!couponName && couponInputFocused
         ? <p className={`error-msg ${classes.InlineInputDesc}`}>Aún no has agregado tu cupón</p>
-        : <p className={classes.InlineInputDesc}>Al agregar tu cupón de descuento obtendrás una mejor tasa.</p>}
+        : <p className={classes.InlineInputDesc}>Al agregar tu cupón de descuento obtendrás una mejor tasa</p>}
     </>
   ) : (
     <>
@@ -49,4 +49,4 @@ const Coupon = ({ coupon, couponName, setCouponName, couponInputFocused, couponF
   );
 };
 
-export default React.memo(Coupon);
+export default memo(Coupon);
