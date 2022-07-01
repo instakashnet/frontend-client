@@ -1,6 +1,6 @@
 import { CreditCard } from "@material-ui/icons";
 import _ from "lodash";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 // COMPONENTS

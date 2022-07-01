@@ -1,5 +1,4 @@
 import { ArrowDropDown } from "@material-ui/icons";
-import React from "react";
 
 // COMPONENTS
 import Accordion from "../../../components/UI/accordion.component";
