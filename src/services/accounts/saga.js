@@ -31,7 +31,7 @@ function* getAccountsSaga({ accType }) {
     yield put(actions.getCurrencies(currencies));
     yield put(actions.getAccountsSuccess(accounts));
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.accountsError());
   }
 }
@@ -47,7 +47,7 @@ function* addAccount({ values, addType }) {
     yield snackActions.success("Cuenta agregada correctamente.");
     yield put(closeModal());
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.accountsError());
   }
 }
@@ -64,7 +64,7 @@ function* editAccount({ id, values, setEdit }) {
     yield snackActions.success("Cuenta editada correctamente.");
     yield call(setEdit, false);
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.accountsError());
   }
 }
@@ -78,7 +78,7 @@ function* withdrawKash({ values }) {
     yield put(closeModal());
     yield call([history, "push"], "/dashboard/recent");
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.accountsError());
   }
 }
@@ -106,7 +106,7 @@ function* deleteAccount({ account }) {
       yield put(closeModal());
     } else yield put(actions.accountsError());
   } catch (error) {
-    if (error.message) yield snackActions.error(error.message);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.accountsError());
   }
 }

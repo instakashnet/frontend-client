@@ -1,13 +1,17 @@
 import { useFormik } from "formik";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+// COMPONENTS
 import { Button } from "../../../components/UI/button.component";
 import Card from "../../../components/UI/card.component";
+// REDUX ACTIONS
 import { closeModal, createExchangeInit, deleteCoupon, getLastOrderInit, getRatesInit, openModal, validateCouponInit } from "../../../store/actions";
+// COMPONENTS
 import { CalculatorForm } from "../components/calculator-items/calculator-form.component";
 import Rates from "../components/calculator-items/rates.component";
 import Timer from "../components/calculator-items/timer.component";
 import UpdateRates from "../components/rates-modal.component";
+// CLASSES
 import classes from "./modules/calculator.screen.module.scss";
 
 const Calculator = ({ profile, setModal, user }) => {
@@ -102,7 +106,7 @@ const Calculator = ({ profile, setModal, user }) => {
         {!ratesLoading && <Rates actualRates={actualRates} coupon={coupon} couponRates={couponRates} currency={values.currency_sent_id} />}
         <div className={classes.Timer}>
           <p className={classes.TimerP}>Se actualizará el tipo de cambio en:</p>
-          <Timer onFinish={timeFinishHandler} time={300000} />
+          <Timer onFinish={timeFinishHandler} time={180000} />
         </div>
         <CalculatorForm
           isCouponMin={isCouponMin}
@@ -119,7 +123,7 @@ const Calculator = ({ profile, setModal, user }) => {
           disabled={disabled}
         />
       </Card>
-      <Button type="submit" form="calculator-form" disabled={values.amount_received < 1 || disabled} className={`action-button mt-2 ld-over ${isProcessing ? "running" : ""}`}>
+      <Button type="submit" form="calculator-form" disabled={values.amount_received < 40 || values.amount_sent < 40 || disabled} className={`action-button mt-2 ld-over ${isProcessing ? "running" : ""}`}>
         <span className="ld ld-ring ld-spin" />
         Comenzar cambio
       </Button>
