@@ -1,9 +1,9 @@
-import React from "react";
 // COMPONENT
 import { Button } from "../../../components/UI/button.component";
 // HOOK
 import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
 // ASSETS & CLASSES
+import MoneyIcon from "@material-ui/icons/Money";
 import InfoImg from "../assets/images/exchange-user.png";
 import Arrows from "../assets/images/icons/arrows.svg";
 import Dollar from "../assets/images/icons/dollar.svg";
@@ -33,6 +33,10 @@ const Information = ({ onClose }) => {
           <div className={classes.InfoCard}>
             <img src={Dollar} alt="dollar sign" />
             <p>Importes mayores de $10,000 pueden tardar más de lo usual.</p>
+          </div>
+          <div className={classes.InfoCard}>
+            <MoneyIcon />
+            <p>Nuestro monto mínimo de cambio establecido es de $ 40.00</p>
           </div>
         </div>
       </div>

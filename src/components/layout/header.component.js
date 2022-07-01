@@ -1,10 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+// REDUX ACTIONS
 import { openSliderModal, toggleNav } from "../../store/actions";
+// COMPONENTS
 import Logo from "../UI/logo.component";
 import ProfileInfo from "../UI/profile-info.component";
 import Whatsapp from "../UI/whatsapp.component";
+// CLASSES
 import classes from "./modules/header.module.scss";
+// COMPONENTS
 import ProfileNavigation from "./navigation/profile-navigation.component";
 
 const Header = ({ containerRef }) => {
@@ -25,7 +29,7 @@ const Header = ({ containerRef }) => {
       <Logo className="lg:w-52 md:w-44 w-40 mr-4 hidden md:block" />
       <div className={classes.Hours}>
         <p>
-          Lunes a Sábado: 9am - 8pm
+          Lunes a Sábado: 9am - 7pm
           <br />
           Domingos y Feriados: Cerrados
         </p>
