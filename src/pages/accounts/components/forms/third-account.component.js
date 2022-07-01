@@ -1,7 +1,7 @@
 import { FormLabel, RadioGroup } from "@material-ui/core";
 // FORMIK
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 // REACT REDUX
 import { useDispatch, useSelector } from "react-redux";
 // COMPONENTS
@@ -20,7 +20,7 @@ import { addThirdPartyAccountSchema } from "../../helpers/validations";
 // COMPONENTS
 import classes from "../modules/forms/add-account.module.scss";
 
-export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, value, index, ...rest }) => {
+export const ThirdPartyAccount = ({ banks, currencies, documents, accountTypes, addType, value, index, ...rest }) => {
   const [selectedBank, setSelectedBank] = useState(null);
   const dispatch = useDispatch();
   const formik = useFormik({
@@ -56,14 +56,6 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
       setSelectedBank(bankSelected);
     }
   }, [bankId, banks]);
-
-  const documentOptions = [
-    { value: "DNI", label: "DNI" },
-    { value: "CE", label: "CE" },
-    { value: "PTP", label: "PTP" },
-    { value: "pasaporte", label: "Pasaporte" },
-    { value: "RUC", label: "RUC" },
-  ];
 
   const onDocumentChangeHandler = (e) => (AllowOnlyNumbers(e.target.value) ? formik.setFieldValue("documentIdentity", e.target.value) : null);
 
@@ -114,7 +106,7 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
               label="Tipo doc."
               value={formik.values.documentType}
               onChange={formik.handleChange}
-              options={documentOptions}
+              options={documents}
               disabled={formik.values.thirdPartyAccType === "juridica"}
             />
           </div>
