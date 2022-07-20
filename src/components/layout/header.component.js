@@ -35,9 +35,7 @@ const Header = ({ containerRef }) => {
         </p>
       </div>
       <div className="flex items-center ml-auto">
-        <a href="https://wa.link/05keps" target="_blank" rel="noopener noreferrer">
-          <Whatsapp />
-        </a>
+        <Whatsapp />
         <ProfileInfo user={user} openNav={openNav} />
       </div>
     </div>
