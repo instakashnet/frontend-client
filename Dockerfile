@@ -1,5 +1,5 @@
 ## Build Stage
-FROM 160743850946.dkr.ecr.us-east-2.amazonaws.com/docker-library:node14-alpine-arm64 as build
+FROM 160743850946.dkr.ecr.us-east-2.amazonaws.com/docker-library:node14-alpine as build
 ## Docker argunments for build:
 ARG REACT_APP_STAGE="dev"
 ARG REACT_APP_AWS_ACCESS_KEY="AWS_KEY"
@@ -26,7 +26,7 @@ COPY package.json yarn.lock ./
 RUN yarn
 COPY ./ ./
 RUN yarn build:$REACT_APP_STAGE
-FROM 160743850946.dkr.ecr.us-east-2.amazonaws.com/docker-library:nginx-alpine-arm64
+FROM 160743850946.dkr.ecr.us-east-2.amazonaws.com/docker-library:nginx-alpine
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
 COPY container /
 RUN \
