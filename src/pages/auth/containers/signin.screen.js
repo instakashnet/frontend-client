@@ -12,7 +12,7 @@ import { Input } from "../../../components/UI/form-items/input.component";
 import Logo from "../../../components/UI/logo.component";
 import { Modal } from "../../../components/UI/modals/modal.component";
 // REDUX ACTIONS
-import { closeModal, signinGoogle, signinInit } from "../../../store/actions";
+import { closeModal, openModal, signinGoogle, signinInit } from "../../../store/actions";
 // COMPONENTS
 import Background from "../components/layout/background.component";
 import { GoogleButton } from "../components/UI/google-button.component";
@@ -50,12 +50,12 @@ const Signin = () => {
     dispatch(signinGoogle(res.accessToken));
   };
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     dispatch(openModal());
-  //   }, 600);
-  //   return () => clearTimeout(timeout);
-  // }, [dispatch]);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      dispatch(openModal());
+    }, 600);
+    return () => clearTimeout(timeout);
+  }, [dispatch]);
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 h-full md:h-screen">
@@ -120,7 +120,8 @@ export const Information = () => {
     <>
       <p className="mb-3 text-center">
         Agradecidos siempre por la confianza. Queremos informarle que{" "}
-        <b>debido a un mantenimiento programado por los bancos, todas las operaciones ingresadas hoy 25/06 desde las 14:30 (2:30PM) serán procesadas a partir del Lunes 27/6.</b>
+        <b>debido a un mantenimiento programado en nuestros servidores, el día de hoy estaremos operando hasta las 14:00 (2:00PM).</b> Toda operación ingresada despues de esta hora
+        será atendida <b>a partir de mañana Miercoles 31 de Agosto.</b>
       </p>
       <p className="text-center my-4 font-bold">Agradecemos su comprensión.</p>
       <Button onClick={() => dispatch(closeModal())} className="action-button">
