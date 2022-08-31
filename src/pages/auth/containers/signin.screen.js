@@ -119,9 +119,8 @@ export const Information = () => {
   return (
     <>
       <p className="mb-3 text-center">
-        Agradecidos siempre por la confianza. Queremos informarle que{" "}
-        <b>debido a un mantenimiento programado en nuestros servidores, el día de hoy estaremos operando hasta las 14:00 (2:00PM).</b> Toda operación ingresada despues de esta hora
-        será atendida <b>a partir de mañana Miercoles 31 de Agosto.</b>
+        Agradecidos siempre por la confianza. Queremos informarle que en este momento la plataforma para empresas de <b>BCP está presentando problemas</b>, por tal motivo no
+        podremos recibir ni realizar pedidos hacia este banco.
       </p>
       <p className="text-center my-4 font-bold">Agradecemos su comprensión.</p>
       <Button onClick={() => dispatch(closeModal())} className="action-button">
