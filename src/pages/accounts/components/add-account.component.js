@@ -1,5 +1,5 @@
-import { Tab,Tabs } from "@material-ui/core";
-import React, { useState } from "react";
+import { Tab, Tabs } from "@material-ui/core";
+import { useState } from "react";
 // REDUX
 import { useSelector } from "react-redux";
 
@@ -33,6 +33,13 @@ export const AddAccount = ({ order, addType }) => {
   const currencyOptions = order
     ? currencies.filter((currency) => currency.id === order.currencyReceivedId).map((currency) => ({ label: `${currency.name} (${currency.Symbol})`, value: currency.id }))
     : currencies.map((currency) => ({ label: `${currency.name} (${currency.Symbol})`, value: currency.id }));
+  const documentOptions = [
+    { value: "DNI", label: "DNI" },
+    { value: "CE", label: "CE" },
+    { value: "PTP", label: "PTP" },
+    { value: "pasaporte", label: "Pasaporte" },
+    { value: "RUC", label: "RUC" },
+  ];
 
   const handleChange = (_, newValue) => setValue(newValue);
 
@@ -42,8 +49,8 @@ export const AddAccount = ({ order, addType }) => {
         <Tab label="Cuenta personal" {...a11yProps(0)} classes={{ root: classes.AddAccountTab }} />
         <Tab label="Cuenta terceros" {...a11yProps(1)} classes={{ root: classes.AddAccountTab }} />
       </Tabs>
-      <PersonalAccount addType={addType} banks={bankOptions} accountTypes={accountTypeOptions} currencies={currencyOptions} value={value} index={0} />
-      <ThirdPartyAccount addType={addType} banks={bankOptions} accountTypes={accountTypeOptions} currencies={currencyOptions} value={value} index={1} />
+      <PersonalAccount addType={addType} banks={bankOptions} accountTypes={accountTypeOptions} currencies={currencyOptions} documents={documentOptions} value={value} index={0} />
+      <ThirdPartyAccount addType={addType} banks={bankOptions} accountTypes={accountTypeOptions} currencies={currencyOptions} documents={documentOptions} value={value} index={1} />
     </>
   );
 };
