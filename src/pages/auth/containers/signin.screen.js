@@ -12,7 +12,7 @@ import { Input } from "../../../components/UI/form-items/input.component";
 import Logo from "../../../components/UI/logo.component";
 import { Modal } from "../../../components/UI/modals/modal.component";
 // REDUX ACTIONS
-import { closeModal, signinGoogle, signinInit } from "../../../store/actions";
+import { closeModal, openModal, signinGoogle, signinInit } from "../../../store/actions";
 // COMPONENTS
 import Background from "../components/layout/background.component";
 import { GoogleButton } from "../components/UI/google-button.component";
@@ -50,12 +50,12 @@ const Signin = () => {
     dispatch(signinGoogle(res.accessToken));
   };
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     dispatch(openModal());
-  //   }, 600);
-  //   return () => clearTimeout(timeout);
-  // }, [dispatch]);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      dispatch(openModal());
+    }, 600);
+    return () => clearTimeout(timeout);
+  }, [dispatch]);
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 h-full md:h-screen">
@@ -118,11 +118,18 @@ export const Information = () => {
   const dispatch = useDispatch();
   return (
     <>
-      <p className="mb-3 text-center">
-        Agradecidos siempre por la confianza. Queremos informarle que en este momento la plataforma para empresas de <b>BCP está presentando problemas en su plataforma</b>, por tal
-        motivo sus operaciones hacia este banco <b>no podrán ser realizadas por el momento</b>.
+      <p className="text-center">
+        Agradecidos siempre por la confianza. En Instakash siempre velamos por tu seguridad. Por ello, queremos informarle que por regulaciones de la SBS{" "}
+        <b>a partir del 14 Octubre del 2022 no estaremos realizando operaciones hacía cuentas de terceros</b>.
       </p>
-      <p className="text-center my-4 font-bold">Agradecemos su comprensión.</p>
+      <a
+        className="text-center my-6 font-bold block underline"
+        href="https://www.facebook.com/photo/?fbid=511111037691040&set=a.442004831268328"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        conoce más aquí
+      </a>
       <Button onClick={() => dispatch(closeModal())} className="action-button">
         Lo entiendo
       </Button>
