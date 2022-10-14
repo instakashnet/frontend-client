@@ -106,7 +106,7 @@ const Calculator = ({ profile, setModal, user }) => {
         {!ratesLoading && <Rates actualRates={actualRates} coupon={coupon} couponRates={couponRates} currency={values.currency_sent_id} />}
         <div className={classes.Timer}>
           <p className={classes.TimerP}>Se actualizará el tipo de cambio en:</p>
-          <Timer onFinish={timeFinishHandler} time={180000} />
+          <Timer onFinish={timeFinishHandler} time={300000} />
         </div>
         <CalculatorForm
           isCouponMin={isCouponMin}
@@ -123,7 +123,12 @@ const Calculator = ({ profile, setModal, user }) => {
           disabled={disabled}
         />
       </Card>
-      <Button type="submit" form="calculator-form" disabled={values.amount_received < 40 || values.amount_sent < 40 || disabled} className={`action-button mt-2 ld-over ${isProcessing ? "running" : ""}`}>
+      <Button
+        type="submit"
+        form="calculator-form"
+        disabled={values.amount_received < 40 || values.amount_sent < 40 || disabled}
+        className={`action-button mt-2 ld-over ${isProcessing ? "running" : ""}`}
+      >
         <span className="ld ld-ring ld-spin" />
         Comenzar cambio
       </Button>
