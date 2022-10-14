@@ -15,7 +15,7 @@ const AccountCard = ({ account, openModal }) => {
       <div className="flex items-center justify-between mt-6">
         <div className="w-3/5">
           <p>{account.alias}</p>
-          <span className="text-sm text-green relative -top-0.5">{account.thirdParty ? "cuenta tercero" : account.joint ? "cuenta mancomunada" : null}</span>
+          <span className="text-sm text-green relative -top-0.5">{account.joint ? "cuenta mancomunada" : null}</span>
         </div>
         <p>****{accountNumber.substring(accountNumber.length - 4, accountNumber.length)}</p>
       </div>
