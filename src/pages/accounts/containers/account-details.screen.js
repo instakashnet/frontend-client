@@ -48,10 +48,10 @@ const AccountDetails = () => {
           <hr />
           {!edit && (
             <>
-              {(accountDetails.thirdParty || accountDetails.joint) && (
+              {accountDetails.joint && (
                 <>
                   <h4 className="mt-4">Cuenta</h4>
-                  <p>{accountDetails.thirdParty ? "De terceros" : "Mancomunada"}</p>
+                  <p>Mancomunada</p>
                 </>
               )}
               <div className="grid grid-cols-1 md:grid-cols-2">
@@ -68,7 +68,9 @@ const AccountDetails = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2">
                   <div>
                     <h4 className="md:mt-4">Nombre del cotitular</h4>
-                    <p>{accountDetails.jointAccount.firstName} {accountDetails.jointAccount.lastName}</p>
+                    <p>
+                      {accountDetails.jointAccount.firstName} {accountDetails.jointAccount.lastName}
+                    </p>
                   </div>
                   <div className="md:text-right">
                     <h4 className="mt-4">Documento</h4>
@@ -78,7 +80,7 @@ const AccountDetails = () => {
                   </div>
                 </div>
               )}
-              {accountDetails.thirdParty && (
+              {/* {accountDetails.thirdParty && (
                 <div className="grid grid-cols-1 md:grid-cols-3">
                   <div>
                     <h4 className="md:mt-4">Nombre del titular</h4>
@@ -95,7 +97,7 @@ const AccountDetails = () => {
                     </p>
                   </div>
                 </div>
-              )}
+              )} */}
               <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6 mt-6">
                 <Button className="action-button mb-4 md:mb-0" type="button" onClick={() => setEdit(true)}>
                   Editar cuenta <EditOutlined className="ml-2" />

@@ -49,7 +49,7 @@ export const PersonalAccount = ({ banks, currencies, documents, accountTypes, is
     onSubmit: (values) => {
       let fixedValues = {
         ...values,
-        joint: (values.joint === "true"),
+        joint: values.joint === "true",
         lastNameJoint: `${values.fatherSurname} ${values.motherSurname}`.trim(),
       };
 
@@ -69,19 +69,18 @@ export const PersonalAccount = ({ banks, currencies, documents, accountTypes, is
 
   // HANDLERS
   const onBankChangeHandler = (e) => {
-    const {
-      target: { value },
-    } = e;
-    formik.handleChange(e);
-    formik.setFieldValue("account_number", "");
-    formik.setFieldValue("cci", "");
+      const {
+        target: { value },
+      } = e;
+      formik.handleChange(e);
+      formik.setFieldValue("account_number", "");
+      formik.setFieldValue("cci", "");
 
-    if (value) {
-      const bank = banks.find((b) => b.value === value);
-      formik.setFieldValue("isDirect", bank.isDirect);
-    }
-  },
-
+      if (value) {
+        const bank = banks.find((b) => b.value === value);
+        formik.setFieldValue("isDirect", bank.isDirect);
+      }
+    },
     onDocumentChangeHandler = ({ target: { value } }) => (AllowOnlyNumbers(value) ? formik.setFieldValue("documentNumberJoint", value) : null);
 
   return (
@@ -242,7 +241,7 @@ export const PersonalAccount = ({ banks, currencies, documents, accountTypes, is
         )}
 
         <CheckboxComponent name="accept" value={formik.values.accept} onChange={formik.handleChange} error={formik.errors.accept}>
-          Declaro que toda la información colocada es correcta y que esta cuenta es mía.
+          Declaro que esta cuenta es mía o de mi empresa y que toda la información colocada es correcta.
         </CheckboxComponent>
         <div className="flex justify-center">
           <Button type="submit" disabled={!formik.isValid || interbank || isProcessing} className={`action-button mt-4 ld-over ${isProcessing ? "running" : ""}`}>
