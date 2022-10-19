@@ -10,7 +10,6 @@ import Dollar from "../assets/images/icons/dollar.svg";
 import User from "../assets/images/icons/user.svg";
 import classes from "./modules/information.module.scss";
 
-
 const Information = ({ onClose }) => {
   const { isMobile } = useDeviceDetect();
 
@@ -28,7 +27,7 @@ const Information = ({ onClose }) => {
           </div>
           <div className={classes.InfoCard}>
             <img src={User} alt="user" />
-            <p>La cuenta de origen debe ser del mismo titular que registra el cambio.</p>
+            <p>Las cuentas de origen y destino deben ser del mismo titular que registra el cambio.</p>
           </div>
           <div className={classes.InfoCard}>
             <img src={Dollar} alt="dollar sign" />
