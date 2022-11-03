@@ -29,7 +29,7 @@ const Header = ({ containerRef }) => {
       <Logo className="lg:w-52 md:w-44 w-40 mr-4 hidden md:block" />
       <div className={classes.Hours}>
         <p>
-          Lunes a Sábado: 9am - 7pm
+          Lunes a Viernes: 9am - 7pm | Sábados: 9am - 2:30pm
           <br />
           Domingos y Feriados: Cerrados
         </p>
