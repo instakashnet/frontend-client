@@ -1,7 +1,9 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .KashCard {
-  background-color: $light-yellow;
+  background-color: #fffbdb;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,16 +14,16 @@
   h3 {
     color: $base-green;
     margin-top: 5px;
-    font-size: 1.1rem;
+    font-size: math.div($title, 3.636);
   }
 
   p {
-    font-size: 0.9rem;
+    font-size: math.div($body, 1.111);
   }
 
   a,
   button {
-    background-color: $button-yellow;
+    background-color: $button-main;
     border-radius: 15px;
     margin: 0 10px;
     padding: 5px 20px;
@@ -29,14 +31,14 @@
 
     &:hover,
     &:focus {
-      background-color: darken($color: $button-yellow, $amount: 15);
+      background-color: $button-hover;
     }
   }
 }
 
 .TotalAmount {
   margin-top: 5px;
-  font-size: 1.25rem;
+  font-size: $body * 1.25;
   color: $base-green;
   font-weight: bold;
 }

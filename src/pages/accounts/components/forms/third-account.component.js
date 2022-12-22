@@ -1,10 +1,9 @@
-import { FormLabel,RadioGroup } from "@material-ui/core";
+import { FormLabel, RadioGroup } from "@material-ui/core";
 // FORMIK
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 // REACT REDUX
-import { useDispatch,useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 // COMPONENTS
 import { Button } from "../../../../components/UI/button.component";
 import { CheckboxComponent } from "../../../../components/UI/form-items/checkbox.component";
@@ -21,7 +20,7 @@ import { addThirdPartyAccountSchema } from "../../helpers/validations";
 // COMPONENTS
 import classes from "../modules/forms/add-account.module.scss";
 
-export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, value, index, ...rest }) => {
+export const ThirdPartyAccount = ({ banks, currencies, documents, accountTypes, addType, value, index, ...rest }) => {
   const [selectedBank, setSelectedBank] = useState(null);
   const dispatch = useDispatch();
   const formik = useFormik({
@@ -58,14 +57,6 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
     }
   }, [bankId, banks]);
 
-  const documentOptions = [
-    { value: "DNI", label: "DNI" },
-    { value: "CE", label: "CE" },
-    { value: "PTP", label: "PTP" },
-    { value: "pasaporte", label: "Pasaporte" },
-    { value: "RUC", label: "RUC" },
-  ];
-
   const onDocumentChangeHandler = (e) => (AllowOnlyNumbers(e.target.value) ? formik.setFieldValue("documentIdentity", e.target.value) : null);
 
   const onBankChangeHandler = (e) => {
@@ -100,7 +91,7 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
           Las cuentas a terceros <b>solo pueden ser utilizadas</b> para recibir el dinero solicitado.
         </MuiAlert>
         <FormLabel component="legend" className="mt-3">
-          ¿A quien le pertenece esta cuenta?
+          ¿A quién le pertenece esta cuenta?
         </FormLabel>
         <RadioGroup aria-label="tipo de cuenta a terceros" name="thirdPartyAccType" value={formik.values.thirdPartyAccType} onChange={onThirdPartyAccTypeChange}>
           <div className="flex flex-wrap items-center justify-between">
@@ -115,7 +106,7 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
               label="Tipo doc."
               value={formik.values.documentType}
               onChange={formik.handleChange}
-              options={documentOptions}
+              options={documents}
               disabled={formik.values.thirdPartyAccType === "juridica"}
             />
           </div>
@@ -243,7 +234,7 @@ export const ThirdPartyAccount = ({ banks, currencies, accountTypes, addType, va
         />
         {selectedBank && !selectedBank.isDirect && (
           <MuiAlert type="warning" opened>
-            Las <b>transferencias interbancarias</b> acarrean comisiones y pueden demorar hasta 48 horas. Conoce más en nuestros{" "}
+            Las <b>transferencias interbancarias</b> acarrean comisiones y pueden demorar hasta 24 horas. Conoce más en nuestros{" "}
             <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
               términos y condiciones
             </a>

@@ -3,15 +3,15 @@ import { Add } from "@material-ui/icons";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 // REDUX
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // REACT ROUTER
 import { useHistory } from "react-router-dom";
-
 // COMPONENTS
 import { Button } from "../../../components/UI/button.component";
 import { Input } from "../../../components/UI/form-items/input.component";
 import { SelectComponent } from "../../../components/UI/form-items/select.component";
 import { MuiAlert } from "../../../components/UI/mui-alert.component";
+import { validateInterplaza } from "../../../shared/functions";
 // REDUX ACTIONS
 import { cancelExchangeInit, completeExchangeInit, getAccountsInit } from "../../../store/actions";
 // COMPONENT
@@ -19,7 +19,7 @@ import KashUsed from "../components/kash-used.component";
 // HELPER
 import { completeExchangeValidation } from "../helpers/validations";
 // CLASSES
-import classes from "./modules/accounts.module.scss";
+import classes from "./modules/accounts.screen.module.scss";
 import sharedClass from "./modules/sharedClasses.module.scss";
 
 const Accounts = ({ setModal }) => {
@@ -34,8 +34,6 @@ const Accounts = ({ setModal }) => {
     [filteredAccounts, setFilteredAccounts] = useState([]),
     history = useHistory(),
     [funds_origin] = useState((order?.currencyReceivedId === 1 && order?.amountSent >= 15000) || (order?.currencyReceivedId === 2 && order?.amountSent >= 5000));
-
-  if (!order) history.push("/currency-exchange");
 
   // FORMIK
   const formik = useFormik({
@@ -92,13 +90,17 @@ const Accounts = ({ setModal }) => {
 
   // EFFECTS
   useEffect(() => {
+    if (!order) history.push("/currency-exchange");
+  }, [history, order]);
+
+  useEffect(() => {
     dispatch(getAccountsInit("orders"));
     dispatch(getAccountsInit("kash"));
   }, [dispatch]);
 
   useEffect(() => {
-    if (accounts.length) setFilteredAccounts(accounts.filter((account) => account.currency.id === order.currencyReceivedId));
-  }, [accounts, order.currencyReceivedId]);
+    if (accounts?.length) setFilteredAccounts(accounts.filter((account) => account.currency.id === order?.currencyReceivedId));
+  }, [accounts, order?.currencyReceivedId]);
 
   // HANDLERS
   const onFundsOriginChange = (e) => {
@@ -120,8 +122,8 @@ const Accounts = ({ setModal }) => {
     if (!e.target.value) return;
 
     const chosenAccount = filteredAccounts.find((account) => account.id === e.target.value);
-    setInterplaza(!!Number(chosenAccount.interbank));
-    setAccountCCI(!!chosenAccount.cci);
+    if (chosenAccount?.bank.name.toLowerCase() === "interbank") setInterplaza(validateInterplaza(chosenAccount.account_number));
+    setAccountCCI(!!chosenAccount?.cci);
   };
 
   const kashUsedHandler = (e) => {
@@ -133,11 +135,11 @@ const Accounts = ({ setModal }) => {
   };
 
   return (
-    <>
+    <article className={classes.Accounts}>
       <h1>Completa los datos</h1>
       <h3>Selecciona tu banco de envío y la cuenta donde recibes.</h3>
       <form onSubmit={formik.handleSubmit} className={sharedClass.ExchangeForm}>
-        {kashAccount.balance > 0 && <KashUsed formik={formik} onKashUsed={kashUsedHandler} totalAmount={totalAmountSent} balance={kashAccount.balance} order={order} />}
+        {order && kashAccount.balance > 0 && <KashUsed formik={formik} onKashUsed={kashUsedHandler} totalAmount={totalAmountSent} balance={kashAccount.balance} order={order} />}
         {formik.values.kashApplied && totalAmountSent <= 0 ? null : (
           <SelectComponent
             name="bank_id"
@@ -174,10 +176,11 @@ const Accounts = ({ setModal }) => {
         )}
         {(bankCCI || accountCCI) && (
           <MuiAlert type="warning" opened>
-            <b>Las transferencias interbancarias generan comisiones y pueden demorar hasta 48 horas.</b> Conozca más en nuestros{" "}
+            <b>Las transferencias interbancarias generan comisiones y pueden demorar hasta 24 horas.</b> Conozca más en nuestros{" "}
             <a href="https://instakash.net/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className="underline">
               términos y condiciones
-            </a>.
+            </a>
+            .
           </MuiAlert>
         )}
         {funds_origin && (
@@ -203,14 +206,14 @@ const Accounts = ({ setModal }) => {
             touched={formik.touched.funds_text}
           />
         )}
-        <div className="flex flex-col items-center justify-center">
-          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button mt-4 ld-over ${isProcessing ? "running" : ""}`}>
+        <div className="flex flex-col lg:flex-row items-center justify-center">
+          <Button type="submit" disabled={!formik.isValid || isProcessing} className={`action-button m-3 ld-over ${isProcessing ? "running" : ""} lg:order-2`}>
             <span className="ld ld-ring ld-spin" />
             Continuar
           </Button>
           <Button
             type="button"
-            className={`secondary-button mt-4 ld-over ${isProcessing ? "running" : ""}`}
+            className={`secondary-button m-3 ld-over ${isProcessing ? "running" : ""}`}
             disabled={isProcessing}
             onClick={() => dispatch(cancelExchangeInit(order.id, "draft"))}
           >
@@ -219,7 +222,7 @@ const Accounts = ({ setModal }) => {
           </Button>
         </div>
       </form>
-    </>
+    </article>
   );
 };
 

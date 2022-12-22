@@ -1,3 +1,7 @@
+// IMPORTS
+import history from "./history";
+
+
 export const formatAmount = (amount) => {
   return Number(amount).toFixed(2);
 };
@@ -5,7 +9,7 @@ export const formatAmount = (amount) => {
 export const convertRate = (amount) => Number(amount).toFixed(4);
 
 export const validateInterplaza = (accountNumber) => {
-  const firstAccNumber = accountNumber.substring(0, 1);
+  const firstAccNumber = Number(accountNumber.substring(0, 1));
 
   let interplaza = false;
   if (firstAccNumber >= 3 && firstAccNumber <= 7) interplaza = true;
@@ -30,3 +34,38 @@ export const AllowOnlyNumbers = (value) => {
 };
 
 export const replaceSpace = (text) => text.split(" ").join("-");
+
+export const encodeFileToBase64URL = (file) => {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+
+    reader.addEventListener("load", () => {
+      resolve(reader.result);
+    });
+
+    reader.readAsDataURL(file);
+  });
+};
+
+// LAZY IMPORTS HANDLER
+export const importsHandler = (lazyImport) => {
+  return new Promise((resolve, reject) => {
+    const hasRefreshed = JSON.parse(
+      sessionStorage.getItem("retry-refreshed") || "false"
+    );
+
+    lazyImport()
+      .then((component) => {
+        resolve(component);
+      })
+      .catch((error) => {
+        if (!hasRefreshed) {
+          history.push("/");
+          sessionStorage.setItem("retry-refreshed", "true");
+          return window.location.reload();
+        };
+
+        reject(error);
+      });
+  })
+};

@@ -1,17 +1,16 @@
-import { lazy,useEffect } from "react";
+import { lazy, useEffect } from "react";
 import ReactPixel from "react-facebook-pixel";
 // REACT REDUX
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // REACT ROUTER
-import { Route,Router, Switch } from "react-router-dom";
-
-// COMPONENTS
-import Alert from "./components/UI/alert.component";
+import { Route, Router, Switch } from "react-router-dom";
+// COMPONENT
 import { ClosedModal } from "./components/UI/modals/closed-modal.component";
 // HOC
 import asyncComponent from "./hoc/async.component";
 import { RefreshSession } from "./hoc/refresh-session.component";
 import ScrollToTop from "./hoc/scroll-top.component";
+import { SnackbarConfigurator } from "./hoc/snackbar-configurator.component";
 // PUBLIC
 import ChangePassword from "./pages/auth/containers/change-password.screen";
 import CompleteProfile from "./pages/auth/containers/complete-profile.screen";
@@ -24,17 +23,20 @@ import Error404 from "./pages/errors/containers/error-404.screen.js";
 // ROUTING
 import PrivateRoute from "./routing/PrivateRoute";
 import PublicRoute from "./routing/PublicRoute";
+// DYNAMIC IMPORTS HANDLER
+import { importsHandler } from "./shared/functions";
+// HISTORY
 import history from "./shared/history";
 // REDUX ACTIONS
 import { setIsClosedInit, setIsClosedSuccess } from "./store/actions";
 
 // PRIVATE
-const Welcome = lazy(() => import("./pages/welcome/containers/welcome.screen"));
-const Dashboard = lazy(() => import("./pages/dashboard/containers/dashboard.screen"));
-const Affiliates = lazy(() => import("./pages/affiliates/containers/affiliates.screen"));
-const MyProfile = lazy(() => import("./pages/profile/containers/profile.screen"));
-const Accounts = lazy(() => import("./pages/accounts/containers/accounts.screen"));
-const Exchange = lazy(() => import("./pages/exchange/containers/exchange.screen"));
+const Welcome = lazy(() => importsHandler(() => import("./pages/welcome/containers/welcome.screen")));
+const Dashboard = lazy(() => importsHandler(() => import("./pages/dashboard/containers/dashboard.screen")));
+const Affiliates = lazy(() => importsHandler(() => import("./pages/affiliates/containers/affiliates.screen")));
+const MyProfile = lazy(() => importsHandler(() => import("./pages/profile/containers/profile.screen")));
+const Accounts = lazy(() => importsHandler(() => import("./pages/accounts/containers/accounts.screen")));
+const Exchange = lazy(() => importsHandler(() => import("./pages/exchange/containers/exchange.screen")));
 
 ReactPixel.init(process.env.REACT_APP_FB_PIXEL_ID, {}, { autoConfig: true, debug: false });
 
@@ -78,7 +80,8 @@ function App() {
             <Route path="*" component={Error404} />
           </Switch>
         </RefreshSession>
-        <Alert />
+        {/* NOTISTACK ALERT */}
+        <SnackbarConfigurator />
         {isClosed && <ClosedModal onClose={() => dispatch(setIsClosedSuccess(false))} />}
       </Router>
     </>

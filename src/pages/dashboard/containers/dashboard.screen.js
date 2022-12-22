@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 // REDUX
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // REACT ROUTER
 import { Route } from "react-router-dom";
-
 // COMPONENTS
 import Layout from "../../../components/layout/layout.component";
 import Spinner from "../../../components/UI/spinner.component";
 // REDUX ACTIONS
-import { getOrderDetailsInit,openSliderModal } from "../../../store/actions";
+import { getOrderDetailsInit, getOrdersInit, getWithdrawalsInit, openSliderModal } from "../../../store/actions";
 // COMPONENTS
 import OrderDetails from "../components/details/order-details.component";
 import WithdrawDetails from "../components/details/withdraw-details.component";
@@ -16,9 +15,16 @@ import WithdrawDetails from "../components/details/withdraw-details.component";
 import { AllActivityScreen } from "./all-activity.screen";
 import { RecentActivityScreen } from "./recent-activity.screen";
 
+
 const Dashboard = ({ match }) => {
   const dispatch = useDispatch(),
     { orders, withdrawals, isLoading } = useSelector((state) => state.Activity);
+
+  // EFFECTS
+  useEffect(() => {
+    dispatch(getOrdersInit(5, true));
+    dispatch(getWithdrawalsInit());
+  }, [dispatch]);
 
   // HANDLERS
   const openDetails = (id, type = null) => {
@@ -33,7 +39,7 @@ const Dashboard = ({ match }) => {
 
   return (
     <>
-      <Layout className={`${orders.length <= 0 && withdrawals.length <= 0 ? "content-center" : "content-start"} max-screen`}>
+      <Layout className={`${orders?.length <= 0 && withdrawals?.length <= 0 ? "content-center" : "content-start"} max-screen`}>
         <Route exact path={match.url + "/recent"}>
           <RecentActivityScreen orders={orders} withdrawals={withdrawals} openDetails={openDetails} />
         </Route>

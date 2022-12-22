@@ -1,21 +1,40 @@
 import camelize from "camelize";
+import moment from "moment";
 import { uploadFile } from "react-s3";
 import { all, call, delay, fork, put, select, takeEvery, takeLatest } from "redux-saga/effects";
+// SWEET ALERT
 import Swal from "sweetalert2";
-
 // API SERVICES
-import { authService } from "../../api/axios";
+import {
+  completeProfileSvc,
+  deleteProfileSvc,
+  editAddInfoSvc,
+  editBasicInfoSvc,
+  generateTokenSvc,
+  getProfilesSvc,
+  loadUserSvc,
+  userCodeSvc
+} from "../../api/services/auth.service";
+// SNACKBAR ALERT ACTIONS
+import { snackActions } from "../../hoc/snackbar-configurator.component";
+// HELPERS
 import { replaceSpace } from "../../shared/functions";
+// HISTORY
 import history from "../../shared/history";
-import { closeModal, setAlertInit, setUserData } from "../../store/actions";
+// REDUX
+import { closeModal, setUserData } from "../../store/actions";
 import * as actions from "./actions";
 import * as types from "./types";
 
 // UTILS
 const uploadToS3 = async (photo, docType) => {
+  const current = moment(),
+    yearMonth = current.format("YYYYMM"),
+    day = current.format("DD");
+
   const S3config = {
     bucketName: process.env.REACT_APP_STAGE !== "prod" ? "instakash-docs-dev" : "instakash-docs",
-    dirName: docType,
+    dirName: `${docType}/${yearMonth}/${day}`,
     region: "us-east-2",
     accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
     secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
@@ -31,32 +50,37 @@ const uploadToS3 = async (photo, docType) => {
 // SAGAS
 function* getProfiles() {
   try {
-    const res = yield authService.get("/users/profiles");
-    if (res.status === 200) yield put(actions.getProfilesSuccess(res.data.profiles, res.data.user));
+    const res = yield call(getProfilesSvc);
+    yield put(actions.getProfilesSuccess(res.profiles, res.user));
   } catch (error) {
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }
 
 function* getUserData() {
-  const res = yield authService.get("/users/session"),
-    resData = camelize(res.data),
-    user = { ...resData.user, verified: resData.verified, completed: resData.completed, isGoogle: resData.isGoogle, isReferal: resData.isReferal };
+  try {
+    const res = yield call(loadUserSvc),
+      resData = camelize(res),
+      user = { ...resData, verified: resData.verified, completed: resData.completed, isGoogle: resData.isGoogle, isReferal: resData.isReferal };
 
-  yield put(setUserData(user));
-  yield put(actions.getUserDataSuccess());
+    yield put(setUserData(user));
+    yield put(actions.getUserDataSuccess());
+  } catch (error) {
+    yield put(actions.profilesError());
+  }
 }
 
 function* addProfile({ values }) {
   try {
-    const res = yield authService.post("/users/profiles", values);
-    if (res.status === 200) {
-      yield put(setAlertInit("El perfil ha sido agregado correctamente.", "success"));
-      yield put(actions.addProfileSuccess());
-      yield put(actions.getProfilesInit());
-      yield put(closeModal());
-    }
+    yield call(completeProfileSvc, values);
+
+    yield snackActions.success("El perfil ha sido agregado correctamente.");
+    yield put(actions.addProfileSuccess());
+    yield put(actions.getProfilesInit());
+    yield put(closeModal());
   } catch (error) {
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }
@@ -70,18 +94,18 @@ function* selectProfile({ profileId }) {
 
 function* editAdditionalInfo({ values, setSubmitted }) {
   try {
-    const res = yield authService.put("/users/profiles", values);
-    if (res.status === 200) {
-      yield call(getUserData);
-      yield put(actions.editAdditionalInfoSuccess());
-      yield put(setAlertInit("Su perfil ha sido actualizado correctamente.", "success"));
-      if (setSubmitted) {
-        yield call(setSubmitted, true);
-        yield delay(2000);
-        yield call(setSubmitted, false);
-      }
+    yield call(editAddInfoSvc, values);
+    yield call(getUserData);
+    yield put(actions.editAdditionalInfoSuccess());
+    yield snackActions.success("Tu perfil ha sido actualizado correctamente.");
+
+    if (setSubmitted) {
+      yield call(setSubmitted, true);
+      yield delay(2000);
+      yield call(setSubmitted, false);
     }
   } catch (error) {
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }
@@ -90,7 +114,7 @@ function* uploadDocument({ photos, docType }) {
   let uploaded;
 
   try {
-    const resToken = yield authService.get("/users/generate-token"),
+    const resToken = yield call(generateTokenSvc),
       user = yield select((state) => state.Auth.user),
       photosArray = docType === "dni" ? [photos.front, photos.back] : [photos.front];
 
@@ -98,10 +122,7 @@ function* uploadDocument({ photos, docType }) {
       const photoRes = yield fetch(photosArray[i]),
         blob = yield photoRes.blob(),
         docSide = docType === "passport" ? "front" : i > 0 ? "back" : "front",
-        photo = new File(
-          [blob],
-          `${user.documentType.toUpperCase()}-${user.documentIdentification}-${replaceSpace(user.name.toUpperCase())}-${docSide}-&Token&${resToken.data.accessToken}.jpg`
-        );
+        photo = new File([blob], `${user.documentType.toUpperCase()}-${user.documentIdentification}-${replaceSpace(user.name.toUpperCase())}-${docSide}-&Token&${resToken}.jpg`);
 
       const res = yield call(uploadToS3, photo, user.documentType.toLowerCase());
       uploaded = res.result.status === 204;
@@ -113,20 +134,20 @@ function* uploadDocument({ photos, docType }) {
     }
   } catch (error) {
     console.log(error);
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }
 
 function* editUserCode({ values }) {
   try {
-    const res = yield authService.put("/users/username", values);
-    if (res.status === 200) {
-      const userResponse = yield authService.get("/users/username");
-      yield put(actions.editUserCodeSuccess(userResponse.data.username));
-      yield put(setAlertInit("Tu código ha sido editado correctamente.", "success"));
-      yield put(closeModal());
-    }
+    yield call(userCodeSvc, values);
+    yield call(getUserData);
+    yield put(actions.editUserCodeSuccess());
+    yield snackActions.success("Tu código ha sido editado correctamente.");
+    yield put(closeModal());
   } catch (error) {
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }
@@ -137,21 +158,20 @@ function* disableProfile({ id }) {
       icon: "warning",
       title: "¿Deseas eliminar este perfil?",
       text: "Los datos serán eliminados y deberás agregarlo de nuevo para poder utilizarlo en otras operaciones.",
-      confirmButtonText: "Si, eliminar",
+      confirmButtonText: "Sí, eliminar",
       showCancelButton: true,
       cancelButtonText: "No, cancelar",
       cancelButtonColor: "#ff4b55",
     });
 
     if (result.isConfirmed) {
-      const res = yield authService.delete(`/users/active/${id}`, { data: { active: false } });
-      if (res.status === 200) {
-        yield call(getProfiles);
-        yield put(actions.disableProfileSuccess());
-        yield Swal.fire("Perfil eliminado", "El perfil ha sido eliminado correctamente. Deberá seleccionar un nuevo perfil.", "success");
-      }
+      yield call(deleteProfileSvc, id);
+      yield call(getProfiles);
+      yield put(actions.disableProfileSuccess());
+      yield Swal.fire("Perfil eliminado", "El perfil ha sido eliminado correctamente. Deberá seleccionar un nuevo perfil.", "success");
     } else yield put(actions.profilesError());
   } catch (error) {
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }
@@ -163,14 +183,19 @@ function* editBasicInfo({ values, editType, setSubmitted }) {
   if (editType === "email") URL = "/users/change-email";
 
   try {
-    const res = yield authService.put(URL, values);
+    yield call(editBasicInfoSvc, URL, values);
 
-    if (res.status === 200) {
-      yield put(setAlertInit(`Tu ${editType === "phone" ? "teléfono" : "correo"} ha sido actualizado correctamente.`, "success"));
+    yield snackActions.success(`Tu ${editType === "phone" ? "teléfono" : "correo"} ha sido actualizado correctamente.`);
+    yield call(getUserData);
+    yield put(actions.editBasicInfoSuccess());
+
+    if (setSubmitted) {
       yield call(setSubmitted, true);
-      yield put(actions.editBasicInfoSuccess());
+      yield delay(2000);
+      yield call(setSubmitted, false);
     }
   } catch (error) {
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.profilesError());
   }
 }

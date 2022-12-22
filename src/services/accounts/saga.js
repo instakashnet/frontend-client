@@ -1,11 +1,15 @@
-import { all, call, fork, put, select, takeEvery,takeLatest } from "redux-saga/effects";
+import { all, call, fork, put, select, takeEvery, takeLatest } from "redux-saga/effects";
+// SWEET ALERT
 import Swal from "sweetalert2";
-
 // API SERVICES
-import { accountsService,exchangeService } from "../../api/axios";
-import { getAccounts,getBanks, getCurrencies } from "../../api/services/accounts.service";
+import { addAccountSvc, deleteAccountSvc, editAccountSvc, getAccounts, getBanks, getCurrencies } from "../../api/services/accounts.service";
+import { withdrawKashSvc } from "../../api/services/exchange.service";
+// SNACKBAR ALERT ACTIONS
+import { snackActions } from "../../hoc/snackbar-configurator.component";
+// HISTORY
 import history from "../../shared/history";
-import { closeModal, setAlertInit } from "../../store/actions";
+// REDUX
+import { closeModal } from "../../store/actions";
 import * as actions from "./actions";
 import * as types from "./types";
 
@@ -19,61 +23,62 @@ function* setAccountDetails({ accId }) {
 function* getAccountsSaga({ accType }) {
   try {
     const accounts = yield call(getAccounts, accType);
-    if (accType === "kash") return yield put(actions.getKashAccountSuccess(accounts.accounts));
+    if (accType === "kash") return yield put(actions.getKashAccountSuccess(accounts));
 
     const [banks, currencies] = yield all([call(getBanks), call(getCurrencies)]);
 
-    yield put(actions.getBanks(banks.banks));
-    yield put(actions.getCurrencies(currencies.currencies));
-    yield put(actions.getAccountsSuccess(accounts.accounts));
+    yield put(actions.getBanks(banks));
+    yield put(actions.getCurrencies(currencies));
+    yield put(actions.getAccountsSuccess(accounts));
   } catch (error) {
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.accountsError());
   }
 }
 
 function* addAccount({ values, addType }) {
   try {
-    const res = yield accountsService.post("/accounts", values);
-    if (res.status === 201) {
-      const accounts = yield call(getAccounts, addType);
-      yield put(actions.getAccountsSuccess(accounts.accounts));
+    yield call(addAccountSvc, values);
 
-      yield put(actions.addAccountSuccess());
-      yield put(setAlertInit("Cuenta agregada correctamente.", "success"));
-      yield put(closeModal());
-    }
+    const accounts = yield call(getAccounts, addType);
+
+    yield put(actions.getAccountsSuccess(accounts));
+    yield put(actions.addAccountSuccess());
+    yield snackActions.success("Cuenta agregada correctamente.");
+    yield put(closeModal());
   } catch (error) {
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.accountsError());
   }
 }
 
 function* editAccount({ id, values, setEdit }) {
   try {
-    const res = yield accountsService.put(`/accounts/${id}`, values);
-    if (res.status === 200) {
-      const accounts = yield call(getAccounts, "users");
-      yield put(actions.getAccountsSuccess(accounts.accounts));
+    yield call(editAccountSvc, id, values);
 
-      yield put(actions.editAccountSuccess());
-      yield call(setAccountDetails, { accId: id });
-      yield put(setAlertInit("Cuenta editada correctamente.", "success"));
-      yield call(setEdit, false);
-    }
+    const accounts = yield call(getAccounts, "users");
+
+    yield put(actions.getAccountsSuccess(accounts));
+    yield put(actions.editAccountSuccess());
+    yield call(setAccountDetails, { accId: id });
+    yield snackActions.success("Cuenta editada correctamente.");
+    yield call(setEdit, false);
   } catch (error) {
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.accountsError());
   }
 }
 
 function* withdrawKash({ values }) {
   try {
-    const res = yield exchangeService.post("/withdrawals/user", values);
-    if (res.status === 201) {
-      yield call([Swal, "fire"], "Recibido", "La solicitud de retiro ha sido recibida. Puedes ver tu solicitud en la pantalla de actividades.", "success");
-      yield put(actions.withdrawKashSuccess());
-      yield put(closeModal());
-      yield call([history, "push"], "/dashboard/recent");
-    }
+    yield call(withdrawKashSvc, values);
+
+    yield call([Swal, "fire"], "Recibido", "La solicitud de retiro ha sido recibida. Puedes ver tu solicitud en la pantalla de actividades.", "success");
+    yield put(actions.withdrawKashSuccess());
+    yield put(closeModal());
+    yield call([history, "push"], "/dashboard/recent");
   } catch (error) {
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.accountsError());
   }
 }
@@ -85,22 +90,23 @@ function* deleteAccount({ account }) {
       title: "Eliminar la cuenta",
       text: `¿Seguro deseas eliminar la cuenta con alias ${account.alias}?`,
       showCancelButton: true,
-      confirmButtonText: "Si, eliminar",
+      confirmButtonText: "Sí, eliminar",
       confirmButtonColor: "#ffeb4d",
       cancelButtonText: "Cancelar",
       cancelButtonColor: "#ff4b55",
     });
 
     if (result.isConfirmed) {
-      yield accountsService.delete(`/accounts/${account.id}`);
+      yield call(deleteAccountSvc, account.id);
       const accounts = yield call(getAccounts, "users");
-      yield put(actions.getAccountsSuccess(accounts.accounts));
+      yield put(actions.getAccountsSuccess(accounts));
 
       yield put(actions.deleteAccountSuccess());
-      yield put(setAlertInit("Cuenta eliminada correctamente.", "success"));
+      yield snackActions.success("Cuenta eliminada correctamente.");
       yield put(closeModal());
     } else yield put(actions.accountsError());
   } catch (error) {
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.accountsError());
   }
 }

@@ -1,5 +1,3 @@
-import React from "react";
-
 // COMPONENTS
 import Card from "../../../components/UI/card.component";
 // CLASSES
@@ -17,7 +15,7 @@ const AccountCard = ({ account, openModal }) => {
       <div className="flex items-center justify-between mt-6">
         <div className="w-3/5">
           <p>{account.alias}</p>
-          {account.thirdParty && <span className="text-sm text-green relative -top-0.5">cuenta tercero</span>}
+          <span className="text-sm text-green relative -top-0.5">{account.joint ? "cuenta mancomunada" : null}</span>
         </div>
         <p>****{accountNumber.substring(accountNumber.length - 4, accountNumber.length)}</p>
       </div>

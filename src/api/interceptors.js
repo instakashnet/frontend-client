@@ -30,7 +30,8 @@ export const setupAxiosInterceptors = (instance) => {
 
       if (status === 418 && !configRequest._retry && store.getState().Auth.isAuth) {
         configRequest._retry = true;
-        return store.dispatch(logoutSuccess());
+        store.dispatch(logoutSuccess());
+        return Promise.reject();
       } else {
         let message;
         let code;
@@ -40,7 +41,7 @@ export const setupAxiosInterceptors = (instance) => {
             message = error.response.data.error.message;
             code = error.response.data.error.code;
           } else message = "Ha ocurrido un error inesperado, por favor intenta de nuevo. Si el problema persiste contacte a soporte.";
-        } else if (error.request) message = "Se ha caido la conexión, por favor revise su conexión a internet. Si el problema persiste contacte a soporte.";
+        } else if (error.request) message = "Se ha caído la conexión, por favor revise su conexión a internet. Si el problema persiste contacte a soporte.";
 
         error.code = code;
         error.message = message;

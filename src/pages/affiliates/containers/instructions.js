@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-// COMPONENT
+// COMPONENTS
 import Card from "../../../components/UI/card.component";
+import { Modal } from "../../../components/UI/modals/modal.component";
 // HOOK
 import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
 // REDUX ACTIONS
@@ -23,14 +23,17 @@ import UserCode from "../components/user-code.component";
 import classes from "./modules/instructions.module.scss";
 import sharedClass from "./modules/sharedClasses.module.scss";
 
+
 export const Instructions = ({ ...rest }) => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.Auth.user);
+  const user = useSelector((state) => state.Auth.user),
+    ModalComponent = useSelector((state) => state.Modal.Component);
   const { isMobile } = useDeviceDetect();
 
+  // HANDLERS
   const editCodeHandler = () => {
-    const ModalComponent = () => <EditCode title="Editar código" />;
-    dispatch(openModal(ModalComponent));
+    let modalContent = () => <EditCode title="Editar código" />;
+    dispatch(openModal(modalContent));
   };
 
   return (
@@ -49,7 +52,7 @@ export const Instructions = ({ ...rest }) => {
             <img src={Arrow1} className="hidden lg:block" alt="siguiente" />
             <Step img={Step2Img} className={`self-end ${classes.Step2}`} title="2. Recibe KASH por cada referido">
               <p>
-                Cada amigo registrado con tu codigo recibirá una tasa preferencial en su primer cambio y tú ganarás <b>1 KASH = 1 $</b>.
+                Cada amigo registrado con tu código recibirá una tasa preferencial en su primer cambio y tú ganarás <b>2 KASH (1 KASH = 1 $)</b>.
               </p>
             </Step>
             <img src={Arrow2} className="hidden lg:block" alt="siguiente" />
@@ -79,6 +82,11 @@ export const Instructions = ({ ...rest }) => {
           <ShareIcons userCode={user.username} className="mt-3 md:mt-0" />
         </div>
       </article>
+      {ModalComponent && (
+        <Modal {...ModalComponent().props}>
+          <ModalComponent />
+        </Modal>
+      )}
     </div>
   );
 };

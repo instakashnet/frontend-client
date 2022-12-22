@@ -1,38 +1,39 @@
-import { all, fork, put, takeEvery, takeLatest } from "redux-saga/effects";
-
+import { all, call, fork, put, takeEvery, takeLatest } from "redux-saga/effects";
 // API SERVICES
-import { exchangeService } from "../../api/axios";
-import { setAlertInit } from "../../store/actions";
+import { getOrderAmountsSvc, getOrderDetailsSvc, getOrdersSvc, getTotalAmountSvc, getWithdrawalsSvc } from "../../api/services/exchange.service";
+// SNACKBAR ALERT ACTIONS
+import { snackActions } from "../../hoc/snackbar-configurator.component";
+// REDUX
 import * as actions from "./actions";
 import * as types from "./types";
 
+
 function* getOrders({ limit, enabled }) {
   try {
-    const res = yield exchangeService.get(`/order/user?enabled=${enabled}&limit=${limit}`);
-    if (res.status === 200) {
-      const orders = res.data.ordersByUser.reverse();
-      const resData = { ...res.data, orders };
-      yield put(actions.getOrdersSuccess(resData));
-    }
+    const res = yield call(getOrdersSvc, limit, enabled);
+    const orders = res?.ordersByUser?.reverse();
+    const resData = { ...res, orders };
+    yield put(actions.getOrdersSuccess(resData));
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.activityError());
   }
 }
 
 function* getWithdrawals() {
   try {
-    const res = yield exchangeService.get("/withdrawals/user?limit=5");
-    if (res.status === 200) yield put(actions.getWithdrawalsSuccess(res.data));
+    const res = yield call(getWithdrawalsSvc);
+    yield put(actions.getWithdrawalsSuccess(res));
   } catch (error) {
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.activityError());
   }
 }
 
 function* getOrderAmounts() {
   try {
-    const res = yield exchangeService.get("/order/data/total-processed/user");
-    if (res.status === 200) yield put(actions.getOrderAmountsSuccess(res.data));
+    const res = yield call(getOrderAmountsSvc);
+    yield put(actions.getOrderAmountsSuccess(res));
   } catch (error) {
     yield put(actions.activityError());
   }
@@ -40,8 +41,8 @@ function* getOrderAmounts() {
 
 function* getTotalAmount() {
   try {
-    const res = yield exchangeService.get("/order/data/user");
-    if (res.status === 200) yield put(actions.getTotalAmountSuccess(res.data));
+    const res = yield call(getTotalAmountSvc);
+    yield put(actions.getTotalAmountSuccess(res));
   } catch (error) {
     yield put(actions.activityError());
   }
@@ -49,16 +50,12 @@ function* getTotalAmount() {
 
 function* getOrderDetails({ id, detailsType }) {
   try {
-    const res = yield exchangeService.get(`/order/detail/${id}?type=${detailsType}`);
-    if (res.status === 200) yield put(actions.getOrderDetailsSuccess(res.data));
+    const res = yield call(getOrderDetailsSvc, id, detailsType);
+    yield put(actions.getOrderDetailsSuccess(res));
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.activityError());
   }
-
-  // if (detailsType === "order") details = yield select((state) => state.Dashboard.orders.find((order) => order.id === id));
-  // if (detailsType === "withdrawal") details = yield select((state) => state.Dashboard.withdrawals.find((withdrawal) => withdrawal.id === id));
-  //
 }
 
 export function* watchGetOrders() {

@@ -1,19 +1,43 @@
 /*  BASE COLORS  */
-$base-green: #20a2a5;
-$base-text: #676767;
-$bg-color: #f8fafb;
-$card-color: #fff;
-$secondary-green: #69bea0;
-$anchor-green: #20a2a5;
-$base-yellow: #e5d344;
-$light-yellow: #fffbdb;
-$button-yellow: #ffeb4d;
-$base-orange: #ffa755;
-$light-orange: #f9ca9e;
-$bg-gray: #f0f8f5;
+$base-green: #0d8284;
+$secondary-green: #20a2a5;
+$tertiary-green: #67be9f;
+$light-color: #f8fafb;
+
+/* TEXT COLORS */
+$text-title: #0d8284;
+$text-body: #676767;
+$text-placeholder: #cacaca;
+$text-extra: #ffeb4c;
 
 /* FORM COLORS */
-$bg-input: #f0f8f5;
-$placeholder: #b3b3b3;
-$border-color: #afafaf;
+$input-active: #0d8284;
+$input-empty: #afafaf;
+$input-fill: #e8f0fe;
+$fill-refer: #fff7b8;
 $error: #ff4b55;
+
+/* BUTTONS */
+$button-main: #ffeb4d;
+$button-hover: #ffe517;
+$button-secondary: #ffffff;
+$button-cancel: #f1f1f1;
+$button-disabled: #e4e4e4;
+
+/* NAVIGATION */
+$navigation-focus: #e1f2ec;
+$navigation-hover: #c3e5d9;
+
+/* STATUS */
+$success: #1da53c;
+$processing: #0291bf;
+$pending: #db6900;
+$unpaid: #909090;
+
+/* ALERT */
+$success-bg-alert: #e1f2ec;
+$error-bg-alert: #fff5f5;
+$error-icon-alert: #c53030;
+$error-border-alert: #fc8181;
+$warning-bg-alert: #fbf0e5;
+$warning-icon-alert: #db6900;

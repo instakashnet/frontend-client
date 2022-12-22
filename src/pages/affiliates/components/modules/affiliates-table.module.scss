@@ -1,10 +1,12 @@
-@import "../../../../assets/css/colors";
+@use "sass:math";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .ContainerTable {
   p {
     color: #a3a3a3;
-    font-size: 0.9rem;
+    font-size: math.div($body, 1.111);
     font-weight: bold;
   }
 
@@ -12,7 +14,7 @@
     max-width: 2rem;
   }
 
-  > div {
+  >div {
     border: none;
     box-shadow: none;
   }
@@ -42,13 +44,13 @@
 
   .ThTable {
     padding: 10px 5px 5px;
-    font-size: 0.85rem;
+    font-size: math.div($body, 1.176);
     font-weight: bold;
     border: none;
     background-color: transparent;
-    color: $base-text;
+    color: $text-body;
 
-    > div {
+    >div {
       width: auto !important;
     }
 
@@ -68,8 +70,8 @@
   .TdTable {
     padding: 7px 5px;
     border: none;
-    font-size: 0.9rem;
-    color: $base-text;
+    font-size: math.div($body, 1.111);
+    color: $text-body;
     font-weight: bold;
   }
 
@@ -81,9 +83,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 0.85rem;
+    font-size: math.div($button, 1.764);
 
-    > div[role="status"] {
+    >div[role="status"] {
       visibility: hidden;
     }
   }
@@ -97,17 +99,17 @@
 
   .PaginationButtonNext:disabled,
   .PaginationButtonPrev:disabled {
-    color: $base-text;
+    color: $text-body;
     font-weight: normal;
   }
 
   @include respond(tablet) {
     p {
-      font-size: 1.1rem;
+      font-size: $body * 1.1;
     }
 
     .PaginationTable {
-      font-size: 1rem;
+      font-size: math.div($button, 1.5);
     }
 
     img {
@@ -120,7 +122,7 @@
 
     .ThTable {
       padding: 10px;
-      font-size: 1rem;
+      font-size: $body;
     }
 
     .SearchTable input {
@@ -140,7 +142,7 @@
         display: none;
       }
 
-      > div[role="status"] {
+      >div[role="status"] {
         margin: 0;
         visibility: visible;
       }
@@ -161,7 +163,7 @@
 
   @include respond(tablet) {
     button {
-      font-size: 1rem;
+      font-size: math.div($button, 1.5);
     }
   }
 }

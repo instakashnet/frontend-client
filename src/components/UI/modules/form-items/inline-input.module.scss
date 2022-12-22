@@ -1,5 +1,7 @@
-@import "../../../../assets/css/colors";
+@use "sass:math";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .FormControl {
   position: relative;
@@ -8,12 +10,12 @@
   input,
   select {
     padding: 14px;
-    font-size: 0.9rem;
+    font-size: math.div($body, 1.11);
   }
-  
+
   select {
     padding: 15px 10px;
-    font-size: 0.85rem;
+    font-size: math.div($body, 1.17);
     border-radius: 4px;
   }
 
@@ -23,13 +25,14 @@
   }
 
   svg {
-    color: $placeholder;
+    color: $text-placeholder;
   }
 
   @include respond(tablet) {
+
     select,
     input {
-      font-size: 1rem;
+      font-size: $body;
     }
   }
 }
@@ -37,26 +40,47 @@
 .FlexInput {
   display: flex;
   align-items: center;
+  border: 1px solid $input-empty;
+  border-radius: 4px;
 
   .OutlinedInput {
-    border-radius: 4px 0 0 4px;
+    padding-left: 10px;
+    border-right: 1px solid $input-empty;
     width: 100%;
     background-color: #fff;
   }
-  
+
   input {
-    flex: 0.8;
-    border-radius: 4px 0;
-    border-right: none;
+    flex: 50%;
+    padding: 3.5px 0;
   }
 
-  button {
-    flex: 0.2;
-    padding: 11.5px 15px;
-    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.1);
-    font-size: 1rem;
-    border-radius: 0 3px 3px 0;
-    color: #fff;
-    background-color: $secondary-green;
+  .InputBtn {
+    flex: 0.1;
+    padding: 14px 8px;
+    box-shadow: none;
+    font-size: math.div($button, 1.57);
+    border-radius: 0;
+    color: $secondary-green;
+    text-decoration-line: underline;
+
+    &:disabled {
+      background-color: transparent;
+      color: $text-placeholder;
+    }
+  }
+
+  @include respond(desktop) {
+    input {
+      font-size: $body * 1.05;
+
+      &::placeholder {
+        font-size: math.div($body, 1.02);
+      }
+    }
+
+    .InputBtn {
+      font-size: math.div($button, 1.5);
+    }
   }
 }

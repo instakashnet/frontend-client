@@ -1,34 +1,35 @@
-import camelize from "camelize";
-import { all, call,fork, put, takeEvery, takeLatest } from "redux-saga/effects";
+import { all, call, fork, put, takeEvery, takeLatest } from "redux-saga/effects";
+// SWEET ALERT
 import Swal from "sweetalert2";
-
 // API SERVICES
-import { exchangeService } from "../../api/axios";
+import { cancelExchangeSvc, completeExchangeSvc, createExchangeSvc, getLastOrderSvc, getRatesSvc, processCodeSvc, validateCouponSvc } from "../../api/services/exchange.service";
+// SNACKBAR ALERT ACTIONS
+import { snackActions } from "../../hoc/snackbar-configurator.component";
+// HISTORY
 import history from "../../shared/history";
-import { getOrdersInit,setAlertInit } from "../../store/actions";
+// REDUX
+import { getOrdersInit } from "../../store/actions";
 import * as actions from "./actions";
 import * as types from "./types";
 
 function* getRates() {
   try {
-    const res = yield exchangeService.get("/rates");
-    if (res.status === 200) {
-      const rates = { id: res.data[0].id, buy: +res.data[0].buy, sell: +res.data[0].sell };
+    const res = yield call(getRatesSvc);
+    const rates = { id: res.id, buy: +res.buy, sell: +res.sell };
 
-      yield put(actions.getRatesSuccess(rates));
-    }
+    yield put(actions.getRatesSuccess(rates));
   } catch (error) {
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.exchangeError());
   }
 }
 
 function* getLastOrder() {
   try {
-    const res = yield exchangeService.get("/order/last-order");
-    const data = camelize(res.data);
+    const lastOrder = yield call(getLastOrderSvc);
 
-    yield put(actions.getLastOrderSuccess(data.lastOrder));
-    if (data.lastOrder?.status === 2) yield call([history, "push"], "/currency-exchange/complete");
+    yield put(actions.getLastOrderSuccess(lastOrder));
+    if (lastOrder?.status === 2) yield call([history, "push"], "/currency-exchange/complete");
   } catch (error) {
     yield put(actions.exchangeError());
   }
@@ -36,13 +37,13 @@ function* getLastOrder() {
 
 function* validateCoupon({ couponName, profileType, clearCoupon }) {
   try {
-    const res = yield exchangeService.get(`/coupons/${couponName}/${profileType}`);
-    if (res.status === 200) {
-      yield put(actions.validateCouponSuccess({ name: couponName, discount: res.data.discount, minimumAmount: res.data.minAmountBuy }));
-      yield call(clearCoupon, "");
-    }
+    const res = yield call(validateCouponSvc, couponName, profileType);
+    yield put(actions.validateCouponSuccess({ name: couponName, discount: res.discount, minimumAmount: res.minAmountBuy }));
+    yield call(clearCoupon, "");
   } catch (error) {
-    if (!couponName.includes("NUEVOREFERIDO")) yield put(setAlertInit(error.message, "error"));
+    if (!couponName.includes("NUEVOREFERIDO") || (couponName.includes("NUEVOREFERIDO") && profileType === "juridica")) {
+      if (error?.message) yield snackActions.error(error.message);
+    }
     yield put(actions.exchangeError());
   }
 }
@@ -51,17 +52,16 @@ function* createExchange({ values, amountSent, profile }) {
   const exchangeValues = {
     ...values,
     amount_sent: amountSent,
+    amount_received: parseFloat(values.amount_received),
     profile_id: profile.id,
   };
 
   try {
-    const res = yield exchangeService.post("/order/step-2", exchangeValues);
-    if (res.status === 201) {
-      yield put(actions.createExchangeSuccess(res.data));
-      yield call([history, "push"], "/currency-exchange/step-2");
-    }
+    const res = yield call(createExchangeSvc, exchangeValues);
+    yield put(actions.createExchangeSuccess(res));
+    yield call([history, "push"], "/currency-exchange/step-2");
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.exchangeError());
   }
 }
@@ -75,88 +75,10 @@ function* completeExchange({ values, orderId }) {
   };
 
   try {
-    const res = yield exchangeService.put(`/order/step-3/${orderId}`, exchangeValues);
+    const res = yield call(completeExchangeSvc, orderId, exchangeValues);
 
-    if (res.status === 200) {
-      if (res.data.noBank) {
-        yield call([history, "push"], "/dashboard/recent");
-        yield Swal.fire({
-          title: "Solicitud completada",
-          text: "Tu solicitud de cambio fue recibida y será procesada en breve. Puedes ver el detalle en tu tabla de actividades.",
-          imageUrl: `${process.env.PUBLIC_URL}/images/success.svg`,
-          imageAlt: "success",
-          showConfirmButton: false,
-          showCloseButton: true,
-        });
-        yield call([sessionStorage, "removeItem"], "order");
-        return yield put(actions.processCodeSuccess());
-      }
-
-      yield put(actions.completeExchangeSuccess(res.data));
-      yield call([history, "push"], "/currency-exchange/complete");
-    }
-  } catch (error) {
-    if (error.code === "C4006") {
-      yield call(
-        [Swal, "fire"],
-        "Ha ocurrido un error",
-        `En este momento no podemos crear su pedido hacía el banco que está solicitando. Por favor intente nuevamente con un monto menor. Si el problema persiste contactese con atención al cliente.`,
-        "error"
-      );
-    } else yield put(setAlertInit(error.message, "error"));
-
-    yield put(actions.exchangeError());
-  }
-}
-
-function* cancelExchange({ orderId, status, closeModal }) {
-  try {
-    const result = yield Swal.fire({
-      icon: "warning",
-      title: "¿Estás seguro?",
-      text: "Deberás crear una nueva operación para recibir tu cambio.",
-      showCancelButton: true,
-      cancelButtonColor: "#ffeb4d",
-      confirmButtonColor: "#ff4b55",
-      confirmButtonText: "Continuar",
-      cancelButtonText: "Regresar",
-    });
-
-    let URL = `/order/cancel/${orderId}`;
-    if (status === "draft") URL = `/order/draft/${orderId}`;
-
-    if (result.isConfirmed) {
-      const res = yield exchangeService.delete(URL);
-
-      if (res.status === 202) {
-        if (status === "details") {
-          yield put(getOrdersInit(5));
-          yield call(closeModal);
-        }
-
-        if (status === "complete" || status === "draft") yield call([history, "push"], "/currency-exchange");
-
-        yield Swal.fire("Exitoso", "Su solicitud de cambio fue cancelada.", "success");
-        yield put(actions.cancelExchangeSuccess());
-      }
-    } else yield put(actions.exchangeError());
-  } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
-    yield put(actions.exchangeError());
-  }
-}
-
-function* processCode({ values, orderId, processType, closeModal }) {
-  const processValue = { transaction_code: values ? values.transaction_code : null };
-
-  try {
-    const res = yield exchangeService.put(`/order/step-4/${orderId}`, processValue);
-    if (res.status === 200) {
-      if (processType === "details") {
-        yield put(getOrdersInit());
-        yield call(closeModal);
-      } else yield call([history, "push"], "/dashboard/recent");
-
+    if (res.noBank) {
+      yield call([history, "push"], "/dashboard/recent");
       yield Swal.fire({
         title: "Solicitud completada",
         text: "Tu solicitud de cambio fue recibida y será procesada en breve. Puedes ver el detalle en tu tabla de actividades.",
@@ -165,12 +87,89 @@ function* processCode({ values, orderId, processType, closeModal }) {
         showConfirmButton: false,
         showCloseButton: true,
       });
-      yield put(actions.processCodeSuccess());
+      yield call([sessionStorage, "removeItem"], "order");
+      return yield put(actions.processCodeSuccess());
     }
+
+    yield put(actions.completeExchangeSuccess(res));
+    yield call([history, "push"], "/currency-exchange/complete");
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    if (error.code === "C4006") {
+      yield call(
+        [Swal, "fire"],
+        "Lo sentimos",
+        "En este momento no podemos crear tu pedido hacia el banco que estás solicitando. Por favor intenta más tarde o contáctanos.",
+        "error"
+      );
+    } else if (error?.message) yield snackActions.error(error.message);
+
     yield put(actions.exchangeError());
-    if (error.data && error.data.code === 4005 && processType !== "details") yield call([history, "push"], "/currency-exchange");
+  }
+}
+
+function* cancelExchange({ orderId, status, necessaryConfirm, closeModal }) {
+  try {
+    let result = { isConfirmed: necessaryConfirm };
+
+    if (necessaryConfirm) {
+      result = yield Swal.fire({
+        icon: "warning",
+        title: "¿Estás seguro?",
+        text: "Deberás crear una nueva operación para recibir tu cambio.",
+        showCancelButton: true,
+        cancelButtonColor: "#ffeb4d",
+        confirmButtonColor: "#ff4b55",
+        confirmButtonText: "Continuar",
+        cancelButtonText: "Regresar",
+      });
+    }
+
+    let URL = `/order/cancel/${orderId}`;
+    if (status === "draft") URL = `/order/draft/${orderId}`;
+
+    if (!necessaryConfirm || result.isConfirmed) {
+      yield call(cancelExchangeSvc, URL);
+
+      if (status === "details") {
+        yield put(getOrdersInit(5));
+        yield call(closeModal);
+      }
+
+      if (status === "complete" || status === "draft") yield call([history, "push"], "/currency-exchange");
+
+      if (result.isConfirmed) yield Swal.fire("Exitoso", "Su solicitud de cambio fue cancelada.", "success");
+
+      yield put(actions.cancelExchangeSuccess());
+    } else yield put(actions.exchangeError());
+  } catch (error) {
+    if (error?.message) yield snackActions.error(error.message);
+    yield put(actions.exchangeError());
+  }
+}
+
+function* processCode({ values, orderId, processType, closeModal }) {
+  const processValue = { transaction_code: values ? values.transaction_code : null };
+
+  try {
+    yield call(processCodeSvc, orderId, processValue);
+    if (processType === "details") {
+      yield put(getOrdersInit());
+      yield call(closeModal);
+    } else yield call([history, "push"], "/dashboard/recent");
+
+    yield Swal.fire({
+      title: "Solicitud completada",
+      text: "Tu solicitud de cambio fue recibida y será procesada en breve. Puedes ver el detalle en tu tabla de actividades.",
+      imageUrl: `${process.env.PUBLIC_URL}/images/success.svg`,
+      imageAlt: "success",
+      showConfirmButton: false,
+      showCloseButton: true,
+    });
+    yield put(actions.processCodeSuccess());
+  } catch (error) {
+    if (error?.message) yield snackActions.error(error.message);
+    yield put(actions.exchangeError());
+    if (error.code === 4005 && processType !== "details") yield call([history, "push"], "/currency-exchange");
   }
 }
 

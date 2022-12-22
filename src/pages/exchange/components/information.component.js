@@ -1,10 +1,9 @@
-import React from "react";
-
 // COMPONENT
 import { Button } from "../../../components/UI/button.component";
 // HOOK
 import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
 // ASSETS & CLASSES
+import MoneyIcon from "@material-ui/icons/Money";
 import InfoImg from "../assets/images/exchange-user.png";
 import Arrows from "../assets/images/icons/arrows.svg";
 import Dollar from "../assets/images/icons/dollar.svg";
@@ -17,7 +16,7 @@ const Information = ({ onClose }) => {
   return (
     <div className={classes.Information}>
       <div className="flex items-end justify-center">
-        <div className="flex items-end justify-center flex-wrap relative lg:flex-nowrap">
+        <div className={`flex justify-center flex-wrap relative lg:flex-nowrap ${classes.InfoContainer}`}>
           <h3 className={classes.InfoTitle}>¡Importante!</h3>
           <div className={classes.InfoImgCard}>
             <img src={InfoImg} alt="information" />
@@ -27,12 +26,16 @@ const Information = ({ onClose }) => {
             <p>Recibimos solo transferencias. No aceptamos depósitos.</p>
           </div>
           <div className={classes.InfoCard}>
-            <img src={User} alt="clock" />
-            <p>La cuenta de origen debe ser del mismo titular que registra el cambio.</p>
+            <img src={User} alt="user" />
+            <p>Las cuentas de origen y destino deben ser del mismo titular que registra el cambio.</p>
           </div>
           <div className={classes.InfoCard}>
-            <img src={Dollar} alt="clock" />
+            <img src={Dollar} alt="dollar sign" />
             <p>Importes mayores de $10,000 pueden tardar más de lo usual.</p>
+          </div>
+          <div className={classes.InfoCard}>
+            <MoneyIcon />
+            <p>Nuestro monto mínimo de cambio establecido es de $ 40.00</p>
           </div>
         </div>
       </div>

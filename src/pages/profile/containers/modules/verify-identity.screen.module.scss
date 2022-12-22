@@ -1,4 +1,6 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .VerifyIdentityWrapper {
   margin-top: 2rem;
@@ -6,7 +8,7 @@
   position: relative;
 
   h1 {
-    font-size: 1.5rem;
+    font-size: math.div($title, 2.666);
     font-weight: bold;
     color: $base-green;
   }
@@ -16,12 +18,12 @@
     font-weight: bold;
     color: $base-green;
     margin-bottom: 0.5rem;
-    font-size: 1.15rem;
+    font-size: math.div($subtitle, 1.304);
   }
 
   h2 {
     text-align: center;
-    font-size: 1.35rem;
+    font-size: math.div($title, 2.962);
   }
 
   ul {
@@ -36,7 +38,7 @@
 }
 
 .DocumentSelect {
-  background-color: $card-color;
+  background-color: #fff;
   width: 100%;
   max-width: 25rem;
   min-height: 60px;
@@ -54,6 +56,6 @@
   }
 
   p {
-    font-size: 0.8rem;
+    font-size: math.div($body, 1.25);
   }
 }

@@ -1,23 +1,44 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/font-sizes";
 
 .Information {
   position: relative;
   width: 100%;
   top: 25px;
   margin-bottom: 25px;
+  color: $base-green;
+
+  button {
+    color: initial;
+  }
 
   @include respond(tablet) {
     top: 55px;
   }
+
+  @include respond(desktop) {
+    margin-top: 20px;
+  }
+}
+
+.InfoContainer {
+  flex-direction: column;
+
+  @include respond(desktop) {
+    flex-direction: row;
+    background-color: #f0f8f5;
+    border-radius: 10px;
+    box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.25);
+  }
 }
 
 .InfoTitle {
-  color: $base-green;
   font-weight: bold;
   text-align: left;
   margin-bottom: 10px;
-  font-size: 1.3rem;
+  font-size: math.div($title, 3.076);
   z-index: 1;
 
   @include respond(tablet) {
@@ -28,22 +49,19 @@
   }
 
   @include respond(ldesktop) {
-    left: 100px;
+    left: 86px;
   }
 }
 
 .InfoImgCard {
-  height: 8rem;
   box-shadow: none;
   position: relative;
-  width: 60%;
+  width: 22%;
   display: none;
-  border-radius: 10px 0 0 10px;
-  background-color: $card-color;
 
   img {
     position: absolute;
-    left: -30px;
+    left: -80px;
     top: -77px;
     max-width: 15rem;
   }
@@ -62,12 +80,11 @@
   justify-content: flex-start;
   border-radius: 10px;
   box-shadow: none;
-  background-color: $card-color;
   padding: 10px 7px;
+  background-color: #fff;
 
   p {
-    font-size: 0.85rem;
-    color: $base-green;
+    font-size: math.div($body, 1.176);
     margin-left: 20px;
   }
 
@@ -77,10 +94,6 @@
     border-radius: 0;
     margin: 10px 0;
 
-    &:last-of-type {
-      border-radius: 0 10px 10px 0;
-    }
-
     p {
       margin-top: 10px;
       margin-left: 0;
@@ -88,13 +101,14 @@
   }
 
   @include respond(desktop) {
+    background-color: transparent;
     min-width: 14rem;
-    max-width: 15rem;
+    max-width: 17rem;
     margin: 0;
-    min-height: 10rem;
+    min-height: 8rem;
   }
 
   @include respond(ldesktop) {
-    max-width: 16rem;
+    max-width: 19rem;
   }
 }

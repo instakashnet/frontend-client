@@ -1,6 +1,5 @@
 import { FormControl, FormLabel, RadioGroup } from "@material-ui/core";
 import React from "react";
-
 // COMPONENTS
 import Card from "../../../components/UI/card.component";
 import { RadioComponent } from "../../../components/UI/form-items/radio.component";
@@ -11,6 +10,7 @@ import KashInput from "./calculator-items/kash-input.component";
 // CLASSES
 import classes from "./modules/kash-used.module.scss";
 
+
 const KashUsed = ({ formik, balance, totalAmount, onKashUsed, order }) => {
   const { currencySentSymbol, amountSent } = order;
 
@@ -19,7 +19,7 @@ const KashUsed = ({ formik, balance, totalAmount, onKashUsed, order }) => {
       <div className="flex items-center md:ml-10">
         <FormControl component="fieldset">
           <FormLabel component="legend">
-            tienes <b>{balance} KASH</b> disponibles, ¿Deseas canjearlos?
+            Tienes <b>{balance} KASH</b> disponibles. ¿Deseas canjearlos?
           </FormLabel>
           <RadioGroup row aria-label="position" name="kashApplied" defaultValue="top" value={formik.values.kashApplied} onChange={formik.handleChange} className={classes.KashRadioGroup}>
             <RadioComponent label="SI" value="yes" checked={formik.values.kashApplied === "yes"} />

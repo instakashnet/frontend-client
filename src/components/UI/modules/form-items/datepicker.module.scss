@@ -1,5 +1,5 @@
-@import "../../../../assets/css/colors";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/colors";
 
 .FormControl {
   margin-top: 16px;
@@ -10,11 +10,11 @@
       padding: 13px;
       border: 1px solid #ccb;
       border-radius: 4px;
-      color: $base-text;
+      color: $text-body;
     }
   }
 
-  @include respond(desktop) {
+  @include respond(tablet) {
     .DateInput.EmptyInput {
       margin-top: 7px;
     }

@@ -12,12 +12,12 @@
 
 .FooterTable {
   border-radius: 0 0 10px 10px !important;
-  background-color: $bg-gray !important;
+  background-color: #f0f8f5 !important;
 }
 
 .ThTable,
 .TdTable {
   border: none !important;
-  border-bottom: 1px solid #c3e5d9 !important;
+  border-bottom: 1px solid $navigation-hover !important;
   background-color: #fff !important;
 }

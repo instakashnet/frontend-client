@@ -1,7 +1,6 @@
 import { AttachMoney } from "@material-ui/icons";
 import React from "react";
 import Skeleton from "react-loading-skeleton";
-
 // COMPONENT
 import Card from "../../../../components/UI/card.component";
 // CLASSES
@@ -20,11 +19,11 @@ const TransferedCharts = ({ isLoading, orderAmounts }) => {
         <Card className="px-3 md:px-8 py-6 flex flex-col justify-center">
           <div className="mb-4 flex flex-col justify-center">
             <h4>Dólares a Soles</h4>
-            <PieChart dataset={orderAmounts.buy ? orderAmounts.buy : [0, 0]} labels={["$", "S/."]} colors={["#FF912B", "#69BEA0"]} />
+            <PieChart dataset={orderAmounts?.buy ? orderAmounts.buy : [0, 0]} labels={["$", "S/."]} colors={["#FF912B", "#69BEA0"]} />
           </div>
           <div className="my-4 flex flex-col justify-center">
             <h4>Soles a Dólares</h4>
-            <PieChart dataset={orderAmounts.sell ? orderAmounts.sell : [0, 0]} labels={["$", "S/."]} colors={["#20A2A5", "#FFBD80"]} />
+            <PieChart dataset={orderAmounts?.sell ? orderAmounts.sell : [0, 0]} labels={["$", "S/."]} colors={["#20A2A5", "#FFBD80"]} />
           </div>
         </Card>
       )}

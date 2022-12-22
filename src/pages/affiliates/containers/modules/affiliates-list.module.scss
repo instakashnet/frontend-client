@@ -1,8 +1,10 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/font-sizes";
 
 p.Completed {
-  color: $base-green !important;
+  color: $base-green  !important;
   font-weight: bold;
 }
 
@@ -34,7 +36,7 @@ img.NoReward {
   justify-content: center;
 
   h4 {
-    font-size: 2rem;
+    font-size: math.div($title, 2);
   }
 
   p {
@@ -48,5 +50,9 @@ img.NoReward {
 
   &:last-of-type {
     color: #eab726;
+  }
+
+  @include respond(tablet) {
+    width: 8.6rem;
   }
 }

@@ -1,18 +1,48 @@
-@import "../../../../assets/css/colors";
+@use "sass:math";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
+
+.CalculatorContainer {
+  width: fit-content;
+  margin: 0 auto 23px;
+  padding-top: 30px;
+  box-shadow: none;
+  border-radius: 16px;
+
+  .CalculatorTitle {
+    color: $base-green;
+    font-size: math.div($title, 2.5);
+  }
+
+  form {
+    max-width: 23rem;
+  }
+
+  @include respond(tablet) {
+    padding: 30px 35px 15px;
+  }
+
+  @include respond(desktop) {
+    .CalculatorTitle {
+      font-size: math.div($title, 2.133);
+    }
+  }
+}
 
 .Timer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  p {
-    font-size: 0.9rem;
+  .TimerP {
+    font-size: math.div($body, 1.111);
+    color: $text-body;
   }
 
   @include respond(tablet) {
-    p {
-      font-size: 1rem;
+    .TimerP {
+      font-size: math.div($body, 1.032);
     }
   }
 }

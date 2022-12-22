@@ -1,7 +1,7 @@
-import { DeleteOutlineOutlined,EditOutlined } from "@material-ui/icons";
-import React, { useState } from "react";
+import { DeleteOutlineOutlined, EditOutlined } from "@material-ui/icons";
+import { memo, useState } from "react";
 // REDUX
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // REACT SPINNERS
 import { HashLoader } from "react-spinners";
 
@@ -48,6 +48,12 @@ const AccountDetails = () => {
           <hr />
           {!edit && (
             <>
+              {accountDetails.joint && (
+                <>
+                  <h4 className="mt-4">Cuenta</h4>
+                  <p>Mancomunada</p>
+                </>
+              )}
               <div className="grid grid-cols-1 md:grid-cols-2">
                 <div>
                   <h4 className="md:mt-4">Número de cuenta</h4>
@@ -58,7 +64,23 @@ const AccountDetails = () => {
                   <p>{accountDetails.alias}</p>
                 </div>
               </div>
-              {accountDetails.thirdParty && (
+              {accountDetails.joint && (
+                <div className="grid grid-cols-1 md:grid-cols-2">
+                  <div>
+                    <h4 className="md:mt-4">Nombre del cotitular</h4>
+                    <p>
+                      {accountDetails.jointAccount.firstName} {accountDetails.jointAccount.lastName}
+                    </p>
+                  </div>
+                  <div className="md:text-right">
+                    <h4 className="mt-4">Documento</h4>
+                    <p>
+                      {accountDetails.jointAccount.documentType} {accountDetails.jointAccount.documentNumber}
+                    </p>
+                  </div>
+                </div>
+              )}
+              {/* {accountDetails.thirdParty && (
                 <div className="grid grid-cols-1 md:grid-cols-3">
                   <div>
                     <h4 className="md:mt-4">Nombre del titular</h4>
@@ -75,7 +97,7 @@ const AccountDetails = () => {
                     </p>
                   </div>
                 </div>
-              )}
+              )} */}
               <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6 mt-6">
                 <Button className="action-button mb-4 md:mb-0" type="button" onClick={() => setEdit(true)}>
                   Editar cuenta <EditOutlined className="ml-2" />
@@ -93,4 +115,4 @@ const AccountDetails = () => {
   );
 };
 
-export default React.memo(AccountDetails);
+export default memo(AccountDetails);

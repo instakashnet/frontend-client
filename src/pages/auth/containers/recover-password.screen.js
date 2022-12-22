@@ -3,10 +3,9 @@ import { Mail } from "@material-ui/icons";
 import { useFormik } from "formik";
 import React from "react";
 // REDUX
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // REACT ROUTER
 import { Link } from "react-router-dom";
-
 // COMPONENTS
 import { Button } from "../../../components/UI/button.component";
 import { Input } from "../../../components/UI/form-items/input.component";
@@ -16,6 +15,7 @@ import { recoverPasswordInit } from "../../../store/actions";
 import { emailValidation } from "../helpers/formValidations";
 // CLASSES
 import sharedClass from "./modules/sharedClasses.module.scss";
+
 
 const RecoverPassword = () => {
   const dispatch = useDispatch();

@@ -1,0 +1,26 @@
+// File imported by rates-modal-component.js and timeout-modal.component.js
+@import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/colors";
+
+.Container {
+  max-width: 17rem;
+  margin-left: 5px;
+  margin-right: 5px;
+
+  p {
+    color: $text-body;
+  }
+
+  .Btn {
+    max-width: 100%;
+    color: $text-body;
+  }
+
+  @include respond(desktop) {
+    max-width: 25rem;
+
+    p {
+      margin: 0 0.625rem 1.5rem;
+    }
+  }
+}

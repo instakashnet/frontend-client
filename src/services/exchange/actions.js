@@ -57,10 +57,11 @@ export const completeExchangeSuccess = (order) => ({
   order,
 });
 
-export const cancelExchangeInit = (orderId, status = null, closeModal) => ({
+export const cancelExchangeInit = (orderId, status = null, necessaryConfirm = true, closeModal) => ({
   type: types.CANCEL_EXCHANGE_INIT,
   orderId,
   status,
+  necessaryConfirm,
   closeModal,
 });
 

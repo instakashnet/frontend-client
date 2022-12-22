@@ -1,9 +1,9 @@
-import { CircularProgress, FormControl,FormHelperText, InputAdornment, InputLabel, OutlinedInput } from "@material-ui/core";
+import { CircularProgress, FormControl, FormHelperText, InputAdornment, InputLabel, OutlinedInput } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import React from "react";
-import { useState } from "react";
-
+import React, { useState } from "react";
+// CLASSES
 import classes from "../modules/form-items/input.module.scss";
+
 
 export const Input = ({ name, onChange, onBlur, value, label, type, error, touched, iconEnd, groupClass, isLoading, helperText, ...rest }) => {
   const [passwordType, setPasswordType] = useState("password");
@@ -35,7 +35,8 @@ export const Input = ({ name, onChange, onBlur, value, label, type, error, touch
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        inputProps={InputProps}
+        endAdornment={InputProps.endAdornment}
+        classes={{ adornedEnd: classes.EndAdornment }}
         {...rest}
       />
       <FormHelperText id="input" className={`${error && touched ? "error-msg" : ""}`}>

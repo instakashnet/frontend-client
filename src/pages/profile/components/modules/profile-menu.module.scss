@@ -47,7 +47,7 @@
             color: #fff;
           }
 
-          + div {
+          +div {
             width: 100%;
             position: absolute;
             height: 2px;
@@ -80,7 +80,7 @@
           padding: 1.5rem 1rem;
           display: flex;
           flex-flow: column;
-          color: #676767;
+          color: $text-body;
 
           span {
             color: $base-green;
@@ -92,14 +92,13 @@
           }
 
           &.Active {
-            color: #676767;
             background-color: #fff;
 
             span {
               color: $base-green;
             }
 
-            + div {
+            +div {
               display: none;
             }
           }

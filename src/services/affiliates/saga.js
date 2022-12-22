@@ -1,21 +1,21 @@
 import camelize from "camelize";
-import { all, fork,put, takeEvery } from "redux-saga/effects";
-
-// API SERVICES
-import { authService } from "../../api/axios";
-import { setAlertInit } from "../../store/actions";
+import { all, call, fork, put, takeEvery } from "redux-saga/effects";
+// API SERVICE
+import { getAffiliatesSvc } from "../../api/services/auth.service";
+// SNACKBAR ALERT ACTIONS
+import { snackActions } from "../../hoc/snackbar-configurator.component";
+// REDUX
 import * as actions from "./actions";
 import * as types from "./types";
 
+
 function* getAffiliates() {
   try {
-    const res = yield authService.get("/users/affiliates");
-    if (res.status === 200) {
-      const affiliatesData = camelize(res.data.affiliates);
-      yield put(actions.getAffiliatesSuccess(affiliatesData));
-    }
+    const res = yield call(getAffiliatesSvc);
+    const affiliatesData = camelize(res);
+    yield put(actions.getAffiliatesSuccess(affiliatesData));
   } catch (error) {
-    yield put(setAlertInit(error.message, "error"));
+    if (error?.message) yield snackActions.error(error.message);
     yield put(actions.affiliatesError());
   }
 }

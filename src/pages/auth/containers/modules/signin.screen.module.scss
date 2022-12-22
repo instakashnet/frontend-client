@@ -1,7 +1,9 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .SignInMessage {
-  font-size: 0.9rem;
+  font-size: math.div($body, 1.111);
   text-align: center;
   margin: 15px 0;
   position: relative;
@@ -13,7 +15,7 @@
     display: block;
     height: 1px;
     width: 26%;
-    background-color: lighten($color: $base-text, $amount: 30);
+    background-color: lighten($color: $text-body, $amount: 30);
     position: absolute;
     left: 0;
     top: 50%;

@@ -1,11 +1,9 @@
-import "swiper/swiper.min.css";
-import "swiper/components/navigation/navigation.min.css";
-
 import { ArrowLeft, ArrowRight } from "@material-ui/icons";
 import React, { useRef } from "react";
+import "swiper/components/navigation/navigation.min.css";
 import SwiperCore, { Navigation } from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import "swiper/swiper.min.css";
 import Step1Img from "../assets/images/step1.svg";
 import Step2Img from "../assets/images/step2.svg";
 import Step3Img from "../assets/images/step3.svg";
@@ -42,7 +40,7 @@ const StepsSwiper = () => {
       <SwiperSlide>
         <Step img={Step2Img} title="2. Disfruta tus recompensas">
           <p>
-            Cada amigo registrado con tu codigo recibirá una tasa preferencial en su primer cambio y tú ganarás <b>1 KASH = 1 $</b>.
+            Cada amigo registrado con tu código recibirá una tasa preferencial en su primer cambio y tú ganarás <b>2 KASH (1 KASH = 1 $)</b>.
           </p>
         </Step>
       </SwiperSlide>

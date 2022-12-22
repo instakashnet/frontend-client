@@ -1,19 +1,40 @@
+@use "sass:math";
 @import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .TransferCode {
-  max-width: 26rem;
+  max-width: 28rem;
   margin: 0 auto;
 
-  h4 {
-    text-align: left;
-    margin-bottom: 10px;
-    font-size: 1.1rem;
+  .ActionButton {
+    padding: 12.5px 10px;
+    border-radius: 3px;
+    width: 100%;
+    max-width: 20rem;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    background-color: $button-main;
+    transition: 250ms ease-out;
+
+    &:hover {
+      background-color: $button-hover;
+    }
+
+    &:hover,
+    &:active {
+      box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.15);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 }
 
 .Amount {
   color: $base-green;
-  font-size: 1.4rem !important;
+  font-size: math.div($body, 0.714);
   font-weight: bold;
   margin: 5px 0;
   display: flex;
@@ -27,7 +48,12 @@
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
   color: $base-green;
 
+  svg {
+    color: $base-green;
+  }
+
   p {
     font-weight: bold;
+    color: $text-body;
   }
 }

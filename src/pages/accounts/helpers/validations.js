@@ -20,6 +20,34 @@ export const addAccountValidation = Yup.object().shape({
   alias: Yup.string().required("Debes ingresar un alias.").min(5, "Debe ser mínimo de 5 caracteres.").max(40, "No deben ser más de 40 caracteres."),
   acc_type: Yup.string().required("Debes seleccionar un tipo de cuenta."),
   accept: Yup.boolean().oneOf([true], "Debes declarar que es tu cuenta personal."),
+  // Validaciones de cuenta mancomunada
+  firstNameJoint: Yup.string().when("joint", {
+    is: "true",
+    then: Yup.string().required("Debes colocar el nombre."),
+    otherwise: Yup.string().notRequired(),
+  }),
+  fatherSurname: Yup.string().when("joint", {
+    is: "true",
+    then: Yup.string().required("Debes colocar el apellido paterno."),
+    otherwise: Yup.string().notRequired(),
+  }),
+  motherSurname: Yup.string().when("joint", {
+    is: "true",
+    then: Yup.string().required("Debes colocar el apellido materno."),
+    otherwise: Yup.string().notRequired(),
+  }),
+  documentTypeJoint: Yup.string().when("joint", {
+    is: "true",
+    then: Yup.string().required("Debes seleccionar un tipo de documento."),
+    otherwise: Yup.string().notRequired(),
+  }),
+  documentNumberJoint: Yup.string().when("joint", {
+    is: "true",
+    then: Yup.string()
+      .required("Debes colocar un nro. de documento.")
+      .matches(/^[0-9]{8,13}$/, "Número de documento ingresado inválido."),
+    otherwise: Yup.string().notRequired(),
+  }),
 });
 
 export const addThirdPartyAccountSchema = Yup.object().shape({
@@ -50,7 +78,7 @@ export const addThirdPartyAccountSchema = Yup.object().shape({
   documentType: Yup.string().required("Debes seleccionar un tipo de documento."),
   razonSocial: Yup.string().when("thirdPartyAccType", {
     is: "juridica",
-    then: Yup.string().required("Debes colocar la razón social de la empresa."),
+    then: Yup.string().required("Debes colocar la razón social de la empresa.").min(3, "La razón social de la empresa debe ser de al menos 3 caracteres."),
     otherwise: Yup.string().notRequired(),
   }),
   name: Yup.string().when("thirdPartyAccType", {
@@ -80,7 +108,7 @@ export const editAccountValidation = Yup.object().shape({
       .matches(/^[0-9]{20}$/, "Número de CCI inválido. Solo números, 20 caracteres."),
     otherwise: Yup.string().notRequired(),
   }),
-  alias: Yup.string().required("Debes ingresar un alias.").max(40, "No deben ser más de 40 caracteres."),
+  alias: Yup.string().required("Debes ingresar un alias.").min(5, "Debe ser mínimo de 5 caracteres.").max(40, "No deben ser más de 40 caracteres."),
 });
 
 export const kashWithdrawalValidation = (amount) =>

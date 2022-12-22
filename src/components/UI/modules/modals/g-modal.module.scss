@@ -1,22 +1,29 @@
 // File imported by modal.component.js & slider-modal.component.js
 
-@import "../../../../assets/css/colors";
+@use "sass:math";
 @import "../../../../assets/css/breakpoints";
+@import "../../../../assets/css/colors";
+@import "../../../../assets/css/font-sizes";
 
 .Modal {
-  width: 100%;
+  width: fit-content;
   max-width: 33rem !important;
   margin: 5px !important;
+  overflow-x: hidden;
 
   h2 {
     color: $base-green;
-    font-size: 1.2rem;
+    font-size: math.div($title, 3.333);
     font-weight: 600;
+  }
+
+  @include respond(tablet) {
+    width: fit-content;
   }
 
   @include respond(desktop) {
     h2 {
-      font-size: 1.3rem;
+      font-size: math.div($title, 3.076);
     }
   }
 }
@@ -31,21 +38,22 @@
 
   h2 {
     color: $base-green;
-    font-size: 1.2rem;
+    font-size: math.div($title, 3.333);
     font-weight: 600;
   }
 
   @include respond(desktop) {
     h2 {
-      font-size: 1.3rem;
+      font-size: math.div($title, 3.076);
     }
   }
 }
 
 .ModalBody {
   padding: 15px 15px 35px !important;
-  font-size: 1rem;
-  background-color: $bg-color;
+  font-size: $body;
+  background-color: $light-color;
+  overflow-x: hidden;
 
   b {
     color: $base-green;

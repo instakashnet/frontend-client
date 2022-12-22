@@ -1,18 +1,18 @@
 import { Add } from "@material-ui/icons";
 import React, { useEffect } from "react";
 // REDUX
-import { useDispatch,useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 // COMPONENTS
 import { Button } from "../../../components/UI/button.component";
 import Spinner from "../../../components/UI/spinner.component";
 // REDUX ACTIONS
-import { closeModal,disableProfileInit, getProfilesInit, openModal, selectProfileInit } from "../../../store/actions";
+import { closeModal, disableProfileInit, getProfilesInit, openModal, selectProfileInit } from "../../../store/actions";
 // COMPONENTS
 import AddProfile from "../../profile/components/forms/add-profile.component";
 import SelectionCard from "../../profile/components/selection-card.component";
 // CLASSES
 import classes from "./modules/selection.screen.module.scss";
+
 
 const Selection = () => {
   const dispatch = useDispatch(),
@@ -40,7 +40,7 @@ const Selection = () => {
             <Spinner />
           ) : (
             <>
-              {profiles.map((profile) => (
+              {profiles?.map((profile) => (
                 <SelectionCard
                   onSelect={() => dispatch(selectProfileInit(profile.id))}
                   onDisable={() => dispatch(disableProfileInit(profile.id))}
@@ -53,7 +53,7 @@ const Selection = () => {
             </>
           )}
         </div>
-        {profiles.length < 6 && (
+        {profiles?.length <= 3 && (
           <>
             <div className="flex items-center justify-center my-3">
               <button onClick={addProfileHandler} className={classes.AddProfile}>

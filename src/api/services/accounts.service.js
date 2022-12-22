@@ -4,11 +4,11 @@ import { accountsService } from "../axios";
 export const getBanks = async () => {
   try {
     const response = await accountsService.get("/banks/172");
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
-    return response.data;
+    return response.data.banks;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -16,11 +16,11 @@ export const getBanks = async () => {
 export const getCurrencies = async () => {
   try {
     const response = await accountsService.get("/currencies/country/172");
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
-    return response.data;
+    return response.data.currencies;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
 
@@ -28,10 +28,33 @@ export const getCurrencies = async () => {
 export const getAccounts = async (type) => {
   try {
     const response = await accountsService.get(`/accounts?type=${type}`);
-    if (response.status >= 400) throw new Error(response.errors[0]);
+    if (response.status >= 400) throw response.errors[0];
 
-    return response.data;
+    return response.data.accounts;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
+
+// ADD ACCOUNT
+export const addAccountSvc = async (values) => {
+  try {
+    const response = await accountsService.post("/accounts", values);
+    if (response.status >= 400) throw response.errors[0];
+  } catch (error) {
+    throw error;
+  }
+};
+
+// EDIT ACCOUNT
+export const editAccountSvc = async (id, values) => {
+  try {
+    const response = await accountsService.put(`/accounts/${id}`, values);
+    if (response.status >= 400) throw response.errors[0];
+  } catch (error) {
+    throw error;
+  }
+};
+
+// DELETE ACCOUNT
+export const deleteAccountSvc = async (id) => await accountsService.delete(`/accounts/${id}`);

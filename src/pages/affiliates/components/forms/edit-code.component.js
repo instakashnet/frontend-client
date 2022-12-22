@@ -1,16 +1,16 @@
 import { useFormik } from "formik";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { Button } from "../../../../components/UI/button.component";
 import { Input } from "../../../../components/UI/form-items/input.component";
 import { editUserCodeInit } from "../../../../store/actions";
 import { usernameValidation } from "../../helpers/validations";
 
+
 const EditUserCode = () => {
   const dispatch = useDispatch();
   const isProcessing = useSelector((state) => state.Profile.isProcessing);
-  const username = useSelector((state) => state.Auth.userCode);
+  const username = useSelector((state) => state.Auth.user.username);
   const formik = useFormik({
     initialValues: { username },
     enableReinitialize: true,
@@ -20,7 +20,7 @@ const EditUserCode = () => {
 
   return (
     <div className="text-center">
-      <p>Puede editar su código de afiliado para que sea más facil de compartir y recordar.</p>
+      <p>Puedes editar tu código de afiliado para que sea más fácil de compartir y recordar.</p>
       <form onSubmit={formik.handleSubmit} className="mt-6 text-left max-w-sm mx-auto">
         <Input
           name="username"

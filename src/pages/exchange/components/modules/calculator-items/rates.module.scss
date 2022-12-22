@@ -1,33 +1,70 @@
+@use "sass:math";
+@import "../../../../../assets/css/breakpoints";
 @import "../../../../../assets/css/colors";
+@import "../../../../../assets/css/font-sizes";
 
 .Rates {
-  color: $base-green;
+  .BeforeRate {
+    margin-bottom: -3px;
+    margin-right: 6px;
+    font-size: math.div($body, 1.111);
+    text-decoration: line-through;
+    transition: opacity 0.5s;
 
-  p {
-    font-size: 0.9rem;
+    &:last-of-type {
+      margin-right: 0;
+      margin-left: 50px;
+    }
+  }
+
+  @include respond(tablet) {
+    .BeforeRate {
+      font-size: math.div($body, 1.032);
+      margin-right: 20px;
+    }
   }
 }
 
 .BuyCard,
 .SellCard {
-  border-radius: 10px 0 0 10px;
-  border-right: 1px solid $base-green;
-  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.05);
-  background-color: $card-color;
-  padding: 10px 25px;
+  background-color: #fff;
+  padding: 0 7px 7px;
+  transition: opacity 0.5s;
 
   h4 {
     color: $base-green;
+    font-weight: bold;
+    font-size: math.div($title, 4.444);
+  }
+
+  @include respond(tablet) {
+    padding: 0 12px 10px;
+
+    h4 {
+      font-size: math.div($title, 4);
+    }
+  }
+
+  @include respond(ldesktop) {
+    h4 {
+      font-size: math.div($title, 3.764);
+    }
   }
 }
 
-.SellCard {
-  border-radius: 0 10px 10px 0;
-  border-right: none;
+.Faint {
+  opacity: 0.4;
 }
 
-.Price {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: $base-green;
+.Hidden {
+  opacity: 0;
+}
+
+.RatesDivider {
+  position: relative;
+  display: block;
+  background-color: #cacaca;
+  height: 32px;
+  width: 1px;
+  top: -7px;
 }
