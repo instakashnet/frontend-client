@@ -1,13 +1,15 @@
 import { lazy, useEffect } from "react";
-import ReactPixel from "react-facebook-pixel";
+
 // REACT REDUX
 import { useDispatch, useSelector } from "react-redux";
 // REACT ROUTER
 import { Route, Router, Switch } from "react-router-dom";
 // COMPONENT
 import { ClosedModal } from "./components/UI/modals/closed-modal.component";
+import initGTM from "./helpers/initGTM";
 // HOC
 import asyncComponent from "./hoc/async.component";
+import FbPixel from "./hoc/fb-pixel.component";
 import { RefreshSession } from "./hoc/refresh-session.component";
 import ScrollToTop from "./hoc/scroll-top.component";
 import { SnackbarConfigurator } from "./hoc/snackbar-configurator.component";
@@ -38,24 +40,19 @@ const MyProfile = lazy(() => importsHandler(() => import("./pages/profile/contai
 const Accounts = lazy(() => importsHandler(() => import("./pages/accounts/containers/accounts.screen")));
 const Exchange = lazy(() => importsHandler(() => import("./pages/exchange/containers/exchange.screen")));
 
-ReactPixel.init(process.env.REACT_APP_FB_PIXEL_ID, {}, { autoConfig: true, debug: false });
+initGTM();
 
 function App() {
   const dispatch = useDispatch(),
     isClosed = useSelector((state) => state.Data.isClosed),
     isAuth = useSelector((state) => state.Auth.isAuth);
 
-  // EFFECTS
-  useEffect(() => {
-    ReactPixel.pageView();
-  }, []);
-
   useEffect(() => {
     if (isAuth) dispatch(setIsClosedInit());
   }, [dispatch, isAuth]);
 
   return (
-    <>
+    <FbPixel>
       <Router history={history}>
         <RefreshSession>
           <ScrollToTop />
@@ -84,7 +81,7 @@ function App() {
         <SnackbarConfigurator />
         {isClosed && <ClosedModal onClose={() => dispatch(setIsClosedSuccess(false))} />}
       </Router>
-    </>
+    </FbPixel>
   );
 }
 
