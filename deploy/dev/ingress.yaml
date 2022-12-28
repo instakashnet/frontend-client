@@ -10,6 +10,7 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-origin: https://dev-client.instakash.net, https://admin-client.instakash.net, https://adminprod.instakash.net, https://app.instakash.net
     nginx.ingress.kubernetes.io/proxy-body-size: 20m
   name: frontend-client
+  namespace: instakash-dev
 spec:
   rules:
     - host: app.dev.instakash.net
