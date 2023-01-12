@@ -1,4 +1,3 @@
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { AccessAlarm } from "@material-ui/icons";
 import React from "react";
 
@@ -15,7 +14,8 @@ export const DocumentInReview = () => {
         En este momento nos encontramos validando su identidad junto con su documento cargado. En aproximadamente 5 minutos le llegará un correo para indicarle el resultado de la
         verificación.
       </p>
-      <CircularProgress size={50} color="primary" className="mr-2" />
+
+      <div className="rounded-full w-full max-w-[10rem] h-4 text-white py-5 flex items-center justify-center bg-green-100 mt-8">Documento en revisión</div>
     </div>
   );
 };

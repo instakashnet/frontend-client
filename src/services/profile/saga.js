@@ -13,7 +13,7 @@ import {
   generateTokenSvc,
   getProfilesSvc,
   loadUserSvc,
-  userCodeSvc
+  userCodeSvc,
 } from "../../api/services/auth.service";
 // SNACKBAR ALERT ACTIONS
 import { snackActions } from "../../hoc/snackbar-configurator.component";
@@ -33,9 +33,9 @@ const uploadToS3 = async (photo, docType) => {
     day = current.format("DD");
 
   const S3config = {
-    bucketName: process.env.REACT_APP_STAGE !== "prod" ? "instakash-docs-dev" : "instakash-docs",
+    bucketName: process.env.REACT_APP_STAGE !== "prod" ? "instakash-docs-dev-us-east-1" : "instakash-docs-us-east-1",
     dirName: `${docType}/${yearMonth}/${day}`,
-    region: "us-east-2",
+    region: "us-east-1",
     accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
     secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
   };

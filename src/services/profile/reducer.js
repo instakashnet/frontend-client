@@ -6,6 +6,7 @@ const initialState = {
   profileSelected: null,
   isLoading: true,
   isProcessing: false,
+  validating: false,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -20,10 +21,12 @@ const profileReducer = (state = initialState, action) => {
     case types.ADD_PROFILE_SUCCESS:
     case types.EDIT_BASIC_INFO_SUCCESS:
     case types.EDIT_ADDITIONAL_INFO_SUCCESS:
-    case types.UPLOAD_DOCUMENT_SUCCESS:
     case types.EDIT_USER_CODE_SUCCESS:
     case types.DISABLE_PROFILE_SUCCESS:
       return { ...state, isProcessing: false };
+
+    case types.UPLOAD_DOCUMENT_SUCCESS:
+      return { ...state, validating: true };
 
     case types.GET_PROFILES_INIT:
     case types.GET_USER_DATA_INIT:

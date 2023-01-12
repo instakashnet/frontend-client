@@ -11,16 +11,15 @@ import { Modal } from "../../../components/UI/modals/modal.component";
 // REDUX ACTION
 import { openModal } from "../../../store/actions";
 // COMPONENTS
-import { DocumentFailed } from "../components/document-failed.component";
 import { DocumentInReview } from "../components/document-in-review.component";
 import { UploadDocument } from "../components/forms/upload-document.component";
 // CLASSES
 import classes from "./modules/verify-identity.screen.module.scss";
 
-
 export const VerifyIdentityScreen = ({ user, history }) => {
   const [docType, setDocType] = useState(""),
-    dispatch = useDispatch();
+    dispatch = useDispatch(),
+    validating = useSelector((state) => state.Profile.validating);
 
   const ModalComponent = useSelector((state) => state.Modal.Component);
 
@@ -38,11 +37,10 @@ export const VerifyIdentityScreen = ({ user, history }) => {
 
   return (
     <div className={classes.VerifyIdentityWrapper}>
-      {user.identityDocumentValidation === "pending" ? (
+      {user.identityDocumentValidation === "pending" || validating ? (
         <DocumentInReview />
       ) : (
         <>
-          {user.identityDocumentValidation === "failed" && <DocumentFailed />}
           <h2>Tipo de documento</h2>
           <div className="flex items-center justify-center">
             {user.documentType.toLowerCase() !== "pasaporte" ? (
