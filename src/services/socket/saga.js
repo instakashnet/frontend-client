@@ -1,22 +1,22 @@
-import { END, eventChannel } from "redux-saga";
-import { call, cancel, cancelled, fork, put,select, take, takeEvery } from "redux-saga/effects";
+import { END, eventChannel } from 'redux-saga';
+import { call, cancel, cancelled, fork, put, select, take, takeEvery } from 'redux-saga/effects';
 
-import { SET_USER_DATA } from "../auth/types";
-import * as types from "./types";
+import { SET_USER_DATA } from '../auth/types';
+import * as types from './types';
 
 let ws;
 
 const createWebsocketChannel = (token, service) =>
   eventChannel((emit) => {
     const connectToWs = () => {
-      ws = new WebSocket(`${process.env.REACT_APP_STAGE === "prod" ? "wss://ws.instakash.net" : "wss://ws.dev.instakash.net"}/ws?token=${token}&service=${service}`);
+      ws = new WebSocket(`wss://ws.instakash.net/ws?token=${token}&service=${service}`);
 
       ws.onopen = () => {
-        console.log("Connection opened.");
+        console.log('Connection opened.');
       };
 
       ws.onerror = (error) => {
-        console.log("error in the connection: " + error);
+        console.log('error in the connection: ' + error);
       };
 
       ws.onmessage = (event) => {
@@ -25,7 +25,7 @@ const createWebsocketChannel = (token, service) =>
         try {
           message = JSON.parse(event.data);
         } catch (error) {
-          console.log("Error parsing: ", event.data);
+          console.log('Error parsing: ', event.data);
         }
 
         if (message) return emit(message);
@@ -33,10 +33,10 @@ const createWebsocketChannel = (token, service) =>
 
       ws.onclose = (e) => {
         if (e.code === 1005) {
-          console.log("Connection closed.");
+          console.log('Connection closed.');
           emit(END);
         } else {
-          console.log("The connection has closed unexpectedly. Reconnect try in 5 seconds.", e.reason);
+          console.log('The connection has closed unexpectedly. Reconnect try in 5 seconds.', e.reason);
           setTimeout(() => {
             connectToWs();
           }, 5000);
@@ -47,7 +47,7 @@ const createWebsocketChannel = (token, service) =>
 
     return () => {
       ws.onmessage = null;
-      console.log("Closing connection.");
+      console.log('Closing connection.');
       ws.close();
     };
   });
@@ -62,7 +62,7 @@ function* listeningSocketSaga(...args) {
       const action = yield take(socketChannel);
 
       switch (action.type) {
-        case "validation":
+        case 'validation':
           let user = yield select((state) => state.Auth.user);
           user = { ...user, identityDocumentValidation: action.data.status, level: action.data.level };
           yield put({ type: SET_USER_DATA, user });
@@ -72,7 +72,7 @@ function* listeningSocketSaga(...args) {
       }
     }
   } catch (error) {
-    console.log("Error connecting.. " + error);
+    console.log('Error connecting.. ' + error);
   } finally {
     if (yield cancelled()) socketChannel.close();
   }

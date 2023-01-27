@@ -1,41 +1,39 @@
-import React, { useEffect } from "react";
+import React from 'react';
 // REDUX
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 // REACT ROUTER
-import { Route } from "react-router-dom";
+import { Route } from 'react-router-dom';
 // COMPONENT
-import Layout from "../../../components/layout/layout.component";
+import Layout from '../../../components/layout/layout.component';
 // HOOKS
-import { useDeviceDetect } from "../../../shared/hooks/useDeviceDetect";
-import { useUserData } from "../../../shared/hooks/useProfileInfo";
+import { useDeviceDetect } from '../../../shared/hooks/useDeviceDetect';
+import { useUserData } from '../../../shared/hooks/useProfileInfo';
 // REDUX ACTIONS
-import { closeSocketConnection, openSocketConnection } from "../../../store/actions";
+// import { closeSocketConnection, openSocketConnection } from "../../../store/actions";
 // COMPONENTS
-import { ProfileInfo } from "../components/profile-info.component";
-import { ProfileMenu } from "../components/profile-menu.component";
+import { ProfileInfo } from '../components/profile-info.component';
+import { ProfileMenu } from '../components/profile-menu.component';
 // SCREENS
-import { AdditionalInfoScreen } from "./additional-info.screen";
-import { BasicInfoScreen } from "./basic-info.screen";
+import { AdditionalInfoScreen } from './additional-info.screen';
+import { BasicInfoScreen } from './basic-info.screen';
 // CLASSES
-import classes from "./modules/profile.screen.module.scss";
+import classes from './modules/profile.screen.module.scss';
 // SCREEN
-import { VerifyIdentityScreen } from "./verify-identity.screen";
-
+import { VerifyIdentityScreen } from './verify-identity.screen';
 
 const Profile = ({ match, history }) => {
-  const dispatch = useDispatch(),
-    user = useSelector((state) => state.Auth.user),
+  const user = useSelector((state) => state.Auth.user),
     { completed, color } = useUserData(user),
     { isMobile } = useDeviceDetect();
 
   // EFFECTS
-  useEffect(() => {
-    dispatch(openSocketConnection("validation"));
+  // useEffect(() => {
+  //   dispatch(openSocketConnection("validation"));
 
-    return () => {
-      closeSocketConnection();
-    };
-  }, [dispatch]);
+  //   return () => {
+  //     closeSocketConnection();
+  //   };
+  // }, [dispatch]);
 
   return (
     <Layout>
@@ -49,10 +47,10 @@ const Profile = ({ match, history }) => {
           <Route exact path={match.url}>
             <BasicInfoScreen user={user} />
           </Route>
-          <Route exact path={match.url + "/verify-identity"}>
+          <Route exact path={match.url + '/verify-identity'}>
             <VerifyIdentityScreen user={user} history={history} />
           </Route>
-          <Route exact path={match.url + "/additionals"}>
+          <Route exact path={match.url + '/additionals'}>
             <AdditionalInfoScreen user={user} />
           </Route>
         </section>
